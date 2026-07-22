@@ -3,6 +3,7 @@
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/qr", "destination": "/qr.html" },
     { "source": "/kiosk", "destination": "/kiosk.html" },
-    { "source": "/slawdawgs", "destination": "/slawdawgs.html" }
+    { "source": "/slawdawgs", "destination": "/slawdawgs.html" },
+    { "source": "/universal", "destination": "/universal_kiosk.html" }
   ]
 }
