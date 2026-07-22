@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darden UCP | Autonomous Video Generator</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --holo-blue: #8ce6ff;
+    --alert-red: #ff3b30;
+    --matrix-green: #39ff14;
+    --bg-void: #050a14;
+  }
+  body {
+    background-color: var(--bg-void);
+    color: var(--holo-blue);
+    font-family: 'Share Tech Mono', monospace;
+    background-image: 
+      linear-gradient(rgba(140, 230, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140, 230, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    margin: 0; padding: 20px;
+    display: flex; justify-content: center; align-items: center; min-height: 100vh;
+  }
+  .ucp-container {
+    width: 100%; max-width: 1000px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--holo-blue);
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(140, 230, 255, 0.15);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+  .font-cyber { font-family: 'Orbitron', sans-serif; }
+  
+  /* The M2M Coordinate Input */
+  .coord-input {
+    width: 100%; background: #000; border: 1px solid var(--holo-blue);
+    color: var(--holo-blue); padding: 12px; font-family: 'Share Tech Mono';
+    border-radius: 6px; outline: none; margin-bottom: 1rem;
+    box-shadow: inset 0 0 10px rgba(140, 230, 255, 0.2);
+  }
+  .coord-input:focus { border-color: var(--matrix-green); box-shadow: inset 0 0 15px rgba(57, 255, 20, 0.3); }
+
+  /* Agent Swarm Status Readout */
+  .swarm-terminal {
+    background: #02040a; border: 1px dashed #444; border-radius: 6px;
+    padding: 15px; height: 150px; overflow-y: auto; margin-bottom: 1.5rem;
+    color: #888; font-size: 0.85rem;
+  }
+  .log-active { color: var(--matrix-green); text-shadow: 0 0 5px var(--matrix-green); }
+  .log-critique { color: #FFD700; }
+
+  /* The Video Generator Canvas */
+  .video-canvas {
+    width: 100%; aspect-ratio: 16/9; background: #000;
+    border: 2px solid #333; border-radius: 8px; position: relative;
+    display: flex; justify-content: center; align-items: center; overflow: hidden;
+  }
+  .video-canvas.active { border-color: var(--holo-blue); box-shadow: 0 0 20px rgba(140, 230, 255, 0.4); }
+  
+  .generator-btn {
+    background: transparent; border: 1px solid var(--holo-blue);
+    color: var(--holo-blue); padding: 12px 24px; font-family: 'Orbitron';
+    font-weight: bold; letter-spacing: 2px; cursor: pointer; border-radius: 6px;
+    transition: all 0.3s ease; width: 100%;
+  }
+  .generator-btn:hover { background: var(--holo-blue); color: #000; box-shadow: 0 0 15px var(--holo-blue); }
+
+  /* Grid Layout */
+  .dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }
+  @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="ucp-container">
+  <div class="flex justify-between items-end border-b border-[#333] pb-4 mb-6">
+    <div>
+      <h1 class="font-cyber text-2xl tracking-[0.2em] text-[#fff] drop-shadow-[0_0_8px_#fff]">UCP VIDEO GENERATOR</h1>
+      <p class="text-xs tracking-widest opacity-60">M2M VIRTUAL SCOUTING & STORYBOARD PROTOCOL</p>
+    </div>
+    <div class="text-right">
+      <span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse mr-2"></span>
+      <span class="text-[10px] tracking-widest text-red-500">ZCODE GLM 5.2 ENGINE: STANDBY</span>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- LEFT PANEL: Command & Control -->
+    <div>
+      <label class="text-[10px] tracking-widest uppercase mb-1 block opacity-70">Target M2M Coordinates / URL</label>
+      <input type="text" id="target-coords" class="coord-input" placeholder="e.g., 33.7145° N, 84.1032° W (Stonecrest)">
+      
+      <label class="text-[10px] tracking-widest uppercase mb-1 block opacity-70">Business Name / Asset Tag</label>
+      <input type="text" id="target-name" class="coord-input" placeholder="Target Business Name">
+
+      <button class="generator-btn mt-2" onclick="initiateSwarm()">INITIATE VIRTUAL SCOUT</button>
+
+      <h3 class="font-cyber text-sm mt-6 mb-2 tracking-widest text-[#fff]">SWARM TERMINAL</h3>
+      <div class="swarm-terminal" id="terminal-output">
+        [SYS] Awaiting coordinate injection...<br>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: The Generator Canvas -->
+    <div>
+      <div class="video-canvas" id="render-screen">
+        <!-- Placeholder for the un-generated state -->
+        <div class="text-center opacity-50" id="canvas-standby">
+          <span class="font-cyber text-4xl block mb-2 opacity-30">◬</span>
+          <span class="text-xs tracking-widest">AWAITING STORYBOARD RENDERING</span>
+        </div>
+
+        <!-- The actual video player (Hidden until generated) -->
+        <video id="final-render-video" class="w-full h-full object-cover hidden" controls loop playsinline></video>
+      </div>
+      
+      <div class="flex gap-4 mt-4">
+        <button class="flex-1 bg-[#111] border border-[#444] text-xs p-2 rounded hover:bg-[#222] transition-colors" onclick="alert('Sending coordinates to AGY/Hermes...')">SYNC TO HERMES</button>
+        <button class="flex-1 bg-[#111] border border-[#444] text-xs p-2 rounded hover:bg-[#222] transition-colors" onclick="alert('Saving asset to Vault...')">STORE IN VAULT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// The Virtual Swarm Simulation Logic
+function initiateSwarm() {
+  const coords = document.getElementById('target-coords').value;
+  const target = document.getElementById('target-name').value;
+  const terminal = document.getElementById('terminal-output');
+  const standby = document.getElementById('canvas-standby');
+  const videoPlayer = document.getElementById('final-render-video');
+  const renderScreen = document.getElementById('render-screen');
+
+  if(!coords || !target) {
+    alert("Please input coordinates and target name for the Swarm to map.");
+    return;
+  }
+
+  // Reset UI
+  renderScreen.classList.add('active');
+  standby.innerHTML = `<span class="text-[var(--matrix-green)] animate-pulse font-cyber tracking-widest">RENDERING IN PROGRESS...</span>`;
+  terminal.innerHTML = `[SYS] M2M Coordinates Locked: ${coords}<br>`;
+
+  // Simulated Agent Factory Floor (This is where ZCode GLM 5.2 backend hooks in)
+  setTimeout(() => terminal.innerHTML += `<span class="log-active">[MAKER AGENT] Scraping Google Street View for ${target}...</span><br>`, 1000);
+  setTimeout(() => terminal.innerHTML += `<span class="log-active">[MAKER AGENT] Extracting website visual assets...</span><br>`, 2500);
+  setTimeout(() => terminal.innerHTML += `<span>[SYS] Drafting arrival storyboard...</span><br>`, 4000);
+  
+  setTimeout(() => terminal.innerHTML += `<span class="log-critique">[CHECKER AGENT] Halting. Evaluating shadow/lighting of doorway...</span><br>`, 5500);
+  setTimeout(() => terminal.innerHTML += `<span class="log-critique">[CHECKER AGENT] Critique complete. Adjusting color grading for maximum emotional impact.</span><br>`, 7500);
+  
+  setTimeout(() => terminal.innerHTML += `<span class="log-active">[VIDEO MAKER] Finalizing M2M render pipeline...</span><br>`, 9000);
+
+  // Final Handoff
+  setTimeout(() => {
+    terminal.innerHTML += `<span class="text-[#fff] font-bold">[SYS] GENERATION COMPLETE. ASSET READY FOR PITCH.</span><br>`;
+    standby.classList.add('hidden');
+    
+    // THIS IS WHERE YOU INJECT THE VIDEO ZCODE GENERATES
+    // videoPlayer.src = "path_to_your_zcode_generated_video.mp4"; 
+    videoPlayer.classList.remove('hidden');
+    videoPlayer.style.border = "2px solid var(--matrix-green)";
+  }, 10500);
+}
+</script>
+
+</body>
+</html>
