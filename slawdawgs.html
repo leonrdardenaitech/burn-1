@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shay's Slaw Dawgs | Burner Site Kiosk Node</title>
+    <style>
+        /* Base Reset & Typography */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 3:4 Aspect Ratio Spatial Display Container */
+        .spatial-display {
+            position: relative;
+            width: calc(85vh * 3 / 4);
+            height: 85vh;
+            max-width: 95vw;
+            max-height: calc(95vw * 4 / 3);
+            aspect-ratio: 3 / 4;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+            background-color: #000;
+        }
+
+        /* Background Video */
+        #bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 111.11%; 
+            object-fit: cover;
+            object-position: left top; 
+            z-index: 1;
+        }
+
+        /* Floating Menu Button */
+        .menu-trigger-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 35px;
+            background-color: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            border: 2px solid #F4B41A;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .menu-trigger-btn:hover {
+            background-color: #F4B41A;
+            color: #000;
+        }
+
+        /* Top HUD Bar */
+        .hud-bar {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            right: 20px;
+            z-index: 15;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #F4B41A;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(6px);
+        }
+
+        .hud-bar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            background: rgba(244, 180, 26, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid #F4B41A;
+        }
+
+        /* Scrim Overlay */
+        .scrim {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 20;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .scrim.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Pop-up Menu Modal */
+        .menu-modal {
+            background-color: #E8A317;
+            color: #FFFFFF;
+            padding: 30px;
+            border-radius: 24px;
+            width: 100%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .menu-modal::-webkit-scrollbar { width: 6px; }
+        .menu-modal::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.4); border-radius: 3px; }
+
+        .scrim.active .menu-modal { transform: translateY(0); }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #FFFFFF;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .menu-header { text-align: center; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 12px; margin-bottom: 15px; }
+        .menu-header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+        .menu-header h2 { margin: 5px 0 0 0; font-size: 1rem; font-style: italic; font-weight: normal; }
+
+        .menu-section { margin-bottom: 20px; }
+        .menu-section h3 { font-size: 1.2rem; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.5); padding-bottom: 5px; margin-bottom: 10px; }
+        .menu-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1rem; }
+        .menu-item-name { font-weight: bold; }
+        .menu-note { font-size: 0.85rem; text-align: center; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <div class="spatial-display">
+        
+        <div class="hud-bar">
+          <span>🌭 SLAWDAWGS.BURN-1.COM</span>
+          <a href="https://burn-1.com">HUB ➔</a>
+        </div>
+
+        <video id="bg-video" autoplay loop muted playsinline>
+            <source src="Mall/d1c40278-37e0-475f-bdba-7c7a467e2138.mp4" type="video/mp4">
+        </video>
+
+        <audio id="bg-audio" loop>
+            <source src="Mall/Home_of_the_Dawgs.mp3" type="audio/mpeg">
+        </audio>
+
+        <button class="menu-trigger-btn" id="openMenuBtn">View Menu</button>
+
+        <div class="scrim" id="menuScrim">
+            <div class="menu-modal">
+                <button class="close-btn" id="closeMenuBtn">&times;</button>
+                
+                <div class="menu-header">
+                    <h1>SHAY SLAW DAWGS</h1>
+                    <h2>The Home of Southern Style Hot Dogs</h2>
+                </div>
+                
+                <div class="menu-note">
+                    Each meal comes with fries or onion rings and a drink
+                </div>
+
+                <div class="menu-section">
+                    <h3>Dawgs & Links</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Naked Dawg</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Southern Slaw Dawg</span>
+                        <span>$7.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Chili and Cheese Dawg</span>
+                        <span>$9.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Southern Sausage Links</span>
+                        <span>$10.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Cleveland Style Polish Sausage</span>
+                        <span>$12.00</span>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h3>Sides</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Fries (Ask for Shay's Shake)</span>
+                        <span>$3.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Chili Cheese Fries</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Onion Rings</span>
+                        <span>$3.00</span>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h3>Drink Specials</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Slushie (Cherry, Blue Razz, Mystery)</span>
+                        <span>$3.00</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Elixirs by La La (Alcoholic)</span>
+                        <span>$15.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        const openBtn = document.getElementById('openMenuBtn');
+        const closeBtn = document.getElementById('closeMenuBtn');
+        const scrim = document.getElementById('menuScrim');
+        const bgAudio = document.getElementById('bg-audio');
+
+        // Play audio on first click
+        document.body.addEventListener('click', () => {
+            if (bgAudio.paused) {
+                bgAudio.play().catch(error => console.log("Audio playback was prevented.", error));
+            }
+        }, { once: true });
+
+        openBtn.addEventListener('click', () => scrim.classList.add('active'));
+        closeBtn.addEventListener('click', () => scrim.classList.remove('active'));
+        scrim.addEventListener('click', (e) => { if (e.target === scrim) scrim.classList.remove('active'); });
+    </script>
+</body>
+</html>
