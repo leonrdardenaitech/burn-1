@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malwdarazor | VIP Barber Kiosk • Malcolm</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@200,0&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg-void: #050508;
+    --razor-red: #ff2a2a;
+    --gold-glow: #ffd700;
+    --cyan-spark: #00f3ff;
+    --dim-text: rgba(255, 255, 255, 0.7);
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-void);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .font-cyber { font-family: 'Orbitron', sans-serif; }
+
+  /* TWINKLE STAR & CONSTELLATION BACKGROUND LAYER */
+  .stars-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -2;
+    background: radial-gradient(ellipse at bottom, #100b24 0%, #050508 100%);
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle linear infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 10px #00f3ff; }
+  }
+
+  /* ANIMATED BARBERPOLE MOIRÉ SWIRL BACKGROUND LAYER */
+  .barber-pole-swirl {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.85;
+  }
+
+  .barber-pole-swirl::before,
+  .barber-pole-swirl::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .barber-pole-swirl::before {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255, 42, 42, 0.05) 15px, rgba(255, 42, 42, 0.05) 30px);
+    animation: swirlRotateOne 20s linear infinite;
+  }
+
+  .barber-pole-swirl::after {
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(0, 243, 255, 0.04) 20px, rgba(0, 243, 255, 0.04) 40px);
+    animation: swirlRotateTwo 26s linear infinite;
+  }
+
+  @keyframes swirlRotateOne {
+    0% { transform: translate3d(0px, 0px, 0px); }
+    100% { transform: translate3d(150px, 350px, 0px); }
+  }
+
+  @keyframes swirlRotateTwo {
+    0% { transform: translate3d(0px, 0px, 0px); }
+    100% { transform: translate3d(-180px, 450px, 0px); }
+  }
+
+  /* GLASSKIOST CONTAINER */
+  .glass-card {
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 42, 42, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(255, 42, 42, 0.15);
+  }
+
+  .service-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 18px 0;
+    transition: all 0.2s ease;
+  }
+
+  .service-row:hover {
+    border-bottom-color: var(--razor-red);
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .gallery-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 42, 42, 0.4);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .gallery-img:hover {
+    border-color: var(--cyan-spark);
+    transform: scale(1.04);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #050508; }
+  ::-webkit-scrollbar-thumb { background: #ff2a2a; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+  <!-- 1. TWINKLE STARS BACKGROUND LAYER -->
+  <div class="stars-layer" id="starsContainer"></div>
+
+  <!-- 2. ANIMATED BARBER POLE MOIRÉ SWIRL LAYER -->
+  <div class="barber-pole-swirl"></div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-black/85 backdrop-blur-md border-b border-red-900/40">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-red-600 via-amber-400 to-cyan-400 p-0.5 shadow-lg shadow-red-500/30">
+        <div class="w-full h-full bg-black rounded-full flex items-center justify-center font-cyber text-red-500 text-sm font-black">MR</div>
+      </div>
+      <div>
+        <h1 class="font-cyber text-base text-white tracking-widest uppercase">MALWDARAZOR</h1>
+        <span class="text-[10px] text-cyan-400 font-mono tracking-wider uppercase block">MALCOLM • FRESH & DETAILED CUTS</span>
+      </div>
+    </div>
+
+    <!-- HUB BACK-LINK (FOR FAMILY & INTERNAL FAVORS) -->
+    <a href="index.html" class="px-3 py-1.5 bg-red-950/80 border border-red-700/60 hover:border-red-500 rounded-lg text-red-400 font-cyber text-xs flex items-center gap-1.5 transition-all">
+      <span>HUB</span>
+      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+    </a>
+  </header>
+
+  <!-- MAIN KIOSK CONTENT -->
+  <main class="relative z-10 max-w-2xl mx-auto pt-28 pb-24 px-6">
+
+    <!-- HERO & BUSINESS CARD HEADER -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-950/80 border border-red-500/40 rounded-full text-red-400 font-cyber text-xs mb-3">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        LITHONIA, GA • RIVERDALE, GA
+      </div>
+
+      <h2 class="font-cyber text-4xl md:text-6xl text-white font-extrabold tracking-tight uppercase mb-3">
+        MAL<span class="text-red-500">WDA</span>RAZOR
+      </h2>
+
+      <!-- BUSINESS CARD QUESTION BANNER -->
+      <div class="p-4 bg-gradient-to-r from-red-950/60 via-black to-red-950/60 border border-red-500/30 rounded-xl mb-4">
+        <p class="font-cyber text-base md:text-lg text-amber-300 font-bold tracking-wide">
+          "Need a fresh, fast, clean and detailed cut???"
+        </p>
+      </div>
+
+      <!-- DIRECT CONTACT BAR -->
+      <div class="flex flex-wrap justify-center items-center gap-4 text-xs font-mono text-gray-300">
+        <a href="tel:4704566666" class="flex items-center gap-1.5 px-3 py-1.5 bg-black/80 border border-cyan-500/40 rounded-lg hover:border-cyan-400 text-cyan-300 transition-all">
+          <span class="material-symbols-outlined text-sm">call</span>
+          <span>470-456-6666</span>
+        </a>
+        <a href="https://instagram.com/Malwdarazor" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-black/80 border border-pink-500/40 rounded-lg hover:border-pink-400 text-pink-400 transition-all">
+          <span class="material-symbols-outlined text-sm">photo_camera</span>
+          <span>@Malwdarazor</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- VIP SERVICE MENU -->
+    <div class="glass-card p-6 md:p-8 mb-10">
+      <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-800">
+        <h3 class="font-cyber text-xl text-white font-bold tracking-wider flex items-center gap-2">
+          <span class="material-symbols-outlined text-red-500">content_cut</span>
+          SERVICES & PRICING
+        </h3>
+        <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2.5 py-1 rounded border border-cyan-800">MALCOLM'S CHAIR</span>
+      </div>
+
+      <!-- SERVICE 1 -->
+      <div class="service-row">
+        <div>
+          <div class="text-lg md:text-xl font-bold text-white">The Fresh & Clean Cut</div>
+          <div class="text-xs text-gray-400 font-mono">Precision haircut, sharp razor edge line & neck shave</div>
+        </div>
+        <div class="font-cyber text-lg md:text-xl text-red-400 font-bold">$35</div>
+      </div>
+
+      <!-- SERVICE 2 -->
+      <div class="service-row">
+        <div>
+          <div class="text-lg md:text-xl font-bold text-white">Beard Sculpt & Razor Edge</div>
+          <div class="text-xs text-gray-400 font-mono">Beard trim, organic oil treatment & sharp razor finish</div>
+        </div>
+        <div class="font-cyber text-lg md:text-xl text-red-400 font-bold">$25</div>
+      </div>
+
+      <!-- SERVICE 3 -->
+      <div class="service-row">
+        <div>
+          <div class="text-lg md:text-xl font-bold text-white">Full VIP Detailed Cut & Beard</div>
+          <div class="text-xs text-gray-400 font-mono">Fresh cut, detailed beard sculpt, hot steam & razor line</div>
+        </div>
+        <div class="font-cyber text-lg md:text-xl text-red-400 font-bold">$75</div>
+      </div>
+
+      <!-- SERVICE 4 -->
+      <div class="service-row">
+        <div>
+          <div class="text-lg md:text-xl font-bold text-white">Junior / Student Cut</div>
+          <div class="text-xs text-gray-400 font-mono">Clean fade or classic cut for students (under 18)</div>
+        </div>
+        <div class="font-cyber text-lg md:text-xl text-red-400 font-bold">$25</div>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="mt-8 flex flex-col md:flex-row gap-4">
+        <button onclick="openBookingModal()" class="flex-1 py-4 bg-gradient-to-r from-red-600 via-red-500 to-amber-500 hover:from-red-500 hover:to-amber-400 text-black font-cyber font-bold rounded-xl transition-all shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 cursor-pointer">
+          <span class="material-symbols-outlined">calendar_month</span>
+          BOOK APPOINTMENT WITH MAL
+        </button>
+        <button onclick="openQRModal()" class="py-4 px-6 bg-black/90 border border-red-500/50 hover:border-red-400 text-red-400 font-cyber font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <span class="material-symbols-outlined">qr_code_2</span>
+          CHAIR QR STICKER
+        </button>
+      </div>
+    </div>
+
+    <!-- CUT POSTER SHOWCASE GALLERY -->
+    <div class="mb-10">
+      <h3 class="font-cyber text-lg text-white font-bold mb-4 tracking-wider uppercase text-center flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-cyan-400">photo_camera</span>
+        HAIRCUT POSTERS & CUT SHOWCASE
+      </h3>
+      <div class="grid grid-cols-2 gap-4">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="Fresh Detailed Cut" class="gallery-img">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=500&q=80" alt="Beard & Razor Edge" class="gallery-img">
+      </div>
+    </div>
+
+    <!-- BUSINESS CARD FOOTER SLOGAN -->
+    <div class="text-center pt-8 border-t border-red-900/30">
+      <p class="font-cyber text-lg md:text-xl text-amber-400 font-extrabold tracking-widest uppercase mb-2">
+        "YALL KNOW MAL STAY W DA RAZOR!!!"
+      </p>
+      <p class="text-xs font-mono text-gray-500 uppercase tracking-widest">
+        MALCOLM • LITHONIA & RIVERDALE, GA • POWERED BY <span class="text-red-500 font-cyber">BURN-1</span>
+      </p>
+    </div>
+
+  </main>
+
+  <!-- BOOKING MODAL -->
+  <div id="bookingModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full p-6 relative">
+      <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-bold text-lg">✕</button>
+      
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-full bg-red-600/20 border border-red-500 text-red-400 flex items-center justify-center mx-auto mb-2">
+          <span class="material-symbols-outlined">event_available</span>
+        </div>
+        <h3 class="font-cyber text-xl text-white font-bold">RESERVE CHAIR WITH MALCOLM</h3>
+        <p class="text-xs text-cyan-400 font-mono mt-1">@Malwdarazor Intake System</p>
+      </div>
+
+      <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
+        <div>
+          <label class="text-xs font-cyber text-gray-300 block mb-1">CLIENT NAME</label>
+          <input type="text" required placeholder="Enter your full name" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-cyber text-gray-300 block mb-1">PHONE NUMBER</label>
+          <input type="tel" required placeholder="(470) 000-0000" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-cyber text-gray-300 block mb-1">PREFERRED LOCATION</label>
+          <select class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+            <option>Lithonia, GA</option>
+            <option>Riverdale, GA</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs font-cyber text-gray-300 block mb-1">SELECT SERVICE</label>
+          <select class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+            <option>The Fresh & Clean Cut ($35)</option>
+            <option>Beard Sculpt & Razor Edge ($25)</option>
+            <option>Full VIP Detailed Cut & Beard ($75)</option>
+            <option>Junior / Student Cut ($25)</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-500 text-black font-cyber font-bold rounded-xl transition-all shadow-lg shadow-red-600/30">
+          CONFIRM RESERVATION WITH MAL
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- QR STICKER MODAL -->
+  <div id="qrModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full p-6 text-center relative">
+      <button onclick="closeQRModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-bold text-lg">✕</button>
+
+      <h3 class="font-cyber text-xl text-white font-bold mb-1 uppercase">MALCOLM'S SMART QR STICKER</h3>
+      <p class="text-xs text-cyan-400 font-mono mb-6">Scan with phone camera to open Malwdarazor Kiosk</p>
+
+      <!-- LIVE GENERATED QR CODE CONTAINER -->
+      <div class="p-4 bg-white rounded-2xl max-w-[220px] mx-auto mb-6 shadow-2xl shadow-red-500/30">
+        <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://burn-1.com/malwdarazor" alt="Malwdarazor QR Code" class="w-full h-full">
+      </div>
+
+      <div class="flex gap-3">
+        <a id="qrDownloadBtn" href="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://burn-1.com/malwdarazor" download="Malwdarazor_Malcolm_QR.png" class="flex-1 py-3 bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-black font-cyber text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-base">download</span>
+          DOWNLOAD QR PNG
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // GENERATE TWINKLE STARS IN BACKGROUND
+    const container = document.getElementById('starsContainer');
+    for (let i = 0; i < 60; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 3 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      star.style.animationDelay = (Math.random() * 3) + 's';
+      container.appendChild(star);
+    }
+
+    function openBookingModal() {
+      document.getElementById('bookingModal').classList.remove('hidden');
+    }
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+    function openQRModal() {
+      document.getElementById('qrModal').classList.remove('hidden');
+    }
+    function closeQRModal() {
+      document.getElementById('qrModal').classList.add('hidden');
+    }
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      alert("Reservation received! Malcolm (@Malwdarazor) will text confirmation to your phone shortly.");
+      closeBookingModal();
+    }
+  </script>
+
+</body>
+</html>

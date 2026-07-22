@@ -6,6 +6,8 @@
     { "source": "/slawdawgs", "destination": "/slawdawgs.html" },
     { "source": "/universal", "destination": "/universal_kiosk.html" },
     { "source": "/bowdega", "destination": "/bowdega.html" },
-    { "source": "/barber", "destination": "/barber.html" }
+    { "source": "/barber", "destination": "/barber.html" },
+    { "source": "/malwdarazor", "destination": "/malwdarazor.html" },
+    { "source": "/mal", "destination": "/mal.html" }
   ]
 }
