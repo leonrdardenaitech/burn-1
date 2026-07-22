@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 | Central Hub & Cyber Directory</title>
+  <meta name="description" content="BURN-1 Central Hub, Burner Sites, B2B Kiosk Management, and Enterprise Cyber Directory.">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Fira Code', monospace;
+      background-color: #000000;
+      color: #e2e8f0;
+    }
+    .font-cyber { font-family: 'Orbitron', sans-serif; }
+    .font-tech { font-family: 'Share Tech Mono', monospace; }
+    
+    /* Fixed Parallax Background Effect */
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .cyber-grid-overlay {
+      background-image: linear-gradient(to right, rgba(255, 69, 0, 0.08) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 69, 0, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    
+    /* Frosted Scrim Panels */
+    .burner-scrim {
+      background: rgba(4, 4, 6, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 69, 0, 0.25);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+    }
+    .burner-scrim:hover { border-color: rgba(255, 140, 0, 0.6); }
+
+    .reticle-box { position: relative; }
+    .reticle-box::before { content: '+'; position: absolute; top: -6px; left: -6px; color: #ff4500; font-size: 14px; }
+    .reticle-box::after { content: '+'; position: absolute; bottom: -6px; right: -6px; color: #ff4500; font-size: 14px; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: #ff4500; border-radius: 2px; }
+  </style>
+</head>
+<body class="bg-black text-gray-200 min-h-screen flex flex-col justify-between overflow-x-hidden relative select-none">
+
+  <!-- ========================================== -->
+  <!-- 1. FIXED PARALLAX CELL PHONES FALLING BG   -->
+  <!-- ========================================== -->
+  <div class="parallax-bg">
+    <img id="bg-gif-loop" src="assets/Cell_phones_falling_1.gif" alt="Cell Phones Falling Sequential" class="w-full h-full object-cover opacity-50">
+    <canvas id="ember-canvas" class="absolute inset-0 w-full h-full opacity-40 mix-blend-screen"></canvas>
+    <div class="absolute inset-0 cyber-grid-overlay opacity-80"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-90"></div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. TOP HUD NAVIGATION                      -->
+  <!-- ========================================== -->
+  <header class="relative z-40 burner-scrim border-b border-orange-950/80 px-6 py-3 sticky top-0">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+      
+      <a href="https://burn-1.com" class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded bg-gradient-to-tr from-red-600 via-orange-500 to-yellow-400 flex items-center justify-center font-cyber font-black text-black text-sm shadow-lg shadow-orange-600/30">🔥</div>
+        <div class="flex flex-col">
+          <span class="font-cyber font-extrabold text-lg tracking-wider text-white">BURN-1<span class="text-orange-500">.COM</span></span>
+          <span class="font-tech text-[10px] text-orange-400/70 tracking-widest uppercase">BURNER SITE PROTOCOL v4.0</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="/qr" class="bg-black/80 hover:bg-orange-950 border border-orange-500/50 text-orange-400 px-3 py-1.5 rounded font-tech text-xs transition-all flex items-center gap-1.5">
+          <span>🏷️ QR FACTORY</span>
+        </a>
+        <button onclick="openSurvey()" class="bg-orange-950/80 hover:bg-orange-900 border border-orange-500/60 text-orange-300 px-3.5 py-1.5 rounded font-tech text-xs transition-all flex items-center gap-2">
+          <span>📋 BUILD BURNER SITE</span>
+        </button>
+        <button onclick="openATM()" class="bg-gradient-to-r from-red-900 to-orange-900 hover:from-red-800 hover:to-orange-800 border border-orange-400 text-white px-3.5 py-1.5 rounded font-tech text-xs transition-all shadow-lg shadow-red-900/30">
+          <span>💳 ATM ($65)</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- 3. MAIN PARALLAX SCROLL CONTENT            -->
+  <!-- ========================================== -->
+  <main class="relative z-10 max-w-7xl mx-auto px-6 py-10 flex-grow w-full space-y-16">
+    
+    <!-- Hero Headline -->
+    <div class="text-center max-w-4xl mx-auto pt-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/80 border border-orange-500/40 text-orange-400 text-[11px] font-tech mb-4 tracking-widest uppercase">
+        <span>⚡ PRIVACY-FIRST BURNER SITES & B2B KIOSK PROTOCOL</span>
+      </div>
+      <h1 class="font-cyber text-4xl md:text-6xl font-black tracking-tight text-white mb-4">
+        BURNER SITE <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400">PROTOCOL</span>
+      </h1>
+      <p class="font-tech text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        Deploy single-purpose Burner Pages ($50), Smart QR Stickers ("The Port"), and Enterprise Kiosk Terminals with zero clutter.
+      </p>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. ISOLATED AI CHATBOT DATA SANITIZER      -->
+    <!-- ========================================== -->
+    <section class="burner-scrim rounded-2xl p-6 md:p-8 max-w-3xl mx-auto border-t-2 border-t-orange-500 shadow-2xl relative reticle-box">
+      
+      <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+          <span class="font-tech text-xs text-orange-400 font-bold">BURNER SANITIZER CHAT BOT</span>
+        </div>
+        <span class="text-[10px] font-tech text-gray-400 bg-black/80 px-2 py-1 rounded border border-gray-800">100% LOCAL BROWSER SCAN</span>
+      </div>
+
+      <div id="chat-output" class="font-tech text-xs text-gray-300 space-y-3 mb-4 h-36 overflow-y-auto pr-2 bg-black/90 p-4 rounded border border-gray-800">
+        <div class="flex gap-2">
+          <span class="text-orange-500 font-bold">[BOT]:</span>
+          <p class="leading-relaxed">Paste your AI prompt below to scan for data leaks (emails, passwords, API keys) before sending to cloud servers.</p>
+        </div>
+      </div>
+
+      <div class="relative bg-black/90 rounded-xl border border-gray-800 p-2 flex items-center gap-2 focus-within:border-orange-500 transition-colors">
+        <span class="text-gray-500 pl-3">🎙️</span>
+        <textarea id="prompt-input" rows="2" placeholder="Paste your AI prompt here to scan for exposed residue..." class="w-full bg-transparent text-xs text-white outline-none resize-none p-2 font-tech"></textarea>
+        <button onclick="runSanitizer()" class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-black font-cyber font-bold text-xs py-3 px-5 rounded-lg transition-all flex items-center gap-1 shadow-lg shadow-orange-600/30">
+          <span>SCAN</span> ➔
+        </button>
+      </div>
+
+      <p class="text-[10px] font-tech text-gray-500 mt-2 text-center">Safe for Airplane Mode • No data is ever transmitted to external servers.</p>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. BURN-THRU SYSTEM DIRECTORY              -->
+    <!-- ========================================== -->
+    <section>
+      <div class="flex justify-between items-end mb-6">
+        <div>
+          <h2 class="font-cyber text-2xl text-white font-bold tracking-wide">BURN-THRU SYSTEM DIRECTORY</h2>
+          <p class="text-xs text-gray-400 font-tech mt-0.5">Official Multi-Domain Enterprise Network</p>
+        </div>
+        <span class="text-xs font-tech text-orange-400 bg-orange-950/80 border border-orange-800 px-3 py-1 rounded">4 NODES VERIFIED</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div onclick="window.location.href='https://leonrdarden.com'" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-tech text-orange-400 font-bold">NODE 01</span>
+              <span class="text-[10px] font-tech text-gray-500 font-bold">VIP HUB</span>
+            </div>
+            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-orange-400">Darden Trust Hub</h3>
+            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">Master Directory, Executive VIP Lobby, and Role-Based Routing.</p>
+          </div>
+          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-orange-400">
+            <span>[ ENTER HUB ]</span><span>➔</span>
+          </div>
+        </div>
+
+        <div onclick="window.open('https://anergi.io', '_blank', 'noopener,noreferrer')" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-tech text-purple-400 font-bold">NODE 02</span>
+              <span class="text-[10px] font-tech text-gray-500 font-bold">SECOPS</span>
+            </div>
+            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-purple-400">Anergi.IO</h3>
+            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">B2B Cyber Security, SSL Shielding, and Enterprise Monitoring.</p>
+          </div>
+          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-purple-400">
+            <span>[ LAUNCH SEC ]</span><span>➔</span>
+          </div>
+        </div>
+
+        <div onclick="window.location.href='https://www.eachoneteach.one/reach_and_teach.html'" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-tech text-blue-400 font-bold">NODE 03</span>
+              <span class="text-[10px] font-tech text-gray-500 font-bold">MENTORSHIP</span>
+            </div>
+            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-blue-400">Reach & Teach</h3>
+            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">Direct Mentorship, Anti-Addiction Routing, and Community Hub.</p>
+          </div>
+          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-blue-400">
+            <span>[ LAUNCH APP ]</span><span>➔</span>
+          </div>
+        </div>
+
+        <div onclick="openATM()" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box border-emerald-500/30">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-tech text-emerald-400 font-bold">NODE 04</span>
+              <span class="text-[10px] font-tech text-emerald-400 font-bold">PAYMENT</span>
+            </div>
+            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-emerald-400">ATM Kiosk Checkout</h3>
+            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">VIP Kiosk Software ($50/mo) + "The Port" Smart QR ($15/mo).</p>
+          </div>
+          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-emerald-400">
+            <span>[ OPEN ATM ]</span><span>💳</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 6. COMMERCIAL VIDEO & AD SHOWCASE ZONE     -->
+    <!-- ========================================== -->
+    <section class="burner-scrim rounded-2xl p-6 border-l-4 border-l-orange-500 reticle-box space-y-6">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+        <span class="text-xs font-tech text-orange-400 tracking-widest uppercase">📺 NETWORK COMMERCIAL VIDEO SHOWCASE</span>
+        <span class="text-[10px] font-tech text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-800">SPONSORED MEDIA</span>
+      </div>
+
+      <!-- Video Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        
+        <!-- COMMERCIAL 1: Darden Trust Hub -->
+        <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+          <div class="aspect-video bg-black rounded mb-3 overflow-hidden border border-gray-800 relative">
+            <video controls preload="metadata" class="w-full h-full object-cover">
+              <source src="assets/commercial_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h4 class="font-cyber text-sm text-white font-bold mb-1">DARDEN TRUST HUB VIP</h4>
+          <p class="text-xs text-gray-400 font-tech">Executive role routing & single sign-on security.</p>
+        </div>
+
+        <!-- COMMERCIAL 2: Anergi.IO -->
+        <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+          <div class="aspect-video bg-black rounded mb-3 overflow-hidden border border-gray-800 relative">
+            <video controls preload="metadata" class="w-full h-full object-cover">
+              <source src="assets/Anergicoshort.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h4 class="font-cyber text-sm text-purple-400 font-bold mb-1">ANERGI.IO SECOPS</h4>
+          <p class="text-xs text-gray-400 font-tech">Enterprise B2B cybersecurity & SSL token validation.</p>
+        </div>
+
+        <!-- COMMERCIAL 3: Reach & Teach (Portrait Video) -->
+        <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+          <div class="aspect-[9/16] max-h-72 bg-black rounded mb-3 overflow-hidden border border-gray-800 relative mx-auto w-full">
+            <video controls preload="metadata" class="w-full h-full object-contain bg-black">
+              <source src="assets/ReachCampaign.mp4" type="video/mp4">
+            </video>
+          </div>
+          <h4 class="font-cyber text-sm text-blue-400 font-bold mb-1">REACH & TEACH CAMPAIGN</h4>
+          <p class="text-xs text-gray-400 font-tech">Direct community mentorship & anti-addiction routing (Portrait).</p>
+        </div>
+
+      </div>
+
+      <!-- FEATURED YOUTUBE EMBED -->
+      <div class="pt-6 border-t border-gray-800">
+        <span class="text-xs font-tech text-emerald-400 block mb-3">FEATURED SYSTEM VIDEO (YOUTUBE NETWORK)</span>
+        <div class="relative w-full aspect-video rounded-xl overflow-hidden border-2 border-orange-500/40 shadow-2xl">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/w2hEmiBfLbo" title="BURN-1 Featured Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 7. ONBOARDING SURVEY & RECEIPT MODAL       -->
+  <!-- ========================================== -->
+  <div id="survey-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/92 backdrop-blur-md p-4">
+    <div class="burner-scrim w-full max-w-2xl p-6 md:p-8 rounded-xl border-t-4 border-t-orange-500 shadow-2xl relative reticle-box max-h-[90vh] overflow-y-auto">
+      <button onclick="closeSurvey()" aria-label="Close Survey" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✕</button>
+
+      <div id="survey-header" class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <span id="survey-step-tag" class="text-xs font-tech text-orange-400 bg-orange-950 px-2.5 py-1 rounded border border-orange-800">STEP 1 OF 4</span>
+          <span class="text-xs font-tech text-gray-400">BURNER SITE INTAKE</span>
+        </div>
+        <h2 class="font-cyber text-2xl text-white font-bold">BURNER SITE & KIOSK SURVEY</h2>
+        <div class="w-full bg-gray-900 h-1.5 rounded-full mt-3 overflow-hidden border border-gray-800">
+          <div id="survey-progress" class="bg-gradient-to-r from-red-500 to-orange-400 h-full w-1/4 transition-all duration-300"></div>
+        </div>
+      </div>
+
+      <form id="survey-form" onsubmit="event.preventDefault();">
+        
+        <div id="survey-step-1" class="survey-step space-y-4 font-tech">
+          <label class="block text-xs text-gray-300 font-bold mb-3">1. Select Environment Type:</label>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
+              <input type="radio" name="kiosk_type" value="Retail / Physical Venue" checked class="accent-orange-500">
+              <span>🏪 Retail / Physical Venue</span>
+            </label>
+            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
+              <input type="radio" name="kiosk_type" value="VIP Lounge & Kiosk" class="accent-orange-500">
+              <span>🍸 VIP Lounge & Kiosk</span>
+            </label>
+            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
+              <input type="radio" name="kiosk_type" value="SecOps & Cyber Terminal" class="accent-orange-500">
+              <span>🛡️ SecOps & Cyber Terminal</span>
+            </label>
+            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
+              <input type="radio" name="kiosk_type" value="Content & Studio Site" class="accent-orange-500">
+              <span>🎬 Studio & Burner Site</span>
+            </label>
+          </div>
+          <div class="pt-4 flex justify-end">
+            <button type="button" onclick="nextSurveyStep(2)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-2.5 px-5 rounded transition-all">NEXT STEP ➔</button>
+          </div>
+        </div>
+
+        <div id="survey-step-2" class="survey-step hidden space-y-4 font-tech text-xs">
+          <label class="block text-xs text-gray-300 font-bold mb-3">2. Select "The Port" Smart QR Sticker Package ($15/mo):</label>
+          <div class="space-y-3">
+            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-300">
+              <div class="flex items-center gap-3">
+                <input type="radio" name="qr_package" value="5x Physical QR Stickers" checked class="accent-orange-500">
+                <span>🏷️ 5x Physical Smart QR Stickers (Mailed)</span>
+              </div>
+              <span class="text-orange-400 font-bold">Physical</span>
+            </label>
+            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-300">
+              <div class="flex items-center gap-3">
+                <input type="radio" name="qr_package" value="Digital QR Code Only" class="accent-orange-500">
+                <span>📲 Digital Vector QR Codes Only</span>
+              </div>
+              <span class="text-orange-400 font-bold">Digital</span>
+            </label>
+          </div>
+          <div class="pt-4 flex justify-between">
+            <button type="button" onclick="nextSurveyStep(1)" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs py-2.5 px-5 rounded">⬅ BACK</button>
+            <button type="button" onclick="nextSurveyStep(3)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-2.5 px-5 rounded transition-all">NEXT STEP ➔</button>
+          </div>
+        </div>
+
+        <div id="survey-step-3" class="survey-step hidden space-y-4 font-tech text-xs">
+          <label class="block text-xs text-gray-300 font-bold mb-1">3. Claim your custom Burner Site URL:</label>
+          <div class="flex items-center gap-2 bg-black/90 border border-gray-800 rounded p-3">
+            <input type="text" id="subdomain-input" placeholder="bowdega" class="bg-transparent text-orange-400 text-xs outline-none flex-grow" oninput="updateSubdomainPreview()">
+            <span class="text-gray-500">.burn-1.com</span>
+          </div>
+          <p id="subdomain-preview" class="text-xs text-orange-400">Assigned URL: https://bowdega.burn-1.com</p>
+
+          <div class="pt-4 flex justify-between">
+            <button type="button" onclick="nextSurveyStep(2)" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs py-2.5 px-5 rounded">⬅ BACK</button>
+            <button type="button" onclick="nextSurveyStep(4)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-2.5 px-5 rounded transition-all">NEXT STEP ➔</button>
+          </div>
+        </div>
+
+        <div id="survey-step-4" class="survey-step hidden space-y-4 font-tech text-xs">
+          <label class="block text-xs text-gray-300 font-bold mb-1">4. Contact & Telemetry Receiver:</label>
+          <div class="space-y-3">
+            <div>
+              <label class="block text-gray-400 mb-1">Organization / Owner Name</label>
+              <input type="text" id="survey-name" placeholder="Alex Darden / Apex Tech" class="w-full bg-black/90 border border-gray-800 rounded p-3 text-white outline-none focus:border-orange-400">
+            </div>
+            <div>
+              <label class="block text-gray-400 mb-1">Business Email</label>
+              <input type="email" id="survey-email" placeholder="alex@apextech.com" class="w-full bg-black/90 border border-gray-800 rounded p-3 text-white outline-none focus:border-orange-400">
+            </div>
+          </div>
+
+          <div class="pt-4 flex justify-between items-center border-t border-gray-800">
+            <button type="button" onclick="nextSurveyStep(3)" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs py-2.5 px-5 rounded">⬅ BACK</button>
+            <button type="button" onclick="generateReceiptCard()" class="bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold text-xs py-3 px-6 rounded shadow-lg shadow-orange-600/30">GENERATE RECEIPT & BUSINESS CARD 💳</button>
+          </div>
+        </div>
+
+        <!-- DIGITAL BUSINESS CARD RECEIPT -->
+        <div id="survey-step-receipt" class="survey-step hidden space-y-4 font-tech text-xs">
+          <div class="text-center mb-4">
+            <span class="text-xs text-emerald-400 font-bold bg-emerald-950 px-3 py-1 rounded border border-emerald-700">✓ BURNER SITE RESERVED</span>
+            <h3 class="font-cyber text-xl text-white font-bold mt-2">OFFICIAL DIGITAL BUSINESS CARD</h3>
+          </div>
+
+          <div id="receipt-card" class="bg-gradient-to-br from-gray-950 via-black to-gray-900 p-6 rounded-2xl border-2 border-orange-500/70 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-3">
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 rounded bg-orange-500 font-cyber font-bold text-black text-[10px] flex items-center justify-center">B1</div>
+                <span class="font-cyber font-bold text-xs text-white">BURN-1 <span class="text-orange-400">SMART CARD</span></span>
+              </div>
+              <span class="text-[9px] text-emerald-400">● STATUS: ACTIVE</span>
+            </div>
+
+            <div class="grid grid-cols-12 gap-3 items-center mb-4">
+              <div class="col-span-7 space-y-2 text-[11px]">
+                <div>
+                  <span class="text-gray-500 text-[9px] uppercase block">ORGANIZATION</span>
+                  <span id="receipt-owner" class="text-white font-bold block">Alex Darden</span>
+                </div>
+                <div>
+                  <span class="text-gray-500 text-[9px] uppercase block">BURNER SITE URL</span>
+                  <span id="receipt-url" class="text-emerald-400 font-mono underline block">https://bowdega.burn-1.com</span>
+                </div>
+              </div>
+              <div class="col-span-5 flex flex-col items-center">
+                <div id="receipt-qrcode" class="p-2 bg-white rounded-lg shadow"></div>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-2 border-t border-gray-800 text-[9px] text-gray-500">
+              <span id="receipt-serial">ID: #PORT-9821</span>
+              <span>BURN-1 PROTOCOL</span>
+            </div>
+          </div>
+
+          <div class="pt-4 flex flex-col gap-2">
+            <button type="button" onclick="downloadReceiptPNG()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold py-3 rounded text-xs shadow-lg shadow-orange-600/30">📥 DOWNLOAD BUSINESS CARD (PNG)</button>
+            <button type="button" onclick="closeSurvey(); openATM();" class="w-full bg-gray-900 border border-purple-500/60 text-purple-300 font-bold py-3 rounded text-xs">💳 PROCEED TO ATM CHECKOUT ($65/mo)</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ATM MODAL -->
+  <div id="atm-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/92 backdrop-blur-md p-4">
+    <div class="burner-scrim w-full max-w-md p-8 rounded-xl border-t-4 border-t-purple-500 shadow-2xl relative reticle-box">
+      <button onclick="closeATM()" aria-label="Close ATM" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✕</button>
+      <div class="text-center mb-6">
+        <h2 class="font-cyber text-2xl text-white tracking-wider mb-1">SECURE CHECKOUT</h2>
+        <p class="text-xs text-gray-400 font-tech uppercase">Enterprise Financial Gateway</p>
+      </div>
+      <div class="bg-black/90 p-4 rounded border border-gray-800 mb-6 font-tech text-xs">
+        <div class="flex justify-between mb-2 text-gray-400">
+          <span>VIP Kiosk / Burner Site</span>
+          <span class="text-white">$50.00 / mo</span>
+        </div>
+        <div class="flex justify-between mb-2 text-gray-400">
+          <span>"The Port" (Smart QR Sticker)</span>
+          <span class="text-white">$15.00 / mo</span>
+        </div>
+        <div class="w-full h-px bg-gray-800 my-3"></div>
+        <div class="flex justify-between font-bold text-sm">
+          <span class="text-white">Hybrid Bundle Due</span>
+          <span class="text-emerald-400">$65.00</span>
+        </div>
+      </div>
+      <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" rel="noopener noreferrer" class="w-full bg-[#0070ba] hover:bg-[#003087] text-white font-bold py-3.5 rounded transition-colors flex items-center justify-center gap-3 shadow-lg shadow-blue-900/20 mb-6 font-tech text-xs">
+        <span>Checkout with PayPal ($65.00)</span>
+      </a>
+      <div class="flex justify-center">
+        <a href="https://anergi.io" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 bg-gray-900 border border-gray-800 rounded-full hover:border-purple-500 transition-all group">
+          <span class="text-xs text-gray-400 font-tech group-hover:text-white transition-colors">Secured by <span class="text-purple-400 font-bold">Anergi.IO</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 border-t border-gray-900 bg-black/80 py-6 px-6 text-center text-xs font-tech text-gray-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>© 2026 <span class="text-white font-cyber">BURN-1.COM</span> • ALL RIGHTS RESERVED.</div>
+      <div class="flex items-center gap-6">
+        <a href="https://leonrdarden.com" class="hover:text-orange-400 transition-colors">LEONRDARDEN.COM</a>
+        <a href="https://anergi.io" class="hover:text-purple-400 transition-colors">ANERGI.IO</a>
+        <a href="https://www.eachoneteach.one/reach_and_teach.html" class="hover:text-blue-400 transition-colors">REACH & TEACH</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Procedural Embers
+    const canvas = document.getElementById('ember-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    const particles = [];
+    window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+    class Ember {
+      constructor() { this.reset(); }
+      reset() { this.x = Math.random() * width; this.y = height + Math.random() * 50; this.size = Math.random() * 3 + 1; this.speedY = Math.random() * 2 + 1; this.speedX = (Math.random() - 0.5) * 1.5; this.opacity = Math.random() * 0.8 + 0.2; }
+      update() { this.y -= this.speedY; this.x += this.speedX; this.opacity -= 0.005; if (this.opacity <= 0 || this.y < 0) this.reset(); }
+      draw() { ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100 + 100)}, 0, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    for (let i = 0; i < 45; i++) particles.push(new Ember());
+    function animateEmbers() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateEmbers); }
+    animateEmbers();
+
+    // Chatbot Sanitizer Logic
+    function runSanitizer() {
+      const input = document.getElementById('prompt-input').value;
+      const outputDiv = document.getElementById('chat-output');
+      if (!input.trim()) return;
+
+      outputDiv.innerHTML += `<div class="flex gap-2 pt-2 border-t border-gray-800"><span class="text-orange-500 font-bold">[YOU]:</span><p class="leading-relaxed text-gray-300">${input}</p></div>`;
+      
+      setTimeout(() => {
+        let threats = 0;
+        let sanitizedHTML = input;
+
+        const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi;
+        sanitizedHTML = sanitizedHTML.replace(emailRegex, (match) => { threats++; return `<span class="bg-red-950 text-red-400 px-1 rounded font-bold">${match} [EMAIL_EXPOSED]</span>`; });
+
+        const tokenRegex = /(?<!\w)([A-Za-z0-9-_]{24,})(?!\w)/g;
+        sanitizedHTML = sanitizedHTML.replace(tokenRegex, (match) => { threats++; return `<span class="bg-red-950 text-red-400 px-1 rounded font-bold">${match} [TOKEN_EXPOSED]</span>`; });
+
+        if (threats > 0) {
+          outputDiv.innerHTML += `<div class="flex gap-2 pt-2 border-t border-gray-800"><span class="text-red-500 font-bold">[BOT WARNING]:</span><p class="leading-relaxed text-red-400 font-bold">VULNERABILITIES DETECTED: ${threats} sensitive data string(s) found. <span class="text-orange-400 cursor-pointer underline" onclick="openSurvey()">Build a Burner Vault</span> to protect your local data.</p></div>`;
+        } else {
+          outputDiv.innerHTML += `<div class="flex gap-2 pt-2 border-t border-gray-800"><span class="text-emerald-400 font-bold">[BOT]:</span><p class="leading-relaxed text-emerald-400">CLEAN: No standard PII/token leaks detected in payload string.</p></div>`;
+        }
+        outputDiv.scrollTop = output.scrollHeight;
+        document.getElementById('prompt-input').value = '';
+      }, 500);
+    }
+
+    // Modal Controls & Survey Receipt Generation
+    function openSurvey() {
+      document.getElementById('survey-modal').classList.remove('hidden');
+      document.getElementById('survey-modal').classList.add('flex');
+    }
+    function closeSurvey() {
+      document.getElementById('survey-modal').classList.remove('flex');
+      document.getElementById('survey-modal').classList.add('hidden');
+    }
+
+    function nextSurveyStep(step) {
+      document.querySelectorAll('.survey-step').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`survey-step-${step}`).classList.remove('hidden');
+      document.getElementById('survey-step-tag').innerText = `STEP ${step} OF 4`;
+      document.getElementById('survey-progress').style.width = `${(step / 4) * 100}%`;
+    }
+
+    function updateSubdomainPreview() {
+      const val = document.getElementById('subdomain-input').value.trim() || 'bowdega';
+      document.getElementById('subdomain-preview').innerText = `Assigned URL: https://${val.toLowerCase()}.burn-1.com`;
+    }
+
+    function generateReceiptCard() {
+      const name = document.getElementById('survey-name').value || 'Alex Darden';
+      const sub = document.getElementById('subdomain-input').value.trim() || 'bowdega';
+      const fullURL = `https://${sub.toLowerCase()}.burn-1.com`;
+
+      document.getElementById('survey-header').classList.add('hidden');
+      document.querySelectorAll('.survey-step').forEach(el => el.classList.add('hidden'));
+      document.getElementById('survey-step-receipt').classList.remove('hidden');
+
+      document.getElementById('receipt-owner').innerText = name;
+      document.getElementById('receipt-url').innerText = fullURL;
+      document.getElementById('receipt-serial').innerText = `ID: #PORT-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      const qrContainer = document.getElementById('receipt-qrcode');
+      qrContainer.innerHTML = '';
+      new QRCode(qrContainer, {
+        text: `https://burn-1.com/kiosk?brand=${encodeURIComponent(sub)}`,
+        width: 100,
+        height: 100,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    function downloadReceiptPNG() {
+      const card = document.getElementById('receipt-card');
+      html2canvas(card, { scale: 2, backgroundColor: '#000000' }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `burn1-digital-card-${Date.now()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    function openATM() { document.getElementById('atm-modal').classList.remove('hidden'); document.getElementById('atm-modal').classList.add('flex'); }
+    function closeATM() { document.getElementById('atm-modal').classList.remove('flex'); document.getElementById('atm-modal').classList.add('hidden'); }
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeATM(); closeSurvey(); } });
+  </script>
+</body>
+</html>

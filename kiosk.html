@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 | B2B Kiosk Terminal Node</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Share Tech Mono', monospace; background: #000; color: #fff; }
+    .font-cyber { font-family: 'Orbitron', sans-serif; }
+    .burner-scrim {
+      background: rgba(6, 6, 10, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 69, 0, 0.3);
+      box-shadow: 0 0 25px rgba(255, 69, 0, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-black min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+  <!-- KIOSK HUD HEADER -->
+  <header class="burner-scrim rounded-xl p-4 flex justify-between items-center mb-6">
+    <div class="flex items-center gap-3">
+      <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+      <span class="font-cyber font-bold text-lg text-white">KIOSK NODE: <span id="node-id" class="text-orange-400">APEX-9042</span></span>
+    </div>
+    <div class="flex items-center gap-4 text-xs font-mono">
+      <span class="text-gray-400 hidden md:inline">PORT TELEMETRY: <span class="text-emerald-400 font-bold">VERIFIED</span></span>
+      <a href="https://burn-1.com" class="bg-orange-950 hover:bg-orange-900 border border-orange-500/60 text-orange-300 px-3 py-1.5 rounded transition-all">
+        ⬅ RETURN TO CENTRAL HUB
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN KIOSK TOUCH TERMINAL -->
+  <main class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-grow">
+    
+    <!-- VIDEO / COURSE PLAYER LAYER -->
+    <div class="lg:col-span-2 burner-scrim rounded-xl p-6 flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xs text-orange-400">TRACK 01: EDUCATIONAL COURSE FEED</span>
+          <span class="text-xs bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-800">LIVE FEED</span>
+        </div>
+        
+        <!-- Video Screen Container -->
+        <div class="relative w-full aspect-video bg-black rounded-lg border border-gray-800 overflow-hidden flex items-center justify-center mb-4">
+          <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="assets/commercial_2.mp4" type="video/mp4">
+          </video>
+          <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center p-6">
+            <h2 id="brand-heading" class="font-cyber text-2xl md:text-3xl text-white font-bold mb-2">CYBER SECURITY & RECOVERY MODULE</h2>
+            <p class="text-xs text-gray-300 max-w-md">Interactive Video Player Node connected to the Burn-1 Decoupled Audio Pipeline.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-between items-center gap-4 text-xs pt-4 border-t border-gray-800">
+        <span class="text-gray-400">STATUS: <span class="text-emerald-400">STREAMING @ 1080P</span></span>
+        <button onclick="logKioskAction('Started Video Course')" class="bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold py-2.5 px-6 rounded hover:opacity-90">
+          ▶ LAUNCH MODULE
+        </button>
+      </div>
+    </div>
+
+    <!-- KIOSK TOUCH CONTROLS -->
+    <div class="burner-scrim rounded-xl p-6 flex flex-col justify-between">
+      <div>
+        <h3 class="font-cyber text-lg text-white font-bold mb-1">TOUCH KIOSK MENU</h3>
+        <p class="text-xs text-gray-400 mb-6">Select an action on the kiosk display:</p>
+
+        <div class="space-y-3">
+          <button onclick="logKioskAction('Reach & Teach Mentorship')" class="w-full bg-black/80 hover:bg-orange-950/60 border border-gray-800 hover:border-orange-500/60 p-4 rounded text-left transition-all">
+            <div class="text-xs text-orange-400 font-bold mb-1">OPTION 01</div>
+            <div class="text-sm text-white font-bold">📚 Reach & Teach Mentorship</div>
+          </button>
+
+          <button onclick="logKioskAction('Anergi.IO SecOps Check')" class="w-full bg-black/80 hover:bg-purple-950/60 border border-gray-800 hover:border-purple-500/60 p-4 rounded text-left transition-all">
+            <div class="text-xs text-purple-400 font-bold mb-2">OPTION 02</div>
+            <div class="text-sm text-white font-bold">🛡️ Anergi.IO Security Check</div>
+          </button>
+
+          <button onclick="window.location.href='https://burn-1.com#atm'" class="w-full bg-black/80 hover:bg-emerald-950/60 border border-gray-800 hover:border-emerald-500/60 p-4 rounded text-left transition-all">
+            <div class="text-xs text-emerald-400 font-bold mb-2">OPTION 03</div>
+            <div class="text-sm text-white font-bold">💳 Upgrade Kiosk Tier ($65/mo)</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-gray-800 font-mono text-xs">
+        <span class="text-gray-400 block mb-2">LAST SCAN ACTIVITY:</span>
+        <div id="kiosk-log" class="bg-black/90 p-3 rounded border border-gray-800 text-emerald-400 h-24 overflow-y-auto">
+          > Kiosk initialized. Ready for touch input...
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="mt-6 text-center text-xs text-gray-500">
+    BURN-1 KIOSK TERMINAL • POWERED BY <a href="https://burn-1.com" class="text-orange-400 hover:underline">BURN-1.COM</a>
+  </footer>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const brand = urlParams.get('brand');
+    const host = window.location.hostname;
+    const sub = host.split('.')[0];
+
+    const activeBrand = brand || (sub && sub !== 'burn-1' && sub !== 'www' ? sub : 'APEX');
+    
+    document.getElementById('node-id').innerText = `${activeBrand.toUpperCase()}-NODE`;
+    document.getElementById('brand-heading').innerText = `${activeBrand.toUpperCase()} KIOSK TERMINAL`;
+
+    function logKioskAction(action) {
+      const log = document.getElementById('kiosk-log');
+      const time = new Date().toLocaleTimeString();
+      log.innerHTML += `<br>> [${time}] Action triggered: ${action}`;
+      log.scrollTop = log.scrollHeight;
+    }
+  </script>
+</body>
+</html>

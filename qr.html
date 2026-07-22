@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 | Smart QR Business Card Generator</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    body { font-family: 'Share Tech Mono', monospace; background: #000; color: #fff; }
+    .font-cyber { font-family: 'Orbitron', sans-serif; }
+    .burner-scrim {
+      background: rgba(6, 6, 10, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 69, 0, 0.3);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+    }
+    .card-border-glow {
+      box-shadow: 0 0 25px rgba(255, 69, 0, 0.25), inset 0 0 15px rgba(255, 140, 0, 0.1);
+    }
+    .reticle-box { position: relative; }
+    .reticle-box::before { content: '+'; position: absolute; top: -6px; left: -6px; color: #ff4500; font-size: 14px; }
+    .reticle-box::after { content: '+'; position: absolute; bottom: -6px; right: -6px; color: #ff4500; font-size: 14px; }
+  </style>
+</head>
+<body class="bg-black min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+  <!-- HEADER -->
+  <header class="burner-scrim rounded-xl p-4 flex justify-between items-center mb-8 reticle-box">
+    <div class="flex items-center gap-3">
+      <span class="text-xl">💳</span>
+      <div>
+        <span class="font-cyber font-bold text-lg text-white">THE PORT: <span class="text-orange-400">SMART QR BUSINESS CARD GENERATOR</span></span>
+        <p class="text-[10px] text-gray-400">ECOSYSTEM TELEMETRY & CODE REVOCATION ENGINE</p>
+      </div>
+    </div>
+    <a href="https://burn-1.com" class="bg-orange-950 hover:bg-orange-900 border border-orange-500/60 text-orange-300 px-3.5 py-2 rounded text-xs transition-all">
+      ⬅ RETURN TO CENTRAL HUB
+    </a>
+  </header>
+
+  <main class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start flex-grow">
+    
+    <!-- INPUT FORM CONTROLS -->
+    <div class="lg:col-span-5 burner-scrim rounded-xl p-6 reticle-box space-y-4">
+      <h2 class="font-cyber text-xl text-white font-bold mb-1">BUSINESS CARD DETAILS</h2>
+      <p class="text-xs text-gray-400 mb-4">Customize your official "The Port" Smart QR Business Card:</p>
+
+      <form onsubmit="event.preventDefault();" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-gray-300 mb-1">Business / Brand Name:</label>
+          <input type="text" id="input-brand" value="BOWDEGA DISPENSARY" class="w-full bg-black/90 border border-gray-800 rounded p-3 text-orange-400 font-bold outline-none focus:border-orange-500" oninput="updateCard()">
+        </div>
+
+        <div>
+          <label class="block text-gray-300 mb-1">Owner / Contact Name:</label>
+          <input type="text" id="input-owner" value="Alex Darden" class="w-full bg-black/90 border border-gray-800 rounded p-3 text-white outline-none focus:border-orange-500" oninput="updateCard()">
+        </div>
+
+        <div>
+          <label class="block text-gray-300 mb-1">Subdomain Name:</label>
+          <div class="flex items-center bg-black/90 border border-gray-800 rounded p-3">
+            <input type="text" id="input-sub" value="bowdega" class="bg-transparent text-emerald-400 font-bold outline-none flex-grow" oninput="updateCard()">
+            <span class="text-gray-500">.burn-1.com</span>
+          </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="pt-2 space-y-2">
+          <button type="button" onclick="downloadCardImage()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-black font-cyber font-bold py-3 rounded text-xs transition-all shadow-lg shadow-orange-600/30 flex items-center justify-center gap-2">
+            <span>📥 DOWNLOAD BUSINESS CARD (PNG)</span>
+          </button>
+          
+          <button type="button" onclick="copyKioskURL()" class="w-full bg-gray-900 hover:bg-gray-800 border border-purple-500/60 text-purple-300 font-bold py-3 rounded text-xs transition-all flex items-center justify-center gap-2">
+            <span>📋 COPY KIOSK URL</span>
+          </button>
+          
+          <button type="button" onclick="toggleCodeStatus()" id="kill-switch-btn" class="w-full bg-red-950/80 hover:bg-red-900 border border-red-600 text-red-300 font-bold py-3 rounded text-xs transition-all flex items-center justify-center gap-2">
+            <span>🛑 ENGAGE KILL SWITCH (DISABLE CODE)</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- LIVE CYBERPUNK BUSINESS CARD PREVIEW -->
+    <div class="lg:col-span-7 flex flex-col items-center justify-center">
+      <span class="text-xs text-gray-400 mb-3 tracking-widest uppercase">Live Card Render & Telemetry Preview</span>
+
+      <!-- THE BUSINESS CARD CANVAS -->
+      <div id="business-card" class="w-full max-w-lg bg-gradient-to-br from-gray-950 via-black to-gray-900 p-6 md:p-8 rounded-2xl border-2 border-orange-500/70 card-border-glow shadow-2xl relative overflow-hidden reticle-box">
+        
+        <div class="absolute inset-0 bg-[radial-gradient(#ff4500_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none"></div>
+
+        <div class="flex justify-between items-start mb-6 border-b border-gray-800/80 pb-4 relative z-10">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <div class="w-5 h-5 rounded bg-gradient-to-tr from-red-600 to-orange-400 flex items-center justify-center font-cyber font-bold text-black text-xs">B1</div>
+              <span class="font-cyber font-bold text-sm text-white tracking-wider">BURN-1 <span class="text-orange-400">SMART CARD</span></span>
+            </div>
+            <span class="text-[10px] text-gray-400 tracking-widest uppercase block">PORT TELEMETRY VERIFIED</span>
+          </div>
+
+          <span id="card-status-badge" class="text-[10px] font-bold text-emerald-400 bg-emerald-950/90 border border-emerald-700 px-3 py-1 rounded">
+            ● STATUS: ACTIVE
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center relative z-10 mb-6">
+          <div class="sm:col-span-7 space-y-3">
+            <div>
+              <span class="text-[10px] text-gray-500 uppercase block">BUSINESS / BRAND</span>
+              <h3 id="card-brand-display" class="font-cyber text-lg md:text-xl text-white font-bold leading-tight">BOWDEGA DISPENSARY</h3>
+            </div>
+
+            <div>
+              <span class="text-[10px] text-gray-500 uppercase block">KEY CONTACT / OWNER</span>
+              <p id="card-owner-display" class="text-sm text-orange-400 font-bold">Alex Darden</p>
+            </div>
+
+            <div>
+              <span class="text-[10px] text-gray-500 uppercase block">ASSIGNED KIOSK URL</span>
+              <p id="card-url-display" class="text-xs text-emerald-400 font-mono underline">https://bowdega.burn-1.com</p>
+            </div>
+          </div>
+
+          <div class="sm:col-span-5 flex flex-col items-center justify-center">
+            <div id="qrcode" class="p-3 bg-white rounded-xl shadow-xl border-2 border-orange-500/40"></div>
+            <span class="text-[9px] text-gray-400 mt-2">SCAN TO ACCESS KIOSK</span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-4 border-t border-gray-800/80 text-[10px] text-gray-500 relative z-10">
+          <span id="card-serial">ID: #PORT-9842</span>
+          <span id="card-timestamp">GEN: 2026-07-22</span>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="mt-8 text-center text-xs text-gray-500">
+    THE PORT SMART QR BUSINESS CARD ENGINE • POWERED BY <a href="https://burn-1.com" class="text-orange-400 hover:underline">BURN-1.COM</a>
+  </footer>
+
+  <script>
+    let isCodeActive = true;
+
+    function updateCard() {
+      const brand = document.getElementById('input-brand').value.trim() || 'BRAND NAME';
+      const owner = document.getElementById('input-owner').value.trim() || 'OWNER NAME';
+      const sub = document.getElementById('input-sub').value.trim() || 'custom';
+      
+      const targetURL = `https://burn-1.com/kiosk?brand=${encodeURIComponent(sub)}`;
+
+      document.getElementById('card-brand-display').innerText = brand.toUpperCase();
+      document.getElementById('card-owner-display').innerText = owner;
+      document.getElementById('card-url-display').innerText = `https://${sub.toLowerCase()}.burn-1.com`;
+
+      const qrContainer = document.getElementById('qrcode');
+      qrContainer.innerHTML = '';
+      
+      new QRCode(qrContainer, {
+        text: targetURL,
+        width: 120,
+        height: 120,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    function toggleCodeStatus() {
+      isCodeActive = !isCodeActive;
+      const badge = document.getElementById('card-status-badge');
+      const btn = document.getElementById('kill-switch-btn');
+
+      if (isCodeActive) {
+        badge.className = "text-[10px] font-bold text-emerald-400 bg-emerald-950/90 border border-emerald-700 px-3 py-1 rounded";
+        badge.innerText = "● STATUS: ACTIVE";
+        btn.className = "w-full bg-red-950/80 hover:bg-red-900 border border-red-600 text-red-300 font-bold py-3 rounded text-xs transition-all flex items-center justify-center gap-2";
+        btn.innerHTML = "<span>🛑 ENGAGE KILL SWITCH (DISABLE CODE)</span>";
+      } else {
+        badge.className = "text-[10px] font-bold text-red-400 bg-red-950/90 border border-red-700 px-3 py-1 rounded animate-pulse";
+        badge.innerText = "✖ STATUS: REVOKED / STOPPED";
+        btn.className = "w-full bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-600 text-emerald-300 font-bold py-3 rounded text-xs transition-all flex items-center justify-center gap-2";
+        btn.innerHTML = "<span>✅ RE-ENABLE CODE TELEMETRY</span>";
+      }
+    }
+
+    function copyKioskURL() {
+      const sub = document.getElementById('input-sub').value.trim() || 'custom';
+      const fullURL = `https://${sub.toLowerCase()}.burn-1.com`;
+      navigator.clipboard.writeText(fullURL);
+      alert(`Copied Kiosk URL: ${fullURL}`);
+    }
+
+    function downloadCardImage() {
+      const cardElement = document.getElementById('business-card');
+      html2canvas(cardElement, { scale: 2, backgroundColor: '#000000' }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `burn1-business-card-${Date.now()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    const now = new Date();
+    document.getElementById('card-timestamp').innerText = `GEN: ${now.toISOString().split('T')[0]}`;
+    document.getElementById('card-serial').innerText = `ID: #PORT-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    updateCard();
+  </script>
+</body>
+</html>

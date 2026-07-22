@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 | Network Admin & Telemetry Dashboard</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Share Tech Mono', monospace; background: #000; color: #fff; }
+    .font-cyber { font-family: 'Orbitron', sans-serif; }
+    .burner-scrim {
+      background: rgba(6, 6, 10, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 69, 0, 0.3);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+    }
+    .reticle-box { position: relative; }
+    .reticle-box::before { content: '+'; position: absolute; top: -6px; left: -6px; color: #ff4500; font-size: 14px; }
+    .reticle-box::after { content: '+'; position: absolute; bottom: -6px; right: -6px; color: #ff4500; font-size: 14px; }
+  </style>
+</head>
+<body class="bg-black min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+  <!-- MAIN ADMIN DASHBOARD (NO LOCK MODAL - LOADS INSTANTLY) -->
+  <div class="flex flex-col justify-between min-h-screen">
+    
+    <!-- HEADER -->
+    <header class="burner-scrim rounded-xl p-4 flex justify-between items-center mb-8 reticle-box">
+      <div class="flex items-center gap-3">
+        <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+        <div>
+          <span class="font-cyber font-bold text-lg text-white">BURN-1: <span class="text-orange-400">MASTER ADMIN CONTROL CENTER</span></span>
+          <p class="text-[10px] text-gray-400">NETWORK TELEMETRY, REVENUE & CODE REVOCATION MATRIX</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono text-emerald-400 bg-emerald-950 px-3 py-1.5 rounded border border-emerald-800">● AUTHORIZED ADMIN</span>
+        <a href="https://burn-1.com" class="bg-orange-950 hover:bg-orange-900 border border-orange-500/60 text-orange-300 px-3.5 py-1.5 rounded text-xs">
+          ⬅ HUB
+        </a>
+      </div>
+    </header>
+
+    <!-- METRICS HUD CARDS -->
+    <main class="max-w-7xl mx-auto w-full space-y-8 flex-grow">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-mono">
+        <div class="burner-scrim rounded-xl p-5 border-l-4 border-l-orange-500 reticle-box">
+          <span class="text-xs text-gray-400 uppercase">ACTIVE BURNER SITES</span>
+          <h3 class="font-cyber text-3xl text-white font-bold mt-1" id="stat-nodes">14</h3>
+          <span class="text-[10px] text-emerald-400">● 100% ONLINE</span>
+        </div>
+
+        <div class="burner-scrim rounded-xl p-5 border-l-4 border-l-emerald-500 reticle-box">
+          <span class="text-xs text-gray-400 uppercase">MONTHLY RECURRING (MRR)</span>
+          <h3 class="font-cyber text-3xl text-emerald-400 font-bold mt-1" id="stat-mrr">$910.00</h3>
+          <span class="text-[10px] text-gray-400">PayPal Autodraft Active</span>
+        </div>
+
+        <div class="burner-scrim rounded-xl p-5 border-l-4 border-l-purple-500 reticle-box">
+          <span class="text-xs text-gray-400 uppercase">TOTAL QR SCANS LOGGED</span>
+          <h3 class="font-cyber text-3xl text-purple-400 font-bold mt-1" id="stat-scans">1,842</h3>
+          <span class="text-[10px] text-purple-300">Smart QR Telemetry</span>
+        </div>
+
+        <div class="burner-scrim rounded-xl p-5 border-l-4 border-l-red-500 reticle-box">
+          <span class="text-xs text-gray-400 uppercase">REVOKED / KILLED NODES</span>
+          <h3 class="font-cyber text-3xl text-red-500 font-bold mt-1" id="stat-revoked">2</h3>
+          <span class="text-[10px] text-red-400">Unpaid / Canceled Subscriptions</span>
+        </div>
+      </div>
+
+      <!-- MASTER CODE REVOCATION MATRIX TABLE -->
+      <section class="burner-scrim rounded-xl p-6 reticle-box">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+          <div>
+            <h2 class="font-cyber text-xl text-white font-bold">MASTER KIOSK REVOCATION MATRIX</h2>
+            <p class="text-xs text-gray-400 mt-0.5">Toggle Client Burner Site Access & Kill-Switch Controls</p>
+          </div>
+          <button onclick="openProvisionModal()" class="bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold text-xs py-2.5 px-4 rounded shadow-lg shadow-orange-600/30">
+            + PROVISION NEW SITE
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead>
+              <tr class="border-b border-gray-800 text-gray-400 uppercase">
+                <th class="pb-3">Client / Brand</th>
+                <th class="pb-3">Subdomain URL</th>
+                <th class="pb-3">Subscription Tier</th>
+                <th class="pb-3">Status</th>
+                <th class="pb-3 text-right">Kill Switch Action</th>
+              </tr>
+            </thead>
+            <tbody id="matrix-table-body" class="divide-y divide-gray-800/60">
+              <tr>
+                <td class="py-4 font-bold text-white">Bowdega Dispensary</td>
+                <td class="py-4 text-orange-400 underline">bowdega.burn-1.com</td>
+                <td class="py-4 text-emerald-400">$65.00/mo Bundle</td>
+                <td class="py-4"><span class="text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">● ACTIVE</span></td>
+                <td class="py-4 text-right">
+                  <button onclick="toggleNodeStatus(this)" class="bg-red-950 hover:bg-red-900 border border-red-600 text-red-300 px-3 py-1.5 rounded transition-all">
+                    🛑 ENGAGE KILL SWITCH
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="py-4 font-bold text-white">Apex Technology</td>
+                <td class="py-4 text-orange-400 underline">apex.burn-1.com</td>
+                <td class="py-4 text-emerald-400">$65.00/mo Bundle</td>
+                <td class="py-4"><span class="text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">● ACTIVE</span></td>
+                <td class="py-4 text-right">
+                  <button onclick="toggleNodeStatus(this)" class="bg-red-950 hover:bg-red-900 border border-red-600 text-red-300 px-3 py-1.5 rounded transition-all">
+                    🛑 ENGAGE KILL SWITCH
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="py-4 font-bold text-white">Studio Lounge VIP</td>
+                <td class="py-4 text-orange-400 underline">studio.burn-1.com</td>
+                <td class="py-4 text-gray-400">$50.00/mo Kiosk</td>
+                <td class="py-4"><span class="text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-800 animate-pulse">✖ REVOKED</span></td>
+                <td class="py-4 text-right">
+                  <button onclick="toggleNodeStatus(this)" class="bg-emerald-950 hover:bg-emerald-900 border border-emerald-600 text-emerald-300 px-3 py-1.5 rounded transition-all">
+                    ✅ RE-ENABLE SITE
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- REAL-TIME SCAN TELEMETRY FEED -->
+      <section class="burner-scrim rounded-xl p-6 reticle-box border-l-4 border-l-purple-500">
+        <h3 class="font-cyber text-lg text-white font-bold mb-3">REAL-TIME QR TELEMETRY LOG STREAM</h3>
+        <div id="admin-log-stream" class="bg-black/90 p-4 rounded border border-gray-800 font-mono text-xs text-emerald-400 h-40 overflow-y-auto space-y-1">
+          <p>> [22:38:12] TELEMETRY: Scanned #PORT-9821 @ bowdega.burn-1.com (IP: 172.56.21.90 - Mobile iOS)</p>
+          <p>> [22:31:05] TELEMETRY: Scanned #PORT-4412 @ apex.burn-1.com (IP: 99.124.8.12 - Desktop Windows)</p>
+          <p>> [22:15:40] SECURITY: Blocked revoked node attempt @ studio.burn-1.com</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="mt-8 text-center text-xs text-gray-500 font-mono">
+      BURN-1 MASTER ADMIN SYSTEM • PRIVATE AUTHORIZED ACCESS ONLY
+    </footer>
+
+  </div>
+
+  <!-- PROVISION NEW SITE MODAL -->
+  <div id="provision-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/92 backdrop-blur-md p-4">
+    <div class="burner-scrim w-full max-w-md p-6 rounded-xl border-t-4 border-t-orange-500 shadow-2xl relative reticle-box">
+      <button onclick="closeProvisionModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✕</button>
+      <h3 class="font-cyber text-xl text-white font-bold mb-4">PROVISION NEW BURNER SITE</h3>
+      
+      <div class="space-y-3 font-mono text-xs">
+        <div>
+          <label class="block text-gray-300 mb-1">Brand Name:</label>
+          <input type="text" id="prov-brand" placeholder="Cyber Lounge" class="w-full bg-black border border-gray-800 rounded p-2.5 text-white outline-none focus:border-orange-500">
+        </div>
+        <div>
+          <label class="block text-gray-300 mb-1">Subdomain Name:</label>
+          <input type="text" id="prov-sub" placeholder="cyberlounge" class="w-full bg-black border border-gray-800 rounded p-2.5 text-orange-400 outline-none focus:border-orange-500">
+        </div>
+        <div>
+          <label class="block text-gray-300 mb-1">Subscription Tier:</label>
+          <select id="prov-tier" class="w-full bg-black border border-gray-800 rounded p-2.5 text-white outline-none">
+            <option value="$65.00/mo Bundle">$65.00/mo Hybrid Bundle</option>
+            <option value="$50.00/mo Kiosk">$50.00/mo VIP Kiosk Software</option>
+            <option value="$15.00/mo QR">$15.00/mo "The Port" QR Sticker</option>
+          </select>
+        </div>
+
+        <button onclick="submitProvisioning()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold py-3 rounded mt-2">
+          ACTIVATE BURNER SITE 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleNodeStatus(btn) {
+      const row = btn.closest('tr');
+      const statusTd = row.children[3];
+
+      if (btn.innerText.includes('ENGAGE KILL SWITCH')) {
+        statusTd.innerHTML = '<span class="text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-800 animate-pulse">✖ REVOKED</span>';
+        btn.className = "bg-emerald-950 hover:bg-emerald-900 border border-emerald-600 text-emerald-300 px-3 py-1.5 rounded transition-all";
+        btn.innerText = "✅ RE-ENABLE SITE";
+      } else {
+        statusTd.innerHTML = '<span class="text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">● ACTIVE</span>';
+        btn.className = "bg-red-950 hover:bg-red-900 border border-red-600 text-red-300 px-3 py-1.5 rounded transition-all";
+        btn.innerText = "🛑 ENGAGE KILL SWITCH";
+      }
+    }
+
+    function openProvisionModal() {
+      const modal = document.getElementById('provision-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeProvisionModal() {
+      const modal = document.getElementById('provision-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function submitProvisioning() {
+      const brand = document.getElementById('prov-brand').value || 'New Kiosk';
+      const sub = document.getElementById('prov-sub').value || 'new';
+      const tier = document.getElementById('prov-tier').value;
+
+      const tbody = document.getElementById('matrix-table-body');
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td class="py-4 font-bold text-white">${brand}</td>
+        <td class="py-4 text-orange-400 underline">${sub.toLowerCase()}.burn-1.com</td>
+        <td class="py-4 text-emerald-400">${tier}</td>
+        <td class="py-4"><span class="text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">● ACTIVE</span></td>
+        <td class="py-4 text-right">
+          <button onclick="toggleNodeStatus(this)" class="bg-red-950 hover:bg-red-900 border border-red-600 text-red-300 px-3 py-1.5 rounded transition-all">
+            🛑 ENGAGE KILL SWITCH
+          </button>
+        </td>
+      `;
+      tbody.appendChild(newRow);
+
+      closeProvisionModal();
+      alert(`Provisioned ${brand} (${sub}.burn-1.com) successfully!`);
+    }
+  </script>
+</body>
+</html>
