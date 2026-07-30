@@ -6,14 +6,14 @@
 <title>Privacy First Protocol | Free Cyber Sanitization Suite</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Plus+Jakarta+Sans:wght@400;600;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
     --hazard-orange: #ff5722;
     --burn-red: #8b0000;
-    --bg-dark: #070709;
-    --panel-bg: rgba(18, 18, 22, 0.85);
+    --bg-dark: #0a0a0a;
+    --panel-bg: rgba(22, 27, 34, 0.9);
   }
 
   body {
@@ -29,10 +29,10 @@
   .font-mono-code { font-family: 'Share Tech Mono', monospace; }
   .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-  /* Cyber Grid Background */
-  .cyber-grid-bg {
-    background-image: linear-gradient(to right, rgba(255, 87, 34, 0.06) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 87, 34, 0.06) 1px, transparent 1px);
+  /* Cyber Grid Overlay */
+  .cyber-grid {
+    background-image: linear-gradient(to right, rgba(255, 87, 34, 0.08) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 87, 34, 0.08) 1px, transparent 1px);
     background-size: 32px 32px;
   }
 
@@ -40,20 +40,20 @@
   .scrim-box {
     background: var(--panel-bg);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 87, 34, 0.25);
+    border: 1px solid rgba(255, 87, 34, 0.3);
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
     transition: all 0.3s ease;
   }
   .scrim-box:hover {
-    border-color: rgba(255, 87, 34, 0.6);
-    box-shadow: 0 0 30px rgba(255, 87, 34, 0.3);
+    border-color: rgba(255, 87, 34, 0.7);
+    box-shadow: 0 0 35px rgba(255, 87, 34, 0.4);
   }
 
-  /* Exaggerated UI Demo Container */
+  /* Exaggerated Interactive Stage Canvas */
   .demo-stage {
     position: relative;
     width: 100%;
-    height: 380px;
+    height: 360px;
     background: #0d1117;
     border: 2px solid #30363d;
     border-radius: 1rem;
@@ -61,7 +61,7 @@
     box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
   }
 
-  /* State 1: Clean Corporate UI */
+  /* Corporate Clean State */
   .state-clean {
     position: absolute;
     inset: 0;
@@ -69,13 +69,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(13, 17, 23, 0.98));
-    transition: opacity 0.8s ease, filter 0.8s ease;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #161b22, #0d1117);
+    transition: opacity 0.6s ease, filter 0.6s ease;
     z-index: 10;
   }
 
-  /* State 2: Opaque Red & Hazard Orange Burn State */
+  /* Burned State: Opaque Red & Hazard Orange */
   .state-burned {
     position: absolute;
     inset: 0;
@@ -83,12 +83,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1.5rem;
     background-color: var(--burn-red);
     border: 6px solid var(--hazard-orange);
     opacity: 0;
     transform: scale(1.05);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
     z-index: 20;
   }
 
@@ -99,28 +99,28 @@
 
   .state-clean.burned-out {
     opacity: 0;
-    filter: blur(10px);
+    filter: blur(10px) contrast(2);
   }
 
-  /* Reticle Markers */
+  /* Reticle Box Markers */
   .reticle { position: relative; }
   .reticle::before { content: '+'; position: absolute; top: -8px; left: -8px; color: var(--hazard-orange); font-size: 16px; font-weight: bold; }
   .reticle::after { content: '+'; position: absolute; bottom: -8px; right: -8px; color: var(--hazard-orange); font-size: 16px; font-weight: bold; }
 </style>
 </head>
-<body class="cyber-grid-bg min-h-screen flex flex-col items-center p-4 md:p-8">
+<body class="cyber-grid min-h-screen flex flex-col items-center p-4 md:p-8">
 
   <!-- HEADER NAVIGATION -->
-  <header class="w-full max-w-6xl flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-5">
+  <header class="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-5">
     <div class="mb-4 md:mb-0 text-center md:text-left">
       <a href="index.html" class="flex items-center justify-center md:justify-start gap-3">
-        <span class="text-2xl">🔥</span>
+        <span class="text-3xl">🔥</span>
         <h1 class="font-cyber text-2xl md:text-4xl text-white font-extrabold tracking-[0.2em] uppercase">
           PRIVACY FIRST <span class="text-orange-500">PROTOCOL</span>
         </h1>
       </a>
-      <p class="font-mono-code text-xs text-gray-400 uppercase tracking-widest mt-1">
-        Complimentary Interactive Digital Hygiene & Cyber Loadout Suite
+      <p class="font-mono-code text-xs text-orange-400/80 tracking-widest uppercase mt-1">
+        Complimentary Interactive Digital Hygiene & 8-Module Cyber Loadout Suite
       </p>
     </div>
 
@@ -128,62 +128,61 @@
       <a href="index.html" class="bg-black border border-gray-800 text-gray-300 px-4 py-2 rounded font-mono-code text-xs hover:border-orange-500 transition-all">
         ← Return to Main Hub
       </a>
-      <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="bg-orange-600 hover:bg-orange-500 text-black font-cyber font-black text-xs px-5 py-2.5 rounded tracking-widest uppercase shadow-[0_0_20px_rgba(255,87,34,0.5)]">
-        Get Vault ($50)
+      <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-black font-cyber font-black text-xs px-6 py-2.5 rounded tracking-widest uppercase shadow-[0_0_25px_rgba(255,87,34,0.7)] transition-all">
+        ⚡ GET THE VAULT ($50)
       </a>
     </div>
   </header>
 
   <!-- HERO BRIEFING -->
-  <section class="w-full max-w-6xl text-center mb-12">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-orange-950/80 border border-orange-500/50 text-orange-400 text-xs font-mono-code mb-4 uppercase tracking-widest">
-      <span>🛡️ FREE LEARNING SUITE · 8-MODULE CYBER LOADOUT</span>
+  <section class="w-full max-w-5xl text-center mb-12">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-orange-950/80 border border-orange-500/50 text-orange-400 text-xs font-mono-code mb-4 uppercase tracking-widest">
+      <span>🛡️ THE SANITIZATION PANEL · COMPLIMENTARY HYPERFRAMES TRAINING</span>
     </div>
     <h2 class="font-cyber text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
-      THE SANITIZATION <span class="text-orange-500">PANEL</span>
+      BURN THROUGH THE <span class="text-orange-500">TRACKERS</span>
     </h2>
     <p class="font-sans-clean text-gray-300 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
-      Learn how third-party trackers, cloud AI logs, and app beacons build profiles on your digital life—and how to burn through them with clean-to-corny transitions.
+      Learn how third-party trackers, cloud AI surveillance, and app beacons track your digital footprint. Test each module's exaggerated UI below to trigger the clean-to-corny burn finish!
     </p>
   </section>
 
-  <!-- INTERACTIVE DEMO STAGE (MODULE 1 & MODULE 2) -->
-  <section class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
-    
-    <!-- DEMO BOX 1: MODULE 1 COOKIE SWEEPING -->
+  <!-- 8 INTERACTIVE MODULE CARDS GRID -->
+  <section class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
+
+    <!-- MODULE 1: COOKIE SWEEPING (THE TRACKERS) -->
     <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
       <div>
         <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
-          <span class="font-mono-code text-xs text-orange-400 font-bold uppercase">MODULE 01 · COOKIE SWEEPING</span>
+          <span class="font-mono-code text-xs text-orange-400 font-bold uppercase">MODULE 01 · COOKIE SWEEPING (THE TRACKERS)</span>
           <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
         </div>
 
-        <!-- STAGE CANVAS -->
         <div class="demo-stage mb-5">
-          
-          <!-- STATE 1: CLEAN UI -->
+          <!-- State 1: Clean Corporate -->
           <div id="clean-mod1" class="state-clean">
-            <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-2">PRIVACY FIRST PROTOCOL</span>
-            <h4 class="font-cyber text-xl text-white uppercase mb-3">Cookie Sweeping & Data Breadcrumbs</h4>
+            <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">THE TRAP</span>
+            <h4 class="font-cyber text-lg text-white uppercase mb-2">Cookies Aren't Spies—They Are Price Tags</h4>
             
-            <!-- OVERSIZED GIANT PADLOCK ICON -->
-            <div class="w-24 h-24 rounded-full bg-blue-500/10 border-2 border-blue-400 flex items-center justify-center mb-4 animate-pulse">
-              <i class="fa-solid fa-lock text-4xl text-blue-400"></i>
+            <!-- Oversized Giant Chrome Extension Puzzle Piece SVG -->
+            <div class="w-20 h-20 bg-blue-500/10 border-2 border-blue-400 rounded-2xl flex items-center justify-center mb-3 animate-pulse">
+              <svg class="w-12 h-12 fill-blue-400" viewBox="0 0 24 24">
+                <path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z"/>
+              </svg>
             </div>
 
-            <p class="text-xs text-gray-300 text-center max-w-sm font-sans-clean">
-              "Third-party cookies follow your web footprint across sites. Go to Settings &gt; Privacy &gt; Clear Browsing Data to sever the connection."
+            <p class="text-xs text-gray-300 text-center font-sans-clean max-w-md">
+              "They attach to your browser and follow you from site to site, logging what you read, buy, and search."
             </p>
           </div>
 
-          <!-- STATE 2: BURNED STATE -->
+          <!-- State 2: Burned Finish -->
           <div id="burned-mod1" class="state-burned">
-            <h3 class="font-cyber text-4xl text-orange-500 font-black tracking-widest uppercase mb-2">STATUS: CLEAR</h3>
-            <div class="bg-black/80 p-3 rounded-lg border-l-4 border-orange-500 text-xs font-mono-code text-white text-center max-w-md">
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: CLEAR</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-orange-500 text-xs font-mono-code text-orange-300 text-center max-w-md">
               &gt; "Torching the breadcrumbs and sweeping the ashes cause the cookies got burnt."
             </div>
           </div>
-
         </div>
       </div>
 
@@ -191,135 +190,326 @@
         <button onclick="triggerBurn(1)" class="bg-orange-600 hover:bg-orange-500 text-black font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(255,87,34,0.6)] flex items-center gap-2">
           <i class="fa-solid fa-fire"></i> EXECUTE BURN (MOD 1)
         </button>
-        <button onclick="resetBurn(1)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">
-          Reset Demo
-        </button>
+        <button onclick="resetBurn(1)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
       </div>
     </div>
 
-    <!-- DEMO BOX 2: MODULE 2 SILENT SESSIONS -->
+    <!-- MODULE 2: SILENT SESSIONS (THE CLOAK) -->
     <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
       <div>
         <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
-          <span class="font-mono-code text-xs text-blue-400 font-bold uppercase">MODULE 02 · SILENT SESSIONS</span>
+          <span class="font-mono-code text-xs text-green-400 font-bold uppercase">MODULE 02 · SILENT SESSIONS (THE CLOAK)</span>
           <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
         </div>
 
-        <!-- STAGE CANVAS -->
         <div class="demo-stage mb-5">
-          
-          <!-- STATE 1: CLEAN UI -->
+          <!-- State 1: Clean Corporate -->
           <div id="clean-mod2" class="state-clean">
-            <span class="text-xs font-mono-code text-green-400 uppercase tracking-widest mb-2">PRIVACY FIRST PROTOCOL</span>
-            <h4 class="font-cyber text-xl text-white uppercase mb-3">Silent Sessions & Incognito Cloaks</h4>
+            <span class="text-xs font-mono-code text-green-400 uppercase tracking-widest mb-1">THE TRAP</span>
+            <h4 class="font-cyber text-lg text-white uppercase mb-2">Incognito Doesn't Make You Invisible</h4>
             
-            <!-- OVERSIZED GIANT INCOGNITO ICON -->
-            <div class="w-24 h-24 rounded-full bg-green-500/10 border-2 border-green-400 flex items-center justify-center mb-4 animate-pulse">
-              <i class="fa-solid fa-user-secret text-4xl text-green-400"></i>
+            <div class="w-20 h-20 bg-green-500/10 border-2 border-green-400 rounded-full flex items-center justify-center mb-3 animate-pulse">
+              <i class="fa-solid fa-user-secret text-3xl text-green-400"></i>
             </div>
 
-            <p class="text-xs text-gray-300 text-center max-w-sm font-sans-clean">
-              "Incognito mode stops your local browser from saving search history and cookies. Press Ctrl+Shift+N to initiate a clean session."
+            <p class="text-xs text-gray-300 text-center font-sans-clean max-w-md">
+              "It just stops your local browser from taking notes. Use CTRL + SHIFT + N to open a temporary sandbox."
             </p>
           </div>
 
-          <!-- STATE 2: BURNED STATE -->
+          <!-- State 2: Burned Finish -->
           <div id="burned-mod2" class="state-burned">
-            <h3 class="font-cyber text-4xl text-blue-400 font-black tracking-widest uppercase mb-2">STATUS: CLOAKED</h3>
-            <div class="bg-black/80 p-3 rounded-lg border-l-4 border-blue-400 text-xs font-mono-code text-white text-center max-w-md">
-              &gt; "Calming the flames with an incognito session cloak."
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: CLOAKED</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-green-400 text-xs font-mono-code text-green-300 text-center max-w-md">
+              &gt; "Closing the sandbox and calming the flames."
             </div>
           </div>
-
         </div>
       </div>
 
       <div class="flex items-center justify-between">
-        <button onclick="triggerBurn(2)" class="bg-blue-600 hover:bg-blue-500 text-white font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(37,99,235,0.6)] flex items-center gap-2">
+        <button onclick="triggerBurn(2)" class="bg-green-600 hover:bg-green-500 text-black font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(34,197,94,0.6)] flex items-center gap-2">
           <i class="fa-solid fa-shield"></i> EXECUTE CLOAK (MOD 2)
         </button>
-        <button onclick="resetBurn(2)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">
-          Reset Demo
+        <button onclick="resetBurn(2)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
+      </div>
+    </div>
+
+    <!-- MODULE 3: ENCRYPTED ROUTING (THE TUNNEL) -->
+    <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-cyan-400 font-bold uppercase">MODULE 03 · ENCRYPTED ROUTING (THE TUNNEL)</span>
+          <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
+        </div>
+
+        <div class="demo-stage mb-5">
+          <div id="clean-mod3" class="state-clean">
+            <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest mb-1">THE TRAP</span>
+            <h4 class="font-cyber text-lg text-white uppercase mb-2">Public Wi-Fi Is a Megaphone</h4>
+            
+            <div class="w-20 h-20 bg-cyan-500/10 border-2 border-cyan-400 rounded-2xl flex items-center justify-center mb-3 animate-pulse">
+              <i class="fa-solid fa-network-wired text-3xl text-cyan-400"></i>
+            </div>
+
+            <p class="text-xs text-gray-300 text-center font-sans-clean max-w-md">
+              "Encrypt the signal. Reroute the drop point with a Virtual Private Network tunnel."
+            </p>
+          </div>
+
+          <div id="burned-mod3" class="state-burned">
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: ENCRYPTED</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-cyan-400 text-xs font-mono-code text-cyan-300 text-center max-w-md">
+              &gt; "Choking the flames with dirt and encrypting the signal."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button onclick="triggerBurn(3)" class="bg-cyan-600 hover:bg-cyan-500 text-black font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2">
+          <i class="fa-solid fa-lock"></i> EXECUTE TUNNEL (MOD 3)
         </button>
+        <button onclick="resetBurn(3)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
+      </div>
+    </div>
+
+    <!-- MODULE 4: SHIELDED INBOXES (THE ALIASES) -->
+    <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-purple-400 font-bold uppercase">MODULE 04 · SHIELDED INBOXES (THE ALIASES)</span>
+          <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
+        </div>
+
+        <div class="demo-stage mb-5">
+          <div id="clean-mod4" class="state-clean">
+            <span class="text-xs font-mono-code text-purple-400 uppercase tracking-widest mb-1">THE TRAP</span>
+            <h4 class="font-cyber text-lg text-white uppercase mb-2">Never Hand Over the Main Gate Key</h4>
+            
+            <div class="w-20 h-20 bg-purple-500/10 border-2 border-purple-400 rounded-full flex items-center justify-center mb-3 animate-pulse">
+              <i class="fa-solid fa-envelope-shield text-3xl text-purple-400"></i>
+            </div>
+
+            <p class="text-xs text-gray-300 text-center font-sans-clean max-w-md">
+              "Use burner addresses for online marketplaces. If they sell your email, just incinerate the alias."
+            </p>
+          </div>
+
+          <div id="burned-mod4" class="state-burned">
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: SHIELDED</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-purple-400 text-xs font-mono-code text-purple-300 text-center max-w-md">
+              &gt; "Torching the alias and leaving the spam in the ashes."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button onclick="triggerBurn(4)" class="bg-purple-600 hover:bg-purple-500 text-white font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(168,85,247,0.6)] flex items-center gap-2">
+          <i class="fa-solid fa-fire-flame-curved"></i> INCINERATE ALIAS (MOD 4)
+        </button>
+        <button onclick="resetBurn(4)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
+      </div>
+    </div>
+
+    <!-- MODULE 5: LOCATION BLACKOUTS (THE BEACONS) -->
+    <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-yellow-400 font-bold uppercase">MODULE 05 · LOCATION BLACKOUTS (THE BEACONS)</span>
+          <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
+        </div>
+
+        <div class="demo-stage mb-5">
+          <div id="clean-mod5" class="state-clean">
+            <span class="text-xs font-mono-code text-yellow-400 uppercase tracking-widest mb-1">THE PANIC</span>
+            <h4 class="font-cyber text-lg text-white uppercase mb-2">Your Phone Is a Homing Beacon</h4>
+            
+            <div class="w-20 h-20 bg-yellow-500/10 border-2 border-yellow-400 rounded-2xl flex items-center justify-center mb-3 animate-pulse">
+              <i class="fa-solid fa-location-dot text-3xl text-yellow-400"></i>
+            </div>
+
+            <p class="text-xs text-gray-300 text-center font-sans-clean max-w-md">
+              "Apps exhaust your battery just to ping GPS coordinates. Turn off Background App Refresh."
+            </p>
+          </div>
+
+          <div id="burned-mod5" class="state-burned">
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: BLACKOUT</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-yellow-400 text-xs font-mono-code text-yellow-300 text-center max-w-md">
+              &gt; "Smashing the beacon and leaving them to track the smoke."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button onclick="triggerBurn(5)" class="bg-yellow-600 hover:bg-yellow-500 text-black font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(234,179,8,0.6)] flex items-center gap-2">
+          <i class="fa-solid fa-plane-slash"></i> KILL BEACONS (MOD 5)
+        </button>
+        <button onclick="resetBurn(5)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
+      </div>
+    </div>
+
+    <!-- MODULE 6: KEY ROTATION (THE CIPHER) -->
+    <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-red-400 font-bold uppercase">MODULE 06 · KEY ROTATION (THE CIPHER)</span>
+          <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
+        </div>
+
+        <div class="demo-stage mb-5">
+          <div id="clean-mod6" class="state-clean">
+            <span class="text-xs font-mono-code text-red-400 uppercase tracking-widest mb-1">THE TERROR</span>
+            <h4 class="font-cyber text-lg text-white uppercase mb-2">Stale Locks Get Picked</h4>
+            
+            <div class="w-20 h-20 bg-red-500/10 border-2 border-red-400 rounded-full flex items-center justify-center mb-3 animate-pulse">
+              <i class="fa-solid fa-key text-3xl text-red-400"></i>
+            </div>
+
+            <p class="text-xs text-gray-300 text-center font-sans-clean max-w-md">
+              "Using the same password everywhere leaves your front door wide open. Rotate with random ciphers."
+            </p>
+          </div>
+
+          <div id="burned-mod6" class="state-burned">
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: LOCKED</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-red-400 text-xs font-mono-code text-red-300 text-center max-w-md">
+              &gt; "Melting the plastic keys and changing the locks."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button onclick="triggerBurn(6)" class="bg-red-600 hover:bg-red-500 text-white font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(239,68,68,0.6)] flex items-center gap-2">
+          <i class="fa-solid fa-lock-open"></i> ROTATE KEYS (MOD 6)
+        </button>
+        <button onclick="resetBurn(6)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
+      </div>
+    </div>
+
+    <!-- MODULE 7: COLD STORAGE (THE AIR GAP) -->
+    <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-indigo-400 font-bold uppercase">MODULE 07 · COLD STORAGE (THE AIR GAP)</span>
+          <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
+        </div>
+
+        <div class="demo-stage mb-5">
+          <div id="clean-mod7" class="state-clean">
+            <span class="text-xs font-mono-code text-indigo-400 uppercase tracking-widest mb-1">THE FALSE SECURITY</span>
+            <h4 class="font-cyber text-lg text-white uppercase mb-2">If It's Plugged In, It Can Be Hacked</h4>
+            
+            <div class="w-20 h-20 bg-indigo-500/10 border-2 border-indigo-400 rounded-2xl flex items-center justify-center mb-3 animate-pulse">
+              <i class="fa-solid fa-hard-drive text-3xl text-indigo-400"></i>
+            </div>
+
+            <p class="text-xs text-gray-300 text-center font-sans-clean max-w-md">
+              "Leaving external USB drives plugged into online PCs lets malware crawl the wire. Physically pull the plug!"
+            </p>
+          </div>
+
+          <div id="burned-mod7" class="state-burned">
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: COLD</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-indigo-400 text-xs font-mono-code text-indigo-300 text-center max-w-md">
+              &gt; "Burning the bridge and leaving them stranded on the other side."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button onclick="triggerBurn(7)" class="bg-indigo-600 hover:bg-indigo-500 text-white font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(99,102,241,0.6)] flex items-center gap-2">
+          <i class="fa-solid fa-plug-circle-xmark"></i> PULL THE PLUG (MOD 7)
+        </button>
+        <button onclick="resetBurn(7)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
+      </div>
+    </div>
+
+    <!-- MODULE 8: THE BURN-1 VAULT (THE FORTRESS & KILL SWITCH) -->
+    <div class="scrim-box p-6 rounded-2xl border-2 border-orange-500 bg-gradient-to-br from-gray-950 via-black to-orange-950/40 flex flex-col justify-between relative overflow-hidden shadow-[0_0_50px_rgba(255,87,34,0.4)]">
+      <div>
+        <div class="flex justify-between items-center border-b border-orange-500/50 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-orange-400 font-bold uppercase">MODULE 08 · THE FORTRESS ($50)</span>
+          <span class="text-xs font-cyber text-black bg-orange-500 font-black px-2.5 py-0.5 rounded uppercase">FINAL BOSS</span>
+        </div>
+
+        <div class="demo-stage mb-5">
+          <div id="clean-mod8" class="state-clean" style="background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(8,8,12,0.98)), url('Burn1vaultthumb.jpg'); background-size: cover; background-position: center;">
+            <span class="text-xs font-mono-code text-orange-400 uppercase tracking-widest mb-1">LOCAL OASIS · ZERO JUDGMENT</span>
+            <h4 class="font-cyber text-xl text-white font-black uppercase mb-2">Burn-1 Offline Local AI Vault</h4>
+            
+            <div class="w-20 h-20 bg-orange-600/20 border-2 border-orange-500 rounded-full flex items-center justify-center mb-3 shadow-[0_0_25px_rgba(255,87,34,0.8)] animate-pulse">
+              <i class="fa-solid fa-vault text-3xl text-orange-500"></i>
+            </div>
+
+            <p class="text-xs text-gray-200 text-center font-sans-clean max-w-md leading-relaxed">
+              "Run local uncensored models (Llama3/Qwen) with relaxed guardrails. Pure freedom to create without corporate logging or monthly fees."
+            </p>
+          </div>
+
+          <div id="burned-mod8" class="state-burned">
+            <h3 class="font-cyber text-3xl text-white font-black tracking-widest uppercase mb-2">STATUS: OBLITERATED</h3>
+            <div class="bg-black/90 p-4 rounded-xl border-l-4 border-orange-500 text-xs font-mono-code text-orange-300 text-center max-w-md">
+              &gt; "Burning the evidence and sweeping the ashes with the Master Kill Switch."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <button onclick="triggerBurn(8)" class="bg-red-700 hover:bg-red-600 text-white font-cyber font-black text-xs px-5 py-2.5 rounded-lg tracking-widest uppercase flex items-center gap-1.5">
+            <i class="fa-solid fa-skull"></i> TEST KILL SWITCH (MOD 8)
+          </button>
+          <button onclick="resetBurn(8)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">Reset</button>
+        </div>
+
+        <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="block w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-black font-cyber font-black text-xs md:text-sm py-3.5 rounded-lg text-center uppercase tracking-widest shadow-[0_0_30px_rgba(255,87,34,0.8)] transition-all">
+          ⚡ DOWNLOAD BURN-1 VAULT TOOLKIT ($50)
+        </a>
       </div>
     </div>
 
   </section>
 
-  <!-- THE 8-MODULE LOADOUT GRID -->
-  <section class="w-full max-w-6xl mb-14">
-    <div class="text-center mb-8">
-      <h3 class="font-cyber text-2xl text-white uppercase tracking-widest">THE 8-MODULE CYBER LOADOUT</h3>
-      <p class="text-xs text-gray-400 font-mono-code uppercase tracking-wider mt-1">Complete your digital sanitization protocol</p>
+  <!-- GUMROAD & TOOLKIT CHECKLIST BANNER -->
+  <section class="w-full max-w-7xl scrim-box p-8 md:p-10 rounded-2xl border-t-4 border-t-orange-500 mb-14 text-center">
+    <h3 class="font-cyber text-2xl md:text-4xl text-white font-black uppercase tracking-widest mb-3">WHAT'S INSIDE THE $50 DIGITAL PACKAGE:</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 text-left font-mono-code text-xs">
+      <div class="bg-black/90 p-4 rounded-xl border border-gray-800 text-gray-300">
+        <span class="text-orange-400 font-bold block mb-1">✔ BASH INSTALLER</span>
+        <code class="text-green-400">./install_burn1.sh</code> automated Ollama & Llama3 setup.
+      </div>
+
+      <div class="bg-black/90 p-4 rounded-xl border border-gray-800 text-gray-300">
+        <span class="text-orange-400 font-bold block mb-1">✔ MASTER KILL SWITCH</span>
+        <code class="text-red-400">./burn1-killswitch.sh</code> zero-residue RAM & history shredder.
+      </div>
+
+      <div class="bg-black/90 p-4 rounded-xl border border-gray-800 text-gray-300">
+        <span class="text-orange-400 font-bold block mb-1">✔ 2 CHEAT SHEETS</span>
+        Printable Terminal & Local AI Master Command Guides.
+      </div>
+
+      <div class="bg-black/90 p-4 rounded-xl border border-gray-800 text-gray-300">
+        <span class="text-orange-400 font-bold block mb-1">✔ HYPERFRAMES PAGE</span>
+        Full Module 1 Cookie Sweeping Visual Template.
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      
-      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-orange-500">
-        <span class="text-xs font-mono-code text-orange-400">MOD 01</span>
-        <h4 class="font-cyber text-base text-white uppercase my-1">Cookie Sweeping</h4>
-        <p class="text-xs text-gray-400 font-sans-clean">Clear third-party trackers & torch digital breadcrumbs.</p>
-      </div>
-
-      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-blue-500">
-        <span class="text-xs font-mono-code text-blue-400">MOD 02</span>
-        <h4 class="font-cyber text-base text-white uppercase my-1">Silent Sessions</h4>
-        <p class="text-xs text-gray-400 font-sans-clean">Incognito mode shortcuts & zero-history browsing.</p>
-      </div>
-
-      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-green-500">
-        <span class="text-xs font-mono-code text-green-400">MOD 03</span>
-        <h4 class="font-cyber text-base text-white uppercase my-1">Encrypted Routing</h4>
-        <p class="text-xs text-gray-400 font-sans-clean">VPN tunnel toggles to shield your ISP traffic.</p>
-      </div>
-
-      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-purple-500">
-        <span class="text-xs font-mono-code text-purple-400">MOD 04</span>
-        <h4 class="font-cyber text-base text-white uppercase my-1">Shielded Inboxes</h4>
-        <p class="text-xs text-gray-400 font-sans-clean">Burner email aliases for signups and downloads.</p>
-      </div>
-
-      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-yellow-500">
-        <span class="text-xs font-mono-code text-yellow-400">MOD 05</span>
-        <h4 class="font-cyber text-base text-white uppercase my-1">Location Blackouts</h4>
-        <p class="text-xs text-gray-400 font-sans-clean">Disable mobile app background pings & GPS beacons.</p>
-      </div>
-
-      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-cyan-500">
-        <span class="text-xs font-mono-code text-cyan-400">MOD 06</span>
-        <h4 class="font-cyber text-base text-white uppercase my-1">Key Rotation</h4>
-        <p class="text-xs text-gray-400 font-sans-clean">Password managers & automated key rotation.</p>
-      </div>
-
-      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-pink-500">
-        <span class="text-xs font-mono-code text-pink-400">MOD 07</span>
-        <h4 class="font-cyber text-base text-white uppercase my-1">Cold Storage</h4>
-        <p class="text-xs text-gray-400 font-sans-clean">Air-gapped external drives for private backups.</p>
-      </div>
-
-      <!-- MOD 8: PITCHES THE $50 VAULT -->
-      <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="scrim-box p-5 rounded-xl border-2 border-orange-500 bg-orange-950/40 hover:bg-orange-900/60 transition-all block">
-        <span class="text-xs font-mono-code text-orange-400 font-bold">MOD 08 · THE VAULT</span>
-        <h4 class="font-cyber text-base text-white font-black uppercase my-1">Burn-1 Vault ($50)</h4>
-        <p class="text-xs text-orange-200 font-sans-clean">100% Offline Local AI, Ollama installer & kill switch.</p>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- BOTTOM CTA BANNER -->
-  <section class="w-full max-w-6xl scrim-box p-8 rounded-2xl text-center border-t-4 border-t-orange-500 mb-12">
-    <h3 class="font-cyber text-2xl md:text-3xl text-white uppercase tracking-widest mb-2">READY FOR THE FULL AIR-GAPPED VAULT?</h3>
-    <p class="text-xs md:text-sm text-gray-300 font-sans-clean max-w-xl mx-auto mb-6">
-      Download the automated installer scripts (<code class="text-orange-400">./install_burn1.sh</code>), RAM kill switch, and printable cheat sheets.
-    </p>
-    <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-black font-cyber font-black text-sm px-8 py-4 rounded-lg tracking-widest uppercase shadow-[0_0_30px_rgba(255,87,34,0.8)]">
-      <i class="fa-solid fa-lock"></i> EXECUTE BURN - ACCESS VAULT ($50)
+    <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-black font-cyber font-black text-sm px-10 py-4 rounded-xl tracking-widest uppercase shadow-[0_0_35px_rgba(255,87,34,0.9)] transition-all">
+      <i class="fa-solid fa-cart-shopping"></i> ACCESS VAULT ON GUMROAD ($50)
     </a>
   </section>
 
   <!-- FOOTER -->
-  <footer class="w-full max-w-6xl text-center py-6 border-t border-gray-800 text-xs text-gray-500 font-mono-code">
+  <footer class="w-full max-w-7xl text-center py-6 border-t border-gray-800 text-xs text-gray-500 font-mono-code">
     Privacy First Protocol © 2026 Burn-1 Security Vault. All Rights Reserved.
   </footer>
 
