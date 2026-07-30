@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy First Protocol | Free Cyber Sanitization Suite</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --hazard-orange: #ff5722;
+    --burn-red: #8b0000;
+    --bg-dark: #070709;
+    --panel-bg: rgba(18, 18, 22, 0.85);
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #e5e5e5;
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .font-cyber { font-family: 'Orbitron', sans-serif; }
+  .font-mono-code { font-family: 'Share Tech Mono', monospace; }
+  .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+  /* Cyber Grid Background */
+  .cyber-grid-bg {
+    background-image: linear-gradient(to right, rgba(255, 87, 34, 0.06) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 87, 34, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Scrim Box Panel */
+  .scrim-box {
+    background: var(--panel-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 87, 34, 0.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    transition: all 0.3s ease;
+  }
+  .scrim-box:hover {
+    border-color: rgba(255, 87, 34, 0.6);
+    box-shadow: 0 0 30px rgba(255, 87, 34, 0.3);
+  }
+
+  /* Exaggerated UI Demo Container */
+  .demo-stage {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background: #0d1117;
+    border: 2px solid #30363d;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+  }
+
+  /* State 1: Clean Corporate UI */
+  .state-clean {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(13, 17, 23, 0.98));
+    transition: opacity 0.8s ease, filter 0.8s ease;
+    z-index: 10;
+  }
+
+  /* State 2: Opaque Red & Hazard Orange Burn State */
+  .state-burned {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: var(--burn-red);
+    border: 6px solid var(--hazard-orange);
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 20;
+  }
+
+  .state-burned.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .state-clean.burned-out {
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  /* Reticle Markers */
+  .reticle { position: relative; }
+  .reticle::before { content: '+'; position: absolute; top: -8px; left: -8px; color: var(--hazard-orange); font-size: 16px; font-weight: bold; }
+  .reticle::after { content: '+'; position: absolute; bottom: -8px; right: -8px; color: var(--hazard-orange); font-size: 16px; font-weight: bold; }
+</style>
+</head>
+<body class="cyber-grid-bg min-h-screen flex flex-col items-center p-4 md:p-8">
+
+  <!-- HEADER NAVIGATION -->
+  <header class="w-full max-w-6xl flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-5">
+    <div class="mb-4 md:mb-0 text-center md:text-left">
+      <a href="index.html" class="flex items-center justify-center md:justify-start gap-3">
+        <span class="text-2xl">🔥</span>
+        <h1 class="font-cyber text-2xl md:text-4xl text-white font-extrabold tracking-[0.2em] uppercase">
+          PRIVACY FIRST <span class="text-orange-500">PROTOCOL</span>
+        </h1>
+      </a>
+      <p class="font-mono-code text-xs text-gray-400 uppercase tracking-widest mt-1">
+        Complimentary Interactive Digital Hygiene & Cyber Loadout Suite
+      </p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="bg-black border border-gray-800 text-gray-300 px-4 py-2 rounded font-mono-code text-xs hover:border-orange-500 transition-all">
+        ← Return to Main Hub
+      </a>
+      <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="bg-orange-600 hover:bg-orange-500 text-black font-cyber font-black text-xs px-5 py-2.5 rounded tracking-widest uppercase shadow-[0_0_20px_rgba(255,87,34,0.5)]">
+        Get Vault ($50)
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO BRIEFING -->
+  <section class="w-full max-w-6xl text-center mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-orange-950/80 border border-orange-500/50 text-orange-400 text-xs font-mono-code mb-4 uppercase tracking-widest">
+      <span>🛡️ FREE LEARNING SUITE · 8-MODULE CYBER LOADOUT</span>
+    </div>
+    <h2 class="font-cyber text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
+      THE SANITIZATION <span class="text-orange-500">PANEL</span>
+    </h2>
+    <p class="font-sans-clean text-gray-300 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+      Learn how third-party trackers, cloud AI logs, and app beacons build profiles on your digital life—and how to burn through them with clean-to-corny transitions.
+    </p>
+  </section>
+
+  <!-- INTERACTIVE DEMO STAGE (MODULE 1 & MODULE 2) -->
+  <section class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
+    
+    <!-- DEMO BOX 1: MODULE 1 COOKIE SWEEPING -->
+    <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-orange-400 font-bold uppercase">MODULE 01 · COOKIE SWEEPING</span>
+          <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
+        </div>
+
+        <!-- STAGE CANVAS -->
+        <div class="demo-stage mb-5">
+          
+          <!-- STATE 1: CLEAN UI -->
+          <div id="clean-mod1" class="state-clean">
+            <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-2">PRIVACY FIRST PROTOCOL</span>
+            <h4 class="font-cyber text-xl text-white uppercase mb-3">Cookie Sweeping & Data Breadcrumbs</h4>
+            
+            <!-- OVERSIZED GIANT PADLOCK ICON -->
+            <div class="w-24 h-24 rounded-full bg-blue-500/10 border-2 border-blue-400 flex items-center justify-center mb-4 animate-pulse">
+              <i class="fa-solid fa-lock text-4xl text-blue-400"></i>
+            </div>
+
+            <p class="text-xs text-gray-300 text-center max-w-sm font-sans-clean">
+              "Third-party cookies follow your web footprint across sites. Go to Settings &gt; Privacy &gt; Clear Browsing Data to sever the connection."
+            </p>
+          </div>
+
+          <!-- STATE 2: BURNED STATE -->
+          <div id="burned-mod1" class="state-burned">
+            <h3 class="font-cyber text-4xl text-orange-500 font-black tracking-widest uppercase mb-2">STATUS: CLEAR</h3>
+            <div class="bg-black/80 p-3 rounded-lg border-l-4 border-orange-500 text-xs font-mono-code text-white text-center max-w-md">
+              &gt; "Torching the breadcrumbs and sweeping the ashes cause the cookies got burnt."
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button onclick="triggerBurn(1)" class="bg-orange-600 hover:bg-orange-500 text-black font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(255,87,34,0.6)] flex items-center gap-2">
+          <i class="fa-solid fa-fire"></i> EXECUTE BURN (MOD 1)
+        </button>
+        <button onclick="resetBurn(1)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">
+          Reset Demo
+        </button>
+      </div>
+    </div>
+
+    <!-- DEMO BOX 2: MODULE 2 SILENT SESSIONS -->
+    <div class="scrim-box p-6 rounded-2xl reticle flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+          <span class="font-mono-code text-xs text-blue-400 font-bold uppercase">MODULE 02 · SILENT SESSIONS</span>
+          <span class="text-[10px] font-mono-code text-gray-400 bg-black px-2 py-0.5 rounded border border-gray-800">INTERACTIVE DEMO</span>
+        </div>
+
+        <!-- STAGE CANVAS -->
+        <div class="demo-stage mb-5">
+          
+          <!-- STATE 1: CLEAN UI -->
+          <div id="clean-mod2" class="state-clean">
+            <span class="text-xs font-mono-code text-green-400 uppercase tracking-widest mb-2">PRIVACY FIRST PROTOCOL</span>
+            <h4 class="font-cyber text-xl text-white uppercase mb-3">Silent Sessions & Incognito Cloaks</h4>
+            
+            <!-- OVERSIZED GIANT INCOGNITO ICON -->
+            <div class="w-24 h-24 rounded-full bg-green-500/10 border-2 border-green-400 flex items-center justify-center mb-4 animate-pulse">
+              <i class="fa-solid fa-user-secret text-4xl text-green-400"></i>
+            </div>
+
+            <p class="text-xs text-gray-300 text-center max-w-sm font-sans-clean">
+              "Incognito mode stops your local browser from saving search history and cookies. Press Ctrl+Shift+N to initiate a clean session."
+            </p>
+          </div>
+
+          <!-- STATE 2: BURNED STATE -->
+          <div id="burned-mod2" class="state-burned">
+            <h3 class="font-cyber text-4xl text-blue-400 font-black tracking-widest uppercase mb-2">STATUS: CLOAKED</h3>
+            <div class="bg-black/80 p-3 rounded-lg border-l-4 border-blue-400 text-xs font-mono-code text-white text-center max-w-md">
+              &gt; "Calming the flames with an incognito session cloak."
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button onclick="triggerBurn(2)" class="bg-blue-600 hover:bg-blue-500 text-white font-cyber font-black text-xs px-6 py-3 rounded-lg tracking-widest uppercase shadow-[0_0_20px_rgba(37,99,235,0.6)] flex items-center gap-2">
+          <i class="fa-solid fa-shield"></i> EXECUTE CLOAK (MOD 2)
+        </button>
+        <button onclick="resetBurn(2)" class="text-gray-400 hover:text-white font-mono-code text-xs underline">
+          Reset Demo
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- THE 8-MODULE LOADOUT GRID -->
+  <section class="w-full max-w-6xl mb-14">
+    <div class="text-center mb-8">
+      <h3 class="font-cyber text-2xl text-white uppercase tracking-widest">THE 8-MODULE CYBER LOADOUT</h3>
+      <p class="text-xs text-gray-400 font-mono-code uppercase tracking-wider mt-1">Complete your digital sanitization protocol</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-orange-500">
+        <span class="text-xs font-mono-code text-orange-400">MOD 01</span>
+        <h4 class="font-cyber text-base text-white uppercase my-1">Cookie Sweeping</h4>
+        <p class="text-xs text-gray-400 font-sans-clean">Clear third-party trackers & torch digital breadcrumbs.</p>
+      </div>
+
+      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-blue-500">
+        <span class="text-xs font-mono-code text-blue-400">MOD 02</span>
+        <h4 class="font-cyber text-base text-white uppercase my-1">Silent Sessions</h4>
+        <p class="text-xs text-gray-400 font-sans-clean">Incognito mode shortcuts & zero-history browsing.</p>
+      </div>
+
+      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-green-500">
+        <span class="text-xs font-mono-code text-green-400">MOD 03</span>
+        <h4 class="font-cyber text-base text-white uppercase my-1">Encrypted Routing</h4>
+        <p class="text-xs text-gray-400 font-sans-clean">VPN tunnel toggles to shield your ISP traffic.</p>
+      </div>
+
+      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-purple-500">
+        <span class="text-xs font-mono-code text-purple-400">MOD 04</span>
+        <h4 class="font-cyber text-base text-white uppercase my-1">Shielded Inboxes</h4>
+        <p class="text-xs text-gray-400 font-sans-clean">Burner email aliases for signups and downloads.</p>
+      </div>
+
+      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-yellow-500">
+        <span class="text-xs font-mono-code text-yellow-400">MOD 05</span>
+        <h4 class="font-cyber text-base text-white uppercase my-1">Location Blackouts</h4>
+        <p class="text-xs text-gray-400 font-sans-clean">Disable mobile app background pings & GPS beacons.</p>
+      </div>
+
+      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-cyan-500">
+        <span class="text-xs font-mono-code text-cyan-400">MOD 06</span>
+        <h4 class="font-cyber text-base text-white uppercase my-1">Key Rotation</h4>
+        <p class="text-xs text-gray-400 font-sans-clean">Password managers & automated key rotation.</p>
+      </div>
+
+      <div class="scrim-box p-5 rounded-xl border-l-4 border-l-pink-500">
+        <span class="text-xs font-mono-code text-pink-400">MOD 07</span>
+        <h4 class="font-cyber text-base text-white uppercase my-1">Cold Storage</h4>
+        <p class="text-xs text-gray-400 font-sans-clean">Air-gapped external drives for private backups.</p>
+      </div>
+
+      <!-- MOD 8: PITCHES THE $50 VAULT -->
+      <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="scrim-box p-5 rounded-xl border-2 border-orange-500 bg-orange-950/40 hover:bg-orange-900/60 transition-all block">
+        <span class="text-xs font-mono-code text-orange-400 font-bold">MOD 08 · THE VAULT</span>
+        <h4 class="font-cyber text-base text-white font-black uppercase my-1">Burn-1 Vault ($50)</h4>
+        <p class="text-xs text-orange-200 font-sans-clean">100% Offline Local AI, Ollama installer & kill switch.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA BANNER -->
+  <section class="w-full max-w-6xl scrim-box p-8 rounded-2xl text-center border-t-4 border-t-orange-500 mb-12">
+    <h3 class="font-cyber text-2xl md:text-3xl text-white uppercase tracking-widest mb-2">READY FOR THE FULL AIR-GAPPED VAULT?</h3>
+    <p class="text-xs md:text-sm text-gray-300 font-sans-clean max-w-xl mx-auto mb-6">
+      Download the automated installer scripts (<code class="text-orange-400">./install_burn1.sh</code>), RAM kill switch, and printable cheat sheets.
+    </p>
+    <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-black font-cyber font-black text-sm px-8 py-4 rounded-lg tracking-widest uppercase shadow-[0_0_30px_rgba(255,87,34,0.8)]">
+      <i class="fa-solid fa-lock"></i> EXECUTE BURN - ACCESS VAULT ($50)
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="w-full max-w-6xl text-center py-6 border-t border-gray-800 text-xs text-gray-500 font-mono-code">
+    Privacy First Protocol © 2026 Burn-1 Security Vault. All Rights Reserved.
+  </footer>
+
+  <script>
+    function triggerBurn(modNum) {
+      document.getElementById(`clean-mod${modNum}`).classList.add('burned-out');
+      document.getElementById(`burned-mod${modNum}`).classList.add('active');
+    }
+
+    function resetBurn(modNum) {
+      document.getElementById(`clean-mod${modNum}`).classList.remove('burned-out');
+      document.getElementById(`burned-mod${modNum}`).classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>
