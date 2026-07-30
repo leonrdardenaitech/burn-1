@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiosk Asset Intake Portal | Burn-1 Network</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Plus+Jakarta+Sans:wght@400;600;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    background-color: #0a0a0a;
+    color: #e5e5e5;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .font-cyber { font-family: 'Orbitron', sans-serif; }
+  .font-mono-code { font-family: 'Share Tech Mono', monospace; }
+  
+  .scrim-box {
+    background: rgba(22, 27, 34, 0.9);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 87, 34, 0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  }
+</style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+
+  <div class="w-full max-w-3xl scrim-box p-6 md:p-10 rounded-2xl border-t-4 border-t-orange-500 shadow-2xl relative">
+    
+    <!-- HEADER STATUS -->
+    <div class="text-center mb-8 border-b border-gray-800 pb-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-950 border border-emerald-700 text-emerald-400 text-xs font-mono-code rounded-full mb-3 uppercase tracking-widest">
+        <span>✓ SUBDOMAIN RESERVED & PAYMENT CONFIRMED</span>
+      </div>
+      <h1 id="intake-subdomain-header" class="font-cyber text-2xl md:text-4xl text-white font-extrabold tracking-wider uppercase mb-2">
+        YOUR KIOSK PORTAL IS RESERVED
+      </h1>
+      <p class="text-xs md:text-sm text-gray-400 font-mono-code">
+        Upload your business assets below to initialize your custom kiosk build.
+      </p>
+    </div>
+
+    <!-- 7-DAY TURNAROUND BANNER -->
+    <div class="bg-orange-950/60 border-l-4 border-orange-500 p-4 rounded-xl mb-8 flex items-start gap-4">
+      <div class="text-2xl text-orange-500 mt-1">⏳</div>
+      <div>
+        <h4 class="font-cyber text-sm text-white uppercase font-bold">7-DAY TURNAROUND GUARANTEE</h4>
+        <p class="text-xs text-gray-300 font-sans mt-0.5 leading-relaxed">
+          Once you submit your logo and details, our system will generate your high-res Smart QR codes and deploy your live kiosk storefront within 7 business days.
+        </p>
+      </div>
+    </div>
+
+    <!-- ASSET INTAKE FORM -->
+    <form id="intake-form" onsubmit="submitIntakeAssets(event)" class="space-y-6">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+        <div>
+          <label class="block text-gray-300 font-bold mb-1 uppercase font-mono-code">Business / Brand Name *</label>
+          <input type="text" id="intake-brand" required placeholder="e.g. Apex Barber Lounge" class="w-full bg-black/90 border border-gray-800 rounded-lg p-3 text-white outline-none focus:border-orange-500">
+        </div>
+        <div>
+          <label class="block text-gray-300 font-bold mb-1 uppercase font-mono-code">Contact Email *</label>
+          <input type="email" id="intake-email" required placeholder="alex@apexbarber.com" class="w-full bg-black/90 border border-gray-800 rounded-lg p-3 text-white outline-none focus:border-orange-500">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-bold mb-1 uppercase font-mono-code">Upload Brand Logo / Image *</label>
+        <div class="border-2 border-dashed border-gray-800 hover:border-orange-500 rounded-xl p-6 text-center bg-black/80 cursor-pointer transition-colors">
+          <i class="fa-solid fa-cloud-arrow-up text-3xl text-orange-500 mb-2"></i>
+          <p class="text-xs text-gray-300 font-bold mb-1">Click to upload your logo file (PNG, JPG, SVG)</p>
+          <p class="text-[10px] text-gray-500 font-mono-code">Files are saved to your dedicated cloud folder</p>
+          <input type="file" id="intake-file" accept="image/*" class="hidden" onchange="showFileName(this)">
+          <div id="file-name-display" class="mt-2 text-xs text-green-400 font-mono-code font-bold"></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-bold mb-1 uppercase font-mono-code">Business Description & Tagline</label>
+        <textarea id="intake-desc" rows="3" placeholder="Describe your services, store hours, or lobby greeting..." class="w-full bg-black/90 border border-gray-800 rounded-lg p-3 text-xs text-white outline-none focus:border-orange-500 resize-none"></textarea>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-bold mb-1 uppercase font-mono-code">Social Links & External URLs</label>
+        <input type="text" id="intake-links" placeholder="Instagram, Booking Page, Menu URL..." class="w-full bg-black/90 border border-gray-800 rounded-lg p-3 text-xs text-white outline-none focus:border-orange-500">
+      </div>
+
+      <button type="submit" class="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-black font-cyber font-black text-xs md:text-sm py-4 rounded-xl uppercase tracking-widest shadow-[0_0_25px_rgba(255,87,34,0.7)] transition-all">
+        🚀 TRANSMIT ASSETS & INITIALIZE BUILD
+      </button>
+
+    </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <div id="intake-success" class="hidden text-center py-8 space-y-4">
+      <div class="w-16 h-16 rounded-full bg-emerald-950 border-2 border-emerald-500 mx-auto flex items-center justify-center text-3xl text-emerald-400">
+        ✓
+      </div>
+      <h3 class="font-cyber text-2xl text-white font-bold uppercase">ASSETS TRANSMITTED SUCCESSFULLY!</h3>
+      <p class="text-xs text-gray-300 max-w-md mx-auto leading-relaxed">
+        We have received your logo and business details. A confirmation receipt has been sent to your email. Your custom kiosk build is in progress!
+      </p>
+      <a href="index.html" class="inline-block bg-gray-900 border border-gray-800 text-orange-400 font-mono-code text-xs px-6 py-2.5 rounded-lg hover:border-orange-500">
+        ← Return to Main Directory
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    function showFileName(input) {
+      if(input.files && input.files[0]) {
+        document.getElementById('file-name-display').innerText = 'Selected: ' + input.files[0].name;
+      }
+    }
+
+    function submitIntakeAssets(e) {
+      e.preventDefault();
+      document.getElementById('intake-form').style.display = 'none';
+      document.getElementById('intake-success').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

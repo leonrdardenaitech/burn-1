@@ -329,102 +329,102 @@
 
       <form id="survey-form" onsubmit="event.preventDefault();">
         
+        <!-- STEP 1: ENVIRONMENT TYPE (LARGER HIGH CONTRAST SELECTION CARDS) -->
         <div id="survey-step-1" class="survey-step space-y-4 font-tech">
-          <label class="block text-xs text-gray-300 font-bold mb-3">1. Select Environment Type:</label>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
-              <input type="radio" name="kiosk_type" value="Retail / Physical Venue" checked class="accent-orange-500">
-              <span>🏪 Retail / Physical Venue</span>
+          <label class="block text-sm text-gray-200 font-bold mb-3 uppercase tracking-wider">1. Select Environment Type:</label>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-bold">
+            <label class="p-4 border-2 border-gray-800 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-200 transition-all">
+              <input type="radio" name="kiosk_type" value="Retail & Physical Venue" checked class="accent-orange-500 w-4 h-4">
+              <span>🏪 Retail &amp; Physical Venue</span>
             </label>
-            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
-              <input type="radio" name="kiosk_type" value="VIP Lounge & Kiosk" class="accent-orange-500">
-              <span>🍸 VIP Lounge & Kiosk</span>
+            <label class="p-4 border-2 border-gray-800 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-200 transition-all">
+              <input type="radio" name="kiosk_type" value="VIP Lounge & Kiosk" class="accent-orange-500 w-4 h-4">
+              <span>🍸 VIP Lounge &amp; Kiosk</span>
             </label>
-            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
-              <input type="radio" name="kiosk_type" value="SecOps & Cyber Terminal" class="accent-orange-500">
-              <span>🛡️ SecOps & Cyber Terminal</span>
+            <label class="p-4 border-2 border-gray-800 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-200 transition-all">
+              <input type="radio" name="kiosk_type" value="SecOps & Cyber Terminal" class="accent-orange-500 w-4 h-4">
+              <span>🛡️ SecOps &amp; Cyber Terminal</span>
             </label>
-            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-300">
-              <input type="radio" name="kiosk_type" value="Content & Studio Site" class="accent-orange-500">
-              <span>🎬 Studio & Burner Site</span>
+            <label class="p-4 border-2 border-gray-800 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center gap-3 text-gray-200 transition-all">
+              <input type="radio" name="kiosk_type" value="Studio & Burner Site" class="accent-orange-500 w-4 h-4">
+              <span>🎬 Studio &amp; Burner Site</span>
             </label>
           </div>
           <div class="pt-4 flex justify-end">
-            <button type="button" onclick="nextSurveyStep(2)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-2.5 px-5 rounded transition-all">NEXT STEP ➔</button>
+            <button type="button" onclick="nextSurveyStep(2)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-3 px-6 rounded-lg transition-all">NEXT STEP ➔</button>
           </div>
         </div>
 
+        <!-- STEP 2: DIGITAL QR DELIVERY (NO MAILING) -->
         <div id="survey-step-2" class="survey-step hidden space-y-4 font-tech text-xs">
-          <label class="block text-xs text-gray-300 font-bold mb-3">2. Select "The Port" Smart QR Sticker Package ($15/mo):</label>
+          <label class="block text-sm text-gray-200 font-bold mb-3 uppercase tracking-wider">2. Select "The Port" Smart QR Package ($15/mo):</label>
           <div class="space-y-3">
-            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-300">
+            <label class="p-4 border-2 border-gray-800 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-200 font-bold">
               <div class="flex items-center gap-3">
-                <input type="radio" name="qr_package" value="5x Physical QR Stickers" checked class="accent-orange-500">
-                <span>🏷️ 5x Physical Smart QR Stickers (Mailed)</span>
+                <input type="radio" name="qr_package" value="100% Instant Digital Vector QR" checked class="accent-orange-500 w-4 h-4">
+                <span>📲 100% Instant Digital Vector QR Codes (High-Res PDF/PNG)</span>
               </div>
-              <span class="text-orange-400 font-bold">Physical</span>
-            </label>
-            <label class="p-3 border border-gray-800 rounded bg-black/80 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-300">
-              <div class="flex items-center gap-3">
-                <input type="radio" name="qr_package" value="Digital QR Code Only" class="accent-orange-500">
-                <span>📲 Digital Vector QR Codes Only</span>
-              </div>
-              <span class="text-orange-400 font-bold">Digital</span>
+              <span class="text-orange-400 font-bold">Instant Digital</span>
             </label>
           </div>
+          <p class="text-[11px] text-gray-400 font-sans italic">
+            * Zero mailing friction. Your custom high-resolution vector QR file will be ready for instant venue display.
+          </p>
           <div class="pt-4 flex justify-between">
             <button type="button" onclick="nextSurveyStep(1)" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs py-2.5 px-5 rounded">⬅ BACK</button>
-            <button type="button" onclick="nextSurveyStep(3)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-2.5 px-5 rounded transition-all">NEXT STEP ➔</button>
+            <button type="button" onclick="nextSurveyStep(3)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-3 px-6 rounded-lg transition-all">NEXT STEP ➔</button>
           </div>
         </div>
 
+        <!-- STEP 3: SUBDOMAIN SELECTION -->
         <div id="survey-step-3" class="survey-step hidden space-y-4 font-tech text-xs">
-          <label class="block text-xs text-gray-300 font-bold mb-1">3. Claim your custom Burner Site URL:</label>
-          <div class="flex items-center gap-2 bg-black/90 border border-gray-800 rounded p-3">
-            <input type="text" id="subdomain-input" placeholder="bowdega" class="bg-transparent text-orange-400 text-xs outline-none flex-grow" oninput="updateSubdomainPreview()">
-            <span class="text-gray-500">.burn-1.com</span>
+          <label class="block text-sm text-gray-200 font-bold mb-1 uppercase tracking-wider">3. Claim your custom Burner Site Subdomain:</label>
+          <div class="flex items-center gap-2 bg-black/90 border-2 border-gray-800 rounded-xl p-3.5">
+            <input type="text" id="subdomain-input" placeholder="bowdega" class="bg-transparent text-orange-400 text-sm font-bold outline-none flex-grow" oninput="updateSubdomainPreview()">
+            <span class="text-gray-400 font-bold">.burn-1.com</span>
           </div>
-          <p id="subdomain-preview" class="text-xs text-orange-400">Assigned URL: https://bowdega.burn-1.com</p>
+          <p id="subdomain-preview" class="text-xs text-orange-400 font-bold">Assigned URL: https://bowdega.burn-1.com</p>
 
           <div class="pt-4 flex justify-between">
             <button type="button" onclick="nextSurveyStep(2)" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs py-2.5 px-5 rounded">⬅ BACK</button>
-            <button type="button" onclick="nextSurveyStep(4)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-2.5 px-5 rounded transition-all">NEXT STEP ➔</button>
+            <button type="button" onclick="nextSurveyStep(4)" class="bg-orange-500 hover:bg-orange-400 text-black font-cyber font-bold text-xs py-3 px-6 rounded-lg transition-all">NEXT STEP ➔</button>
           </div>
         </div>
 
+        <!-- STEP 4: CONTACT & OWNER INFO -->
         <div id="survey-step-4" class="survey-step hidden space-y-4 font-tech text-xs">
-          <label class="block text-xs text-gray-300 font-bold mb-1">4. Contact & Telemetry Receiver:</label>
+          <label class="block text-sm text-gray-200 font-bold mb-1 uppercase tracking-wider">4. Contact &amp; Organization Details:</label>
           <div class="space-y-3">
             <div>
-              <label class="block text-gray-400 mb-1">Organization / Owner Name</label>
-              <input type="text" id="survey-name" placeholder="Alex Darden / Apex Tech" class="w-full bg-black/90 border border-gray-800 rounded p-3 text-white outline-none focus:border-orange-400">
+              <label class="block text-gray-400 mb-1 font-bold">Organization / Owner Name</label>
+              <input type="text" id="survey-name" placeholder="Alex Darden / Apex Tech" class="w-full bg-black/90 border border-gray-800 rounded-lg p-3 text-white outline-none focus:border-orange-400 font-sans">
             </div>
             <div>
-              <label class="block text-gray-400 mb-1">Business Email</label>
-              <input type="email" id="survey-email" placeholder="alex@apextech.com" class="w-full bg-black/90 border border-gray-800 rounded p-3 text-white outline-none focus:border-orange-400">
+              <label class="block text-gray-400 mb-1 font-bold">Business Email</label>
+              <input type="email" id="survey-email" placeholder="alex@apextech.com" class="w-full bg-black/90 border border-gray-800 rounded-lg p-3 text-white outline-none focus:border-orange-400 font-sans">
             </div>
           </div>
 
           <div class="pt-4 flex justify-between items-center border-t border-gray-800">
             <button type="button" onclick="nextSurveyStep(3)" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs py-2.5 px-5 rounded">⬅ BACK</button>
-            <button type="button" onclick="generateReceiptCard()" class="bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold text-xs py-3 px-6 rounded shadow-lg shadow-orange-600/30">GENERATE RECEIPT & BUSINESS CARD 💳</button>
+            <button type="button" onclick="generateReceiptCard()" class="bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold text-xs py-3.5 px-6 rounded-lg shadow-lg shadow-orange-600/30">GENERATE RECEIPT &amp; BUSINESS CARD 💳</button>
           </div>
         </div>
 
-        <!-- DIGITAL BUSINESS CARD RECEIPT -->
+        <!-- DIGITAL BUSINESS CARD RECEIPT & QR PLACEHOLDER BADGE -->
         <div id="survey-step-receipt" class="survey-step hidden space-y-4 font-tech text-xs">
           <div class="text-center mb-4">
-            <span class="text-xs text-emerald-400 font-bold bg-emerald-950 px-3 py-1 rounded border border-emerald-700">✓ BURNER SITE RESERVED</span>
-            <h3 class="font-cyber text-xl text-white font-bold mt-2">OFFICIAL DIGITAL BUSINESS CARD</h3>
+            <span class="text-xs text-emerald-400 font-bold bg-emerald-950 px-3 py-1 rounded-full border border-emerald-700">✓ SUBDOMAIN RESERVED</span>
+            <h3 class="font-cyber text-xl text-white font-bold mt-2 uppercase">OFFICIAL DIGITAL BUSINESS CARD</h3>
           </div>
 
           <div id="receipt-card" class="bg-gradient-to-br from-gray-950 via-black to-gray-900 p-6 rounded-2xl border-2 border-orange-500/70 shadow-2xl relative">
             <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-3">
               <div class="flex items-center gap-2">
-                <div class="w-4 h-4 rounded bg-orange-500 font-cyber font-bold text-black text-[10px] flex items-center justify-center">B1</div>
+                <div class="w-5 h-5 rounded bg-orange-500 font-cyber font-bold text-black text-xs flex items-center justify-center">B1</div>
                 <span class="font-cyber font-bold text-xs text-white">BURN-1 <span class="text-orange-400">SMART CARD</span></span>
               </div>
-              <span class="text-[9px] text-emerald-400">● STATUS: ACTIVE</span>
+              <span class="text-[9px] text-emerald-400 font-mono">● STATUS: RESERVED</span>
             </div>
 
             <div class="grid grid-cols-12 gap-3 items-center mb-4">
@@ -434,12 +434,16 @@
                   <span id="receipt-owner" class="text-white font-bold block">Alex Darden</span>
                 </div>
                 <div>
-                  <span class="text-gray-500 text-[9px] uppercase block">BURNER SITE URL</span>
+                  <span class="text-gray-500 text-[9px] uppercase block">RESERVED SUBDOMAIN</span>
                   <span id="receipt-url" class="text-emerald-400 font-mono underline block">https://bowdega.burn-1.com</span>
                 </div>
               </div>
               <div class="col-span-5 flex flex-col items-center">
-                <div id="receipt-qrcode" class="p-2 bg-white rounded-lg shadow"></div>
+                <!-- QR PLACEHOLDER BADGE UNTIL PAYMENT -->
+                <div class="p-3 bg-black border-2 border-orange-500/60 rounded-xl text-center shadow-lg">
+                  <div class="text-2xl text-orange-400 mb-1">🔒</div>
+                  <span class="text-[9px] font-mono-code text-orange-300 font-bold block leading-tight">ACTIVATE QR UPON PAYMENT</span>
+                </div>
               </div>
             </div>
 
@@ -449,9 +453,11 @@
             </div>
           </div>
 
-          <div class="pt-4 flex flex-col gap-2">
-            <button type="button" onclick="downloadReceiptPNG()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold py-3 rounded text-xs shadow-lg shadow-orange-600/30">📥 DOWNLOAD BUSINESS CARD (PNG)</button>
-            <button type="button" onclick="closeSurvey(); openATM();" class="w-full bg-gray-900 border border-purple-500/60 text-purple-300 font-bold py-3 rounded text-xs">💳 PROCEED TO ATM CHECKOUT ($65/mo)</button>
+          <div class="pt-4 flex flex-col gap-2.5">
+            <button type="button" onclick="downloadReceiptPNG()" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-bold py-3 rounded-lg text-xs shadow-lg shadow-orange-600/30">📥 DOWNLOAD BUSINESS CARD (PNG)</button>
+            <a href="kiosk_intake.html" class="w-full bg-emerald-600 hover:bg-emerald-500 text-black font-cyber font-black py-3.5 rounded-lg text-xs text-center uppercase tracking-wider block shadow-lg shadow-emerald-900/40 transition-all">
+              💳 ACTIVATE SUBDOMAIN &amp; UPLOAD ASSETS ($50 / $65)
+            </a>
           </div>
         </div>
 
