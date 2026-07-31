@@ -446,24 +446,38 @@
           </div>
         </div>
 
-        <!-- STEP 2: QR CODE OPTIONS -->
+        <!-- STEP 2: PACKAGE & PRICING OPTION (MAIN FOCUS: $50 ONE-TIME BURNER SITE) -->
         <div id="survey-step-2" class="survey-step hidden space-y-4 font-tech text-xs">
-          <label class="block text-sm text-gray-200 font-bold mb-3 uppercase tracking-wider">2. Select QR Code Option:</label>
+          <label class="block text-sm text-gray-200 font-bold mb-2 uppercase tracking-wider">2. Select Package Option:</label>
           <div class="space-y-3">
-            <label class="p-4 border-2 border-gray-800 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-200 font-bold">
+            <label class="p-4 border-2 border-orange-500 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-200 font-bold shadow-lg shadow-orange-950/40">
               <div class="flex items-center gap-3">
-                <input type="radio" name="qr_option" value="Generate Digital Vector QR Code" checked class="accent-orange-500 w-4 h-4">
-                <span>📲 Option 1: Generate Digital Vector QR Code (High-Res SVG/PNG)</span>
+                <input type="radio" name="qr_option" value="$50 One-Time Custom Burner Site Package" checked class="accent-orange-500 w-4 h-4">
+                <div>
+                  <span class="block text-white">🔥 Option 1: $50 One-Time Custom Burner Site Package</span>
+                  <span class="text-[10px] text-gray-400 font-sans block font-normal">Includes custom design, venue QR code generator, custom subdomain &amp; 7-day turnaround — One &amp; Done!</span>
+                </div>
               </div>
-              <span class="text-orange-400 font-bold">$15.00/mo</span>
+              <span class="text-orange-400 font-cyber text-sm">$50.00</span>
             </label>
 
             <label class="p-4 border-2 border-gray-800 rounded-xl bg-black/90 hover:border-orange-400 cursor-pointer flex items-center justify-between text-gray-200 font-bold">
               <div class="flex items-center gap-3">
-                <input type="radio" name="qr_option" value="No QR Code (Link Only)" class="accent-orange-500 w-4 h-4">
-                <span>🔗 Option 2: No QR Code (Direct Link Only)</span>
+                <input type="radio" name="qr_option" value="$65 Full Bundle ($50 Site + $15 Maintenance)" class="accent-orange-500 w-4 h-4">
+                <div>
+                  <span class="block text-white">💳 Option 2: $65 Full Package ($50 Site + $15 Maintenance)</span>
+                  <span class="text-[10px] text-gray-400 font-sans block font-normal">Custom Burner Site Package + initial 1-month maintenance &amp; updates.</span>
+                </div>
               </div>
-              <span class="text-gray-400 font-bold">Link Only</span>
+              <span class="text-emerald-400 font-cyber text-sm">$65.00</span>
+            </label>
+
+            <label class="p-3 border border-gray-800/60 rounded-lg bg-black/60 hover:border-gray-700 cursor-pointer flex items-center justify-between text-gray-400 font-mono text-[11px]">
+              <div class="flex items-center gap-2">
+                <input type="radio" name="qr_option" value="Cryptic Option: $15/mo Maintenance Add-On" class="accent-orange-500 w-3.5 h-3.5">
+                <span>[Cryptic Option] $15/mo Maintenance Add-On Only</span>
+              </div>
+              <span class="text-gray-500 font-bold">$15.00/mo</span>
             </label>
           </div>
 
@@ -508,11 +522,11 @@
           </div>
         </div>
 
-        <!-- STEP 5: PAYMENT QUEUE (PAYPAL CHECKOUT INTEGRATION) -->
+        <!-- STEP 5: REAL PAYPAL CHECKOUT PAYMENT QUEUE -->
         <div id="survey-step-5" class="survey-step hidden space-y-4 font-tech text-xs">
           <div class="text-center mb-2">
-            <span class="text-xs text-orange-400 font-bold bg-orange-950 px-3 py-1 rounded-full border border-orange-700">🔒 PAYMENT QUEUE STEP 5 OF 5</span>
-            <h3 class="font-cyber text-xl text-white font-bold mt-2 uppercase">CONFIRM RESERVATION &amp; PAYPAL QUEUE</h3>
+            <span class="text-xs text-orange-400 font-bold bg-orange-950 px-3 py-1 rounded-full border border-orange-700">🔒 SECURE CHECKOUT QUEUE STEP 5 OF 5</span>
+            <h3 class="font-cyber text-xl text-white font-bold mt-2 uppercase">CONFIRM RESERVATION &amp; PAYPAL CHECKOUT</h3>
           </div>
 
           <div class="bg-black/90 p-5 rounded-xl border border-gray-800 space-y-3">
@@ -521,28 +535,25 @@
               <span id="pay-summary-url" class="text-orange-400 font-bold font-mono">https://bowdega.burn-1.com</span>
             </div>
             <div class="flex justify-between items-center text-gray-300 border-b border-gray-800 pb-2">
-              <span>QR Package Option:</span>
-              <span id="pay-summary-qr" class="text-white font-bold">Generate Digital Vector QR</span>
+              <span>Selected Package:</span>
+              <span id="pay-summary-qr" class="text-white font-bold">$50 One-Time Custom Burner Site</span>
             </div>
             <div class="flex justify-between items-center text-gray-300 border-b border-gray-800 pb-2">
-              <span>Selected Category:</span>
+              <span>Business Category:</span>
               <span id="pay-summary-cat" class="text-white font-bold">Food</span>
             </div>
             <div class="flex justify-between items-center text-sm font-bold pt-1">
               <span class="text-white">Total Amount Due:</span>
-              <span class="text-emerald-400 font-cyber text-lg">$15.00 / mo</span>
+              <span id="pay-summary-total" class="text-emerald-400 font-cyber text-lg">$50.00 One-Time</span>
             </div>
           </div>
 
           <div class="space-y-3 pt-2">
-            <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" rel="noopener noreferrer" onclick="processPaymentQueueSuccess()" class="w-full bg-[#0070ba] hover:bg-[#003087] text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-900/40 font-cyber text-xs">
+            <!-- REAL PAYPAL CHECKOUT BUTTON -->
+            <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" rel="noopener noreferrer" onclick="processPaymentQueueSuccess()" class="w-full bg-[#0070ba] hover:bg-[#003087] text-white font-cyber font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-900/50 text-xs tracking-wider">
               <i class="fab fa-paypal text-lg"></i>
-              <span>PAYPAL CHECKOUT &amp; CONFIRM QUEUE ($15.00)</span>
+              <span id="paypal-btn-text">CHECKOUT WITH PAYPAL ($50.00) ➔</span>
             </a>
-
-            <button type="button" onclick="processPaymentQueueSuccess()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-black font-cyber font-black py-3 rounded-lg text-xs uppercase tracking-wider">
-              ✓ SIMULATE PAYMENT QUEUE CONFIRMATION (TEST)
-            </button>
           </div>
 
           <div class="pt-4 flex justify-start border-t border-gray-800">
@@ -725,11 +736,24 @@
       if (step === 5) {
         const sub = (document.getElementById('subdomain-input').value.trim() || 'bowdega').toLowerCase();
         const cat = document.querySelector('input[name="kiosk_category"]:checked')?.value || 'Food';
-        const qrOpt = document.querySelector('input[name="qr_option"]:checked')?.value || 'Generate Digital Vector QR Code';
+        const pkgOpt = document.querySelector('input[name="qr_option"]:checked')?.value || '$50 One-Time Custom Burner Site Package';
         
+        let priceStr = '$50.00 One-Time';
+        let btnText = 'CHECKOUT WITH PAYPAL ($50.00) ➔';
+
+        if (pkgOpt.includes('65')) {
+          priceStr = '$65.00 Total Package';
+          btnText = 'CHECKOUT WITH PAYPAL ($65.00) ➔';
+        } else if (pkgOpt.includes('15')) {
+          priceStr = '$15.00 / mo (Maintenance)';
+          btnText = 'CHECKOUT WITH PAYPAL ($15.00/mo) ➔';
+        }
+
         document.getElementById('pay-summary-url').innerText = `https://${sub}.burn-1.com`;
         document.getElementById('pay-summary-cat').innerText = cat;
-        document.getElementById('pay-summary-qr').innerText = qrOpt.includes('No QR') ? 'No QR Code (Link Only)' : 'Digital Vector QR ($15/mo)';
+        document.getElementById('pay-summary-qr').innerText = pkgOpt;
+        document.getElementById('pay-summary-total').innerText = priceStr;
+        document.getElementById('paypal-btn-text').innerText = btnText;
       }
     }
 
@@ -742,7 +766,7 @@
       const name = document.getElementById('survey-name').value || 'Alex Darden';
       const sub = (document.getElementById('subdomain-input').value.trim() || 'bowdega').toLowerCase();
       const cat = document.querySelector('input[name="kiosk_category"]:checked')?.value || 'Food';
-      const qrOpt = document.querySelector('input[name="qr_option"]:checked')?.value || 'Generate Digital Vector QR Code';
+      const pkgOpt = document.querySelector('input[name="qr_option"]:checked')?.value || '$50 One-Time Custom Burner Site Package';
       const fullURL = `https://${sub}.burn-1.com`;
 
       document.getElementById('survey-header').classList.add('hidden');
