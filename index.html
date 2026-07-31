@@ -830,14 +830,20 @@
       <!-- Modal Body Grid -->
       <div class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-y-auto z-10 flex-1">
         
-        <!-- Left: Video Player Container -->
-        <div class="flex flex-col">
-          <div class="w-full aspect-video bg-black/90 border-2 border-orange-500/40 rounded-xl overflow-hidden relative flex flex-col items-center justify-center text-center shadow-2xl">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/F7q4wGMr0MY" title="Obliterate Course Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- Left: Video Player Container (Onsite MP4 + YouTube Embed) -->
+        <div class="flex flex-col space-y-4">
+          <!-- Onsite Self-Contained MP4 Video Player -->
+          <div class="w-full aspect-video bg-black/90 border-2 border-orange-500/60 rounded-xl overflow-hidden relative flex flex-col items-center justify-center text-center shadow-2xl">
+            <video controls preload="metadata" playsinline poster="Burn1vaultthumb.jpg" class="w-full h-full object-cover" src="assets/Burn-1_Local_AI_Vault_Deployment_Guide.mp4"></video>
+          </div>
+
+          <!-- YouTube Embed Stream (1d3jwC7DLt4) -->
+          <div class="w-full aspect-video bg-black/90 border border-gray-800 rounded-xl overflow-hidden relative flex flex-col items-center justify-center text-center shadow-md">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/1d3jwC7DLt4" title="Local AI Setup: Burn-1 Vault & Master Kill Switch Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
 
           <!-- Checkout Link CTA -->
-          <div class="mt-4 bg-black/90 border border-orange-500/40 p-4 rounded-xl text-center">
+          <div class="bg-black/90 border border-orange-500/40 p-4 rounded-xl text-center">
             <p class="font-tech text-xs text-gray-300 mb-2 italic">"I build managed burner sites for clients every day at $15/mo. But this toolkit is for people who want to own the hardware. For a one-time $50 fee, you get total ownership and zero monthly fees."</p>
             <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="block w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-black font-cyber font-black text-xs py-3 rounded-lg uppercase tracking-widest shadow-[0_0_25px_rgba(255,87,34,0.7)] transition-all mt-2">
               ⚡ EXECUTE BURN - ACCESS VAULT ($50)
@@ -851,7 +857,7 @@
           <!-- Tab Buttons -->
           <div class="flex border-b border-gray-800 bg-black/60 font-cyber text-xs">
             <button id="btn-tab-transcript" onclick="switchVaultTab('transcript')" class="flex-1 py-3 border-b-2 border-orange-500 text-orange-400 font-bold uppercase tracking-wider">
-              📄 Transcript
+              📄 Transcript &amp; Guide
             </button>
             <button id="btn-tab-commands" onclick="switchVaultTab('commands')" class="flex-1 py-3 border-b-2 border-transparent text-gray-400 hover:text-white font-bold uppercase tracking-wider">
               💻 Commands
@@ -861,18 +867,30 @@
             </button>
           </div>
 
-          <!-- Tab 1: Transcript -->
-          <div id="vault-tab-transcript" class="p-5 overflow-y-auto max-h-[350px] font-tech text-xs leading-relaxed text-gray-300 space-y-4">
+          <!-- Tab 1: Transcript & Deployment Guide -->
+          <div id="vault-tab-transcript" class="p-5 overflow-y-auto max-h-[480px] font-tech text-xs leading-relaxed text-gray-300 space-y-4">
             <div class="border-l-2 border-orange-500 pl-3">
-              <h5 class="font-cyber text-white text-xs uppercase font-bold">Module 1: The Privacy Choke Point</h5>
-              <p class="text-gray-400 mt-1">"Every prompt sent to cloud AI logs IP and sensitive data on corporate servers. Anonymized data is a myth."</p>
+              <h5 class="font-cyber text-white text-xs uppercase font-bold">Local AI Setup: Burn-1 Vault Walkthrough</h5>
+              <p class="text-gray-400 mt-1">"Welcome to the Burn-1 Local AI Vault Deployment Guide. In this 5-minute walkthrough, we set up an air-gapped, zero-cloud LLM environment running locally on your hardware."</p>
             </div>
-            <div class="border-l-2 border-orange-500 pl-3">
-              <h5 class="font-cyber text-white text-xs uppercase font-bold">Module 2: Cookie Sweeping & Data Breadcrumbs</h5>
-              <p class="text-gray-400 mt-1">"Third-party cookies follow your web footprint. Sever the connection by clearing browsing data."</p>
+            
+            <div class="border-l-2 border-green-500 pl-3">
+              <h5 class="font-cyber text-green-400 text-xs uppercase font-bold">Module 1: One-Click Installer</h5>
+              <p class="text-gray-400 mt-1">Run <code class="text-green-400">./install_burn1.sh</code> to automatically install Ollama, fetch Llama3, and configure air-gapped network isolation on <code class="text-white">127.0.0.1</code>.</p>
             </div>
+
+            <div class="border-l-2 border-sky-500 pl-3">
+              <h5 class="font-cyber text-sky-400 text-xs uppercase font-bold">Module 2: Zero External Telemetry</h5>
+              <p class="text-gray-400 mt-1">"All prompts, sensitive data strings, and code snippets stay strictly inside RAM. No external API calls, zero corporate tracking."</p>
+            </div>
+
+            <div class="border-l-2 border-red-500 pl-3">
+              <h5 class="font-cyber text-red-400 text-xs uppercase font-bold">Module 3: Master Kill Switch Shredder</h5>
+              <p class="text-gray-400 mt-1">Execute <code class="text-red-400">./burn1-killswitch.sh</code> at any time. It purges RAM buffers, incinerates session history, and restores a clean slate instantly.</p>
+            </div>
+
             <div class="bg-orange-500/10 p-3 rounded border border-orange-500/30 text-orange-300 font-bold">
-              STATUS: CLEAR &gt; Torching breadcrumbs into ashes.
+              STATUS: AIR-GAPPED &gt; Zero residue. 100% Local AI Sovereignty.
             </div>
           </div>
 
