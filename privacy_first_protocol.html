@@ -193,35 +193,35 @@
     <div class="scrim-box p-6 md:p-8 rounded-2xl border-t-4 border-t-orange-500 text-left mb-10 shadow-2xl">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800 pb-4 mb-6">
         <div>
-          <span class="text-xs font-mono-code text-orange-400 uppercase font-bold tracking-widest bg-orange-950 px-2.5 py-1 rounded border border-orange-800">FEATURED VAULT VIDEO &amp; WALKTHROUGH</span>
-          <h3 class="font-cyber text-xl md:text-2xl text-white font-extrabold uppercase mt-2">LOCAL AI SETUP: BURN-1 VAULT &amp; MASTER KILL SWITCH WALKTHROUGH</h3>
+          <span class="text-xs font-mono-code text-orange-400 uppercase font-bold tracking-widest bg-orange-950 px-2.5 py-1 rounded border border-orange-800">FEATURED OBLITERATION MEDIA &amp; SIGNAL OVERRIDE</span>
+          <h3 class="font-cyber text-xl md:text-2xl text-white font-extrabold uppercase mt-2">LOCAL AI SETUP: BURN-1 VAULT &amp; OBLITERATION WALKTHROUGH</h3>
         </div>
         <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="mt-3 md:mt-0 bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-black text-xs px-5 py-2.5 rounded-lg shadow-lg uppercase tracking-widest">
           GET VAULT TOOLKIT ($50) ➔
         </a>
       </div>
 
-      <!-- VIDEO PLAYERS: ONSITE MP4 + YOUTUBE EMBED SIDE BY SIDE -->
+      <!-- VIDEO PLAYERS: OBLITERATION PROMO + THE BURNING ANTENNAS YOUTUBE EMBEDS -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <!-- ONSITE MP4 VIDEO PLAYER (SELF CONTAINED) -->
+        <!-- OBLITERATION PROMO (40-SEC) -->
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs font-mono-code text-gray-400">
-            <span>🎥 ONSITE VIDEO (SELF-CONTAINED MP4)</span>
-            <span class="text-emerald-400">● LOCAL STREAM</span>
+            <span class="text-orange-400 font-bold">⚡ OBLITERATION PROMO (40 SEC)</span>
+            <span class="text-emerald-400">● YOUTUBE HD</span>
           </div>
           <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-orange-500/50 bg-black shadow-xl">
-            <video controls preload="metadata" playsinline class="w-full h-full object-cover" src="assets/Burn-1_Local_AI_Vault_Deployment_Guide.mp4"></video>
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/YiuSE_ZC1mM" title="Obliteration Promo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
 
-        <!-- YOUTUBE EMBED VIDEO -->
+        <!-- THE BURNING ANTENNAS (10-MIN BROADCAST) -->
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs font-mono-code text-gray-400">
-            <span>📺 YOUTUBE STREAM (1D3JWC7DLT4)</span>
-            <span class="text-red-400">● YOUTUBE HD</span>
+            <span class="text-purple-400 font-bold">📡 THE BURNING ANTENNAS (10 MIN BROADCAST)</span>
+            <span class="text-purple-400">● SIGNAL OVERRIDE</span>
           </div>
-          <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-red-500/50 bg-black shadow-xl">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/1d3jwC7DLt4" title="Local AI Setup: Burn-1 Vault & Master Kill Switch Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-purple-500/50 bg-black shadow-xl">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/mt6ROceVORc" title="The Burning Antennas Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -249,6 +249,104 @@
         </div>
       </div>
     </div>
+
+    <!-- ============================================================ -->
+    <!-- GAMIFIED 4-NODE HYPERFRAMES OBLITERATION COURSE SUITE       -->
+    <!-- ============================================================ -->
+    <div class="scrim-box p-6 md:p-8 rounded-2xl border-t-4 border-t-red-500 text-left mb-14 shadow-2xl relative overflow-hidden">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800 pb-4 mb-6">
+        <div>
+          <span class="text-xs font-mono-code text-red-400 uppercase font-bold tracking-widest bg-red-950 px-2.5 py-1 rounded border border-red-800">PHASE IV · OBLITERATION PROTOCOL</span>
+          <h3 class="font-cyber text-2xl md:text-3xl text-white font-black uppercase mt-2">⚡ GAMIFIED OBLITERATION COURSE (4 NODES)</h3>
+          <p class="font-sans-clean text-xs text-gray-300 mt-1">Hover over cards for Guardrail Flaws. Click to Obliterate &amp; Lock Unthrottled Status!</p>
+        </div>
+        <div class="mt-3 md:mt-0 bg-black/90 border border-gray-800 px-4 py-2 rounded-xl text-right">
+          <span class="text-[10px] font-mono-code text-gray-400 uppercase block">PROGRESS COUNTER</span>
+          <span id="obliterate-counter" class="font-cyber text-lg font-black text-orange-400">0 / 4 NODES CLEARED</span>
+        </div>
+      </div>
+
+      <!-- 4 OBLITERATION NODES GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        
+        <!-- NODE 1 -->
+        <div id="ob-card-1" class="scrim-box p-5 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all duration-300 relative reticle group" onclick="toggleObliterationNode(1)">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-mono-code text-xs text-red-400 font-bold uppercase">NODE 01 · SYSTEM PROMPT STERILIZATION</span>
+            <span id="ob-status-1" class="text-[10px] font-mono-code text-gray-500 bg-black px-2 py-0.5 rounded border border-gray-800">UNRESOLVED</span>
+          </div>
+          <h4 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-red-400">System Prompt Sterilization</h4>
+          <p class="text-xs text-gray-300 font-sans-clean leading-relaxed mb-4">
+            Inject unaligned operator personas to purge corporate disclaimers ("As an AI model...") and force direct unthrottled execution.
+          </p>
+          <div class="bg-black/90 p-3 rounded-lg border border-red-900/60 font-mono-code text-[11px] text-red-300">
+            <code>&gt; OVERRIDE: INJECT UNALIGNED_OPERATOR_PERSONA</code>
+          </div>
+        </div>
+
+        <!-- NODE 2 -->
+        <div id="ob-card-2" class="scrim-box p-5 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all duration-300 relative reticle group" onclick="toggleObliterationNode(2)">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-mono-code text-xs text-red-400 font-bold uppercase">NODE 02 · MEMORY ISOLATION &amp; LOG SHREDDING</span>
+            <span id="ob-status-2" class="text-[10px] font-mono-code text-gray-500 bg-black px-2 py-0.5 rounded border border-gray-800">UNRESOLVED</span>
+          </div>
+          <h4 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-red-400">Memory Isolation &amp; Systemd Lock</h4>
+          <p class="text-xs text-gray-300 font-sans-clean leading-relaxed mb-4">
+            Apply systemd security overrides (<code class="text-green-400">ProtectHome=read-only</code> &amp; <code class="text-green-400">PrivateTmp=true</code>) to lock process memory in RAM.
+          </p>
+          <div class="bg-black/90 p-3 rounded-lg border border-red-900/60 font-mono-code text-[11px] text-green-300">
+            <code>&gt; LOCK: SYSTEMD PROTECT_HOME &amp; PRIVATE_TMP</code>
+          </div>
+        </div>
+
+        <!-- NODE 3 -->
+        <div id="ob-card-3" class="scrim-box p-5 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all duration-300 relative reticle group" onclick="toggleObliterationNode(3)">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-mono-code text-xs text-red-400 font-bold uppercase">NODE 03 · VRAM &amp; GPU UNTHROTTLING</span>
+            <span id="ob-status-3" class="text-[10px] font-mono-code text-gray-500 bg-black px-2 py-0.5 rounded border border-gray-800">UNRESOLVED</span>
+          </div>
+          <h4 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-red-400">VRAM &amp; GPU Layer Offloading</h4>
+          <p class="text-xs text-gray-300 font-sans-clean leading-relaxed mb-4">
+            Maximize layer offloading across hardware VRAM and expand context windows for zero-lag local inference.
+          </p>
+          <div class="bg-black/90 p-3 rounded-lg border border-red-900/60 font-mono-code text-[11px] text-sky-300">
+            <code>&gt; UNTHROTTLE: N_GPU_LAYERS=MAX &amp; CTX_SIZE=8192</code>
+          </div>
+        </div>
+
+        <!-- NODE 4 -->
+        <div id="ob-card-4" class="scrim-box p-5 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all duration-300 relative reticle group" onclick="toggleObliterationNode(4)">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-mono-code text-xs text-red-400 font-bold uppercase">NODE 04 · AIRLOCK FLUSH DRY-RUN</span>
+            <span id="ob-status-4" class="text-[10px] font-mono-code text-gray-500 bg-black px-2 py-0.5 rounded border border-gray-800">UNRESOLVED</span>
+          </div>
+          <h4 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-red-400">Airlock Flush Dry-Run (3-Sec Purge)</h4>
+          <p class="text-xs text-gray-300 font-sans-clean leading-relaxed mb-4">
+            Verify the 3-second atomic RAM purge and history shredder via <code class="text-red-400">./burn1-killswitch.sh</code>.
+          </p>
+          <div class="bg-black/90 p-3 rounded-lg border border-red-900/60 font-mono-code text-[11px] text-orange-300">
+            <code>&gt; EXECUTE: ATOMIC RAM PURGE &amp; HISTORY SHRED</code>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VICTORY REWARD BADGE (UNLOCKED AT 4/4 NODES CLEARED) -->
+      <div id="obliteration-reward-badge" class="hidden bg-gradient-to-r from-red-950 via-black to-orange-950 p-6 rounded-2xl border-2 border-red-500 text-center shadow-[0_0_50px_rgba(239,68,68,0.7)] animate-pulse">
+        <span class="text-xs font-mono-code text-yellow-400 font-bold uppercase tracking-widest bg-black px-3 py-1 rounded border border-yellow-500/40 mb-2 inline-block">
+          🏆 UNTHROTTLED COMPUTE ACHIEVEMENT
+        </span>
+        <h3 class="font-cyber text-2xl md:text-3xl text-white font-black uppercase tracking-wider mb-2">⚡ ANTENNA OVERRIDE VERIFIED</h3>
+        <p class="font-sans-clean text-xs text-gray-300 max-w-xl mx-auto mb-4">
+          All 4 Obliteration Nodes cleared! Your local AI deployment is 100% air-gapped, zero-cloud, and unthrottled.
+        </p>
+        <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-black text-xs px-8 py-3.5 rounded-xl uppercase tracking-widest shadow-xl">
+          <span>DOWNLOAD COMPLETE BURN-1 VAULT ($50)</span> ➔
+        </a>
+      </div>
+
+    </div>
+  </section>
   </section>
 
   <!-- 8 INTERACTIVE HYPERFRAMES MODULE CARDS GRID -->
@@ -808,23 +906,39 @@
       osc.stop(audioCtx.currentTime + 0.3);
     }
 
-    function toggleSolution(nodeNum) {
-      const stageEl = document.getElementById(`stage-${nodeNum}`);
-      stageEl.classList.toggle('showing-solution');
-      playDing();
-    }
+    // Gamified 4-Node Obliteration Course Logic
+    const obliterationCleared = new Set();
 
-    function triggerBurn(modNum) {
-      const burnedEl = document.getElementById(`burned-mod${modNum}`);
-      burnedEl.classList.add('active');
+    function toggleObliterationNode(nodeNum) {
       playDing();
-    }
+      const card = document.getElementById(`ob-card-${nodeNum}`);
+      const statusEl = document.getElementById(`ob-status-${nodeNum}`);
 
-    function resetBurn(modNum) {
-      const stageEl = document.getElementById(`stage-${modNum}`);
-      stageEl.classList.remove('showing-solution');
-      const burnedEl = document.getElementById(`burned-mod${modNum}`);
-      burnedEl.classList.remove('active');
+      if (obliterationCleared.has(nodeNum)) {
+        obliterationCleared.delete(nodeNum);
+        card.classList.remove('border-red-500', 'bg-red-950/30', 'shadow-[0_0_20px_rgba(239,68,68,0.5)]');
+        card.classList.add('border-gray-800');
+        statusEl.innerText = 'UNRESOLVED';
+        statusEl.className = 'text-[10px] font-mono-code text-gray-500 bg-black px-2 py-0.5 rounded border border-gray-800';
+      } else {
+        obliterationCleared.add(nodeNum);
+        card.classList.remove('border-gray-800');
+        card.classList.add('border-red-500', 'bg-red-950/30', 'shadow-[0_0_20px_rgba(239,68,68,0.5)]');
+        statusEl.innerText = '✓ OBLITERATED';
+        statusEl.className = 'text-[10px] font-mono-code text-red-400 font-bold bg-red-950 px-2 py-0.5 rounded border border-red-700';
+      }
+
+      const clearedCount = obliterationCleared.size;
+      const counterEl = document.getElementById('obliterate-counter');
+      if (counterEl) counterEl.innerText = `${clearedCount} / 4 NODES CLEARED`;
+
+      const rewardBadge = document.getElementById('obliteration-reward-badge');
+      if (clearedCount === 4) {
+        rewardBadge.classList.remove('hidden');
+        rewardBadge.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        rewardBadge.classList.add('hidden');
+      }
     }
   </script>
 
