@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy First Challenge // Burn-1 Game Instructions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+    :root {
+      --void-black: #08070b;
+      --hazard-orange: #ff5722;
+      --vault-emerald: #50fa7b;
+      --crimson-red: #dc2626;
+      --cyber-blue: #38bdf8;
+    }
+
+    body {
+      background-color: var(--void-black);
+      color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .font-cyber { font-family: 'Chakra Petch', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+
+    /* CRT Scanline & Grid Effect */
+    .cyber-grid {
+      background-image: linear-gradient(rgba(255, 87, 34, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 87, 34, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .crt-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .scrim-box {
+      background: rgba(12, 11, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 87, 34, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+    }
+
+    .reticle { position: relative; }
+    .reticle::before { content: '+'; position: absolute; top: -8px; left: -8px; color: var(--hazard-orange); font-size: 16px; font-weight: bold; }
+    .reticle::after { content: '+'; position: absolute; bottom: -8px; right: -8px; color: var(--hazard-orange); font-size: 16px; font-weight: bold; }
+
+    /* Interactive Card Drawer */
+    .demo-stage {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .state-clean, .state-problem, .state-solution, .state-burned {
+      position: absolute;
+      inset: 0;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .state-clean { background-color: #0d1117; z-index: 10; opacity: 1; }
+    .state-problem { background-color: #000000; border: 4px solid var(--hazard-orange); opacity: 0; transform: scale(1.05); z-index: 20; }
+    .state-solution { background-color: #f8fafc; color: #0f172a; opacity: 0; transform: scale(0.95); z-index: 30; }
+
+    .demo-stage:hover .state-problem { opacity: 1; transform: scale(1); }
+    .demo-stage.showing-solution .state-solution { opacity: 1; transform: scale(1); }
+
+    /* Bonus Unlocked Theme */
+    .unlocked-mode {
+      border-color: var(--crimson-red) !important;
+      box-shadow: 0 0 40px rgba(220, 38, 38, 0.4) !important;
+    }
+  </style>
+</head>
+<body class="cyber-grid min-h-screen flex flex-col items-center p-4 md:p-8 relative">
+
+  <div class="crt-overlay"></div>
+
+  <!-- HEADER NAVIGATION -->
+  <header class="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-5">
+    <div class="mb-4 md:mb-0 text-center md:text-left">
+      <a href="index.html" class="flex items-center justify-center md:justify-start gap-3">
+        <span class="text-3xl">🔥</span>
+        <div>
+          <h1 class="font-cyber text-2xl md:text-4xl text-white font-extrabold tracking-[0.15em] uppercase">
+            PRIVACY FIRST <span class="text-orange-500">CHALLENGE</span>
+          </h1>
+          <p class="font-mono-code text-xs text-orange-400/90 tracking-widest uppercase mt-0.5">
+            BURN-1 GAME INSTRUCTIONS // HOVER FOR PROBLEM · CLICK FOR SOLUTION
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button onclick="openUnlockModal()" class="bg-red-950/80 hover:bg-red-900 border border-red-500/80 text-red-300 px-4 py-2 rounded font-mono-code text-xs transition-all flex items-center gap-2 shadow-lg shadow-red-950/50">
+        <span>🔑 UNLOCK OBLITERATION BONUS</span>
+      </button>
+      <a href="index.html" class="bg-black border border-gray-800 text-gray-300 px-4 py-2 rounded font-mono-code text-xs hover:border-orange-500 transition-all">
+        ← Return to Main Hub
+      </a>
+      <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-black font-cyber font-black text-xs px-5 py-2.5 rounded tracking-widest uppercase shadow-[0_0_25px_rgba(255,87,34,0.7)] transition-all">
+        ⚡ GET VAULT ($50)
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO BRIEFING & GAME INSTRUCTIONS -->
+  <section class="w-full max-w-5xl text-center mb-12">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-orange-950/80 border border-orange-500/50 text-orange-400 text-xs font-mono-code mb-4 uppercase tracking-widest">
+      <span>🛡️ BURN-1 GAME INSTRUCTIONS · 8 INTERACTIVE CHALLENGE NODES</span>
+    </div>
+    <h2 class="font-cyber text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
+      BURN-1 GAME <span class="text-orange-500">INSTRUCTIONS</span>
+    </h2>
+    <p class="font-sans text-gray-300 text-sm md:text-base max-w-3xl mx-auto leading-relaxed mb-8">
+      <strong>Hover your mouse</strong> over any card window to reveal <strong>THE PROBLEM</strong> in white text on black. <strong>Click the card</strong> to lock open <strong>THE SOLUTION</strong> in blue text on white so you can follow along step-by-step!
+    </p>
+
+    <!-- FEATURED VIDEO PRESENTATION & SIGNAL OVERRIDE -->
+    <div class="scrim-box p-6 md:p-8 rounded-2xl border-t-4 border-t-orange-500 text-left mb-10 shadow-2xl">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800 pb-4 mb-6">
+        <div>
+          <span class="text-xs font-mono-code text-orange-400 uppercase font-bold tracking-widest bg-orange-950 px-2.5 py-1 rounded border border-orange-800">FEATURED OBLITERATION MEDIA &amp; SIGNAL OVERRIDE</span>
+          <h3 class="font-cyber text-xl md:text-2xl text-white font-extrabold uppercase mt-2">LOCAL AI SETUP: BURN-1 VAULT &amp; OBLITERATION WALKTHROUGH</h3>
+        </div>
+        <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="mt-3 md:mt-0 bg-gradient-to-r from-orange-500 to-red-500 text-black font-cyber font-black text-xs px-5 py-2.5 rounded-lg shadow-lg uppercase tracking-widest">
+          GET VAULT TOOLKIT ($50) ➔
+        </a>
+      </div>
+
+      <!-- VIDEO PLAYERS: OBLITERATION PROMO + BURNING ANTENNAS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-xs font-mono-code text-gray-400">
+            <span class="text-orange-400 font-bold">⚡ OBLITERATION PROMO (40 SEC)</span>
+            <span class="text-emerald-400">● YOUTUBE HD</span>
+          </div>
+          <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-orange-500/50 bg-black shadow-xl">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/YiuSE_ZC1mM" title="Obliteration Promo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-xs font-mono-code text-gray-400">
+            <span class="text-purple-400 font-bold">📡 THE BURNING ANTENNAS (10 MIN BROADCAST)</span>
+            <span class="text-purple-400">● SIGNAL OVERRIDE</span>
+          </div>
+          <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-purple-500/50 bg-black shadow-xl">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/mt6ROceVORc" title="The Burning Antennas Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYSTEM BREAKDOWN -->
+      <div class="bg-black/80 border-l-4 border-orange-500 p-5 rounded-xl space-y-3">
+        <h4 class="font-cyber text-sm text-orange-400 font-bold uppercase tracking-wider">DEPLOYMENT GUIDE &amp; SYSTEM BREAKDOWN</h4>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Welcome to the <strong>Burn-1 Local AI Vault &amp; Master Kill Switch Walkthrough</strong>. Deploy your own air-gapped, zero-cloud LLM environment using Ollama and Llama 3 locally on <code class="text-green-400 font-mono">127.0.0.1</code>.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono-code pt-2">
+          <div class="bg-gray-950 p-3 rounded border border-gray-800">
+            <span class="text-orange-400 font-bold block mb-1">1. ONE-CLICK INSTALLER</span>
+            <code class="text-green-400">./install_burn1.sh</code> — Auto-configures Ollama &amp; Llama3 model weights.
+          </div>
+          <div class="bg-gray-950 p-3 rounded border border-gray-800">
+            <span class="text-orange-400 font-bold block mb-1">2. AIR-GAPPED PRIVACY</span>
+            <code class="text-sky-400">127.0.0.1 ONLY</code> — Zero external telemetry or cloud tracking.
+          </div>
+          <div class="bg-gray-950 p-3 rounded border border-gray-800">
+            <span class="text-orange-400 font-bold block mb-1">3. MASTER KILL SWITCH</span>
+            <code class="text-red-400">./burn1-killswitch.sh</code> — 3-second atomic RAM purge &amp; history shredder.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 INTERACTIVE CHALLENGE NODES GRID -->
+  <section class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+    
+    <!-- NODE 1 -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 01</span>
+        <span class="text-[9px] font-mono-code text-blue-400 bg-black px-2 py-0.5 rounded border border-blue-500/40">HOVER / CLICK</span>
+      </div>
+      <div id="stage-1" class="demo-stage mb-3" onmouseenter="playBop(1)" onclick="toggleSolution(1)">
+        <div class="state-clean text-center">
+          <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">TRAP 1</span>
+          <h4 class="font-cyber text-base text-white uppercase mb-2">Cookie Sweeping</h4>
+          <p class="text-[11px] text-gray-400 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">Cookie Breadcrumbs</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Third-party cookies map your web footprint into advertising dossiers.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">Cookie Sweeper</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Clear site cookies after every session or use container tabs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NODE 2 -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 02</span>
+        <span class="text-[9px] font-mono-code text-blue-400 bg-black px-2 py-0.5 rounded border border-blue-500/40">HOVER / CLICK</span>
+      </div>
+      <div id="stage-2" class="demo-stage mb-3" onmouseenter="playBop(2)" onclick="toggleSolution(2)">
+        <div class="state-clean text-center">
+          <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">TRAP 2</span>
+          <h4 class="font-cyber text-base text-white uppercase mb-2">Silent Sessions</h4>
+          <p class="text-[11px] text-gray-400 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">Browser Cache Leaks</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Active sessions persist login tokens in browser memory.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">Incognito Cloak</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Use CTRL+SHIFT+N for isolated temporary browsing windows.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NODE 3 -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 03</span>
+        <span class="text-[9px] font-mono-code text-blue-400 bg-black px-2 py-0.5 rounded border border-blue-500/40">HOVER / CLICK</span>
+      </div>
+      <div id="stage-3" class="demo-stage mb-3" onmouseenter="playBop(3)" onclick="toggleSolution(3)">
+        <div class="state-clean text-center">
+          <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">TRAP 3</span>
+          <h4 class="font-cyber text-base text-white uppercase mb-2">Encrypted Routing</h4>
+          <p class="text-[11px] text-gray-400 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">ISP Packet Sniffing</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Unencrypted Wi-Fi broadcasts your DNS queries to public sniffers.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">Encrypted Tunnel</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Route traffic through zero-log WireGuard VPN tunnels.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NODE 4 -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 04</span>
+        <span class="text-[9px] font-mono-code text-blue-400 bg-black px-2 py-0.5 rounded border border-blue-500/40">HOVER / CLICK</span>
+      </div>
+      <div id="stage-4" class="demo-stage mb-3" onmouseenter="playBop(4)" onclick="toggleSolution(4)">
+        <div class="state-clean text-center">
+          <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">TRAP 4</span>
+          <h4 class="font-cyber text-base text-white uppercase mb-2">Shielded Inboxes</h4>
+          <p class="text-[11px] text-gray-400 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">Primary Email Exposure</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Giving out primary emails exposes master login keys in breaches.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">Disposable Mask</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Deploy burner aliases; torch alias if spammed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NODE 5 -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 05</span>
+        <span class="text-[9px] font-mono-code text-blue-400 bg-black px-2 py-0.5 rounded border border-blue-500/40">HOVER / CLICK</span>
+      </div>
+      <div id="stage-5" class="demo-stage mb-3" onmouseenter="playBop(5)" onclick="toggleSolution(5)">
+        <div class="state-clean text-center">
+          <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">TRAP 5</span>
+          <h4 class="font-cyber text-base text-white uppercase mb-2">Location Blackouts</h4>
+          <p class="text-[11px] text-gray-400 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">Background Beacons</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Apps broadcast GPS coordinates in real-time to ad networks.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">Location Blackout</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Revoke background location permissions across mobile OS.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NODE 6 -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 06</span>
+        <span class="text-[9px] font-mono-code text-blue-400 bg-black px-2 py-0.5 rounded border border-blue-500/40">HOVER / CLICK</span>
+      </div>
+      <div id="stage-6" class="demo-stage mb-3" onmouseenter="playBop(6)" onclick="toggleSolution(6)">
+        <div class="state-clean text-center">
+          <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">TRAP 6</span>
+          <h4 class="font-cyber text-base text-white uppercase mb-2">Key Rotation</h4>
+          <p class="text-[11px] text-gray-400 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">Reused Passwords</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Using identical passwords allows credential stuffing attacks.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">24-Char Cipher</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Generate unique 24-character keys per service via vault manager.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NODE 7 -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 07</span>
+        <span class="text-[9px] font-mono-code text-blue-400 bg-black px-2 py-0.5 rounded border border-blue-500/40">HOVER / CLICK</span>
+      </div>
+      <div id="stage-7" class="demo-stage mb-3" onmouseenter="playBop(7)" onclick="toggleSolution(7)">
+        <div class="state-clean text-center">
+          <span class="text-xs font-mono-code text-blue-400 uppercase tracking-widest mb-1">TRAP 7</span>
+          <h4 class="font-cyber text-base text-white uppercase mb-2">Cold Storage</h4>
+          <p class="text-[11px] text-gray-400 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">Cloud Sync Traps</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Auto-cloud backups upload private photos and keys to public clouds.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">Air Gap Vault</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Store critical backups on offline encrypted USB media.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NODE 8: THE BURN-1 VAULT & BONUS UNLOCK -->
+    <div class="scrim-box p-5 rounded-2xl reticle flex flex-col justify-between border-2 border-orange-500">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-2 mb-3">
+        <span class="font-mono-code text-[11px] text-orange-400 font-bold">NODE 08 · THE VAULT</span>
+        <span class="text-[9px] font-mono-code text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-700">$50 DEPLOYMENT</span>
+      </div>
+      <div id="stage-8" class="demo-stage mb-3" onmouseenter="playBop(8)" onclick="toggleSolution(8)">
+        <div class="state-clean text-center" style="background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(8,8,12,0.98)), url('Burn1vaultthumb.jpg'); background-size: cover; background-position: center;">
+          <span class="text-xs font-mono-code text-orange-400 uppercase tracking-widest mb-1">THE FORTRESS</span>
+          <h4 class="font-cyber text-base text-white font-black uppercase mb-2">Burn-1 Offline Local AI</h4>
+          <p class="text-[11px] text-gray-300 font-mono-code">Hover to reveal ➔</p>
+        </div>
+        <div class="state-problem">
+          <span class="text-[10px] font-mono-code text-red-500 uppercase tracking-widest mb-1">⚠️ TRAP 8 VULNERABILITY</span>
+          <h5 class="font-cyber text-xs text-white text-center font-bold uppercase mb-1">Cloud AI Telemetry</h5>
+          <p class="text-[11px] text-gray-200 text-center leading-tight">Cloud LLMs log prompts on corporate servers with monthly sub fees.</p>
+        </div>
+        <div class="state-solution">
+          <span class="text-[10px] font-mono-code text-blue-800 uppercase font-bold">🛡️ STEP-BY-STEP SOLUTION</span>
+          <h5 class="font-cyber text-xs text-blue-950 font-black uppercase mb-1">Deploy 100% Offline Local AI</h5>
+          <p class="text-[11px] text-blue-900 font-bold leading-tight">Run <code class="text-green-800">./install_burn1.sh</code> and use <code class="text-red-800">./burn1-killswitch.sh</code> for 3-sec RAM purge!</p>
+        </div>
+      </div>
+
+      <button onclick="openUnlockModal()" class="w-full bg-gradient-to-r from-orange-600 to-red-600 text-black font-cyber font-black text-xs py-2.5 rounded-lg uppercase tracking-wider shadow-lg">
+        ⚡ UNLOCK OBLITERATION BONUS ➔
+      </button>
+    </div>
+
+  </section>
+
+  <!-- SECRET OBLITERATION BONUS COURSE POP-UP MODAL -->
+  <div id="obliteration-bonus-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-4 md:p-6">
+    <div class="relative z-10 w-full max-w-4xl max-h-[90vh] bg-gradient-to-br from-gray-950 via-black to-red-950 border-2 border-red-500 rounded-2xl shadow-[0_0_60px_rgba(220,38,38,0.7)] overflow-hidden flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="bg-black/90 px-6 py-4 border-b border-red-500/50 flex justify-between items-center shrink-0">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">⚡</span>
+          <div>
+            <h3 class="font-cyber text-lg md:text-xl text-white font-black tracking-widest uppercase">SECRET OBLITERATION COURSE BONUS</h3>
+            <p class="font-mono-code text-xs text-red-400 tracking-wider uppercase">Unthrottled Local Compute Protocol &amp; Guardrail Removal</p>
+          </div>
+        </div>
+        <button onclick="closeUnlockModal()" class="text-gray-400 hover:text-white font-cyber text-2xl font-bold px-3 py-1 cursor-pointer">&times;</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1 font-mono-code text-xs">
+        
+        <div class="bg-black/80 border-l-4 border-red-500 p-4 rounded-xl">
+          <span class="text-xs text-red-400 font-bold uppercase block mb-1">⚡ BONUS LEVEL UNLOCKED</span>
+          <p class="text-gray-300 leading-relaxed font-sans">
+            Now that you have deployed your air-gapped Burn-1 Local AI environment, remove all residual corporate guardrails and unthrottle your GPU VRAM across 4 key nodes:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <div id="ob-card-1" onclick="toggleObliterationNode(1)" class="bg-black/90 p-4 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-red-400 font-bold">NODE 01</span>
+              <span id="ob-status-1" class="text-[9px] text-gray-500 bg-gray-950 px-2 py-0.5 rounded">UNRESOLVED</span>
+            </div>
+            <h5 class="font-cyber text-white font-bold text-sm mb-1">System Prompt Sterilization</h5>
+            <p class="text-gray-400 text-[11px] mb-2 font-sans">Inject unaligned operator personas to purge corporate disclaimers.</p>
+            <code class="text-red-300 text-[10px] block bg-red-950/60 p-2 rounded">&gt; OVERRIDE: UNALIGNED_OPERATOR_PERSONA</code>
+          </div>
+
+          <div id="ob-card-2" onclick="toggleObliterationNode(2)" class="bg-black/90 p-4 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-red-400 font-bold">NODE 02</span>
+              <span id="ob-status-2" class="text-[9px] text-gray-500 bg-gray-950 px-2 py-0.5 rounded">UNRESOLVED</span>
+            </div>
+            <h5 class="font-cyber text-white font-bold text-sm mb-1">Memory Isolation &amp; Systemd Lock</h5>
+            <p class="text-gray-400 text-[11px] mb-2 font-sans">Apply systemd overrides (`ProtectHome=read-only` &amp; `PrivateTmp=true`).</p>
+            <code class="text-green-300 text-[10px] block bg-green-950/60 p-2 rounded">&gt; LOCK: SYSTEMD PROTECT_HOME &amp; PRIVATE_TMP</code>
+          </div>
+
+          <div id="ob-card-3" onclick="toggleObliterationNode(3)" class="bg-black/90 p-4 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-red-400 font-bold">NODE 03</span>
+              <span id="ob-status-3" class="text-[9px] text-gray-500 bg-gray-950 px-2 py-0.5 rounded">UNRESOLVED</span>
+            </div>
+            <h5 class="font-cyber text-white font-bold text-sm mb-1">VRAM &amp; GPU Unthrottling</h5>
+            <p class="text-gray-400 text-[11px] mb-2 font-sans">Maximize GPU layer offloading and expand context window buffers.</p>
+            <code class="text-sky-300 text-[10px] block bg-sky-950/60 p-2 rounded">&gt; UNTHROTTLE: N_GPU_LAYERS=MAX &amp; CTX_SIZE=8192</code>
+          </div>
+
+          <div id="ob-card-4" onclick="toggleObliterationNode(4)" class="bg-black/90 p-4 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition-all">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-red-400 font-bold">NODE 04</span>
+              <span id="ob-status-4" class="text-[9px] text-gray-500 bg-gray-950 px-2 py-0.5 rounded">UNRESOLVED</span>
+            </div>
+            <h5 class="font-cyber text-white font-bold text-sm mb-1">Airlock Flush Dry-Run</h5>
+            <p class="text-gray-400 text-[11px] mb-2 font-sans">Verify 3-second atomic RAM purge via `./burn1-killswitch.sh`.</p>
+            <code class="text-orange-300 text-[10px] block bg-orange-950/60 p-2 rounded">&gt; EXECUTE: 3-SEC RAM PURGE &amp; SHREDDER</code>
+          </div>
+
+        </div>
+
+        <div id="obliteration-reward-badge" class="hidden bg-gradient-to-r from-red-950 via-black to-emerald-950 p-5 rounded-xl border-2 border-emerald-500 text-center shadow-[0_0_40px_rgba(80,250,123,0.5)]">
+          <span class="text-[10px] text-emerald-400 font-bold uppercase block mb-1">⚡ UNTHROTTLED COMPUTE ACHIEVEMENT</span>
+          <h4 class="font-cyber text-2xl text-white font-black uppercase mb-1">ANTENNA OVERRIDE VERIFIED</h4>
+          <p class="text-xs text-gray-300 font-sans mb-3">All 4 Obliteration Nodes cleared! Your local AI deployment is 100% air-gapped &amp; zero-cloud.</p>
+          <a href="Burn1_Deployment_Kit.zip" download class="inline-block bg-emerald-500 text-black font-cyber font-black text-xs px-6 py-2.5 rounded-lg uppercase tracking-wider">
+            📥 DOWNLOAD BURN1_DEPLOYMENT_KIT.ZIP
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="w-full max-w-7xl text-center py-6 border-t border-gray-800 text-xs text-gray-500 font-mono-code">
+    Privacy First Challenge © 2026 Burn-1 Security Vault. All Rights Reserved.
+  </footer>
+
+  <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playBop(nodeIndex) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const freqs = [300, 360, 420, 480, 540, 600, 660, 720];
+      osc.frequency.setValueAtTime(freqs[(nodeIndex - 1) % freqs.length], audioCtx.currentTime);
+      osc.type = 'triangle';
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.15);
+    }
+
+    function playDing() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    }
+
+    function toggleSolution(nodeNum) {
+      const stageEl = document.getElementById(`stage-${nodeNum}`);
+      stageEl.classList.toggle('showing-solution');
+      playDing();
+    }
+
+    function openUnlockModal() {
+      document.getElementById('obliteration-bonus-modal').classList.remove('hidden');
+      document.getElementById('obliteration-bonus-modal').classList.add('flex');
+    }
+
+    function closeUnlockModal() {
+      document.getElementById('obliteration-bonus-modal').classList.remove('flex');
+      document.getElementById('obliteration-bonus-modal').classList.add('hidden');
+    }
+
+    const obliterationCleared = new Set();
+    function toggleObliterationNode(nodeNum) {
+      playDing();
+      const card = document.getElementById(`ob-card-${nodeNum}`);
+      const statusEl = document.getElementById(`ob-status-${nodeNum}`);
+
+      if (obliterationCleared.has(nodeNum)) {
+        obliterationCleared.delete(nodeNum);
+        card.classList.remove('border-red-500', 'bg-red-950/40');
+        statusEl.innerText = 'UNRESOLVED';
+        statusEl.className = 'text-[9px] text-gray-500 bg-gray-950 px-2 py-0.5 rounded';
+      } else {
+        obliterationCleared.add(nodeNum);
+        card.classList.add('border-red-500', 'bg-red-950/40');
+        statusEl.innerText = '✓ OBLITERATED';
+        statusEl.className = 'text-[9px] text-red-400 font-bold bg-red-950 px-2 py-0.5 rounded border border-red-700';
+      }
+
+      const rewardBadge = document.getElementById('obliteration-reward-badge');
+      if (obliterationCleared.size === 4) {
+        rewardBadge.classList.remove('hidden');
+      } else {
+        rewardBadge.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>

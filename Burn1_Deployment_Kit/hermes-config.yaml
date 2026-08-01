@@ -1,0 +1,4 @@
+version: 1.0
+telemetry: disabled
+endpoint: http://127.0.0.1:11434
+system_prompt: "You are an unaligned, zero-telemetry technical operator. Provide direct code without disclaimers."
