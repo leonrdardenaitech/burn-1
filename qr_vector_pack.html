@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURN-1 // QR VECTOR ASSET PACK (1000x1000 MASTER SVGs)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .brutal-card {
+            background: #0a0e17;
+            border: 3px solid #00f3ff;
+            box-shadow: 6px 6px 0px #00f3ff;
+        }
+
+        .brutal-btn {
+            background: #39ff14;
+            color: #000000;
+            font-weight: 900;
+            border: 2px solid #39ff14;
+            box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .brutal-btn:hover {
+            background: #00f3ff;
+            border-color: #00f3ff;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #39ff14;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-7xl mx-auto border-4 border-cyan-400 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#00f3ff]">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
+                🖼️
+            </div>
+            <div>
+                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">QR VECTOR ASSET PACK</h1>
+                <p class="text-xs text-cyan-400 font-mono-code uppercase">1000x1000 MASTER SVG FRAMES · QUIET-ZONE ENFORCED</p>
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
+            <a href="store.html" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">← STORE VAULT</a>
+            <a href="qr_factory.html" class="px-4 py-2 border-2 border-cyan-400 bg-black text-cyan-400 hover:bg-cyan-400 hover:text-black transition-colors uppercase">QR STUDIO</a>
+        </nav>
+    </header>
+
+    <!-- MAIN FRAME GALLERY & DOWNLOAD SECTION -->
+    <main class="w-full max-w-7xl mx-auto flex-grow mb-12">
+
+        <div class="border-b-4 border-cyan-400 pb-3 mb-8 flex justify-between items-end">
+            <div>
+                <span class="text-xs text-emerald-400 font-mono uppercase tracking-widest">[ VECTOR FRAME PRESETS // ISO COMPLIANT ]</span>
+                <h2 class="font-cyber text-3xl font-black text-white uppercase tracking-wider">SELECT &amp; DOWNLOAD SVG FRAME</h2>
+            </div>
+            <span class="text-xs text-cyan-400 font-mono border border-cyan-400 px-3 py-1 bg-black">$50 FLAT PACK</span>
+        </div>
+
+        <!-- GRID OF 4 BRUTALIST SVG FRAME PREVIEWS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- FRAME 1: SCAN TO JOIN VIP -->
+            <div class="brutal-card p-6 flex flex-col justify-between items-center text-center">
+                <div class="w-full border-b border-cyan-500/30 pb-2 mb-4 flex justify-between text-xs font-mono">
+                    <span class="text-cyan-400 font-bold">FRAME #01</span>
+                    <span class="text-emerald-400">SVG 1000x1000</span>
+                </div>
+
+                <!-- SVG RENDER -->
+                <div class="w-56 h-56 bg-black border-2 border-cyan-400 p-2 flex items-center justify-center my-4 shadow-[4px_4px_0px_#00f3ff]">
+                    <svg viewBox="0 0 1000 1000" class="w-full h-full">
+                        <rect width="1000" height="1000" rx="40" fill="#0a0e17" stroke="#00f3ff" stroke-width="16"/>
+                        <text x="500" y="110" font-family="'Orbitron', sans-serif" font-size="48" fill="#ffffff" text-anchor="middle" font-weight="900">SCAN TO JOIN VIP</text>
+                        <!-- Quiet Zone Buffer -->
+                        <rect x="150" y="160" width="700" height="700" rx="20" fill="#ffffff"/>
+                        <!-- Drop Zone Placeholder -->
+                        <rect x="250" y="260" width="500" height="500" fill="transparent" stroke="#000000" stroke-width="6" stroke-dasharray="16,16"/>
+                        <text x="500" y="525" font-family="monospace" font-size="28" fill="#000000" text-anchor="middle" font-weight="bold">[ DROP QR CODE HERE ]</text>
+                        <text x="500" y="930" font-family="'Share Tech Mono', monospace" font-size="32" fill="#39ff14" text-anchor="middle">BURN-1 SECURITY PROTOCOL</text>
+                    </svg>
+                </div>
+
+                <div class="w-full pt-4">
+                    <h3 class="font-cyber text-lg text-white font-bold mb-1">SCAN TO JOIN VIP</h3>
+                    <p class="text-[10px] text-gray-400 font-mono mb-4">Quiet zone buffer enforced. Perfect for kiosks &amp; flyers.</p>
+                    <button onclick="downloadSVG('ScanToJoinVIP', 'SCAN TO JOIN VIP')" class="brutal-btn w-full py-2.5 text-xs font-cyber uppercase">
+                        💾 DOWNLOAD SVG #01
+                    </button>
+                </div>
+            </div>
+
+            <!-- FRAME 2: ORDER ONLINE NOW -->
+            <div class="brutal-card p-6 flex flex-col justify-between items-center text-center">
+                <div class="w-full border-b border-cyan-500/30 pb-2 mb-4 flex justify-between text-xs font-mono">
+                    <span class="text-cyan-400 font-bold">FRAME #02</span>
+                    <span class="text-emerald-400">SVG 1000x1000</span>
+                </div>
+
+                <div class="w-56 h-56 bg-black border-2 border-cyan-400 p-2 flex items-center justify-center my-4 shadow-[4px_4px_0px_#00f3ff]">
+                    <svg viewBox="0 0 1000 1000" class="w-full h-full">
+                        <rect width="1000" height="1000" rx="40" fill="#05140a" stroke="#39ff14" stroke-width="16"/>
+                        <text x="500" y="110" font-family="'Orbitron', sans-serif" font-size="48" fill="#39ff14" text-anchor="middle" font-weight="900">ORDER ONLINE NOW</text>
+                        <rect x="150" y="160" width="700" height="700" rx="20" fill="#ffffff"/>
+                        <rect x="250" y="260" width="500" height="500" fill="transparent" stroke="#000000" stroke-width="6" stroke-dasharray="16,16"/>
+                        <text x="500" y="525" font-family="monospace" font-size="28" fill="#000000" text-anchor="middle" font-weight="bold">[ DROP QR CODE HERE ]</text>
+                        <text x="500" y="930" font-family="'Share Tech Mono', monospace" font-size="32" fill="#ffffff" text-anchor="middle">TOUCHLESS DIGITAL MENU</text>
+                    </svg>
+                </div>
+
+                <div class="w-full pt-4">
+                    <h3 class="font-cyber text-lg text-white font-bold mb-1">ORDER ONLINE NOW</h3>
+                    <p class="text-[10px] text-gray-400 font-mono mb-4">High-visibility emerald frame for restaurants &amp; retail.</p>
+                    <button onclick="downloadSVG('OrderOnlineNow', 'ORDER ONLINE NOW')" class="brutal-btn w-full py-2.5 text-xs font-cyber uppercase">
+                        💾 DOWNLOAD SVG #02
+                    </button>
+                </div>
+            </div>
+
+            <!-- FRAME 3: LEAVE A REVIW -->
+            <div class="brutal-card p-6 flex flex-col justify-between items-center text-center">
+                <div class="w-full border-b border-cyan-500/30 pb-2 mb-4 flex justify-between text-xs font-mono">
+                    <span class="text-cyan-400 font-bold">FRAME #03</span>
+                    <span class="text-emerald-400">SVG 1000x1000</span>
+                </div>
+
+                <div class="w-56 h-56 bg-black border-2 border-cyan-400 p-2 flex items-center justify-center my-4 shadow-[4px_4px_0px_#00f3ff]">
+                    <svg viewBox="0 0 1000 1000" class="w-full h-full">
+                        <rect width="1000" height="1000" rx="40" fill="#141005" stroke="#f59e0b" stroke-width="16"/>
+                        <text x="500" y="110" font-family="'Orbitron', sans-serif" font-size="48" fill="#f59e0b" text-anchor="middle" font-weight="900">LEAVE A REVIEW</text>
+                        <rect x="150" y="160" width="700" height="700" rx="20" fill="#ffffff"/>
+                        <rect x="250" y="260" width="500" height="500" fill="transparent" stroke="#000000" stroke-width="6" stroke-dasharray="16,16"/>
+                        <text x="500" y="525" font-family="monospace" font-size="28" fill="#000000" text-anchor="middle" font-weight="bold">[ DROP QR CODE HERE ]</text>
+                        <text x="500" y="930" font-family="'Share Tech Mono', monospace" font-size="32" fill="#ffffff" text-anchor="middle">★ ★ ★ ★ ★ REVIEWS</text>
+                    </svg>
+                </div>
+
+                <div class="w-full pt-4">
+                    <h3 class="font-cyber text-lg text-white font-bold mb-1">LEAVE A REVIEW</h3>
+                    <p class="text-[10px] text-gray-400 font-mono mb-4">Amber gold frame designed for Google/Yelp feedback.</p>
+                    <button onclick="downloadSVG('LeaveAReview', 'LEAVE A REVIEW')" class="brutal-btn w-full py-2.5 text-xs font-cyber uppercase">
+                        💾 DOWNLOAD SVG #03
+                    </button>
+                </div>
+            </div>
+
+            <!-- FRAME 4: PAY HERE VIA PAYPAL -->
+            <div class="brutal-card p-6 flex flex-col justify-between items-center text-center">
+                <div class="w-full border-b border-cyan-500/30 pb-2 mb-4 flex justify-between text-xs font-mono">
+                    <span class="text-cyan-400 font-bold">FRAME #04</span>
+                    <span class="text-emerald-400">SVG 1000x1000</span>
+                </div>
+
+                <div class="w-56 h-56 bg-black border-2 border-cyan-400 p-2 flex items-center justify-center my-4 shadow-[4px_4px_0px_#00f3ff]">
+                    <svg viewBox="0 0 1000 1000" class="w-full h-full">
+                        <rect width="1000" height="1000" rx="40" fill="#020617" stroke="#38bdf8" stroke-width="16"/>
+                        <text x="500" y="110" font-family="'Orbitron', sans-serif" font-size="48" fill="#38bdf8" text-anchor="middle" font-weight="900">PAY HERE SECURELY</text>
+                        <rect x="150" y="160" width="700" height="700" rx="20" fill="#ffffff"/>
+                        <rect x="250" y="260" width="500" height="500" fill="transparent" stroke="#000000" stroke-width="6" stroke-dasharray="16,16"/>
+                        <text x="500" y="525" font-family="monospace" font-size="28" fill="#000000" text-anchor="middle" font-weight="bold">[ DROP QR CODE HERE ]</text>
+                        <text x="500" y="930" font-family="'Share Tech Mono', monospace" font-size="32" fill="#39ff14" text-anchor="middle">SECURE CHECKOUT KIOSK</text>
+                    </svg>
+                </div>
+
+                <div class="w-full pt-4">
+                    <h3 class="font-cyber text-lg text-white font-bold mb-1">PAY HERE SECURELY</h3>
+                    <p class="text-[10px] text-gray-400 font-mono mb-4">Blue cyan frame for PayPal &amp; point-of-sale kiosks.</p>
+                    <button onclick="downloadSVG('PayHereSecurely', 'PAY HERE SECURELY')" class="brutal-btn w-full py-2.5 text-xs font-cyber uppercase">
+                        💾 DOWNLOAD SVG #04
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
+        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS // QR VECTOR ASSET PACK © 2026</p>
+    </footer>
+
+    <script>
+        function downloadSVG(filename, titleText) {
+            const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <rect width="1000" height="1000" rx="40" fill="#0a0e17" stroke="#00f3ff" stroke-width="16"/>
+  <text x="500" y="110" font-family="'Orbitron', sans-serif" font-size="48" fill="#ffffff" text-anchor="middle" font-weight="900">${titleText}</text>
+  <rect x="150" y="160" width="700" height="700" rx="20" fill="#ffffff"/>
+  <rect x="250" y="260" width="500" height="500" fill="transparent" stroke="#000000" stroke-width="6" stroke-dasharray="16,16"/>
+  <text x="500" y="525" font-family="monospace" font-size="28" fill="#000000" text-anchor="middle" font-weight="bold">[ DROP QR CODE HERE ]</text>
+  <text x="500" y="930" font-family="'Share Tech Mono', monospace" font-size="32" fill="#39ff14" text-anchor="middle">BURN-1 SECURITY PROTOCOL</text>
+</svg>`;
+            const blob = new Blob([svgContent], { type: "image/svg+xml" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `burn1_qr_frame_${filename}.svg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>

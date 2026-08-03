@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURN-1 // BRAND BUILDER UI KIT (MAD-LIBS CODE TEMPLATE)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .brutal-card {
+            background: #0a0e17;
+            border: 3px solid #00f3ff;
+            box-shadow: 6px 6px 0px #00f3ff;
+        }
+
+        .brutal-btn {
+            background: #39ff14;
+            color: #000000;
+            font-weight: 900;
+            border: 2px solid #39ff14;
+            box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .brutal-btn:hover {
+            background: #00f3ff;
+            border-color: #00f3ff;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #39ff14;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-7xl mx-auto border-4 border-cyan-400 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#00f3ff]">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
+                📦
+            </div>
+            <div>
+                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">BRAND BUILDER UI KIT</h1>
+                <p class="text-xs text-cyan-400 font-mono-code uppercase">ZERO-CODE DIY TEMPLATE · DRAG-AND-DROP NETLIFY HOSTING</p>
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
+            <a href="store.html" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">← STORE VAULT</a>
+        </nav>
+    </header>
+
+    <!-- MAIN TEMPLATE CODE DEMO -->
+    <main class="w-full max-w-7xl mx-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+
+        <!-- LEFT COLUMN: CODE INSIGHT (7 COLS) -->
+        <div class="lg:col-span-7 brutal-card p-6 space-y-6">
+            <div class="border-b-2 border-cyan-400 pb-3 flex justify-between items-center">
+                <h2 class="font-cyber text-xl font-bold text-white uppercase">1. "MAD-LIBS" HTML SNIPPET</h2>
+                <span class="text-xs text-emerald-400 font-mono">[ FOOLPROOF CODE ]</span>
+            </div>
+
+            <p class="text-xs text-gray-300 font-mono-code leading-relaxed">
+                This code template is structured with emoji instructions so anyone can edit text without breaking layout syntax:
+            </p>
+
+            <pre class="bg-black border-2 border-cyan-400 p-4 font-mono-code text-xs text-cyan-300 overflow-x-auto rounded leading-relaxed select-text"><code>&lt;!-- =======================================================
+    👇 1. THE MAIN HERO SECTION 👇
+    Change the text inside the quotes. DO NOT delete the &lt;tags&gt;.
+    ======================================================= --&gt;
+
+&lt;section class="hero-section"&gt;
+   
+   &lt;!-- ✍️ CHANGE YOUR HEADLINE HERE: --&gt;
+   &lt;h1 class="hero-title"&gt;
+       Build Your Brand in Record Time
+   &lt;/h1&gt;
+
+   &lt;!-- ✍️ CHANGE YOUR SUBTITLE HERE: --&gt;
+   &lt;p class="hero-subtitle"&gt;
+       The ultimate zero-code template for modern creators.
+   &lt;/p&gt;
+
+   &lt;!-- 🔗 CHANGE YOUR BUTTON LINK HERE: --&gt;
+   &lt;a href="https://paypal.me/..." class="primary-button"&gt;
+       Buy Now for $50
+   &lt;/a&gt;
+
+&lt;/section&gt;</code></pre>
+
+            <div class="pt-4 border-t border-cyan-500/30 flex justify-between items-center">
+                <span class="text-xs font-mono text-emerald-400 uppercase font-bold">✓ NETLIFY DROP COMPATIBLE</span>
+                <button onclick="copyCode()" class="brutal-btn px-6 py-2 text-xs font-cyber uppercase">
+                    📋 COPY HTML TEMPLATE
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: DEPLOYMENT GUIDE (5 COLS) -->
+        <div class="lg:col-span-5 brutal-card p-6 flex flex-col justify-between">
+            <div>
+                <div class="border-b-2 border-cyan-400 pb-3 mb-6 flex justify-between items-center">
+                    <h2 class="font-cyber text-xl font-bold text-white uppercase">2. 3-STEP DEPLOYMENT</h2>
+                    <span class="text-xs text-cyan-400 font-mono">ZERO FTP NEEDED</span>
+                </div>
+
+                <ol class="space-y-4 text-xs font-mono text-gray-300">
+                    <li class="p-3 bg-black border border-cyan-500/40 rounded">
+                        <strong class="text-cyan-400 block mb-1">STEP 1: UNZIP &amp; EDIT TEXT</strong>
+                        Open <code class="text-emerald-400">index.html</code> in Notepad or VS Code and replace the "Mad Libs" placeholder text.
+                    </li>
+                    <li class="p-3 bg-black border border-cyan-500/40 rounded">
+                        <strong class="text-cyan-400 block mb-1">STEP 2: DRAG &amp; DROP TO NETLIFY</strong>
+                        Go to <code class="text-emerald-400">app.netlify.com/drop</code> and drag your extracted folder directly into the browser window.
+                    </li>
+                    <li class="p-3 bg-black border border-cyan-500/40 rounded">
+                        <strong class="text-cyan-400 block mb-1">STEP 3: LINK CUSTOM DOMAIN</strong>
+                        Attach your custom domain (e.g. <code class="text-emerald-400">yourbrand.com</code>) using Netlify's 1-click DNS setting.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="pt-6 border-t-2 border-cyan-400 mt-6">
+                <a href="store.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    GET FULL UI KIT ($50) &rarr;
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
+        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS // BRAND BUILDER UI KIT © 2026</p>
+    </footer>
+
+    <script>
+        function copyCode() {
+            const codeText = `<!-- =======================================================
+    👇 1. THE MAIN HERO SECTION 👇
+    Change the text inside the quotes. DO NOT delete the <tags>.
+    ======================================================= -->
+
+<section class="hero-section">
+   
+   <!-- ✍️ CHANGE YOUR HEADLINE HERE: -->
+   <h1 class="hero-title">
+       Build Your Brand in Record Time
+   </h1>
+
+   <!-- ✍️ CHANGE YOUR SUBTITLE HERE: -->
+   <p class="hero-subtitle">
+       The ultimate zero-code template for modern creators.
+   </p>
+
+   <!-- 🔗 CHANGE YOUR BUTTON LINK HERE: -->
+   <a href="https://paypal.me/..." class="primary-button">
+       Buy Now for $50
+   </a>
+
+</section>`;
+            navigator.clipboard.writeText(codeText);
+            alert("HTML Snippet Copied to Clipboard!");
+        }
+    </script>
+</body>
+</html>
