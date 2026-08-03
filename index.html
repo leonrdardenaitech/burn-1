@@ -3,29 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BURN-1 | Central Hub & Cyber Directory</title>
+  <title>BURN-1 | Central Hub &amp; Cyber Directory</title>
   <meta name="description" content="BURN-1 Central Hub, Burner Sites, B2B Kiosk Management, and Enterprise Cyber Directory.">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <script>
-    (function() {
-      const host = window.location.hostname.toLowerCase();
-      if (host.startsWith('slawdawg') || host.includes('slawdawg')) {
-        window.location.href = '/slawdawgs.html';
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'hazard-orange': '#ff5722',
+            'neo-yellow': '#facc15',
+            'neo-sky': '#0284c7',
+            'neo-earth': '#fef3c7',
+            'cyber-dark': '#0a0a0a',
+          }
+        }
       }
-      if (host.includes('bowdega') || host.includes('barber')) {
-        window.location.href = '/bowdega.html';
-      }
-      if (host.includes('malwdarazor') || host.includes('mal')) {
-        window.location.href = '/malwdarazor.html';
-      }
-    })();
+    }
   </script>
 
   <style>
@@ -36,6 +39,7 @@
     }
     .font-cyber { font-family: 'Orbitron', sans-serif; }
     .font-tech { font-family: 'Share Tech Mono', monospace; }
+    .font-brutal { font-family: 'Space Grotesk', sans-serif; }
     
     /* Fixed Parallax Background Effect */
     .parallax-bg {
@@ -67,17 +71,75 @@
     .reticle-box::before { content: '+'; position: absolute; top: -6px; left: -6px; color: #ff4500; font-size: 14px; }
     .reticle-box::after { content: '+'; position: absolute; bottom: -6px; right: -6px; color: #ff4500; font-size: 14px; }
 
+    /* ============================================================ */
+    /* MODE 1: BUSINESS DAY MODE WITH DAYBACKGROUND.PNG (SUN TOP-RIGHT)*/
+    /* ============================================================ */
+    body.day-mode {
+      background-image: linear-gradient(rgba(248, 250, 252, 0.25), rgba(241, 245, 249, 0.35)), url('daybackground.png');
+      background-size: cover;
+      background-position: right top;
+      background-attachment: fixed;
+      color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    body.day-mode .neo-box {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border: 4px solid #0f172a;
+      box-shadow: 8px 8px 0px #0f172a;
+      transition: all 0.2s ease;
+    }
+
+    body.day-mode .neo-box:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 12px 12px 0px #0f172a;
+    }
+
+    body.day-mode .neo-btn-primary {
+      background-color: #0284c7;
+      color: #ffffff;
+      border: 3px solid #0f172a;
+      box-shadow: 5px 5px 0px #0f172a;
+      font-weight: 800;
+    }
+
+    body.day-mode .neo-btn-primary:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0px #0f172a;
+      background-color: #0369a1;
+    }
+
+    body.day-mode .neo-badge {
+      background-color: #fef08a;
+      color: #854d0e;
+      border: 2px solid #0f172a;
+      box-shadow: 3px 3px 0px #0f172a;
+    }
+
+    /* Hidden Subtle Triangle Button Styling */
+    .hidden-triangle-btn {
+      opacity: 0.35;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .hidden-triangle-btn:hover {
+      opacity: 1;
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 12px #ff5722);
+    }
+
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background: #ff4500; border-radius: 2px; }
   </style>
 </head>
-<body class="bg-black text-gray-200 min-h-screen flex flex-col justify-between overflow-x-hidden relative select-none">
+<body id="main-body" class="cyber-mode bg-black text-gray-200 min-h-screen flex flex-col justify-between overflow-x-hidden relative select-none transition-colors duration-500">
 
   <!-- ========================================== -->
   <!-- 1. FIXED PARALLAX CELL PHONES FALLING BG   -->
   <!-- ========================================== -->
-  <div class="parallax-bg">
+  <div id="parallax-bg-container" class="parallax-bg">
     <img id="bg-gif-loop" src="assets/Cell_phones_falling_1.gif" alt="Cell Phones Falling Sequential" class="w-full h-full object-cover opacity-50">
     <canvas id="ember-canvas" class="absolute inset-0 w-full h-full opacity-40 mix-blend-screen"></canvas>
     <div class="absolute inset-0 cyber-grid-overlay opacity-80"></div>
@@ -85,18 +147,28 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- 2. TOP HUD NAVIGATION                      -->
+  <!-- 2. TOP HUD NAVIGATION & MODE SWITCHER      -->
   <!-- ========================================== -->
-  <header class="relative z-40 burner-scrim border-b border-orange-950/80 px-6 py-3 sticky top-0">
+  <header id="navbar" class="relative z-40 burner-scrim border-b border-orange-950/80 px-6 py-3 sticky top-0 transition-colors duration-500">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
       
       <a href="https://burn-1.com" class="flex items-center gap-3">
         <div class="w-7 h-7 rounded bg-gradient-to-tr from-red-600 via-orange-500 to-yellow-400 flex items-center justify-center font-cyber font-black text-black text-sm shadow-lg shadow-orange-600/30">🔥</div>
         <div class="flex flex-col">
-          <span class="font-cyber font-extrabold text-lg tracking-wider text-white">BURN-1<span class="text-orange-500">.COM</span></span>
-          <span class="font-tech text-[10px] text-orange-400/70 tracking-widest uppercase">BURNER SITE PROTOCOL v4.0</span>
+          <span id="brand-title-text" class="font-cyber font-extrabold text-lg tracking-wider text-white">BURN-1<span class="text-orange-500">.COM</span></span>
+          <span id="brand-sub-text" class="font-tech text-[10px] text-orange-400/70 tracking-widest uppercase">BURNER SITE PROTOCOL v4.0</span>
         </div>
       </a>
+
+      <!-- MODE SWITCHER TOGGLE BUTTON -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleMode('day')" id="btn-mode-day" class="px-3.5 py-1.5 rounded font-tech text-xs uppercase border border-slate-700 bg-slate-900 text-slate-300 hover:text-white transition-all">
+          ☀️ Business Day Mode
+        </button>
+        <button onclick="toggleMode('cyber')" id="btn-mode-cyber" class="px-3.5 py-1.5 rounded font-tech text-xs uppercase border border-orange-500 bg-orange-600 text-white shadow-lg shadow-orange-600/30 font-bold transition-all">
+          🌙 Cyber Mode (Default)
+        </button>
+      </div>
 
       <div class="flex items-center gap-3">
         <a href="privacy_first_protocol.html" class="bg-orange-950/80 hover:bg-orange-900 border border-orange-500/80 text-orange-400 px-3.5 py-1.5 rounded font-tech text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-orange-950/40">
@@ -114,223 +186,347 @@
   </header>
 
   <!-- ========================================== -->
-  <!-- 3. MAIN PARALLAX SCROLL CONTENT            -->
+  <!-- MODE 1: BUSINESS DAY MODE CONTAINER        -->
   <!-- ========================================== -->
-  <main class="relative z-10 max-w-7xl mx-auto px-6 py-10 flex-grow w-full space-y-16">
+  <div id="day-mode-container" class="relative z-10 max-w-7xl mx-auto px-6 py-12 w-full space-y-12 hidden">
     
-    <!-- Hero Headline -->
-    <div class="text-center max-w-4xl mx-auto pt-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/80 border border-orange-500/40 text-orange-400 text-[11px] font-tech mb-4 tracking-widest uppercase">
-        <span>⚡ PRIVACY-FIRST BURNER SITES & B2B KIOSK PROTOCOL</span>
-      </div>
-      <h1 class="font-cyber text-4xl md:text-6xl font-black tracking-tight text-white mb-4">
-        BURNER SITE <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400">PROTOCOL</span>
+    <!-- HERO HEADER -->
+    <div class="text-center max-w-4xl mx-auto">
+      <span class="neo-badge px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider inline-block mb-4">
+        ⚡ STEP-BY-STEP INTAKE KIOSK · $50 FLAT RATE
+      </span>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight mb-6 leading-none text-slate-900">
+        Claim Your Brand in 60 Seconds.
       </h1>
-      <p class="font-tech text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-        Deploy single-purpose Burner Pages ($50), Smart QR Stickers ("The Port"), and Enterprise Kiosk Terminals with zero clutter.
+      <p class="text-slate-700 text-lg sm:text-xl font-bold max-w-2xl mx-auto leading-relaxed mb-8">
+        Automated subdomain deployment, custom QR code routing, and instant digital footprint for local restaurants, salons, events, and services.
       </p>
     </div>
 
-    <!-- ========================================== -->
-    <!-- 4. SIDE-BY-SIDE BUTTON ROW: KIOSK & VAULT  -->
-    <!-- ========================================== -->
-    <section class="max-w-4xl mx-auto my-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        
-        <!-- BUTTON 1: BURNER SITE KIOSK BUILDER -->
-        <div onclick="openSurvey()" class="burner-scrim p-6 rounded-2xl border-2 border-orange-500/60 text-center cursor-pointer transition-all duration-300 hover:border-orange-500 hover:shadow-[0_0_40px_rgba(255,87,34,0.5)] group reticle-box flex flex-col items-center justify-center">
-          <div class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-orange-500 bg-black/90 flex items-center justify-center mb-4 shadow-[0_0_25px_rgba(255,87,34,0.8)] group-hover:scale-110 transition-transform">
-            <span class="text-4xl md:text-5xl">🔥</span>
-          </div>
-          <h3 class="font-cyber text-2xl md:text-3xl text-white font-extrabold tracking-widest uppercase mb-1">
-            BURNER SITE
-          </h3>
-          <p class="font-tech text-xs text-orange-400 tracking-wider uppercase">
-            Deploy Single-Purpose Kiosk &amp; Digital Storefront
-          </p>
+    <!-- STEP-BY-STEP INTERACTIVE WIZARD KIOSK -->
+    <section id="intake-kiosk" class="neo-box p-8 sm:p-12 rounded-2xl max-w-3xl mx-auto relative">
+      
+      <!-- STEP PROGRESS BAR -->
+      <div class="mb-8 border-b-4 border-slate-900 pb-6">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-xs font-black font-mono-code text-sky-600 uppercase" id="wizard-step-indicator">STEP 1 OF 4</span>
+          <span class="neo-badge px-3 py-1 text-xs font-mono-code font-bold">100% AUTOMATED</span>
         </div>
-
-        <!-- BUTTON 2: BURN-1 VAULT -->
-        <div onclick="openVaultModal()" class="burner-scrim p-6 rounded-2xl border-2 border-orange-500/60 text-center cursor-pointer transition-all duration-300 hover:border-orange-500 hover:shadow-[0_0_40px_rgba(255,87,34,0.5)] group reticle-box flex flex-col items-center justify-center" style="background: linear-gradient(135deg, rgba(255,87,34,0.2), rgba(139,0,0,0.85)), url('Burn1vaultthumb.jpg'); background-size: cover; background-position: center;">
-          <div class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-orange-500 bg-black/90 flex items-center justify-center mb-4 shadow-[0_0_25px_rgba(255,87,34,0.8)] group-hover:scale-110 transition-transform">
-            <span class="text-4xl md:text-5xl">🔐</span>
-          </div>
-          <h3 class="font-cyber text-2xl md:text-3xl text-white font-extrabold tracking-widest uppercase mb-1">
-            BURN-1 VAULT
-          </h3>
-          <p class="font-tech text-xs text-orange-300 tracking-wider uppercase">
-            100% Offline Local AI &amp; Kill Switch ($50)
-          </p>
+        <div class="w-full bg-slate-200 h-4 border-2 border-slate-900 rounded-full overflow-hidden">
+          <div id="wizard-progress-bar" class="bg-sky-600 h-full w-1/4 transition-all duration-400"></div>
         </div>
-
       </div>
 
-      <!-- FLASHING CHALLENGE TEXT INPUT/CHAT LINE -->
-      <div onclick="window.location.href='privacy_first_protocol.html'" class="bg-black/95 border-2 border-purple-500 rounded-xl p-3.5 text-center cursor-pointer hover:bg-purple-950/40 transition-all shadow-[0_0_20px_rgba(168,85,247,0.5)] flex items-center justify-center gap-3">
-        <span class="text-purple-400 text-lg animate-pulse">💬</span>
-        <div id="flashing-challenge-line" class="font-cyber text-xs md:text-sm text-purple-400 font-black uppercase tracking-widest animate-pulse drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]">
-          Take The Privacy First Challenge!!! Click Here!!
+      <!-- WIZARD STEP 1: SUBDOMAIN CHOICE -->
+      <div id="kiosk-step-1" class="space-y-6">
+        <div class="p-6 bg-slate-50 border-3 border-slate-900 rounded-xl">
+          <label class="block font-black text-lg uppercase text-slate-900 mb-2">
+            Step 1: Choose Your Subdomain &amp; Brand Name
+          </label>
+          <p class="text-xs text-slate-600 mb-4">Enter your business or event name to claim your custom sub-route instantly.</p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input type="text" id="kiosk-subdomain-input" placeholder="mybusinessname" class="flex-grow p-3.5 border-3 border-slate-900 font-mono-code font-bold text-slate-900 text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" oninput="updateKioskPreview()">
+            <span class="p-3.5 font-bold font-mono-code bg-slate-200 border-3 border-slate-900 rounded-lg text-slate-700 flex items-center">
+              .burn-1.com
+            </span>
+          </div>
         </div>
-        <span class="text-purple-400 text-lg animate-pulse">➔</span>
+        <div class="flex justify-end">
+          <button onclick="goToStep(2)" class="neo-btn-primary px-8 py-3.5 text-sm uppercase tracking-wider flex items-center gap-2">
+            Next: QR Routing ➔
+          </button>
+        </div>
       </div>
+
+      <!-- WIZARD STEP 2: INSTANT QR CODE PREVIEW -->
+      <div id="kiosk-step-2" class="space-y-6 hidden">
+        <div class="p-6 bg-slate-50 border-3 border-slate-900 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div>
+            <label class="block font-black text-lg uppercase text-slate-900 mb-1">
+              Step 2: Instant QR Routing Preview
+            </label>
+            <p class="text-xs text-slate-600 mb-2">Dynamic QR code generated automatically for prints, menus, flyers, and storefronts.</p>
+            <span class="font-mono-code text-xs font-bold text-sky-700 bg-sky-100 px-3 py-1 rounded border border-sky-300" id="preview-url-text">https://mybusinessname.burn-1.com</span>
+          </div>
+          <div class="w-32 h-32 bg-white border-3 border-slate-900 rounded-lg flex items-center justify-center p-2 shadow-[4px_4px_0px_#0f172a]">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://burn-1.com" alt="QR Code Preview" id="qr-img" class="w-full h-full object-contain">
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <button onclick="goToStep(1)" class="px-6 py-3 border-2 border-slate-900 bg-slate-100 font-bold text-xs uppercase hover:bg-slate-200">
+            ⇦ Back
+          </button>
+          <button onclick="goToStep(3)" class="neo-btn-primary px-8 py-3.5 text-sm uppercase tracking-wider flex items-center gap-2">
+            Next: Choose Plan ➔
+          </button>
+        </div>
+      </div>
+
+      <!-- WIZARD STEP 3: PACKAGE SELECTION -->
+      <div id="kiosk-step-3" class="space-y-6 hidden">
+        <div class="p-6 bg-slate-50 border-3 border-slate-900 rounded-xl">
+          <label class="block font-black text-lg uppercase text-slate-900 mb-3">
+            Step 3: Select Package Plan
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div id="plan-flat" onclick="selectPlan('flat')" class="p-5 bg-white border-4 border-sky-600 rounded-lg cursor-pointer shadow-[4px_4px_0px_#0284c7] flex justify-between items-center">
+              <div>
+                <h4 class="font-black text-slate-900 uppercase text-base">Turnkey Site Zip</h4>
+                <p class="text-xs text-slate-600">Self-serve HTML package</p>
+              </div>
+              <span class="font-mono-code font-black text-emerald-600 text-xl">$50 Flat</span>
+            </div>
+            <div id="plan-sub" onclick="selectPlan('sub')" class="p-5 bg-white border-2 border-slate-400 rounded-lg cursor-pointer hover:bg-sky-50 transition-colors flex justify-between items-center">
+              <div>
+                <h4 class="font-black text-slate-900 uppercase text-base">Managed Kiosk Subdomain</h4>
+                <p class="text-xs text-slate-600">Includes hosting &amp; updates</p>
+              </div>
+              <span class="font-mono-code font-black text-sky-600 text-xl">$15/mo</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <button onclick="goToStep(2)" class="px-6 py-3 border-2 border-slate-900 bg-slate-100 font-bold text-xs uppercase hover:bg-slate-200">
+            ⇦ Back
+          </button>
+          <button onclick="goToStep(4)" class="neo-btn-primary px-8 py-3.5 text-sm uppercase tracking-wider flex items-center gap-2">
+            Next: Checkout ➔
+          </button>
+        </div>
+      </div>
+
+      <!-- WIZARD STEP 4: CHECKOUT & IGNITION -->
+      <div id="kiosk-step-4" class="space-y-6 hidden">
+        <div class="p-8 bg-amber-100 border-3 border-slate-900 rounded-xl text-center">
+          <label class="block font-black text-xl uppercase text-slate-900 mb-2">
+            Step 4: One-Touch Checkout &amp; Instant Ignition
+          </label>
+          <p class="text-xs text-slate-700 font-bold mb-6">Complete purchase via secure PayPal or credit card webhook to launch your subdomain engine.</p>
+          <a href="https://paypal.me/LeonRDarden" target="_blank" class="neo-btn-primary block w-full py-4 text-center text-lg uppercase tracking-wider">
+            💳 Ignite Subdomain Engine ($50)
+          </a>
+        </div>
+        <div class="flex justify-start">
+          <button onclick="goToStep(3)" class="px-6 py-3 border-2 border-slate-900 bg-slate-100 font-bold text-xs uppercase hover:bg-slate-200">
+            ⇦ Back
+          </button>
+        </div>
+      </div>
+
     </section>
-
-    <!-- ========================================== -->
-    <!-- 5. BURN-THRU SYSTEM DIRECTORY              -->
-    <!-- ========================================== -->
-    <section>
-      <div class="flex justify-between items-end mb-6">
-        <div>
-          <h2 class="font-cyber text-2xl text-white font-bold tracking-wide">BURN-THRU SYSTEM DIRECTORY</h2>
-          <p class="text-xs text-gray-400 font-tech mt-0.5">Official Multi-Domain Enterprise Network</p>
-        </div>
-        <span class="text-xs font-tech text-orange-400 bg-orange-950/80 border border-orange-800 px-3 py-1 rounded">4 NODES VERIFIED</span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- NODE 01: Each One Teach One -->
-        <div onclick="window.open('https://www.eachoneteach.one', '_blank', 'noopener,noreferrer')" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-tech text-orange-400 font-bold">NODE 01</span>
-              <span class="text-[10px] font-tech text-gray-500 font-bold">NON-PROFIT HUB</span>
-            </div>
-            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-orange-400">Each One Teach One</h3>
-            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">PassITOn Initiative, Youth IT Mentorship, and Zero Recidivism Pathway.</p>
-          </div>
-          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-orange-400">
-            <span>[ ENTER HUB ]</span><span>➔</span>
-          </div>
-        </div>
-
-        <!-- NODE 02: Anergi.IO -->
-        <div onclick="window.open('https://anergi.io', '_blank', 'noopener,noreferrer')" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-tech text-purple-400 font-bold">NODE 02</span>
-              <span class="text-[10px] font-tech text-gray-500 font-bold">SECOPS</span>
-            </div>
-            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-purple-400">Anergi.IO</h3>
-            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">B2B Cyber Security, SSL Shielding, and Enterprise Monitoring.</p>
-          </div>
-          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-purple-400">
-            <span>[ LAUNCH SEC ]</span><span>➔</span>
-          </div>
-        </div>
-
-        <!-- NODE 03: 21-Day SOC Training -->
-        <div onclick="window.open('https://www.eachoneteach.one/SOCtraining21.html', '_blank', 'noopener,noreferrer')" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-tech text-blue-400 font-bold">NODE 03</span>
-              <span class="text-[10px] font-tech text-gray-500 font-bold">ACADEMY</span>
-            </div>
-            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-blue-400">21-Day SOC Training</h3>
-            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">Digital Street Smarts 21-Day SOC Threat Monitoring On-Ramp.</p>
-          </div>
-          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-blue-400">
-            <span>[ VIEW CURRICULUM ]</span><span>➔</span>
-          </div>
-        </div>
-
-        <!-- NODE 04: Kiosk Survey Intake -->
-        <div onclick="openSurvey()" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box border-emerald-500/30">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-tech text-emerald-400 font-bold">NODE 04</span>
-              <span class="text-[10px] font-tech text-emerald-400 font-bold">ONBOARDING</span>
-            </div>
-            <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-emerald-400">Burner Kiosk Intake</h3>
-            <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">B2B Digital Kiosk Software ($50/mo) + "The Port" Smart QR ($15/mo).</p>
-          </div>
-          <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-emerald-400">
-            <span>[ OPEN SURVEY ]</span><span>📋</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- 6. COMMERCIAL VIDEO & AD SHOWCASE ZONE     -->
-    <!-- ========================================== -->
-    <section class="burner-scrim rounded-2xl p-6 border-l-4 border-l-orange-500 reticle-box space-y-6">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-3">
-        <span class="text-xs font-tech text-orange-400 tracking-widest uppercase">📺 NETWORK COMMERCIAL VIDEO SHOWCASE</span>
-        <span class="text-[10px] font-tech text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-800">SPONSORED MEDIA</span>
-      </div>
-
-      <!-- Video Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-        
-        <!-- COMMERCIAL 1: Darden Trust Hub -->
-        <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
-          <div class="aspect-video bg-black rounded mb-3 overflow-hidden border border-gray-800 relative">
-            <video controls preload="metadata" class="w-full h-full object-cover">
-              <source src="assets/commercial_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <h4 class="font-cyber text-sm text-white font-bold mb-1">DARDEN TRUST HUB VIP</h4>
-          <p class="text-xs text-gray-400 font-tech">Executive role routing & single sign-on security.</p>
-        </div>
-
-        <!-- COMMERCIAL 2: Anergi.IO (Portrait Video) -->
-        <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
-          <div class="aspect-[9/16] max-h-72 bg-black rounded mb-3 overflow-hidden border border-gray-800 relative mx-auto w-full">
-            <video controls preload="metadata" class="w-full h-full object-contain bg-black">
-              <source src="assets/Anergicoshort.mp4" type="video/mp4">
-            </video>
-          </div>
-          <h4 class="font-cyber text-sm text-purple-400 font-bold mb-1">ANERGI.IO SECOPS</h4>
-          <p class="text-xs text-gray-400 font-tech">Enterprise B2B cybersecurity & SSL token validation (Portrait).</p>
-        </div>
-
-        <!-- COMMERCIAL 3: Reach & Teach (Portrait Video) -->
-        <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
-          <div class="aspect-[9/16] max-h-72 bg-black rounded mb-3 overflow-hidden border border-gray-800 relative mx-auto w-full">
-            <video controls preload="metadata" class="w-full h-full object-contain bg-black">
-              <source src="assets/ReachCampaign.mp4" type="video/mp4">
-            </video>
-          </div>
-          <h4 class="font-cyber text-sm text-blue-400 font-bold mb-1">REACH & TEACH CAMPAIGN</h4>
-          <p class="text-xs text-gray-400 font-tech">Direct community mentorship & anti-addiction routing (Portrait).</p>
-        </div>
-
-      </div>
-
-      <!-- FEATURED YOUTUBE EMBED (COMPACT SIZE - SOMEBODY'S WATCHING ME) -->
-      <div class="pt-6 border-t border-gray-800 text-center">
-        <span class="text-xs font-tech text-emerald-400 block mb-3 uppercase">FEATURED SYSTEM VIDEO (SOMEBODY'S WATCHING ME)</span>
-        <div class="relative max-w-xl mx-auto aspect-video rounded-xl overflow-hidden border-2 border-orange-500/40 shadow-2xl">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/w2hEmiBfLbo" title="Somebody's Watching Me Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-  </main>
+  </div>
 
   <!-- ========================================== -->
-  <!-- 7. ONBOARDING SURVEY & RECEIPT MODAL       -->
+  <!-- MODE 2: DEFAULT ONLINE CYBER MODE CONTAINER-->
   <!-- ========================================== -->
+  <div id="cyber-mode-container">
+    <main class="relative z-10 max-w-7xl mx-auto px-6 py-10 flex-grow w-full space-y-16">
+      
+      <!-- Hero Headline -->
+      <div class="text-center max-w-4xl mx-auto pt-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/80 border border-orange-500/40 text-orange-400 text-[11px] font-tech mb-4 tracking-widest uppercase">
+          <span>⚡ PRIVACY-FIRST BURNER SITES &amp; B2B KIOSK PROTOCOL</span>
+        </div>
+        <h1 class="font-cyber text-4xl md:text-6xl font-black tracking-tight text-white mb-4">
+          BURNER SITE <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400">PROTOCOL</span>
+        </h1>
+        <p class="font-tech text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          Deploy single-purpose Burner Pages ($50), Smart QR Stickers ("The Port"), and Enterprise Kiosk Terminals with zero clutter.
+        </p>
+      </div>
+
+      <!-- SIDE-BY-SIDE BUTTON ROW: KIOSK & VAULT -->
+      <section class="max-w-4xl mx-auto my-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          
+          <!-- BUTTON 1: BURNER SITE KIOSK BUILDER -->
+          <div onclick="openSurvey()" class="burner-scrim p-6 rounded-2xl border-2 border-orange-500/60 text-center cursor-pointer transition-all duration-300 hover:border-orange-500 hover:shadow-[0_0_40px_rgba(255,87,34,0.5)] group reticle-box flex flex-col items-center justify-center">
+            <div class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-orange-500 bg-black/90 flex items-center justify-center mb-4 shadow-[0_0_25px_rgba(255,87,34,0.8)] group-hover:scale-110 transition-transform">
+              <span class="text-4xl md:text-5xl">🔥</span>
+            </div>
+            <h3 class="font-cyber text-2xl md:text-3xl text-white font-extrabold tracking-widest uppercase mb-1">
+              BURNER SITE
+            </h3>
+            <p class="font-tech text-xs text-orange-400 tracking-wider uppercase">
+              Deploy Single-Purpose Kiosk &amp; Digital Storefront
+            </p>
+          </div>
+
+          <!-- BUTTON 2: BURN-1 VAULT -->
+          <div onclick="openVaultModal()" class="burner-scrim p-6 rounded-2xl border-2 border-orange-500/60 text-center cursor-pointer transition-all duration-300 hover:border-orange-500 hover:shadow-[0_0_40px_rgba(255,87,34,0.5)] group reticle-box flex flex-col items-center justify-center" style="background: linear-gradient(135deg, rgba(255,87,34,0.2), rgba(139,0,0,0.85)), url('Burn1vaultthumb.jpg'); background-size: cover; background-position: center;">
+            <div class="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-orange-500 bg-black/90 flex items-center justify-center mb-4 shadow-[0_0_25px_rgba(255,87,34,0.8)] group-hover:scale-110 transition-transform">
+              <span class="text-4xl md:text-5xl">🔐</span>
+            </div>
+            <h3 class="font-cyber text-2xl md:text-3xl text-white font-extrabold tracking-widest uppercase mb-1">
+              BURN-1 VAULT
+            </h3>
+            <p class="font-tech text-xs text-orange-300 tracking-wider uppercase">
+              100% Offline Local AI &amp; Kill Switch ($50)
+            </p>
+          </div>
+
+        </div>
+
+        <!-- FLASHING CHALLENGE TEXT INPUT/CHAT LINE -->
+        <div onclick="window.location.href='privacy_first_protocol.html'" class="bg-black/95 border-2 border-purple-500 rounded-xl p-3.5 text-center cursor-pointer hover:bg-purple-950/40 transition-all shadow-[0_0_20px_rgba(168,85,247,0.5)] flex items-center justify-center gap-3">
+          <span class="text-purple-400 text-lg animate-pulse">💬</span>
+          <div id="flashing-challenge-line" class="font-cyber text-xs md:text-sm text-purple-400 font-black uppercase tracking-widest animate-pulse drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]">
+            Take The Privacy First Challenge!!! Click Here!!
+          </div>
+          <span class="text-purple-400 text-lg animate-pulse">➔</span>
+        </div>
+      </section>
+
+      <!-- BURN-THRU SYSTEM DIRECTORY -->
+      <section>
+        <div class="flex justify-between items-end mb-6">
+          <div>
+            <h2 class="font-cyber text-2xl text-white font-bold tracking-wide">BURN-THRU SYSTEM DIRECTORY</h2>
+            <p class="text-xs text-gray-400 font-tech mt-0.5">Official Multi-Domain Enterprise Network</p>
+          </div>
+          <span class="text-xs font-tech text-orange-400 bg-orange-950/80 border border-orange-800 px-3 py-1 rounded">4 NODES VERIFIED</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- NODE 01: Each One Teach One -->
+          <div onclick="window.open('https://www.eachoneteach.one', '_blank', 'noopener,noreferrer')" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs font-tech text-orange-400 font-bold">NODE 01</span>
+                <span class="text-[10px] font-tech text-gray-500 font-bold">NON-PROFIT HUB</span>
+              </div>
+              <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-orange-400">Each One Teach One</h3>
+              <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">PassITOn Initiative, Youth IT Mentorship, and Zero Recidivism Pathway.</p>
+            </div>
+            <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-orange-400">
+              <span>[ ENTER HUB ]</span><span>➔</span>
+            </div>
+          </div>
+
+          <!-- NODE 02: Anergi.IO -->
+          <div onclick="window.open('https://anergi.io', '_blank', 'noopener,noreferrer')" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs font-tech text-purple-400 font-bold">NODE 02</span>
+                <span class="text-[10px] font-tech text-gray-500 font-bold">SECOPS</span>
+              </div>
+              <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-purple-400">Anergi.IO</h3>
+              <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">B2B Cyber Security, SSL Shielding, and Enterprise Monitoring.</p>
+            </div>
+            <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-purple-400">
+              <span>[ LAUNCH SEC ]</span><span>➔</span>
+            </div>
+          </div>
+
+          <!-- NODE 03: 21-Day SOC Training -->
+          <div onclick="window.open('https://www.eachoneteach.one/SOCtraining21.html', '_blank', 'noopener,noreferrer')" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs font-tech text-blue-400 font-bold">NODE 03</span>
+                <span class="text-[10px] font-tech text-gray-500 font-bold">ACADEMY</span>
+              </div>
+              <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-blue-400">21-Day SOC Training</h3>
+              <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">Digital Street Smarts 21-Day SOC Threat Monitoring On-Ramp.</p>
+            </div>
+            <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-blue-400">
+              <span>[ VIEW CURRICULUM ]</span><span>➔</span>
+            </div>
+          </div>
+
+          <!-- NODE 04: Kiosk Survey Intake -->
+          <div onclick="openSurvey()" class="burner-scrim rounded-xl p-5 flex flex-col justify-between cursor-pointer transition-all duration-300 group reticle-box border-emerald-500/30">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs font-tech text-emerald-400 font-bold">NODE 04</span>
+                <span class="text-[10px] font-tech text-emerald-400 font-bold">ONBOARDING</span>
+              </div>
+              <h3 class="font-cyber text-base text-white font-bold mb-2 group-hover:text-emerald-400">Burner Kiosk Intake</h3>
+              <p class="text-xs text-gray-400 font-tech leading-relaxed mb-6">B2B Digital Kiosk Software ($50/mo) + "The Port" Smart QR ($15/mo).</p>
+            </div>
+            <div class="mt-auto pt-3 border-t border-gray-800/80 flex items-center justify-between font-tech text-xs text-emerald-400">
+              <span>[ OPEN SURVEY ]</span><span>📋</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- COMMERCIAL VIDEO & AD SHOWCASE ZONE -->
+      <section class="burner-scrim rounded-2xl p-6 border-l-4 border-l-orange-500 reticle-box space-y-6">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+          <span class="text-xs font-tech text-orange-400 tracking-widest uppercase">📺 NETWORK COMMERCIAL VIDEO SHOWCASE</span>
+          <span class="text-[10px] font-tech text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-800">SPONSORED MEDIA</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          
+          <!-- COMMERCIAL 1 -->
+          <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+            <div class="aspect-video bg-black rounded mb-3 overflow-hidden border border-gray-800 relative">
+              <video controls preload="metadata" class="w-full h-full object-cover">
+                <source src="assets/commercial_2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <h4 class="font-cyber text-sm text-white font-bold mb-1">DARDEN TRUST HUB VIP</h4>
+            <p class="text-xs text-gray-400 font-tech">Executive role routing &amp; single sign-on security.</p>
+          </div>
+
+          <!-- COMMERCIAL 2 -->
+          <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+            <div class="aspect-[9/16] max-h-72 bg-black rounded mb-3 overflow-hidden border border-gray-800 relative mx-auto w-full">
+              <video controls preload="metadata" class="w-full h-full object-contain bg-black">
+                <source src="assets/Anergicoshort.mp4" type="video/mp4">
+              </video>
+            </div>
+            <h4 class="font-cyber text-sm text-purple-400 font-bold mb-1">ANERGI.IO SECOPS</h4>
+            <p class="text-xs text-gray-400 font-tech">Enterprise B2B cybersecurity &amp; SSL token validation (Portrait).</p>
+          </div>
+
+          <!-- COMMERCIAL 3 -->
+          <div class="bg-black/90 p-4 rounded-xl border border-gray-800 flex flex-col justify-between">
+            <div class="aspect-[9/16] max-h-72 bg-black rounded mb-3 overflow-hidden border border-gray-800 relative mx-auto w-full">
+              <video controls preload="metadata" class="w-full h-full object-contain bg-black">
+                <source src="assets/ReachCampaign.mp4" type="video/mp4">
+              </video>
+            </div>
+            <h4 class="font-cyber text-sm text-blue-400 font-bold mb-1">REACH &amp; TEACH CAMPAIGN</h4>
+            <p class="text-xs text-gray-400 font-tech">Direct community mentorship &amp; anti-addiction routing (Portrait).</p>
+          </div>
+
+        </div>
+
+        <!-- FEATURED YOUTUBE EMBED -->
+        <div class="pt-6 border-t border-gray-800 text-center">
+          <span class="text-xs font-tech text-emerald-400 block mb-3 uppercase">FEATURED SYSTEM VIDEO (SOMEBODY'S WATCHING ME)</span>
+          <div class="relative max-w-xl mx-auto aspect-video rounded-xl overflow-hidden border-2 border-orange-500/40 shadow-2xl">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/w2hEmiBfLbo" title="Somebody's Watching Me Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ONBOARDING SURVEY MODAL -->
   <div id="survey-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/92 backdrop-blur-md p-4">
     <div class="burner-scrim w-full max-w-2xl p-6 md:p-8 rounded-xl border-t-4 border-t-orange-500 shadow-2xl relative reticle-box max-h-[90vh] overflow-y-auto">
       <button onclick="closeSurvey()" aria-label="Close Survey" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">✕</button>
 
       <div id="survey-header" class="mb-6">
         <div class="flex justify-between items-center mb-2">
-          <span id="survey-step-tag" class="text-xs font-tech text-orange-400 bg-orange-950 px-2.5 py-1 rounded border border-orange-800">STEP 1 OF 4</span>
+          <span id="survey-step-tag" class="text-xs font-tech text-orange-400 bg-orange-950 px-2.5 py-1 rounded border border-orange-800">STEP 1 OF 5</span>
           <span class="text-xs font-tech text-gray-400">BURNER SITE INTAKE</span>
         </div>
-        <h2 class="font-cyber text-2xl text-white font-bold">BURNER SITE & KIOSK SURVEY</h2>
+        <h2 class="font-cyber text-2xl text-white font-bold">BURNER SITE &amp; KIOSK SURVEY</h2>
         <div class="w-full bg-gray-900 h-1.5 rounded-full mt-3 overflow-hidden border border-gray-800">
-          <div id="survey-progress" class="bg-gradient-to-r from-red-500 to-orange-400 h-full w-1/4 transition-all duration-300"></div>
+          <div id="survey-progress" class="bg-gradient-to-r from-red-500 to-orange-400 h-full w-1/5 transition-all duration-300"></div>
         </div>
       </div>
 
       <form id="survey-form" onsubmit="event.preventDefault();">
         
-        <!-- STEP 1: 8 EXPANDABLE CATEGORIES -->
+        <!-- STEP 1 -->
         <div id="survey-step-1" class="survey-step space-y-4 font-tech">
           <label class="block text-sm text-gray-200 font-bold mb-2 uppercase tracking-wider">1. Select Business Category (8 Expandable Radial Sectors):</label>
           
@@ -342,9 +538,9 @@
                 <span>🍔 Food &amp; Dining</span>
               </label>
               <div id="food-sub" class="category-sub mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
-                <label class="block cursor-pointer"><input type="radio" name="food_type" value="Restaurant & Cafe" checked class="accent-orange-400"> Restaurant &amp; Cafe</label>
-                <label class="block cursor-pointer"><input type="radio" name="food_type" value="Food Truck & Popup" class="accent-orange-400"> Food Truck &amp; Pop-up</label>
-                <label class="block cursor-pointer"><input type="radio" name="food_type" value="Catering & Events" class="accent-orange-400"> Catering &amp; Events</label>
+                <label class="block cursor-pointer"><input type="radio" name="food_type" value="Restaurant &amp; Cafe" checked class="accent-orange-400"> Restaurant &amp; Cafe</label>
+                <label class="block cursor-pointer"><input type="radio" name="food_type" value="Food Truck &amp; Popup" class="accent-orange-400"> Food Truck &amp; Pop-up</label>
+                <label class="block cursor-pointer"><input type="radio" name="food_type" value="Catering &amp; Events" class="accent-orange-400"> Catering &amp; Events</label>
               </div>
             </div>
 
@@ -355,8 +551,8 @@
                 <span>🧼 Hygiene &amp; Personal Care</span>
               </label>
               <div id="hygiene-sub" class="category-sub hidden mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
-                <label class="block cursor-pointer"><input type="radio" name="hygiene_type" value="Skincare & Cosmetics" checked class="accent-orange-400"> Skincare &amp; Cosmetics</label>
-                <label class="block cursor-pointer"><input type="radio" name="hygiene_type" value="Artisan Soaps & Bath" class="accent-orange-400"> Artisan Soaps &amp; Bath</label>
+                <label class="block cursor-pointer"><input type="radio" name="hygiene_type" value="Skincare &amp; Cosmetics" checked class="accent-orange-400"> Skincare &amp; Cosmetics</label>
+                <label class="block cursor-pointer"><input type="radio" name="hygiene_type" value="Artisan Soaps &amp; Bath" class="accent-orange-400"> Artisan Soaps &amp; Bath</label>
                 <label class="block cursor-pointer"><input type="radio" name="hygiene_type" value="Grooming Essentials" class="accent-orange-400"> Grooming Essentials</label>
               </div>
             </div>
@@ -368,9 +564,9 @@
                 <span>👕 Clothing &amp; Apparel</span>
               </label>
               <div id="clothing-sub" class="category-sub hidden mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
-                <label class="block cursor-pointer"><input type="radio" name="clothing_type" value="Streetwear & Fashion" checked class="accent-orange-400"> Streetwear &amp; Fashion</label>
-                <label class="block cursor-pointer"><input type="radio" name="clothing_type" value="Custom Merch & Print" class="accent-orange-400"> Custom Merch &amp; Print</label>
-                <label class="block cursor-pointer"><input type="radio" name="clothing_type" value="Vintage & Thrift" class="accent-orange-400"> Vintage &amp; Thrift</label>
+                <label class="block cursor-pointer"><input type="radio" name="clothing_type" value="Streetwear &amp; Fashion" checked class="accent-orange-400"> Streetwear &amp; Fashion</label>
+                <label class="block cursor-pointer"><input type="radio" name="clothing_type" value="Custom Merch &amp; Print" class="accent-orange-400"> Custom Merch &amp; Print</label>
+                <label class="block cursor-pointer"><input type="radio" name="clothing_type" value="Vintage &amp; Thrift" class="accent-orange-400"> Vintage &amp; Thrift</label>
               </div>
             </div>
 
@@ -381,9 +577,9 @@
                 <span>🛠️ Professional Services</span>
               </label>
               <div id="service-sub" class="category-sub hidden mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
-                <label class="block cursor-pointer"><input type="radio" name="service_type" value="Tech Support & IT" checked class="accent-orange-400"> Tech Support &amp; IT</label>
-                <label class="block cursor-pointer"><input type="radio" name="service_type" value="Consulting & Business" class="accent-orange-400"> Consulting &amp; Business</label>
-                <label class="block cursor-pointer"><input type="radio" name="service_type" value="Home & Trade Services" class="accent-orange-400"> Home &amp; Trade Services</label>
+                <label class="block cursor-pointer"><input type="radio" name="service_type" value="Tech Support &amp; IT" checked class="accent-orange-400"> Tech Support &amp; IT</label>
+                <label class="block cursor-pointer"><input type="radio" name="service_type" value="Consulting &amp; Business" class="accent-orange-400"> Consulting &amp; Business</label>
+                <label class="block cursor-pointer"><input type="radio" name="service_type" value="Home &amp; Trade Services" class="accent-orange-400"> Home &amp; Trade Services</label>
               </div>
             </div>
 
@@ -394,9 +590,9 @@
                 <span>🥖 Bakery &amp; Sweets</span>
               </label>
               <div id="bakery-sub" class="category-sub hidden mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
-                <label class="block cursor-pointer"><input type="radio" name="bakery_type" value="Custom Cakes & Pastries" checked class="accent-orange-400"> Custom Cakes &amp; Pastries</label>
+                <label class="block cursor-pointer"><input type="radio" name="bakery_type" value="Custom Cakes &amp; Pastries" checked class="accent-orange-400"> Custom Cakes &amp; Pastries</label>
                 <label class="block cursor-pointer"><input type="radio" name="bakery_type" value="Artisan Breads" class="accent-orange-400"> Artisan Breads</label>
-                <label class="block cursor-pointer"><input type="radio" name="bakery_type" value="Confectionery & Desserts" class="accent-orange-400"> Confectionery &amp; Desserts</label>
+                <label class="block cursor-pointer"><input type="radio" name="bakery_type" value="Confectionery &amp; Desserts" class="accent-orange-400"> Confectionery &amp; Desserts</label>
               </div>
             </div>
 
@@ -407,9 +603,9 @@
                 <span>💈 Barber &amp; Hair Styling</span>
               </label>
               <div id="barber-sub" class="category-sub hidden mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
-                <label class="block cursor-pointer"><input type="radio" name="barber_type" value="Barbershop & Cuts" checked class="accent-orange-400"> Barbershop &amp; Cuts</label>
-                <label class="block cursor-pointer"><input type="radio" name="barber_type" value="Hair Salon & Styling" class="accent-orange-400"> Hair Salon &amp; Styling</label>
-                <label class="block cursor-pointer"><input type="radio" name="barber_type" value="Beard & Spa Grooming" class="accent-orange-400"> Beard &amp; Spa Grooming</label>
+                <label class="block cursor-pointer"><input type="radio" name="barber_type" value="Barbershop &amp; Cuts" checked class="accent-orange-400"> Barbershop &amp; Cuts</label>
+                <label class="block cursor-pointer"><input type="radio" name="barber_type" value="Hair Salon &amp; Styling" class="accent-orange-400"> Hair Salon &amp; Styling</label>
+                <label class="block cursor-pointer"><input type="radio" name="barber_type" value="Beard &amp; Spa Grooming" class="accent-orange-400"> Beard &amp; Spa Grooming</label>
               </div>
             </div>
 
@@ -421,8 +617,8 @@
               </label>
               <div id="boutique-sub" class="category-sub hidden mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
                 <label class="block cursor-pointer"><input type="radio" name="boutique_type" value="Fashion Boutique" checked class="accent-orange-400"> Fashion Boutique</label>
-                <label class="block cursor-pointer"><input type="radio" name="boutique_type" value="Jewelry & Handcrafted" class="accent-orange-400"> Jewelry &amp; Handcrafted</label>
-                <label class="block cursor-pointer"><input type="radio" name="boutique_type" value="Footwear & Handbags" class="accent-orange-400"> Footwear &amp; Handbags</label>
+                <label class="block cursor-pointer"><input type="radio" name="boutique_type" value="Jewelry &amp; Handcrafted" class="accent-orange-400"> Jewelry &amp; Handcrafted</label>
+                <label class="block cursor-pointer"><input type="radio" name="boutique_type" value="Footwear &amp; Handbags" class="accent-orange-400"> Footwear &amp; Handbags</label>
               </div>
             </div>
 
@@ -433,9 +629,9 @@
                 <span>🚗 Automotive &amp; Detailing</span>
               </label>
               <div id="auto-sub" class="category-sub hidden mt-2 pl-6 space-y-1 text-gray-400 text-[11px] font-sans">
-                <label class="block cursor-pointer"><input type="radio" name="auto_type" value="Auto Detailing & Ceramic" checked class="accent-orange-400"> Auto Detailing &amp; Ceramic</label>
-                <label class="block cursor-pointer"><input type="radio" name="auto_type" value="Mechanic & Repairs" class="accent-orange-400"> Mechanic &amp; Repairs</label>
-                <label class="block cursor-pointer"><input type="radio" name="auto_type" value="Car Rentals & Wrap" class="accent-orange-400"> Car Rentals &amp; Wrap</label>
+                <label class="block cursor-pointer"><input type="radio" name="auto_type" value="Auto Detailing &amp; Ceramic" checked class="accent-orange-400"> Auto Detailing &amp; Ceramic</label>
+                <label class="block cursor-pointer"><input type="radio" name="auto_type" value="Mechanic &amp; Repairs" class="accent-orange-400"> Mechanic &amp; Repairs</label>
+                <label class="block cursor-pointer"><input type="radio" name="auto_type" value="Car Rentals &amp; Wrap" class="accent-orange-400"> Car Rentals &amp; Wrap</label>
               </div>
             </div>
 
@@ -446,7 +642,7 @@
           </div>
         </div>
 
-        <!-- STEP 2: PACKAGE & PRICING OPTION (MAIN FOCUS: $50 ONE-TIME BURNER SITE) -->
+        <!-- STEP 2 -->
         <div id="survey-step-2" class="survey-step hidden space-y-4 font-tech text-xs">
           <label class="block text-sm text-gray-200 font-bold mb-2 uppercase tracking-wider">2. Select Package Option:</label>
           <div class="space-y-3">
@@ -487,7 +683,7 @@
           </div>
         </div>
 
-        <!-- STEP 3: SUBDOMAIN SELECTION -->
+        <!-- STEP 3 -->
         <div id="survey-step-3" class="survey-step hidden space-y-4 font-tech text-xs">
           <label class="block text-sm text-gray-200 font-bold mb-1 uppercase tracking-wider">3. Claim your custom Burner Site Subdomain:</label>
           <div class="flex items-center gap-2 bg-black/90 border-2 border-gray-800 rounded-xl p-3.5">
@@ -502,7 +698,7 @@
           </div>
         </div>
 
-        <!-- STEP 4: CONTACT & OWNER INFO -->
+        <!-- STEP 4 -->
         <div id="survey-step-4" class="survey-step hidden space-y-4 font-tech text-xs">
           <label class="block text-sm text-gray-200 font-bold mb-1 uppercase tracking-wider">4. Contact &amp; Organization Details:</label>
           <div class="space-y-3">
@@ -522,7 +718,7 @@
           </div>
         </div>
 
-        <!-- STEP 5: REAL PAYPAL CHECKOUT PAYMENT QUEUE -->
+        <!-- STEP 5 -->
         <div id="survey-step-5" class="survey-step hidden space-y-4 font-tech text-xs">
           <div class="text-center mb-2">
             <span class="text-xs text-orange-400 font-bold bg-orange-950 px-3 py-1 rounded-full border border-orange-700">🔒 SECURE CHECKOUT QUEUE STEP 5 OF 5</span>
@@ -549,7 +745,6 @@
           </div>
 
           <div class="space-y-3 pt-2">
-            <!-- REAL PAYPAL CHECKOUT BUTTON -->
             <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" rel="noopener noreferrer" onclick="processPaymentQueueSuccess()" class="w-full bg-[#0070ba] hover:bg-[#003087] text-white font-cyber font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-blue-900/50 text-xs tracking-wider">
               <i class="fab fa-paypal text-lg"></i>
               <span id="paypal-btn-text">CHECKOUT WITH PAYPAL ($50.00) ➔</span>
@@ -561,7 +756,7 @@
           </div>
         </div>
 
-        <!-- DIGITAL BUSINESS CARD RECEIPT WITH DYNAMIC VECTOR QR CODE -->
+        <!-- DIGITAL BUSINESS CARD RECEIPT -->
         <div id="survey-step-receipt" class="survey-step hidden space-y-4 font-tech text-xs">
           <div class="text-center mb-4">
             <span class="text-xs text-emerald-400 font-bold bg-emerald-950 px-3 py-1 rounded-full border border-emerald-700">✓ PAYMENT QUEUE VERIFIED &amp; SUBDOMAIN ACTIVATED</span>
@@ -593,7 +788,6 @@
                 </div>
               </div>
               <div class="col-span-5 flex flex-col items-center">
-                <!-- DYNAMIC VECTOR QR CODE -->
                 <div id="qr-container" class="p-2 bg-white rounded-xl text-center shadow-lg">
                   <img id="receipt-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://bowdega.burn-1.com" alt="Dynamic Vector QR Code" class="w-28 h-28 object-contain">
                 </div>
@@ -652,15 +846,23 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="relative z-10 border-t border-gray-900 bg-black/80 py-6 px-6 text-center text-xs font-tech text-gray-500">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+  <!-- FOOTER WITH HIDDEN SUBTLE TRIANGLE BUTTON -->
+  <footer id="footer" class="relative z-10 border-t border-gray-900 bg-black/80 py-6 px-6 text-center text-xs font-tech text-gray-500 flex flex-col items-center justify-center gap-3 transition-colors duration-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 w-full">
       <div>© 2026 <span class="text-white font-cyber">BURN-1.COM</span> • ALL RIGHTS RESERVED.</div>
       <div class="flex items-center gap-6">
         <a href="https://leonrdarden.com" class="hover:text-orange-400 transition-colors">LEONRDARDEN.COM</a>
         <a href="https://anergi.io" class="hover:text-purple-400 transition-colors">ANERGI.IO</a>
         <a href="https://www.eachoneteach.one" class="hover:text-blue-400 transition-colors">REACH &amp; TEACH</a>
       </div>
+    </div>
+
+    <!-- HIDDEN SUBTLE TRIANGLE BUTTON AT THE VERY BOTTOM -->
+    <div onclick="toggleMode('cyber')" class="hidden-triangle-btn mt-2 flex flex-col items-center gap-1 group" title="Cryptic Portal Switch">
+      <svg class="w-5 h-5 fill-slate-500 group-hover:fill-red-500 transition-colors" viewBox="0 0 24 24">
+        <polygon points="12,2 22,22 2,22" />
+      </svg>
+      <span class="text-[10px] text-slate-500 group-hover:text-red-400 font-mono-code italic">One day they will heed the danger..</span>
     </div>
   </footer>
 
@@ -682,32 +884,86 @@
     function animateEmbers() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateEmbers); }
     animateEmbers();
 
-    // Chatbot Sanitizer Logic
-    function runSanitizer() {
-      const input = document.getElementById('prompt-input').value;
-      const outputDiv = document.getElementById('chat-output');
-      if (!input.trim()) return;
+    // Toggle Mode Logic
+    function toggleMode(mode) {
+      const body = document.getElementById('main-body');
+      const navbar = document.getElementById('navbar');
+      const footer = document.getElementById('footer');
+      const dayContainer = document.getElementById('day-mode-container');
+      const cyberContainer = document.getElementById('cyber-mode-container');
+      const parallaxBg = document.getElementById('parallax-bg-container');
+      const btnDay = document.getElementById('btn-mode-day');
+      const btnCyber = document.getElementById('btn-mode-cyber');
+      const brandTitle = document.getElementById('brand-title-text');
+      const brandSub = document.getElementById('brand-sub-text');
 
-      outputDiv.innerHTML += `<div class="flex gap-2 pt-2 border-t border-gray-800"><span class="text-orange-500 font-bold">[YOU]:</span><p class="leading-relaxed text-gray-300">${input}</p></div>`;
+      if (mode === 'day') {
+        body.className = 'day-mode min-h-screen flex flex-col justify-between overflow-x-hidden relative transition-colors duration-500';
+        navbar.className = 'relative z-40 border-b-4 border-slate-900 bg-white/90 px-6 py-3 sticky top-0 transition-colors duration-500';
+        footer.className = 'relative z-10 border-t-4 border-slate-900 bg-white py-6 px-6 text-center text-xs font-tech font-bold text-slate-700 flex flex-col items-center justify-center gap-3 transition-colors duration-500';
+        
+        if (brandTitle) brandTitle.className = 'font-cyber font-extrabold text-lg tracking-wider text-slate-900';
+        if (brandSub) brandSub.className = 'font-tech text-[10px] text-slate-600 tracking-widest uppercase';
+
+        parallaxBg.classList.add('hidden');
+        cyberContainer.classList.add('hidden');
+        dayContainer.classList.remove('hidden');
+
+        btnDay.className = 'px-3.5 py-1.5 rounded font-tech text-xs uppercase border-2 border-slate-900 bg-amber-300 text-slate-900 font-bold shadow-[3px_3px_0px_#0f172a] transition-all';
+        btnCyber.className = 'px-3.5 py-1.5 rounded font-tech text-xs uppercase border border-slate-700 bg-slate-900 text-slate-300 hover:text-white transition-all';
+      } else {
+        body.className = 'cyber-mode bg-black text-gray-200 min-h-screen flex flex-col justify-between overflow-x-hidden relative select-none transition-colors duration-500';
+        navbar.className = 'relative z-40 burner-scrim border-b border-orange-950/80 px-6 py-3 sticky top-0 transition-colors duration-500';
+        footer.className = 'relative z-10 border-t border-gray-900 bg-black/80 py-6 px-6 text-center text-xs font-tech text-gray-500 flex flex-col items-center justify-center gap-3 transition-colors duration-500';
+        
+        if (brandTitle) brandTitle.className = 'font-cyber font-extrabold text-lg tracking-wider text-white';
+        if (brandSub) brandSub.className = 'font-tech text-[10px] text-orange-400/70 tracking-widest uppercase';
+
+        parallaxBg.classList.remove('hidden');
+        dayContainer.classList.add('hidden');
+        cyberContainer.classList.remove('hidden');
+
+        btnDay.className = 'px-3.5 py-1.5 rounded font-tech text-xs uppercase border border-slate-700 bg-slate-900 text-slate-300 hover:text-white transition-all';
+        btnCyber.className = 'px-3.5 py-1.5 rounded font-tech text-xs uppercase border border-orange-500 bg-orange-600 text-white shadow-lg shadow-orange-600/30 font-bold transition-all';
+      }
+    }
+
+    // Interactive Step Wizard Logic for Business Day Mode
+    function goToStep(stepNum) {
+      for (let i = 1; i <= 4; i++) {
+        const stepEl = document.getElementById(`kiosk-step-${i}`);
+        if (stepEl) stepEl.classList.add('hidden');
+      }
+      const activeStep = document.getElementById(`kiosk-step-${stepNum}`);
+      if (activeStep) activeStep.classList.remove('hidden');
+
+      const indicator = document.getElementById('wizard-step-indicator');
+      const progressBar = document.getElementById('wizard-progress-bar');
       
-      setTimeout(() => {
-        let threats = 0;
-        let sanitizedHTML = input;
+      if (indicator) indicator.textContent = `STEP ${stepNum} OF 4`;
+      if (progressBar) progressBar.style.width = `${(stepNum / 4) * 100}%`;
+    }
 
-        const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi;
-        sanitizedHTML = sanitizedHTML.replace(emailRegex, (match) => { threats++; return `<span class="bg-red-950 text-red-400 px-1 rounded font-bold">${match} [EMAIL_EXPOSED]</span>`; });
+    function selectPlan(planType) {
+      const flat = document.getElementById('plan-flat');
+      const sub = document.getElementById('plan-sub');
+      if (planType === 'flat') {
+        flat.className = 'p-5 bg-white border-4 border-sky-600 rounded-lg cursor-pointer shadow-[4px_4px_0px_#0284c7] flex justify-between items-center';
+        sub.className = 'p-5 bg-white border-2 border-slate-400 rounded-lg cursor-pointer hover:bg-sky-50 transition-colors flex justify-between items-center';
+      } else {
+        sub.className = 'p-5 bg-white border-4 border-sky-600 rounded-lg cursor-pointer shadow-[4px_4px_0px_#0284c7] flex justify-between items-center';
+        flat.className = 'p-5 bg-white border-2 border-slate-400 rounded-lg cursor-pointer hover:bg-sky-50 transition-colors flex justify-between items-center';
+      }
+    }
 
-        const tokenRegex = /(?<!\w)([A-Za-z0-9-_]{24,})(?!\w)/g;
-        sanitizedHTML = sanitizedHTML.replace(tokenRegex, (match) => { threats++; return `<span class="bg-red-950 text-red-400 px-1 rounded font-bold">${match} [TOKEN_EXPOSED]</span>`; });
-
-        if (threats > 0) {
-          outputDiv.innerHTML += `<div class="flex gap-2 pt-2 border-t border-gray-800"><span class="text-red-500 font-bold">[BOT WARNING]:</span><p class="leading-relaxed text-red-400 font-bold">VULNERABILITIES DETECTED: ${threats} sensitive data string(s) found. <span class="text-orange-400 cursor-pointer underline" onclick="openSurvey()">Build a Burner Vault</span> to protect your local data.</p></div>`;
-        } else {
-          outputDiv.innerHTML += `<div class="flex gap-2 pt-2 border-t border-gray-800"><span class="text-emerald-400 font-bold">[BOT]:</span><p class="leading-relaxed text-emerald-400">CLEAN: No standard PII/token leaks detected in payload string.</p></div>`;
-        }
-        outputDiv.scrollTop = output.scrollHeight;
-        document.getElementById('prompt-input').value = '';
-      }, 500);
+    function updateKioskPreview() {
+      const input = document.getElementById('kiosk-subdomain-input');
+      const qrImg = document.getElementById('qr-img');
+      const previewText = document.getElementById('preview-url-text');
+      const name = input.value.trim() || 'mybusinessname';
+      const targetUrl = `https://${name}.burn-1.com`;
+      if (qrImg) qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(targetUrl)}`;
+      if (previewText) previewText.textContent = targetUrl;
     }
 
     // Expandable Business Category Toggle
@@ -725,6 +981,19 @@
     function closeSurvey() {
       document.getElementById('survey-modal').classList.remove('flex');
       document.getElementById('survey-modal').classList.add('hidden');
+    }
+
+    function openATM() {
+      document.getElementById('atm-modal').classList.remove('hidden');
+      document.getElementById('atm-modal').classList.add('flex');
+    }
+    function closeATM() {
+      document.getElementById('atm-modal').classList.remove('flex');
+      document.getElementById('atm-modal').classList.add('hidden');
+    }
+
+    function openVaultModal() {
+      window.location.href = 'privacy_first_protocol.html';
     }
 
     function nextSurveyStep(step) {
@@ -779,204 +1048,27 @@
       document.getElementById('receipt-serial').innerText = `ID: #PORT-${Math.floor(1000 + Math.random() * 9000)}`;
 
       const qrContainer = document.getElementById('qr-container');
-      if (qrOpt.includes('No QR')) {
-        qrContainer.innerHTML = `<div class="p-3 bg-black border border-sky-500/50 rounded-xl text-center"><span class="text-[10px] font-mono text-sky-400 font-bold block">🔗 LINK ONLY MODE</span><span class="text-[8px] text-gray-400 block mt-1">${fullURL}</span></div>`;
-      } else {
-        qrContainer.innerHTML = `<img id="receipt-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(fullURL)}" alt="Dynamic Vector QR Code" class="w-28 h-28 object-contain">`;
-      }
+      qrContainer.innerHTML = `<img id="receipt-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(fullURL)}" alt="Dynamic Vector QR Code" class="w-28 h-28 object-contain">`;
     }
+
+    // Auto-detect mode from URL parameter or hash (e.g. burn-1.html?mode=day or #day)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('mode') === 'day' || window.location.hash === '#day') {
+        toggleMode('day');
+      }
+    });
 
     function downloadReceiptPNG() {
       const card = document.getElementById('receipt-card');
       html2canvas(card, { scale: 2, backgroundColor: '#000000' }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `burn1-digital-card-${Date.now()}.png`;
+        link.download = 'Burn1-Digital-Card.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
       });
     }
-
-    function openATM() { document.getElementById('atm-modal').classList.remove('hidden'); document.getElementById('atm-modal').classList.add('flex'); }
-    function closeATM() { document.getElementById('atm-modal').classList.remove('flex'); document.getElementById('atm-modal').classList.add('hidden'); }
-
-    function openVaultModal() { document.getElementById('vault-modal-main').classList.remove('hidden'); document.getElementById('vault-modal-main').classList.add('flex'); }
-    function closeVaultModal() { document.getElementById('vault-modal-main').classList.remove('flex'); document.getElementById('vault-modal-main').classList.add('hidden'); }
-
-    function switchVaultTab(tab) {
-      document.getElementById('vault-tab-transcript').classList.add('hidden');
-      document.getElementById('vault-tab-commands').classList.add('hidden');
-      document.getElementById('vault-tab-sanitizer').classList.add('hidden');
-      
-      document.getElementById('btn-tab-transcript').classList.remove('border-orange-500', 'text-orange-400');
-      document.getElementById('btn-tab-commands').classList.remove('border-orange-500', 'text-orange-400');
-      document.getElementById('btn-tab-sanitizer').classList.remove('border-orange-500', 'text-orange-400');
-
-      document.getElementById('vault-tab-' + tab).classList.remove('hidden');
-      document.getElementById('btn-tab-' + tab).classList.add('border-orange-500', 'text-orange-400');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        const line = document.getElementById('flashing-challenge-line');
-        if (line) {
-          line.classList.remove('animate-pulse');
-          line.classList.add('text-gray-400');
-        }
-      }, 7000);
-    });
-
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeATM(); closeSurvey(); closeVaultModal(); } });
   </script>
 
-  <!-- ========================================== -->
-  <!-- BURN-1 VAULT POP-UP MODAL WINDOW           -->
-  <!-- ========================================== -->
-  <div id="vault-modal-main" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-4 md:p-6">
-    
-    <!-- Video Background Overlay (Fire-up Vault Door Opening) -->
-    <video class="absolute inset-0 w-full h-full object-cover opacity-35 z-0 pointer-events-none" autoplay loop muted playsinline src="burnonevault.mp4"></video>
-
-    <!-- Modal Content Box -->
-    <div class="relative z-10 w-full max-w-5xl max-h-[90vh] bg-gradient-to-br from-gray-950 via-black to-gray-900 border-2 border-orange-500 rounded-2xl shadow-[0_0_60px_rgba(255,87,34,0.6)] overflow-hidden flex flex-col" style="background-image: linear-gradient(135deg, rgba(15,15,20,0.95), rgba(5,5,8,0.98)), url('Burn1vaultthumb.jpg'); background-size: cover; background-position: center;">
-      
-      <!-- Modal Header -->
-      <div class="bg-black/90 px-6 py-4 border-b border-orange-500/50 flex justify-between items-center shrink-0">
-        <div class="flex items-center gap-3">
-          <span class="text-2xl">🔥</span>
-          <div>
-            <h3 class="font-cyber text-base md:text-lg text-white font-extrabold tracking-widest uppercase">BURN-1 VAULT INTERACTIVE SUITE</h3>
-            <p class="font-tech text-xs text-orange-400 tracking-wider uppercase">Walkthrough Video, Transcript & Terminal Instructions</p>
-          </div>
-        </div>
-        <button onclick="closeVaultModal()" class="text-gray-400 hover:text-white font-cyber text-2xl font-bold px-3 py-1 cursor-pointer">&times;</button>
-      </div>
-
-      <!-- Modal Body Grid -->
-      <div class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-y-auto z-10 flex-1">
-        
-        <!-- Left: Video Player Container (YouTube Streams: Obliteration Promo + Burning Antennas) -->
-        <div class="flex flex-col space-y-4">
-          <!-- 1. Obliteration Promo (40-sec) -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-tech text-gray-400">
-              <span class="text-gray-300 font-bold">⚡ OBLITERATION PROMO (40 SEC)</span>
-              <span class="text-emerald-400">● YOUTUBE HD</span>
-            </div>
-            <div class="w-full aspect-video bg-black/90 border border-gray-800 rounded-xl overflow-hidden relative flex flex-col items-center justify-center text-center shadow-md">
-              <iframe class="w-full h-full" src="https://www.youtube.com/embed/YiuSE_ZC1mM" title="Obliteration Promo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-          </div>
-
-          <!-- 2. The Burning Antennas (10-min Full Broadcast) -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-tech text-gray-400">
-              <span class="text-gray-300 font-bold">📡 THE BURNING ANTENNAS (10 MIN BROADCAST)</span>
-              <span class="text-purple-400">● SIGNAL OVERRIDE</span>
-            </div>
-            <div class="w-full aspect-video bg-black/90 border border-gray-800 rounded-xl overflow-hidden relative flex flex-col items-center justify-center text-center shadow-md">
-              <iframe class="w-full h-full" src="https://www.youtube.com/embed/mt6ROceVORc" title="The Burning Antennas Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-          </div>
-
-          <!-- Checkout Link CTA -->
-          <div class="bg-black/90 border border-orange-500/40 p-4 rounded-xl text-center">
-            <p class="font-tech text-xs text-gray-300 mb-2 italic">"I build managed burner sites for clients every day at $15/mo. But this toolkit is for people who want to own the hardware. For a one-time $50 fee, you get total ownership and zero monthly fees."</p>
-            <a href="https://leonardartistry1.gumroad.com/l/burn1-vault?wanted=true" target="_blank" class="block w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-black font-cyber font-black text-xs py-3 rounded-lg uppercase tracking-widest shadow-[0_0_25px_rgba(255,87,34,0.7)] transition-all mt-2">
-              ⚡ EXECUTE BURN - ACCESS VAULT ($50)
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: Interactive Panel (Tabs: Transcript, Commands, Sanitizer) -->
-        <div class="flex flex-col bg-black/90 border border-gray-800 rounded-xl overflow-hidden">
-          
-          <!-- Tab Buttons -->
-          <div class="flex border-b border-gray-800 bg-black/60 font-cyber text-xs">
-            <button id="btn-tab-transcript" onclick="switchVaultTab('transcript')" class="flex-1 py-3 border-b-2 border-orange-500 text-orange-400 font-bold uppercase tracking-wider">
-              📄 Transcript &amp; Guide
-            </button>
-            <button id="btn-tab-commands" onclick="switchVaultTab('commands')" class="flex-1 py-3 border-b-2 border-transparent text-gray-400 hover:text-white font-bold uppercase tracking-wider">
-              💻 Commands
-            </button>
-            <button id="btn-tab-sanitizer" onclick="switchVaultTab('sanitizer')" class="flex-1 py-3 border-b-2 border-transparent text-gray-400 hover:text-white font-bold uppercase tracking-wider">
-              🛡️ Sanitizer
-            </button>
-          </div>
-
-          <!-- Tab 1: Transcript & Deployment Guide -->
-          <div id="vault-tab-transcript" class="p-5 overflow-y-auto max-h-[480px] font-tech text-xs leading-relaxed text-gray-300 space-y-4">
-            <div class="border-l-2 border-orange-500 pl-3">
-              <h5 class="font-cyber text-white text-xs uppercase font-bold">Local AI Setup: Burn-1 Vault Walkthrough</h5>
-              <p class="text-gray-400 mt-1">"Welcome to the Burn-1 Local AI Vault Deployment Guide. In this 5-minute walkthrough, we set up an air-gapped, zero-cloud LLM environment running locally on your hardware."</p>
-            </div>
-            
-            <div class="border-l-2 border-green-500 pl-3">
-              <h5 class="font-cyber text-green-400 text-xs uppercase font-bold">Module 1: One-Click Installer</h5>
-              <p class="text-gray-400 mt-1">Run <code class="text-green-400">./install_burn1.sh</code> to automatically install Ollama, fetch Llama3, and configure air-gapped network isolation on <code class="text-white">127.0.0.1</code>.</p>
-            </div>
-
-            <div class="border-l-2 border-sky-500 pl-3">
-              <h5 class="font-cyber text-sky-400 text-xs uppercase font-bold">Module 2: Zero External Telemetry</h5>
-              <p class="text-gray-400 mt-1">"All prompts, sensitive data strings, and code snippets stay strictly inside RAM. No external API calls, zero corporate tracking."</p>
-            </div>
-
-            <div class="border-l-2 border-red-500 pl-3">
-              <h5 class="font-cyber text-red-400 text-xs uppercase font-bold">Module 3: Master Kill Switch Shredder</h5>
-              <p class="text-gray-400 mt-1">Execute <code class="text-red-400">./burn1-killswitch.sh</code> at any time. It purges RAM buffers, incinerates session history, and restores a clean slate instantly.</p>
-            </div>
-
-            <div class="bg-orange-500/10 p-3 rounded border border-orange-500/30 text-orange-300 font-bold">
-              STATUS: AIR-GAPPED &gt; Zero residue. 100% Local AI Sovereignty.
-            </div>
-          </div>
-
-          <!-- Tab 2: Terminal Commands -->
-          <div id="vault-tab-commands" class="p-5 overflow-y-auto max-h-[350px] font-tech text-xs leading-relaxed text-gray-300 space-y-4 hidden">
-            <div>
-              <h5 class="font-cyber text-orange-400 text-xs uppercase mb-1">1. Run Automated Vault Installer:</h5>
-              <div class="bg-black p-3 rounded border border-gray-800 text-green-400 font-mono">
-                ./install_burn1.sh
-              </div>
-            </div>
-
-            <div>
-              <h5 class="font-cyber text-orange-400 text-xs uppercase mb-1">2. Run Master Memory Kill Switch:</h5>
-              <div class="bg-black p-3 rounded border border-gray-800 text-red-400 font-mono">
-                ./burn1-killswitch.sh
-              </div>
-            </div>
-
-            <div class="text-[11px] text-gray-400">
-              * Included inside your <strong class="text-white">Burn1_Toolkit_v2.zip</strong> digital download package.
-            </div>
-          </div>
-
-          <!-- Tab 3: Sanitizer Chatbot -->
-          <div id="vault-tab-sanitizer" class="p-4 overflow-y-auto max-h-[350px] font-tech text-xs space-y-3 hidden">
-            <div id="chat-output-modal" class="bg-black/90 p-3 rounded border border-gray-800 h-28 overflow-y-auto text-gray-300">
-              <span class="text-orange-500 font-bold">[BOT]:</span> Paste prompt to scan for data leaks.
-            </div>
-            <textarea id="prompt-input-modal" rows="2" placeholder="Paste prompt here..." class="w-full bg-black border border-gray-800 rounded p-2 text-xs text-white outline-none focus:border-orange-500"></textarea>
-            <button onclick="runSanitizerModal()" class="w-full bg-orange-600 hover:bg-orange-500 text-black font-cyber font-bold py-2 rounded uppercase tracking-wider text-xs">
-              SCAN PROMPT
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <script>
-    function runSanitizerModal() {
-      const input = document.getElementById('prompt-input-modal').value;
-      const out = document.getElementById('chat-output-modal');
-      if(!input.trim()) return;
-      out.innerHTML += `<div class='text-orange-400 mt-1'>[SCAN COMPLETE]: Zero data leaks detected in local buffer.</div>`;
-    }
-  </script>
 </body>
 </html>
