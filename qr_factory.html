@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURN-1 // QR FACTORY & STUDIO (NO-PHOTOSHOP JS TOOL)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .brutal-box {
+            background: #0a0e17;
+            border: 3px solid #00f3ff;
+            box-shadow: 6px 6px 0px #00f3ff;
+        }
+        .brutal-box-emerald {
+            background: #05140a;
+            border: 3px solid #39ff14;
+            box-shadow: 6px 6px 0px #39ff14;
+        }
+
+        .brutal-input {
+            background: #000000;
+            border: 2px solid #00f3ff;
+            color: #ffffff;
+            font-family: 'Fira Code', monospace;
+            padding: 10px 14px;
+            font-size: 13px;
+        }
+        .brutal-input:focus {
+            outline: none;
+            border-color: #39ff14;
+            box-shadow: 0 0 10px rgba(57,255,20,0.5);
+        }
+
+        .brutal-btn {
+            background: #00f3ff;
+            color: #000000;
+            font-weight: 900;
+            border: 2px solid #00f3ff;
+            box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .brutal-btn:hover {
+            background: #39ff14;
+            border-color: #39ff14;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #00f3ff;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+    <!-- BRUTALIST TOP HEADER -->
+    <header class="w-full max-w-7xl mx-auto border-4 border-cyan-400 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#00f3ff]">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
+                🛠️
+            </div>
+            <div>
+                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">QR FACTORY &amp; STUDIO</h1>
+                <p class="text-xs text-cyan-400 font-mono-code uppercase">PROPRIETARY BROWSER-BASED QR ENGINE · ZERO PHOTOSHOP NEEDED</p>
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
+            <a href="index.html" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">← STORE FRONT</a>
+            <a href="privacy_first_protocol.html" class="px-4 py-2 border-2 border-red-500 bg-red-950 text-red-400 hover:bg-red-500 hover:text-black transition-colors uppercase">PRIVACY SUITE</a>
+        </nav>
+    </header>
+
+    <!-- MAIN TWO-COLUMN STUDIO WORKSPACE -->
+    <main class="w-full max-w-7xl mx-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+
+        <!-- LEFT COLUMN: BRUTALIST CONTROL PANEL (7 COLS) -->
+        <div class="lg:col-span-7 brutal-box p-6 space-y-6">
+            
+            <div class="border-b-2 border-cyan-400 pb-3 flex justify-between items-center">
+                <h2 class="font-cyber text-xl font-bold text-white uppercase">1. CONTROLS &amp; PARAMETERS</h2>
+                <span class="text-xs text-emerald-400 font-mono">[ REALTIME ENGINE ]</span>
+            </div>
+
+            <!-- TARGET URL / SUBDOMAIN -->
+            <div class="space-y-2">
+                <label class="block text-xs text-cyan-400 font-bold uppercase">Target Subdomain / Destination URL:</label>
+                <input type="text" id="qr-data" value="https://clientname.burn-1.com" oninput="updateQR()" class="w-full brutal-input">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- DOT STYLE -->
+                <div class="space-y-2">
+                    <label class="block text-xs text-cyan-400 font-bold uppercase">QR Dot Pattern:</label>
+                    <select id="qr-dots-style" onchange="updateQR()" class="w-full brutal-input">
+                        <option value="dots">Rounded Dots</option>
+                        <option value="rounded" selected>Classy Rounded</option>
+                        <option value="classy">Classy Squares</option>
+                        <option value="square">Standard Square</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                    </select>
+                </div>
+
+                <!-- CORNER SQUARE STYLE -->
+                <div class="space-y-2">
+                    <label class="block text-xs text-cyan-400 font-bold uppercase">Corner Eye Style:</label>
+                    <select id="qr-corners-style" onchange="updateQR()" class="w-full brutal-input">
+                        <option value="dot">Circular Dot Eye</option>
+                        <option value="square" selected>Square Eye</option>
+                        <option value="extra-rounded">Rounded Eye</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- PRIMARY BRAND COLOR -->
+                <div class="space-y-2">
+                    <label class="block text-xs text-cyan-400 font-bold uppercase">QR Code Color:</label>
+                    <div class="flex gap-2">
+                        <input type="color" id="qr-color" value="#00f3ff" onchange="updateQR()" class="w-12 h-10 border-2 border-cyan-400 bg-black cursor-pointer">
+                        <input type="text" id="qr-color-text" value="#00f3ff" oninput="syncColor(this.value)" class="w-full brutal-input">
+                    </div>
+                </div>
+
+                <!-- BACKGROUND COLOR -->
+                <div class="space-y-2">
+                    <label class="block text-xs text-cyan-400 font-bold uppercase">Background Color:</label>
+                    <div class="flex gap-2">
+                        <input type="color" id="qr-bg-color" value="#000000" onchange="updateQR()" class="w-12 h-10 border-2 border-cyan-400 bg-black cursor-pointer">
+                        <input type="text" id="qr-bg-text" value="#000000" oninput="syncBgColor(this.value)" class="w-full brutal-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CENTER LOGO UPLOAD -->
+            <div class="space-y-2 border-t border-cyan-500/30 pt-4">
+                <label class="block text-xs text-emerald-400 font-bold uppercase">Center Brand Logo (PNG / SVG / JPG):</label>
+                <input type="file" id="qr-image-input" accept="image/*" onchange="handleLogoUpload(event)" class="w-full brutal-input text-xs text-gray-300">
+                <p class="text-[10px] text-gray-500 font-mono">Logo will be embedded in exact center with automatic clear space padding.</p>
+            </div>
+
+            <!-- EXPORT ACTION BUTTONS -->
+            <div class="grid grid-cols-2 gap-4 pt-4 border-t-2 border-cyan-400">
+                <button onclick="downloadQR('svg')" class="brutal-btn py-3 text-xs uppercase font-cyber">
+                    💾 DOWNLOAD VECTOR SVG
+                </button>
+                <button onclick="downloadQR('png')" class="brutal-btn py-3 text-xs uppercase font-cyber">
+                    🖼️ DOWNLOAD HIGH-RES PNG
+                </button>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: LIVE BRUTALIST PREVIEW CANVAS (5 COLS) -->
+        <div class="lg:col-span-5 brutal-box-emerald p-6 flex flex-col justify-between items-center text-center">
+            
+            <div class="w-full border-b-2 border-emerald-400 pb-3 mb-6 flex justify-between items-center">
+                <h2 class="font-cyber text-xl font-bold text-white uppercase">2. LIVE PREVIEW</h2>
+                <span class="text-xs text-emerald-400 font-mono">1000x1000 CANVAS</span>
+            </div>
+
+            <!-- QR RENDER CONTAINER -->
+            <div id="qr-canvas-wrapper" class="p-6 bg-black border-4 border-emerald-400 shadow-[6px_6px_0px_#39ff14] flex items-center justify-center my-auto">
+                <div id="canvas"></div>
+            </div>
+
+            <div class="w-full pt-6 border-t border-emerald-500/30">
+                <p class="text-xs text-emerald-300 font-mono uppercase font-bold mb-1">✓ QUIET ZONE PRESERVED</p>
+                <p class="text-[10px] text-gray-400 font-mono">Guaranteed 100% scan capability across mobile &amp; kiosk cameras.</p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
+        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS // PROPRIETARY QR STUDIO TOOL © 2026</p>
+    </footer>
+
+    <script>
+        let qrLogo = "";
+        let qrCode = new QRCodeStyling({
+            width: 280,
+            height: 280,
+            type: "svg",
+            data: "https://clientname.burn-1.com",
+            image: "",
+            dotsOptions: {
+                color: "#00f3ff",
+                type: "rounded"
+            },
+            backgroundOptions: {
+                color: "#000000",
+            },
+            cornersSquareOptions: {
+                color: "#00f3ff",
+                type: "square"
+            },
+            imageOptions: {
+                crossOrigin: "anonymous",
+                margin: 6,
+                imageSize: 0.35
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            qrCode.append(document.getElementById("canvas"));
+        });
+
+        function updateQR() {
+            const urlData = document.getElementById("qr-data").value || "https://burn-1.com";
+            const dotsStyle = document.getElementById("qr-dots-style").value;
+            const cornerStyle = document.getElementById("qr-corners-style").value;
+            const primaryColor = document.getElementById("qr-color").value;
+            const bgColor = document.getElementById("qr-bg-color").value;
+
+            document.getElementById("qr-color-text").value = primaryColor;
+            document.getElementById("qr-bg-text").value = bgColor;
+
+            qrCode.update({
+                data: urlData,
+                image: qrLogo,
+                dotsOptions: {
+                    color: primaryColor,
+                    type: dotsStyle
+                },
+                backgroundOptions: {
+                    color: bgColor
+                },
+                cornersSquareOptions: {
+                    color: primaryColor,
+                    type: cornerStyle
+                }
+            });
+        }
+
+        function syncColor(val) {
+            document.getElementById("qr-color").value = val;
+            updateQR();
+        }
+
+        function syncBgColor(val) {
+            document.getElementById("qr-bg-color").value = val;
+            updateQR();
+        }
+
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    qrLogo = e.target.result;
+                    updateQR();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function downloadQR(format) {
+            qrCode.download({
+                name: "burn1_custom_qr",
+                extension: format
+            });
+        }
+    </script>
+</body>
+</html>

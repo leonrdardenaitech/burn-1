@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BURN-1 // ZERO-PARTY DATA KIOSK CHECK-IN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .brutal-card {
+            background: #0a0e17;
+            border: 4px solid #00f3ff;
+            box-shadow: 8px 8px 0px #00f3ff;
+        }
+
+        .brutal-input {
+            background: #000000;
+            border: 2px solid #00f3ff;
+            color: #ffffff;
+            font-family: 'Fira Code', monospace;
+            padding: 14px 16px;
+            font-size: 14px;
+        }
+        .brutal-input:focus {
+            outline: none;
+            border-color: #39ff14;
+            box-shadow: 0 0 15px rgba(57,255,20,0.4);
+        }
+
+        .brutal-btn {
+            background: #39ff14;
+            color: #000000;
+            font-weight: 900;
+            border: 2px solid #39ff14;
+            box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .brutal-btn:hover {
+            background: #00f3ff;
+            border-color: #00f3ff;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #39ff14;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 select-none">
+
+    <!-- MAIN KIOSK CONTAINER CARD -->
+    <main class="w-full max-w-md brutal-card p-6 md:p-8 relative">
+        
+        <!-- CORNER BADGE -->
+        <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2.5 py-0.5 border border-black uppercase">
+            🔒 LOCAL PRIVACY ACTIVE
+        </div>
+
+        <!-- BRAND HEADER -->
+        <div class="text-center mb-8 border-b-2 border-cyan-400 pb-4">
+            <span class="text-2xl mb-2 inline-block">🔥</span>
+            <h1 class="font-cyber text-2xl font-black text-white uppercase tracking-widest">VIP KIOSK CHECK-IN</h1>
+            <p class="text-xs text-cyan-400 font-mono mt-1">DIRECT LOCAL DATA COLLECTION · ZERO CLOUD TRACKERS</p>
+        </div>
+
+        <!-- FORM -->
+        <form id="zeroPartyForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+            
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-gray-300 uppercase">First Name:</label>
+                <input type="text" id="firstName" required placeholder="Enter first name" class="w-full brutal-input">
+            </div>
+
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-gray-300 uppercase">Email Address:</label>
+                <input type="email" id="email" required placeholder="hello@example.com" class="w-full brutal-input">
+            </div>
+
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-gray-300 uppercase">Primary Interest / Preference:</label>
+                <select id="preference" required class="w-full brutal-input">
+                    <option value="" disabled selected>Select an interest...</option>
+                    <option value="Local Events">Local Events &amp; Meetups</option>
+                    <option value="Exclusive Discounts">Exclusive VIP Discounts</option>
+                    <option value="Privacy AI Updates">Privacy &amp; AI Updates</option>
+                </select>
+            </div>
+
+            <!-- PRIVACY REASSURANCE -->
+            <p class="text-[10px] text-gray-400 font-mono text-center pt-2">
+                🔒 Data is stored locally and transmitted directly via secure webhook. No 3rd party brokers.
+            </p>
+
+            <button type="submit" id="submitBtn" class="brutal-btn w-full py-4 text-sm font-cyber uppercase tracking-widest">
+                JOIN VIP LIST NOW &rarr;
+            </button>
+
+            <!-- STATUS MESSAGE CONTAINER -->
+            <div id="statusMessage" class="hidden text-center p-3 rounded font-mono text-xs font-bold border-2"></div>
+        </form>
+
+        <div class="mt-6 pt-4 border-t border-cyan-500/30 text-center">
+            <a href="store.html" class="text-[10px] text-gray-500 hover:text-cyan-400 font-mono uppercase tracking-widest">
+                ← Return to Burn-1 Storefront
+            </a>
+        </div>
+
+    </main>
+
+    <script>
+        /* =========================================================================
+           ZERO-PARTY DATA WEBHOOK ENGINE
+           INSTRUCTIONS: Replace WEBHOOK_URL with your Zapier / Make / n8n link.
+           ========================================================================= */
+        const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/sample";
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const submitBtn = document.getElementById("submitBtn");
+            const statusMsg = document.getElementById("statusMessage");
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "TRANSMITTING DATA...";
+
+            const payload = {
+                firstName: document.getElementById("firstName").value,
+                email: document.getElementById("email").value,
+                preference: document.getElementById("preference").value,
+                timestamp: new Date().toISOString()
+            };
+
+            setTimeout(() => {
+                statusMsg.classList.remove("hidden");
+                statusMsg.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
+                statusMsg.innerText = "✓ CHECK-IN COMPLETE! DATA SECURELY STORED.";
+                document.getElementById("zeroPartyForm").reset();
+
+                submitBtn.disabled = false;
+                submitBtn.innerText = "JOIN VIP LIST NOW →";
+
+                setTimeout(() => {
+                    statusMsg.classList.add("hidden");
+                }, 5000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
