@@ -1,264 +1,355 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BURN-1 SYSTEMS // DIGITAL ASSET VAULT</title>
+    <title>BURN-1 SYSTEMS // DIGITAL ASSET VAULT (DAY MODE)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* DAY MODE BACKGROUND & UNIFORM COLOR SCHEME */
         body {
-            background-color: #050505;
-            color: #00f3ff;
-            font-family: 'Share Tech Mono', monospace;
+            background-image: linear-gradient(rgba(248, 250, 252, 0.35), rgba(241, 245, 249, 0.45)), url('daybackground.png');
+            background-size: cover;
+            background-position: right top;
+            background-attachment: fixed;
+            color: #0f172a;
+            font-family: 'Space Grotesk', sans-serif;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
         .font-mono-code { font-family: 'Fira Code', monospace; }
-        
-        /* BRUTALIST SHARP BORDERS & HARD SHADOWS */
-        .brutal-card {
-            background: #0a0e17;
-            border: 3px solid #00f3ff;
-            box-shadow: 6px 6px 0px #00f3ff;
-            transition: all 0.15s ease-in-out;
+        .font-tech { font-family: 'Share Tech Mono', monospace; }
+
+        /* DAY MODE BRUTALIST CARDS (NEO-BOX) */
+        .brutal-card-day {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 4px solid #0f172a;
+            box-shadow: 8px 8px 0px #0f172a;
+            transition: all 0.2s ease;
         }
-        .brutal-card:hover {
+        .brutal-card-day:hover {
             transform: translate(-3px, -3px);
-            box-shadow: 9px 9px 0px #39ff14;
-            border-color: #39ff14;
+            box-shadow: 12px 12px 0px #0f172a;
         }
 
-        .brutal-card-gold {
-            background: #141005;
-            border: 3px solid #f59e0b;
-            box-shadow: 6px 6px 0px #f59e0b;
+        .brutal-card-gold-day {
+            background-color: #fffbebfb;
+            backdrop-filter: blur(12px);
+            border: 4px solid #b45309;
+            box-shadow: 8px 8px 0px #b45309;
+            transition: all 0.2s ease;
         }
-        .brutal-card-gold:hover {
+        .brutal-card-gold-day:hover {
             transform: translate(-3px, -3px);
-            box-shadow: 9px 9px 0px #ff0055;
-            border-color: #ff0055;
+            box-shadow: 12px 12px 0px #b45309;
         }
 
-        .brutal-btn {
-            background: #00f3ff;
-            color: #000000;
-            font-weight: 900;
-            border: 2px solid #00f3ff;
-            box-shadow: 4px 4px 0px #ffffff;
-            transition: all 0.1s ease-in-out;
-        }
-        .brutal-btn:hover {
-            background: #39ff14;
-            border-color: #39ff14;
-            box-shadow: 4px 4px 0px #00f3ff;
-            transform: translate(-2px, -2px);
-        }
-
-        .brutal-btn-gold {
-            background: #f59e0b;
-            color: #000000;
-            font-weight: 900;
-            border: 2px solid #f59e0b;
-            box-shadow: 4px 4px 0px #ffffff;
-        }
-        .brutal-btn-gold:hover {
-            background: #ff0055;
-            border-color: #ff0055;
+        /* DAY MODE BRUTALIST BUTTONS */
+        .brutal-btn-day {
+            background-color: #0284c7;
             color: #ffffff;
+            font-weight: 800;
+            border: 3px solid #0f172a;
+            box-shadow: 5px 5px 0px #0f172a;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+        .brutal-btn-day:hover {
+            background-color: #0369a1;
             transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #0f172a;
+        }
+
+        .brutal-btn-gold-day {
+            background-color: #d97706;
+            color: #ffffff;
+            font-weight: 800;
+            border: 3px solid #0f172a;
+            box-shadow: 5px 5px 0px #0f172a;
+            transition: all 0.15s ease;
+        }
+        .brutal-btn-gold-day:hover {
+            background-color: #b45309;
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #0f172a;
+        }
+
+        .badge-day {
+            background-color: #fef08a;
+            color: #854d0e;
+            border: 2px solid #0f172a;
+            box-shadow: 3px 3px 0px #0f172a;
+            font-weight: 800;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
 
-    <!-- BRUTALIST TOP HEADER -->
-    <header class="w-full max-w-7xl mx-auto border-4 border-cyan-400 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#00f3ff]">
+    <!-- DAY MODE TOP HEADER -->
+    <header class="w-full max-w-7xl mx-auto border-4 border-slate-900 bg-white/90 backdrop-blur-md p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#0f172a]">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
+            <div class="w-12 h-12 bg-sky-600 text-white flex items-center justify-center font-cyber font-black text-2xl border-2 border-slate-900 shadow-[3px_3px_0px_#0f172a]">
                 🔥
             </div>
             <div>
-                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">BURN-1 SYSTEMS</h1>
-                <p class="text-xs text-cyan-400 font-mono-code uppercase">ZERO-CONTACT DIGITAL ASSET VAULT · FLAT $50</p>
+                <h1 class="font-cyber text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-widest">BURN-1 SYSTEMS</h1>
+                <p class="text-xs text-sky-700 font-mono-code font-bold uppercase">ZERO-CONTACT DIGITAL ASSET VAULT · DAY MODE · FLAT $50</p>
             </div>
         </div>
 
-        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
-            <a href="https://leonrdarden.com" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">LOBBY</a>
-            <a href="onboarding.html" class="px-4 py-2 border-2 border-emerald-400 bg-emerald-950 text-emerald-300 hover:bg-emerald-400 hover:text-black transition-colors uppercase">🚀 ONBOARDING</a>
-            <a href="https://leonrdarden.com/services" class="px-4 py-2 border-2 border-cyan-400 bg-black text-cyan-400 hover:bg-cyan-400 hover:text-black transition-colors uppercase">SERVICES MATRIX</a>
-            <a href="privacy_first_protocol.html" class="px-4 py-2 border-2 border-red-500 bg-red-950 text-red-400 hover:bg-red-500 hover:text-black transition-colors uppercase">PRIVACY SUITE</a>
+        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-tech">
+            <a href="index.html" class="px-4 py-2 border-2 border-slate-900 bg-white text-slate-900 hover:bg-slate-900 hover:text-white transition-colors uppercase shadow-[3px_3px_0px_#0f172a]">← CENTRAL HUB</a>
+            <a href="onboarding.html" class="px-4 py-2 border-2 border-slate-900 bg-amber-200 text-amber-900 hover:bg-amber-400 transition-colors uppercase shadow-[3px_3px_0px_#0f172a]">🚀 ONBOARDING</a>
+            <a href="https://leonrdarden.com/services" class="px-4 py-2 border-2 border-slate-900 bg-sky-100 text-sky-900 hover:bg-sky-500 hover:text-white transition-colors uppercase shadow-[3px_3px_0px_#0f172a]">SERVICES MATRIX</a>
+            <a href="privacy_first_protocol.html" class="px-4 py-2 border-2 border-slate-900 bg-red-100 text-red-900 hover:bg-red-600 hover:text-white transition-colors uppercase shadow-[3px_3px_0px_#0f172a]">PRIVACY SUITE</a>
         </nav>
     </header>
 
-    <!-- SYSTEM ALERT BANNER -->
-    <div class="w-full max-w-7xl mx-auto border-2 border-emerald-400 bg-emerald-950/40 p-3 mb-10 text-center text-xs font-mono text-emerald-300 uppercase tracking-widest shadow-[4px_4px_0px_#39ff14]">
-        ⚡ [SYSTEM NOTICE] ALL VAULT ASSETS ARE 100% OFFINE, STANDALONE, AND ZERO-CLOUD HARVESTING
+    <!-- SYSTEM ALERT BANNER (DAY MODE) -->
+    <div class="w-full max-w-7xl mx-auto border-3 border-slate-900 bg-amber-100/90 backdrop-blur-md p-3 mb-10 text-center text-xs font-tech text-slate-900 font-bold uppercase tracking-widest shadow-[4px_4px_0px_#0f172a]">
+        ⚡ [DAY MODE ACTIVE] ALL DIGITAL ASSETS ARE 100% STANDALONE, OFFINE, AND ZERO-CLOUD TRACKING
     </div>
 
     <!-- MAIN STORE VAULT GRID -->
     <main class="w-full max-w-7xl mx-auto flex-grow mb-16">
         
         <!-- SECTION TITLE -->
-        <div class="border-b-4 border-cyan-400 pb-3 mb-8 flex justify-between items-end">
+        <div class="border-b-4 border-slate-900 pb-3 mb-8 flex justify-between items-end">
             <div>
-                <span class="text-xs text-emerald-400 font-mono uppercase tracking-widest">[ STORE CATALOG // 2026 RELEASE ]</span>
-                <h2 class="font-cyber text-3xl font-black text-white uppercase tracking-wider">AVAILABLE DIGITAL ASSETS</h2>
+                <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">[ DAY MODE STORE CATALOG // 2026 RELEASE ]</span>
+                <h2 class="font-cyber text-3xl font-black text-slate-900 uppercase tracking-wider">AVAILABLE DIGITAL ASSETS</h2>
             </div>
-            <span class="text-xs text-cyan-400 font-mono border border-cyan-400 px-3 py-1 bg-black">6 ASSETS ACTIVE</span>
+            <span class="text-xs text-slate-900 font-tech border-2 border-slate-900 px-3 py-1 bg-white font-bold shadow-[2px_2px_0px_#0f172a]">9 ASSETS READY</span>
         </div>
 
-        <!-- 6-CARD BRUTALIST VAULT GRID -->
+        <!-- 9-CARD DAY MODE BRUTALIST VAULT GRID -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             <!-- PRODUCT 1: B2B KIOSK ENGINE -->
-            <div class="brutal-card p-6 flex flex-col justify-between relative">
-                <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2 py-0.5 border border-black uppercase">
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
                     SYS: B2B-01
                 </div>
                 <div>
-                    <span class="text-xs text-emerald-400 font-mono font-bold uppercase tracking-widest">SUBDOMAIN & KIOSK</span>
-                    <h3 class="font-cyber text-xl text-white font-bold my-2">B2B Kiosk Engine &amp; QR</h3>
-                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-mono-code">
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">SUBDOMAIN &amp; KIOSK</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">B2B Kiosk Engine &amp; QR</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
                         Wildcard subdomains, vector QR sticker generator, and automated PayPal checkout webhooks for instant single-page digital storefronts.
                     </p>
-                    <ul class="text-xs text-cyan-300 space-y-1.5 mb-6 font-mono border-t border-b border-cyan-500/30 py-3">
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
                         <li>► Wildcard DNS &amp; Subdomains</li>
                         <li>► PayPal Autodraft API Webhooks</li>
                         <li>► One-Touch QR Digital Menus</li>
                     </ul>
                 </div>
                 <div>
-                    <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">Setup / $50/mo</span></div>
-                    <a href="https://burn-1.com?mode=day" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">Setup / $50/mo</span></div>
+                    <a href="https://burn-1.com?mode=day" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
                         LAUNCH KIOSK ENGINE &rarr;
                     </a>
                 </div>
             </div>
 
             <!-- PRODUCT 2: ZERO-PARTY DATA COLLECTION KIT -->
-            <div class="brutal-card p-6 flex flex-col justify-between relative">
-                <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2 py-0.5 border border-black uppercase">
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
                     SYS: DATA-02
                 </div>
                 <div>
-                    <span class="text-xs text-cyan-400 font-mono font-bold uppercase tracking-widest">PRIVACY MARKETING</span>
-                    <h3 class="font-cyber text-xl text-white font-bold my-2">Zero-Party Data Form Kit</h3>
-                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-mono-code">
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">PRIVACY MARKETING</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">Zero-Party Data Form Kit</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
                         Standalone HTML/CSS kiosk forms optimized for mobile screens. Collect customer emails and preferences locally with zero cloud trackers.
                     </p>
-                    <ul class="text-xs text-cyan-300 space-y-1.5 mb-6 font-mono border-t border-b border-cyan-500/30 py-3">
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
                         <li>► 100% Offline Local Processing</li>
                         <li>► Isolated CSS Theme Variables</li>
                         <li>► Webhook Engine (Zapier/Make/n8n)</li>
                     </ul>
                 </div>
                 <div>
-                    <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">FLAT FEE</span></div>
-                    <a href="https://burn-1.com/privacy_first_protocol.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">FLAT FEE</span></div>
+                    <a href="zero_party_kiosk.html" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
                         GET DATA KIT ($50) &rarr;
                     </a>
                 </div>
             </div>
 
             <!-- PRODUCT 3: QR VECTOR ASSET PACK -->
-            <div class="brutal-card p-6 flex flex-col justify-between relative">
-                <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2 py-0.5 border border-black uppercase">
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
                     SYS: VECTOR-03
                 </div>
                 <div>
-                    <span class="text-xs text-emerald-400 font-mono font-bold uppercase tracking-widest">BRAND GRAPHICS</span>
-                    <h3 class="font-cyber text-xl text-white font-bold my-2">QR Vector Asset Pack</h3>
-                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-mono-code">
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">BRAND GRAPHICS</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">QR Vector Asset Pack</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
                         15+ scalable SVG vector frames, borders, and CTA banners. Engineered with built-in quiet zone buffers to guarantee zero scan failures.
                     </p>
-                    <ul class="text-xs text-cyan-300 space-y-1.5 mb-6 font-mono border-t border-b border-cyan-500/30 py-3">
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
                         <li>► 1000x1000 Master SVG Canvas</li>
                         <li>► Built-In Quiet Zone Margins</li>
                         <li>► Transparent Drop Zones</li>
                     </ul>
                 </div>
                 <div>
-                    <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">FLAT FEE</span></div>
-                    <a href="qr.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">FLAT FEE</span></div>
+                    <a href="qr_vector_pack.html" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
                         GET QR ASSETS ($50) &rarr;
                     </a>
                 </div>
             </div>
 
             <!-- PRODUCT 4: PRIVACY-FIRST LOCAL AI VAULT -->
-            <div class="brutal-card p-6 flex flex-col justify-between relative">
-                <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2 py-0.5 border border-black uppercase">
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
                     SYS: AI-04
                 </div>
                 <div>
-                    <span class="text-xs text-emerald-400 font-mono font-bold uppercase tracking-widest">AIR-GAPPED AI</span>
-                    <h3 class="font-cyber text-xl text-white font-bold my-2">Privacy-First Local AI Vault</h3>
-                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-mono-code">
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">AIR-GAPPED AI</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">Privacy-First Local AI Vault</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
                         Turnkey, offline local LLM environment configuration zip. Complete data sovereignty on internal hardware with zero cloud telemetry.
                     </p>
-                    <ul class="text-xs text-cyan-300 space-y-1.5 mb-6 font-mono border-t border-b border-cyan-500/30 py-3">
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
                         <li>► Ollama / Hermes Config Blueprints</li>
                         <li>► Local Hardware Spec &amp; Sourcing Guide</li>
                         <li>► 5-Minute Executable Setup</li>
                     </ul>
                 </div>
                 <div>
-                    <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">SETUP ZIP</span></div>
-                    <a href="privacy_first_protocol.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">SETUP ZIP</span></div>
+                    <a href="privacy_first_protocol.html" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
                         ACCESS LOCAL AI ($50) &rarr;
                     </a>
                 </div>
             </div>
 
-            <!-- PRODUCT 5: VIP MASTERCLASS & TRAINING (GOLD BRUTALIST) -->
-            <div class="brutal-card-gold p-6 flex flex-col justify-between relative">
-                <div class="absolute -top-3 right-4 bg-amber-400 text-black font-mono text-[10px] font-bold px-2 py-0.5 border border-black uppercase">
+            <!-- PRODUCT 5: VIP MASTERCLASS & TRAINING (GOLD DAY MODE) -->
+            <div class="brutal-card-gold-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 bg-amber-500 text-white font-bold text-[10px] px-2.5 py-0.5 border-2 border-slate-900 uppercase shadow-[2px_2px_0px_#0f172a]">
                     EXCLUSIVE
                 </div>
                 <div>
-                    <span class="text-xs text-amber-400 font-mono font-bold uppercase tracking-widest">EXECUTIVE PROTOCOL</span>
-                    <h3 class="font-cyber text-xl text-white font-bold my-2">VIP Training &amp; Masterclass</h3>
-                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-mono-code">
+                    <span class="text-xs text-amber-900 font-tech font-bold uppercase tracking-widest">EXECUTIVE PROTOCOL</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">VIP Training &amp; Masterclass</h3>
+                    <p class="text-xs text-slate-800 mb-4 leading-relaxed font-mono-code">
                         3-series video masterclass, podcasts, and workbooks covering elite hospitality, industrial etiquette, and executive digital protocols.
                     </p>
-                    <ul class="text-xs text-amber-300 space-y-1.5 mb-6 font-mono border-t border-b border-amber-500/30 py-3">
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-amber-900/20 py-3">
                         <li>► Series 1–3 Video Masterclasses</li>
                         <li>► Workbooks &amp; Operational Quizzes</li>
-                        <li>► Interactive VIP Vault Canvas (<code class="text-amber-200">vip_vault.html</code>)</li>
+                        <li>► Interactive VIP Vault Canvas (<code class="text-amber-900 font-bold">vip_vault.html</code>)</li>
                     </ul>
                 </div>
                 <div>
-                    <div class="font-cyber text-xl font-black text-white mb-3">GATED ACCESS / VAULT</div>
-                    <a href="vip_vault.html" class="brutal-btn-gold block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    <div class="font-cyber text-xl font-black text-slate-900 mb-3">GATED ACCESS / VAULT</div>
+                    <a href="vip_vault.html" class="brutal-btn-gold-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
                         ENTER VIP VAULT &rarr;
                     </a>
                 </div>
             </div>
 
             <!-- PRODUCT 6: SCORM LMS COURSE SHELLS -->
-            <div class="brutal-card p-6 flex flex-col justify-between relative">
-                <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2 py-0.5 border border-black uppercase">
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
                     SYS: LMS-06
                 </div>
                 <div>
-                    <span class="text-xs text-emerald-400 font-mono font-bold uppercase tracking-widest">EDTECH FRAMEWORKS</span>
-                    <h3 class="font-cyber text-xl text-white font-bold my-2">SCORM LMS Course Shells</h3>
-                    <p class="text-xs text-gray-300 mb-4 leading-relaxed font-mono-code">
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">EDTECH FRAMEWORKS</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">SCORM LMS Course Shells</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
                         Pre-structured, instructional-design-optimized SCORM course templates ready for instant upload to Canvas, Moodle, or Blackboard.
                     </p>
-                    <ul class="text-xs text-cyan-300 space-y-1.5 mb-6 font-mono border-t border-b border-cyan-500/30 py-3">
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
                         <li>► SCORM 1.2 &amp; SCORM 2004 Standard</li>
                         <li>► 3-Step Universal Upload Guide</li>
                         <li>► Zero Custom Integration Needed</li>
                     </ul>
                 </div>
                 <div>
-                    <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">FLAT FEE</span></div>
-                    <a href="https://www.eachoneteach.one/SOCtraining21.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">FLAT FEE</span></div>
+                    <a href="scorm_lms_shells.html" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
                         EXPLORE LMS SHELLS &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUCT 7: RESTAURANT & FOOD TRUCK DIGITAL MENU KITS -->
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
+                    SYS: MENU-07
+                </div>
+                <div>
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">RETAIL &amp; FOOD</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">Digital Menu &amp; Food Truck Kit</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
+                        Mobile-optimized, touch-friendly digital menu templates replacing paper menus. Includes Canva/Figma links &amp; QR frame wrapper.
+                    </p>
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
+                        <li>► Fast Mobile Load (&lt;1s)</li>
+                        <li>► Category Tab Switcher</li>
+                        <li>► Netlify 1-Click Drag &amp; Drop Guide</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">FLAT FEE</span></div>
+                    <a href="digital_menu_kit.html" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                        GET DIGITAL MENU KIT ($50) &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUCT 8: CHATBOT FLOW MAPS -->
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
+                    SYS: BOT-08
+                </div>
+                <div>
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">AI LOGIC MAPS</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">Automated Chatbot Flow Maps</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
+                        Downloadable decision-tree logic maps for high-converting customer service, scheduling, and booking bots.
+                    </p>
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
+                        <li>► Lucidchart Shared Link</li>
+                        <li>► Microsoft Visio (.vsdx) Files</li>
+                        <li>► Copywriting Prompt Matrix</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">FLAT FEE</span></div>
+                    <a href="chatbot_flow_maps.html" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                        GET CHATBOT MAPS ($50) &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRODUCT 9: EXECUTIVE DIGITAL ETIQUETTE PLAYBOOK -->
+            <div class="brutal-card-day p-6 flex flex-col justify-between relative">
+                <div class="absolute -top-3 right-4 badge-day text-[10px] px-2.5 py-0.5 uppercase">
+                    SYS: PLAYBOOK-09
+                </div>
+                <div>
+                    <span class="text-xs text-sky-800 font-tech font-bold uppercase tracking-widest">REMOTE PROTOCOL</span>
+                    <h3 class="font-cyber text-xl text-slate-900 font-bold my-2">Executive Digital Etiquette</h3>
+                    <p class="text-xs text-slate-700 mb-4 leading-relaxed font-mono-code">
+                        48-page PDF manual detailing communication protocols, data hygiene, and front-facing standards for remote teams.
+                    </p>
+                    <ul class="text-xs text-slate-900 space-y-1.5 mb-6 font-tech font-bold border-t-2 border-b-2 border-slate-900/20 py-3">
+                        <li>► Elite Hospitality Standards</li>
+                        <li>► Cybersecurity &amp; Data Hygiene</li>
+                        <li>► Pure Consumption (Zero Support)</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-cyber text-2xl font-black text-slate-900 mb-3">$50 <span class="text-xs font-mono font-normal text-slate-600">FLAT FEE</span></div>
+                    <a href="executive_etiquette_playbook.html" class="brutal-btn-day block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                        GET ETIQUETTE PLAYBOOK ($50) &rarr;
                     </a>
                 </div>
             </div>
@@ -267,28 +358,28 @@
 
     </main>
 
-    <!-- BURN-1 MANIFESTO TERMINAL SECTION -->
-    <section class="w-full max-w-7xl mx-auto border-4 border-red-600 bg-black p-6 mb-16 shadow-[8px_8px_0px_#ff0055]">
-        <div class="flex items-center gap-2 border-b border-red-600 pb-3 mb-4 text-xs font-mono text-red-500">
-            <span class="w-3 h-3 rounded-full bg-red-600 animate-ping"></span>
-            <span>CAT BURN1_MANIFESTO.TXT // THE ZERO-CONTACT PRIVACY PROTOCOL</span>
+    <!-- BURN-1 MANIFESTO SECTION (DAY MODE) -->
+    <section class="w-full max-w-7xl mx-auto border-4 border-slate-900 bg-white/95 backdrop-blur-md p-6 mb-16 shadow-[8px_8px_0px_#0f172a]">
+        <div class="flex items-center gap-2 border-b-2 border-slate-900 pb-3 mb-4 text-xs font-tech text-slate-900 font-bold">
+            <span class="w-3 h-3 rounded-full bg-red-500 animate-ping"></span>
+            <span>BURN1_MANIFESTO.TXT // THE ZERO-CONTACT PRIVACY PROTOCOL</span>
         </div>
-        <div class="font-mono text-xs md:text-sm text-gray-300 space-y-3 leading-relaxed">
-            <p class="text-white font-bold">Most digital infrastructure today is designed to bleed you dry with recurring SaaS fees while your data is strip-mined by third-party trackers.</p>
-            <p><span class="text-cyan-400 font-bold">BURN-1 SYSTEMS</span> is the counter-measure. We engineer zero-contact, flat-fee digital assets for businesses that value sovereignty over cloud lock-in.</p>
-            <div class="pl-4 border-l-2 border-cyan-400 space-y-1 text-cyan-300">
+        <div class="font-mono text-xs md:text-sm text-slate-800 space-y-3 leading-relaxed">
+            <p class="text-slate-900 font-bold">Most digital infrastructure today is designed to bleed you dry with recurring SaaS fees while your data is strip-mined by third-party trackers.</p>
+            <p><span class="text-sky-700 font-bold">BURN-1 SYSTEMS</span> is the counter-measure. We engineer zero-contact, flat-fee digital assets for businesses that value sovereignty over cloud lock-in.</p>
+            <div class="pl-4 border-l-3 border-sky-600 space-y-1 text-slate-900 font-bold">
                 <p>1. ONE-TIME DEPLOYMENT: No recurring SaaS drain. You buy the code, you own the infrastructure.</p>
                 <p>2. ZERO-PARTY DATA: Our forms run locally. No cloud trackers, no data brokers.</p>
                 <p>3. LOCAL EXECUTION: From offline local AI vaults to headless webhooks, hardware stays air-gapped.</p>
             </div>
-            <p class="text-gray-400">Everything in the Burn-1 Vault is a flat $50. Download the zip, follow the deployment blueprint, and take control of your digital footprint.</p>
+            <p class="text-slate-700">Everything in the Burn-1 Vault is a flat $50. Download the zip, follow the deployment blueprint, and take control of your digital footprint.</p>
         </div>
     </section>
 
-    <!-- BRUTALIST FOOTER -->
-    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
-        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS © 2026 // ALL RIGHTS RESERVED // DATA SOVEREIGNTY GUARANTEE</p>
-        <p>CONTACT: <a href="mailto:leonrdarden@gmail.com" class="text-cyan-400 hover:underline">leonrdarden@gmail.com</a> | PHONE: (678) 763-0580</p>
+    <!-- FOOTER (DAY MODE) -->
+    <footer class="w-full max-w-7xl mx-auto border-t-4 border-slate-900 pt-6 pb-4 text-center text-xs font-tech text-slate-900 font-bold">
+        <p class="uppercase font-bold text-slate-900 mb-2">BURN-1 SYSTEMS © 2026 // ALL RIGHTS RESERVED // DATA SOVEREIGNTY GUARANTEE</p>
+        <p>CONTACT: <a href="mailto:leonrdarden@gmail.com" class="text-sky-700 hover:underline">leonrdarden@gmail.com</a> | PHONE: (678) 763-0580</p>
     </footer>
 
     <script src="js/chatbot.js"></script>
