@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURN-1 // AUTOMATED CHATBOT FLOW MAPS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .brutal-card {
+            background: #0a0e17;
+            border: 3px solid #00f3ff;
+            box-shadow: 6px 6px 0px #00f3ff;
+        }
+
+        .brutal-node {
+            background: #000000;
+            border: 2px solid #00f3ff;
+            box-shadow: 4px 4px 0px #39ff14;
+        }
+
+        .brutal-btn {
+            background: #39ff14;
+            color: #000000;
+            font-weight: 900;
+            border: 2px solid #39ff14;
+            box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .brutal-btn:hover {
+            background: #00f3ff;
+            border-color: #00f3ff;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #39ff14;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-7xl mx-auto border-4 border-cyan-400 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#00f3ff]">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
+                🤖
+            </div>
+            <div>
+                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">CHATBOT FLOW MAPS</h1>
+                <p class="text-xs text-cyan-400 font-mono-code uppercase">DECISION-TREE LOGIC BLUEPRINTS · LUCIDCHART / VISIO / PDF</p>
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
+            <a href="store.html" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">← STORE VAULT</a>
+        </nav>
+    </header>
+
+    <!-- MAIN PRODUCT WORKSPACE -->
+    <main class="w-full max-w-7xl mx-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+
+        <!-- LEFT COLUMN: INTERACTIVE DECISION-TREE FLOW MAP (7 COLS) -->
+        <div class="lg:col-span-7 brutal-card p-6 space-y-6">
+            <div class="border-b-2 border-cyan-400 pb-3 flex justify-between items-center">
+                <h2 class="font-cyber text-xl font-bold text-white uppercase">1. DECISION-TREE LOGIC MAP</h2>
+                <span class="text-xs text-emerald-400 font-mono">[ INTERACTIVE FLOW ]</span>
+            </div>
+
+            <p class="text-xs text-gray-300 font-mono-code leading-relaxed">
+                Visual representation of the automated customer service &amp; booking decision tree:
+            </p>
+
+            <!-- FLOW CHART CONNECTOR NODES -->
+            <div class="space-y-4 font-mono text-xs">
+                
+                <!-- NODE 1 -->
+                <div class="brutal-node p-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-cyan-400 font-bold uppercase">NODE 01: GREETING &amp; INTENT CLASSIFICATION</span>
+                        <span class="text-[10px] text-emerald-400 border border-emerald-400 px-1.5 py-0.5">TRIGGER</span>
+                    </div>
+                    <p class="text-gray-300 text-[11px]">User initiates chat ➔ Bot presents 3 options: [Order Status], [Book Service], [Talk to Human].</p>
+                </div>
+
+                <div class="text-center text-cyan-400 font-bold text-base">↓ IF "BOOK SERVICE" CLICKED ↓</div>
+
+                <!-- NODE 2 -->
+                <div class="brutal-node p-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-emerald-400 font-bold uppercase">NODE 02: AUTOMATED CALENDAR &amp; PRICING INQUIRY</span>
+                        <span class="text-[10px] text-cyan-400 border border-cyan-400 px-1.5 py-0.5">LOGIC BRANCH</span>
+                    </div>
+                    <p class="text-gray-300 text-[11px]">Bot requests Date/Time ➔ Checks availability API ➔ Displays open appointment slots.</p>
+                </div>
+
+                <div class="text-center text-cyan-400 font-bold text-base">↓ IF SLOT SELECTED ↓</div>
+
+                <!-- NODE 3 -->
+                <div class="brutal-node p-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-amber-400 font-bold uppercase">NODE 03: LEAD CAPTURE &amp; WEBHOOK ESCALATION</span>
+                        <span class="text-[10px] text-amber-400 border border-amber-400 px-1.5 py-0.5">FULFILLMENT</span>
+                    </div>
+                    <p class="text-gray-300 text-[11px]">Captures Phone/Email ➔ Triggers Zapier/Make webhook ➔ Sends SMS confirmation.</p>
+                </div>
+
+            </div>
+
+            <div class="pt-4 border-t border-cyan-500/30 flex justify-between items-center text-xs font-mono">
+                <span class="text-emerald-400 font-bold">✓ CONVERSION OPTIMIZED</span>
+                <span class="text-cyan-300">LUCIDCHART + VISIO + PDF</span>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: DELIVERABLES & DOWNLOAD DETAILS (5 COLS) -->
+        <div class="lg:col-span-5 brutal-card p-6 flex flex-col justify-between">
+            <div>
+                <div class="border-b-2 border-cyan-400 pb-3 mb-6 flex justify-between items-center">
+                    <h2 class="font-cyber text-xl font-bold text-white uppercase">2. WHATS INCLUDED</h2>
+                    <span class="text-xs text-cyan-400 font-mono">ZIP PACKAGE</span>
+                </div>
+
+                <div class="space-y-3 text-xs font-mono text-gray-300 p-4 bg-black border border-cyan-500/40 rounded mb-6">
+                    <p class="text-white font-bold uppercase">Deliverables Upon Purchase:</p>
+                    <ul class="space-y-2 text-[11px] text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Editable Lucidchart Template Shared Link</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Microsoft Visio (.vsdx) Source Diagrams</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> High-Resolution Vector PDF Diagrams</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Copywriting Prompt Matrix for Bot Responses</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t-2 border-cyan-400">
+                <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">FLAT FEE</span></div>
+                <a href="store.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    GET CHATBOT FLOW MAPS ($50) &rarr;
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
+        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS // AUTOMATED CHATBOT FLOW MAPS © 2026</p>
+    </footer>
+
+</body>
+</html>
