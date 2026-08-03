@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BURN-1 // RESTAURANT & FOOD TRUCK DIGITAL MENU KIT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .brutal-card {
+            background: #0a0e17;
+            border: 3px solid #00f3ff;
+            box-shadow: 6px 6px 0px #00f3ff;
+        }
+        .brutal-card-orange {
+            background: #190a05;
+            border: 3px solid #f97316;
+            box-shadow: 6px 6px 0px #f97316;
+        }
+
+        .brutal-btn {
+            background: #f97316;
+            color: #000000;
+            font-weight: 900;
+            border: 2px solid #f97316;
+            box-shadow: 4px 4px 0px #ffffff;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .brutal-btn:hover {
+            background: #39ff14;
+            border-color: #39ff14;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #f97316;
+        }
+
+        .tab-active {
+            background: #f97316;
+            color: #000000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-7xl mx-auto border-4 border-amber-500 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#f97316]">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-amber-500 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
+                🍔
+            </div>
+            <div>
+                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">DIGITAL MENU KIT</h1>
+                <p class="text-xs text-amber-400 font-mono-code uppercase">MOBILE-FIRST KIOSK MENU TEMPLATE · REPLACES PHYSICAL MENUS</p>
+            </div>
+        </div>
+
+        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
+            <a href="store.html" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">← STORE VAULT</a>
+        </nav>
+    </header>
+
+    <!-- MAIN PRODUCT WORKSPACE -->
+    <main class="w-full max-w-7xl mx-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+
+        <!-- LEFT COLUMN: LIVE DEMO DIGITAL MENU (7 COLS) -->
+        <div class="lg:col-span-7 brutal-card-orange p-6 space-y-6">
+            <div class="border-b-2 border-amber-500 pb-3 flex justify-between items-center">
+                <h2 class="font-cyber text-xl font-bold text-white uppercase">1. LIVE MENU PREVIEW</h2>
+                <span class="text-xs text-amber-400 font-mono">[ TOUCH-OPTIMIZED ]</span>
+            </div>
+
+            <!-- CATEGORY TAB SELECTOR -->
+            <div class="flex gap-2 border-b border-amber-500/30 pb-3 overflow-x-auto text-xs font-mono">
+                <button onclick="switchTab('mains')" id="tab-mains" class="px-4 py-2 border border-amber-500 tab-active">MAINS &amp; BURGERS</button>
+                <button onclick="switchTab('sides')" id="tab-sides" class="px-4 py-2 border border-amber-500 text-amber-400">SIDES &amp; COMBOS</button>
+                <button onclick="switchTab('drinks')" id="tab-drinks" class="px-4 py-2 border border-amber-500 text-amber-400">DRINKS &amp; BEVS</button>
+            </div>
+
+            <!-- MENU ITEMS CONTAINER -->
+            <div id="menu-items" class="space-y-4 font-mono text-xs">
+                
+                <!-- ITEM 1 -->
+                <div class="p-4 bg-black border-2 border-amber-500/50 rounded flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-bold text-sm">SMASH BURGER SUPREME</span>
+                            <span class="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">POPULAR</span>
+                        </div>
+                        <p class="text-gray-400 text-[11px] mt-1">Double Angus beef, smoked cheddar, house slaw sauce, brioche bun.</p>
+                        <span class="text-[10px] text-amber-400">Allergens: Dairy, Gluten</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-cyber text-lg font-black text-amber-400 block">$14.50</span>
+                        <button class="mt-2 px-3 py-1 bg-amber-500 text-black font-bold uppercase text-[10px] hover:bg-emerald-400 transition-colors">ORDER</button>
+                    </div>
+                </div>
+
+                <!-- ITEM 2 -->
+                <div class="p-4 bg-black border-2 border-amber-500/50 rounded flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-bold text-sm">SPICY CRISPY CHICKEN TENDERS</span>
+                        </div>
+                        <p class="text-gray-400 text-[11px] mt-1">4-piece buttermilk tenders, Nashville hot oil drizzle, crinkle fries.</p>
+                        <span class="text-[10px] text-amber-400">Allergens: Gluten</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-cyber text-lg font-black text-amber-400 block">$12.00</span>
+                        <button class="mt-2 px-3 py-1 bg-amber-500 text-black font-bold uppercase text-[10px] hover:bg-emerald-400 transition-colors">ORDER</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-4 border-t border-amber-500/30 flex justify-between items-center text-xs font-mono">
+                <span class="text-emerald-400 font-bold">✓ FAST MOBILE LOAD (&lt;1s)</span>
+                <span class="text-amber-400">CANVA &amp; HTML BLUEPRINT</span>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: PACKAGE & DEPLOYMENT DETAILS (5 COLS) -->
+        <div class="lg:col-span-5 brutal-card-orange p-6 flex flex-col justify-between">
+            <div>
+                <div class="border-b-2 border-amber-500 pb-3 mb-6 flex justify-between items-center">
+                    <h2 class="font-cyber text-xl font-bold text-white uppercase">2. WHATS INCLUDED</h2>
+                    <span class="text-xs text-amber-400 font-mono">ZIP PACKAGE</span>
+                </div>
+
+                <div class="space-y-3 text-xs font-mono text-gray-300 p-4 bg-black border border-amber-500/40 rounded mb-6">
+                    <p class="text-white font-bold uppercase">Deliverables Upon Purchase:</p>
+                    <ul class="space-y-2 text-[11px] text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Mobile HTML/CSS Digital Menu Template</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Editable Canva &amp; Figma Design Links</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> QR Code Frame Wrapper SVG</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Netlify 1-Click Drag &amp; Drop Guide</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t-2 border-amber-500">
+                <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">FLAT FEE</span></div>
+                <a href="store.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
+                    GET DIGITAL MENU KIT ($50) &rarr;
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
+        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS // DIGITAL MENU KIT © 2026</p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('[id^="tab-"]').forEach(btn => {
+                btn.className = 'px-4 py-2 border border-amber-500 text-amber-400';
+            });
+            document.getElementById(`tab-${tabName}`).className = 'px-4 py-2 border border-amber-500 tab-active';
+        }
+    </script>
+</body>
+</html>
