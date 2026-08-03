@@ -170,7 +170,7 @@
             if (query.includes('50') || query.includes('price') || query.includes('cost')) {
                 bDiv.innerHTML = `<strong>[SYSTEM]:</strong> Everything in the Burn-1 Vault is a flat $50 one-time fee. No recurring SaaS drain. You buy the code, you own the infrastructure.`;
             } else if (query.includes('vip') || query.includes('vault') || query.includes('masterclass')) {
-                bDiv.innerHTML = `<strong>[SYSTEM]:</strong> Enter the VIP Vault masterclasses at <a href="vip_vault.html" class="underline text-emerald-400 font-bold">burn-1.com/vip_vault.html</a>.`;
+                bDiv.innerHTML = `<strong>[SYSTEM]:</strong> Enter the VIP Vault masterclasses at <a href="https://leonrdarden.com/vip_vault.html" target="_blank" class="underline text-emerald-400 font-bold">leonrdarden.com/vip_vault.html</a>.`;
             } else if (query.includes('kiosk') || query.includes('subdomain') || query.includes('qr')) {
                 bDiv.innerHTML = `<strong>[SYSTEM]:</strong> Kiosk packages provide wildcard subdomains (yourname.burn-1.com), PayPal webhooks, and SVG QR sticker generator tools.`;
             } else if (query.includes('ai') || query.includes('local') || query.includes('ollama')) {
