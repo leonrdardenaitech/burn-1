@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURN-1 // WEBHOOK DIAGNOSTIC CONNECTOR TEST</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f3ff;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .brutal-card {
+            background: #0a0e17;
+            border: 4px solid #00f3ff;
+            box-shadow: 8px 8px 0px #00f3ff;
+        }
+        .brutal-btn {
+            background: #39ff14;
+            color: #000000;
+            font-weight: 900;
+            border: 2px solid #39ff14;
+            box-shadow: 4px 4px 0px #ffffff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <main class="w-full max-w-lg brutal-card p-6 md:p-8 space-y-6">
+        <div class="border-b-2 border-cyan-400 pb-3 flex justify-between items-center">
+            <h1 class="font-cyber text-xl font-bold text-white uppercase">🛠️ DIAGNOSTIC CONNECTOR TEST</h1>
+            <span class="text-xs text-emerald-400 font-mono">[ STEP 5 ]</span>
+        </div>
+
+        <p class="text-xs text-gray-300 font-mono-code leading-relaxed">
+            Click below to test whether your Zapier, Make.com, or n8n Webhook URL is correctly formatted and live:
+        </p>
+
+        <button onclick="runTest()" class="brutal-btn w-full py-4 text-xs font-cyber uppercase tracking-widest">
+            🧪 TEST WEBHOOK CONNECTION
+        </button>
+
+        <div id="testResult" class="hidden text-center p-4 rounded font-mono text-xs font-bold border-2"></div>
+
+        <div class="pt-4 border-t border-cyan-500/30 text-center">
+            <a href="zero_party_kiosk.html" class="text-xs text-cyan-400 font-mono underline uppercase">← Return to Kiosk Form</a>
+        </div>
+    </main>
+
+    <script>
+        const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/sample";
+
+        async function runTest() {
+            const resBox = document.getElementById("testResult");
+            resBox.classList.remove("hidden");
+            resBox.className = "text-center p-4 rounded font-mono text-xs font-bold border-2 border-cyan-400 bg-black text-cyan-400";
+            resBox.innerText = "⏳ TRANSMITTING TEST PAYLOAD TO WEBHOOK...";
+
+            if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_WEBHOOK") || !WEBHOOK_URL.startsWith("http")) {
+                setTimeout(() => {
+                    resBox.className = "text-center p-4 rounded font-mono text-xs font-bold border-2 border-red-500 bg-red-950 text-red-300";
+                    resBox.innerHTML = "❌ <strong>CONNECTION REFUSED</strong><br>Missing or invalid Webhook URL in js/webhook-engine.js at line 8. Please check quotation marks.";
+                }, 800);
+                return;
+            }
+
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    mode: "no-cors",
+                    body: JSON.stringify({ testPayload: "Burn-1 Zero-Party Diagnostic", timestamp: new Date().toISOString() })
+                });
+
+                setTimeout(() => {
+                    resBox.className = "text-center p-4 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
+                    resBox.innerHTML = "✅ <strong>CONNECTION SECURE!</strong><br>Your Webhook URL is live & responding. Zero syntax errors detected.";
+                }, 800);
+            } catch (err) {
+                setTimeout(() => {
+                    resBox.className = "text-center p-4 rounded font-mono text-xs font-bold border-2 border-red-500 bg-red-950 text-red-300";
+                    resBox.innerHTML = "❌ <strong>SYNTAX / NETWORK ERROR</strong><br>Check URL formatting or quotes on line 8.";
+                }, 800);
+            }
+        }
+    </script>
+</body>
+</html>

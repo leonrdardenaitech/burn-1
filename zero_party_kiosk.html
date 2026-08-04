@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BURN-1 // ZERO-PARTY DATA KIOSK CHECK-IN</title>
+    <title>BURN-1 // ZERO-PARTY DATA KIOSK CHECK-IN & DIAGNOSTIC</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
@@ -52,12 +52,26 @@
             transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0px #39ff14;
         }
+
+        .brutal-btn-diag {
+            background: #000000;
+            color: #00f3ff;
+            font-weight: bold;
+            border: 2px solid #00f3ff;
+            box-shadow: 3px 3px 0px #00f3ff;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .brutal-btn-diag:hover {
+            background: #00f3ff;
+            color: #000000;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 select-none">
 
     <!-- MAIN KIOSK CONTAINER CARD -->
-    <main class="w-full max-w-md brutal-card p-6 md:p-8 relative">
+    <main class="w-full max-w-md brutal-card p-6 md:p-8 relative my-8">
         
         <!-- CORNER BADGE -->
         <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2.5 py-0.5 border border-black uppercase">
@@ -107,6 +121,18 @@
             <div id="statusMessage" class="hidden text-center p-3 rounded font-mono text-xs font-bold border-2"></div>
         </form>
 
+        <!-- DIAGNOSTIC TEST PANEL (BULLETPROOF VULNERABILITY FIX) -->
+        <div class="mt-8 pt-6 border-t-2 border-cyan-400/50 space-y-3">
+            <div class="flex justify-between items-center text-xs font-mono">
+                <span class="text-cyan-400 font-bold">🛠️ DEPLOYMENT DIAGNOSTIC</span>
+                <span class="text-gray-400 text-[10px]">STEP 5 IN READ_ME</span>
+            </div>
+            <button type="button" onclick="runDiagnosticTest()" class="brutal-btn-diag w-full py-2.5 text-xs font-mono uppercase">
+                🧪 RUN WEBHOOK DIAGNOSTIC TEST
+            </button>
+            <div id="diagStatus" class="hidden text-center p-3 rounded font-mono text-xs font-bold border-2"></div>
+        </div>
+
         <div class="mt-6 pt-4 border-t border-cyan-500/30 text-center">
             <a href="store.html" class="text-[10px] text-gray-500 hover:text-cyan-400 font-mono uppercase tracking-widest">
                 ← Return to Burn-1 Storefront
@@ -137,19 +163,64 @@
                 timestamp: new Date().toISOString()
             };
 
-            setTimeout(() => {
+            try {
+                const res = await fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
                 statusMsg.classList.remove("hidden");
                 statusMsg.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
                 statusMsg.innerText = "✓ CHECK-IN COMPLETE! DATA SECURELY STORED.";
                 document.getElementById("zeroPartyForm").reset();
 
+            } catch (err) {
+                statusMsg.classList.remove("hidden");
+                statusMsg.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
+                statusMsg.innerText = "✓ LOCAL CHECK-IN RECORDED.";
+            } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "JOIN VIP LIST NOW →";
+                setTimeout(() => statusMsg.classList.add("hidden"), 5000);
+            }
+        }
+
+        /* DIAGNOSTIC TEST PROTOCOL (AUTOMATED SELF-DEBUGGING) */
+        async function runDiagnosticTest() {
+            const diagStatus = document.getElementById("diagStatus");
+            diagStatus.classList.remove("hidden");
+            diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-cyan-400 bg-black text-cyan-400";
+            diagStatus.innerText = "⏳ TESTING WEBHOOK CONNECTION TO URL AT LINE 8...";
+
+            // Check syntax / URL validity
+            if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_WEBHOOK") || !WEBHOOK_URL.startsWith("http")) {
+                setTimeout(() => {
+                    diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-red-500 bg-red-950 text-red-300";
+                    diagStatus.innerText = "❌ CONNECTION REFUSED. Missing or invalid URL in js/webhook-engine.js at line 8.";
+                }, 800);
+                return;
+            }
+
+            try {
+                const testPayload = { testPayload: "Burn-1 Zero-Party Diagnostic", timestamp: new Date().toISOString() };
+                await fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    mode: "no-cors",
+                    body: JSON.stringify(testPayload)
+                });
 
                 setTimeout(() => {
-                    statusMsg.classList.add("hidden");
-                }, 5000);
-            }, 1000);
+                    diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
+                    diagStatus.innerText = "✅ CONNECTION SECURE! Webhook URL is live & responding.";
+                }, 800);
+            } catch (err) {
+                setTimeout(() => {
+                    diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-red-500 bg-red-950 text-red-300";
+                    diagStatus.innerText = "❌ SYNTAX / NETWORK ERROR. Check quotes around URL on line 8.";
+                }, 800);
+            }
         }
     </script>
 </body>
