@@ -1,175 +1,503 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BURN-1 // RESTAURANT & FOOD TRUCK DIGITAL MENU KIT</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #050505;
-            color: #00f3ff;
-            font-family: 'Share Tech Mono', monospace;
-            margin: 0;
-            padding: 0;
-        }
-        .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .font-mono-code { font-family: 'Fira Code', monospace; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Digital Menu Kit | Update Your Menu in 2 Minutes</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=JetBrains+Mono:wght@700;800&family=Playfair+Display:wght@700;900&display=swap');
 
-        .brutal-card {
-            background: #0a0e17;
-            border: 3px solid #00f3ff;
-            box-shadow: 6px 6px 0px #00f3ff;
-        }
-        .brutal-card-orange {
-            background: #190a05;
-            border: 3px solid #f97316;
-            box-shadow: 6px 6px 0px #f97316;
-        }
+/* Dynamic Theme Variable Definitions */
+.theme-day {
+    --bg-base: #f8fafc;            /* Sand background */
+    --bg-surface: #ffffff;         /* White card surface */
+    --text-main: #0f172a;          /* Ink Black text */
+    --text-muted: #475569;         /* Slate grey text */
+    --accent-primary: #0284c7;     /* Sky Blue */
+    --accent-secondary: #facc15;   /* Solar Yellow */
+    --accent-success: #16a34a;     /* Earth Green */
+    --accent-danger: #ef4444;      /* Alert Red */
+    --border-color: #0f172a;       /* Ink Black borders */
+    --border-width-val: 3px;
+    --shadow-style: 6px 6px 0px #0f172a; /* Hard offset shadows */
+    --radius-val: 12px;
+}
 
-        .brutal-btn {
-            background: #f97316;
-            color: #000000;
-            font-weight: 900;
-            border: 2px solid #f97316;
-            box-shadow: 4px 4px 0px #ffffff;
-            transition: all 0.1s ease-in-out;
-            cursor: pointer;
-        }
-        .brutal-btn:hover {
-            background: #39ff14;
-            border-color: #39ff14;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #f97316;
-        }
+.theme-night {
+    --bg-base: #0c0a09;            /* Rich dark background */
+    --bg-surface: #1c1917;         /* Dark stone surface */
+    --text-main: #f5f1ea;          /* Warm off-white text */
+    --text-muted: #a8a29e;         /* Warm grey text */
+    --accent-primary: #ea580c;     /* Terracotta */
+    --accent-secondary: #eab308;   /* Saffron */
+    --accent-success: #10b981;     /* Emerald Green */
+    --accent-danger: #ef4444;      /* Alert Red */
+    --border-color: #292524;       /* Subtle dark border */
+    --border-width-val: 1px;
+    --shadow-style: 0px 20px 40px rgba(0,0,0,0.6); /* Sleek translucent shadows */
+    --radius-val: 16px;
+}
 
-        .tab-active {
-            background: #f97316;
-            color: #000000;
-            font-weight: bold;
-        }
-    </style>
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+.font-display { font-family: 'Playfair Display', serif; }
+.font-mono-code { font-family: 'JetBrains Mono', monospace; }
+
+/* 2D Hard Cards vs. Sleek Translucent panels */
+.brutal-card {
+    background-color: var(--bg-surface);
+    border: var(--border-width-val) solid var(--border-color);
+    box-shadow: var(--shadow-style);
+    border-radius: var(--radius-val);
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.brutal-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: calc(var(--border-width-val) + 3px) calc(var(--border-width-val) + 3px) 0px var(--border-color);
+}
+
+/* Day vs. Night specific button variations */
+.btn-sun {
+    background-color: var(--accent-secondary);
+    color: #0f172a;
+    border: 3px solid #0f172a;
+    box-shadow: 4px 4px 0px #0f172a;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-sun:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #0f172a;
+    background-color: #fde047;
+}
+
+.btn-sun:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #0f172a;
+}
+
+.menu-item-box {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.menu-item-box:hover {
+    background-color: var(--bg-surface);
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+/* Before / after comparison strip values */
+.paper-card {
+    background: #f5f1e8;
+    color: #3f3a30;
+    border: 3px solid #0f172a;
+    box-shadow: 5px 5px 0px #0f172a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transform: rotate(-1deg);
+}
+
+.paper-strike { text-decoration: line-through; color: var(--accent-danger); font-weight: 800; }
+.paper-strike-out { text-decoration: line-through; }
+.paper-scribble { color: var(--accent-danger); font-size: 11px; font-weight: 900; font-family: 'JetBrains Mono', monospace; }
+
+/* Cinematic Intro Overlay */
+#cinematic-intro {
+    position: fixed;
+    inset: 0;
+    background-color: #000000;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#intro-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fade-out-active {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#skip-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10001;
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+<body class="theme-day min-h-screen flex flex-col justify-between">
 
-    <!-- HEADER -->
-    <header class="w-full max-w-7xl mx-auto border-4 border-amber-500 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#f97316]">
-        <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-amber-500 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
-                🍔
+<!-- CINEMATIC INTRO OVERLAY (AUTOPLAYS SURVIVOR CLIP ON LOAD WITH DUAL FAIL-SAFES) -->
+<div id="cinematic-intro">
+    <video id="intro-player" autoplay muted playsinline>
+        <source src="digitalmenu.mp4" type="video/mp4">
+    </video>
+    <button id="skip-btn" class="btn-sun px-6 py-3 rounded-lg text-xs" onclick="skipIntro()">SKIP INTRO ➔</button>
+</div>
+
+<!-- GLOBAL HEADER -->
+<header class="w-full max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-6 border-b-4 border-slate-900 sticky top-0 bg-inherit z-45">
+    <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-yellow-400 border-2 border-slate-900 rounded-lg flex items-center justify-center shadow-[2px_2px_0px_#0f172a]">
+            <i class="fas fa-utensils text-slate-900"></i>
+        </div>
+        <div class="flex flex-col">
+            <h1 class="font-display text-xl font-black tracking-tight leading-none text-slate-900" id="header-brand-title">Digital Menu Kit</h1>
+            <span class="text-[10px] font-bold text-sky-700 uppercase tracking-widest mt-1">BURN-1 Systems</span>
+        </div>
+    </div>
+    <div class="flex items-center gap-4">
+        <!-- Day/Night Mode B2B Slider Toggle -->
+        <button onclick="toggleTheme()" class="btn-sun px-4 py-2 rounded-lg text-xs flex items-center gap-2">
+            <i class="fas fa-adjust"></i> <span id="theme-btn-text">NIGHT MODE</span>
+        </button>
+        <a href="https://www.burn-1.com/store.html" class="px-4 py-2 border-2 border-slate-900 bg-white text-slate-900 font-bold rounded-lg text-xs hover:bg-slate-100 transition-colors shadow-[2px_2px_0px_#0f172a]">
+            ← Store Vault
+        </a>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="w-full max-w-7xl mx-auto px-6 py-12 text-center md:text-left md:py-16">
+    <div class="inline-block mb-4 px-4 py-1.5 bg-sky-200 border-2 border-slate-900 rounded-md font-mono text-xs font-black uppercase text-sky-900">
+        Built for menus that already have a home
+    </div>
+    <h2 class="font-display text-4xl md:text-6xl font-black tracking-tight leading-none mb-4 max-w-4xl text-slate-900" id="hero-headline">
+        You already have a URL.<br>Updating what's on it shouldn't take a print run.
+    </h2>
+    <p class="text-base md:text-lg font-semibold text-slate-700 max-w-3xl leading-relaxed">
+        A menu template you edit like a text document. Change a price, 86 an item, add tonight's special — save it, push it, done. No app dashboard, no monthly bill, no waiting on a printer.
+    </p>
+    <div class="flex flex-wrap gap-3 justify-center md:justify-start mt-6 text-xs font-mono font-bold text-slate-600">
+        <span class="px-3 py-1.5 bg-white border-2 border-slate-900 rounded-md shadow-[2px_2px_0px_#0f172a]"><i class="fas fa-clock"></i> First-time setup: 10 min</span>
+        <span class="px-3 py-1.5 bg-white border-2 border-slate-900 rounded-md shadow-[2px_2px_0px_#0f172a]"><i class="fas fa-bolt"></i> Every update after: ~2 min</span>
+        <span class="px-3 py-1.5 bg-white border-2 border-slate-900 rounded-md shadow-[2px_2px_0px_#0f172a]"><i class="fas fa-cloud"></i> Works with Netlify, GitHub Pages, or Firebase</span>
+    </div>
+</section>
+
+<!-- BEFORE / AFTER STRIP -->
+<section class="w-full max-w-7xl mx-auto px-6 mb-16">
+    <div class="brutal-card p-6 md:p-10 bg-slate-50">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <span class="text-xs uppercase tracking-widest text-slate-500 font-mono font-black"><i class="fas fa-times-circle"></i> The old way</span>
+                <div class="paper-card mt-4">
+                    <div class="font-display text-lg tracking-widest text-center border-b-2 border-stone-400 pb-2 mb-3">DAILY MENU</div>
+                    <div class="flex justify-between text-xs font-bold mb-1"><span class="paper-strike-out">Smash Burger Supreme</span><span class="paper-strike">$14.50</span></div>
+                    <div class="paper-scribble mb-2">➔ 86'd — out of buns</div>
+                    <div class="flex justify-between text-xs font-bold mb-1"><span>Spicy Crispy Tenders</span><span>$12.00</span></div>
+                    <div class="flex justify-between text-xs font-bold mb-1"><span class="paper-strike-out">Loaded Fries</span><span class="paper-strike">$8.00</span></div>
+                    <div class="paper-scribble">➔ price change — call kitchen</div>
+                </div>
+                <p class="text-xs text-slate-500 font-bold mt-4 font-mono uppercase">Reprint, wait, physically swap it at every table. Every time.</p>
             </div>
             <div>
-                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">DIGITAL MENU KIT</h1>
-                <p class="text-xs text-amber-400 font-mono-code uppercase">MOBILE-FIRST KIOSK MENU TEMPLATE · REPLACES PHYSICAL MENUS</p>
+                <span class="text-xs uppercase tracking-widest text-green-700 font-mono font-black"><i class="fas fa-check-circle"></i> The burn-1 way</span>
+                <div class="brutal-card p-6 mt-4 bg-white">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-black text-slate-900 text-sm">Tonight's Menu</span>
+                        <span class="text-[10px] bg-green-100 text-green-800 border-2 border-slate-900 px-2.5 py-0.5 rounded font-black uppercase">updated 2 min ago</span>
+                    </div>
+                    <div class="menu-item-box flex justify-between items-center py-2 px-3 mb-2">
+                        <span class="text-xs font-black text-slate-900">Spicy Crispy Tenders</span>
+                        <span class="text-xs font-black text-slate-900">$12.00</span>
+                    </div>
+                    <div class="menu-item-box flex justify-between items-center py-2 px-3">
+                        <span class="text-xs font-black text-slate-900">New: Street Corn</span>
+                        <span class="text-xs font-black text-slate-900">$6.00</span>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 font-bold mt-4 font-mono uppercase">Edit the text file, push it live. Same URL, same printed QR code — only what's behind it changes.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN PRODUCT WORKSPACE -->
+<main class="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+
+    <!-- LEFT: LIVE DEMO -->
+    <div class="lg:col-span-7 brutal-card p-6 md:p-8 bg-white relative">
+        <div class="border-b-4 border-slate-900 pb-4 mb-6 flex justify-between items-center">
+            <h3 class="font-display text-2xl font-black text-slate-900">Live Menu Preview</h3>
+            <span class="text-xs text-slate-500 bg-slate-100 border-2 border-slate-900 px-3 py-1 rounded-full font-black uppercase">Touch-Optimized</span>
+        </div>
+
+        <div class="flex gap-4 border-b-2 border-slate-200 mb-6 text-xs font-black font-mono">
+            <button onclick="switchTab('mains')" id="tab-mains" class="tab-btn tab-active border-b-4 border-slate-900 pb-3 text-slate-900">Mains & Burgers</button>
+            <button onclick="switchTab('sides')" id="tab-sides" class="tab-btn text-slate-400 pb-3 hover:text-slate-900">Sides & Combos</button>
+            <button onclick="switchTab('drinks')" id="tab-drinks" class="tab-btn text-slate-400 pb-3 hover:text-slate-900">Drinks & Bevs</button>
+        </div>
+
+        <div id="menu-items" class="space-y-4">
+            <div class="menu-item-box flex justify-between items-center">
+                <div class="pr-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h4 class="text-slate-900 font-black text-lg">Smash Burger Supreme</h4>
+                        <span class="text-[9px] bg-yellow-300 border-2 border-slate-900 text-slate-950 font-black px-2 py-0.5 rounded uppercase">Popular</span>
+                    </div>
+                    <p class="text-slate-600 text-xs font-semibold leading-relaxed mb-2">Double Angus beef, smoked cheddar, house slaw sauce, toasted brioche bun.</p>
+                    <span class="text-[10px] text-slate-500 font-bold uppercase font-mono">Allergens: Dairy, Gluten</span>
+                </div>
+                <div class="text-right flex flex-col items-end justify-between h-full">
+                    <span class="font-mono-code text-xl font-black text-slate-900">$14.50</span>
+                    <button class="order-btn btn-sun px-4 py-1.5 rounded-lg text-xs">Order</button>
+                </div>
+            </div>
+
+            <div class="menu-item-box flex justify-between items-center">
+                <div class="pr-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h4 class="text-slate-900 font-black text-lg">Spicy Crispy Tenders</h4>
+                    </div>
+                    <p class="text-slate-600 text-xs font-semibold leading-relaxed mb-2">4-piece buttermilk tenders, Nashville hot oil drizzle, crinkle fries.</p>
+                    <span class="text-[10px] text-slate-500 font-bold uppercase font-mono">Allergens: Gluten</span>
+                </div>
+                <div class="text-right flex flex-col items-end justify-between h-full">
+                    <span class="font-mono-code text-xl font-black text-slate-900">$12.00</span>
+                    <button class="order-btn btn-sun px-4 py-1.5 rounded-lg text-xs">Order</button>
+                </div>
+            </div>
+
+            <div class="menu-item-box flex justify-between items-center">
+                <div class="pr-4">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h4 class="text-slate-900 font-black text-lg">Truffle Loaded Fries</h4>
+                    </div>
+                    <p class="text-slate-600 text-xs font-semibold leading-relaxed mb-2">Crispy fries tossed in truffle oil, parmesan, parsley, garlic aioli.</p>
+                    <span class="text-[10px] text-slate-500 font-bold uppercase font-mono">Allergens: Dairy, Egg</span>
+                </div>
+                <div class="text-right flex flex-col items-end justify-between h-full">
+                    <span class="font-mono-code text-xl font-black text-slate-900">$8.50</span>
+                    <button class="order-btn btn-sun px-4 py-1.5 rounded-lg text-xs">Order</button>
+                </div>
             </div>
         </div>
 
-        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
-            <a href="store.html" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">← STORE VAULT</a>
-        </nav>
-    </header>
+        <div class="pt-6 mt-6 border-t-2 border-slate-200 flex justify-between items-center text-xs font-mono font-bold text-slate-500">
+            <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> Fast Mobile Load (&lt;1s)</span>
+            <span>Canva & HTML Blueprint Included</span>
+        </div>
+    </div>
 
-    <!-- MAIN PRODUCT WORKSPACE -->
-    <main class="w-full max-w-7xl mx-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+    <!-- RIGHT: PACKAGE, HONEST FAQ, CHECKOUT -->
+    <div class="lg:col-span-5 flex flex-col gap-6">
 
-        <!-- LEFT COLUMN: LIVE DEMO DIGITAL MENU (7 COLS) -->
-        <div class="lg:col-span-7 brutal-card-orange p-6 space-y-6">
-            <div class="border-b-2 border-amber-500 pb-3 flex justify-between items-center">
-                <h2 class="font-cyber text-xl font-bold text-white uppercase">1. LIVE MENU PREVIEW</h2>
-                <span class="text-xs text-amber-400 font-mono">[ TOUCH-OPTIMIZED ]</span>
+        <div class="brutal-card p-6 md:p-8 bg-white">
+            <div class="border-b-4 border-slate-900 pb-4 mb-6 flex justify-between items-center">
+                <h3 class="font-display text-xl font-black text-slate-900">What's Included</h3>
+                <span class="text-xs text-slate-500 bg-slate-100 border-2 border-slate-900 px-3 py-1 rounded-full font-black uppercase">ZIP Package</span>
             </div>
 
-            <!-- CATEGORY TAB SELECTOR -->
-            <div class="flex gap-2 border-b border-amber-500/30 pb-3 overflow-x-auto text-xs font-mono">
-                <button onclick="switchTab('mains')" id="tab-mains" class="px-4 py-2 border border-amber-500 tab-active">MAINS &amp; BURGERS</button>
-                <button onclick="switchTab('sides')" id="tab-sides" class="px-4 py-2 border border-amber-500 text-amber-400">SIDES &amp; COMBOS</button>
-                <button onclick="switchTab('drinks')" id="tab-drinks" class="px-4 py-2 border border-amber-500 text-amber-400">DRINKS &amp; BEVS</button>
-            </div>
-
-            <!-- MENU ITEMS CONTAINER -->
-            <div id="menu-items" class="space-y-4 font-mono text-xs">
-                
-                <!-- ITEM 1 -->
-                <div class="p-4 bg-black border-2 border-amber-500/50 rounded flex justify-between items-center">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-white font-bold text-sm">SMASH BURGER SUPREME</span>
-                            <span class="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded">POPULAR</span>
-                        </div>
-                        <p class="text-gray-400 text-[11px] mt-1">Double Angus beef, smoked cheddar, house slaw sauce, brioche bun.</p>
-                        <span class="text-[10px] text-amber-400">Allergens: Dairy, Gluten</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="font-cyber text-lg font-black text-amber-400 block">$14.50</span>
-                        <button class="mt-2 px-3 py-1 bg-amber-500 text-black font-bold uppercase text-[10px] hover:bg-emerald-400 transition-colors">ORDER</button>
-                    </div>
-                </div>
-
-                <!-- ITEM 2 -->
-                <div class="p-4 bg-black border-2 border-amber-500/50 rounded flex justify-between items-center">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-white font-bold text-sm">SPICY CRISPY CHICKEN TENDERS</span>
-                        </div>
-                        <p class="text-gray-400 text-[11px] mt-1">4-piece buttermilk tenders, Nashville hot oil drizzle, crinkle fries.</p>
-                        <span class="text-[10px] text-amber-400">Allergens: Gluten</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="font-cyber text-lg font-black text-amber-400 block">$12.00</span>
-                        <button class="mt-2 px-3 py-1 bg-amber-500 text-black font-bold uppercase text-[10px] hover:bg-emerald-400 transition-colors">ORDER</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="pt-4 border-t border-amber-500/30 flex justify-between items-center text-xs font-mono">
-                <span class="text-emerald-400 font-bold">✓ FAST MOBILE LOAD (&lt;1s)</span>
-                <span class="text-amber-400">CANVA &amp; HTML BLUEPRINT</span>
+            <div class="space-y-4 text-xs font-semibold text-slate-600 p-5 bg-slate-50 border-2 border-slate-900 rounded-xl mb-2">
+                <p class="text-slate-900 font-black uppercase tracking-wider text-[11px] mb-2 font-mono">Deliverables Upon Purchase:</p>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 text-base"><i class="fas fa-check-circle"></i></span>
+                        Mobile HTML/CSS menu template — plain text, no code required to edit
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 text-base"><i class="fas fa-check-circle"></i></span>
+                        Editable Canva & Figma links, if you'd rather design visually first
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 text-base"><i class="fas fa-check-circle"></i></span>
+                        QR code frame wrapper (SVG), quiet-zone margins built in
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-green-600 text-base"><i class="fas fa-check-circle"></i></span>
+                        Deployment guide for Netlify, GitHub Pages, and Firebase — use whatever you already run
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: PACKAGE & DEPLOYMENT DETAILS (5 COLS) -->
-        <div class="lg:col-span-5 brutal-card-orange p-6 flex flex-col justify-between">
-            <div>
-                <div class="border-b-2 border-amber-500 pb-3 mb-6 flex justify-between items-center">
-                    <h2 class="font-cyber text-xl font-bold text-white uppercase">2. WHATS INCLUDED</h2>
-                    <span class="text-xs text-amber-400 font-mono">ZIP PACKAGE</span>
+        <!-- Straight answers FAQ, right on the page -->
+        <div class="brutal-card p-6 md:p-8 bg-white">
+            <h3 class="font-display text-lg font-black text-slate-900 mb-4 border-b pb-2">Straight answers</h3>
+            <div class="space-y-4 text-xs">
+                <div>
+                    <p class="text-slate-900 font-black mb-1">Is this a drag-and-drop builder?</p>
+                    <p class="text-slate-600 font-semibold leading-relaxed">No. It's a text file — you find the old dish, type over it with the new one. The only drag-and-drop is uploading the finished folder to your host.</p>
                 </div>
-
-                <div class="space-y-3 text-xs font-mono text-gray-300 p-4 bg-black border border-amber-500/40 rounded mb-6">
-                    <p class="text-white font-bold uppercase">Deliverables Upon Purchase:</p>
-                    <ul class="space-y-2 text-[11px] text-gray-300">
-                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Mobile HTML/CSS Digital Menu Template</li>
-                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Editable Canva &amp; Figma Design Links</li>
-                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> QR Code Frame Wrapper SVG</li>
-                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Netlify 1-Click Drag &amp; Drop Guide</li>
-                    </ul>
+                <div>
+                    <p class="text-slate-900 font-black mb-1">Do I need Netlify specifically?</p>
+                    <p class="text-slate-600 font-semibold leading-relaxed">No. It's static HTML/CSS — deploy it anywhere that serves files: Netlify, GitHub Pages, Firebase Hosting, your existing host.</p>
                 </div>
-            </div>
-
-            <div class="pt-6 border-t-2 border-amber-500">
-                <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">FLAT FEE</span></div>
-                <a href="https://leonardartistry1.gumroad.com/l/mvdkqb" target="_blank" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
-                    GET DIGITAL MENU KIT ($50) &rarr;
-                </a>
+                <div>
+                    <p class="text-slate-900 font-black mb-1">How long do updates take after setup?</p>
+                    <p class="text-slate-600 font-semibold leading-relaxed">About 2 minutes — edit the text, push the same folder again. Same URL, same printed QR code.</p>
+                </div>
             </div>
         </div>
 
-    </main>
+        <div class="brutal-card p-6 md:p-8 bg-white flex flex-col justify-between">
+            <div class="flex items-end justify-between mb-4">
+                <div>
+                    <span class="font-mono-code text-4xl font-black text-slate-900">$50</span>
+                    <span class="text-xs text-slate-500 font-bold uppercase tracking-wider ml-2">Flat Fee</span>
+                </div>
+                <span class="text-xs text-slate-500 font-bold font-mono">One-time payment</span>
+            </div>
+            <!-- Native Gumroad link at the bottom -->
+            <a href="https://gumroad.com/l/REPLACE-WITH-DIGITAL-MENU-KIT-SLUG" class="btn-sun w-full py-4 text-center text-sm font-black tracking-widest block rounded-lg uppercase">
+                Get Digital Menu Kit →
+            </a>
+            <p class="text-[10px] font-mono font-bold text-slate-400 text-center mt-3 uppercase tracking-wider">No subscription. No trackers. Just burn-1 and go.</p>
+        </div>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
-        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS // DIGITAL MENU KIT © 2026</p>
-    </footer>
+</main>
 
-    <script>
-        function switchTab(tabName) {
-            document.querySelectorAll('[id^="tab-"]').forEach(btn => {
-                btn.className = 'px-4 py-2 border border-amber-500 text-amber-400';
-            });
-            document.getElementById(`tab-${tabName}`).className = 'px-4 py-2 border border-amber-500 tab-active';
-        }
-    </script>
+<!-- FOOTER -->
+<footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t-4 border-slate-900 text-center flex flex-col sm:flex-row justify-between items-center gap-4 bg-white">
+    <p class="font-black text-slate-900 text-xs tracking-wider font-mono">BURN-1 SYSTEMS // Digital Menu Kit © 2026</p>
+    <div class="flex gap-4 text-xs font-bold text-sky-700">
+        <a href="https://www.burn-1.com/privacy_first_protocol.html" class="hover:underline">Privacy Suite</a>
+        <span>|</span>
+        <a href="https://anergi.io" target="_blank" class="hover:underline">anergi.io</a>
+        <span>|</span>
+        <a href="https://leonrdarden.com" target="_blank" class="hover:underline">leonrdarden.com</a>
+    </div>
+</footer>
+
+<script>
+// -------------------------------------------------------------
+// DUAL-LAYER FAIL-SAFE INTRO CONTROLLER
+// -------------------------------------------------------------
+const introOverlay = document.getElementById('cinematic-intro');
+const player = document.getElementById('intro-player');
+
+// 1. 3-Second Active Bypass (Locks out black screen if browser blocks native local file video loading)
+const autoSkipTimeout = setTimeout(() => {
+    console.warn("Autoplay or local file origin restriction detected. Auto-bypassing intro overlay.");
+    skipIntro();
+}, 3000);
+
+player.addEventListener('play', () => {
+    clearTimeout(autoSkipTimeout); // Video is confirmed playing, kill safety timer
+});
+
+player.addEventListener('error', () => {
+    console.error("Local video load failed. Triggering immediate safe bypass.");
+    clearTimeout(autoSkipTimeout);
+    skipIntro();
+});
+
+// Auto-bypass when video finishes natively
+player.addEventListener('ended', () => {
+    skipIntro();
+});
+
+function skipIntro() {
+    clearTimeout(autoSkipTimeout);
+    player.pause();
+    introOverlay.classList.add('fade-out-active');
+}
+
+// Dynamic Tab Switching Preview
+const sampleData = {
+    mains: [
+        { name: "Smash Burger Supreme", desc: "Double Angus beef, smoked cheddar, house slaw sauce, toasted brioche bun.", price: "$14.50", badge: "Popular", allergens: "Dairy, Gluten" },
+        { name: "Spicy Crispy Tenders", desc: "4-piece buttermilk tenders, Nashville hot oil drizzle, crinkle fries.", price: "$12.00", allergens: "Gluten" },
+        { name: "Truffle Loaded Fries", desc: "Crispy fries tossed in truffle oil, parmesan, parsley, garlic aioli.", price: "$8.50", allergens: "Dairy, Egg" }
+    ],
+    sides: [
+        { name: "Crinkle Cut Fries", desc: "Classic crisp crinkle fries with sea salt seasoning.", price: "$4.00", allergens: "None" },
+        { name: "Onion Ring Stack", desc: "Crispy beer-battered onion rings with smoky BBQ dipping sauce.", price: "$5.50", allergens: "Gluten" }
+    ],
+    drinks: [
+        { name: "Craft Soda", desc: "Local-brewed cane sugar soda. Choice of Cola, Root Beer, or Ginger.", price: "$3.00", allergens: "None" },
+        { name: "Cold Brew Coffee", desc: "Signature robust house blend coffee, steeped 18 hours.", price: "$4.50", allergens: "None" }
+    ]
+};
+
+function switchTab(tabName) {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = "tab-btn text-slate-400 pb-3 hover:text-slate-900 transition-colors";
+    });
+    document.getElementById(`tab-${tabName}`).className = "tab-btn tab-active border-b-4 border-slate-900 pb-3 text-slate-900";
+
+    const container = document.getElementById('menu-items');
+    container.innerHTML = '';
+    
+    sampleData[tabName].forEach(item => {
+        let badgeHtml = item.badge ? `<span class="text-[9px] bg-yellow-300 border-2 border-slate-900 text-slate-950 font-black px-2 py-0.5 rounded uppercase">${item.badge}</span>` : '';
+        let allergensHtml = item.allergens ? `<span class="text-[10px] text-slate-500 font-bold uppercase font-mono">Allergens: ${item.allergens}</span>` : '';
+        
+        container.innerHTML += `
+        <div class="menu-item-box flex justify-between items-center">
+            <div class="pr-4">
+                <div class="flex items-center gap-3 mb-1">
+                    <h4 class="text-slate-900 font-black text-lg">${item.name}</h4>
+                    ${badgeHtml}
+                </div>
+                <p class="text-slate-600 text-xs font-semibold leading-relaxed mb-2">${item.desc}</p>
+                ${allergensHtml}
+            </div>
+            <div class="text-right flex flex-col items-end justify-between h-full">
+                <span class="font-mono-code text-xl font-black text-slate-900">${item.price}</span>
+                <button class="order-btn btn-sun px-4 py-1.5 rounded-lg text-xs">Order</button>
+            </div>
+        </div>
+        `;
+    });
+}
+
+// B2B Day/Night Theme Swapper
+let currentTheme = 'day';
+function toggleTheme() {
+    const body = document.body;
+    const btnText = document.getElementById('theme-btn-text');
+    const headerTitle = document.getElementById('header-brand-title');
+    const heroHeadline = document.getElementById('hero-headline');
+    
+    if (currentTheme === 'day') {
+        currentTheme = 'night';
+        body.classList.remove('theme-day');
+        body.classList.add('theme-night');
+        btnText.textContent = "DAY MODE";
+        
+        headerTitle.style.color = '#ffffff';
+        heroHeadline.style.color = '#ffffff';
+    } else {
+        currentTheme = 'day';
+        body.classList.remove('theme-night');
+        body.classList.add('theme-day');
+        btnText.textContent = "NIGHT MODE";
+        
+        headerTitle.style.color = '#0f172a';
+        heroHeadline.style.color = '#0f172a';
+    }
+}
+</script>
 </body>
 </html>
