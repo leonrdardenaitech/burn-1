@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burn-1 HyperFrames Module 1: Cookie Sweeping</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* The Main Container Card */
+        .module-card {
+            position: relative;
+            width: 900px;
+            height: 540px;
+            background-color: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        }
+
+        /* State 1: Clean Corporate / Translucent Popup UI */
+        .corporate-state {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(13, 17, 23, 0.98));
+            padding: 2rem;
+            animation: burnAway 1s forwards;
+            animation-delay: 4.5s; /* Burns away after 4.5s */
+        }
+
+        .header-tag {
+            font-size: 0.9rem;
+            color: #58a6ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .header-text {
+            font-size: 2.2rem;
+            color: #f0f6fc;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* Oversized Giant Padlock Icon */
+        .giant-icon svg {
+            width: 140px;
+            height: 140px;
+            fill: #58a6ff;
+            animation: pulseClick 2s infinite;
+            filter: drop-shadow(0 0 15px rgba(88, 166, 255, 0.4));
+        }
+
+        .cookie-popup-box {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            font-size: 0.95rem;
+            color: #b8b3c3;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* State 2: The Opaque Red & Hazard Orange Burn State */
+        .burned-state {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #8b0000; /* Almost Opaque Red */
+            border: 6px solid #ff5722; /* Hazard Orange Accent Border */
+            opacity: 0;
+            transform: scale(1.05);
+            animation: revealBurn 0.8s forwards;
+            animation-delay: 4.7s; /* Snaps right as corporate burns */
+            padding: 2rem;
+        }
+
+        .burned-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff5722;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(255, 87, 34, 0.6);
+        }
+
+        .pun-text {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-top: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 12px 24px;
+            border-radius: 8px;
+            border-left: 4px solid #ff5722;
+        }
+
+        /* Animations */
+        @keyframes pulseClick {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.85; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes burnAway {
+            0% { opacity: 1; filter: contrast(1); }
+            50% { opacity: 0.5; filter: contrast(3) brightness(2) sepia(1) hue-rotate(-50deg); }
+            100% { opacity: 0; filter: blur(12px); }
+        }
+
+        @keyframes revealBurn {
+            0% { opacity: 0; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="module-card">
+        
+        <!-- State 1: Clean Corporate UI (The Why & The Action) -->
+        <div class="corporate-state">
+            <div class="header-tag">PRIVACY FIRST PROTOCOL · MODULE 1</div>
+            <div class="header-text">Cookie Sweeping & Data Breadcrumbs</div>
+            <div class="giant-icon">
+                <!-- Oversized Lock Icon -->
+                <svg viewBox="0 0 24 24">
+                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                </svg>
+            </div>
+            <div class="cookie-popup-box">
+                "Stop letting third-party cookies track your digital footprint across the web. Go to Settings &gt; Privacy &gt; Clear Browsing Data to sever the connection."
+            </div>
+        </div>
+
+        <!-- State 2: Opaque Red & Hazard Orange Gamified Finish -->
+        <div class="burned-state">
+            <div class="burned-title">STATUS: CLEAR</div>
+            <div class="pun-text">&gt; Torching the breadcrumbs and sweeping the ashes cause the cookies got burnt.</div>
+        </div>
+
+    </div>
+
+</body>
+</html>

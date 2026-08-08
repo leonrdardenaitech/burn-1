@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Street Smarts | leonrdarden.com</title>
+    <!-- Tailwind for structural power, custom CSS for Vesper's neon glows -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --neon-green: #39ff14;
+            --neon-blue: #00f3ff;
+            --text-main: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            background-color: #050508;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Cyberpunk Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.9); }
+        ::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
+
+        /* THE HYPERFRAME FRAMEWORK CONTAINER */
+        .hyperframe-container {
+            position: relative;
+            width: 100%;
+            max-width: 520px; /* Constrains text directly inside portrait video boundary */
+            min-height: 100vh;
+            margin: 0 auto;
+            border-left: 2px solid rgba(0, 243, 255, 0.5);
+            border-right: 2px solid rgba(0, 243, 255, 0.5);
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.3);
+            background: #000;
+            overflow: hidden;
+        }
+
+        /* Fixed Portrait Background Video locked to Hyperframe bounds */
+        .hyperframe-video {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 520px;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* Corner Reticles for Cyberpunk Hyperframe Aesthetic */
+        .reticle-tl { position: fixed; top: 10px; left: calc(50% - 250px); color: var(--neon-blue); font-family: 'Orbitron', sans-serif; font-size: 16px; z-index: 30; pointer-events: none; }
+        .reticle-tr { position: fixed; top: 10px; right: calc(50% - 250px); color: var(--neon-blue); font-family: 'Orbitron', sans-serif; font-size: 16px; z-index: 30; pointer-events: none; }
+
+        /* Content Layer Fitting 100% Inside Background */
+        .hyperframe-content {
+            position: relative;
+            z-index: 10;
+            padding: 1.5rem 1.25rem 4rem 1.25rem;
+            width: 100%;
+        }
+
+        /* Cyber Glitch & Blink Animation for Title */
+        @keyframes cyber-glitch-blink {
+            0%, 100% { opacity: 1; text-shadow: 0 0 20px rgba(57, 255, 20, 0.9), 0 0 35px rgba(0, 243, 255, 0.7), 0 4px 10px #000; }
+            12% { opacity: 0.9; text-shadow: -3px 0 #00f3ff, 3px 0 #ff00ff, 0 4px 10px #000; }
+            24% { opacity: 0.15; text-shadow: none; }
+            36% { opacity: 1; text-shadow: 0 0 25px rgba(57, 255, 20, 1), 0 0 45px rgba(0, 243, 255, 0.9), 0 4px 10px #000; }
+            50% { opacity: 0.85; text-shadow: 3px 0 #ff00ff, -3px 0 #39ff14, 0 4px 10px #000; }
+            68% { opacity: 0.2; text-shadow: none; }
+            82% { opacity: 1; text-shadow: 0 0 18px rgba(57, 255, 20, 0.8), 0 4px 10px #000; }
+        }
+        .glitch-blink-title {
+            animation: cyber-glitch-blink 3s infinite step-end;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 12px #000000, 0 0 20px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Floating Pure White Cards Fitting Inside Video Boundary */
+        .card, .upsell-section {
+            background: transparent !important;
+            border: none !important;
+            padding: 1.25rem 0;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .card h2 {
+            color: #ffffff;
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 800;
+            text-shadow: 0 3px 10px #000000, 0 0 15px rgba(0,0,0,0.9);
+        }
+        .time-badge {
+            font-size: 0.75rem;
+            background: rgba(0, 243, 255, 0.25);
+            color: var(--neon-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 800;
+            text-shadow: 0 2px 6px #000;
+        }
+        .section-title {
+            color: var(--neon-green);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 1.25rem;
+            margin-bottom: 0.4rem;
+            font-weight: 800;
+            text-shadow: 0 2px 8px #000;
+        }
+        
+        p, li {
+            color: #ffffff !important;
+            text-shadow: 0 2px 8px #000000, 0 0 12px rgba(0,0,0,0.95);
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .links-box {
+            background: transparent !important;
+            padding: 0.75rem 0 0.75rem 1rem;
+            border-left: 3px solid var(--neon-green) !important;
+            margin: 1.25rem 0;
+        }
+        .links-box a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 800;
+            text-shadow: 0 2px 8px #000000, 0 0 10px var(--neon-blue);
+        }
+        .links-box a:hover {
+            text-shadow: 0 0 18px var(--neon-blue), 0 2px 8px #000;
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        .mitre-link {
+            font-weight: 900 !important;
+            color: var(--neon-green) !important;
+            text-shadow: 0 0 15px rgba(57, 255, 20, 0.9), 0 2px 8px #000 !important;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            text-decoration: underline;
+        }
+
+        /* Upsell Gateway Section */
+        .upsell-section {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .upsell-section h2 {
+            color: var(--neon-green);
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 0 20px rgba(57, 255, 20, 0.8), 0 3px 10px #000;
+            font-weight: 900;
+        }
+        .upsell-list { list-style: none; margin: 1.75rem auto; text-align: left; }
+        .upsell-list li { margin-bottom: 1rem; padding-left: 1.75rem; position: relative; font-size: 0.9rem; font-weight: 600; line-height: 1.5; color: #ffffff;}
+        .upsell-list li::before { content: '►'; position: absolute; left: 0; color: var(--neon-blue); font-size: 0.85rem; top: 2px; text-shadow: 0 0 10px var(--neon-blue), 0 2px 6px #000;}
+
+        /* Glowing Cyan Highlighted Dashboard Button */
+        .glowing-dash-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(0, 243, 255, 0.2);
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.8), inset 0 0 12px rgba(0, 243, 255, 0.4);
+            backdrop-filter: blur(8px);
+        }
+        .glowing-dash-btn:hover {
+            background: var(--neon-blue);
+            color: #000000;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 1);
+            transform: scale(1.05);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(57, 255, 20, 0.2);
+            color: var(--neon-green);
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--neon-green);
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.6);
+            backdrop-filter: blur(8px);
+            margin-top: 1rem;
+            width: 100%;
+        }
+        .cta-button:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 45px rgba(57, 255, 20, 1);
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HYPERFRAME CONTAINER WRAPPER (Text Fits 100% Within Background) -->
+    <div class="hyperframe-container">
+        
+        <!-- FIXED PORTRAIT BACKGROUND VIDEO INSIDE HYPERFRAME -->
+        <video id="bg-video" src="initial_scene.mp4" autoplay loop muted playsinline class="hyperframe-video"></video>
+
+        <!-- HYPERFRAME CORNER RETICLES -->
+        <div class="reticle-tl">+ STRATEGEM</div>
+        <div class="reticle-tr">PORT: #21</div>
+
+        <!-- SCROLLING CONTENT FITTING INSIDE BACKGROUND -->
+        <div class="hyperframe-content">
+
+            <!-- TOP NAVIGATION DOCK WITH GLOWING DASHBOARD BUTTON -->
+            <nav class="w-full flex justify-between items-center mb-6 pt-2">
+                <a href="https://www.leonrdarden.com" class="text-white hover:text-cyan-300 text-[11px] uppercase tracking-widest font-bold transition-colors shadow-black drop-shadow-md">
+                    ⬅ Command Center
+                </a>
+                <a href="21dashboard.html" class="glowing-dash-btn">
+                    <i class="fas fa-gauge-high"></i> DASHBOARD
+                </a>
+            </nav>
+
+            <header class="text-center mb-8 header">
+                <!-- TITLE WITH GLITCH BLINK ANIMATION -->
+                <div class="header-title-box">
+                    <h1 class="glitch-blink-title">🛡️ Digital Street Smarts</h1>
+                    <p class="text-white text-base font-semibold tracking-wide mt-1">The 10-Minute Cyber Survival Guide</p>
+                </div>
+            </header>
+
+            <div class="space-y-6 mb-8">
+
+                <!-- Module 1 -->
+                <div class="card">
+                    <h2>Module 1: Read the Hacker's Playbook <span class="time-badge">3 Min</span></h2>
+                    <div class="section-title">The Street Smart Lesson</div>
+                    <p class="text-white leading-relaxed">Hackers do not improvise; they follow a highly structured playbook. If you know their playbook, you can see them coming.</p>
+                    
+                    <div class="links-box">
+                        <div class="section-title" style="margin-top:0">The Professional Links</div>
+                        <p class="text-white">Introduction to the <a href="https://attack.mitre.org/" target="_blank" class="mitre-link">MITRE ATT&amp;CK 101 framework</a>. Explore free MITRE ATT&amp;CK training.</p>
+                    </div>
+
+                    <div class="section-title">What You Learn</div>
+                    <p class="text-white leading-relaxed">Attackers use 14 tactics (like "Initial Access" and "Credential Access") to compromise targets. Learn how attacks are predictable.</p>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="card">
+                    <h2>Module 2: Social Engineering &amp; Human Exploit <span class="time-badge border-[#ff00ff]/30 text-[#ff00ff] bg-[#ff00ff]/10">3 Min</span></h2>
+                    <div class="section-title">The Street Smart Lesson</div>
+                    <p class="text-white leading-relaxed">Remember the rule: <em>They don't break in, they log in.</em> Your biggest vulnerability isn't your firewall; it is a fake email link or rogue consent screen.</p>
+                    
+                    <div class="links-box" style="border-left-color: #ff00ff !important;">
+                        <div class="section-title" style="margin-top:0; color: #ff00ff;">The Professional Links</div>
+                        <p class="text-white">Access the <a href="https://www.sans.org/for-organizations/workforce/resources" style="color: #ff00ff;">SANS Security Awareness resources</a> and <a href="https://www.knowbe4.com/products/security-awareness-training">KnowBe4 concepts</a>.</p>
+                    </div>
+
+                    <div class="section-title">What You Learn</div>
+                    <p class="text-white leading-relaxed">Learn social engineering basics—how to pause and verify before handing over credentials to keep "phish-prone" rates below 5%.</p>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="card">
+                    <h2>Module 3: The 6-Step Survival Response <span class="time-badge border-[#ffa500]/30 text-[#ffa500] bg-[#ffa500]/10">3 Min</span></h2>
+                    <div class="section-title">The Street Smart Lesson</div>
+                    <p class="text-white leading-relaxed">If you accidentally click a malicious link, panic is your enemy. You need a response protocol.</p>
+                    
+                    <div class="links-box" style="border-left-color: #ffa500 !important;">
+                        <div class="section-title" style="margin-top:0; color: #ffa500;">The Professional Links</div>
+                        <p class="text-white">Download free <a href="https://www.sans.org/white-papers/33901" style="color: #ffa500;">SANS Incident Response (IR) Handbook</a> and <a href="#" style="color: #ffa500;">SANS IR Process Poster</a>.</p>
+                    </div>
+
+                    <div class="section-title">What You Learn</div>
+                    <p class="text-white leading-relaxed">Master the SANS 6-phase methodology: <strong>PICERL</strong> (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned).</p>
+                </div>
+
+            </div>
+
+            <!-- The Close / Upsell / Gateway -->
+            <div class="upsell-section">
+                <h2>Level Up to Professional</h2>
+                <p class="text-base mb-6 italic opacity-90 tracking-wide text-sky-100">"Ready to get paid to hunt threats for the world's biggest companies?"</p>
+                <p class="text-white text-sm mb-4">Introducing the <strong>21-Day Cognitive SOC Masterclass</strong>. A 168-hour program preparing you to:</p>
+                
+                <ul class="upsell-list">
+                    <li>Build a hands-on digital forensics lab for $41/mo.</li>
+                    <li>Write Detection-as-Code using Sigma &amp; YARA.</li>
+                    <li>Perform memory forensics with Volatility &amp; Autopsy.</li>
+                    <li>Deploy Agentic AI copilots using the 4-tier Trust Gradient.</li>
+                </ul>
+
+                <!-- GATEWAY BUTTON TO 21dashboard.html -->
+                <a href="21dashboard.html" class="cta-button group">
+                    Start Complimentary <i class="fas fa-chevron-right text-base group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 25% VIDEO SLOW DOWN CONTROLLER (0.75x SPEED) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('bg-video');
+            if (video) {
+                video.playbackRate = 0.75; // Slow down video by 25% (0.75x speed)
+            }
+        });
+    </script>
+</body>
+</html>

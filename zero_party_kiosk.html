@@ -1,227 +1,655 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BURN-1 // ZERO-PARTY DATA KIOSK CHECK-IN & DIAGNOSTIC</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #050505;
-            color: #00f3ff;
-            font-family: 'Share Tech Mono', monospace;
-            margin: 0;
-            padding: 0;
-        }
-        .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .font-mono-code { font-family: 'Fira Code', monospace; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Zero-Party Kiosk | Claim Your Customer Data Sovereignty</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=JetBrains+Mono:wght@700;800&display=swap');
 
-        .brutal-card {
-            background: #0a0e17;
-            border: 4px solid #00f3ff;
-            box-shadow: 8px 8px 0px #00f3ff;
-        }
+/* Dynamic Theme Variable Definitions */
+.theme-day {
+    --bg-base: #f8fafc;            
+    --bg-surface: #ffffff;         
+    --text-main: #0f172a;          
+    --text-muted: #475569;         
+    --accent-primary: #0284c7;     
+    --accent-secondary: #facc15;   
+    --accent-success: #16a34a;     
+    --accent-danger: #ef4444;      
+    --border-color: #0f172a;       
+    --border-width-val: 3px;
+    --shadow-style: 6px 6px 0px #0f172a; 
+    --radius-val: 12px;
+}
 
-        .brutal-input {
-            background: #000000;
-            border: 2px solid #00f3ff;
-            color: #ffffff;
-            font-family: 'Fira Code', monospace;
-            padding: 14px 16px;
-            font-size: 14px;
-        }
-        .brutal-input:focus {
-            outline: none;
-            border-color: #39ff14;
-            box-shadow: 0 0 15px rgba(57,255,20,0.4);
-        }
+.theme-night {
+    --bg-base: #020617;            
+    --bg-surface: #0f172a;         
+    --text-main: #f8fafc;          
+    --text-muted: #94a3b8;         
+    --accent-primary: #f97316;     
+    --accent-secondary: #eab308;   
+    --accent-success: #10b981;     
+    --accent-danger: #ef4444;      
+    --border-color: #334155;       
+    --border-width-val: 1px;
+    --shadow-style: 0px 20px 40px rgba(0,0,0,0.6); 
+    --radius-val: 16px;
+}
 
-        .brutal-btn {
-            background: #39ff14;
-            color: #000000;
-            font-weight: 900;
-            border: 2px solid #39ff14;
-            box-shadow: 4px 4px 0px #ffffff;
-            transition: all 0.1s ease-in-out;
-            cursor: pointer;
-        }
-        .brutal-btn:hover {
-            background: #00f3ff;
-            border-color: #00f3ff;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #39ff14;
-        }
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+}
 
-        .brutal-btn-diag {
-            background: #000000;
-            color: #00f3ff;
-            font-weight: bold;
-            border: 2px solid #00f3ff;
-            box-shadow: 3px 3px 0px #00f3ff;
-            transition: all 0.1s ease-in-out;
-            cursor: pointer;
-        }
-        .brutal-btn-diag:hover {
-            background: #00f3ff;
-            color: #000000;
-        }
-    </style>
+.font-mono-code { font-family: 'JetBrains Mono', monospace; }
+
+/* 2D Neo-Brutalist Hard Cards */
+.brutal-card {
+    background-color: var(--bg-surface);
+    border: var(--border-width-val) solid var(--border-color);
+    box-shadow: var(--shadow-style);
+    border-radius: var(--radius-val);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.brutal-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: calc(var(--border-width-val) + 3px) calc(var(--border-width-val) + 3px) 0px var(--border-color);
+}
+
+.btn-sun {
+    background-color: var(--accent-secondary);
+    color: #0f172a;
+    border: 3px solid #0f172a;
+    box-shadow: 4px 4px 0px #0f172a;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-sun:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #0f172a;
+    background-color: #fde047;
+}
+
+.btn-sun:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #0f172a;
+}
+
+.btn-orange {
+    background-color: #f97316;
+    color: white;
+    border: 3px solid #0f172a;
+    box-shadow: 4px 4px 0px #0f172a;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-orange:hover {
+    background-color: #ea580c;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #0f172a;
+}
+
+.brutal-input {
+    border: 2px solid var(--border-color);
+    background-color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: #0f172a;
+}
+
+.brutal-input:focus {
+    outline: none;
+    background-color: #fef08a; 
+    box-shadow: 3px 3px 0px var(--border-color);
+}
+
+/* ---------------------------------
+   UNIVERSAL EXPANDABLE ACCORDION LOGIC
+   (Fixes the height calculation issue)
+   ----------------------------------- */
+.module-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.module-content.is-expanded {
+    grid-template-rows: 1fr;
+}
+.module-inner {
+    overflow: hidden;
+}
+
+/* Hides scrollbar on the right menu but keeps it scrollable */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------------------------------
+   NIGHT MODE FULL-BLEED VIDEO BG LAYER
+   ----------------------------------- */
+#night-bg-video-container {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+#night-bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.video-overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.95));
+    z-index: 15;
+}
+
+/* ---------------------------------
+   CONSOLIDATED SYSTEM DROPDOWN MENU
+   ----------------------------------- */
+.dropdown-menu { position: relative; pointer-events: auto; z-index: 50; }
+.dropdown-content {
+    display: none; 
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 320px;
+    background-color: var(--bg-surface);
+    border: 3px solid var(--border-color);
+    box-shadow: var(--shadow-style);
+    border-radius: var(--radius-val);
+    z-index: 100;
+    padding: 14px;
+}
+.dropdown-menu.active .dropdown-content { display: block; }
+.section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 950;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 3px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+.section-label:first-child { margin-top: 0; }
+.menu-link-item {
+    display: flex; align-items: center; gap: 12px; padding: 8px 12px;
+    border-radius: 6px; border: 2px solid transparent; transition: all 0.1s ease;
+    text-align: left; margin-bottom: 6px;
+}
+.menu-link-item:last-child { margin-bottom: 0; }
+.menu-link-item:hover { background-color: #f1f5f9; border-color: var(--border-color); }
+
+/* Cinematic Intro Overlay */
+#cinematic-intro {
+    position: fixed; inset: 0; background-color: #000000; z-index: 10000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+#intro-player { width: 100%; height: 100%; object-fit: cover; }
+.fade-out-active { opacity: 0 !important; pointer-events: none !important; }
+#skip-btn { position: absolute; bottom: 40px; right: 40px; z-index: 10001; }
+</style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 select-none">
+<body class="theme-day min-h-screen flex flex-col justify-between">
 
-    <!-- MAIN KIOSK CONTAINER CARD -->
-    <main class="w-full max-w-md brutal-card p-6 md:p-8 relative my-8">
+<!-- CINEMATIC INTRO -->
+<div id="cinematic-intro">
+    <video id="intro-player" autoplay muted playsinline poster="Zombie_survival_maze_escape_202608051138.jpeg">
+        <source src="Survivor_runs_path_to_helicopter_202608051645.mp4" type="video/mp4">
+    </video>
+    <button id="skip-btn" class="btn-orange px-6 py-3 rounded-lg text-xs" onclick="skipIntro()">SKIP INTRO ➔</button>
+</div>
+
+<!-- GLOBAL HEADER -->
+<header class="w-full max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-6 border-b-4 border-slate-900 sticky top-0 bg-inherit z-40">
+    <div class="flex items-center gap-3">
+        <div class="dropdown-menu" id="vault-dropdown">
+            <button class="btn-sun px-5 py-2.5 rounded-lg text-sm flex items-center gap-2" onclick="toggleDropdown(event)">
+                <i class="fas fa-bars"></i> SYSTEM MENU <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-content bg-white text-slate-900">
+                <div class="section-label font-mono">TIME SYSTEM</div>
+                <button class="menu-link-item w-full" onclick="injectBonusTime(event)">
+                    <div class="w-8 h-8 bg-green-400 border-2 border-slate-900 rounded flex items-center justify-center text-xs font-mono font-black shadow-[1px_1px_0px_#000]">+20</div>
+                    <div class="text-xs font-black uppercase text-green-700">Burn-1.com Credits</div>
+                </button>
+                <div class="section-label font-mono">POWER UPS</div>
+                <a href="https://www.burn-1.com/zero_party_kiosk.html" class="menu-link-item">
+                    <div class="w-8 h-8 bg-slate-900 border-2 border-slate-900 rounded-full flex items-center justify-center text-white text-xs font-mono font-black shadow-[1px_1px_0px_#000]">🎯</div>
+                    <div class="text-[10px] text-slate-500 font-mono font-bold leading-none">SYS: DATA-02 <span class="text-xs font-black text-slate-900 block leading-tight">ZERO-PARTY KIOSK</span></div>
+                </a>
+                <div class="section-label font-mono">SYSTEM DECK</div>
+                <a href="https://www.burn-1.com/index.html" class="menu-link-item">
+                    <div class="w-8 h-8 bg-sky-200 border-2 border-slate-900 rounded flex items-center justify-center text-xs font-mono font-black shadow-[1px_1px_0px_#000]">←</div>
+                    <div class="text-xs font-black uppercase">Central Hub Portal</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col">
+            <h1 class="font-extrabold text-xl tracking-tight leading-none" id="header-brand-title">Zero-Party Data Kiosk</h1>
+            <span class="text-[10px] font-bold text-sky-700 uppercase tracking-widest mt-1">BURN-1 SYSTEMS</span>
+        </div>
+    </div>
+    
+    <div class="flex items-center gap-4">
+        <button onclick="toggleTheme()" class="btn-sun px-4 py-2 rounded-lg text-xs flex items-center gap-2">
+            <i class="fas fa-adjust"></i> <span id="theme-btn-text">NIGHT MODE</span>
+        </button>
+        <a href="https://www.burn-1.com/store.html" class="px-4 py-2 border-2 border-slate-900 bg-white text-slate-900 font-bold rounded-lg text-xs hover:bg-slate-100 shadow-[2px_2px_0px_#0f172a]">
+            ← Store Vault
+        </a>
+    </div>
+</header>
+
+<main class="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 my-12">
+
+    <!-- LEFT COLUMN: SYSTEM TERMINAL -->
+    <!-- FIX: Using explicit classes so the grid column doesn't break in JS -->
+    <div class="lg:col-span-6 brutal-card min-h-[580px] flex flex-col justify-between overflow-hidden relative p-8 bg-white border-4 border-slate-900" id="interactive-left-column">
         
-        <!-- CORNER BADGE -->
-        <div class="absolute -top-3 right-4 bg-cyan-400 text-black font-mono text-[10px] font-bold px-2.5 py-0.5 border border-black uppercase">
-            🔒 LOCAL PRIVACY ACTIVE
+        <div id="night-bg-video-container">
+            <video id="night-bg-video" muted playsinline></video>
+            <div class="video-overlay-dark"></div>
         </div>
 
-        <!-- BRAND HEADER -->
-        <div class="text-center mb-8 border-b-2 border-cyan-400 pb-4">
-            <span class="text-2xl mb-2 inline-block">🔥</span>
-            <h1 class="font-cyber text-2xl font-black text-white uppercase tracking-widest">VIP KIOSK CHECK-IN</h1>
-            <p class="text-xs text-cyan-400 font-mono mt-1">DIRECT LOCAL DATA COLLECTION · ZERO CLOUD TRACKERS</p>
+        <div class="space-y-6 relative z-25 w-full flex-1 flex flex-col justify-between" id="day-form-panel">
+            <div class="space-y-4">
+                <div class="flex justify-between items-center border-b-4 border-slate-900 pb-3">
+                    <h3 class="font-black text-2xl text-slate-900">VIP Check-In Terminal</h3>
+                    <span class="text-xs text-slate-500 bg-slate-100 border-2 border-slate-900 px-3 py-1 rounded-full font-black uppercase">Demo Active</span>
+                </div>
+                
+                <div class="p-3 bg-green-100 border-2 border-slate-900 rounded-md text-[10px] font-black uppercase text-green-900 inline-flex items-center gap-1.5 shadow-[2px_2px_0px_#0f172a]">
+                    <i class="fas fa-shield-alt text-green-700"></i> 100% Secure Local Capture
+                </div>
+
+                <form id="demoKioskForm" class="space-y-4" onsubmit="event.preventDefault();">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-black uppercase text-slate-900 mb-1">First Name</label>
+                            <input type="text" id="demoFirstName" required placeholder="Alex" class="w-full p-3.5 rounded-lg brutal-input">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black uppercase text-slate-900 mb-1">Last Name</label>
+                            <input type="text" id="demoLastName" required placeholder="Vane" class="w-full p-3.5 rounded-lg brutal-input">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black uppercase text-slate-900 mb-1">Email Address</label>
+                        <input type="email" id="demoEmail" required placeholder="alex@example.com" class="w-full p-3.5 brutal-input rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black uppercase text-slate-900 mb-1">Primary Preference</label>
+                        <select id="demoPreference" required class="w-full p-3.5 brutal-input rounded-lg cursor-pointer">
+                            <option value="" disabled selected>Select interest...</option>
+                            <option value="AI Tools">Local AI Configs</option>
+                            <option value="SLA Services">7-Day SLA Services</option>
+                            <option value="Sovereignty">Data Sovereignty Logs</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="pt-6 border-t-4 border-slate-900 mt-6 flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-mono font-black text-slate-500 uppercase tracking-widest block">TIME BURNING CALCULATOR</span>
+                        <h4 class="text-sm font-black text-slate-900 uppercase">Est. Workout Burn Time</h4>
+                    </div>
+                    <div class="bg-yellow-300 border-2 border-slate-900 px-4 py-2 rounded-lg font-mono font-black text-lg shadow-[2px_2px_0px_#0f172a]">
+                        ⏱️ <span id="burned-calories-display">0.00</span> / 10.00 MINS
+                    </div>
+                </div>
+                
+                <div class="w-full bg-slate-200 border-2 border-slate-900 rounded-full h-4 overflow-hidden relative shadow-[inset_1px_1px_2px_rgba(0,0,0,0.2)]">
+                    <div id="calorie-progress-bar" class="h-full bg-gradient-to-r from-sky-500 via-yellow-400 to-green-500 w-0 transition-all duration-500"></div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <span class="text-[10px] font-bold text-slate-500 font-mono">Transmission Target Sync</span>
+                    <button class="btn-sun px-4 py-2 text-xs rounded-md" onclick="runDemoDiagnostic()">
+                        🧪 TEST LOCAL CONNECTION
+                    </button>
+                </div>
+                <div id="demoDiagnosticOutput" class="hidden p-3 border-2 border-slate-900 rounded-lg text-xs font-mono font-black text-center shadow-[2px_2px_0px_#0f172a]"></div>
+            </div>
         </div>
 
-        <!-- FORM -->
-        <form id="zeroPartyForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
-            
-            <div class="space-y-1.5">
-                <label class="block text-xs font-bold text-gray-300 uppercase">First Name:</label>
-                <input type="text" id="firstName" required placeholder="Enter first name" class="w-full brutal-input">
+        <div class="space-y-6 relative z-25 w-full flex-1 flex flex-col justify-between hidden" id="night-hud-panel">
+            <div class="space-y-4">
+                <div class="flex justify-between items-center border-b-4 border-orange-500 pb-3">
+                    <h3 class="font-mono-code font-black text-xl text-orange-500">> SOVEREIGNTY ENGINE</h3>
+                    <span class="text-xs text-green-400 bg-slate-950 border-2 border-green-400 px-3 py-1 rounded-full font-black uppercase">GRID BYPASS: ACTIVE</span>
+                </div>
+                
+                <div class="bg-black/90 border-2 border-orange-500 p-5 rounded-xl font-mono-code text-xs text-orange-400 space-y-3 shadow-[0_0_20px_rgba(249,115,22,0.35)]">
+                    <p class="text-white font-black text-sm uppercase"><i class="fas fa-check-circle text-green-400"></i> STATUS: ESCAPED THE GRID</p>
+                    <p class="text-slate-300 font-semibold leading-relaxed font-mono-code">
+                        You successfully completed your helicopter flight escape! Third-party tracking protocols terminated. Local coordinate sync bypassed. Client telemetry stored safely under private ownership.
+                    </p>
+                    <div class="pt-2 border-t border-slate-800 text-[10px] text-slate-500 leading-normal">
+                        SESSION_ID: <span class="text-slate-300">DFY-DATA-02</span><br>
+                        COORDINATE_DEVIATION: <span class="text-slate-300">0.00% [SAFE]</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="space-y-1.5">
-                <label class="block text-xs font-bold text-gray-300 uppercase">Email Address:</label>
-                <input type="email" id="email" required placeholder="hello@example.com" class="w-full brutal-input">
+            <div class="pt-6 border-t border-slate-800 flex items-center justify-between text-xs font-mono-code text-slate-400">
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> SYSTEM: AIR-GAPPED</span>
+                <button class="btn-orange px-4 py-2 text-xs rounded-md" onclick="replayNightBgClips()">
+                    <i class="fas fa-redo-alt"></i> REPLAY FLIGHT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN: SCROLLING MENU OF EXPANDABLE SECTIONS -->
+    <!-- Setup as a scrolling container that locks to the height of the left column -->
+    <div class="lg:col-span-6 flex flex-col gap-6 max-h-[580px] overflow-y-auto no-scrollbar pr-2 pb-10">
+
+        <!-- SECTION 1: TACTICAL DECK -->
+        <div class="brutal-card bg-white text-slate-900 flex flex-col transition-all duration-300">
+            <!-- Header (Click to expand) -->
+            <div class="p-5 border-b-4 border-slate-900 flex justify-between items-center bg-slate-50 cursor-pointer" onclick="toggleModule('tactical-content')">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-black uppercase text-slate-500 font-mono tracking-widest">TACTICAL DECK CONTROL</span>
+                </div>
+                <button class="btn-sun px-3.5 py-1.5 text-xs rounded font-black font-mono flex items-center gap-2 pointer-events-none">
+                    <i class="fas fa-chevron-up" id="tactical-icon"></i> TOGGLE
+                </button>
             </div>
 
-            <div class="space-y-1.5">
-                <label class="block text-xs font-bold text-gray-300 uppercase">Primary Interest / Preference:</label>
-                <select id="preference" required class="w-full brutal-input">
-                    <option value="" disabled selected>Select an interest...</option>
-                    <option value="Local Events">Local Events &amp; Meetups</option>
-                    <option value="Exclusive Discounts">Exclusive VIP Discounts</option>
-                    <option value="Privacy AI Updates">Privacy &amp; AI Updates</option>
-                </select>
+            <!-- Content Area (Uses Grid 0fr->1fr logic) -->
+            <div id="tactical-content" class="module-content is-expanded"> <!-- Starts Expanded -->
+                <div class="module-inner">
+                    <div class="p-6 md:p-8 flex flex-col justify-between">
+                        <div class="inline-block mb-3 px-3 py-1 bg-yellow-300 border-2 border-slate-900 rounded w-max font-extrabold text-[10px] uppercase tracking-wider text-slate-900">
+                            ⚡ WE BURN THROUGH TIME... SO YOU DON'T BURN OUT
+                        </div>
+                        <h2 class="text-2xl font-black text-slate-900 tracking-tight leading-none mb-3">
+                            Third-Party Cookies Are Dead.<br>Own Your Customer Data.
+                        </h2>
+                        <p class="text-xs font-semibold text-slate-600 leading-relaxed mb-4">
+                            Stop paying monthly SaaS subscription fees to databases that harvest your client records. Deploy the Burn-1 Zero-Party Data Kiosk Kit, collect direct consumer preference data locally, and route it instantly to your private webhooks.
+                        </p>
+                        
+                        <div class="border-t-4 border-slate-900 pt-5 mt-2">
+                            <h4 class="font-black text-xs text-slate-900 uppercase tracking-widest mb-3 font-mono flex items-center gap-1.5">
+                                <i class="fas fa-box-open text-sky-600"></i> What's Inside the Digital Cache
+                            </h4>
+                            <ul class="space-y-2 text-xs font-semibold text-slate-700">
+                                <li class="flex items-center gap-2"><span class="text-green-600 font-bold"><i class="fas fa-check-circle"></i></span> Standalone Data Kiosk (index.html)</li>
+                                <li class="flex items-center gap-2"><span class="text-green-600 font-bold"><i class="fas fa-check-circle"></i></span> Webhook Post-Engine (webhook-engine.js)</li>
+                                <li class="flex items-center gap-2 text-indigo-700 font-black"><span class="text-indigo-600"><i class="fas fa-network-wired text-xs"></i></span> LIFETIME SECURE BURN-1 NETWORK ACCESS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- PRIVACY REASSURANCE -->
-            <p class="text-[10px] text-gray-400 font-mono text-center pt-2">
-                🔒 Data is stored locally and transmitted directly via secure webhook. No 3rd party brokers.
-            </p>
-
-            <button type="submit" id="submitBtn" class="brutal-btn w-full py-4 text-sm font-cyber uppercase tracking-widest">
-                JOIN VIP LIST NOW &rarr;
-            </button>
-
-            <!-- STATUS MESSAGE CONTAINER -->
-            <div id="statusMessage" class="hidden text-center p-3 rounded font-mono text-xs font-bold border-2"></div>
-        </form>
-
-        <!-- DIAGNOSTIC TEST PANEL (BULLETPROOF VULNERABILITY FIX) -->
-        <div class="mt-8 pt-6 border-t-2 border-cyan-400/50 space-y-3">
-            <div class="flex justify-between items-center text-xs font-mono">
-                <span class="text-cyan-400 font-bold">🛠️ DEPLOYMENT DIAGNOSTIC</span>
-                <span class="text-gray-400 text-[10px]">STEP 5 IN READ_ME</span>
-            </div>
-            <button type="button" onclick="runDiagnosticTest()" class="brutal-btn-diag w-full py-2.5 text-xs font-mono uppercase">
-                🧪 RUN WEBHOOK DIAGNOSTIC TEST
-            </button>
-            <div id="diagStatus" class="hidden text-center p-3 rounded font-mono text-xs font-bold border-2"></div>
         </div>
 
-        <div class="mt-6 pt-4 border-t border-cyan-500/30 text-center">
-            <a href="store.html" class="text-[10px] text-gray-500 hover:text-cyan-400 font-mono uppercase tracking-widest">
-                ← Return to Burn-1 Storefront
+        <!-- SECTION 2: THE 10-MINUTE BURN (No longer hardcoded heights!) -->
+        <div class="brutal-card bg-white text-slate-900 flex flex-col transition-all duration-300">
+            <!-- Header (Click to expand) -->
+            <div class="p-5 border-b-4 border-slate-900 flex justify-between items-center bg-slate-50 cursor-pointer" onclick="toggleModule('workout-content')">
+                <div>
+                    <span class="text-[10px] font-mono font-black text-slate-500 uppercase tracking-widest block">WORKOUT PROGRAM</span>
+                    <h3 class="font-black text-lg text-slate-900 uppercase mt-1">The 10-Minute Burn Challenge</h3>
+                </div>
+                <button class="btn-sun px-3.5 py-1.5 text-xs rounded font-black font-mono flex items-center gap-2 pointer-events-none">
+                    <i class="fas fa-chevron-down" id="workout-icon"></i> TOGGLE
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div id="workout-content" class="module-content"> <!-- Starts Collapsed -->
+                <div class="module-inner">
+                    <div class="p-6 space-y-4 text-xs font-semibold text-slate-700">
+                        <div class="flex items-start gap-3 p-3 bg-sky-50 border-2 border-sky-400 rounded-lg">
+                            <input type="checkbox" id="round1" class="mt-1 w-5 h-5 cursor-pointer accent-sky-600" onchange="calculateBurnProgress()">
+                            <div>
+                                <strong class="text-sky-900 block font-black uppercase font-mono">ROUND 1: Webhook Alignment (+3 Mins)</strong>
+                                Generate a secure webhook endpoint via Make.com or n8n.
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-yellow-50 border-2 border-yellow-400 rounded-lg">
+                            <input type="checkbox" id="round2" class="mt-1 w-5 h-5 cursor-pointer accent-yellow-600" onchange="calculateBurnProgress()">
+                            <div>
+                                <strong class="text-yellow-700 block font-black uppercase font-mono">ROUND 2: Color & Brand Sync (+2 Mins)</strong>
+                                Update variables with your hex codes and company name.
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-orange-50 border-2 border-orange-400 rounded-lg">
+                            <input type="checkbox" id="round3" class="mt-1 w-5 h-5 cursor-pointer accent-orange-600" onchange="calculateBurnProgress()">
+                            <div>
+                                <strong class="text-orange-700 block font-black uppercase font-mono">ROUND 3: Zero-Cost CDN Deployment (+4 Mins)</strong>
+                                Drag and drop folder to Netlify Drop for global CDN hosting.
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-green-50 border-2 border-green-400 rounded-lg">
+                            <input type="checkbox" id="round4" class="mt-1 w-5 h-5 cursor-pointer accent-green-600" onchange="calculateBurnProgress()">
+                            <div>
+                                <strong class="text-green-700 block font-black uppercase font-mono">ROUND 4: Print & Verify (+1 Min)</strong>
+                                Print and position your vector QR frame block. Done!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: PRICE BAR & CHECKOUT (Static within the scroll view) -->
+        <div class="brutal-card p-6 bg-white flex flex-col justify-between">
+            <div class="flex items-end justify-between mb-4">
+                <div>
+                    <span class="font-mono-code text-4xl font-black text-slate-900">$50</span>
+                    <span class="text-xs text-slate-500 font-bold uppercase tracking-wider ml-2">Flat Fee</span>
+                </div>
+                <span class="text-xs text-slate-500 font-bold font-mono">One-Time Payment</span>
+            </div>
+            <a href="https://gumroad.com/l/REPLACE-WITH-KIOSK-KIT-SLUG" class="btn-orange w-full py-4 text-center text-sm font-black tracking-widest block rounded-lg uppercase">
+                Secure Zero-Party Kiosk Kit →
             </a>
+            <p class="text-[10px] font-mono font-bold text-slate-400 text-center mt-3 uppercase tracking-wider">No subscription drainage. Own your pipeline forever.</p>
         </div>
 
-    </main>
+    </div>
 
-    <script>
-        /* =========================================================================
-           ZERO-PARTY DATA WEBHOOK ENGINE
-           INSTRUCTIONS: Replace WEBHOOK_URL with your Zapier / Make / n8n link.
-           ========================================================================= */
-        const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/sample";
+</main>
 
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            const submitBtn = document.getElementById("submitBtn");
-            const statusMsg = document.getElementById("statusMessage");
+<script>
+// Cinematic Intro Route 1 Trigger
+function skipIntro() {
+    const intro = document.getElementById('cinematic-intro');
+    const player = document.getElementById('intro-player');
+    player.pause();
+    intro.classList.add('fade-out-active');
+    
+    if (currentTheme === 'day') {
+        toggleTheme();
+    }
+}
 
-            submitBtn.disabled = true;
-            submitBtn.innerText = "TRANSMITTING DATA...";
+document.getElementById('intro-player').addEventListener('ended', function() {
+    skipIntro();
+});
 
-            const payload = {
-                firstName: document.getElementById("firstName").value,
-                email: document.getElementById("email").value,
-                preference: document.getElementById("preference").value,
-                timestamp: new Date().toISOString()
-            };
+// Dropdown Toggle
+function toggleDropdown(event) {
+    if (event) event.stopPropagation();
+    const menu = document.getElementById('vault-dropdown');
+    menu.classList.toggle('active');
+}
 
-            try {
-                const res = await fetch(WEBHOOK_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('vault-dropdown');
+    if (menu && menu.classList.contains('active') && !menu.contains(event.target)) {
+        menu.classList.remove('active');
+    }
+});
 
-                statusMsg.classList.remove("hidden");
-                statusMsg.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
-                statusMsg.innerText = "✓ CHECK-IN COMPLETE! DATA SECURELY STORED.";
-                document.getElementById("zeroPartyForm").reset();
+// -------------------------------------------------------------
+// UNIVERSAL ACCORDION TOGGLE LOGIC (Fixes the hardcoded height bug)
+// -------------------------------------------------------------
+function toggleModule(targetId) {
+    const content = document.getElementById(targetId);
+    
+    // Identify the related icon to flip the arrow up/down
+    const prefix = targetId.split('-')[0]; // "tactical" or "workout"
+    const icon = document.getElementById(prefix + '-icon');
 
-            } catch (err) {
-                statusMsg.classList.remove("hidden");
-                statusMsg.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
-                statusMsg.innerText = "✓ LOCAL CHECK-IN RECORDED.";
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "JOIN VIP LIST NOW →";
-                setTimeout(() => statusMsg.classList.add("hidden"), 5000);
-            }
+    if (content.classList.contains('is-expanded')) {
+        content.classList.remove('is-expanded'); // Collapses to 0fr
+        if(icon) {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
         }
-
-        /* DIAGNOSTIC TEST PROTOCOL (AUTOMATED SELF-DEBUGGING) */
-        async function runDiagnosticTest() {
-            const diagStatus = document.getElementById("diagStatus");
-            diagStatus.classList.remove("hidden");
-            diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-cyan-400 bg-black text-cyan-400";
-            diagStatus.innerText = "⏳ TESTING WEBHOOK CONNECTION TO URL AT LINE 8...";
-
-            // Check syntax / URL validity
-            if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_YOUR_WEBHOOK") || !WEBHOOK_URL.startsWith("http")) {
-                setTimeout(() => {
-                    diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-red-500 bg-red-950 text-red-300";
-                    diagStatus.innerText = "❌ CONNECTION REFUSED. Missing or invalid URL in js/webhook-engine.js at line 8.";
-                }, 800);
-                return;
-            }
-
-            try {
-                const testPayload = { testPayload: "Burn-1 Zero-Party Diagnostic", timestamp: new Date().toISOString() };
-                await fetch(WEBHOOK_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    mode: "no-cors",
-                    body: JSON.stringify(testPayload)
-                });
-
-                setTimeout(() => {
-                    diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-emerald-400 bg-emerald-950 text-emerald-300";
-                    diagStatus.innerText = "✅ CONNECTION SECURE! Webhook URL is live & responding.";
-                }, 800);
-            } catch (err) {
-                setTimeout(() => {
-                    diagStatus.className = "text-center p-3 rounded font-mono text-xs font-bold border-2 border-red-500 bg-red-950 text-red-300";
-                    diagStatus.innerText = "❌ SYNTAX / NETWORK ERROR. Check quotes around URL on line 8.";
-                }, 800);
-            }
+    } else {
+        content.classList.add('is-expanded'); // Expands to 1fr organically
+        if(icon) {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
         }
-    </script>
+    }
+}
+
+// -------------------------------------------------------------
+// DYNAMIC TIME BURNING CALCULATOR ENGINE
+// -------------------------------------------------------------
+function calculateBurnProgress() {
+    let burnedMins = 0.00;
+    
+    if (document.getElementById('round1').checked) burnedMins += 3.00;
+    if (document.getElementById('round2').checked) burnedMins += 2.00;
+    if (document.getElementById('round3').checked) burnedMins += 4.00;
+    if (document.getElementById('round4').checked) burnedMins += 1.00;
+    
+    document.getElementById('burned-calories-display').textContent = burnedMins.toFixed(2);
+    const percentage = (burnedMins / 10.00) * 100;
+    document.getElementById('calorie-progress-bar').style.width = `${percentage}%`;
+}
+
+// Demo Form Logic
+function runDemoDiagnostic() {
+    const output = document.getElementById('demoDiagnosticOutput');
+    const fName = document.getElementById('demoFirstName').value;
+    if (!fName) {
+        output.className = "p-3 bg-red-100 border-2 border-red-500 rounded-lg text-xs font-mono font-black text-center text-red-900 block";
+        output.textContent = "❌ ERROR: Enter form data before running diagnostic.";
+        return;
+    }
+    output.className = "p-3 bg-yellow-100 border-2 border-yellow-500 rounded-lg text-xs font-mono font-black text-center text-yellow-900 block animate-pulse";
+    output.textContent = "⚙️ TRANSMITTING ENCRYPTED SIMULATION...";
+    setTimeout(() => {
+        output.className = "p-3 bg-green-100 border-2 border-green-500 rounded-lg text-xs font-mono font-black text-center text-green-900 block shadow-[2px_2px_0px_#16a34a]";
+        output.innerHTML = '🧪 Webhook Simulation Captured! Ready to deploy.';
+    }, 2000);
+}
+
+// -------------------------------------------------------------
+// NIGHT MODE BACKGROUND VIDEO SEQUENCER
+// -------------------------------------------------------------
+const bgVideo = document.getElementById('night-bg-video');
+const clips = [
+    "animate_the_words_subtitle_in (1).mp4",
+    "extend_the_video_and_let_the_h.mp4"
+];
+let currentClipIndex = 0;
+
+function playNextBgClip() {
+    if (currentClipIndex < clips.length) {
+        bgVideo.src = clips[currentClipIndex];
+        bgVideo.load();
+        bgVideo.play().catch(err => console.log("Bg autoplay blocked:", err));
+        currentClipIndex++;
+    } else {
+        bgVideo.src = clips[1]; 
+        bgVideo.loop = true;
+        bgVideo.load();
+        bgVideo.play();
+    }
+}
+
+bgVideo.addEventListener('ended', playNextBgClip);
+
+function startNightBgSequencer() {
+    bgVideo.loop = false;
+    currentClipIndex = 0;
+    playNextBgClip();
+}
+function replayNightBgClips() { startNightBgSequencer(); }
+
+// -------------------------------------------------------------
+// THEME SWAPPER (Fixed the missing Tailwind grid classes issue)
+// -------------------------------------------------------------
+let currentTheme = 'day';
+function toggleTheme() {
+    const body = document.body;
+    const btnText = document.getElementById('theme-btn-text');
+    const headerTitle = document.getElementById('header-brand-title');
+    const leftColumn = document.getElementById('interactive-left-column');
+    
+    const dayFormPanel = document.getElementById('day-form-panel');
+    const nightHudPanel = document.getElementById('night-hud-panel');
+    const nightBgContainer = document.getElementById('night-bg-video-container');
+
+    if (currentTheme === 'day') {
+        currentTheme = 'night';
+        body.classList.replace('theme-day', 'theme-night');
+        btnText.textContent = "DAY MODE";
+        
+        dayFormPanel.classList.add('hidden');
+        nightHudPanel.classList.remove('hidden');
+        nightBgContainer.style.display = 'block';
+
+        // Swap visual classes without breaking the grid layout
+        leftColumn.classList.remove('bg-white', 'border-4', 'border-slate-900');
+        leftColumn.classList.add('bg-slate-950', 'border', 'border-slate-800');
+        headerTitle.style.color = '#ffffff';
+
+        startNightBgSequencer();
+    } else {
+        currentTheme = 'day';
+        body.classList.replace('theme-night', 'theme-day');
+        btnText.textContent = "NIGHT MODE";
+        
+        dayFormPanel.classList.remove('hidden');
+        nightHudPanel.classList.add('hidden');
+        nightBgContainer.style.display = 'none';
+        bgVideo.pause();
+
+        // Restore day styling
+        leftColumn.classList.remove('bg-slate-950', 'border', 'border-slate-800');
+        leftColumn.classList.add('bg-white', 'border-4', 'border-slate-900');
+        headerTitle.style.color = '#0f172a';
+    }
+}
+</script>
 </body>
 </html>

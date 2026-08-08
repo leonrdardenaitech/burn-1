@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malcolm's Barbershop VIP Kiosk</title>
+<style>
+  :root {
+    /* Core Hub Variables */
+    --bg-void: #1a1a1a;
+    --orange: #D4621A;
+    --cream: #FDF6EC;
+    --dim: rgba(253, 246, 236, 0.6);
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 200vh; /* Creates the scrolling depth for the QR trap */
+    background-color: var(--bg-void);
+    color: var(--cream);
+    font-family: Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* 
+   THE DIABOLICAL ARCHITECTURE: MOIRÉ BARBERPOLE VIBRATION (GPU OPTIMIZED)
+   Pushed to z-index: -1 to sit firmly in the background.
+  */
+  .moire-void {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
+    z-index: -1; 
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Splitting the gradients into two elements forces Hardware Acceleration */
+  .moire-void::before,
+  .moire-void::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    will-change: transform; 
+  }
+
+  .moire-void::before {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(253, 246, 236, 0.03) 10px, rgba(253, 246, 236, 0.03) 20px);
+    animation: moireShiftOne 20s linear infinite;
+  }
+
+  .moire-void::after {
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(212, 98, 26, 0.03) 15px, rgba(212, 98, 26, 0.03) 30px);
+    animation: moireShiftTwo 25s linear infinite;
+  }
+
+  @keyframes moireShiftOne {
+    0% { transform: translate3d(0px, 0px, 0px); }
+    100% { transform: translate3d(100px, 300px, 0px); }
+  }
+
+  @keyframes moireShiftTwo {
+    0% { transform: translate3d(0px, 0px, 0px); }
+    100% { transform: translate3d(-150px, 400px, 0px); }
+  }
+
+  /* FLAT CONTRAST UI LAYER (Zero Friction) */
+  .kiosk-ui {
+    position: relative;
+    z-index: 10;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 8vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .tagline {
+    font-size: 16px;
+    color: var(--dim);
+    font-style: italic;
+    margin-bottom: 60px;
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(253, 246, 236, 0.1);
+    padding: 24px 0;
+  }
+
+  .menu-item:last-child {
+    border-bottom: none;
+  }
+
+  .service-name {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .service-price {
+    font-family: monospace;
+    font-size: 18px;
+    color: var(--orange);
+  }
+
+  /* 6-IMAGE GALLERY GRID (Mobile-Optimized Constraints) */
+  .kiosk-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 16px;
+    margin-top: 50px;
+    margin-bottom: 150px; 
+  }
+
+  /* Forces all images to be perfect squares and fit the grid without blowing up */
+  .gallery-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover; 
+    background: rgba(253, 246, 236, 0.03); 
+    border: 1px solid rgba(253, 246, 236, 0.15);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .gallery-img:hover {
+    border-color: var(--orange);
+    transform: scale(1.02);
+  }
+
+  /* THE ANAMORPHIC TRAP CONTAINER */
+  .qr-trap-zone {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    z-index: 20;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- The Optical Funnel -->
+<div class="moire-void"></div>
+
+<!-- The Frictionless Interface -->
+<div class="kiosk-ui">
+  <div class="eyebrow">VIP SERVICE MENU</div>
+  <h1>Malcolm's Barbershop</h1>
+  <p class="tagline">Commanding the aesthetic.</p>
+
+  <div class="menu-item">
+    <div class="service-name">The Executive Cut</div>
+    <div class="service-price">$30</div>
+  </div>
+  <div class="menu-item">
+    <div class="service-name">Beard Sculpt & Razor</div>
+    <div class="service-price">$20</div>
+  </div>
+  <div class="menu-item">
+    <div class="service-name">Full VIP Treatment</div>
+    <div class="service-price">$80</div>
+  </div>
+
+  <!-- The Visual Proof (2 Image Grid with your local files) -->
+  <div class="kiosk-gallery">
+    <img src="weldLobby/Cortes y Peinados  Afro.jpg" alt="Afro Cut" class="gallery-img">
+    <img src="weldLobby/MEN'S HAIRCUT NAMES.jpg" alt="Haircut Names" class="gallery-img">
+  </div>
+</div>
+
+<!-- The Trap Door -->
+<div class="qr-trap-zone" id="qrTrap">
+  <!-- JavaScript will inject the shattered geometric shards here -->
+</div>
+
+</body>
+</html>

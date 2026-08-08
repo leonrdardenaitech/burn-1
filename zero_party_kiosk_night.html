@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zero-Party Kiosk - Night Mode Terminal</title>
+    
+    <!-- TailWind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cyber: ['Orbitron', 'sans-serif'],
+                        mono: ['"Share Tech Mono"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-base: #020617;            /* Deep Black Slate [1] */
+            --bg-surface: rgba(15, 23, 42, 0.75); /* Translucent dark slate panel [1] */
+            --text-main: #f8fafc;          /* Off-white text [1] */
+            --text-muted: #94a3b8;         /* Muted Slate text [1] */
+            --accent-primary: #f97316;     /* Terracotta Red-Orange [1] */
+            --accent-secondary: #eab308;   /* Saffron Burn [1] */
+            --accent-success: #10b981;     /* Emerald Green [1] */
+            --accent-danger: #ef4444;      /* Alert Red [1] */
+            --border-color: rgba(249, 115, 22, 0.3); /* Subtle Orange border [1] */
+            --border-width-val: 1px;
+            --shadow-style: 0 10px 40px rgba(0,0,0,0.8);
+            --radius-val: 16px;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Cinematic Background Loop [2] */
+        .video-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            object-fit: cover;
+            filter: saturate(0.9) brightness(0.3);
+        }
+
+        .video-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.65), rgba(2, 6, 23, 0.9));
+        }
+
+        /* Translucent Glass Layout Cards [3] */
+        .glass-panel {
+            background: var(--bg-surface);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: var(--border-width-val) solid var(--border-color);
+            border-radius: var(--radius-val);
+            box-shadow: var(--shadow-style);
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(255, 87, 34, 0.5);
+            box-shadow: 0 20px 50px rgba(255, 87, 34, 0.15);
+        }
+
+        /* Sliding Inputs Layout [4] */
+        .input-slider {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .kiosk-row.row-expanded .input-slider {
+            max-height: 100px;
+            opacity: 1;
+            pointer-events: auto;
+            margin-top: 12px;
+        }
+
+        /* Collapsing specs list block [4] */
+        #expandable-workspace {
+            transition: max-height 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .workspace-collapsed #slogan-details, 
+        .workspace-collapsed #specs-segment {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            padding-top: 0;
+            margin-top: 0;
+            pointer-events: none;
+        }
+
+        /* Cyberpunk Button Styles [5] */
+        .btn-orange {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #020617;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.5);
+        }
+
+        .btn-sun {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid var(--accent-secondary);
+            backdrop-filter: blur(8px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-sun:hover {
+            background: var(--accent-secondary);
+            color: #020617;
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
+        }
+
+        /* Monospace inputs [6] */
+        .brutal-input {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: rgba(15, 23, 42, 0.8);
+            color: white;
+            font-family: 'Share Tech Mono', monospace;
+            transition: border-color 0.2s;
+        }
+
+        .brutal-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Reticle Box Markers [7] */
+        .reticle {
+            position: relative;
+        }
+        .reticle::before {
+            content: '+';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            color: var(--accent-primary);
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .reticle::after {
+            content: '+';
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            color: var(--accent-primary);
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.3);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(249, 115, 22, 0.4);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(249, 115, 22, 0.7);
+        }
+    </style>
+</head>
+<body class="min-h-screen relative">
+
+    <!-- ===== FULL-SCREEN VIDEO BACKPLANE [2] ===== -->
+    <!-- Attempting local storage paths for digital street smarts video [8] -->
+    <video src="C:\Users\Leonr\Downloads2\AGY_New_Team_HQ\Team3_Breakroom\redblockapp\digital street smarts.mp4" 
+           autoplay loop muted playsinline class="video-bg" id="bg-video">
+        <source src="C:\Users\Leonr\Downloads2\AGY_New_Team_HQ\Team3_Breakroom\thisoneKael\animate_the_words_subtitle_in (1).mp4">
+        <source src="Survivor_running_through_zombie_hordes_202608051646.mp4">
+    </video>
+    <div class="video-overlay"></div>
+
+    <!-- ===== MAIN CONTENT CONTAINER ===== -->
+    <div class="container mx-auto px-4 py-8 min-h-screen flex flex-col justify-between relative z-10">
+
+        <!-- ===== SYSTEM HEADER PROTOCOL ===== -->
+        <header class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 glass-panel p-4 border-b border-orange-500/20">
+            <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-orange-500 animate-ping"></div>
+                <span class="font-cyber text-lg tracking-wider font-bold text-orange-500">BURN-1 SYSTEMS</span>
+                <span class="text-xs font-mono bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2 py-0.5 rounded">SOVEREIGN MODE</span>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <!-- Status Code Indicator -->
+                <div class="flex items-center gap-2 font-mono text-sm text-slate-400">
+                    <span class="text-orange-500">SYS_LOC:</span>
+                    <span id="sys-loc">TERM_NIGHT_01</span>
+                </div>
+                <!-- Day / Night Mode Link Simulated Toggle -->
+                <button onclick="simulateThemeToggle()" class="btn-sun text-xs py-1.5 px-4 rounded-lg flex items-center gap-2 transition-all">
+                    <i class="fas fa-sun text-yellow-400"></i>
+                    <span>DAY MODE</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ===== TWO-COLUMN TACTICAL HUD ===== -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start my-auto">
+            
+            <!-- LEFT COLUMN: THE SOVEREIGNTY ENGINE TERMINAL (ONBOARDING) -->
+            <section class="lg:col-span-5 glass-panel p-6 reticle flex flex-col gap-6">
+                <div class="border-b border-orange-500/20 pb-4">
+                    <h2 class="font-cyber text-xl font-bold tracking-widest text-orange-500 flex items-center gap-2">
+                        <i class="fas fa-terminal"></i> KIOSK INITIALIZATION
+                    </h2>
+                    <p class="text-xs text-slate-400 font-mono mt-1">PROVISION PRIVATE CREDENTIALS LOCALLY</p>
+                </div>
+
+                <!-- Initialization Kiosk Rows [9] -->
+                <div class="flex flex-col gap-4" id="kiosk-inputs-container">
+                    
+                    <!-- Row 1: System Hostname -->
+                    <div class="kiosk-row border border-slate-700/50 hover:border-orange-500/30 rounded-xl p-4 transition-all duration-300 bg-slate-950/40 cursor-pointer" onclick="toggleKioskRow(this)">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <span class="font-mono text-xs text-orange-500/70">01 /</span>
+                                <span class="font-cyber text-sm font-bold tracking-wide">SYSTEM HOSTNAME</span>
+                            </div>
+                            <!-- Lock Icon -->
+                            <div class="lock-indicator text-red-500 flex items-center gap-2">
+                                <span class="font-mono text-xs text-red-400/80">UNLOCKED</span>
+                                <span class="lock-icon text-lg">🔓</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Collapsible Input Slider [4] -->
+                        <div class="input-slider" onclick="event.stopPropagation()">
+                            <div class="flex gap-2 items-center">
+                                <input type="text" placeholder="e.g. client-kiosk-01" 
+                                       class="brutal-input flex-1 px-3 py-2 rounded-lg text-sm" 
+                                       id="input-hostname" onkeypress="handleInputKeyPress(event, this)">
+                                <button onclick="saveKioskRow(this)" class="btn-orange px-4 py-2 rounded-lg font-cyber text-xs font-bold shrink-0">SAVE</button>
+                            </div>
+                            <p class="text-[10px] font-mono text-slate-500 mt-2">ALPHANUMERIC IDENTIFIER ASSIGNED TO LOCAL HOST</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Webhook Post-Engine Endpoint -->
+                    <div class="kiosk-row border border-slate-700/50 hover:border-orange-500/30 rounded-xl p-4 transition-all duration-300 bg-slate-950/40 cursor-pointer" onclick="toggleKioskRow(this)">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <span class="font-mono text-xs text-orange-500/70">02 /</span>
+                                <span class="font-cyber text-sm font-bold tracking-wide">WEBHOOK TARGET</span>
+                            </div>
+                            <div class="lock-indicator text-red-500 flex items-center gap-2">
+                                <span class="font-mono text-xs text-red-400/80">UNLOCKED</span>
+                                <span class="lock-icon text-lg">🔓</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-slider" onclick="event.stopPropagation()">
+                            <div class="flex gap-2 items-center">
+                                <input type="url" placeholder="https://api.domain.com/webhook" 
+                                       class="brutal-input flex-1 px-3 py-2 rounded-lg text-sm" 
+                                       id="input-webhook" onkeypress="handleInputKeyPress(event, this)">
+                                <button onclick="saveKioskRow(this)" class="btn-orange px-4 py-2 rounded-lg font-cyber text-xs font-bold shrink-0">SAVE</button>
+                            </div>
+                            <p class="text-[10px] font-mono text-slate-500 mt-2">CRM POST DISPATCHER OR DATA DEPOSIT ENDPOINT</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Admin Decryption Passkey -->
+                    <div class="kiosk-row border border-slate-700/50 hover:border-orange-500/30 rounded-xl p-4 transition-all duration-300 bg-slate-950/40 cursor-pointer" onclick="toggleKioskRow(this)">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <span class="font-mono text-xs text-orange-500/70">03 /</span>
+                                <span class="font-cyber text-sm font-bold tracking-wide">DECRYPTION PASSKEY</span>
+                            </div>
+                            <div class="lock-indicator text-red-500 flex items-center gap-2">
+                                <span class="font-mono text-xs text-red-400/80">UNLOCKED</span>
+                                <span class="lock-icon text-lg">🔓</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-slider" onclick="event.stopPropagation()">
+                            <div class="flex gap-2 items-center">
+                                <input type="password" placeholder="••••••••••••" 
+                                       class="brutal-input flex-1 px-3 py-2 rounded-lg text-sm" 
+                                       id="input-passkey" onkeypress="handleInputKeyPress(event, this)">
+                                <button onclick="saveKioskRow(this)" class="btn-orange px-4 py-2 rounded-lg font-cyber text-xs font-bold shrink-0">SAVE</button>
+                            </div>
+                            <p class="text-[10px] font-mono text-slate-500 mt-2">ENFORCES 256-BIT LOCAL KEY CHAINS FOR SYSTEM RESET</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Unified Safe/Active State Status Button [9] -->
+                <div class="mt-4 border-t border-slate-800 pt-6">
+                    <button id="status-button" disabled
+                            class="w-full bg-slate-800/80 text-slate-500 border border-slate-700 font-cyber font-black tracking-widest text-center py-4 rounded-xl text-sm transition-all duration-500">
+                        STATUS: UNINITIALIZED 🔒
+                    </button>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: SPRING-LOADED TACTICAL ESCAPE DECK -->
+            <section class="lg:col-span-7 glass-panel p-6 flex flex-col gap-6" id="tactical-deck-container">
+                
+                <!-- Deck Header with Collapsing Toggle Button [10] -->
+                <div class="flex justify-between items-center border-b border-orange-500/20 pb-4">
+                    <div>
+                        <h2 class="font-cyber text-xl font-bold tracking-widest text-yellow-500 flex items-center gap-2">
+                            <i class="fas fa-shield-halved"></i> TACTICAL ESCAPE DECK
+                        </h2>
+                        <p class="text-xs text-slate-400 font-mono mt-1">BURN-1 STANDALONE ARCHITECTURE BLUEPRINTS</p>
+                    </div>
+                    
+                    <!-- Collapsible Trigger Button [10] -->
+                    <button onclick="toggleWorkspace()" id="expand-btn" 
+                            class="px-4 py-2 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-400 font-cyber font-bold text-xs tracking-wider flex items-center gap-2 hover:bg-orange-500/25 transition-all">
+                        <span id="expand-btn-text">COLLAPSE SPEC LIST</span>
+                        <span id="expand-btn-icon">[-]</span>
+                    </button>
+                </div>
+
+                <!-- Expandable Workspace Compartment [4] -->
+                <div id="expandable-workspace" class="flex flex-col gap-6 overflow-hidden max-h-[1200px] transition-all duration-500">
+                    
+                    <!-- Slogan & Sledgehammer Copy [11] -->
+                    <div id="slogan-details" class="bg-slate-950/50 p-4 border-l-4 border-orange-500 rounded-r-xl transition-all duration-300">
+                        <h3 class="font-cyber text-sm font-bold text-orange-400 mb-2 tracking-wide">THE CORE COUNTER-MEASURE</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                            Most digital marketing tools are designed to bleed you dry with recurring SaaS subscription fees while your client list is quietly harvested by Big Tech trackers. 
+                            <strong>Burn-1 Systems is the counter-measure.</strong> We build un-tracked, standalone customer kiosks that run strictly on your local hardware or subdomains. 
+                            No monthly fees. No cloud data leakage. No corporate chaperones. Just burn-1 and go.
+                        </p>
+                    </div>
+
+                    <!-- Color-Coded Progress Workout Gauge [11, 12] -->
+                    <div id="progress-gauge-segment" class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 flex flex-col gap-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-cyber text-xs font-bold tracking-wider text-yellow-500">SOVEREIGN CALORIE-STYLE CHRONO PROGRESS</span>
+                            <span class="font-mono text-xs text-orange-400" id="burn-percentage">0% ACCUMULATED</span>
+                        </div>
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-slate-950 border border-slate-800 h-4 rounded-full overflow-hidden p-0.5">
+                            <div id="burn-progress-fill" class="bg-gradient-to-r from-orange-600 via-amber-500 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <p class="text-[10px] text-slate-400 font-mono uppercase tracking-widest text-center" id="chrono-feedback">Complete the workout rounds below to fuel the core.</p>
+                    </div>
+
+                    <!-- Specs Segment [11] -->
+                    <div id="specs-segment" class="grid grid-cols-1 md:grid-cols-2 gap-4 transition-all duration-300">
+                        
+                        <!-- 10-Minute Burn Challenge (The Workout Rounds) [11] -->
+                        <div class="border border-slate-800/80 rounded-xl p-4 bg-slate-950/30">
+                            <h4 class="font-cyber text-xs font-bold tracking-wider text-orange-400 mb-3 uppercase">10-Minute Burn Challenge</h4>
+                            <div class="flex flex-col gap-3 font-mono text-xs text-slate-300">
+                                <label class="flex items-center gap-3 cursor-pointer select-none">
+                                    <input type="checkbox" onchange="calculateBurnProgress()" class="accent-orange-500 w-4 h-4 rounded border-slate-700 bg-slate-900">
+                                    <span class="text-sky-400">🔵 ROUND 1: Webhook Alignment</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer select-none">
+                                    <input type="checkbox" onchange="calculateBurnProgress()" class="accent-orange-500 w-4 h-4 rounded border-slate-700 bg-slate-900">
+                                    <span class="text-yellow-400">🟡 ROUND 2: Color & Brand Sync</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer select-none">
+                                    <input type="checkbox" onchange="calculateBurnProgress()" class="accent-orange-500 w-4 h-4 rounded border-slate-700 bg-slate-900">
+                                    <span class="text-orange-500">🟠 ROUND 3: Zero-Cost CDN Deploy</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer select-none">
+                                    <input type="checkbox" onchange="calculateBurnProgress()" class="accent-orange-500 w-4 h-4 rounded border-slate-700 bg-slate-900">
+                                    <span class="text-emerald-400">🟢 ROUND 4: Print & Verify</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- What's Inside the $50 Digital Cache [11] -->
+                        <div class="border border-slate-800/80 rounded-xl p-4 bg-slate-950/30">
+                            <h4 class="font-cyber text-xs font-bold tracking-wider text-yellow-500 mb-3 uppercase">Vault Cargo Cache</h4>
+                            <ul class="flex flex-col gap-2 font-mono text-[11px] text-slate-400">
+                                <li class="flex items-center gap-2 text-slate-300">
+                                    <i class="fas fa-check-square text-orange-500"></i> Standalone Kiosk (index.html)
+                                </li>
+                                <li class="flex items-center gap-2 text-slate-300">
+                                    <i class="fas fa-check-square text-orange-500"></i> Webhook Engine script
+                                </li>
+                                <li class="flex items-center gap-2 text-slate-300">
+                                    <i class="fas fa-check-square text-orange-500"></i> Connection Diagnostic Utility
+                                </li>
+                                <li class="flex items-center gap-2 text-slate-300">
+                                    <i class="fas fa-check-square text-orange-500"></i> Quiet-Zone SVG QR Frame
+                                </li>
+                                <li class="flex items-center gap-2 text-yellow-400 animate-pulse">
+                                    <i class="fas fa-network-wired"></i> SECURE BURN-1 LIFE ACCESS
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- ===== FOOTER ACTIONS PROTOCOL ===== -->
+        <footer class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500 border-t border-slate-800/50 pt-4">
+            <div>
+                <span>SECURE DIGITAL LOCK BOX PROTOTYPE © 2026</span>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="resetLocalTerminal()" class="hover:text-orange-500 transition-colors uppercase">
+                    <i class="fas fa-arrow-rotate-left"></i> Reset Terminal Cache
+                </button>
+                <span>|</span>
+                <span class="text-slate-400">LAYER 4 SECURED VIA MCP-WATCHDOG PROXY</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Custom Toast / Interactive Popup HUD Notifications -->
+    <div id="hud-toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-950/90 text-white border border-orange-500/50 px-6 py-3 rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] opacity-0 pointer-events-none transition-all duration-300 z-50 font-mono text-xs tracking-wider flex items-center gap-3">
+        <i class="fas fa-bell text-orange-500 animate-bounce"></i>
+        <span id="hud-toast-text">HUD ALERT TRIGGERED</span>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- INTERACTIVE STATE MACHINE JAVASCRIPT CONTROLLER -->
+    <!-- ============================================================ -->
+    <script>
+        // Track the initialization states of the rows [Row1, Row2, Row3]
+        const rowStates = {
+            'input-hostname': { valid: false, value: '' },
+            'input-webhook': { valid: false, value: '' },
+            'input-passkey': { valid: false, value: '' }
+        };
+
+        // Initialize state indicators on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTerminalCache();
+            calculateBurnProgress();
+        });
+
+        // Toggle Expand/Collapse of Input rows inside Left Onboarding Column [9]
+        function toggleKioskRow(rowElement) {
+            const isExpanded = rowElement.classList.contains('row-expanded');
+            
+            // Collapse all rows first
+            document.querySelectorAll('.kiosk-row').forEach(row => {
+                row.classList.remove('row-expanded');
+            });
+
+            // If it wasn't expanded, expand it now
+            if (!isExpanded) {
+                rowElement.classList.add('row-expanded');
+                const input = rowElement.querySelector('input');
+                if (input) input.focus();
+            }
+        }
+
+        // Validate and Save Kiosk Row Input Values [9]
+        function saveKioskRow(buttonElement) {
+            const rowElement = buttonElement.closest('.kiosk-row');
+            const input = rowElement.querySelector('input');
+            const inputValue = input.value.trim();
+            const inputId = input.id;
+
+            let isValid = false;
+
+            // Simple validation rules per input type
+            if (inputId === 'input-hostname') {
+                isValid = inputValue.length >= 3;
+                if (!isValid) triggerToast("INVALID HOSTNAME - MUST BE AT LEAST 3 CHARACTERS");
+            } else if (inputId === 'input-webhook') {
+                const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+                isValid = urlPattern.test(inputValue);
+                if (!isValid) triggerToast("INVALID URL ENDPOINT PATH");
+            } else if (inputId === 'input-passkey') {
+                isValid = inputValue.length >= 6;
+                if (!isValid) triggerToast("KEY INVALID - MINIMUM 6 CHARACTERS REQUIRED");
+            }
+
+            if (isValid) {
+                rowStates[inputId].valid = true;
+                rowStates[inputId].value = inputValue;
+
+                // Update UI state to represent a successful dynamic lock state [9]
+                const lockIndicator = rowElement.querySelector('.lock-indicator');
+                lockIndicator.innerHTML = '<span class="font-mono text-xs text-emerald-400/80">SECURED</span><span class="lock-icon text-lg">🔒</span>';
+                lockIndicator.className = 'lock-indicator text-emerald-500 flex items-center gap-2';
+                rowElement.classList.remove('border-slate-700/50');
+                rowElement.classList.add('border-emerald-500/50');
+
+                // Auto collapse row
+                rowElement.classList.remove('row-expanded');
+
+                // Play custom feedback beeps
+                playLocalBeep(880, 0.15);
+
+                triggerToast(`DECK CONFIGURATION [${inputId.replace('input-', '').toUpperCase()}] LOCKED IN`);
+                
+                // Save state to local browser memory cache [13]
+                localStorage.setItem('burn1_night_kiosk_cache', JSON.stringify(rowStates));
+
+                // Check overall initialization status
+                checkKioskInitializationStatus();
+            } else {
+                rowElement.classList.add('animate-shake');
+                setTimeout(() => rowElement.classList.remove('animate-shake'), 400);
+                playLocalBeep(220, 0.3); // Error buzz
+            }
+        }
+
+        // Handle Enter Key press inside inputs to save seamlessly
+        function handleInputKeyPress(event, inputElement) {
+            if (event.key === 'Enter') {
+                const saveButton = inputElement.nextElementSibling;
+                if (saveButton) saveButton.click();
+            }
+        }
+
+        // Check if Kiosk initialization requirements are 100% completed [9]
+        function checkKioskInitializationStatus() {
+            const allValid = Object.values(rowStates).every(row => row.valid);
+            const statusButton = document.getElementById('status-button');
+
+            if (allValid) {
+                statusButton.disabled = false;
+                statusButton.innerText = "STATUS: SECURE & ACTIVE 🟢";
+                statusButton.className = "w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-cyber font-black tracking-widest text-center py-4 rounded-xl text-sm transition-all duration-500 cursor-pointer shadow-[0_0_25px_rgba(16,185,129,0.4)]";
+                statusButton.onclick = () => {
+                    playLocalBeep(1200, 0.4);
+                    triggerToast("SOVEREIGN ENCLAVE BOOTED successfully! ACTIVE PROTECTION IN SERVICE.");
+                };
+            } else {
+                statusButton.disabled = true;
+                statusButton.innerText = "STATUS: UNINITIALIZED 🔒";
+                statusButton.className = "w-full bg-slate-800/80 text-slate-500 border border-slate-700 font-cyber font-black tracking-widest text-center py-4 rounded-xl text-sm transition-all duration-500";
+            }
+        }
+
+        // Toggle Expanding/Collapsing Right Workspace Compartment [4]
+        function toggleWorkspace() {
+            const container = document.getElementById('tactical-deck-container');
+            const expandBtnText = document.getElementById('expand-btn-text');
+            const expandBtnIcon = document.getElementById('expand-btn-icon');
+            const workspace = document.getElementById('expandable-workspace');
+
+            if (container.classList.contains('workspace-collapsed')) {
+                container.classList.remove('workspace-collapsed');
+                workspace.style.maxHeight = '1200px';
+                expandBtnText.innerText = 'COLLAPSE SPEC LIST';
+                expandBtnIcon.innerText = '[-]';
+                playLocalBeep(440, 0.1);
+            } else {
+                container.classList.add('workspace-collapsed');
+                workspace.style.maxHeight = '0px';
+                expandBtnText.innerText = 'EXPAND SPEC LIST';
+                expandBtnIcon.innerText = '[+]';
+                playLocalBeep(330, 0.1);
+            }
+        }
+
+        // Color-Coded Progress Calculator (Calories Burning style) [12]
+        function calculateBurnProgress() {
+            const checkboxes = document.querySelectorAll('#specs-segment input[type="checkbox"]');
+            let checkedCount = 0;
+            checkboxes.forEach(box => {
+                if (box.checked) {
+                    checkedCount++;
+                }
+            });
+
+            // Calculate percentage
+            const percentage = (checkedCount / checkboxes.length) * 100;
+            const progressFill = document.getElementById('burn-progress-fill');
+            const burnPctText = document.getElementById('burn-percentage');
+            const chronoFeedback = document.getElementById('chrono-feedback');
+
+            progressFill.style.width = `${percentage}%`;
+            burnPctText.innerText = `${percentage.toFixed(0)}% ACCUMULATED`;
+
+            // Dynamic textual logging feedback
+            if (percentage === 0) {
+                chronoFeedback.innerText = "Complete the workout rounds below to fuel the core.";
+                chronoFeedback.className = "text-[10px] text-slate-400 font-mono uppercase tracking-widest text-center";
+            } else if (percentage === 25) {
+                chronoFeedback.innerText = "Round 1 complete! Webhook engine post synced.";
+                chronoFeedback.className = "text-[10px] text-sky-400 font-mono uppercase tracking-widest text-center";
+                playLocalBeep(523.25, 0.1);
+            } else if (percentage === 50) {
+                chronoFeedback.innerText = "Brand asset syncing mapped on coordinate canvas.";
+                chronoFeedback.className = "text-[10px] text-yellow-400 font-mono uppercase tracking-widest text-center";
+                playLocalBeep(587.33, 0.1);
+            } else if (percentage === 75) {
+                chronoFeedback.innerText = "Zero-cost local CDN deployed in local network.";
+                chronoFeedback.className = "text-[10px] text-orange-400 font-mono uppercase tracking-widest text-center";
+                playLocalBeep(659.25, 0.1);
+            } else if (percentage === 100) {
+                chronoFeedback.innerText = "STATION VERIFIED: STANDALONE ARCHITECTURE OPERATIONAL! 🔥";
+                chronoFeedback.className = "text-[10px] text-emerald-400 font-mono uppercase tracking-widest text-center font-bold animate-pulse";
+                playLocalBeep(880, 0.3);
+                triggerToast("CHALLENGE COMPLETE - SOVEREIGN HARDENING COMMITTED!");
+            }
+            
+            localStorage.setItem('burn1_night_workout_state', checkedCount);
+        }
+
+        // Web Audio Synthesizer (Zero-friction local Sound Indicators) [13]
+        function playLocalBeep(frequency, duration) {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.type = 'sine';
+                osc.frequency.value = frequency;
+
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {
+                // Background contexts muted until gesture
+            }
+        }
+
+        // Dynamic Web HUD Toast Notification Drawer
+        function triggerToast(textMessage) {
+            const toast = document.getElementById('hud-toast');
+            const toastText = document.getElementById('hud-toast-text');
+
+            toastText.innerText = textMessage;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translate(-50%, -10px)';
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translate(-50%, 0px)';
+            }, 3000);
+        }
+
+        // Load persisted states from browser database storage cache [13]
+        function loadTerminalCache() {
+            try {
+                const kioskCache = localStorage.getItem('burn1_night_kiosk_cache');
+                if (kioskCache) {
+                    const parsed = JSON.parse(kioskCache);
+                    Object.keys(parsed).forEach(id => {
+                        if (parsed[id].valid) {
+                            rowStates[id] = parsed[id];
+                            const inputElement = document.getElementById(id);
+                            inputElement.value = parsed[id].value;
+
+                            const rowElement = inputElement.closest('.kiosk-row');
+                            const lockIndicator = rowElement.querySelector('.lock-indicator');
+                            lockIndicator.innerHTML = '<span class="font-mono text-xs text-emerald-400/80">SECURED</span><span class="lock-icon text-lg">🔒</span>';
+                            lockIndicator.className = 'lock-indicator text-emerald-500 flex items-center gap-2';
+                            rowElement.classList.remove('border-slate-700/50');
+                            rowElement.classList.add('border-emerald-500/50');
+                        }
+                    });
+                    checkKioskInitializationStatus();
+                }
+
+                const workoutState = localStorage.getItem('burn1_night_workout_state');
+                if (workoutState) {
+                    const checkedNum = parseInt(workoutState, 10);
+                    const checkboxes = document.querySelectorAll('#specs-segment input[type="checkbox"]');
+                    for (let i = 0; i < checkedNum && i < checkboxes.length; i++) {
+                        checkboxes[i].checked = true;
+                    }
+                }
+            } catch (e) {
+                // Graceful degradation
+            }
+        }
+
+        function resetLocalTerminal() {
+            if (confirm("ARE YOU SURE YOU WANT TO CLEAR ALL SECURE TERMINAL SETTINGS AND CACHE?")) {
+                localStorage.removeItem('burn1_night_kiosk_cache');
+                localStorage.removeItem('burn1_night_workout_state');
+                playLocalBeep(150, 0.5);
+                triggerToast("TERMINAL CACHE DELETED. RELOADING PROTOCOL...");
+                setTimeout(() => window.location.reload(), 1000);
+            }
+        }
+
+        function simulateThemeToggle() {
+            playLocalBeep(600, 0.15);
+            triggerToast("DIVERTER DETECTED: LAUNCHING zero_party_kiosk_day MODE");
+            setTimeout(() => {
+                window.location.href = "zero_party_kiosk_day.html";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
