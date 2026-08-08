@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ꟻRIED BRAINS WORLD :: RECLAIM YOUR MIND | ꟻRIEDBRANDS STUDIO</title>
-    <meta name="description" content="ꟻried Brains World: Vertical Scrolling Recovery Engine, ꟻriedbrands Studio, Interactive Recovery RPG Terminal, & Hard Hat Protocol.">
+    <title>ꟻRIED BRAINS WORLD :: MAIN HUB | ꟻRIEDBRANDS STUDIO</title>
+    <meta name="description" content="ꟻried Brains World: Main Hub featuring 75% Slow Video Loop, ꟻriedbrands Studio, Interactive Recovery RPG Terminal, & Hard Hat Protocol.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,29 +17,12 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: {
-                            400: '#FFD700',
-                            500: '#D4AF37',
-                            600: '#C5A059',
-                            700: '#B8860B',
-                        },
-                        asphalt: {
-                            700: '#33373B',
-                            800: '#242528',
-                            900: '#1A1C1E',
-                            950: '#0F1012',
-                        },
-                        denim: {
-                            300: '#C5DCED',
-                            400: '#A4C2D4',
-                            500: '#89ACCE',
-                            600: '#6B93B8',
-                            700: '#7FA1C3',
-                        }
+                        gold: { 400: '#FFD700', 500: '#D4AF37', 600: '#C5A059' },
+                        asphalt: { 700: '#33373B', 800: '#242528', 900: '#1A1C1E' },
+                        denim: { 300: '#C5DCED', 400: '#A4C2D4', 500: '#89ACCE', 600: '#6B93B8' }
                     },
                     fontFamily: {
                         gothic: ['Pirata One', 'Cinzel Decorative', 'serif'],
-                        cyber: ['Pirata One', 'Orbitron', 'sans-serif'],
                         mono: ['Share Tech Mono', 'monospace'],
                         sans: ['Space Grotesk', 'sans-serif'],
                     }
@@ -49,28 +32,14 @@
     </script>
 
     <style>
-        :root {
-            --gold-primary: #D4AF37;
-            --asphalt-bg: #1A1C1E;
-            --denim-blue: #A4C2D4;
-            --text-black: #000000;
-        }
-
+        /* BASE NIGHT MODE IS NOW BABY BLUE JEAN AS REQUESTED */
         body {
-            background-color: #0F1012;
-            color: #ffffff;
+            background-color: #A4C2D4;
+            color: #000000;
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
-            background-image: linear-gradient(180deg, #0F1012 0%, #1A1C1E 50%, #242528 100%);
         }
 
-        /* Gothic Title Styling */
-        .gothic-title {
-            font-family: 'Pirata One', 'Cinzel Decorative', serif;
-            letter-spacing: 2px;
-        }
-
-        /* Rectangle-on-Rectangle Brutalist Badge Design with Heavy Shading */
         .rect-badge-gold {
             background-color: #D4AF37;
             color: #000000 !important;
@@ -80,7 +49,7 @@
         }
 
         .rect-badge-denim {
-            background-color: #A4C2D4;
+            background-color: #ffffff;
             color: #000000 !important;
             border: 4px solid #000000;
             box-shadow: 6px 6px 0px #000000, 10px 10px 0px rgba(0,0,0,0.6);
@@ -88,295 +57,137 @@
         }
 
         .rect-badge-asphalt {
-            background-color: #33373B;
-            color: #ffffff !important;
-            border: 4px solid #D4AF37;
-            box-shadow: 6px 6px 0px #000000, 10px 10px 0px rgba(212, 175, 55, 0.4);
+            background-color: #1A1C1E;
+            color: #D4AF37 !important;
+            border: 4px solid #000000;
+            box-shadow: 6px 6px 0px #000000;
             font-weight: 800;
         }
 
-        /* Heavily Shaded Vertical Panel Blocks */
         .vertical-panel {
-            background-color: #242528;
+            background-color: #ffffff;
             border: 5px solid #000000;
-            box-shadow: 12px 12px 0px #000000, 18px 18px 0px rgba(0,0,0,0.7);
+            box-shadow: 10px 10px 0px #000000, 16px 16px 0px rgba(0,0,0,0.5);
             border-radius: 4px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .vertical-panel:hover {
-            transform: translateY(-4px);
-            box-shadow: 16px 16px 0px #000000, 22px 22px 0px rgba(212, 175, 55, 0.5);
-        }
-
-        /* Day Mode Overrides */
-        html.day-mode body {
-            background-color: #F4F4F5 !important;
-            background-image: none !important;
-            color: #000000 !important;
-        }
-        html.day-mode header {
-            background-color: #ffffff !important;
-            border-bottom: 4px solid #000000 !important;
-        }
-        html.day-mode header span, html.day-mode header a {
-            color: #000000 !important;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative antialiased selection:bg-amber-400 selection:text-black">
 
-    <!-- UNIFIED TOP HEADER WITH REVERSED F ꟻ -->
-    <header class="sticky top-0 z-50 bg-[#1A1C1E]/95 backdrop-blur-md border-b-4 border-black px-4 lg:px-8 py-4 flex justify-between items-center transition-colors shadow-[0_6px_0px_#000000]">
+    <!-- UNIFIED WORLD INTERCONNECTIVITY NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-[#1A1C1E] border-b-4 border-black px-4 lg:px-8 py-3.5 flex flex-wrap justify-between items-center transition-colors shadow-[0_6px_0px_#000000]">
         <div class="flex items-center gap-3">
             <a href="../index.html" title="Burn-1 Hub (Home)" class="flex items-center gap-3 group">
-                <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-10 w-auto rounded border-2 border-black shadow-[3px_3px_0px_#D4AF37]">
+                <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border-2 border-black shadow-[3px_3px_0px_#D4AF37]">
                 <span class="text-2xl font-gothic text-white font-extrabold tracking-widest flex items-center gap-2">
-                    <span class="text-[#D4AF37] group-hover:text-amber-300">ꟻRIED BRAINS</span>
-                    <span id="version-tag" class="rect-badge-denim text-xs px-2.5 py-0.5 font-mono uppercase">WORLD</span>
+                    <span class="text-[#D4AF37]">ꟻRIED BRAINS</span>
+                    <span class="rect-badge-gold text-[10px] px-2 py-0.5 font-mono uppercase">WORLD HUB</span>
                 </span>
             </a>
         </div>
 
-        <div class="flex items-center gap-3 font-mono">
-            <a href="../index.html" class="rect-badge-gold px-4 py-2 text-xs uppercase tracking-wider transition-all flex items-center gap-2">
-                <i class="fa-solid fa-house"></i> HUB
+        <!-- 4 WORLD INTERCONNECTIVITY BUTTONS -->
+        <nav class="flex flex-wrap items-center gap-2 font-mono text-xs my-1">
+            <a href="index.html" class="rect-badge-gold px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+                <i class="fa-solid fa-earth-americas"></i> 1. HUB
             </a>
-            <a href="../store.html" class="rect-badge-denim px-4 py-2 text-xs uppercase tracking-wider transition-all flex items-center gap-2">
+            <a href="digital_cigarette.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+                <i class="fa-solid fa-smoking"></i> 2. DIGITAL CIGARETTE
+            </a>
+            <a href="12_week_recovery_checklist.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+                <i class="fa-solid fa-list-check"></i> 3. 12-WK ROADMAP
+            </a>
+            <a href="sovereignty_case_study.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+                <i class="fa-solid fa-chart-pie"></i> 4. CASE STUDY
+            </a>
+            <a href="../store.html" class="rect-badge-asphalt px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
                 <i class="fa-solid fa-store"></i> STOREFRONT
             </a>
-            <button id="themeToggleBtn" onclick="toggleTheme()" class="rect-badge-asphalt px-4 py-2 text-xs uppercase tracking-wider transition-all flex items-center gap-2">
-                <i id="themeIcon" class="fa-solid fa-sun text-[#D4AF37]"></i>
-                <span id="themeText">DAY MODE</span>
-            </button>
-        </div>
+        </nav>
     </header>
 
-    <!-- MAIN VERTICAL SCROLLING CONTAINER -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16 w-full">
-
-        <!-- =========================================================
-             SECTION 1: HERO PORTRAIT BANNER (VERTICAL SCROLL ENTRY)
-             ========================================================= -->
-        <section class="vertical-panel p-6 sm:p-12 relative overflow-hidden bg-[#242528]">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                <!-- LEFT COLUMN: GOTHIC TYPOGRAPHY & RECTANGLE BADGES -->
-                <div class="lg:col-span-7 space-y-6">
-                    
-                    <!-- RECTANGLE ON RECTANGLE HEADER BADGE -->
-                    <div class="inline-block p-1 bg-black rounded border-2 border-[#D4AF37]">
-                        <div class="rect-badge-gold px-4 py-1.5 text-xs font-mono tracking-widest uppercase flex items-center gap-2">
-                            <i class="fa-solid fa-crown text-black"></i> ꟻRIEDBRANDS STUDIO // OFFICIAL PORTRAIT
-                        </div>
-                    </div>
-
-                    <h1 class="text-4xl sm:text-6xl font-gothic text-white uppercase leading-none tracking-wider">
-                        ꟻRIED BRAINS WORLD
-                    </h1>
-
-                    <div class="p-4 bg-[#A4C2D4] border-4 border-black shadow-[6px_6px_0px_#000000]">
-                        <p class="text-sm sm:text-base font-mono text-black font-extrabold leading-relaxed">
-                            RECLAIM YOUR MIND FROM SURVEILLANCE CAPITALISM. HAND-DRAWN &amp; AI-ENHANCED COGNITIVE SOVEREIGNTY ARCHITECTURE.
-                        </p>
-                    </div>
-
-                    <div class="flex flex-wrap gap-4 font-mono text-xs pt-2">
-                        <div class="rect-badge-gold px-3.5 py-2 uppercase">
-                            PALETTE: METALLIC GOLD • ASPHALT GREY • BABY BLUE JEAN
-                        </div>
-                        <div class="rect-badge-denim px-3.5 py-2 uppercase">
-                            LAYOUT: VERTICAL SCROLLING GOTHIC PANELS
-                        </div>
-                    </div>
-
+    <!-- HERO VIDEO BACKDROP STAGE -->
+    <section class="relative w-full max-w-6xl mx-auto px-4 mt-8">
+        <div class="vertical-panel p-2 overflow-hidden relative">
+            <video id="heroVideo" autoplay loop muted playsinline class="w-full h-80 sm:h-96 object-cover border-4 border-black" oncanplay="this.playbackRate = 0.75;">
+                <source src="assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
+                <source src="../assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center p-6">
+                <div class="rect-badge-gold px-4 py-1.5 text-xs font-mono uppercase mb-4 shadow-[4px_4px_0px_#000]">
+                    ⚡ SLOW 75% BINARY CODE CYLINDER STREAM
                 </div>
+                <h1 class="font-gothic text-4xl sm:text-6xl text-white uppercase tracking-wider glow-title mb-2">
+                    ꟻRIED BRAINS WORLD
+                </h1>
+                <p class="font-mono text-sm sm:text-base text-[#FFD700] bg-black/80 px-4 py-2 border-2 border-black font-extrabold">
+                    BABY BLUE JEAN NIGHT MODE • 4 INTERCONNECTED WORLD MODULES
+                </p>
+            </div>
+        </div>
+    </section>
 
-                <!-- RIGHT COLUMN: HAND-DRAWN PORTRAIT & AI TOUCHED-UP ARTWORK -->
-                <div class="lg:col-span-5">
-                    <div class="border-8 border-black bg-black shadow-[10px_10px_0px_#D4AF37] relative group">
-                        <img src="assets/FriedbrainsMainTorVault.png" alt="ꟻried Brains Hand-Drawn Portrait Motif" class="w-full h-auto object-cover filter contrast-125 transition-transform duration-500 group-hover:scale-105">
-                        <div class="rect-badge-gold absolute bottom-2 right-2 text-[10px] px-2 py-0.5 font-mono">
-                            FIG 01 // HAND-DRAWN &amp; AI TOUCHED-UP PORTRAIT
-                        </div>
+    <!-- MAIN VERTICAL CONTENT CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12 w-full">
+
+        <!-- PROMO GRAPHIC GALLERY STAGE -->
+        <section class="vertical-panel p-6 bg-white space-y-6">
+            <div class="rect-badge-gold p-3 text-sm font-mono uppercase font-extrabold flex justify-between items-center">
+                <span>📸 PROMO GRAPHICS &amp; ARTWORK MANIFEST</span>
+                <span class="text-xs">FIG 01 &amp; FIG 02</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border-4 border-black bg-black p-2 shadow-[6px_6px_0px_#D4AF37]">
+                    <img src="assets/Gemini_Generated_Image_akmnrnakmnrnakmn.png" alt="Promo Art 1" class="w-full h-64 object-cover border-2 border-white">
+                    <div class="p-3 bg-black font-mono text-xs text-amber-400 font-bold border-t-2 border-white">
+                        PROMO ARTWORK // CYBERNETIC COGNITIVE SHIELD
                     </div>
                 </div>
 
+                <div class="border-4 border-black bg-black p-2 shadow-[6px_6px_0px_#A4C2D4]">
+                    <img src="assets/image.png_202608080921.jpeg" alt="Promo Art 2" class="w-full h-64 object-cover border-2 border-white">
+                    <div class="p-3 bg-black font-mono text-xs text-[#A4C2D4] font-bold border-t-2 border-white">
+                        PROMO ARTWORK // HARD HAT PROTOCOL EDITION
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- =========================================================
-             SECTION 2: INTERACTIVE RECOVERY RPG TERMINAL
-             ========================================================= -->
-        <section class="vertical-panel p-6 sm:p-10 bg-[#1A1C1E]">
-            
-            <div class="mb-6 p-4 bg-[#D4AF37] border-4 border-black shadow-[6px_6px_0px_#000000] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                    <span class="text-xs font-mono text-black font-extrabold uppercase tracking-widest block">⚡ SYSTEM MODULE 01</span>
-                    <h2 class="font-gothic text-2xl sm:text-3xl text-black font-bold uppercase">
-                        ꟻRIED BRAINS DIGITAL RECOVERY RPG
-                    </h2>
-                </div>
-                <div class="rect-badge-denim px-3 py-1 text-xs font-mono uppercase">
-                    sovereignty-digital-recovery-rpg.py
-                </div>
+        <!-- INTERACTIVE RPG TERMINAL -->
+        <section class="vertical-panel p-6 bg-[#1A1C1E] text-white">
+            <div class="rect-badge-gold p-3 text-sm font-mono text-black font-bold uppercase mb-4 flex justify-between">
+                <span>🎮 ꟻRIED BRAINS DIGITAL RECOVERY RPG</span>
+                <span class="text-xs">TERMINAL ENGINE</span>
             </div>
 
-            <!-- TERMINAL SCREEN -->
-            <div class="border-4 border-black bg-black p-5 font-mono text-xs sm:text-sm text-[#A4C2D4] h-72 overflow-y-auto space-y-2 mb-6 shadow-[inset_0_0_20px_rgba(0,0,0,0.9)]">
-                <div class="text-[#D4AF37] font-bold">🧠 ꟻRIED BRAINS SYSTEMS :: SOVEREIGNTY RECOVERY TERMINAL ⚡</div>
-                <div class="text-slate-400">Operational Clearance: Level 4 | Hard Hat Protocol Active</div>
-                <div class="text-slate-500">------------------------------------------------------------</div>
-                <div id="terminal-log">Welcome, Operative. Click a recovery mission below to execute scripts.</div>
+            <div class="border-4 border-black bg-black p-4 font-mono text-xs text-green-400 h-64 overflow-y-auto space-y-2 mb-4">
+                <div class="text-[#D4AF37]">🧠 ꟻRIED BRAINS SYSTEMS :: RECOVERY TERMINAL ⚡</div>
+                <div>Operational Clearance: Level 4 | Hard Hat Protocol Active</div>
+                <div class="text-slate-400">------------------------------------------------------------</div>
+                <div id="terminal-log">Select a recovery mission below to execute scripts.</div>
             </div>
 
-            <!-- TERMINAL CONTROLS -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
-                <button onclick="runMission(1)" class="rect-badge-denim p-3.5 text-left uppercase hover:bg-white transition-all">
-                    ⚡ 1. Run exiftool_scrub.sh
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 font-mono text-xs">
+                <button onclick="runMission(1)" class="rect-badge-denim p-3 text-left uppercase">
+                    ⚡ 1. exiftool_scrub.sh
                 </button>
-                <button onclick="runMission(2)" class="rect-badge-denim p-3.5 text-left uppercase hover:bg-white transition-all">
-                    🌐 2. Connect obfs4 Bridges
+                <button onclick="runMission(2)" class="rect-badge-denim p-3 text-left uppercase">
+                    🌐 2. obfs4 Tor Bridges
                 </button>
-                <button onclick="runMission(3)" class="rect-badge-denim p-3.5 text-left uppercase hover:bg-white transition-all">
-                    🔥 3. Execute burn1-cache.sh
+                <button onclick="runMission(3)" class="rect-badge-denim p-3 text-left uppercase">
+                    🔥 3. burn1-cache.sh
                 </button>
-                <button onclick="runMission(4)" class="rect-badge-gold p-3.5 text-left uppercase shadow-[4px_4px_0px_#000000]">
-                    🏆 4. View Clearance Audit
+                <button onclick="runMission(4)" class="rect-badge-gold p-3 text-left uppercase">
+                    🏆 4. Clearance Audit
                 </button>
             </div>
-
-        </section>
-
-        <!-- =========================================================
-             SECTION 3: FEATURED PROTOCOL - THE DIGITAL CIGARETTE
-             ========================================================= -->
-        <section class="vertical-panel p-6 sm:p-10 bg-[#242528]">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                <div class="lg:col-span-8 space-y-4">
-                    <div class="inline-block p-1 bg-black rounded border-2 border-[#A4C2D4]">
-                        <div class="rect-badge-denim px-3 py-1 text-xs font-mono uppercase">
-                            🚬 SYS: VICE-08 PROTOCOL
-                        </div>
-                    </div>
-
-                    <h2 class="font-gothic text-3xl sm:text-4xl text-white uppercase">
-                        THE DIGITAL CIGARETTE PROTOCOL
-                    </h2>
-
-                    <div class="p-4 bg-[#33373B] border-4 border-[#D4AF37] shadow-[6px_6px_0px_#000000]">
-                        <p class="text-xs sm:text-sm font-mono text-slate-100 leading-relaxed">
-                            Interactive Vice Simulator, Dopamine Trance dissection, striatal D2 receptor downregulation analysis, &amp; the Hard Hat Protocol for Cognitive Sovereignty.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-4 flex justify-center">
-                    <a href="digital_cigarette.html" class="rect-badge-gold px-8 py-5 text-sm uppercase tracking-widest text-center w-full block shadow-[8px_8px_0px_#000000] hover:scale-105 transition-all">
-                        LAUNCH PROTOCOL &rarr;
-                    </a>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- =========================================================
-             SECTION 4: 12-WEEK ROADMAP & CASE STUDY RECTANGLES
-             ========================================================= -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- CARD 1: 12-WEEK ROADMAP -->
-            <div class="vertical-panel p-6 sm:p-8 bg-[#1A1C1E] flex flex-col justify-between">
-                <div class="space-y-4">
-                    <div class="rect-badge-gold px-3 py-1 text-xs font-mono uppercase inline-block">
-                        📋 12-WEEK ROADMAP
-                    </div>
-                    <h3 class="font-gothic text-2xl text-white uppercase">
-                        12-WEEK MIND RECLAMATION CHECKLIST
-                    </h3>
-                    <div class="p-3 bg-[#A4C2D4] border-2 border-black font-mono text-xs text-black font-bold">
-                        Phase I Isolation, Phase II Restoration, Phase III Sovereignty.
-                    </div>
-                </div>
-                <div class="pt-6">
-                    <a href="12_week_recovery_checklist.html" class="rect-badge-denim w-full text-center py-3 block text-xs uppercase font-mono">
-                        OPEN FULL HTML ROADMAP &rarr;
-                    </a>
-                </div>
-            </div>
-
-            <!-- CARD 2: CASE STUDY -->
-            <div class="vertical-panel p-6 sm:p-8 bg-[#1A1C1E] flex flex-col justify-between">
-                <div class="space-y-4">
-                    <div class="rect-badge-denim px-3 py-1 text-xs font-mono uppercase inline-block">
-                        📊 CASE STUDY REPORT
-                    </div>
-                    <h3 class="font-gothic text-2xl text-white uppercase">
-                        SOVEREIGNTY INTERACTIVE CASE STUDY
-                    </h3>
-                    <div class="p-3 bg-[#D4AF37] border-2 border-black font-mono text-xs text-black font-bold">
-                        Surveillance Capitalism, Dwell-Time Tracking, &amp; Empirical Remediation.
-                    </div>
-                </div>
-                <div class="pt-6">
-                    <a href="sovereignty_case_study.html" class="rect-badge-gold w-full text-center py-3 block text-xs uppercase font-mono shadow-[4px_4px_0px_#000000]">
-                        OPEN CASE STUDY REPORT &rarr;
-                    </a>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- =========================================================
-             SECTION 5: CAMPAIGN GRAPHIC ASSETS GALLERY
-             ========================================================= -->
-        <section class="vertical-panel p-6 sm:p-10 bg-[#242528] space-y-6">
-            
-            <div class="p-4 bg-[#A4C2D4] border-4 border-black shadow-[6px_6px_0px_#000000] flex justify-between items-center">
-                <h2 class="font-gothic text-2xl sm:text-3xl text-black font-bold uppercase">
-                    ꟻRIED BRAINS CAMPAIGN GRAPHIC DELIVERABLES
-                </h2>
-                <a href="image-prompts-manifest.md" target="_blank" class="rect-badge-asphalt px-3 py-1 text-xs font-mono">
-                    VIEW PROMPTS MD
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- ASSET 1 -->
-                <div class="border-4 border-black bg-black shadow-[6px_6px_0px_#D4AF37]">
-                    <img src="assets/FriedbrainsMainTorVault.png" alt="Asset 1" class="w-full h-48 object-cover">
-                    <div class="p-3 bg-[#33373B] font-mono text-xs border-t-4 border-black text-slate-100">
-                        <strong class="text-[#D4AF37] block">Asset #1: Hero Banner</strong>
-                        Neo-Brutalist maze profile motif.
-                    </div>
-                </div>
-
-                <!-- ASSET 2 -->
-                <div class="border-4 border-black bg-black shadow-[6px_6px_0px_#A4C2D4]">
-                    <img src="assets/TorVault2.png" alt="Asset 2" class="w-full h-48 object-cover">
-                    <div class="p-3 bg-[#33373B] font-mono text-xs border-t-4 border-black text-slate-100">
-                        <strong class="text-[#A4C2D4] block">Asset #2: Sticker &amp; Pin</strong>
-                        Die-cut vinyl "DON'T BE A ꟻRIED BRAINS".
-                    </div>
-                </div>
-
-                <!-- ASSET 3 -->
-                <div class="border-4 border-black bg-black shadow-[6px_6px_0px_#D4AF37]">
-                    <img src="assets/TorVault3.png" alt="Asset 3" class="w-full h-48 object-cover">
-                    <div class="p-3 bg-[#33373B] font-mono text-xs border-t-4 border-black text-slate-100">
-                        <strong class="text-[#D4AF37] block">Asset #3: UNIX Terminal</strong>
-                        Chassis displaying RAM purge scripts.
-                    </div>
-                </div>
-            </div>
-
         </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-black border-t-8 border-[#D4AF37] py-8 px-4 text-center text-xs font-mono text-slate-300 relative z-10">
+    <footer class="bg-black border-t-8 border-[#D4AF37] py-8 px-4 text-center text-xs font-mono text-white relative z-10">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-left flex items-center gap-3">
                 <a href="../index.html">
@@ -384,22 +195,24 @@
                 </a>
                 <div>
                     <span class="font-gothic font-bold text-white text-sm">ꟻRIEDBRANDS STUDIO</span>
-                    <p class="text-slate-400 text-xs">ꟻried Brains World • Cognitive Sovereignty Architecture</p>
+                    <p class="text-slate-400 text-xs">ꟻried Brains World • Baby Blue Jean Night Edition</p>
                 </div>
             </div>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="../index.html" class="hover:text-[#D4AF37] transition-colors">Burn-1 Hub</a>
-                <a href="../store.html" class="hover:text-[#D4AF37] transition-colors">Storefront</a>
-                <a href="../tor-vault/index.html" class="hover:text-[#D4AF37] transition-colors">Tor Vault Hub</a>
-            </div>
-            <div>
-                <span class="text-[#D4AF37]">© 2026 ꟻRIEDBRANDS STUDIO</span>
+            <div class="flex flex-wrap justify-center gap-4 text-xs font-bold">
+                <a href="index.html" class="text-amber-400">1. Hub</a>
+                <a href="digital_cigarette.html" class="text-white hover:text-amber-400">2. Digital Cigarette</a>
+                <a href="12_week_recovery_checklist.html" class="text-white hover:text-amber-400">3. 12-Wk Roadmap</a>
+                <a href="sovereignty_case_study.html" class="text-white hover:text-amber-400">4. Case Study</a>
             </div>
         </div>
     </footer>
 
-    <!-- INTERACTIVE TERMINAL SCRIPT -->
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const vid = document.getElementById('heroVideo');
+            if (vid) vid.playbackRate = 0.75;
+        });
+
         let pScore = 25;
         let d2Density = 45.0;
 
@@ -408,49 +221,19 @@
             if (id === 1) {
                 pScore += 25;
                 d2Density += 12.5;
-                log.innerHTML += `<br><br><span class="text-[#D4AF37]">[MISSION 1 EXECUTED]:</span> exiftool_scrub.sh finished.<br>Stripped GPS tags & device serials.<br>+25% Privacy Clearance | D2 Density: ${d2Density.toFixed(1)}%`;
+                log.innerHTML += `<br><br><span class="text-[#D4AF37]">[MISSION 1 EXECUTED]:</span> exiftool_scrub.sh finished.<br>Stripped GPS tags.<br>+25% Privacy | D2 Density: ${d2Density.toFixed(1)}%`;
             } else if (id === 2) {
                 pScore += 30;
                 d2Density += 15.0;
-                log.innerHTML += `<br><br><span class="text-[#A4C2D4]">[MISSION 2 EXECUTED]:</span> obfs4 Tor Transport connected.<br>Bypassed ISP Deep Packet Inspection.<br>+30% Privacy Clearance | D2 Density: ${d2Density.toFixed(1)}%`;
+                log.innerHTML += `<br><br><span class="text-[#A4C2D4]">[MISSION 2 EXECUTED]:</span> obfs4 Tor Transport connected.<br>+30% Privacy | D2 Density: ${d2Density.toFixed(1)}%`;
             } else if (id === 3) {
                 pScore += 20;
                 d2Density += 15.0;
-                log.innerHTML += `<br><br><span class="text-green-400">[MISSION 3 EXECUTED]:</span> burn1-cache-clear.sh executed.<br>Shredded tracking cookies & beacons.<br>+20% Privacy Clearance | D2 Density: ${d2Density.toFixed(1)}%`;
+                log.innerHTML += `<br><br><span class="text-green-400">[MISSION 3 EXECUTED]:</span> burn1-cache-clear.sh executed.<br>+20% Privacy | D2 Density: ${d2Density.toFixed(1)}%`;
             } else if (id === 4) {
                 log.innerHTML += `<br><br><span class="text-[#D4AF37]">========================================================</span><br><span class="text-white">🏆 FINAL CLEARANCE AUDIT:</span><br>Privacy Clearance: ${pScore}% / 100%<br>D2 Receptor Density: ${d2Density.toFixed(1)}%<br>Rank: Sovereign Mind Master<br><span class="text-[#D4AF37]">========================================================</span>`;
             }
-
-            const screen = document.querySelector('.h-72');
-            if (screen) screen.scrollTop = screen.scrollHeight;
         }
-
-        function toggleTheme() {
-            const htmlRoot = document.getElementById('html-root');
-            const themeIcon = document.getElementById('themeIcon');
-            const themeText = document.getElementById('themeText');
-
-            if (htmlRoot.classList.contains('day-mode')) {
-                htmlRoot.classList.remove('day-mode');
-                themeIcon.className = "fa-solid fa-sun text-[#D4AF37]";
-                themeText.innerText = "DAY MODE";
-                localStorage.setItem('burn1_theme', 'night');
-            } else {
-                htmlRoot.classList.add('day-mode');
-                themeIcon.className = "fa-solid fa-moon text-purple-600";
-                themeText.innerText = "NIGHT MODE";
-                localStorage.setItem('burn1_theme', 'day');
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('burn1_theme');
-            if (savedTheme === 'day') {
-                document.getElementById('html-root').classList.add('day-mode');
-                document.getElementById('themeIcon').className = "fa-solid fa-moon text-purple-600";
-                document.getElementById('themeText').innerText = "NIGHT MODE";
-            }
-        });
     </script>
 </body>
 </html>
