@@ -1,0 +1,3 @@
+^!f::
+SendInput ꟻ
+return
