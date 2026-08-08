@@ -1,0 +1,90 @@
+[
+  {
+    "id": "resource-001",
+    "service_name": "988 Suicide & Crisis Lifeline",
+    "category": "Crisis",
+    "provider_org": "SAMHSA / VA",
+    "phone": "988",
+    "text": "988",
+    "website": "https://988lifeline.org",
+    "features": ["24/7", "confidential", "call/text/chat", "veterans option (press 1)", "spanish", "ASL", "free"],
+    "notes": "Free and confidential support for anyone in suicidal crisis or emotional distress."
+  },
+  {
+    "id": "resource-002",
+    "service_name": "SAMHSA National Helpline",
+    "category": "Substance Use",
+    "provider_org": "SAMHSA",
+    "phone": "1-800-662-4357 (HELP)",
+    "text": "N/A",
+    "website": "https://www.samhsa.gov/find-help/national-helpline",
+    "features": ["24/7", "365-day", "confidential", "english/spanish", "treatment referral", "free"],
+    "notes": "Information service for individuals and families facing mental and/or substance use disorders."
+  },
+  {
+    "id": "resource-003",
+    "service_name": "Veterans Crisis Line",
+    "category": "Veterans",
+    "provider_org": "VA",
+    "phone": "988 (Press 1)",
+    "text": "838255",
+    "website": "https://www.veteranscrisisline.net",
+    "features": ["24/7", "confidential", "call/text/chat", "veterans & military", "deaf/hard of hearing", "free"],
+    "notes": "Connects Veterans and Service members in crisis with qualified Department of Veterans Affairs responders."
+  },
+  {
+    "id": "resource-004",
+    "service_name": "SMART Recovery Support Network",
+    "category": "Substance Use",
+    "provider_org": "SMART Recovery",
+    "phone": "1-440-951-5357",
+    "text": "N/A",
+    "website": "https://www.smartrecovery.org",
+    "features": ["self-empowered", "science-based", "online/in-person meetings", "free"],
+    "notes": "Mutual support meetings for individuals seeking independence from addictive behaviors."
+  },
+  {
+    "id": "resource-005",
+    "service_name": "National Problem Gambling Helpline",
+    "category": "Gambling",
+    "provider_org": "NCPG",
+    "phone": "1-800-GAMBLER (1-800-522-4700)",
+    "text": "1-800-522-4700",
+    "website": "https://www.ncpgambling.org",
+    "features": ["24/7", "confidential", "call/text/chat", "gambling support", "free"],
+    "notes": "Single national access point for problem gambling resources across the United States."
+  },
+  {
+    "id": "resource-006",
+    "service_name": "Alcoholics Anonymous (AA) World Services",
+    "category": "Substance Use",
+    "provider_org": "AA",
+    "phone": "Local Intergroup Locator",
+    "text": "N/A",
+    "website": "https://www.aa.org",
+    "features": ["12-step", "global fellowship", "online/in-person meetings", "free"],
+    "notes": "International fellowship of people who have had a drinking problem."
+  },
+  {
+    "id": "resource-007",
+    "service_name": "Narcotics Anonymous (NA) World Services",
+    "category": "Substance Use",
+    "provider_org": "NA",
+    "phone": "1-818-773-9999",
+    "text": "N/A",
+    "website": "https://www.na.org",
+    "features": ["12-step", "global fellowship", "multilingual", "free"],
+    "notes": "Global community-based organization for recovering drug addicts."
+  },
+  {
+    "id": "resource-008",
+    "service_name": "Crisis Text Line",
+    "category": "Crisis",
+    "provider_org": "Crisis Text Line",
+    "phone": "N/A",
+    "text": "Text HOME to 741741",
+    "website": "https://www.crisistextline.org",
+    "features": ["24/7", "confidential", "text-based", "spanish (text HOLA)", "free"],
+    "notes": "Free, 24/7 crisis counseling via SMS text messaging."
+  }
+]
