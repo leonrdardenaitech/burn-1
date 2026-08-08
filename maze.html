@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Burn-1 and Go | Day-Mode Time Survival Game</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=JetBrains+Mono:wght@700;800&display=swap');
+
+:root {
+    --sky-blue: #0284c7;
+    --sun-yellow: #facc15;
+    --earth-green: #16a34a;
+    --sand-bg: #f8fafc;
+    --ink-black: #0f172a;
+    --card-white: #ffffff;
+    --brutal-orange: #f97316; /* True Neo-Brutalist Orange */
+    --brutal-orange-hover: #ea580c;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--ink-black);
+    color: var(--ink-black);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden; 
+    touch-action: none; 
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    max-width: 1920px; 
+    aspect-ratio: 1920 / 1080; 
+    border: 4px solid var(--ink-black);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 10px 10px 0px var(--ink-black);
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+#game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; 
+    cursor: none; 
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+/* 2D Neo-Brutalist Panels - NO GLASSMORPHISM */
+.brutal-panel {
+    background-color: var(--card-white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 3px solid var(--ink-black);
+    box-shadow: 4px 4px 0px var(--ink-black);
+    pointer-events: auto; 
+}
+
+/* Day Mode Action Buttons */
+.btn-sun {
+    background-color: var(--sun-yellow);
+    color: var(--ink-black);
+    border: 3px solid var(--ink-black);
+    box-shadow: 3px 3px 0px var(--ink-black);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-sun:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--ink-black);
+}
+
+.btn-sun:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--ink-black);
+}
+
+/* High-Contrast Brutalist Orange Buttons */
+.btn-orange {
+    background-color: var(--brutal-orange);
+    color: white;
+    border: 3px solid var(--ink-black);
+    box-shadow: 4px 4px 0px var(--ink-black);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-orange:hover {
+    background-color: var(--brutal-orange-hover);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--ink-black);
+}
+
+.btn-orange:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--ink-black);
+}
+
+.btn-sky {
+    background-color: #e0f2fe;
+    color: var(--sky-blue);
+    border: 3px solid var(--ink-black);
+    box-shadow: 3px 3px 0px var(--ink-black);
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.btn-sky:hover {
+    background-color: #bae6fd;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--ink-black);
+}
+
+/* ---------------------------------
+   CONSOLIDATED SYSTEM DROPDOWN MENU
+   ----------------------------------- */
+.dropdown-menu {
+    position: relative;
+    pointer-events: auto;
+    z-index: 50;
+}
+
+.dropdown-content {
+    display: none; /* Strictly controlled via .active class */
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 320px;
+    background-color: var(--card-white);
+    border: 3px solid var(--ink-black);
+    box-shadow: 6px 6px 0px var(--ink-black);
+    border-radius: 8px;
+    z-index: 100;
+    padding: 14px;
+}
+
+/* Click-activated display override */
+.dropdown-menu.active .dropdown-content {
+    display: block;
+}
+
+.section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 950;
+    color: var(--ink-black);
+    border-bottom: 2px solid var(--ink-black);
+    padding-bottom: 3px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.section-label:first-child {
+    margin-top: 0;
+}
+
+.menu-link-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    transition: all 0.1s ease;
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+.menu-link-item:last-child {
+    margin-bottom: 0;
+}
+
+.menu-link-item:hover {
+    background-color: #f1f5f9;
+    border-color: var(--ink-black);
+}
+
+/* ---------------------------------
+   TOUCHSCREEN D-PAD CONTROLLER (BOTTOM-RIGHT)
+   ----------------------------------- */
+#mobile-dpad-container {
+    position: absolute;
+    bottom: 40px; 
+    right: 40px; 
+    pointer-events: auto;
+    z-index: 10;
+}
+
+#mobile-dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(3, 48px);
+    gap: 6px;
+}
+
+.dpad-btn {
+    background-color: var(--card-white);
+    border: 3px solid var(--ink-black);
+    box-shadow: 2px 2px 0px var(--ink-black);
+    border-radius: 8px;
+    color: var(--ink-black);
+    font-size: 16px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+    transition: all 0.05s ease;
+}
+
+.dpad-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px var(--ink-black);
+    background-color: var(--sun-yellow);
+}
+
+#dpad-up { grid-column: 2; grid-row: 1; }
+#dpad-left { grid-column: 1; grid-row: 2; }
+#dpad-right { grid-column: 3; grid-row: 2; }
+#dpad-down { grid-column: 2; grid-row: 3; }
+
+/* Portrait Warning Intercept */
+#portrait-gate {
+    position: fixed;
+    inset: 0;
+    background-color: var(--sand-bg);
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+@media (orientation: portrait) {
+    #portrait-gate {
+        display: flex;
+    }
+}
+
+#message-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    border: 4px solid var(--ink-black);
+    text-align: center;
+    z-index: 10;
+    display: none; 
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 8px 8px 0px var(--ink-black);
+}
+
+#start-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--sand-bg);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow-y: auto; /* Prevent layout clipping on small viewports */
+}
+
+#debug-toggle {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: #888;
+    cursor: pointer;
+    z-index: 50;
+    background: #ffffff;
+    padding: 5px 10px;
+    border: 2px solid var(--ink-black);
+    box-shadow: 2px 2px 0px var(--ink-black);
+    font-family: monospace;
+}
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- Portrait Warning Screen -->
+<div id="portrait-gate" class="text-slate-900">
+    <div class="brutal-panel p-8 max-w-sm space-y-4">
+        <div class="text-4xl text-yellow-500"><i class="fas fa-redo-alt animate-spin"></i></div>
+        <h2 class="text-2xl font-black uppercase tracking-tight">ROTATE TO LANDSCAPE</h2>
+        <p class="text-xs text-slate-600 font-medium">This interactive tactical map is built specifically for widescreen displays. Flip your device horizontally to play.</p>
+        <button class="btn-sun px-6 py-2.5 rounded-lg text-xs" onclick="requestLandscapeLock()">FORCE ROTATE</button>
+    </div>
+</div>
+
+<div id="game-container">
+    <!-- Day Mode Looping Video Background loaded natively -->
+    <video id="background-video" autoplay loop muted playsinline draggable="false">
+        <source src="Ruined_city_with_zombie_hordes_202608051153.mp4" type="video/mp4">
+    </video>
+
+    <!-- Playable Canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- HUD Overlay -->
+    <div id="ui-layer">
+        <!-- Top HUD Panel -->
+        <div class="flex justify-between items-center w-full">
+            
+            <!-- Left Side Dropdown Menu (Consolidating Hub, Toggles, Power-ups, and Time Boost) -->
+            <div class="dropdown-menu" id="vault-dropdown">
+                <button class="btn-sun px-5 py-2.5 rounded-lg text-sm flex items-center gap-2" onclick="toggleDropdown(event)">
+                    <i class="fas fa-bars"></i> SYSTEM MENU <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                
+                <div class="dropdown-content">
+                    <!-- SECTION 1: TIME SYSTEM -->
+                    <div class="section-label font-mono">TIME SYSTEM</div>
+                    
+                    <!-- Burn-1.com Credits Button [Add seconds renamed and placed first] -->
+                    <button class="menu-link-item w-full" onclick="injectBonusTime(event)">
+                        <div class="w-8 h-8 bg-green-400 border-2 border-slate-900 rounded flex items-center justify-center text-xs font-mono font-black shadow-[1px_1px_0px_#000]">+20</div>
+                        <div class="text-xs font-black uppercase text-green-700">Burn-1.com Credits</div>
+                    </button>
+                    
+                    <!-- SECTION 2: POWER UPS [System Files renamed to Power Ups] -->
+                    <div class="section-label font-mono">POWER UPS</div>
+                    
+                    <!-- Zero-Party Data Kiosk link -->
+                    <a href="https://www.burn-1.com/zero_party_kiosk.html" class="menu-link-item">
+                        <div class="w-8 h-8 bg-slate-900 border-2 border-slate-900 rounded-full flex items-center justify-center text-white text-xs font-mono font-black shadow-[1px_1px_0px_#000]">🎯</div>
+                        <div class="text-[10px] text-slate-500 font-mono font-bold leading-none">SYS: DATA-02 <span class="text-xs font-black text-slate-900 block leading-tight">ZERO-PARTY KIOSK</span></div>
+                    </a>
+                    
+                    <!-- Digital Menu link -->
+                    <a href="https://www.burn-1.com/digital_menu_kit.html" class="menu-link-item">
+                        <div class="w-8 h-8 bg-yellow-400 border-2 border-slate-900 rounded-full flex items-center justify-center text-slate-900 text-xs font-mono font-black shadow-[1px_1px_0px_#000]">🍽️</div>
+                        <div class="text-[10px] text-slate-500 font-mono font-bold leading-none">SYS: MENU-07 <span class="text-xs font-black text-slate-900 block leading-tight">DIGITAL MENU KIT</span></div>
+                    </a>
+
+                    <!-- Privacy Vault -->
+                    <a href="https://www.burn-1.com/privacy_first_protocol.html" class="menu-link-item">
+                        <div class="w-8 h-8 bg-orange-500 border-2 border-slate-900 rounded-full flex items-center justify-center text-white text-xs font-mono font-black shadow-[1px_1px_0px_#000]">🔒</div>
+                        <div class="text-[10px] text-slate-500 font-mono font-bold leading-none">SYS: AI-04 <span class="text-xs font-black text-slate-900 block leading-tight">PRIVACY VAULT</span></div>
+                    </a>
+                    
+                    <!-- SECTION 3: SYSTEM DECK -->
+                    <div class="section-label font-mono">SYSTEM DECK</div>
+                    
+                    <!-- Central Hub link -->
+                    <a href="https://www.burn-1.com/index.html" class="menu-link-item">
+                        <div class="w-8 h-8 bg-sky-200 border-2 border-slate-900 rounded flex items-center justify-center text-xs font-mono font-black shadow-[1px_1px_0px_#000]">←</div>
+                        <div class="text-xs font-black uppercase">Central Hub Portal</div>
+                    </a>
+                    
+                    <!-- Sound Toggle -->
+                    <button class="menu-link-item w-full" onclick="toggleMuteState(event)">
+                        <div id="sound-icon-box" class="w-8 h-8 bg-yellow-400 border-2 border-slate-900 rounded flex items-center justify-center text-xs font-mono font-black shadow-[1px_1px_0px_#000]">🔊</div>
+                        <div class="text-xs font-black uppercase" id="sound-menu-text">Mute Sound</div>
+                    </button>
+                    
+                    <!-- Guideline Toggle -->
+                    <button class="menu-link-item w-full" onclick="toggleHelpLine(event)">
+                        <div id="guide-icon-box" class="w-8 h-8 bg-sky-300 border-2 border-slate-900 rounded flex items-center justify-center text-xs font-mono font-black shadow-[1px_1px_0px_#000]">👁️</div>
+                        <div class="text-xs font-black uppercase" id="guide-menu-text">Hide Guideline</div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Central Timer -->
+            <div class="brutal-panel bg-yellow-300 font-mono font-black text-xl flex items-center gap-2">
+                <i class="fas fa-stopwatch animate-pulse"></i> TIMER: <span id="timer-display">20.00</span>s
+            </div>
+
+            <!-- Right Status Box -->
+            <div class="brutal-panel flex items-center gap-2">
+                <span class="text-slate-500 font-mono text-xs font-bold uppercase">STATUS:</span> 
+                <span id="status-text" class="text-green-600 font-black font-mono">ALIVE</span>
+            </div>
+        </div>
+
+        <!-- Relocated D-Pad (Center Bottom is cleared, moved to bottom-right) -->
+        <div id="mobile-dpad-container">
+            <div id="mobile-dpad">
+                <button class="dpad-btn" id="dpad-up" onmousedown="setDir('up', true)" onmouseup="setDir('up', false)" ontouchstart="setDirTouch('up', true)" ontouchend="setDirTouch('up', false)">▲</button>
+                <button class="dpad-btn" id="dpad-left" onmousedown="setDir('left', true)" onmouseup="setDir('left', false)" ontouchstart="setDirTouch('left', true)" ontouchend="setDirTouch('left', false)">◀</button>
+                <button class="dpad-btn" id="dpad-right" onmousedown="setDir('right', true)" onmouseup="setDir('right', false)" ontouchstart="setDirTouch('right', true)" ontouchend="setDirTouch('right', false)">▶</button>
+                <button class="dpad-btn" id="dpad-down" onmousedown="setDir('down', true)" onmouseup="setDir('down', false)" ontouchstart="setDirTouch('down', true)" ontouchend="setDirTouch('down', false)">▼</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over / Win Modal -->
+    <div id="message-overlay">
+        <!-- Softened fail indicator states -->
+        <h1 id="message-title" class="text-4xl font-black mb-2 uppercase tracking-wider text-red-600">EATEN BY ZOMBIES</h1>
+        <p id="message-subtitle" class="text-sm mb-6 text-slate-600 font-medium font-mono-code">The horde caught you in the open ruins.</p>
+        <button class="btn-orange px-6 py-3 rounded-lg text-sm" onclick="startGame()">Re-Deploy Protocol</button>
+    </div>
+
+    <!-- Start Screen & Tactical Setup Instructions -->
+    <div id="start-overlay">
+        <!-- CRITICAL UPDATE: High-Impact Official Disclaimer Warning Box -->
+        <div class="w-full max-w-lg brutal-card bg-orange-100 border-3 border-slate-900 p-4 mb-4 text-left shadow-[4px_4px_0px_#0f172a] relative">
+            <div class="flex items-center gap-2 text-orange-700 font-black text-xs uppercase tracking-wider mb-1.5 font-mono">
+                ⚠️ WARNING: OFFICIAL SYSTEM DISCLAIMER ⚠️
+            </div>
+            <p class="text-[10px] md:text-xs font-bold text-slate-700 leading-relaxed font-sans">
+                PLAY AT YOUR OWN RISK. Some of the coordinates, simulated timeline constraints, and graphic survival elements inside this game may be too harsh or stressful for sensitive individuals. Secure your status protocols carefully.
+            </p>
+        </div>
+
+        <div class="inline-flex items-center gap-2 px-3 py-1 brutal-card bg-yellow-300 font-extrabold text-xs uppercase tracking-wider text-slate-900 mb-4">
+            <i class="fas fa-sun text-slate-900"></i> Day-Mode Interactive Challenge
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-none mb-1">BURN-1 AND GO</h1>
+        <h2 class="text-xl font-extrabold text-orange-600 font-mono mb-4">THE TIME SURVIVAL GAME</h2>
+
+        <!-- Game Instructions Card (Replaced the file uploader) -->
+        <div class="mb-6 brutal-card p-5 max-w-lg text-left space-y-3">
+            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider border-b pb-1.5"><i class="fas fa-info-circle mr-1"></i> Tactical Instructions</p>
+            
+            <div class="space-y-1.5 text-xs text-slate-700 leading-relaxed font-semibold">
+                <p>➔ <strong class="text-slate-900">Desktop Controls:</strong> Pilot your cyan safety node along the secure orange corridor using the <strong class="text-orange-600">Arrow Keys</strong> or <strong class="text-orange-600">W A S D</strong> keys on your keyboard.</p>
+                <p>➔ <strong class="text-slate-900">Mobile Controls:</strong> Tap or hold the touchscreen <strong class="text-orange-600">D-Pad controller</strong> in the bottom-right corner of the HUD.</p>
+                <p class="pt-1.5 border-t text-[11px] text-slate-600">
+                    💡 <strong class="text-slate-900">System Tip:</strong> Start up off by clicking the <strong class="text-sky-600">SYSTEM MENU</strong> dropdown in the top-left, and click <strong class="text-green-600">Burn-1.com Credits</strong> (you may want to hit this button a couple of times!). If you get stuck, toggle the <strong class="text-sky-600">GUIDELINE</strong> button inside the menu. Okay, I'm fresh out of tips, now make it to the chopper and get your time back, don't forget to use the power ups.. <span class="italic text-orange-600 font-extrabold">*wink*</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Deploy Button Toggles with sound configuration -->
+        <div class="flex flex-col items-center gap-3">
+            <!-- Big High-Voltage Orange Button -->
+            <button class="btn-orange text-lg px-12 py-4 rounded-xl font-black" onclick="initGame(true)">
+                DEPLOY WITH SOUND ➔
+            </button>
+            <button class="text-xs font-black uppercase text-slate-500 hover:text-slate-900 underline cursor-pointer" onclick="initGame(false)">
+                DEPLOY NO SOUND
+            </button>
+        </div>
+        
+        <p class="text-[10px] font-mono text-slate-400 font-bold mt-6 uppercase tracking-widest border-t pt-2">A Battle for Time</p>
+    </div>
+</div>
+
+<div id="debug-toggle" onclick="toggleDebug()">[DEBUG: SHOW COLLISION BUFFER]</div>
+
+<script>
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+const container = document.getElementById('game-container');
+const msgOverlay = document.getElementById('message-overlay');
+const msgTitle = document.getElementById('message-title');
+const msgSubtitle = document.getElementById('message-subtitle');
+const statusText = document.getElementById('status-text');
+const startOverlay = document.getElementById('start-overlay');
+const bgVideo = document.getElementById('background-video');
+const timerDisplay = document.getElementById('timer-display');
+
+// Reference Coordinate Space
+const BASE_WIDTH = 1920;
+const BASE_HEIGHT = 1080;
+let gameState = 'START'; 
+let scaleX = 1;
+let scaleY = 1;
+let showDebugPaths = false;
+let showHelpLine = true; 
+let hasMoved = false;    
+let animationId;
+
+// Game Clock State (Strict 20-Second Budget)
+let gameTimer = 20.00;
+let lastTime = 0;
+
+// Volume / Muted State
+let isMuted = false;
+
+// Web Audio Context Synthesizer (Zero-dependency Local Synth)
+let audioCtx = null;
+
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+function playSynthesizerTone(frequency, type, duration, volume) {
+    if (isMuted || !audioCtx) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.type = type;
+    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+    
+    gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+}
+
+// Player Dot State
+const player = {
+    x: 0,
+    y: 0,
+    radius: 12, 
+    color: '#00ffff', 
+    speed: 6.0
+};
+
+// Input Observers
+const keys = {
+    ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false,
+    w: false, a: false, s: false, d: false
+};
+
+// Map touch/mouse directions to key state
+function setDir(dir, active) {
+    if (gameState !== 'PLAYING') return;
+    hasMoved = true;
+    showHelpLine = false;
+    if (dir === 'up') keys.ArrowUp = active;
+    if (dir === 'down') keys.ArrowDown = active;
+    if (dir === 'left') keys.ArrowLeft = active;
+    if (dir === 'right') keys.ArrowRight = active;
+}
+
+function setDirTouch(dir, active) {
+    event.preventDefault(); // Kill native browser scroll physics
+    setDir(dir, active);
+}
+
+// -------------------------------------------------------------
+// CRITICAL FIX: Click-to-Toggle Dropdown Menu with Escape Hatch
+// -------------------------------------------------------------
+function toggleDropdown(event) {
+    if (event) event.stopPropagation();
+    const menu = document.getElementById('vault-dropdown');
+    menu.classList.toggle('active');
+}
+
+// Global click event to catch clicks outside the dropdown container
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('vault-dropdown');
+    if (menu && menu.classList.contains('active')) {
+        if (!menu.contains(event.target)) {
+            menu.classList.remove('active');
+        }
+    }
+});
+
+// Force mobile landscape lock
+function requestLandscapeLock() {
+    document.documentElement.requestFullscreen().then(() => {
+        screen.orientation.lock('landscape').catch(err => {
+            console.warn("Screen orientation lock denied on local browser profile:", err);
+        });
+    }).catch(err => {
+        console.warn("Fullscreen request blocked:", err);
+    });
+}
+
+// Continuous corridor paths representing the Programmatic Guideline (orange track)
+const guidelinePoints = [
+    {x: 200, y: 875},   // Start
+    {x: 680, y: 875},   // Corner 1
+    {x: 680, y: 725},   // Up past Gun Shop
+    {x: 725, y: 725},   // Loop around Gun Shop
+    {x: 795, y: 725},
+    {x: 795, y: 570},
+    {x: 570, y: 570},
+    {x: 570, y: 415},   // Under ruins
+    {x: 370, y: 415},   // Left to Hospital Ruins
+    {x: 370, y: 500},   // Around Hospital Ruins
+    {x: 270, y: 500},
+    {x: 270, y: 240},
+    {x: 400, y: 240},
+    {x: 400, y: 300},
+    {x: 530, y: 300},
+    {x: 530, y: 240},
+    {x: 710, y: 240},   // Under top structure
+    {x: 710, y: 340},
+    {x: 900, y: 340},
+    {x: 900, y: 220},   // Up around fire pit
+    {x: 1120, y: 220},
+    {x: 1120, y: 420},  // Connect right
+    {x: 1400, y: 420},  // Right Highway
+    {x: 1400, y: 630},  // Down past horde
+    {x: 1170, y: 630},  // Right turn segment
+    {x: 1170, y: 900},  // Down to bottom path
+    {x: 1730, y: 900},  // Bottom path right
+    {x: 1730, y: 570},  // Up stairs right
+    {x: 1470, y: 570},  // Landing
+    {x: 1470, y: 470},  // Up left
+    {x: 1650, y: 470},  // Final run
+    {x: 1650, y: 275}   // Helipad Extraction
+];
+
+const startZone = { x: 150, y: 820, w: 100, h: 100 };
+const finishZone = { x: 1550, y: 150, w: 300, h: 250 }; 
+
+const CORRIDOR_RADIUS = 48; // Corridor thickness radius
+
+function resizeCanvas() {
+    const rect = container.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    scaleX = canvas.width / BASE_WIDTH;
+    scaleY = canvas.height / BASE_HEIGHT;
+}
+
+window.addEventListener('keydown', (e) => {
+    if (keys.hasOwnProperty(e.key)) keys[e.key] = true;
+    if (keys.hasOwnProperty(e.key.toLowerCase())) keys[e.key.toLowerCase()] = true;
+    
+    if (gameState === 'PLAYING' && !hasMoved) {
+        hasMoved = true;
+        showHelpLine = false; 
+    }
+});
+
+window.addEventListener('keyup', (e) => {
+    if (keys.hasOwnProperty(e.key)) keys[e.key] = false;
+    if (keys.hasOwnProperty(e.key.toLowerCase())) keys[e.key.toLowerCase()] = false;
+});
+
+function initGame(soundEnabled) {
+    initAudio();
+    isMuted = !soundEnabled;
+    bgVideo.muted = isMuted;
+
+    // Synchronize UI Elements to sound toggle choice
+    const txt = document.getElementById('sound-menu-text');
+    const box = document.getElementById('sound-icon-box');
+    if (isMuted) {
+        txt.textContent = "Unmute Sound";
+        box.textContent = "🔇";
+        box.style.backgroundColor = "#e2e8f0";
+    } else {
+        txt.textContent = "Mute Sound";
+        box.textContent = "🔊";
+        box.style.backgroundColor = "var(--sun-yellow)";
+        playSynthesizerTone(520, 'sine', 0.1, 0.05);
+    }
+
+    startOverlay.style.display = 'none';
+    resizeCanvas();
+    bgVideo.play().catch(err => console.log("Direct loop playback restriction handled:", err));
+    startGame();
+}
+
+function startGame() {
+    player.x = startZone.x + startZone.w / 2;
+    player.y = startZone.y + startZone.h / 2;
+    gameState = 'PLAYING';
+    gameTimer = 20.00;     
+    hasMoved = false;     
+    showHelpLine = true;  
+    msgOverlay.style.display = 'none';
+    statusText.textContent = "ALIVE";
+    statusText.className = "text-green-600 font-bold font-mono";
+    
+    for (let key in keys) keys[key] = false;
+    lastTime = performance.now();
+    if (animationId) cancelAnimationFrame(animationId);
+    gameLoop();
+}
+
+// SOFTENED FAIL STATES
+function gameOver(reason) {
+    gameState = 'GAMEOVER';
+    msgOverlay.style.display = 'flex';
+    msgTitle.textContent = "EATEN BY ZOMBIES";
+    msgTitle.className = "text-5xl font-black mb-4 uppercase tracking-wider text-red-600 drop-shadow-[0_0_10px_rgba(255,0,0,1)]";
+    msgSubtitle.textContent = reason || "The horde caught you in the open ruins.";
+    statusText.textContent = "IN DISPOSE";
+    statusText.className = "text-red-600 font-bold font-mono";
+    playSynthesizerTone(120, 'sawtooth', 0.6, 0.2);
+    drawGlitchEffect();
+}
+
+function winGame() {
+    gameState = 'WIN';
+    msgOverlay.style.display = 'flex';
+    msgTitle.textContent = "EVACUATED";
+    msgTitle.className = "text-5xl font-black mb-4 uppercase tracking-wider text-green-600 drop-shadow-[0_0_10px_rgba(0,255,0,1)]";
+    msgSubtitle.textContent = "You successfully completed the day protocol.";
+    statusText.textContent = "SAFE";
+    statusText.className = "text-green-600 font-bold font-mono";
+    playSynthesizerTone(880, 'sine', 0.5, 0.15);
+}
+
+function toggleHelpLine(event) {
+    if (event) event.stopPropagation(); // Avoid triggering click-outside dropdown closer
+    playSynthesizerTone(440, 'triangle', 0.1, 0.05);
+    showHelpLine = !showHelpLine;
+    const txt = document.getElementById('guide-menu-text');
+    const box = document.getElementById('guide-icon-box');
+    if (showHelpLine) {
+        txt.textContent = "Hide Guideline";
+        box.style.backgroundColor = "var(--sky-blue)";
+    } else {
+        txt.textContent = "Show Guideline";
+        box.style.backgroundColor = "#e2e8f0";
+    }
+    if (gameState !== 'PLAYING') draw(); 
+}
+
+function toggleMuteState(event) {
+    if (event) event.stopPropagation(); // Avoid triggering click-outside dropdown closer
+    isMuted = !isMuted;
+    bgVideo.muted = isMuted;
+    const txt = document.getElementById('sound-menu-text');
+    const box = document.getElementById('sound-icon-box');
+    if (isMuted) {
+        txt.textContent = "Unmute Sound";
+        box.textContent = "🔇";
+        box.style.backgroundColor = "#e2e8f0";
+    } else {
+        txt.textContent = "Mute Sound";
+        box.textContent = "🔊";
+        box.style.backgroundColor = "var(--sun-yellow)";
+        playSynthesizerTone(520, 'sine', 0.1, 0.05);
+    }
+}
+
+// +20S TIME INJECTOR PROTOCOL [Formerly Add Seconds]
+function injectBonusTime(event) {
+    if (event) event.stopPropagation(); // Avoid triggering click-outside dropdown closer
+    if (gameState !== 'PLAYING') return;
+    gameTimer += 20.00;
+    playSynthesizerTone(587.33, 'sine', 0.4, 0.15); 
+}
+
+// Distance Calculation: Point to line segment
+function getDistanceToSegment(p, a, b) {
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    if (dx === 0 && dy === 0) {
+        return Math.hypot(p.x - a.x, p.y - a.y);
+    }
+    let t = ((p.x - a.x) * dx + (p.y - a.y) * dy) / (dx * dx + dy * dy);
+    t = Math.max(0, Math.min(1, t)); 
+    const projX = a.x + t * dx;
+    const projY = a.y + t * dy;
+    return Math.hypot(p.x - projX, p.y - projY);
+}
+
+// Verify if player lies inside the safe segment corridors
+function isPositionSafe(px, py) {
+    if (px >= startZone.x && px <= startZone.x + startZone.w &&
+        py >= startZone.y && py <= startZone.y + startZone.h) return true;
+        
+    if (px >= finishZone.x && px <= finishZone.x + finishZone.w &&
+        py >= finishZone.y && py <= finishZone.y + finishZone.h) return true;
+
+    for (let i = 0; i < guidelinePoints.length - 1; i++) {
+        const dist = getDistanceToSegment({x: px, y: py}, guidelinePoints[i], guidelinePoints[i+1]);
+        if (dist <= CORRIDOR_RADIUS) {
+            return true; 
+        }
+    }
+    return false;
+}
+
+function update(deltaTime) {
+    if (gameState !== 'PLAYING') return;
+
+    // Process clock deduction
+    gameTimer -= deltaTime;
+    if (gameTimer <= 0) {
+        gameTimer = 0;
+        gameOver("Your survival clock expired.");
+        return;
+    }
+    timerDisplay.textContent = gameTimer.toFixed(2);
+
+    let dx = 0;
+    let dy = 0;
+
+    if (keys.ArrowUp || keys.w) dy = -1;
+    if (keys.ArrowDown || keys.s) dy = 1;
+    if (keys.ArrowLeft || keys.a) dx = -1;
+    if (keys.ArrowRight || keys.d) dx = 1;
+
+    if (dx !== 0 && dy !== 0) {
+        const length = Math.sqrt(dx * dx + dy * dy);
+        dx /= length;
+        dy /= length;
+    }
+
+    const nextX = player.x + dx * player.speed;
+    const nextY = player.y + dy * player.speed;
+
+    const safeX = isPositionSafe(nextX, player.y);
+    const safeY = isPositionSafe(player.x, nextY);
+
+    if (safeX) player.x = nextX;
+    if (safeY) player.y = nextY;
+
+    if (!isPositionSafe(player.x, player.y)) {
+        gameOver("You strayed off the path and got eaten by zombies.");
+    }
+
+    // Win Check at the Helipad
+    if (player.x > finishZone.x + 50 && player.y < finishZone.y + 200) {
+        winGame();
+    }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw the Guideline
+    if (showHelpLine) {
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = 'rgba(255, 100, 0, 1)';
+        ctx.strokeStyle = 'rgba(255, 120, 0, 0.75)';
+        ctx.lineWidth = 14; 
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        ctx.beginPath();
+        ctx.moveTo(guidelinePoints.x * scaleX, guidelinePoints.y * scaleY);
+        for(let i = 1; i < guidelinePoints.length; i++) {
+            ctx.lineTo(guidelinePoints[i].x * scaleX, guidelinePoints[i].y * scaleY);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0; 
+    }
+
+    // Debug Mode: Render Green Safe Tubes
+    if (showDebugPaths) {
+        ctx.strokeStyle = 'rgba(22, 163, 74, 0.25)';
+        ctx.lineWidth = CORRIDOR_RADIUS * 2 * scaleX;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        ctx.beginPath();
+        ctx.moveTo(guidelinePoints.x * scaleX, guidelinePoints.y * scaleY);
+        for(let i = 1; i < guidelinePoints.length; i++) {
+            ctx.lineTo(guidelinePoints[i].x * scaleX, guidelinePoints[i].y * scaleY);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(2, 132, 199, 0.25)';
+        ctx.fillRect(startZone.x * scaleX, startZone.y * scaleY, startZone.w * scaleX, startZone.h * scaleY);
+        ctx.fillStyle = 'rgba(250, 204, 21, 0.25)';
+        ctx.fillRect(finishZone.x * scaleX, finishZone.y * scaleY, finishZone.w * scaleX, finishZone.h * scaleY);
+    }
+
+    // Draw Player Dot (Neon Cyan Lens)
+    if (gameState === 'PLAYING') {
+        const screenX = player.x * scaleX;
+        const screenY = player.y * scaleY;
+        const visualRadius = player.radius * Math.min(scaleX, scaleY) * 1.5;
+
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = player.color;
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, visualRadius, 0, Math.PI * 2);
+        ctx.fillStyle = player.color;
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, visualRadius * 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        const time = Date.now() / 150;
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, visualRadius + Math.sin(time)*3, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(0, 255, 255, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+}
+
+function drawGlitchEffect() {
+    ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for(let i=0; i<8; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const w = Math.random() * 250 + 50;
+        const h = Math.random() * 12 + 2;
+        ctx.fillStyle = `rgba(239, 68, 68, ${Math.random()*0.5})`;
+        ctx.fillRect(x, y, w, h);
+    }
+}
+
+function gameLoop() {
+    const now = performance.now();
+    const deltaTime = (now - lastTime) / 1000;
+    lastTime = now;
+
+    if (gameState === 'PLAYING') {
+        update(deltaTime);
+        draw();
+        animationId = requestAnimationFrame(gameLoop);
+    } else if (gameState === 'GAMEOVER') {
+        drawGlitchEffect();
+        animationId = requestAnimationFrame(gameLoop);
+    } else if (gameState === 'WIN') {
+        draw();
+    }
+}
+
+function toggleDebug() {
+    showDebugPaths = !showDebugPaths;
+    if (gameState !== 'PLAYING') draw();
+}
+
+resizeCanvas();
+</script>
+</body>
+</html>
