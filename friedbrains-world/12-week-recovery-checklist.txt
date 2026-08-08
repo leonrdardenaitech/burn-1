@@ -1,0 +1,76 @@
+===============================================================================
+12-WEEK MIND RECLAMATION ROADMAP & CHECKLIST :: BURN-1 SYSTEMS
+===============================================================================
+A structured, clinically aligned 3-phase protocol designed to reverse striatal
+D2 receptor downregulation, restore prefrontal gray matter volume, and establish
+unshakable digital sovereignty.
+
+-------------------------------------------------------------------------------
+PHASE I: DIGITAL PERIMETER ISOLATION (WEEKS 1–4)
+-------------------------------------------------------------------------------
+Objective: Eliminate unintentional data leaks & break impulsive checking loops.
+
+[ ] Week 1: Notification Audit & Device Grayscale Mode
+    - Strip all non-human push notifications (apps, news, promos).
+    - Convert phone display to 100% Grayscale to neutralize visual triggers.
+    - Relocate phone charger out of the bedroom into the hallway.
+
+[ ] Week 2: Metadata Purge & Camera Scrubbing
+    - Audit all existing photo libraries with exiftool_scrub.sh.
+    - Disable location tagging permanently on smartphone cameras.
+    - Install NextDNS / Pi-hole ad-blocking at the home router level.
+
+[ ] Week 3: Variable-Ratio Pattern Interrupts
+    - Replace default browser homepages with static local terminals.
+    - Enforce a 15-minute "Latency Buffer" before responding to non-urgent messages.
+    - Ban social media feeds from mobile devices (desktop-only access).
+
+[ ] Week 4: Phase I Operational Review
+    - Measure baseline focus duration. Target: 45 minutes uninterrupted.
+    - Verify 0 active tracking beacons emitting from primary mobile hardware.
+
+-------------------------------------------------------------------------------
+PHASE II: ATTENTION SPAN RESTORATION (WEEKS 5–8)
+-------------------------------------------------------------------------------
+Objective: Rebuild D2 receptor binding density & prefrontal cortex volume.
+
+[ ] Week 5: Cardiovascular Receptor Regeneration Protocol
+    - Engage in 30 minutes of daily High-Intensity Interval Training (HIIT).
+    - Clinical Goal: Trigger 16% increase in D2 receptor binding density.
+
+[ ] Week 6: Offline Local AI Deployment
+    - Install air-gapped local AI models (Ollama / Llama3 / Local Vault).
+    - Disconnect research workflows from commercial telemetry engines.
+
+[ ] Week 7: Default Mode Network (DMN) Reset
+    - Commit to 15 minutes of daily non-judgmental mindfulness meditation.
+    - Restore DMN-to-Prefrontal Cortex neural connectivity.
+
+[ ] Week 8: Phase II Operational Review
+    - Measure reading comprehension latency on 50-page physical texts.
+    - Confirm zero screen usage within 90 minutes of sleep.
+
+-------------------------------------------------------------------------------
+PHASE III: SUSTAINED MIND SOVEREIGNTY (WEEKS 9–12)
+-------------------------------------------------------------------------------
+Objective: Permanent hardware killswitches & zero-party data architecture.
+
+[ ] Week 9: PGP Keypair Encryption & Burner Identity
+    - Generate 4096-bit RSA / Ed25519 PGP keypairs for sensitive comms.
+    - Deploy virtual burner debit cards for all digital subscriptions.
+
+[ ] Week 10: Tails OS USB Portable Vault Setup
+    - Flash an encrypted Tails OS USB drive with persistent storage.
+    - Test obfs4 Tor pluggable transport bridges in high-censorship mode.
+
+[ ] Week 11: Zero-Party Data Kiosk Integration
+    - Transition online contact forms to zero-party intake architecture.
+    - Establish private self-hosted backup nodes.
+
+[ ] Week 12: Sovereign Clearance Certification
+    - Complete the Sovereignty Digital Recovery RPG Clearance Audit.
+    - Status Achieved: Sovereign Mind Master (100% Digital Sovereignty).
+
+===============================================================================
+DON'T BE A FRIED BRAINS. STEP AWAY FROM THE DEVICE. 🧠⚡
+===============================================================================

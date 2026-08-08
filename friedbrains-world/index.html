@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRIEDBRAINS WORLD :: DIGITAL RECOVERY RPG & SOVEREIGNTY HUB</title>
+    <meta name="description" content="Friedbrains World: Interactive Digital Recovery RPG Terminal, 12-Week Mind Reclamation Checklist, & AI Prompts Manifest.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cyber: ['Orbitron', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                        code: ['Fira Code', 'monospace'],
+                        sans: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #040208;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .glow-title {
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.95), 0 0 45px rgba(147, 51, 234, 0.9), 0 0 70px rgba(245, 158, 11, 0.8);
+        }
+        .glow-amber {
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.95), 0 0 35px rgba(251, 191, 36, 0.8);
+        }
+
+        .cyber-card, .glass-panel {
+            background: rgba(12, 8, 24, 0.65) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(147, 51, 234, 0.4) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cyber-card:hover {
+            border-color: rgba(245, 158, 11, 0.9) !important;
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.35), inset 0 0 20px rgba(147, 51, 234, 0.25) !important;
+            transform: translateY(-4px) !important;
+        }
+
+        .terminal-box {
+            background: #06030c;
+            border: 2px solid #9333ea;
+            box-shadow: 0 0 25px rgba(147, 51, 234, 0.4);
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        html.day-mode body {
+            background-color: #ffffff !important;
+            background-image: url('../assets/Saved_Frame_from_Animate_brutalist_202608061504.jpeg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
+            color: #000000 !important;
+        }
+        html.day-mode header {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 3px solid #000000 !important;
+        }
+        html.day-mode header span, html.day-mode header a {
+            color: #000000 !important;
+            text-shadow: none !important;
+        }
+        html.day-mode .cyber-card,
+        html.day-mode .glass-panel,
+        html.day-mode .terminal-box {
+            background-color: rgba(255, 255, 255, 0.96) !important;
+            border: 3px solid #000000 !important;
+            box-shadow: 6px 6px 0px #000000 !important;
+            color: #000000 !important;
+        }
+        html.day-mode h1, html.day-mode h2, html.day-mode h3, html.day-mode p, html.day-mode span {
+            color: #000000 !important;
+            text-shadow: none !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative antialiased selection:bg-purple-600 selection:text-white">
+
+    <!-- UNIFIED TOP HEADER -->
+    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-purple-900/80 px-4 lg:px-8 py-3 flex justify-between items-center transition-colors">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" title="Burn-1 Hub (Home)" class="flex items-center gap-3 group">
+                <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border border-purple-500/60 group-hover:border-amber-400 transition-colors shadow-[0_0_10px_rgba(147,51,234,0.5)]">
+                <span class="text-2xl font-cyber text-white font-extrabold tracking-widest flex items-center gap-2">
+                    <span class="text-amber-500 glow-amber group-hover:text-amber-400">BURN-1</span>
+                    <span id="version-tag" class="text-purple-400 text-xs px-2 py-0.5 rounded border border-purple-500/50 bg-purple-950/40 font-mono">WORLD</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)] flex items-center gap-1.5">
+                <i class="fa-solid fa-house"></i> HOME DIRECTORY
+            </a>
+            <a href="../store.html" class="px-3.5 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-store"></i> STOREFRONT
+            </a>
+            <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3.5 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(147,51,234,0.4)]">
+                <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
+                <span id="themeText">DAY MODE</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO TITLE -->
+    <section class="py-10 px-4 max-w-7xl mx-auto w-full text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/50 mb-4">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-ping"></span>
+            <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest">
+                🧠 FRIEDBRAINS-WORLD // DIGITAL RECOVERY ENGINE
+            </span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-cyber font-extrabold text-white uppercase tracking-wider mb-2 glow-title">
+            FRIEDBRAINS-WORLD MODULE
+        </h1>
+        <p class="text-base sm:text-lg font-mono text-amber-300 font-bold max-w-3xl mx-auto">
+            Interactive Digital Recovery RPG, 12-Week Roadmap, &amp; AI Image Prompts Manifest
+        </p>
+    </section>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full space-y-12">
+
+        <!-- 1. INTERACTIVE DIGITAL RECOVERY RPG TERMINAL -->
+        <div class="terminal-box p-6 md:p-8 relative">
+            <div class="flex justify-between items-center border-b border-purple-900/60 pb-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                    <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                    <span class="text-xs font-mono text-purple-300 font-bold ml-2">sovereignty-digital-recovery-rpg.py</span>
+                </div>
+                <span class="text-xs font-mono text-amber-400 font-bold px-2.5 py-1 rounded bg-amber-950/60 border border-amber-500/40">INTERACTIVE TERMINAL</span>
+            </div>
+
+            <!-- TERMINAL DISPLAY -->
+            <div id="terminal-screen" class="bg-black/90 p-5 rounded-xl border border-purple-500/40 text-xs sm:text-sm font-mono text-green-400 h-64 overflow-y-auto space-y-2 mb-6">
+                <div>🧠 BURN-1 SYSTEMS :: SOVEREIGNTY DIGITAL RECOVERY RPG ⚡</div>
+                <div>Operational Clearance: Level 4 | Hard Hat Protocol Active</div>
+                <div class="text-slate-400">------------------------------------------------------------</div>
+                <div id="terminal-log">Welcome, Operative. Select a recovery mission below to execute scripts.</div>
+            </div>
+
+            <!-- TERMINAL CONTROLS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
+                <button onclick="runMission(1)" class="p-3 rounded-lg bg-purple-950 border border-purple-500 text-purple-200 font-bold hover:bg-purple-900 transition-all text-left">
+                    ⚡ 1. Run exiftool_scrub.sh
+                </button>
+                <button onclick="runMission(2)" class="p-3 rounded-lg bg-purple-950 border border-purple-500 text-purple-200 font-bold hover:bg-purple-900 transition-all text-left">
+                    🌐 2. Connect obfs4 Bridges
+                </button>
+                <button onclick="runMission(3)" class="p-3 rounded-lg bg-purple-950 border border-purple-500 text-purple-200 font-bold hover:bg-purple-900 transition-all text-left">
+                    🔥 3. Execute burn1-cache.sh
+                </button>
+                <button onclick="runMission(4)" class="p-3 rounded-lg bg-amber-500 text-black font-cyber font-extrabold hover:bg-amber-400 transition-all text-left shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                    🏆 4. View Clearance Audit
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. 12-WEEK ROADMAP & CHECKLIST -->
+        <div class="cyber-card p-6 md:p-8 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4 border-b border-purple-900/60 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block mb-1">📋 12-WEEK RECOVERY ROADMAP</span>
+                    <h2 class="font-cyber text-2xl md:text-3xl font-bold text-white uppercase">12-WEEK MIND RECLAMATION CHECKLIST</h2>
+                </div>
+                <a href="12-week-recovery-checklist.txt" target="_blank" class="text-xs font-mono text-purple-300 hover:text-purple-200 border border-purple-500/50 px-3 py-1.5 rounded bg-purple-950/60">
+                    VIEW RAW TXT <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+                <!-- PHASE 1 -->
+                <div class="p-5 rounded-2xl border border-purple-500/40 bg-black/40 space-y-3">
+                    <h3 class="font-cyber text-sm text-amber-400 font-bold uppercase">PHASE I: Isolation (Weeks 1–4)</h3>
+                    <p class="text-slate-300 text-[11px]">Eliminate data leaks &amp; break compulsive checking loops.</p>
+                    <ul class="space-y-2 text-slate-200">
+                        <li class="flex items-center gap-2"><input type="checkbox" checked class="accent-purple-500"> Notification &amp; Grayscale Audit</li>
+                        <li class="flex items-center gap-2"><input type="checkbox" checked class="accent-purple-500"> Metadata Purge (exiftool_scrub)</li>
+                        <li class="flex items-center gap-2"><input type="checkbox" class="accent-purple-500"> 15-Min Latency Buffer Enforced</li>
+                    </ul>
+                </div>
+
+                <!-- PHASE 2 -->
+                <div class="p-5 rounded-2xl border border-purple-500/40 bg-black/40 space-y-3">
+                    <h3 class="font-cyber text-sm text-purple-400 font-bold uppercase">PHASE II: Restoration (Weeks 5–8)</h3>
+                    <p class="text-slate-300 text-[11px]">Rebuild D2 receptor binding density &amp; prefrontal volume.</p>
+                    <ul class="space-y-2 text-slate-200">
+                        <li class="flex items-center gap-2"><input type="checkbox" class="accent-purple-500"> 30-Min Daily HIIT Cardio (+16% D2)</li>
+                        <li class="flex items-center gap-2"><input type="checkbox" class="accent-purple-500"> Offline Air-Gapped Local AI</li>
+                        <li class="flex items-center gap-2"><input type="checkbox" class="accent-purple-500"> Mindfulness &amp; DMN Reset</li>
+                    </ul>
+                </div>
+
+                <!-- PHASE 3 -->
+                <div class="p-5 rounded-2xl border border-amber-500/50 bg-black/40 space-y-3">
+                    <h3 class="font-cyber text-sm text-green-400 font-bold uppercase">PHASE III: Sovereignty (Weeks 9–12)</h3>
+                    <p class="text-slate-300 text-[11px]">Permanent hardware killswitches &amp; PGP keys.</p>
+                    <ul class="space-y-2 text-slate-200">
+                        <li class="flex items-center gap-2"><input type="checkbox" class="accent-purple-500"> 4096-bit RSA PGP Keypair</li>
+                        <li class="flex items-center gap-2"><input type="checkbox" class="accent-purple-500"> Encrypted Tails OS USB Setup</li>
+                        <li class="flex items-center gap-2"><input type="checkbox" class="accent-purple-500"> Sovereign Mind Master Audit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. AI IMAGE PROMPTS MANIFEST & STAGED ASSETS -->
+        <div class="cyber-card p-6 md:p-8 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4 border-b border-purple-900/60 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block mb-1">🖼️ CAMPAIGN ASSETS &amp; AI PROMPTS</span>
+                    <h2 class="font-cyber text-2xl md:text-3xl font-bold text-white uppercase">AI IMAGE PROMPTS MANIFEST</h2>
+                </div>
+                <a href="image-prompts-manifest.md" target="_blank" class="text-xs font-mono text-purple-300 hover:text-purple-200 border border-purple-500/50 px-3 py-1.5 rounded bg-purple-950/60">
+                    VIEW MANIFEST MD <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- GALLERY GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- ASSET 1 -->
+                <div class="rounded-xl overflow-hidden border border-purple-500/40 bg-black/60">
+                    <img src="assets/FriedbrainsMainTorVault.png" alt="Hero Banner Asset" class="w-full h-48 object-cover">
+                    <div class="p-4 space-y-2 font-mono text-xs">
+                        <span class="text-amber-400 font-bold block">Asset #1: Flagship Hero Banner</span>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">Neo-Brutalist maze profile motif in deep purple &amp; neon teal tones.</p>
+                    </div>
+                </div>
+
+                <!-- ASSET 2 -->
+                <div class="rounded-xl overflow-hidden border border-purple-500/40 bg-black/60">
+                    <img src="assets/TorVault2.png" alt="Sticker Asset" class="w-full h-48 object-cover">
+                    <div class="p-4 space-y-2 font-mono text-xs">
+                        <span class="text-amber-400 font-bold block">Asset #2: Sticker &amp; Enamel Pin Mockup</span>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">Die-cut vinyl sticker reading "DON'T BE A FRIED BRAINS".</p>
+                    </div>
+                </div>
+
+                <!-- ASSET 3 -->
+                <div class="rounded-xl overflow-hidden border border-purple-500/40 bg-black/60">
+                    <img src="assets/TorVault3.png" alt="Terminal Execution Visual" class="w-full h-48 object-cover">
+                    <div class="p-4 space-y-2 font-mono text-xs">
+                        <span class="text-amber-400 font-bold block">Asset #3: Terminal Execution Visual</span>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">UNIX terminal interface running metadata scrubbing scripts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/90 border-t border-purple-900/80 py-8 px-4 text-center text-xs font-mono text-slate-400 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-left flex items-center gap-3">
+                <a href="../index.html">
+                    <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-8 w-auto rounded border border-purple-500/50">
+                </a>
+                <div>
+                    <span class="font-cyber font-bold text-white text-sm">BURN-1 SYSTEMS</span>
+                    <p class="text-slate-400 text-xs">Friedbrains World • Digital Recovery Engine</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 text-slate-300">
+                <a href="../index.html" class="hover:text-amber-400 transition-colors">Burn-1 Hub</a>
+                <a href="../store.html" class="hover:text-amber-400 transition-colors">Storefront</a>
+                <a href="../tor-vault/index.html" class="hover:text-amber-400 transition-colors">Tor Vault</a>
+            </div>
+            <div>
+                <span class="text-purple-400">© 2026 BURN-1.COM</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE TERMINAL SCRIPT -->
+    <script>
+        let pScore = 25;
+        let d2Density = 45.0;
+
+        function runMission(id) {
+            const log = document.getElementById('terminal-log');
+            if (id === 1) {
+                pScore += 25;
+                d2Density += 12.5;
+                log.innerHTML += `<br><br><span class="text-amber-400">[MISSION 1 EXECUTED]:</span> exiftool_scrub.sh finished.<br>Stripped GPS tags & device serials.<br>+25% Privacy Clearance | D2 Density: ${d2Density.toFixed(1)}%`;
+            } else if (id === 2) {
+                pScore += 30;
+                d2Density += 15.0;
+                log.innerHTML += `<br><br><span class="text-purple-400">[MISSION 2 EXECUTED]:</span> obfs4 Tor Transport connected.<br>Bypassed ISP Deep Packet Inspection.<br>+30% Privacy Clearance | D2 Density: ${d2Density.toFixed(1)}%`;
+            } else if (id === 3) {
+                pScore += 20;
+                d2Density += 15.0;
+                log.innerHTML += `<br><br><span class="text-green-400">[MISSION 3 EXECUTED]:</span> burn1-cache-clear.sh executed.<br>Shredded tracking cookies & beacons.<br>+20% Privacy Clearance | D2 Density: ${d2Density.toFixed(1)}%`;
+            } else if (id === 4) {
+                log.innerHTML += `<br><br><span class="text-amber-400">========================================================</span><br><span class="text-white">🏆 FINAL CLEARANCE AUDIT:</span><br>Privacy Clearance: ${pScore}% / 100%<br>D2 Receptor Density: ${d2Density.toFixed(1)}%<br>Rank: Sovereign Mind Master<br><span class="text-amber-400">========================================================</span>`;
+            }
+
+            const screen = document.getElementById('terminal-screen');
+            screen.scrollTop = screen.scrollHeight;
+        }
+
+        function toggleTheme() {
+            const htmlRoot = document.getElementById('html-root');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const versionTag = document.getElementById('version-tag');
+
+            if (htmlRoot.classList.contains('day-mode')) {
+                htmlRoot.classList.remove('day-mode');
+                themeIcon.className = "fa-solid fa-sun text-amber-400";
+                themeText.innerText = "DAY MODE";
+                versionTag.innerText = "WORLD";
+                localStorage.setItem('burn1_theme', 'night');
+            } else {
+                htmlRoot.classList.add('day-mode');
+                themeIcon.className = "fa-solid fa-moon text-purple-600";
+                themeText.innerText = "NIGHT MODE";
+                versionTag.innerText = "WORLD BIZ";
+                localStorage.setItem('burn1_theme', 'day');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('burn1_theme');
+            if (savedTheme === 'day') {
+                document.getElementById('html-root').classList.add('day-mode');
+                document.getElementById('themeIcon').className = "fa-solid fa-moon text-purple-600";
+                document.getElementById('themeText').innerText = "NIGHT MODE";
+                document.getElementById('version-tag').innerText = "WORLD BIZ";
+            }
+        });
+    </script>
+</body>
+</html>
