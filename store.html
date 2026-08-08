@@ -84,6 +84,9 @@
         html.day-mode .ambient-glow-orange {
             display: none !important;
         }
+        html.day-mode #songToggleBtn {
+            display: none !important; /* HIDE MUSIC BUTTON IN DAY MODE */
+        }
         html.day-mode header {
             background-color: rgba(255, 255, 255, 0.95) !important;
             border-bottom: 3px solid #000000 !important;
@@ -141,7 +144,7 @@
     <div class="fixed inset-0 pointer-events-none z-0 ambient-glow-purple"></div>
     <div class="fixed inset-0 pointer-events-none z-0 ambient-glow-orange"></div>
 
-    <!-- STREAMLINED TOP HEADER: LOGO LEFT | HOME HUB + PLAY MUSIC + DAY MODE RIGHT -->
+    <!-- STREAMLINED TOP HEADER: LOGO LEFT | HOME HUB + PLAY MUSIC (NIGHT ONLY) + DAY MODE RIGHT -->
     <header class="sticky top-0 z-50 bg-black/60 backdrop-blur-md border-b border-purple-900/60 px-4 lg:px-8 py-3 flex justify-between items-center transition-colors">
         <!-- LOGO & BRAND TEXT (HUB BUTTON -> HOME) -->
         <div class="flex items-center gap-3">
@@ -154,13 +157,13 @@
             </a>
         </div>
 
-        <!-- FAR RIGHT CONTROLS: HOME HUB | PLAY MUSIC | DAY MODE -->
+        <!-- FAR RIGHT CONTROLS: HOME HUB | PLAY MUSIC (NIGHT ONLY) | DAY MODE -->
         <div class="flex items-center gap-3">
             <a href="index.html" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)] flex items-center gap-1.5">
                 <i class="fa-solid fa-house"></i> HOME DIRECTORY
             </a>
 
-            <!-- AUDIO TOGGLE BUTTON FOR SLIP & SLIDE SONG -->
+            <!-- AUDIO TOGGLE BUTTON FOR SLIP & SLIDE SONG (NIGHT MODE ONLY) -->
             <button id="songToggleBtn" onclick="toggleSong()" class="px-3.5 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(147,51,234,0.4)]">
                 <i id="songIcon" class="fa-solid fa-music text-amber-400"></i>
                 <span id="songText">PLAY MUSIC</span>
@@ -378,6 +381,7 @@
             const themeIcon = document.getElementById('themeIcon');
             const themeText = document.getElementById('themeText');
             const versionTag = document.getElementById('version-tag');
+            const bgAudio = document.getElementById('bgAudio');
 
             if (htmlRoot.classList.contains('day-mode')) {
                 htmlRoot.classList.remove('day-mode');
@@ -390,6 +394,9 @@
                 themeIcon.className = "fa-solid fa-moon text-purple-600";
                 themeText.innerText = "NIGHT MODE";
                 versionTag.innerText = "STORE BIZ";
+                if (!bgAudio.paused) {
+                    bgAudio.pause(); // Pause music when switching to Day Mode
+                }
                 localStorage.setItem('burn1_theme', 'day');
             }
         }
