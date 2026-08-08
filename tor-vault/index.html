@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURN-1 SYSTEMS // ANTI-ADDICTION & OPSEC PUBLIC DATABASE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #06040a;
+            color: #f8fafc;
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+        .font-tech { font-family: 'Share Tech Mono', monospace; }
+
+        .brutal-card-purple {
+            background-color: #0f0a1c;
+            border: 3px solid #a855f7;
+            box-shadow: 6px 6px 0px #a855f7;
+            transition: all 0.2s ease;
+        }
+        .brutal-card-purple:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 10px 10px 0px #a855f7;
+        }
+
+        .brutal-sticky-cta {
+            background-color: #581c87;
+            border: 3px solid #f59e0b;
+            box-shadow: 6px 6px 0px #f59e0b;
+        }
+
+        .skeleton-placeholder {
+            border: 2px dashed #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex flex-col justify-between">
+
+    <!-- HEADER NAVIGATION -->
+    <header class="w-full max-w-7xl mx-auto brutal-card-purple p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-purple-600 border-2 border-white flex items-center justify-center font-cyber font-bold text-lg">B1</div>
+            <div>
+                <h1 class="font-cyber text-2xl font-black text-purple-400 tracking-wider">BURN-1 // OPSEC DATABASE</h1>
+                <p class="text-xs text-amber-400 font-tech uppercase">PUBLIC ANTI-ADDICTION &amp; PRIVACY RESOURCE DIRECTORY</p>
+            </div>
+        </div>
+        <nav class="flex items-center gap-3 text-xs font-tech font-bold">
+            <a href="../store.html" class="px-4 py-2 border-2 border-purple-400 bg-purple-950 text-purple-200 hover:bg-purple-600 hover:text-white transition-colors uppercase">← STORE CATALOG</a>
+            <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" class="px-4 py-2 border-2 border-amber-400 bg-amber-500 text-black hover:bg-amber-400 font-cyber font-black uppercase">GET VAULT BUNDLE ($50) ⚡</a>
+        </nav>
+    </header>
+
+    <!-- TOP STICKY CTA CARD -->
+    <div class="w-full max-w-7xl mx-auto brutal-sticky-cta p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">⚡</span>
+            <p class="text-sm font-cyber font-bold text-amber-200 uppercase">
+                Need 1-click execution? Get the 6-part automated script bundle inside the Burn-1 Tor Privacy Vault ($50).
+            </p>
+        </div>
+        <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" class="px-6 py-2.5 bg-amber-400 text-black font-cyber font-black text-xs uppercase border-2 border-black hover:bg-white transition-colors whitespace-nowrap shadow-[3px_3px_0px_#000]">
+            UPGRADE TO $50 VAULT &rarr;
+        </a>
+    </div>
+
+    <!-- FLAGSHIP GRAPHIC DISPLAY CONTAINER -->
+    <div class="w-full max-w-7xl mx-auto mb-8 rounded-xl overflow-hidden border-2 border-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.35)] relative group">
+        <img src="assets/FriedbrainsMainTorVault.png" onerror="this.onerror=null; this.src='assets/TorVault1.png';" alt="Burn-1 Tor Vault Flagship Graphic" class="w-full max-h-[420px] object-cover w-full">
+        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-purple-950/90 to-transparent p-4 flex justify-between items-center text-xs font-tech">
+            <span class="text-amber-400 font-bold">FLAGSHIP ASSET: TOR PRIVACY VAULT &amp; OPSEC GUIDEBOOK</span>
+            <span class="text-purple-300 font-mono-code">STATUS: LIVE (assets/FriedbrainsMainTorVault.png)</span>
+        </div>
+    </div>
+
+    <!-- SEARCH & FILTER BAR -->
+    <main class="w-full max-w-7xl mx-auto flex-grow mb-12">
+        <div class="brutal-card-purple p-6 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="w-full md:w-1/2">
+                    <label for="searchInput" class="text-xs font-tech text-purple-300 block mb-1 uppercase font-bold">Search Database Resources:</label>
+                    <input type="text" id="searchInput" placeholder="Filter by keyword (e.g. EXIF, Tor, PGP, Mental Health)..." class="w-full bg-slate-950 border-2 border-purple-500 text-purple-200 px-4 py-2 text-sm font-mono-code focus:outline-none focus:border-amber-400">
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs font-tech">
+                    <button onclick="filterCategory('ALL')" class="px-3 py-1.5 border-2 border-purple-400 bg-purple-900 text-white hover:bg-purple-600 font-bold uppercase">ALL</button>
+                    <button onclick="filterCategory('OpSec & Privacy')" class="px-3 py-1.5 border-2 border-purple-400 bg-slate-900 text-purple-300 hover:bg-purple-600 font-bold uppercase">OPSEC</button>
+                    <button onclick="filterCategory('Anonymity & Routing')" class="px-3 py-1.5 border-2 border-purple-400 bg-slate-900 text-purple-300 hover:bg-purple-600 font-bold uppercase">TOR &amp; BRIDGES</button>
+                    <button onclick="filterCategory('Mental Wellness & Focus')" class="px-3 py-1.5 border-2 border-purple-400 bg-slate-900 text-purple-300 hover:bg-purple-600 font-bold uppercase">WELLNESS</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESOURCE GRID CONTAINER -->
+        <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated via database.json -->
+        </div>
+    </main>
+
+    <!-- PHYSICAL STICKER & BADGE SHOWCASE (ASSET #2) -->
+    <section class="max-w-6xl mx-auto p-6 md:p-8 rounded-2xl border-2 border-amber-500/40 bg-slate-950 flex flex-col md:flex-row items-center gap-8 my-8">
+        <div class="w-full md:w-1/2 text-left">
+            <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block mb-2">
+                🏷️ PHYSICAL SWAG &amp; DIE-CUT MOCKUP
+            </span>
+            <h3 class="font-cyber text-2xl md:text-3xl font-bold text-white uppercase mb-3">
+                DON'T BE A FRIED BRAINS.
+            </h3>
+            <p class="text-slate-300 text-xs md:text-sm leading-relaxed mb-4">
+                Die-cut vinyl sticker and riveted copper enamel pin preview for digital self-defense advocates. Display your commitment to zero-party data sovereignty.
+            </p>
+            <div class="flex flex-wrap gap-3 font-tech text-xs mb-6">
+                <span class="px-3 py-1.5 bg-purple-950 border border-amber-500/40 text-amber-200">► Die-Cut Vinyl Stickers</span>
+                <span class="px-3 py-1.5 bg-purple-950 border border-amber-500/40 text-amber-200">► Enamel OpSec Lapel Pins</span>
+                <span class="px-3 py-1.5 bg-purple-950 border border-amber-500/40 text-amber-200">► Air-Gap Security Badges</span>
+            </div>
+            <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" 
+               class="inline-block px-4 py-2 rounded bg-amber-950/60 border border-amber-500 text-amber-300 font-mono text-xs hover:bg-amber-500 hover:text-black transition-all">
+                ⚡ INCLUDED WITH TOR VAULT PRO BUNDLE ($50) &rarr;
+            </a>
+        </div>
+        <div class="w-full md:w-1/2 overflow-hidden">
+            <img src="assets/TorVault2.png" alt="Don't Be A Fried Brains Sticker &amp; Enamel Pin Mockup" class="w-full h-auto rounded-xl border-2 border-purple-500/50 shadow-2xl object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+    </section>
+
+    <!-- TERMINAL DEMO SHOWCASE (ASSET #3) -->
+    <section class="max-w-6xl mx-auto p-6 md:p-8 rounded-2xl border-2 border-purple-900 bg-purple-950/20 my-8">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <div class="w-full md:w-1/2 text-left">
+                <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-widest block mb-2">
+                    💻 INSIDE THE SHELL · OPSEC IN ACTION
+                </span>
+                <h3 class="font-cyber text-2xl font-bold text-white uppercase mb-3">
+                    METADATA SCRUBBING &amp; RAM PURGE DEMO
+                </h3>
+                <p class="text-slate-300 text-xs md:text-sm leading-relaxed mb-4">
+                    Watch <code class="text-amber-400 font-mono">exiftool_scrub.sh</code> strip camera model, serial number, and GPS coordinates from your photos before sharing online—followed by <code class="text-red-400 font-mono">burn1-killswitch.sh</code> running an atomic RAM purge.
+                </p>
+                <div class="bg-black/90 p-4 rounded-xl border border-slate-800 font-mono text-xs text-purple-300 space-y-1 mb-6">
+                    <p class="text-amber-400">&gt; ./exiftool_scrub.sh /photos [GPS PURGED]</p>
+                    <p class="text-purple-300">&gt; ./burn1-killswitch.sh [RAM INCINERATED]</p>
+                </div>
+                <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" 
+                   class="inline-block px-4 py-2 rounded bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs hover:bg-purple-600 hover:text-white transition-all">
+                    ⚡ ACCESS TERMINAL SCRIPTS IN VAULT ($50) &rarr;
+                </a>
+            </div>
+            <div class="w-full md:w-1/2 relative rounded-xl overflow-hidden border border-purple-500/60 bg-black shadow-2xl">
+                <img src="assets/TorVault3.png" alt="Terminal Demo: Metadata Scrubbing &amp; RAM Purge" class="w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM STICKY CTA CARD -->
+    <div class="w-full max-w-7xl mx-auto brutal-sticky-cta p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <p class="text-sm font-cyber font-bold text-amber-200 uppercase">
+                Need 1-click execution? Get the 6-part automated script bundle inside the Burn-1 Tor Privacy Vault ($50).
+            </p>
+        </div>
+        <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" class="px-6 py-2.5 bg-amber-400 text-black font-cyber font-black text-xs uppercase border-2 border-black hover:bg-white transition-colors whitespace-nowrap shadow-[3px_3px_0px_#000]">
+            GET INSTANT ACCESS ($50) &rarr;
+        </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto border-t-2 border-purple-900 pt-6 pb-4 text-center text-xs font-tech text-purple-400">
+        <p class="uppercase font-bold mb-1">BURN-1 SYSTEMS © 2026 // PUBLIC MENTAL HEALTH &amp; OPSEC DATABASE</p>
+        <p>Zero Cloud Tracking · Pure Offline Sovereignty · <a href="https://leonardartistry1.gumroad.com/l/wscdtp" class="text-amber-400 underline font-bold">Tor Vault Upgrade ($50)</a></p>
+    </footer>
+
+    <!-- DYNAMIC DATABASE RENDER SCRIPT -->
+    <script>
+        let allResources = [];
+
+        async function loadDatabase() {
+            try {
+                const res = await fetch('database.json');
+                allResources = await res.json();
+                renderResources(allResources);
+            } catch (err) {
+                console.error("Error loading database.json:", err);
+            }
+        }
+
+        function renderResources(items) {
+            const container = document.getElementById('resourceGrid');
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'brutal-card-purple p-5 flex flex-col justify-between relative';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] font-tech text-amber-400 font-bold uppercase tracking-widest">[${item.category}]</span>
+                            <span class="text-[10px] font-cyber text-purple-300 border border-purple-500 px-2 py-0.5">${item.access}</span>
+                        </div>
+                        <h3 class="font-cyber text-lg font-bold text-white mb-2">${item.title}</h3>
+                        <p class="text-xs text-slate-300 font-mono-code mb-3 leading-relaxed">${item.summary}</p>
+                        
+                        <div class="bg-purple-950/60 p-2.5 border-l-2 border-amber-400 mb-4 text-[11px] font-tech text-amber-200">
+                            <strong>🧠 Mental Health Angle:</strong> ${item.mental_health_angle}
+                        </div>
+                    </div>
+                    <div>
+                        <a href="${item.vault_upsell_link}" target="_blank" class="block w-full text-center py-2 bg-purple-900 hover:bg-amber-400 hover:text-black border-2 border-purple-400 text-purple-100 font-cyber text-xs uppercase font-bold transition-colors">
+                            VIEW FULL RESOURCE &amp; SCRIPT &rarr;
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = allResources.filter(r => 
+                r.title.toLowerCase().includes(query) || 
+                r.summary.toLowerCase().includes(query) ||
+                r.category.toLowerCase().includes(query) ||
+                r.mental_health_angle.toLowerCase().includes(query)
+            );
+            renderResources(filtered);
+        });
+
+        function filterCategory(cat) {
+            if (cat === 'ALL') {
+                renderResources(allResources);
+            } else {
+                renderResources(allResources.filter(r => r.category === cat));
+            }
+        }
+
+        loadDatabase();
+    </script>
+</body>
+</html>

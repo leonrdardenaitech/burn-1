@@ -1,0 +1,56 @@
+[
+  {
+    "id": "res-01",
+    "title": "Metadata & EXIF Scrubber Guide",
+    "category": "OpSec & Privacy",
+    "mental_health_angle": "Reduce digital anxiety and prevent tracking fatigue.",
+    "access": "Free",
+    "summary": "Step-by-step process to strip locations, camera models, and timestamps from images before sharing.",
+    "vault_upsell_link": "https://leonardartistry1.gumroad.com/l/wscdtp"
+  },
+  {
+    "id": "res-02",
+    "title": "Tor Browser & obfs4 Bridges Setup",
+    "category": "Anonymity & Routing",
+    "mental_health_angle": "Escape commercial surveillance profiling and intrusive behavioral tracking.",
+    "access": "Free",
+    "summary": "Configure Tor Browser security sliders, request obfs4 pluggable bridges, and defeat network censorship.",
+    "vault_upsell_link": "https://leonardartistry1.gumroad.com/l/wscdtp"
+  },
+  {
+    "id": "res-03",
+    "title": "Tails OS Bootable USB Blueprint",
+    "category": "Air-Gapped Systems",
+    "mental_health_angle": "Establish zero-residue digital boundary control on external hardware.",
+    "access": "Free",
+    "summary": "Create an amnesic, bootable USB OS running 100% in RAM with zero hard drive footprints.",
+    "vault_upsell_link": "https://leonardartistry1.gumroad.com/l/wscdtp"
+  },
+  {
+    "id": "res-04",
+    "title": "4096-Bit PGP Encryption Primer",
+    "category": "Cryptographic Safety",
+    "mental_health_angle": "Reclaim peace of mind through un-interceptable end-to-end communication.",
+    "access": "Free",
+    "summary": "Generate GPG keypairs, encrypt message payloads, and verify cryptographic signatures.",
+    "vault_upsell_link": "https://leonardartistry1.gumroad.com/l/wscdtp"
+  },
+  {
+    "id": "res-05",
+    "title": "Digital Detox & Surveillance Shield",
+    "category": "Mental Wellness & Focus",
+    "mental_health_angle": "Break doom-scrolling addiction loops and mitigate algorithmic fatigue.",
+    "access": "Free",
+    "summary": "Block ad-tech tracker feeds via NextDNS and switch to zero-metadata messengers (Session & Signal).",
+    "vault_upsell_link": "https://leonardartistry1.gumroad.com/l/wscdtp"
+  },
+  {
+    "id": "res-06",
+    "title": "Atomic RAM Purge & Kill Switch",
+    "category": "Emergency Protocol",
+    "mental_health_angle": "Eliminate digital panic with instant zero-trace session incinerator.",
+    "access": "Free",
+    "summary": "Execute bash kill-switches to instantly clear system memory and terminal command logs.",
+    "vault_upsell_link": "https://leonardartistry1.gumroad.com/l/wscdtp"
+  }
+]

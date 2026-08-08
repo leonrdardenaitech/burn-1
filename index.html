@@ -130,6 +130,14 @@
             margin-top: 1.5rem;
         }
 
+        /* LIVE DIGITAL BUSINESS CARD MOCKUP STYLING */
+        .biz-card-mockup {
+            background: linear-gradient(135deg, rgba(20, 10, 40, 0.95), rgba(5, 2, 12, 0.98));
+            border: 2px solid #9333ea;
+            box-shadow: 0 0 25px rgba(147, 51, 234, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.2);
+            border-radius: 1rem;
+        }
+
         /* =========================================================
            DAY MODE (CORPORATE EDITION - BLACK TEXT ON LIGHT BG)
            ========================================================= */
@@ -156,13 +164,6 @@
             color: #000000 !important;
             text-shadow: none !important;
         }
-        html.day-mode header nav a {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html.day-mode header nav a:hover {
-            color: #9333ea !important;
-        }
         
         /* BLACK TEXT FOR DAY MODE TITLES & CARDS */
         html.day-mode h1, 
@@ -184,9 +185,10 @@
             color: #000000 !important;
             backdrop-filter: blur(4px) !important;
         }
-        html.day-mode .cyber-card:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 7px 7px 0px #9333ea !important;
+        html.day-mode .biz-card-mockup {
+            background: #ffffff !important;
+            border: 3px solid #000000 !important;
+            box-shadow: 6px 6px 0px #000000 !important;
         }
         html.day-mode .marker-divider,
         html.day-mode .marker-divider-amber {
@@ -344,46 +346,46 @@
         <div class="marker-divider"></div>
 
         <!-- =========================================================
-             SECTION 2: DUPLICATED WORKING PAYMENT PROCESS WIZARD & ACCORDION
+             SECTION 2: FULL 4-STEP AUTOMATED INTAKE & REAL-TIME CARD BUILDER
              ========================================================= -->
         <section id="payment-process" class="mb-16">
             <div class="glass-panel p-6 md:p-10 rounded-3xl relative">
                 
                 <div class="text-center mb-8">
                     <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block mb-2">
-                        💳 4-STEP AUTOMATED INTAKE &amp; PAYMENT PROCESS
+                        💳 4-STEP AUTOMATED INTAKE &amp; DIGITAL CARD BUILDER
                     </span>
                     <h2 class="font-cyber text-3xl md:text-4xl font-bold text-white uppercase mb-2">
                         CLAIM YOUR PRIVATE DIGITAL SPACE
                     </h2>
                     <p class="text-sm font-mono text-slate-200 max-w-xl mx-auto">
-                        Turnkey Custom 1-Page Site + QR Code + Directory Space. <strong class="text-amber-400">$150 setup &amp; $50/month</strong>.
+                        Turnkey Custom 1-Page Site + Live Digital Card + Dynamic QR Routing. <strong class="text-amber-400">$150 setup &amp; $50/month</strong>.
                     </p>
                 </div>
 
                 <!-- STEP-BY-STEP INTERACTIVE WIZARD KIOSK -->
-                <div class="max-w-3xl mx-auto p-6 md:p-8 border-2 border-purple-500/60 rounded-2xl bg-black/20 backdrop-blur-sm relative">
+                <div class="max-w-4xl mx-auto p-6 md:p-8 border-2 border-purple-500/60 rounded-2xl bg-black/30 backdrop-blur-md relative">
                     
                     <!-- STEP PROGRESS BAR -->
                     <div class="mb-8 border-b border-purple-900/60 pb-6">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-xs font-mono text-amber-400 font-bold uppercase" id="wizard-step-indicator">STEP 1 OF 4</span>
-                            <span class="text-xs font-mono text-purple-300 font-bold px-3 py-1 rounded bg-purple-950/60 border border-purple-500/40">100% AUTOMATED</span>
+                            <span class="text-xs font-mono text-purple-300 font-bold px-3 py-1 rounded bg-purple-950/60 border border-purple-500/40">100% AUTOMATED INTAKE</span>
                         </div>
                         <div class="w-full bg-slate-900 h-3 border border-purple-900 rounded-full overflow-hidden">
                             <div id="wizard-progress-bar" class="bg-gradient-to-r from-purple-500 to-amber-400 h-full w-1/4 transition-all duration-400"></div>
                         </div>
                     </div>
 
-                    <!-- WIZARD STEP 1: SUBDOMAIN CHOICE -->
+                    <!-- WIZARD STEP 1: SUBDOMAIN CLAIM -->
                     <div id="kiosk-step-1" class="space-y-6">
                         <div>
                             <label class="block font-cyber text-lg uppercase text-white mb-2">
-                                Step 1: Choose Your Subdomain &amp; Brand Name
+                                Step 1: Claim Your Subdomain &amp; System Route
                             </label>
-                            <p class="text-xs font-mono text-slate-300 mb-4">Enter your business or event name to claim your custom sub-route instantly.</p>
+                            <p class="text-xs font-mono text-slate-300 mb-4">Enter your brand, alias, or event name to reserve your custom route on Burn-1.</p>
                             <div class="flex flex-col sm:flex-row gap-3">
-                                <input type="text" id="kiosk-subdomain-input" placeholder="mybusinessname" class="flex-grow p-3.5 border-2 border-purple-500 bg-black/60 font-mono font-bold text-white text-base rounded-lg focus:outline-none focus:border-amber-400" oninput="updateKioskPreview()">
+                                <input type="text" id="kiosk-subdomain-input" placeholder="mybusinessname" value="mybusinessname" class="flex-grow p-3.5 border-2 border-purple-500 bg-black/60 font-mono font-bold text-white text-base rounded-lg focus:outline-none focus:border-amber-400" oninput="updateKioskPreview()">
                                 <span class="p-3.5 font-bold font-mono bg-purple-950 border-2 border-purple-500 rounded-lg text-purple-200 flex items-center">
                                     .burn-1.com
                                 </span>
@@ -391,24 +393,41 @@
                         </div>
                         <div class="flex justify-end">
                             <button onclick="goToStep(2)" class="px-8 py-3.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-                                Next: QR Routing &rarr;
+                                Next: Category &amp; Scope &rarr;
                             </button>
                         </div>
                     </div>
 
-                    <!-- WIZARD STEP 2: INSTANT QR CODE PREVIEW -->
+                    <!-- WIZARD STEP 2: CATEGORY & SCOPE SELECTION -->
                     <div id="kiosk-step-2" class="space-y-6 hidden">
                         <div>
                             <label class="block font-cyber text-lg uppercase text-white mb-2">
-                                Step 2: Dynamic QR Routing Code
+                                Step 2: Select Industry Category &amp; Usage Scope
                             </label>
-                            <p class="text-xs font-mono text-slate-300 mb-4">Your digital space will instantly generate custom vector QR codes for print and displays.</p>
-                            <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-xl border border-purple-500/40 bg-black/40">
-                                <div id="qr-preview-container" class="w-32 h-32 p-2 bg-white rounded-lg flex items-center justify-center"></div>
+                            <p class="text-xs font-mono text-slate-300 mb-4">Categorize your kiosk deployment for directory routing and compliance indexing.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Industry Type -->
                                 <div>
-                                    <span class="text-xs font-mono text-amber-400 font-bold block mb-1">TARGET ROUTE URL:</span>
-                                    <span id="preview-url-text" class="text-sm font-mono text-purple-300 font-bold block mb-3">https://mybusinessname.burn-1.com</span>
-                                    <span class="text-xs font-mono text-slate-300 block">⚡ Vector QR ready for stickers &amp; kiosk signage.</span>
+                                    <label class="block font-mono text-xs text-amber-400 font-bold uppercase mb-2">Industry Type:</label>
+                                    <select id="kiosk-industry-select" class="w-full p-3.5 border-2 border-purple-500 bg-black/80 font-mono text-white rounded-lg focus:outline-none focus:border-amber-400" onchange="updateKioskPreview()">
+                                        <option value="Business & Retail">Business &amp; Retail</option>
+                                        <option value="Food & Restaurant">Food &amp; Restaurant (Kiosk / Food Truck)</option>
+                                        <option value="Hygiene & Care">Hygiene &amp; Personal Care</option>
+                                        <option value="Apparel & Fashion">Apparel &amp; Fashion</option>
+                                        <option value="Mechanical & Repair">Mechanical &amp; Hardware</option>
+                                        <option value="Cyber & OpSec Vault">Cyber &amp; OpSec Vault</option>
+                                    </select>
+                                </div>
+                                <!-- Usage Scope -->
+                                <div>
+                                    <label class="block font-mono text-xs text-amber-400 font-bold uppercase mb-2">Deployment Scope:</label>
+                                    <select id="kiosk-scope-select" class="w-full p-3.5 border-2 border-purple-500 bg-black/80 font-mono text-white rounded-lg focus:outline-none focus:border-amber-400" onchange="updateKioskPreview()">
+                                        <option value="Professional / Commercial">Professional / Commercial</option>
+                                        <option value="Personal Brand">Personal Brand</option>
+                                        <option value="Private / Air-Gapped">Private / Air-Gapped</option>
+                                        <option value="Temporary Event / Kiosk">Temporary Event / Kiosk</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -417,61 +436,91 @@
                                 &larr; Back
                             </button>
                             <button onclick="goToStep(3)" class="px-8 py-3.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-                                Next: Package Features &rarr;
+                                Next: Digital Business Card Builder &rarr;
                             </button>
                         </div>
                     </div>
 
-                    <!-- WIZARD STEP 3: PACKAGE DETAILS -->
+                    <!-- WIZARD STEP 3: REAL-TIME DIGITAL BUSINESS CARD EDITOR -->
                     <div id="kiosk-step-3" class="space-y-6 hidden">
                         <div>
                             <label class="block font-cyber text-lg uppercase text-white mb-2">
-                                Step 3: Turnkey Package &amp; Turnaround
+                                Step 3: Interactive Digital Business Card Builder
                             </label>
-                            <p class="text-xs font-mono text-slate-300 mb-4">Review included turnkey features before completing payment gateway processing.</p>
-                            <div class="space-y-3 font-mono text-xs">
-                                <div class="p-3 rounded bg-purple-950/60 border border-purple-500/40 flex items-center justify-between text-slate-200">
-                                    <span>📱 Portable QR Code Generator</span>
-                                    <span class="text-green-400 font-bold">INCLUDED</span>
+                            <p class="text-xs font-mono text-slate-300 mb-4">Type your information below to see your physical &amp; digital business card generate in real time.</p>
+                            
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                                <!-- LEFT COLUMN: INPUT FIELDS -->
+                                <div class="lg:col-span-5 space-y-4">
+                                    <div>
+                                        <label class="block font-mono text-xs text-amber-400 font-bold uppercase mb-1">Business Name:</label>
+                                        <input type="text" id="biz-name-input" value="Apex Security Kiosks" placeholder="Apex Security Kiosks" class="w-full p-3 border-2 border-purple-500 bg-black/60 font-mono text-white text-xs rounded-lg focus:outline-none focus:border-amber-400" oninput="updateKioskPreview()">
+                                    </div>
+                                    <div>
+                                        <label class="block font-mono text-xs text-amber-400 font-bold uppercase mb-1">Person's Name &amp; Title:</label>
+                                        <input type="text" id="biz-person-input" value="Leon Darden, Operations Lead" placeholder="Leon Darden, Operations Lead" class="w-full p-3 border-2 border-purple-500 bg-black/60 font-mono text-white text-xs rounded-lg focus:outline-none focus:border-amber-400" oninput="updateKioskPreview()">
+                                    </div>
+                                    <div>
+                                        <label class="block font-mono text-xs text-amber-400 font-bold uppercase mb-1">Contact Email / Handle:</label>
+                                        <input type="text" id="biz-contact-input" value="leonrdarden@gmail.com" placeholder="leonrdarden@gmail.com" class="w-full p-3 border-2 border-purple-500 bg-black/60 font-mono text-white text-xs rounded-lg focus:outline-none focus:border-amber-400" oninput="updateKioskPreview()">
+                                    </div>
                                 </div>
-                                <div class="p-3 rounded bg-purple-950/60 border border-purple-500/40 flex items-center justify-between text-slate-200">
-                                    <span>💳 Digital Business Card Setup</span>
-                                    <span class="text-green-400 font-bold">INCLUDED</span>
-                                </div>
-                                <div class="p-3 rounded bg-purple-950/60 border border-purple-500/40 flex items-center justify-between text-slate-200">
-                                    <span>🌐 Permanent Space on Burn-1 Directory</span>
-                                    <span class="text-green-400 font-bold">INCLUDED</span>
-                                </div>
-                                <div class="p-3 rounded bg-purple-950/60 border border-purple-500/40 flex items-center justify-between text-slate-200">
-                                    <span>⚡ 1-Page Custom Clickable Site (7-Day Delivery)</span>
-                                    <span class="text-amber-400 font-bold">7-DAY TURNAROUND</span>
+
+                                <!-- RIGHT COLUMN: LIVE RECTANGULAR BUSINESS CARD SIMULATION -->
+                                <div class="lg:col-span-7">
+                                    <div class="biz-card-mockup p-6 rounded-2xl flex flex-col sm:flex-row items-center gap-6">
+                                        <!-- QR CODE WITH THIN PURPLE BORDER -->
+                                        <div id="qr-preview-container" class="w-28 h-28 p-2 bg-white rounded-lg border-2 border-purple-500 flex-shrink-0 flex items-center justify-center shadow-lg"></div>
+                                        
+                                        <!-- CARD CONTENT -->
+                                        <div class="flex-grow text-center sm:text-left space-y-2">
+                                            <h4 id="card-preview-biz" class="font-cyber text-lg font-bold text-white uppercase glow-title leading-tight">Apex Security Kiosks</h4>
+                                            <p id="card-preview-person" class="font-mono text-xs text-amber-400 font-bold">Leon Darden, Operations Lead</p>
+                                            <div class="pt-2 border-t border-purple-500/40 font-mono text-[11px] space-y-1">
+                                                <p id="card-preview-handle" class="text-purple-300 font-bold">https://mybusinessname.burn-1.com</p>
+                                                <p id="card-preview-contact" class="text-slate-300">leonrdarden@gmail.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="flex justify-between">
                             <button onclick="goToStep(2)" class="px-6 py-3 rounded bg-purple-950 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
                                 &larr; Back
                             </button>
                             <button onclick="goToStep(4)" class="px-8 py-3.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-                                Next: Secure Checkout &rarr;
+                                Next: Confirm &amp; Checkout &rarr;
                             </button>
                         </div>
                     </div>
 
-                    <!-- WIZARD STEP 4: CHECKOUT & PAYPAL GATEWAY -->
+                    <!-- WIZARD STEP 4: COMBINED PRE-CHECKOUT VERIFICATION & PAYPAL -->
                     <div id="kiosk-step-4" class="space-y-6 hidden">
                         <div>
                             <label class="block font-cyber text-lg uppercase text-white mb-2">
-                                Step 4: Confirm Order &amp; Checkout
+                                Step 4: Confirm System Claim &amp; Checkout
                             </label>
-                            <div class="p-4 rounded-xl border border-amber-500/50 bg-black/60 font-mono text-xs space-y-3 mb-6">
-                                <div class="flex justify-between text-slate-300">
-                                    <span>One-Page Custom Clickable Site (7-Day Delivery)</span>
-                                    <span class="text-amber-400 font-bold">$150.00 (One-Time Setup)</span>
+                            <p class="text-xs font-mono text-slate-300 mb-4">Verify your system intake record before completing secure payment processing.</p>
+                            
+                            <!-- SUMMARY TABLE -->
+                            <div class="p-5 rounded-xl border border-purple-500/50 bg-black/60 font-mono text-xs space-y-3 mb-6">
+                                <div class="flex justify-between text-slate-300 pb-2 border-b border-purple-900/60">
+                                    <span class="font-bold text-amber-400">Target Route:</span>
+                                    <span id="summary-route" class="text-purple-300 font-bold">https://mybusinessname.burn-1.com</span>
                                 </div>
                                 <div class="flex justify-between text-slate-300">
-                                    <span>Burn-1 Directory Space &amp; Maintenance</span>
-                                    <span class="text-purple-300 font-bold">$50.00 / month</span>
+                                    <span>Industry &amp; Scope:</span>
+                                    <span id="summary-scope" class="text-white">Business &amp; Retail (Professional)</span>
+                                </div>
+                                <div class="flex justify-between text-slate-300">
+                                    <span>Business &amp; Owner Name:</span>
+                                    <span id="summary-owner" class="text-white">Apex Security Kiosks — Leon Darden</span>
+                                </div>
+                                <div class="flex justify-between text-slate-300">
+                                    <span>Package Included:</span>
+                                    <span class="text-green-400 font-bold">1-Page Custom Site + QR + Digital Card</span>
                                 </div>
                                 <div class="w-full h-px bg-purple-900/60 my-2"></div>
                                 <div class="flex justify-between text-sm font-cyber font-bold">
@@ -480,21 +529,25 @@
                                 </div>
                             </div>
 
-                            <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(245,158,11,0.8)] flex items-center justify-center gap-3">
+                            <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(245,158,11,0.8)] flex items-center justify-center gap-3">
                                 <i class="fa-brands fa-paypal text-xl"></i> PAY WITH PAYPAL / CARD ($150 + $50/MO)
                             </a>
                         </div>
-                        <div class="flex justify-start">
+
+                        <div class="flex justify-between">
                             <button onclick="goToStep(3)" class="px-6 py-3 rounded bg-purple-950 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
                                 &larr; Back
                             </button>
+                            <a href="after-purchase.html" class="px-6 py-3 rounded bg-purple-900 border border-purple-500 text-amber-300 font-mono text-xs font-bold hover:bg-purple-800 transition-all flex items-center gap-1.5">
+                                After-Purchase Hub &rarr;
+                            </a>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- HIGHLIGHTED FLOATING ZIPPER LINE ACCORDION: BUNDLE INCLUDES -->
-                <div class="max-w-3xl mx-auto mt-8">
+                <div class="max-w-4xl mx-auto mt-8">
                     <div class="zipper-line mb-6"></div>
 
                     <!-- ACCORDION BUTTON (NO PANE WINDOW / 100% SEE-THROUGH) -->
@@ -579,7 +632,7 @@
         </section>
 
         <!-- =========================================================
-             SECTION 4: GAME SECTION (PRIVACY FIRST CHALLENGE)
+             SECTION 4: GAME SECTION (PRIVACY FIRST CHALLENGE - RAW IMAGE CLICKABLE)
              ========================================================= -->
         <section id="game-portal" class="mb-12">
             <div class="p-6 md:p-8 rounded-2xl flex flex-col md:flex-row-reverse items-center gap-8 cyber-card">
@@ -597,20 +650,12 @@
                         <a href="maze.html" class="px-5 py-2.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber text-xs font-bold uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.7)] flex items-center gap-2">
                             <i class="fa-solid fa-play"></i> LAUNCH MAZE GAME &rarr;
                         </a>
-                        <a href="privacy_first_challenge.html" class="px-5 py-2.5 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                            PRIVACY CHALLENGE DEMO
-                        </a>
                     </div>
                 </div>
 
-                <!-- CLICKABLE MAZE GAME IMAGE PORTAL -->
-                <div class="w-full md:w-1/2 relative rounded-xl overflow-hidden border-2 border-amber-500/60 shadow-2xl group cursor-pointer" onclick="window.location.href='maze.html'">
+                <!-- CLICKABLE MAZE GAME IMAGE PORTAL (NO OVERLAY BUTTON ON PICTURE) -->
+                <div class="w-full md:w-1/2 overflow-hidden rounded-xl border-2 border-amber-500/60 shadow-2xl group cursor-pointer" onclick="window.location.href='maze.html'">
                     <img src="assets/Saved_Frame_from_Animate_brutalist_202608071942.jpeg" alt="Click to Play Burn-1 Maze Game" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                        <span class="px-6 py-3 rounded-lg bg-amber-500 text-black font-cyber font-extrabold text-sm uppercase tracking-widest shadow-[0_0_25px_rgba(245,158,11,0.9)] flex items-center gap-2 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-gamepad"></i> CLICK TO START MAZE GAME
-                        </span>
-                    </div>
                 </div>
             </div>
         </section>
@@ -826,20 +871,39 @@
 
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
-        // 1. WIZARD KIOSK PREVIEW & NAVIGATION
+        // 1. WIZARD KIOSK PREVIEW & NAVIGATION (REAL-TIME CARD BUILDER)
         let currentStep = 1;
         function updateKioskPreview() {
-            const input = document.getElementById('kiosk-subdomain-input').value.trim() || 'mybusinessname';
-            const cleanInput = input.toLowerCase().replace(/[^a-z0-9]/g, '');
-            const fullURL = `https://${cleanInput}.burn-1.com`;
-            document.getElementById('preview-url-text').innerText = fullURL;
+            // Subdomain & Handle
+            const inputSub = document.getElementById('kiosk-subdomain-input').value.trim() || 'mybusinessname';
+            const cleanSub = inputSub.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const fullURL = `https://${cleanSub}.burn-1.com`;
+            
+            // Inputs
+            const bizName = document.getElementById('biz-name-input').value.trim() || 'Apex Security Kiosks';
+            const personName = document.getElementById('biz-person-input').value.trim() || 'Leon Darden, Operations Lead';
+            const contact = document.getElementById('biz-contact-input').value.trim() || 'leonrdarden@gmail.com';
+            const industry = document.getElementById('kiosk-industry-select').value;
+            const scope = document.getElementById('kiosk-scope-select').value;
 
+            // Live Card Updates
+            document.getElementById('card-preview-biz').innerText = bizName;
+            document.getElementById('card-preview-person').innerText = personName;
+            document.getElementById('card-preview-handle').innerText = fullURL;
+            document.getElementById('card-preview-contact').innerText = contact;
+
+            // Summary Table Updates
+            document.getElementById('summary-route').innerText = fullURL;
+            document.getElementById('summary-scope').innerText = `${industry} (${scope})`;
+            document.getElementById('summary-owner').innerText = `${bizName} — ${personName}`;
+
+            // Dynamic QR Code Rendering
             const qrContainer = document.getElementById('qr-preview-container');
             qrContainer.innerHTML = '';
             new QRCode(qrContainer, {
                 text: fullURL,
-                width: 110,
-                height: 110,
+                width: 100,
+                height: 100,
                 colorDark: '#000000',
                 colorLight: '#ffffff'
             });
