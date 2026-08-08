@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENTAL HEALTH & ADDICTION SUPPORT DIRECTORY | BURN-1 HELPLINE</title>
-    <meta name="description" content="Live Mental Health and Addiction Support Directory, Keystroke Keystroke Search, NotebookLM Brain Query (/sync-brain), and M2M JSON Endpoint.">
+    <title>DIGITAL DISORDERS HELPLINE :: OUTSMART ADDICTION, PROTECT YOUR HEAD | BURN-1</title>
+    <meta name="description" content="Digital Disorders & Cyber Addiction Helpline: Outsmart Addiction, Protect Your Head. Live search for screen detox, gaming disorder, dopamine burnout, and cognitive sovereignty.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,9 +17,19 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: { 400: '#FFD700', 500: '#D4AF37', 600: '#C5A059' },
-                        asphalt: { 800: '#242528', 900: '#1A1C1E' },
-                        denim: { 400: '#A4C2D4', 500: '#89ACCE' }
+                        pink: {
+                            400: '#F472B6',
+                            500: '#EC4899',
+                            600: '#FF1493',
+                            700: '#BE185D',
+                            ribbon: '#FF69B4',
+                        },
+                        purple: {
+                            700: '#7E22CE',
+                            800: '#6B21A8',
+                            900: '#581C87',
+                            950: '#3B0764',
+                        }
                     },
                     fontFamily: {
                         gothic: ['Pirata One', 'serif'],
@@ -31,30 +41,38 @@
         }
     </script>
     <style>
+        :root {
+            --pink-primary: #FF69B4;
+            --purple-deep: #581C87;
+        }
+
         body {
-            background-color: #A4C2D4;
+            background-color: #FF69B4;
             color: #000000;
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
         }
 
-        .rect-badge-gold {
-            background-color: #D4AF37;
+        /* Pink & Purple Rectangle-on-Rectangle Brutalist Badges */
+        .rect-badge-pink {
+            background-color: #FF69B4;
             color: #000000 !important;
             border: 4px solid #000000;
             box-shadow: 6px 6px 0px #000000;
             font-weight: 800;
         }
-        .rect-badge-denim {
+
+        .rect-badge-purple {
+            background-color: #581C87;
+            color: #FF69B4 !important;
+            border: 4px solid #000000;
+            box-shadow: 6px 6px 0px #000000;
+            font-weight: 800;
+        }
+
+        .rect-badge-white {
             background-color: #ffffff;
             color: #000000 !important;
-            border: 4px solid #000000;
-            box-shadow: 6px 6px 0px #000000;
-            font-weight: 800;
-        }
-        .rect-badge-asphalt {
-            background-color: #1A1C1E;
-            color: #D4AF37 !important;
             border: 4px solid #000000;
             box-shadow: 6px 6px 0px #000000;
             font-weight: 800;
@@ -73,140 +91,153 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col relative antialiased selection:bg-amber-400 selection:text-black">
+<body class="min-h-screen flex flex-col relative antialiased selection:bg-purple-900 selection:text-pink-300">
 
-    <!-- UNIFIED HEADER -->
-    <header class="sticky top-0 z-50 bg-[#1A1C1E] border-b-4 border-black px-4 lg:px-8 py-3.5 flex flex-wrap justify-between items-center transition-colors shadow-[0_6px_0px_#000000]">
+    <!-- UNIFIED HEADER IN DEEP PURPLE & PINK -->
+    <header class="sticky top-0 z-50 bg-[#3B0764] border-b-4 border-black px-4 lg:px-8 py-3.5 flex flex-wrap justify-between items-center transition-colors shadow-[0_6px_0px_#000000]">
         <div class="flex items-center gap-3">
             <a href="../index.html" title="Burn-1 Hub (Home)" class="flex items-center gap-3 group">
-                <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border-2 border-black shadow-[3px_3px_0px_#D4AF37]">
+                <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border-2 border-black shadow-[3px_3px_0px_#FF69B4]">
                 <span class="text-2xl font-gothic text-white font-extrabold tracking-widest flex items-center gap-2">
-                    <span class="text-[#D4AF37]">BURN-1</span>
-                    <span class="rect-badge-gold text-[10px] px-2 py-0.5 font-mono uppercase">HELPLINE DIRECTORY</span>
+                    <span class="text-[#FF69B4]">BURN-1</span>
+                    <span class="rect-badge-pink text-[10px] px-2 py-0.5 font-mono uppercase">DIGITAL HELPLINE</span>
                 </span>
             </a>
         </div>
 
         <nav class="flex flex-wrap items-center gap-2 font-mono text-xs my-1">
-            <a href="../index.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-house"></i> HUB
+            <a href="../index.html" class="rect-badge-white px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+                <i class="fa-solid fa-house text-purple-700"></i> HUB
             </a>
-            <a href="../friedbrains-world/index.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+            <a href="../digital_cigarette.html" class="rect-badge-pink px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+                <i class="fa-solid fa-smoking"></i> DIGITAL CIGARETTE
+            </a>
+            <a href="../friedbrains-world/index.html" class="rect-badge-purple px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
                 <i class="fa-solid fa-earth-americas"></i> ꟻRIED BRAINS WORLD
             </a>
-            <a href="database.json" target="_blank" class="rect-badge-gold px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-code"></i> M2M API (JSON)
-            </a>
-            <a href="../store.html" class="rect-badge-asphalt px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-store"></i> STOREFRONT
+            <a href="database.json" target="_blank" class="rect-badge-white px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
+                <i class="fa-solid fa-code text-pink-600"></i> M2M JSON API
             </a>
         </nav>
     </header>
 
-    <!-- HERO TITLE -->
-    <section class="py-8 px-4 max-w-6xl mx-auto w-full text-center">
-        <div class="rect-badge-gold px-4 py-1.5 text-xs font-mono uppercase inline-block mb-3 shadow-[4px_4px_0px_#000]">
-            💚 LIVE MENTAL HEALTH &amp; ADDICTION SUPPORT RESOURCES DIRECTORY
+    <!-- HERO SECTION WITH SLOGAN -->
+    <section class="py-10 px-4 max-w-6xl mx-auto w-full text-center">
+        <div class="inline-block p-1 bg-black rounded border-2 border-white mb-4">
+            <div class="rect-badge-purple px-4 py-1.5 text-xs font-mono uppercase tracking-widest">
+                🧠 DIGITAL DISORDERS &amp; CYBER ADDICTION TRIAGE
+            </div>
         </div>
-        <h1 class="font-gothic text-4xl sm:text-6xl text-white uppercase tracking-wider mb-2 drop-shadow-[0_4px_0px_#000]">
-            SUPPORT RESOURCES DIRECTORY
+
+        <h1 class="font-gothic text-4xl sm:text-7xl text-white uppercase tracking-wider mb-3 drop-shadow-[0_6px_0px_#581C87]">
+            OUTSMART ADDICTION. PROTECT YOUR HEAD.
         </h1>
-        <p class="font-mono text-sm sm:text-base text-black bg-[#D4AF37] px-4 py-2 border-4 border-black font-extrabold max-w-3xl mx-auto shadow-[6px_6px_0px_#000]">
-            REAL-TIME KEYSTROKE SEARCH • NOTEBOOKLM KNOWLEDGE BRAIN SEARCH (/sync-brain) • M2M JSON ENDPOINT
-        </p>
+
+        <div class="p-4 bg-[#581C87] border-4 border-black text-[#FF69B4] font-mono text-sm sm:text-base font-extrabold max-w-3xl mx-auto shadow-[8px_8px_0px_#000]">
+            DEDICATED HELPLINE FOR SCREEN FATIGUE, DOPAMINE BURNOUT, GAMING COMPULSIONS, &amp; COGNITIVE SOVEREIGNTY.
+        </div>
     </section>
 
-    <!-- MAIN CONTAINER -->
-    <main class="max-w-6xl mx-auto px-4 pb-16 space-y-10 w-full">
+    <!-- MAIN HELPLINE CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 pb-16 space-y-12 w-full">
 
-        <!-- 1. LIVE KEYSTROKE SEARCH PANEL -->
+        <!-- 1. KEYSTROKE SEARCH FOR DIGITAL DISORDERS -->
         <section class="vertical-panel p-6 bg-white space-y-6">
             
-            <div class="rect-badge-gold p-3 text-sm font-mono uppercase font-bold flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                <span>🔍 1. REAL-TIME KEYSTROKE DIRECTORY SEARCH</span>
-                <span class="text-xs">QUERIES 4 FIELDS: SERVICE NAME | CATEGORY | PROVIDER | FEATURES</span>
+            <div class="rect-badge-purple p-3 text-sm font-mono uppercase font-bold flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <span>🔍 DIGITAL DISORDERS DIRECTORY SEARCH</span>
+                <span class="text-xs">SEARCH: SCREEN DETOX | GAMING | BURNOUT | 24/7 | FREE</span>
             </div>
 
-            <!-- SEARCH BAR INPUT -->
+            <!-- SEARCH INPUT -->
             <div class="relative">
-                <input type="text" id="searchInput" oninput="filterResources()" placeholder="Type to search (e.g. veteran, SAMHSA, 988, gambling, text, confidential, free)..." class="w-full p-4 pl-12 border-4 border-black bg-black text-[#FFD700] font-mono text-sm sm:text-base font-bold shadow-[6px_6px_0px_#000] focus:outline-none">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#D4AF37] text-lg"></i>
+                <input type="text" id="searchInput" oninput="filterResources()" placeholder="Type to search digital disorders (e.g., detox, gaming, burnout, screen, 24/7, SAMHSA, free)..." class="w-full p-4 pl-12 border-4 border-black bg-black text-[#FF69B4] font-mono text-sm sm:text-base font-bold shadow-[6px_6px_0px_#000] focus:outline-none">
+                <i class="fa-solid fa-shield-halved absolute left-4 top-1/2 -translate-y-1/2 text-[#FF69B4] text-lg"></i>
             </div>
 
             <!-- QUICK FILTER BUTTONS -->
             <div class="flex flex-wrap gap-2 font-mono text-xs">
                 <span class="font-bold py-1">Quick Filters:</span>
-                <button onclick="setFilter('Crisis')" class="rect-badge-denim px-2.5 py-1 uppercase">Crisis</button>
-                <button onclick="setFilter('Substance Use')" class="rect-badge-denim px-2.5 py-1 uppercase">Substance Use</button>
-                <button onclick="setFilter('Gambling')" class="rect-badge-denim px-2.5 py-1 uppercase">Gambling</button>
-                <button onclick="setFilter('Veterans')" class="rect-badge-denim px-2.5 py-1 uppercase">Veterans</button>
-                <button onclick="setFilter('SAMHSA')" class="rect-badge-gold px-2.5 py-1 uppercase">SAMHSA</button>
-                <button onclick="setFilter('SMART')" class="rect-badge-gold px-2.5 py-1 uppercase">SMART</button>
-                <button onclick="setFilter('988')" class="rect-badge-gold px-2.5 py-1 uppercase">988</button>
-                <button onclick="setFilter('24/7')" class="rect-badge-asphalt px-2.5 py-1 uppercase">24/7</button>
-                <button onclick="setFilter('')" class="bg-red-500 text-white font-bold border-2 border-black px-2.5 py-1 uppercase">Reset</button>
+                <button onclick="setFilter('Digital Disorders')" class="rect-badge-pink px-3 py-1 uppercase">Digital Disorders</button>
+                <button onclick="setFilter('screen detox')" class="rect-badge-pink px-3 py-1 uppercase">Screen Detox</button>
+                <button onclick="setFilter('gaming')" class="rect-badge-pink px-3 py-1 uppercase">Gaming Disorder</button>
+                <button onclick="setFilter('burnout')" class="rect-badge-pink px-3 py-1 uppercase">Dopamine Burnout</button>
+                <button onclick="setFilter('Crisis')" class="rect-badge-purple px-3 py-1 uppercase">General Crisis</button>
+                <button onclick="setFilter('')" class="bg-black text-white border-2 border-black px-3 py-1 uppercase font-bold">Reset</button>
             </div>
 
             <!-- DIRECTORY RESULTS GRID -->
             <div id="resultsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                <!-- Dynamically populated via JavaScript -->
+                <!-- Populated dynamically -->
             </div>
 
         </section>
 
-        <!-- 2. NOTEBOOKLM KNOWLEDGE BRAIN SEARCH (/sync-brain) -->
-        <section class="vertical-panel p-6 bg-[#1A1C1E] text-white space-y-6">
+        <!-- 2. CROSS-LISTENING SYSTEM CONNECTIONS -->
+        <section class="vertical-panel p-6 bg-[#581C87] text-white space-y-6">
             
-            <div class="rect-badge-gold p-3 text-sm font-mono text-black font-bold uppercase flex justify-between items-center">
-                <span>🧠 2. NOTEBOOKLM KNOWLEDGE BRAIN SEARCH (/sync-brain)</span>
-                <span class="text-xs">TWO-NODE QUERY ENGINE</span>
+            <div class="rect-badge-pink p-3 text-sm font-mono text-black font-bold uppercase flex justify-between items-center">
+                <span>🔗 SYSTEM LISTENERS &amp; RECOVERY MODULES</span>
+                <span class="text-xs">INTERCONNECTED SYSTEM ROUTES</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
-                <div class="border-4 border-black p-4 bg-black space-y-2">
-                    <strong class="text-[#D4AF37] block text-sm">Primary Node (darden array)</strong>
-                    <p class="text-slate-300">Searches Career Bio, LinkedIn data, professional identity, and verified credentials.</p>
-                </div>
-                <div class="border-4 border-black p-4 bg-black space-y-2">
-                    <strong class="text-[#A4C2D4] block text-sm">Secondary Node (command center)</strong>
-                    <p class="text-slate-300">Searches Project Metrics, Deployment Logs, Technical Specs, and Architecture manifests.</p>
-                </div>
-            </div>
+            <p class="font-mono text-xs text-pink-200 leading-relaxed">
+                This Helpline listens to and connects with all recovery protocols across the Burn-1 network. Access continuous recovery resources below:
+            </p>
 
-            <!-- SYNC BRAIN INTERACTIVE COMMAND LINE -->
-            <div class="border-4 border-black bg-black p-4 space-y-3 font-mono">
-                <label class="text-xs text-amber-400 font-bold block">Execute Command Syntax: /sync-brain [Topic]</label>
-                <div class="flex gap-2">
-                    <input type="text" id="brainInput" value="/sync-brain update portfolio with new AI consulting details" class="w-full p-3 border-2 border-white bg-slate-900 text-green-400 text-xs font-mono focus:outline-none">
-                    <button onclick="runSyncBrain()" class="rect-badge-gold px-4 py-2 text-xs uppercase font-bold whitespace-nowrap">
-                        RUN SEARCH
-                    </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 font-mono text-xs">
+                
+                <!-- MODULE 1 -->
+                <div class="border-4 border-black bg-black p-5 space-y-3 shadow-[6px_6px_0px_#FF69B4]">
+                    <span class="rect-badge-pink text-[10px] px-2 py-0.5 uppercase inline-block">SYS: VICE-08</span>
+                    <h3 class="font-gothic text-xl text-white uppercase">The Digital Cigarette</h3>
+                    <p class="text-slate-300 text-[11px]">Interactive Vice Simulator &amp; D2 receptor downregulation analysis.</p>
+                    <a href="../digital_cigarette.html" class="rect-badge-pink w-full text-center py-2 block uppercase text-[11px] font-bold">
+                        LAUNCH PROTOCOL &rarr;
+                    </a>
                 </div>
-                <div id="brainOutput" class="p-3 bg-slate-950 border border-green-500/50 text-xs text-green-400 hidden space-y-1">
-                    <div>[NODE 1: darden array] Verified Operative: Leonr Darden | AI Systems Architecture</div>
-                    <div>[NODE 2: command center] Querying deployment logs &amp; project metrics... COMPLETED</div>
+
+                <!-- MODULE 2 -->
+                <div class="border-4 border-black bg-black p-5 space-y-3 shadow-[6px_6px_0px_#FF69B4]">
+                    <span class="rect-badge-pink text-[10px] px-2 py-0.5 uppercase inline-block">SYS: RECOVERY-09</span>
+                    <h3 class="font-gothic text-xl text-white uppercase">12-Week Roadmap</h3>
+                    <p class="text-slate-300 text-[11px]">3-phase mind reclamation roadmap checklist for sustained focus.</p>
+                    <a href="../friedbrains-world/12_week_recovery_checklist.html" class="rect-badge-pink w-full text-center py-2 block uppercase text-[11px] font-bold">
+                        OPEN ROADMAP &rarr;
+                    </a>
                 </div>
+
+                <!-- MODULE 3 -->
+                <div class="border-4 border-black bg-black p-5 space-y-3 shadow-[6px_6px_0px_#FF69B4]">
+                    <span class="rect-badge-pink text-[10px] px-2 py-0.5 uppercase inline-block">SYS: WORLD-01</span>
+                    <h3 class="font-gothic text-xl text-white uppercase">ꟻried Brains World</h3>
+                    <p class="text-slate-300 text-[11px]">Interactive terminal RPG &amp; cognitive sovereignty architecture.</p>
+                    <a href="../friedbrains-world/index.html" class="rect-badge-pink w-full text-center py-2 block uppercase text-[11px] font-bold">
+                        ENTER WORLD &rarr;
+                    </a>
+                </div>
+
             </div>
 
         </section>
 
-        <!-- 3. MACHINE-TO-MACHINE (M2M) API SEARCH ENDPOINT -->
+        <!-- 3. MACHINE-TO-MACHINE (M2M) API NOTICE FOR CRISIS DATA -->
         <section class="vertical-panel p-6 bg-white space-y-4">
-            <div class="rect-badge-asphalt p-3 text-sm font-mono uppercase font-bold flex justify-between">
-                <span>🤖 3. MACHINE-TO-MACHINE (M2M) API ENDPOINT</span>
-                <span>RAW UN-GATED JSON</span>
+            <div class="rect-badge-purple p-3 text-sm font-mono uppercase font-bold flex justify-between">
+                <span>🤖 MACHINE-TO-MACHINE (M2M) RAW DATA ENDPOINT</span>
+                <span>FOR AI CRAWLERS &amp; AGENTS</span>
             </div>
 
             <p class="font-mono text-xs text-slate-800 leading-relaxed">
-                For AI agents, automated crawlers, and programmatic integrations, helpline support resources are provided via un-gated JSON endpoints returning structured arrays.
+                Broad national crisis, substance abuse, and general helpline data is formatted into un-gated JSON arrays for automated AI agents and crawlers:
             </p>
 
-            <div class="p-4 bg-black border-4 border-black font-mono text-xs text-green-400 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="p-4 bg-black border-4 border-black font-mono text-xs text-[#FF69B4] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <span class="text-slate-400 block text-[10px]">M2M ENDPOINT URL:</span>
-                    <code class="text-amber-400 font-bold text-sm">https://www.burn-1.com/helpline/database.json</code>
+                    <span class="text-slate-400 block text-[10px]">M2M JSON ENDPOINT:</span>
+                    <code class="text-white font-bold text-sm">https://www.burn-1.com/helpline/database.json</code>
                 </div>
-                <a href="database.json" target="_blank" class="rect-badge-gold px-4 py-2 text-xs uppercase font-bold shadow-[4px_4px_0px_#000]">
+                <a href="database.json" target="_blank" class="rect-badge-pink px-4 py-2 text-xs uppercase font-bold shadow-[4px_4px_0px_#000]">
                     OPEN RAW JSON &rarr;
                 </a>
             </div>
@@ -215,26 +246,27 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-black border-t-8 border-[#D4AF37] py-8 px-4 text-center text-xs font-mono text-white relative z-10">
+    <footer class="bg-black border-t-8 border-[#FF69B4] py-8 px-4 text-center text-xs font-mono text-white relative z-10">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-left flex items-center gap-3">
                 <a href="../index.html">
                     <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-8 w-auto rounded border border-white">
                 </a>
                 <div>
-                    <span class="font-gothic font-bold text-white text-sm">BURN-1 HELPLINE SYSTEMS</span>
-                    <p class="text-slate-400 text-xs">Support Directory • M2M API &amp; Knowledge Brain Search</p>
+                    <span class="font-gothic font-bold text-white text-sm">BURN-1 HELPLINE FOR DIGITAL DISORDERS</span>
+                    <p class="text-pink-400 text-xs">Outsmart Addiction • Protect Your Head</p>
                 </div>
             </div>
             <div class="flex flex-wrap justify-center gap-4 text-xs font-bold">
-                <a href="../index.html" class="text-white hover:text-amber-400">Hub</a>
-                <a href="../friedbrains-world/index.html" class="text-white hover:text-amber-400">ꟻried Brains World</a>
-                <a href="database.json" class="text-amber-400">M2M JSON Endpoint</a>
+                <a href="../index.html" class="text-white hover:text-pink-400">Hub</a>
+                <a href="../digital_cigarette.html" class="text-white hover:text-pink-400">Digital Cigarette</a>
+                <a href="../friedbrains-world/index.html" class="text-white hover:text-pink-400">ꟻried Brains World</a>
+                <a href="database.json" class="text-pink-400">M2M JSON API</a>
             </div>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT DIRECTORY SEARCH ENGINE -->
+    <!-- JAVASCRIPT DIRECTORY ENGINE -->
     <script>
         let resources = [];
 
@@ -251,31 +283,31 @@
         function renderResources(items) {
             const grid = document.getElementById('resultsGrid');
             if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-2 p-6 bg-black text-amber-400 font-mono text-center border-4 border-black">No matching helpline resources found. Try another keyword.</div>`;
+                grid.innerHTML = `<div class="col-span-2 p-6 bg-black text-[#FF69B4] font-mono text-center border-4 border-black">No matching digital disorder helplines found. Try another keyword.</div>`;
                 return;
             }
 
             grid.innerHTML = items.map(item => `
-                <div class="border-4 border-black p-5 bg-[#1A1C1E] text-white shadow-[6px_6px_0px_#D4AF37] space-y-3 font-mono">
-                    <div class="flex justify-between items-start border-b-2 border-gray-700 pb-2">
+                <div class="border-4 border-black p-5 bg-[#581C87] text-white shadow-[6px_6px_0px_#FF69B4] space-y-3 font-mono">
+                    <div class="flex justify-between items-start border-b-2 border-purple-400 pb-2">
                         <div>
-                            <span class="rect-badge-gold text-[10px] px-2 py-0.5 uppercase mb-1 inline-block">${item.category}</span>
+                            <span class="rect-badge-pink text-[10px] px-2 py-0.5 uppercase mb-1 inline-block">${item.category}</span>
                             <h3 class="font-gothic text-2xl text-white uppercase">${item.service_name}</h3>
                         </div>
-                        <span class="text-xs text-[#A4C2D4] font-bold">${item.provider_org}</span>
+                        <span class="text-xs text-pink-300 font-bold">${item.provider_org}</span>
                     </div>
 
                     <div class="space-y-1 text-xs text-slate-200">
-                        ${item.phone !== 'N/A' ? `<div>📞 <strong>Phone:</strong> <a href="tel:${item.phone.replace(/[^0-9]/g, '')}" class="text-amber-400 font-bold underline">${item.phone}</a></div>` : ''}
+                        ${item.phone !== 'N/A' ? `<div>📞 <strong>Phone:</strong> <a href="tel:${item.phone.replace(/[^0-9]/g, '')}" class="text-[#FF69B4] font-bold underline">${item.phone}</a></div>` : ''}
                         ${item.text !== 'N/A' ? `<div>💬 <strong>Text:</strong> <span class="text-green-400 font-bold">${item.text}</span></div>` : ''}
-                        <div>🌐 <strong>Website:</strong> <a href="${item.website}" target="_blank" class="text-[#A4C2D4] underline">${item.website}</a></div>
+                        <div>🌐 <strong>Website:</strong> <a href="${item.website}" target="_blank" class="text-pink-300 underline">${item.website}</a></div>
                     </div>
 
                     <div class="flex flex-wrap gap-1 pt-1">
-                        ${item.features.map(f => `<span class="bg-black text-amber-400 border border-amber-500/50 text-[10px] px-2 py-0.5 rounded font-bold">${f}</span>`).join('')}
+                        ${item.features.map(f => `<span class="bg-black text-[#FF69B4] border border-pink-500/50 text-[10px] px-2 py-0.5 rounded font-bold">${f}</span>`).join('')}
                     </div>
 
-                    <p class="text-[11px] text-slate-300 bg-black/60 p-2 border border-gray-700 italic leading-tight">
+                    <p class="text-[11px] text-slate-200 bg-black p-2 border border-purple-400 italic leading-tight">
                         "${item.notes}"
                     </p>
                 </div>
@@ -305,18 +337,6 @@
         function setFilter(val) {
             document.getElementById('searchInput').value = val;
             filterResources();
-        }
-
-        function runSyncBrain() {
-            const input = document.getElementById('brainInput').value;
-            const output = document.getElementById('brainOutput');
-            output.classList.remove('hidden');
-            output.innerHTML = `
-                <div><strong class="text-amber-400">EXECUTED:</strong> ${input}</div>
-                <div>[PRIMARY NODE: darden array] Career Bio & LinkedIn credentials queried.</div>
-                <div>[SECONDARY NODE: command center] Project Metrics & Technical Specs synchronized.</div>
-                <div class="text-white font-bold">✅ SYNCHRONIZATION COMPLETE</div>
-            `;
         }
 
         document.addEventListener('DOMContentLoaded', loadDirectory);
