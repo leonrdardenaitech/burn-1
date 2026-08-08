@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE DIGITAL CIGARETTE PROTOCOL | ꟻRIED BRAINS WORLD</title>
-    <meta name="description" content="The Digital Cigarette Protocol: Dual Split-Screen Layout, 75% Slow Video Stream, & Vice Simulator.">
+    <meta name="description" content="The Digital Cigarette Protocol: Dual Split-Screen Layout, 75% Slow Video Stream, & Expandable Scrolling Reader Section by Domino 2.0.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,6 +63,20 @@
             background-color: #1A1C1E;
             border: 4px solid #D4AF37;
             box-shadow: 8px 8px 0px #000000;
+        }
+
+        /* Expandable Collapsible Scrolling Reader Container */
+        .reader-scroll-box {
+            background-color: #15171A;
+            border: 4px solid #000000;
+            box-shadow: 8px 8px 0px #D4AF37;
+            max-height: 480px;
+            overflow-y: auto;
+            transition: max-height 0.4s ease;
+        }
+
+        .reader-scroll-box.expanded {
+            max-height: none;
         }
 
         #sparkCanvas {
@@ -133,11 +147,11 @@
             <!-- PROMO ARTWORK STAGE -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="border-4 border-black bg-black p-1 shadow-[4px_4px_0px_#A4C2D4]">
-                    <img src="assets/Gemini_Generated_Image_akmnrnakmnrnakmn.png" alt="Artwork 1" class="w-full h-44 object-cover">
+                    <img src="assets/Gemini_Generated_Image_akmnrnakmnrnakmn.png" alt="Artwork 1" class="w-full h-40 object-cover">
                     <div class="p-1 text-[10px] font-mono text-center bg-black text-[#A4C2D4] font-bold">COGNITIVE SHIELD</div>
                 </div>
                 <div class="border-4 border-black bg-black p-1 shadow-[4px_4px_0px_#D4AF37]">
-                    <img src="assets/image.png_202608080921.jpeg" alt="Artwork 2" class="w-full h-44 object-cover">
+                    <img src="assets/image.png_202608080921.jpeg" alt="Artwork 2" class="w-full h-40 object-cover">
                     <div class="p-1 text-[10px] font-mono text-center bg-black text-[#D4AF37] font-bold">HARD HAT PROMO</div>
                 </div>
             </div>
@@ -167,53 +181,132 @@
 
         </aside>
 
-        <!-- RIGHT HALF (50% WIDTH): WEB MATERIAL & PROSE TEXT -->
-        <main class="lg:col-span-6 p-6 sm:p-10 space-y-8 bg-[#242528] min-h-screen">
+        <!-- RIGHT HALF (50% WIDTH): EXPANDABLE COLLAPSING SCROLLING READER SECTION -->
+        <main class="lg:col-span-6 p-6 sm:p-10 space-y-6 bg-[#242528] min-h-screen">
             
-            <div class="rect-badge-denim p-4 text-xs font-mono uppercase font-bold">
-                RIGHT HALF VIEW // WEB MATERIAL &amp; PROSE TEXT
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b-4 border-black pb-4">
+                <div>
+                    <span class="rect-badge-denim text-[10px] px-2.5 py-1 font-mono uppercase block mb-1">
+                        📖 ESSAY READER BY DOMINO 2.0
+                    </span>
+                    <h1 class="font-gothic text-3xl sm:text-4xl text-white uppercase tracking-wider">
+                        THE DIGITAL CIGARETTE
+                    </h1>
+                </div>
+                <button id="toggleReaderBtn" onclick="toggleReader()" class="rect-badge-gold px-4 py-2 text-xs font-mono uppercase tracking-widest flex items-center gap-2 shadow-[4px_4px_0px_#000]">
+                    <i id="toggleIcon" class="fa-solid fa-expand"></i>
+                    <span id="toggleText">EXPAND FULL ARTICLE</span>
+                </button>
             </div>
 
-            <h1 class="font-gothic text-4xl sm:text-5xl text-white uppercase tracking-wider">
-                THE DIGITAL CIGARETTE
-            </h1>
-            <p class="font-mono text-sm text-[#D4AF37] font-bold">
-                Lighting Up with Every Scroll :: The Physical Architecture of Screen Addiction
-            </p>
-
-            <article class="space-y-6 font-mono text-sm leading-relaxed text-slate-200">
-                <p>
+            <!-- EXPANDABLE / COLLAPSIBLE SCROLLING READER BOX -->
+            <div id="readerBox" class="reader-scroll-box p-6 sm:p-8 space-y-6 font-mono text-sm leading-relaxed text-slate-200">
+                
+                <!-- HOOK PARAGRAPHS -->
+                <p class="text-base text-white font-bold">
                     You see them on every street corner, on every train, and in the quiet corners of every parlor: respectable citizens, heads bowed, thumbs flicking in a rhythmic, desperate dance. They look like they are praying, but they are not. <strong>They are smoking.</strong>
                 </p>
+                <p>
+                    But they aren’t smoking the old, rolled-leaf cylinders of our ancestors. No, they have traded those self-limiting paper tubes for something far more insidious. They are puffing on the <strong>Digital Cigarette</strong>.
+                </p>
+                <p>
+                    Let us examine the mechanics of this modern vice, and let us not be polite about it.
+                </p>
+
+                <!-- SECTION 1 -->
+                <h2 class="font-gothic text-2xl text-[#D4AF37] uppercase border-b-2 border-[#D4AF37] pb-1 pt-4">
+                    The Match That Must Be Struck Every Second
+                </h2>
+                <p>
+                    With a traditional, physical cigarette, a gentleman strikes a single match, lights the end, and the leaf stays lit. It burns down at a predictable, natural pace. You smoke it, you finish it, you stub it out in an ashtray, and you are done for an hour or two. There is a natural pause—what I like to call "latency".
+                </p>
+
+                <!-- EMBEDDED FIG 1 PICTURE -->
+                <div class="border-4 border-black bg-black p-2 shadow-[6px_6px_0px_#D4AF37] my-4">
+                    <img src="../digital_cigarette_spark.jpeg" alt="Fig 1: The Spark" class="w-full h-auto object-cover border border-white" onerror="this.src='../assets/digital_cigarette_spark.jpeg'">
+                    <div class="p-2 bg-black text-[#D4AF37] text-[11px] font-bold text-center border-t border-white">
+                        FIG 01 // THE SPARK (INITIAL TRIGGER)
+                    </div>
+                </div>
+
+                <p>
+                    But the Digital Cigarette? Ah, the corporate puppet masters in Silicon Valley realized that the old way was far too inefficient. They didn't want you to light up once and be satisfied. They wanted a system where <strong>you must strike the match every single time you want a single drag</strong>.
+                </p>
                 
-                <div class="border-4 border-black p-4 bg-[#A4C2D4] text-black font-bold shadow-[6px_6px_0px_#000]">
+                <div class="border-4 border-black p-4 bg-[#A4C2D4] text-black font-extrabold shadow-[6px_6px_0px_#000]">
                     "Every downward swipe of your thumb is the strike of a match head against the sulfur box."
                 </div>
 
-                <h2 class="font-gothic text-2xl text-[#D4AF37] uppercase">The Match That Must Be Struck Every Second</h2>
                 <p>
-                    With a traditional physical cigarette, a gentleman strikes a single match, lights the end, and the leaf stays lit. It burns down at a predictable natural pace. You smoke it, stub it out, and you are done for an hour.
+                    <em>Swipe.</em> A spark of anticipation. Will this next post be a laugh? A political outrage? A validation of your existence?<br>
+                    <em>Swipe.</em> Another strike.<br>
+                    <em>Swipe.</em> Another spark.
                 </p>
                 <p>
-                    But the Digital Cigarette? Silicon Valley pushers realized that the old way was inefficient. They wanted a system where <strong>you must strike the match every single time you want a single drag</strong>.
-                </p>
-
-                <h2 class="font-gothic text-2xl text-[#A4C2D4] uppercase">The Ploy of the Infinite Hit</h2>
-                <p>
-                    They employ a psychological parlor trick known as the <strong>variable ratio reinforcement schedule</strong>. It is the exact same mechanism used in lever-action slot machines. On the digital screen, this is translated into a constant, frantic search for the next "hit".
+                    You are sitting there, striking match after match after match, lighting the paper over and over, inhaling nothing but the toxic, invisible soot of "content". They removed the natural ending point—the "stub" of the cigarette—and replaced it with the <strong>infinite scroll</strong>, a bottomless pit of tobacco that never burns down to the filter.
                 </p>
 
-                <div class="border-4 border-black p-6 bg-black text-amber-400 space-y-3">
-                    <h3 class="font-gothic text-xl text-white uppercase">RECLAIMING SOVEREIGNTY: THE HARD HAT PROTOCOL</h3>
-                    <ul class="space-y-2 text-xs">
-                        <li>• <strong>30-Min Daily HIIT Cardio:</strong> Triggers 16% increase in D2 receptor binding density.</li>
-                        <li>• <strong>Air-Gapped Local AI:</strong> Disconnects research workflows from telemetry engines.</li>
-                        <li>• <strong>Mindfulness &amp; DMN Reset:</strong> Restores prefrontal cortex neural connectivity.</li>
-                    </ul>
+                <!-- SECTION 2 -->
+                <h2 class="font-gothic text-2xl text-[#A4C2D4] uppercase border-b-2 border-[#A4C2D4] pb-1 pt-4">
+                    The Ploy of the Infinite Hit &amp; Biological Toll
+                </h2>
+                <p>
+                    The corporate pushers don't want you to have a single moment of quiet reflection. They have studied your brain's plumbing better than any surgeon. They know that your brain runs on a chemical currency called dopamine—the molecule of <em>more</em>.
+                </p>
+                <p>
+                    To keep you in a hypnotic trance, they employ a psychological parlor trick known as the <strong>variable ratio reinforcement schedule</strong>. It is the exact same mechanism used in the lever-action slot machines of low-rent casinos.
+                </p>
+
+                <!-- EMBEDDED FIG 2 PICTURE -->
+                <div class="border-4 border-black bg-black p-2 shadow-[6px_6px_0px_#A4C2D4] my-4">
+                    <img src="../digital_cigarette_trance.jpeg" alt="Fig 2: The Inhale" class="w-full h-auto object-cover border border-white" onerror="this.src='../assets/digital_cigarette_trance.jpeg'">
+                    <div class="p-2 bg-black text-[#A4C2D4] text-[11px] font-bold text-center border-t border-white">
+                        FIG 02 // THE INHALE (THE DOPAMINE TRANCE)
+                    </div>
                 </div>
-            </article>
 
-            <div class="pt-6">
+                <h3 class="font-gothic text-xl text-amber-400 uppercase pt-2">The Biological Toll: A Fried Brain</h3>
+                <p>
+                    Your brain is not an infinite resource. When you subject your neural pathways to thousands of artificial dopamine spikes every single day, the brain’s survival systems kick in to protect itself from toxic overstimulation.
+                </p>
+                <p>
+                    It begins to strip away its own receivers. Your <strong>striatal D2 receptors downregulate</strong>—essentially, the brain turns down the volume because the music is too loud.
+                </p>
+                <p>
+                    The result? A profound baseline reward deficiency. Normal, slow, offline life starts to feel completely flat, boring, and dead. Neuroimaging shows that this constant match-striking physically erodes gray matter in the <strong>orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC)</strong>.
+                </p>
+
+                <!-- SECTION 3 -->
+                <h2 class="font-gothic text-2xl text-green-400 uppercase border-b-2 border-green-400 pb-1 pt-4">
+                    Put on Your Hard Hat and Step Away
+                </h2>
+                <p>
+                    So, how does an upstanding citizen strike back against the electronic pushers? You must protect your head with a <strong>hard hat</strong> made of conscious cognitive armor.
+                </p>
+
+                <!-- EMBEDDED FIG 3 PICTURE -->
+                <div class="border-4 border-black bg-black p-2 shadow-[6px_6px_0px_#D4AF37] my-4">
+                    <img src="../digital_cigarette_hardhat.jpeg" alt="Fig 3: The Hard Hat" class="w-full h-auto object-cover border border-white" onerror="this.src='../assets/digital_cigarette_hardhat.jpeg'">
+                    <div class="p-2 bg-black text-amber-400 text-[11px] font-bold text-center border-t border-white">
+                        FIG 03 // THE HARD HAT (COGNITIVE SOVEREIGNTY)
+                    </div>
+                </div>
+
+                <ul class="space-y-3 p-4 bg-black border-2 border-white text-xs">
+                    <li><strong class="text-[#D4AF37] block">1. Introduce Friction in Reverse:</strong> Set display to 100% grayscale. Ban digital needles from sleeping quarters.</li>
+                    <li><strong class="text-[#A4C2D4] block">2. Declare a Sovereign Timeout:</strong> Commit to 1 to 4 months of sustained behavioral modification for D2 receptor recovery.</li>
+                    <li><strong class="text-green-400 block">3. Step Away from the Device:</strong> 30 minutes of daily HIIT cardio boosts D2 receptor binding density by 16%.</li>
+                    <li><strong class="text-amber-400 block">4. Guard Your Gates:</strong> Deploy metadata-scrubbing scripts and host conversations in encrypted Tor vaults.</li>
+                </ul>
+
+                <p class="font-gothic text-xl text-[#D4AF37] font-bold text-center pt-4">
+                    Don't Be A Fried Brain. Step away from the device! 🧠⚡
+                </p>
+
+            </div>
+
+            <!-- CTA LINK TO TOR VAULT -->
+            <div class="pt-4">
                 <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" class="rect-badge-gold w-full py-4 text-xs font-mono uppercase tracking-widest text-center block shadow-[6px_6px_0px_#000]">
                     🛡️ GET TOR PRIVACY VAULT ($50)
                 </a>
@@ -228,6 +321,22 @@
             const vid = document.getElementById('sideVideo');
             if (vid) vid.playbackRate = 0.75;
         });
+
+        function toggleReader() {
+            const box = document.getElementById('readerBox');
+            const icon = document.getElementById('toggleIcon');
+            const text = document.getElementById('toggleText');
+
+            if (box.classList.contains('expanded')) {
+                box.classList.remove('expanded');
+                icon.className = "fa-solid fa-expand";
+                text.innerText = "EXPAND FULL ARTICLE";
+            } else {
+                box.classList.add('expanded');
+                icon.className = "fa-solid fa-compress";
+                text.innerText = "COLLAPSE ARTICLE";
+            }
+        }
 
         let hits = 0;
         let paperLength = 100;
