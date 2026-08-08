@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE DIGITAL CIGARETTE: Lighting Up with Every Scroll</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: #111827;
+            --border-color: #374151;
+            --neon-magenta: #ff007f;
+            --neon-cyan: #00f0ff;
+            --neon-green: #39ff14;
+            --text-color: #e5e7eb;
+            --text-muted: #9ca3af;
+            --glow-magenta: 0 0 10px rgba(255, 0, 127, 0.5);
+            --glow-cyan: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Glitch and Scanline effects */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        header {
+            border-bottom: 2px solid var(--neon-magenta);
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--panel-bg);
+            position: relative;
+            box-shadow: var(--glow-magenta);
+        }
+
+        .header-tag {
+            color: var(--neon-magenta);
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: var(--glow-magenta);
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .panel-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Cigarette Interactive Simulator Widget */
+        .cig-widget {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #0d1321;
+            border: 1px solid var(--neon-magenta);
+            border-radius: 4px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: inset 0 0 15px rgba(255, 0, 127, 0.2);
+        }
+
+        .cig-visual-container {
+            width: 100%;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: #070a13;
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        /* Custom Interactive CSS/JS Cigarette */
+        .cigarette {
+            width: 200px;
+            height: 25px;
+            background: linear-gradient(to bottom, #ffffff 0%, #e5e7eb 70%, #9ca3af 100%);
+            border-radius: 2px 8px 8px 2px;
+            position: relative;
+            transition: width 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .filter {
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(to bottom, #d97706 0%, #b45309 100%);
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .ember {
+            width: 6px;
+            height: 100%;
+            background: #ef4444;
+            position: absolute;
+            right: 0;
+            top: 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 0 10px #f97316, 0 0 20px #ef4444;
+            display: none;
+        }
+
+        .smoke-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(4px);
+        }
+
+        .spark-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff5500;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .meter-container {
+            width: 100%;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        .meter-bar {
+            width: 100%;
+            height: 10px;
+            background: #1f2937;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+            transition: width 0.3s ease;
+        }
+
+        .meter-fill.atrophy {
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+        }
+
+        .btn {
+            background-color: transparent;
+            border: 1px solid var(--neon-magenta);
+            color: var(--neon-magenta);
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            box-shadow: inset 0 0 0px var(--neon-magenta);
+        }
+
+        .btn:hover {
+            background-color: var(--neon-magenta);
+            color: #fff;
+            box-shadow: var(--glow-magenta);
+        }
+
+        .btn-cyan {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .btn-cyan:hover {
+            background-color: var(--neon-cyan);
+            color: #0b0f19;
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Narrative Story Accordions */
+        .accordion {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: #1f2937;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: #374151;
+        }
+
+        .accordion-title {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .accordion-title span {
+            color: var(--neon-magenta);
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.open .accordion-icon {
+            transform: rotate(45deg);
+            color: var(--neon-cyan);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            background-color: #111827;
+        }
+
+        .accordion.open .accordion-content {
+            max-height: 1000px;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .accordion-inner {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Image Framing Block */
+        .image-frame {
+            border: 2px solid var(--border-color);
+            background-color: #070a13;
+            width: 100%;
+            aspect-ratio: 16/9;
+            margin: 1rem 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .image-frame::after {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px dashed rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+        }
+
+        .image-frame-brackets {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--neon-cyan);
+            border-style: solid;
+            pointer-events: none;
+        }
+
+        .top-left { top: 5px; left: 5px; border-width: 2px 0 0 2px; }
+        .top-right { top: 5px; right: 5px; border-width: 2px 2px 0 0; }
+        .bottom-left { bottom: 5px; left: 5px; border-width: 0 0 2px 2px; }
+        .bottom-right { bottom: 5px; right: 5px; border-width: 0 2px 2px 0; }
+
+        .image-placeholder-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .image-prompt-box {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+            width: 100%;
+            word-break: break-all;
+            user-select: all;
+            margin-top: 0.5rem;
+        }
+
+        /* Scientific / Technical Specs Cards */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .spec-card {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .spec-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .spec-value {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--neon-magenta);
+        }
+
+        /* Hero Backstory */
+        .backstory-card {
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.05) 0%, rgba(0, 240, 255, 0.05) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .backstory-card::before {
+            content: "INTEL_REPORT // CLASSIFIED";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: var(--bg-color);
+            padding: 0 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: var(--neon-magenta);
+            letter-spacing: 2px;
+            border: 1px solid var(--neon-magenta);
+        }
+
+        /* Footer / Call to Action */
+        footer {
+            border-top: 2px solid var(--neon-cyan);
+            background-color: var(--panel-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            box-shadow: 0 -5px 15px rgba(0, 240, 255, 0.1);
+        }
+
+        .footer-tag {
+            color: var(--neon-cyan);
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-shadow: var(--glow-cyan);
+        }
+
+        .footer-cta {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .btn-giant {
+            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+            border: none;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: var(--glow-cyan);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-giant:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 30px rgba(255, 0, 127, 0.8);
+        }
+
+        .source-link {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 0.75rem;
+            border-bottom: 1px dashed var(--neon-cyan);
+        }
+
+        .source-link:hover {
+            color: var(--neon-magenta);
+            border-bottom-color: var(--neon-magenta);
+        }
+
+        .sticker-badge {
+            display: inline-block;
+            border: 2px dashed var(--neon-magenta);
+            color: var(--neon-magenta);
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            transform: rotate(-3deg);
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-tag">BURN-1 SYSTEMS // RECOVERY REPORT</div>
+        <h1>The Digital Cigarette</h1>
+        <div class="subtitle">Lighting Up with Every Scroll: Outsmarting the Trance of Cognitive Decay</div>
+    </header>
+
+    <main>
+        <div class="content-area">
+            <!-- Backstory -->
+            <div class="backstory-card">
+                <p><strong>SUBJECT: Darden, L. — Age 24 — Systems Analyst.</strong></p>
+                <p style="margin-top: 0.75rem; text-align: justify;">
+                    Our subject thought he was merely keeping pace with the digital front lines. In his waistcoat pocket rested a device he believed to be a tool—a polished window to global database networks. Instead, he carried an invisible double agent. Under the cold, digital lights, we watched his eyes glaze over as his thumb executed the automatic rhythm of the scroll. It was not a screen check; it was an electronic inhale.
+                </p>
+                <p style="margin-top: 0.75rem; text-align: justify;">
+                    With every swipe, he struck a invisible match, burning through his cognitive willpower, trading the physical density of his prefrontal cortex for short, synthetic bursts of validation. This is the anatomical blueprint of his extraction, and the map of how he chose to put on the armor.
+                </p>
+            </div>
+
+            <!-- Accordions of the Funnel -->
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">🧠 SYSTEMIC EXTRACTION CODES</div>
+                    <span style="color: var(--text-muted); font-size: 0.8rem;">TAB_01_COGNITIVE_DECAY</span>
+                </div>
+
+                <!-- Stage 1 -->
+                <div class="accordion" id="stage1">
+                    <div class="accordion-header" onclick="toggleAccordion('stage1')">
+                        <div class="accordion-title"><span>01 //</span> The Match Strike: Variable Ratios</div>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>A physical paper cigarette has a built-in limit—it burns down to the filter, forcing a natural, quiet pause where ethical reflection and self-regulation reside. But the digital cigarette? It has no bottom.</p>
+                            <p>Marketers and advertising pushers treat your brain like a low-rent casino slot machine. They utilize <strong>variable ratio reinforcement schedules</strong>—giving you an unpredictable reward sequence of flashing colors, likes, and algorithmic shocks to lock you in a perpetual checking loop.</p>
+                            
+                            <!-- Placeholder Image for Stage 1 -->
+                            <div class="image-frame">
+                                <div class="image-frame-brackets top-left"></div>
+                                <div class="image-frame-brackets top-right"></div>
+                                <div class="image-frame-brackets bottom-left"></div>
+                                <div class="image-frame-brackets bottom-right"></div>
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--neon-magenta)">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                                <div class="image-placeholder-text">IMAGE PENDING: digital_cigarette_spark.png</div>
+                                <div class="image-prompt-box">PROMPT: A high-fidelity cyberpunk visual illustration of digital addiction. In a dark, moody environment, a vintage match is struck against the edge of a sleek, black smartphone. A brilliant, intense neon-magenta spark and a flame of glowing purple code erupt from the strike. The flame is sucked into a cybernetic cigarette made of glowing fiber-optic cables and circuit board traces. Abstract, floating red notification bubbles drift in the smoke. Elegant, cinematic lighting with rich contrast, deep teal and magenta tones.</div>
+                            </div>
+
+                            <p>This "frictionless" design is a trap. By striving for instantaneous interactions, the system treats your human hesitation as a bug to be eliminated, transforming you into a highly reactive, automated consumer.</p>
+                            <div class="specs-grid">
+                                <div class="spec-card">
+                                    <div class="spec-title">Surveillance Vector</div>
+                                    <div class="spec-value">Typing rhythms / scroll speed</div>
+                                </div>
+                                <div class="spec-card">
+                                    <div class="spec-title">Reinforcement Type</div>
+                                    <div class="spec-value">Variable Ratio (Ludic Loop)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="accordion" id="stage2">
+                    <div class="accordion-header" onclick="toggleAccordion('stage2')">
+                        <div class="accordion-title"><span>02 //</span> The Chemical Inhale: Downregulation</div>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Subjecting the brain's mesolimbic reward pathway to repeated, artificial dopamine surges triggers a survival-driven baseline adjustment.</p>
+                            <p>To protect itself from neurotoxic overstimulation, your brain drastically downregulates the density of functional <strong>dopamine D2 receptors</strong> in the striatum and nucleus accumbens. This creates a severe, baseline reward deficiency.</p>
+
+                            <!-- Placeholder Image for Stage 2 -->
+                            <div class="image-frame">
+                                <div class="image-frame-brackets top-left"></div>
+                                <div class="image-frame-brackets top-right"></div>
+                                <div class="image-frame-brackets bottom-left"></div>
+                                <div class="image-frame-brackets bottom-right"></div>
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--neon-cyan)">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+                                </svg>
+                                <div class="image-placeholder-text">IMAGE PENDING: digital_cigarette_trance.png</div>
+                                <div class="image-prompt-box">PROMPT: A close-up profile of a person in a deep, hypnotic trance, illuminated solely by the cold glow of an invisible smartphone screen. The person's face is enshrouded in thick, swirling neon-cyan and purple vapor. Upon close inspection, the vapor is woven out of cascading binary code, microscopic glowing app icons, and infinite scroll layouts. The person’s eye is wide and glassy, perfectly reflecting a grid of tiny notification badges. Sleek, high-concept digital design with atmospheric cyberpunk mist.</div>
+                            </div>
+
+                            <p>Because these receptors are depleted, natural, slow offline rewards (like reading a paper book or having a real conversation) fail to register. Offline life feels flat, grey, and boring. You are locked in a negative reinforcement cycle where you swipe simply to escape the baseline emotional flatness.</p>
+                            <div class="specs-grid">
+                                <div class="spec-card">
+                                    <div class="spec-title">Grey Matter Volume Reduction</div>
+                                    <div class="spec-value">Orbitofrontal Cortex (OFC)</div>
+                                </div>
+                                <div class="spec-card">
+                                    <div class="spec-title">D2 Receptor Loss</div>
+                                    <div class="spec-value">Striatal Depletion</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="accordion" id="stage3">
+                    <div class="accordion-header" onclick="toggleAccordion('stage3')">
+                        <div class="accordion-title"><span>03 //</span> Reclaiming sovereignty: The Hard Hat</div>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Sovereignty cannot be achieved solely through simple willpower. Breaking the trance requires throwing real, systemic sand into the frictionless gears of the tech pushers. We call this the <strong>Hard Hat Protocol</strong>.</p>
+                            <p>First, you must introduce explicit physical friction—disable every non-essential notification, turn your screen entirely to grayscale to starve the visual cortex, and physically lock your device away during working hours.</p>
+
+                            <!-- Placeholder Image for Stage 3 -->
+                            <div class="image-frame">
+                                <div class="image-frame-brackets top-left"></div>
+                                <div class="image-frame-brackets top-right"></div>
+                                <div class="image-frame-brackets bottom-left"></div>
+                                <div class="image-frame-brackets bottom-right"></div>
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--neon-green)">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                <div class="image-placeholder-text">IMAGE PENDING: digital_cigarette_hardhat.png</div>
+                                <div class="image-prompt-box">PROMPT: A powerful visual manifesto of digital sovereignty. In the center, a heavy, rugged industrial yellow hard hat with a 'BURN-1' logo sits on a dark, steel workbench. In the background, a smartphone is locked behind a heavy, primitive cast-iron grate with a massive rusted padlock, completely severed from its glowing data cables. The toxic neon-cyan smoke from previous images is dissipating, and a clean, warm beam of natural golden sunlight cuts through the darkness. Gritty, cinematic, and industrial aesthetic.</div>
+                            </div>
+
+                            <p>Secondly, you must engage in <strong>High-Intensity Interval Training (HIIT)</strong>. Clinically, 30 minutes of daily cardiovascular HIIT over six weeks has been shown to trigger a 16% increase in D2 receptor binding, physically repairing the neural desensitization and raising your executive control back to full strength.</p>
+                            <div class="specs-grid">
+                                <div class="spec-card">
+                                    <div class="spec-title">D2 Binding Boost</div>
+                                    <div class="spec-value">+16% via Daily HIIT</div>
+                                </div>
+                                <div class="spec-card">
+                                    <div class="spec-title">Recovery Timeline</div>
+                                    <div class="spec-value">1 - 4 Months sustained</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sidebar / Interactive Widget -->
+        <div class="sidebar">
+            <div class="panel cig-widget">
+                <div class="panel-header" style="width: 100%;">
+                    <div class="panel-title" style="color: var(--neon-magenta);">⚡ VICE_SIMULATOR_v1.0</div>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase;">Strike matches. Keep scrolling. Watch the indicators decay.</p>
+                
+                <div class="cig-visual-container">
+                    <div class="cigarette" id="cigarette">
+                        <div class="filter"></div>
+                        <div class="ember" id="ember"></div>
+                    </div>
+                </div>
+
+                <div class="meter-container">
+                    <div class="meter-label">
+                        <span>Dopamine Hits Inhaled</span>
+                        <span id="hits-counter">0</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="dopamine-fill"></div>
+                    </div>
+                </div>
+
+                <div class="meter-container">
+                    <div class="meter-label">
+                        <span>PFC Gray Matter Atrophy</span>
+                        <span id="atrophy-counter">0%</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill atrophy" id="atrophy-fill"></div>
+                    </div>
+                </div>
+
+                <button class="btn" id="swipe-btn">Swipe To Scroll (Strike Match)</button>
+                <button class="btn btn-cyan" id="reset-btn" style="display: none;">Put On Hard Hat (Reset System)</button>
+            </div>
+
+            <!-- Sticker Graphic Quote -->
+            <div style="text-align: center;">
+                <div class="sticker-badge">Don't Be A Fried Brains. 🧠⚡</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-tag">BURN-1 SYSTEMS // COGNITIVE SHIELD</div>
+        <div class="footer-logo">BURN-1 TOR PRIVACY VAULT</div>
+        <p class="footer-cta">
+            Surveillance capitalism isn't just harvesting your data—it’s hijacking your attention and burning out your focus. Digital privacy is a mental health defense system. Throw a smoke bomb, put on the fake mustache, and reclaim your mind.
+        </p>
+        <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" class="btn-giant">CLAIM YOUR SHIELD ($50)</a>
+        <div style="margin-top: 1.5rem;">
+            <a href="https://www.burn-1.com/index.html" class="source-link" target="_blank">Return to BURN-1 HUB</a>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Accordions
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            const isOpen = el.classList.contains('open');
+            
+            // Close all
+            document.querySelectorAll('.accordion').forEach(acc => {
+                acc.classList.remove('open');
+            });
+
+            // Open targeted if was closed
+            if (!isOpen) {
+                el.classList.add('open');
+            }
+        }
+
+        // Cigarette Simulator logic
+        let hits = 0;
+        let atrophy = 0;
+        let cigWidth = 200;
+        const maxHits = 15;
+
+        const swipeBtn = document.getElementById('swipe-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const cigarette = document.getElementById('cigarette');
+        const ember = document.getElementById('ember');
+        const hitsCounter = document.getElementById('hits-counter');
+        const atrophyCounter = document.getElementById('atrophy-counter');
+        const dopamineFill = document.getElementById('dopamine-fill');
+        const atrophyFill = document.getElementById('atrophy-fill');
+        const container = document.querySelector('.cig-visual-container');
+
+        swipeBtn.addEventListener('click', () => {
+            if (hits >= maxHits) return;
+
+            hits++;
+            atrophy = Math.min(100, Math.floor((hits / maxHits) * 100));
+            cigWidth = Math.max(50, 200 - (hits * 10));
+
+            // Update DOM
+            hitsCounter.innerText = hits;
+            atrophyCounter.innerText = atrophy + '%';
+            dopamineFill.style.width = (hits / maxHits * 100) + '%';
+            atrophyFill.style.width = atrophy + '%';
+            cigarette.style.width = cigWidth + 'px';
+            
+            // Activate Ember
+            ember.style.display = 'block';
+
+            // Create Spark Particles
+            createSparks();
+
+            // Check if fully burned
+            if (hits >= maxHits) {
+                swipeBtn.style.display = 'none';
+                resetBtn.style.display = 'block';
+                atrophyCounter.innerText = "100% (FRIED BRAIN)";
+                atrophyCounter.style.color = "var(--neon-magenta)";
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            hits = 0;
+            atrophy = 0;
+            cigWidth = 200;
+
+            hitsCounter.innerText = hits;
+            atrophyCounter.innerText = atrophy + '%';
+            atrophyCounter.style.color = "var(--text-color)";
+            dopamineFill.style.width = '0%';
+            atrophyFill.style.width = '0%';
+            cigarette.style.width = '200px';
+            ember.style.display = 'none';
+
+            swipeBtn.style.display = 'block';
+            resetBtn.style.display = 'none';
+        });
+
+        function createSparks() {
+            const containerRect = container.getBoundingClientRect();
+            const cigaretteRect = cigarette.getBoundingClientRect();
+            
+            // Spawn sparks at the right tip of the cigarette
+            const x = cigaretteRect.right - containerRect.left;
+            const y = cigaretteRect.top - containerRect.top + (cigaretteRect.height / 2);
+
+            for (let i = 0; i < 8; i++) {
+                const spark = document.createElement('div');
+                spark.classList.add('spark-particle');
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                container.appendChild(spark);
+
+                const angle = (Math.random() - 0.5) * Math.PI;
+                const speed = 2 + Math.random() * 3;
+                let vx = Math.cos(angle) * speed;
+                let vy = Math.sin(angle) * speed;
+                let life = 1;
+
+                const anim = setInterval(() => {
+                    const cx = parseFloat(spark.style.left);
+                    const cy = parseFloat(spark.style.top);
+                    spark.style.left = (cx + vx) + 'px';
+                    spark.style.top = (cy + vy) + 'px';
+                    vy += 0.05; // gravity
+                    life -= 0.05;
+                    spark.style.opacity = life;
+
+                    if (life <= 0) {
+                        clearInterval(anim);
+                        spark.remove();
+                    }
+                }, 30);
+            }
+        }
+    </script>
+</body>
+</html>

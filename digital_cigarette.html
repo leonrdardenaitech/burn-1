@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE DIGITAL CIGARETTE: Lighting Up with Every Scroll | BURN-1</title>
+    <meta name="description" content="The Digital Cigarette Protocol: Interactive Vice Simulator, Dopamine Trance Analysis, and Cognitive Sovereignty Shield.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: #111827;
+            --border-color: #374151;
+            --neon-magenta: #ff007f;
+            --neon-cyan: #00f0ff;
+            --neon-green: #39ff14;
+            --text-color: #e5e7eb;
+            --text-muted: #9ca3af;
+            --glow-magenta: 0 0 10px rgba(255, 0, 127, 0.5);
+            --glow-cyan: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Glitch and Scanline effects */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        header.hero-header {
+            border-bottom: 2px solid var(--neon-magenta);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background-color: var(--panel-bg);
+            position: relative;
+            box-shadow: var(--glow-magenta);
+        }
+
+        .header-tag {
+            color: var(--neon-magenta);
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1.hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), var(--glow-magenta);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            text-shadow: var(--glow-cyan);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 900px) {
+            .container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .card-cyber {
+            border: 1px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Image Display Brackets */
+        .cyber-image-frame {
+            position: relative;
+            border: 2px solid var(--neon-cyan);
+            background-color: #000;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            box-shadow: var(--glow-cyan);
+            border-radius: 8px;
+        }
+
+        .cyber-image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(1.1) brightness(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .cyber-image-frame:hover img {
+            transform: scale(1.03);
+        }
+
+        .frame-label {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--neon-cyan);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Vice Simulator Widget */
+        .simulator-box {
+            background-color: #050811;
+            border: 2px solid var(--neon-magenta);
+            padding: 1.5rem;
+            box-shadow: var(--glow-magenta);
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .sim-title {
+            color: var(--neon-magenta);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cigarette-container {
+            width: 100%;
+            height: 30px;
+            background-color: #333;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #555;
+        }
+
+        .cigarette-filter {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 25%;
+            background-color: #d97706;
+            border-right: 2px solid #92400e;
+            z-index: 2;
+        }
+
+        .cigarette-paper {
+            position: absolute;
+            left: 25%;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: #f3f4f6;
+            transition: right 0.3s ease;
+            z-index: 1;
+        }
+
+        .cigarette-cherry {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            background: radial-gradient(circle, #ff0000 0%, #ff7700 100%);
+            box-shadow: 0 0 10px #ff0000, 0 0 20px #ff7700;
+            z-index: 3;
+            display: none;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+
+        .stat-value {
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        .btn-strike {
+            background-color: var(--neon-magenta);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            box-shadow: var(--glow-magenta);
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .btn-strike:hover {
+            background-color: #ff3399;
+            transform: translateY(-2px);
+        }
+
+        /* Accordion Styles */
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            background-color: var(--panel-bg);
+            border-radius: 4px;
+        }
+
+        .accordion-header {
+            padding: 1rem;
+            background-color: #1a2234;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: #242f48;
+            color: var(--neon-cyan);
+        }
+
+        .accordion-content {
+            padding: 1.5rem;
+            display: none;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        .tag-amber { color: #f59e0b; }
+        .tag-magenta { color: var(--neon-magenta); }
+        .tag-cyan { color: var(--neon-cyan); }
+
+        .cta-container {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(180deg, var(--panel-bg) 0%, #050811 100%);
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+            border-radius: 8px;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background: linear-gradient(90deg, #9333ea 0%, #f59e0b 100%);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.8);
+        }
+
+        /* Spark Canvas */
+        #sparkCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="sparkCanvas"></canvas>
+
+    <!-- UNIFIED BURN-1 TOP HEADER -->
+    <header class="bg-black/80 border-b border-purple-900/80 px-4 lg:px-8 py-3 flex justify-between items-center relative z-50">
+        <div class="flex items-center gap-3">
+            <a href="index.html" title="Burn-1 Hub (Home)" class="flex items-center gap-3 group">
+                <img src="assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border border-purple-500/60 group-hover:border-amber-400 transition-colors shadow-[0_0_10px_rgba(147,51,234,0.5)]">
+                <span class="text-2xl font-cyber text-white font-extrabold tracking-widest flex items-center gap-2">
+                    <span class="text-amber-500 glow-amber group-hover:text-amber-400">BURN-1</span>
+                    <span class="text-purple-400 text-xs px-2 py-0.5 rounded border border-purple-500/50 bg-purple-950/40 font-mono">VICE-08</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="px-3.5 py-1.5 rounded-lg bg-purple-950 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
+                <i class="fa-solid fa-house mr-1"></i> HUB
+            </a>
+            <a href="store.html" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)] flex items-center gap-1.5">
+                <i class="fa-solid fa-store"></i> STOREFRONT
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO HEADER -->
+    <header class="hero-header">
+        <div class="header-tag">// COGNITIVE SOVEREIGNTY PROTOCOL :: SYSTEM MEMORANDUM</div>
+        <h1 class="hero-title">The Digital Cigarette</h1>
+        <p class="subtitle">Lighting Up with Every Scroll :: The Physical Architecture of Screen Addiction</p>
+    </header>
+
+    <div class="container">
+        <!-- MAIN CONTENT COLUMN -->
+        <main class="main-content">
+            
+            <!-- INTRO SECTION -->
+            <div class="card card-cyber">
+                <div class="card-title">
+                    <span>SYS_MANIFESTO // OVERVIEW</span>
+                    <span class="tag-cyan">[STATUS: UNFILTERED]</span>
+                </div>
+                <p style="margin-bottom: 1rem;">You aren't just using an app. You are striking a match on your brain's evolutionary hardware 150 times a day.</p>
+                <p>Modern visual streams are engineered like chemical delivery vehicles: fast hit, rapid decay, immediate craving. Welcome to the clinical dissection of your pocket addiction.</p>
+            </div>
+
+            <!-- VISUAL 1: THE SPARK -->
+            <div class="cyber-image-frame">
+                <img src="digital_cigarette_spark.jpeg" alt="The Spark: Initial Trigger" onerror="this.src='assets/digital_cigarette_spark.jpeg'">
+                <div class="frame-label">FIG 01 // THE SPARK (INITIAL TRIGGER)</div>
+            </div>
+
+            <!-- THREE STAGE EXTRACTION ACCORDIONS -->
+            <div class="card">
+                <div class="card-title">
+                    <span>CLINICAL EXTRACTION ACCORDIONS</span>
+                    <span class="tag-magenta">[3 MODULES]</span>
+                </div>
+
+                <!-- ACCORDION 1 -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(1)">
+                        <span>01 // THE MATCH STRIKE: Variable-Ratio Schedules</span>
+                        <span id="acc-icon-1">+</span>
+                    </div>
+                    <div class="accordion-content" id="acc-content-1">
+                        <p style="margin-bottom: 1rem;"><strong class="tag-amber">The Trigger Mechanism:</strong> B.F. Skinner proved decades ago that predictable rewards create satisfaction, but <em>unpredictable rewards</em> create compulsive checking. Every time you unlock your phone, your brain calculates a probability matrix.</p>
+                        <p>Will it be a dead notification (empty pull) or a high-dopamine social validation hit? This uncertainty fires your ventral striatum before your thumb even contacts the glass.</p>
+                    </div>
+                </div>
+
+                <!-- VISUAL 2: THE INHALE -->
+                <div class="cyber-image-frame">
+                    <img src="digital_cigarette_trance.jpeg" alt="The Inhale: The Dopamine Trance" onerror="this.src='assets/digital_cigarette_trance.jpeg'">
+                    <div class="frame-label">FIG 02 // THE INHALE (THE DOPAMINE TRANCE)</div>
+                </div>
+
+                <!-- ACCORDION 2 -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(2)">
+                        <span>02 // THE CHEMICAL INHALE: Receptor Downregulation &amp; OFC Atrophy</span>
+                        <span id="acc-icon-2">+</span>
+                    </div>
+                    <div class="accordion-content" id="acc-content-2">
+                        <p style="margin-bottom: 1rem;"><strong class="tag-magenta">Structural Decay:</strong> Chronic high-frequency scrolling causes your striatal D2 receptors to downregulate to protect themselves from neural exhaustion. The physical result? Offline reality feels flat, dull, and unstimulating.</p>
+                        <p>High-resolution neuroimaging confirms that chronic screen abuse correlates with measurable gray matter volume reduction in the Orbitofrontal Cortex (OFC)—the precise region responsible for impulse control and long-term decision making.</p>
+                    </div>
+                </div>
+
+                <!-- VISUAL 3: HARD HAT PROTOCOL -->
+                <div class="cyber-image-frame">
+                    <img src="digital_cigarette_hardhat.jpeg" alt="The Hard Hat: Cognitive Sovereignty" onerror="this.src='assets/digital_cigarette_hardhat.jpeg'">
+                    <div class="frame-label">FIG 03 // THE HARD HAT (COGNITIVE SOVEREIGNTY)</div>
+                </div>
+
+                <!-- ACCORDION 3 -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(3)">
+                        <span>03 // RECLAIMING SOVEREIGNTY: The Hard Hat Protocol</span>
+                        <span id="acc-icon-3">+</span>
+                    </div>
+                    <div class="accordion-content" id="acc-content-3">
+                        <p style="margin-bottom: 1rem;"><strong class="tag-cyan">Rebuilding Executive Machinery:</strong> Neuroplasticity works both ways. You can repair damaged reward pathways through targeted physiological protocols:</p>
+                        <ul style="padding-left: 1.5rem; margin-bottom: 1rem; list-style-type: square;">
+                            <li><strong class="tag-green">30-Min Daily HIIT Cardio:</strong> Clinical studies show 6 weeks of intense cardiovascular exercise triggers a 16% increase in D2 receptor binding density.</li>
+                            <li><strong class="tag-cyan">Air-Gapped Privacy Vaults:</strong> Isolating your core identity and data behind local encryption killswitches cuts off the telemetry pushers.</li>
+                            <li><strong class="tag-amber">Mindfulness &amp; DMN Reset:</strong> 15 minutes of non-judgmental attention daily restores Default Mode Network-to-Prefrontal Cortex connectivity.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- SIDEBAR COLUMN -->
+        <aside class="sidebar">
+            
+            <!-- VICE SIMULATOR WIDGET -->
+            <div class="simulator-box">
+                <div class="sim-title">⚡ VICE SIMULATOR v1.0</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Simulate the physical cost of screen use in real-time.</p>
+                
+                <div class="cigarette-container">
+                    <div class="cigarette-filter"></div>
+                    <div class="cigarette-paper" id="cigPaper"></div>
+                    <div class="cigarette-cherry" id="cigCherry"></div>
+                </div>
+
+                <div class="stat-grid">
+                    <div>Dopamine Hits Inhaled:</div>
+                    <div class="stat-value" id="hitCounter">0 Hits</div>
+                    <div>OFC Gray Matter Atrophy:</div>
+                    <div class="stat-value" style="color: var(--neon-magenta);" id="atrophyMeter">0.00%</div>
+                    <div>D2 Receptor Density:</div>
+                    <div class="stat-value" style="color: var(--neon-cyan);" id="d2Density">100.0%</div>
+                </div>
+
+                <button class="btn-strike" onclick="strikeMatch()">SWIPE TO SCROLL (STRIKE MATCH)</button>
+            </div>
+
+            <!-- SYSTEM METRICS -->
+            <div class="card font-mono text-xs space-y-2">
+                <div class="card-title text-sm">
+                    <span>SYSTEM METRICS</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Target Audience:</span>
+                    <span class="text-amber-400 font-bold">Techies / Power Users</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Protocol Shield:</span>
+                    <span class="text-green-400 font-bold">Burn-1 Tor Vault</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Delivery Status:</span>
+                    <span class="text-purple-400 font-bold">Domino 2.0 Live</span>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- COGNITIVE SHIELD CTA -->
+    <div class="max-w-4xl mx-auto px-4 pb-16">
+        <div class="cta-container">
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #fff; margin-bottom: 1rem;" class="glow-title">
+                ARM YOUR BRAIN WITH THE ULTIMATE SHIELD
+            </h2>
+            <p style="color: var(--text-muted); max-w: 600px; margin: 0 auto;">
+                Cut off electronic pickpockets, metadata scrubbers, and behavioral algorithms with the official 6-in-1 Burn-1 Tor Privacy Vault.
+            </p>
+            <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" class="btn-cta">
+                <i class="fa-solid fa-shield-halved mr-2"></i> GET TOR PRIVACY VAULT ($50)
+            </a>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT SIMULATOR & SPARKS ENGINE -->
+    <script>
+        let hits = 0;
+        let paperLength = 100; // Percentage
+
+        function toggleAccordion(num) {
+            const content = document.getElementById(`acc-content-${num}`);
+            const icon = document.getElementById(`acc-icon-${num}`);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.innerText = '+';
+            } else {
+                content.classList.add('active');
+                icon.innerText = '-';
+            }
+        }
+
+        function strikeMatch() {
+            hits += 1;
+            paperLength = Math.max(0, paperLength - 4);
+
+            document.getElementById('hitCounter').innerText = `${hits} Hits`;
+            
+            // Calculate atrophy and D2 density decay
+            const atrophy = (hits * 0.42).toFixed(2);
+            const density = (100 - (hits * 0.78)).toFixed(1);
+            
+            document.getElementById('atrophyMeter').innerText = `${atrophy}%`;
+            document.getElementById('d2Density').innerText = `${Math.max(0, density)}%`;
+
+            // Update virtual cigarette burn
+            const paper = document.getElementById('cigPaper');
+            const cherry = document.getElementById('cigCherry');
+            
+            paper.style.right = `${100 - paperLength}%`;
+            cherry.style.display = 'block';
+            cherry.style.left = `calc(${25 + (paperLength * 0.75)}% - 5px)`;
+
+            // Fire Glowing Orange/Magenta Canvas Sparks
+            createSparks();
+        }
+
+        // Canvas Sparks Physics Simulation
+        const canvas = document.getElementById('sparkCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function createSparks() {
+            const count = 30;
+            const startX = window.innerWidth * 0.75;
+            const startY = window.innerHeight * 0.4;
+
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: startX,
+                    y: startY,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.8) * 10,
+                    size: Math.random() * 4 + 2,
+                    color: Math.random() > 0.5 ? '#f59e0b' : '#ff007f',
+                    life: 1,
+                    decay: Math.random() * 0.04 + 0.02
+                });
+            }
+        }
+
+        function animateSparks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.2; // Gravity
+                p.life -= p.decay;
+
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.globalAlpha = p.life;
+                ctx.fillStyle = p.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animateSparks);
+        }
+        animateSparks();
+    </script>
+</body>
+</html>
