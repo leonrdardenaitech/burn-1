@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="day-mode scroll-smooth" id="html-root">
+<html lang="en" class="dark scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1051,16 +1051,16 @@
             const savedTheme = localStorage.getItem('burn1_theme');
             const urlParams = new URLSearchParams(window.location.search);
             const modeParam = urlParams.get('mode');
-            if (modeParam === 'night' || savedTheme === 'night') {
-                document.getElementById('html-root').classList.remove('day-mode');
-                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-amber-400';
-                document.getElementById('themeText').innerText = 'DAY MODE';
-                document.getElementById('version-tag').innerText = 'HUB';
-            } else {
+            if (modeParam === 'day' || savedTheme === 'day') {
                 document.getElementById('html-root').classList.add('day-mode');
                 document.getElementById('themeIcon').className = 'fa-solid fa-moon text-purple-600';
                 document.getElementById('themeText').innerText = 'NIGHT MODE';
                 document.getElementById('version-tag').innerText = 'HUB BIZ';
+            } else {
+                document.getElementById('html-root').classList.remove('day-mode');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-amber-400';
+                document.getElementById('themeText').innerText = 'DAY MODE';
+                document.getElementById('version-tag').innerText = 'HUB';
             }
                 document.getElementById('html-root').classList.add('day-mode');
                 document.getElementById('themeIcon').className = "fa-solid fa-moon text-purple-600";
