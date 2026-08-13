@@ -1,0 +1,14 @@
+# ============================================================
+# BURN-1 SYSTEMS SUBDOMAIN ROUTING (.htaccess for Apache/cPanel)
+# ============================================================
+RewriteEngine On
+RewriteBase /
+
+# 1. Ignore the main www.burn-1.com or burn-1.com root domain
+RewriteCond %{HTTP_HOST} !^www\.burn-1\.com$ [NC]
+RewriteCond %{HTTP_HOST} !^burn-1\.com$ [NC]
+
+# 2. Capture the subdomain (*.burn-1.com) and serve card.html behind the scenes
+RewriteCond %{HTTP_HOST} ^([^.]+)\.burn-1\.com$ [NC]
+RewriteRule ^$ card.html [L]
+RewriteRule ^$ burn1-digital-card.html [L]

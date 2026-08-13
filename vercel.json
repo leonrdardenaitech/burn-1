@@ -1,13 +1,16 @@
 {
+  "version": 2,
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/qr", "destination": "/qr.html" },
-    { "source": "/kiosk", "destination": "/kiosk.html" },
-    { "source": "/slawdawgs", "destination": "/slawdawgs.html" },
-    { "source": "/universal", "destination": "/universal_kiosk.html" },
-    { "source": "/bowdega", "destination": "/bowdega.html" },
-    { "source": "/barber", "destination": "/barber.html" },
-    { "source": "/malwdarazor", "destination": "/malwdarazor.html" },
-    { "source": "/mal", "destination": "/mal.html" }
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?!www\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com"
+        }
+      ],
+      "destination": "/card.html"
+    }
   ]
 }
