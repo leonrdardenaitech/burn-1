@@ -20,6 +20,10 @@
       "source": "/:path*",
       "has": [{ "type": "host", "value": "(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/card.html"
+    },
+    {
+      "source": "/",
+      "destination": "/home.html"
     }
   ]
 }
