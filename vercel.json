@@ -5,16 +5,20 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "www.burn-1.com" }],
-      "destination": "/index.html"
+      "destination": "/home.html"
     },
     {
       "source": "/",
       "has": [{ "type": "host", "value": "burn-1.com" }],
-      "destination": "/index.html"
+      "destination": "/home.html"
+    },
+    {
+      "source": "/directory",
+      "destination": "/directory.html"
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "(?<subdomain>[^.]+)\\.burn-1\\.com" }],
+      "has": [{ "type": "host", "value": "(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/card.html"
     }
   ]
