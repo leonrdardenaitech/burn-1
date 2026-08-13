@@ -110,7 +110,7 @@
 
     <!-- FOOTER / RETURN NAVIGATION -->
     <footer class="w-full max-w-md mx-auto text-center pb-4 flex flex-col gap-4 items-center">
-        <a href="burn1-business-directory-v4.html" class="text-xs font-black text-slate-400 hover:text-cyan-400 uppercase tracking-widest transition-all font-mono">
+        <a href="https://burn-1.com/directory" class="text-xs font-black text-slate-400 hover:text-cyan-400 uppercase tracking-widest transition-all font-mono">
             ← Return to Directory Hub
         </a>
         <div class="text-[9px] text-slate-600 font-mono">
@@ -122,6 +122,181 @@
     <script>
         // Grounded Local Business Database
         const BUSINESS_DATABASE = {
+            "shay-slaw-dogs": {
+                name: "Shay Slaw Dogs",
+                category: "Food & Dining",
+                address: "Redan Plaza, Lithonia, GA 30058",
+                phone: "(678) 555-0199",
+                mapSearch: "Redan Plaza Lithonia GA"
+            },
+            "allstar-seafood": {
+                name: "Allstar Seafood",
+                category: "Food & Dining",
+                address: "Lithonia Crossing, Lithonia, GA 30058",
+                phone: "(678) 555-0101",
+                mapSearch: "Lithonia Crossing Lithonia GA"
+            },
+            "china-panda": {
+                name: "China Panda",
+                category: "Food & Dining",
+                address: "Lithonia Crossing, Lithonia, GA 30058",
+                phone: "(678) 555-0102",
+                mapSearch: "China Panda Lithonia Crossing Lithonia GA"
+            },
+            "ameribistro": {
+                name: "AmeriBistro",
+                category: "Food & Dining",
+                address: "Lithonia Crossing, Lithonia, GA 30058",
+                phone: "(678) 555-0103",
+                mapSearch: "AmeriBistro Lithonia Crossing Lithonia GA"
+            },
+            "green-love-kitchen": {
+                name: "Green Love Kitchen",
+                category: "Food & Dining",
+                address: "Lithonia Area, Lithonia, GA 30058",
+                phone: "(678) 555-0104",
+                mapSearch: "Green Love Kitchen Lithonia GA"
+            },
+            "doublescoop": {
+                name: "Double Scoop Ice Cream",
+                category: "Sweets & Desserts",
+                address: "2970 Stonecrest Pass, Lithonia, GA 30038",
+                phone: "678-806-8474",
+                mapSearch: "2970 Stonecrest Pass Lithonia GA"
+            },
+            "crishas-tasty-treats": {
+                name: "Crisha's Tasty Treats",
+                category: "Sweets & Desserts",
+                address: "Stonecrest, GA 30038",
+                phone: "(678) 555-0105",
+                mapSearch: "Stonecrest GA"
+            },
+            "island-spice": {
+                name: "Island Spice Hut",
+                category: "Food & Dining",
+                address: "Redan / Lithonia, GA 30058",
+                phone: "(678) 555-0106",
+                mapSearch: "Redan Lithonia GA"
+            },
+            "plaza-grill": {
+                name: "Plaza Grill & Wings",
+                category: "Food & Dining",
+                address: "Lithonia Plaza, Lithonia, GA 30058",
+                phone: "(678) 555-0107",
+                mapSearch: "Lithonia Plaza Lithonia GA"
+            },
+            "touchdown-wings": {
+                name: "Touchdown Wings",
+                category: "Food & Dining",
+                address: "DeKalb Medical Pkwy, Lithonia, GA 30058",
+                phone: "(678) 555-0108",
+                mapSearch: "DeKalb Medical Pkwy Lithonia GA"
+            },
+            "ashley-stewart": {
+                name: "Ashley Stewart",
+                category: "Clothing & Retail",
+                address: "Stonecrest Regional, Stonecrest, GA 30038",
+                phone: "(770) 462-2053",
+                mapSearch: "Stonecrest Mall Lithonia GA"
+            },
+            "marshalls": {
+                name: "Marshall's",
+                category: "Clothing & Retail",
+                address: "Stonecrest Marketplace, Stonecrest, GA 30038",
+                phone: "(678) 555-0109",
+                mapSearch: "Stonecrest Marketplace Stonecrest GA"
+            },
+            "ross": {
+                name: "Ross Dress For Less",
+                category: "Clothing & Retail",
+                address: "Stonecrest Marketplace, Stonecrest, GA 30038",
+                phone: "(678) 555-0110",
+                mapSearch: "Ross Dress For Less Stonecrest Marketplace Stonecrest GA"
+            },
+            "dsw": {
+                name: "DSW Shoe Warehouse",
+                category: "Clothing & Retail",
+                address: "Stonecrest Marketplace, Stonecrest, GA 30038",
+                phone: "(678) 555-0111",
+                mapSearch: "DSW Shoe Warehouse Stonecrest Marketplace Stonecrest GA"
+            },
+            "shoppers-world": {
+                name: "Shoppers World",
+                category: "Clothing & Retail",
+                address: "Stonecrest Marketplace, Stonecrest, GA 30038",
+                phone: "(678) 555-0112",
+                mapSearch: "Shoppers World Stonecrest Marketplace Stonecrest GA"
+            },
+            "fresh-cuts": {
+                name: "Fresh Cuts Barbershop",
+                category: "Barber & Beauty",
+                address: "Lithonia, GA 30058",
+                phone: "(678) 555-0144",
+                mapSearch: "Lithonia GA 30058"
+            },
+            "gentlemens-touch": {
+                name: "Gentlemen's Touch Barbershop",
+                category: "Barber & Beauty",
+                address: "8200 Mall Parkway, Stonecrest, GA 30038",
+                phone: "770-484-5700",
+                mapSearch: "8200 Mall Parkway Stonecrest GA 30038"
+            },
+            "slammin-cuts": {
+                name: "Slammin' Cuts Barbershop",
+                category: "Barber & Beauty",
+                address: "2410 Dekalb Medical Pkwy Ste C, Lithonia, GA 30058",
+                phone: "770.484.0404",
+                mapSearch: "2410 Dekalb Medical Pkwy Lithonia GA 30058"
+            },
+            "mimosa-suites": {
+                name: "Mimosa Salon Suites",
+                category: "Barber & Beauty",
+                address: "7300 Stonecrest Concourse, Lithonia, GA 30058",
+                phone: "(678) 374-3148",
+                mapSearch: "7300 Stonecrest Concourse Lithonia GA 30058"
+            },
+            "stonecrest-salon-suite": {
+                name: "Stonecrest Salon Suite",
+                category: "Barber & Beauty",
+                address: "7342 Stonecrest Concourse, Stonecrest, GA 30038",
+                phone: "(678) 555-0113",
+                mapSearch: "7342 Stonecrest Concourse Stonecrest GA 30038"
+            },
+            "ilocdit": {
+                name: "iLocdit Natural Hair",
+                category: "Barber & Beauty",
+                address: "6992 Mahonia Place, Stonecrest, GA 30038",
+                phone: "(678) 555-0122",
+                mapSearch: "6992 Mahonia Place Stonecrest GA 30038"
+            },
+            "hair-by-bella": {
+                name: "Hair By Bella",
+                category: "Barber & Beauty",
+                address: "Stonecrest Concourse, Suite C307, GA 30038",
+                phone: "(678) 555-0114",
+                mapSearch: "Stonecrest Concourse GA 30038"
+            },
+            "locz-by-lola": {
+                name: "Locz by Lola",
+                category: "Barber & Beauty",
+                address: "Flavaz Team, Main St, GA 30038",
+                phone: "(678) 555-0115",
+                mapSearch: "Flavaz Restaurant Lithonia GA"
+            },
+            "apogee-barber": {
+                name: "Apogee Barber Shop",
+                category: "Barber & Beauty",
+                address: "Stonecrest, GA 30038",
+                phone: "(678) 555-0116",
+                mapSearch: "Stonecrest GA 30038"
+            },
+            "barber-kingz": {
+                name: "Barber Kingz Studio",
+                category: "Barber & Beauty",
+                address: "7245 Rockbridge Rd, Stonecrest, GA 30038",
+                phone: "(678) 555-0117",
+                mapSearch: "7245 Rockbridge Rd Stonecrest GA"
+            },
             "taddas-fitness": {
                 name: "Tadda's Fitness Center",
                 category: "Fitness & Wellness",
@@ -136,26 +311,12 @@
                 phone: "(470) 676-7399",
                 mapSearch: "Gladiator Martial Arts 6025 Covington Hwy Decatur GA"
             },
-            "the-cigar-bar": {
-                name: "The Cigar Bar",
-                category: "Lounge & Dining",
-                address: "2617 Panola Rd Suite 103, Lithonia, Georgia 30058",
-                phone: "(470) 375-8879",
-                mapSearch: "The Cigar Bar 2617 Panola Rd Lithonia GA"
-            },
-            "auto-motion-wheel-repairs": {
-                name: "Auto Motion Wheel Repairs",
-                category: "Auto Services",
-                address: "2526 Panola Rd, Lithonia, Georgia 30058",
-                phone: "(404) 299-7255",
-                mapSearch: "Auto Motion Wheel Repairs 2526 Panola Rd Lithonia GA"
-            },
-            "ac-event-space": {
-                name: "A&C Event Space",
-                category: "Event Services",
-                address: "2412 Park Central Blvd, Decatur, Georgia 30035",
-                phone: "(678) 891-9253",
-                mapSearch: "A and C Event Space 2412 Park Central Blvd Decatur GA"
+            "steel-mill-wellness": {
+                name: "Steel Mill Wellness Center",
+                category: "Gym & Fitness",
+                address: "2500 Park Central Blvd, Suite A1, Decatur, Georgia 30035",
+                phone: "(404) 516-5469",
+                mapSearch: "Steel Mill Wellness Center 2500 Park Central Blvd Decatur GA"
             },
             "force-xtreme-cheer": {
                 name: "Force Xtreme Cheer",
@@ -164,19 +325,117 @@
                 phone: "(470) 413-8003",
                 mapSearch: "Force Xtreme Cheer 2520 Park Central Blvd Decatur GA"
             },
-            "steel-mill-wellness": {
-                name: "Steel Mill Wellness Center",
-                category: "Gym & Fitness",
-                address: "2500 Park Central Blvd, Suite A1, Decatur, Georgia 30035",
-                phone: "(404) 516-5469",
-                mapSearch: "Steel Mill Wellness Center 2500 Park Central Blvd Decatur GA"
-            },
             "progressive-dental": {
                 name: "Progressive Dental Group",
                 category: "Medical & Health",
                 address: "2485 Park Central Blvd #3, Lithonia, Georgia 30035",
                 phone: "(770) 593-4976",
                 mapSearch: "Progressive Dental Group 2485 Park Central Blvd Lithonia GA"
+            },
+            "automotion": {
+                name: "Auto Motion Wheel Repairs",
+                category: "Auto Services",
+                address: "2526 Panola Rd, Lithonia, Georgia 30058",
+                phone: "(404) 299-7255",
+                mapSearch: "Auto Motion Wheel Repairs 2526 Panola Rd Lithonia GA"
+            },
+            "metro-auto": {
+                name: "Metro Auto Repair & Collision",
+                category: "Auto Services",
+                address: "2755 S Stone Mountain Lithonia Rd, Lithonia, GA 30058",
+                phone: "(404) 855-5705",
+                mapSearch: "2755 S Stone Mountain Lithonia Rd Lithonia GA"
+            },
+            "lithonia-auto-tech": {
+                name: "Lithonia Auto Tech",
+                category: "Auto Services",
+                address: "Cafe Plaza, Lithonia, GA 30058",
+                phone: "(678) 555-0118",
+                mapSearch: "Cafe Plaza Lithonia GA"
+            },
+            "masscom": {
+                name: "MASSCOM Install Tech, Inc.",
+                category: "Industrial & Local Services",
+                address: "2400 Park Central Blvd, Decatur, GA 30035",
+                phone: "770.593.3455",
+                mapSearch: "2400 Park Central Blvd Decatur GA 30035"
+            },
+            "interprint": {
+                name: "InterPrint Communications",
+                category: "Industrial & Local Services",
+                address: "2605 Park Central Blvd, Decatur, GA 30035",
+                phone: "(770) 987-7400",
+                mapSearch: "2605 Park Central Blvd Decatur GA 30035"
+            },
+            "mowersplus": {
+                name: "Mowers Plus LLC",
+                category: "Industrial & Local Services",
+                address: "2513 Park Central Blvd, Decatur, GA 30035",
+                phone: "(770) 482-9993",
+                mapSearch: "2513 Park Central Blvd Decatur GA 30035"
+            },
+            "quick-dry-cleaners": {
+                name: "Quick Dry Cleaners",
+                category: "Industrial & Local Services",
+                address: "Redan Plaza, Lithonia, GA 30058",
+                phone: "(678) 555-0119",
+                mapSearch: "Redan Plaza Lithonia GA"
+            },
+            "redan-key-lock": {
+                name: "Redan Key & Lock",
+                category: "Industrial & Local Services",
+                address: "Redan Plaza, Lithonia, GA 30058",
+                phone: "(678) 555-0120",
+                mapSearch: "Redan Plaza Lithonia GA"
+            },
+            "luxe-nails": {
+                name: "Luxe Nails & Spa",
+                category: "Barber & Beauty",
+                address: "Lithonia, GA 30058",
+                phone: "(678) 555-0121",
+                mapSearch: "Lithonia GA 30058"
+            },
+            "elite-braids": {
+                name: "Elite Braids & Weaves",
+                category: "Barber & Beauty",
+                address: "Lithonia, GA 30058",
+                phone: "(678) 555-0123",
+                mapSearch: "Lithonia GA"
+            },
+            "thecigarbar": {
+                name: "The Cigar Bar",
+                category: "Lounge & Dining",
+                address: "2617 Panola Rd Suite 103, Lithonia, GA 30058",
+                phone: "(470) 375-8879",
+                mapSearch: "2617 Panola Rd Lithonia GA"
+            },
+            "ac-event-space": {
+                name: "A&C Event Space",
+                category: "Event Services",
+                address: "2412 Park Central Blvd, Decatur, GA 30035",
+                phone: "(678) 891-9253",
+                mapSearch: "2412 Park Central Blvd Decatur GA 30035"
+            },
+            "spice-house": {
+                name: "Spice House Restaurant & Lounge",
+                category: "Food & Dining",
+                address: "2617 Panola Rd, Lithonia, GA 30058",
+                phone: "(770) 559-9595",
+                mapSearch: "2617 Panola Rd Lithonia GA"
+            },
+            "children-for-christ": {
+                name: "Children For Christ Academy",
+                category: "Education & Care",
+                address: "2637 Panola Rd, Lithonia, GA 30058",
+                phone: "(770) 981-0039",
+                mapSearch: "2637 Panola Rd Lithonia GA"
+            },
+            "davita": {
+                name: "DaVita Dialysis of Lithonia",
+                category: "Medical & Health",
+                address: "2485 Park Central Blvd, Decatur, GA 30035",
+                phone: "(678) 418-9808",
+                mapSearch: "2485 Park Central Blvd Decatur GA"
             }
         };
 
