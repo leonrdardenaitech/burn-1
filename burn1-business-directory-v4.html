@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Burn-1 Business Directory | Atlanta Metro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap');
+        
+        body {
+            background-color: #020617; /* Dark Slate BG */
+            color: #f8fafc;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Centered Silhouette City Skyline Background */
+        .skyline-container {
+            position: relative;
+            height: 240px;
+            background: linear-gradient(180deg, #090d1f 0%, #0c0a21 100%);
+            border-bottom: 4px solid #CC2200; /* Burn-1 Red Accent Line */
+            overflow: hidden;
+        }
+        .skyline-silhouette {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,90 L30,90 L30,60 L70,60 L70,95 L110,95 L110,40 L160,40 L160,85 L200,85 L200,30 L250,30 L250,105 L300,105 L300,50 L340,50 L340,75 L390,75 L390,20 L440,20 L440,90 L480,90 L480,45 L520,45 L520,70 L570,70 L570,10 L620,10 L620,85 L670,85 L670,35 L710,35 L710,65 L760,65 L760,15 L810,15 L810,95 L850,95 L850,55 L890,55 L890,80 L940,80 L940,25 L990,25 L990,100 L1030,100 L1030,50 L1070,50 L1070,75 L1120,75 L1120,5 L1170,5 L1170,90 L1200,90 L1200,120 Z" fill="%23020617"/></svg>');
+            background-size: cover;
+            background-repeat: repeat-x;
+            opacity: 0.85;
+        }
+
+        /* 
+           PHYSICAL PLAZA DIRECTORY STYLE CARDS 
+           - Matted grey holders (bg-zinc-800)
+           - Crisp shiny reflective metal casing (silver gradient borders, white internal highlights, inset dropshadows)
+           - Inner core: Rich Black (bg-black)
+           - Accents: Neon Blue glow and highlights
+        */
+        .plaza-casing {
+            background: linear-gradient(135deg, #3f3f46 0%, #18181b 100%); /* Matted grey satin holder */
+            border: 4px solid #d4d4d8; /* Reflective silver chrome-like casing border */
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 
+                0 10px 25px -5px rgba(0, 0, 0, 0.7),
+                inset 0 1px 3px rgba(255, 255, 255, 0.4),
+                0 0 15px rgba(0, 240, 255, 0.1); /* Subtle neon blue ambient glow */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .plaza-casing:hover {
+            transform: translateY(-4px);
+            box-shadow:                 0 20px 35px -10px rgba(0, 0, 0, 0.8),                inset 0 1px 4px rgba(255, 255, 255, 0.6),                0 0 25px rgba(0, 240, 255, 0.35); /* Amplified neon blue glow */
+            border-color: #f4f4f5;
+        }
+        .plaza-panel {
+            background-color: #000000; /* Building Black directory core */
+            border-radius: 8px;
+            border: 1px solid #27272a;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.9);
+        }
+
+        /* Neon blue accent glowing buttons & text tags */
+        .neon-blue-glow {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+        }
+        .neon-blue-border {
+            border-color: #00f0ff;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.3), inset 0 0 6px rgba(0, 240, 255, 0.2);
+        }
+        .neon-blue-btn {
+            background: linear-gradient(135deg, #090d1f 0%, #1e1b4b 100%);
+            border: 1px solid #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+            transition: all 0.2s ease;
+        }
+        .neon-blue-btn:hover {
+            background: #00f0ff;
+            color: #000000;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+            text-shadow: none;
+        }
+
+        /* Interactive Detail Hover Widget (Popups) */
+        .hover-trigger:hover .hover-widget {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .hover-widget {
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(10px) scale(0.95);
+        }
+
+        /* CSS Video Loop Background simulation */
+        .video-canvas {
+            position: relative;
+            background: radial-gradient(circle at center, #1e1b4b 0%, #03001e 100%);
+            overflow: hidden;
+        }
+        .video-canvas::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+        }
+        .video-glow-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,240,255,0.12) 0%, transparent 70%);
+            animation: drift 12s infinite alternate ease-in-out;
+        }
+        @keyframes drift {
+            0% { transform: translate(-10%, -10%); }
+            100% { transform: translate(110%, 110%); }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+
+    <!-- SILHOUETTE SKYLINE HEADER (Centered) -->
+    <header class="skyline-container flex flex-col justify-center items-center p-6 md:p-8">
+        <div class="z-10 flex flex-col items-center justify-center text-center gap-2">
+            <div>
+                <span class="text-xs font-bold tracking-widest bg-red-600 text-white px-2.5 py-1 uppercase rounded-sm">Burn-1 Platform</span>
+                <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 uppercase text-white">Business Directory</h1>
+            </div>
+            <p class="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-widest neon-blue-glow mt-1">
+                ★ METROPOLITAN LOBBY DISPLAY V5 ★
+            </p>
+            <div class="bg-black/90 px-4 py-1 rounded border border-cyan-500/30 text-[10px] font-mono text-emerald-400 font-bold mt-2 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
+                SYSTEM STATUS: ACTIVE // 45 STOREFRONTS IN MASTER SYNCHRONIZATION
+            </div>
+        </div>
+        <div class="skyline-silhouette"></div>
+    </header>
+
+    <!-- FLOATING MAIN CONTROL INTERFACE -->
+    <div class="max-w-[1700px] mx-auto px-4 md:px-8 mt-6 flex justify-between items-center border-b border-slate-800 pb-4">
+        <div class="text-xs text-slate-500 font-bold uppercase font-mono">
+            Display Mode: <span class="text-cyan-400">Interactive Plaza Matrix</span>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="toggleMasterAds()" id="master-toggle-btn" class="neon-blue-btn px-4 py-1.5 rounded text-xs font-black uppercase text-cyan-400 tracking-wider flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <span id="master-toggle-text">Expand All Ads (Master Toggle)</span>
+            </button>
+        </div>
+    </div>
+
+    <main class="p-4 md:p-8 max-w-[1700px] mx-auto flex flex-col gap-10">
+
+        <!-- ================= SECTION ROW 1: FOOD & RETAIL ================= -->
+        <div>
+            <div class="mb-4 flex items-center justify-between border-l-4 border-red-500 pl-3">
+                <h2 class="text-xl font-black uppercase tracking-tight text-white">SECTION A: Plaza Dining & Style</h2>
+                <span class="text-xs font-mono text-slate-500">Rows A1 - A3</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- COLUMN 01: FOOD & DINING DIRECTORY A -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">01. Food & Dining [A]</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-01</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">SHAY SLAW DOGS</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">MOBILE MENU APP IS LIVE</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">Fast Ordering & Delivery</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('shay-slaw', 1)" class="text-[9px] bg-red-600 hover:bg-red-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('shay-slaw', 1)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">Shay Slaw Dogs</span>
+                                    <span class="text-[9px] text-zinc-500">Redan Plaza, GA</span>
+                                </div>
+                                <button onclick="toggleMedia('shay-slaw', 1)" class="text-[8px] border border-red-500/50 text-red-400 px-1.5 py-0.5 rounded uppercase font-bold bg-red-950/20 hover:bg-red-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">Shay Slaw Dogs</h5>
+                                        <span class="text-[8px] bg-red-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">FOOD</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Custom mobile ordering menus, specialty slaw dogs, and local food kiosk operations.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 Redan Plaza, Lithonia, GA</div>
+                                        <div>📞 (678) 555-0199</div>
+                                        <div class="text-cyan-400 mt-1 font-bold">shay-slaw-dogs.burn-1.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Allstar Seafood</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia Crossing</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-01</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">China Panda</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia Crossing</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-02</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">AmeriBistro</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia Crossing</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-03</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Green Love Kitchen</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia Area</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-04</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 02: FOOD & DINING DIRECTORY B -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">02. Food & Dining [B]</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-02</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">DOUBLE SCOOP</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">BLACK OWNED SISTER BRAND</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">Famous Handmade Ice Cream</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('double-scoop', 1)" class="text-[9px] bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('double-scoop', 1)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">Double Scoop Ice Cream</span>
+                                    <span class="text-[9px] text-zinc-500">2970 Stonecrest Pass, Lithonia, GA</span>
+                                </div>
+                                <button onclick="toggleMedia('double-scoop', 1)" class="text-[8px] border border-indigo-500/50 text-indigo-400 px-1.5 py-0.5 rounded uppercase font-bold bg-indigo-950/20 hover:bg-indigo-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">Double Scoop Ice Cream</h5>
+                                        <span class="text-[8px] bg-indigo-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">SWEETS</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Black-owned boutique operated by two local sisters. Celebrated homemade ice cream flavors and scoops.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 2970 Stonecrest Pass, Lithonia, GA 30038</div>
+                                        <div>📞 (678) 806-8474</div>
+                                        <div class="text-cyan-400 mt-1 font-bold">doublescoop.burn-1.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Crisha's Tasty Treats</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest, GA</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-05</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Island Spice Hut</span>
+                                    <span class="text-[9px] text-zinc-500">Redan / Lithonia</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-06</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Plaza Grill & Wings</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia Plaza</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-07</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Touchdown Wings</span>
+                                    <span class="text-[9px] text-zinc-500">DeKalb Medical Pkwy</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-08</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 03: CLOTHING & RETAIL -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">03. Clothing & Retail</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-03</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">ASHLEY STEWART</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">PREMIUM LADIES BOUTIQUE</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">High Fashion & Outfits</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('ashley-stewart', 1)" class="text-[9px] bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('ashley-stewart', 1)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">Ashley Stewart</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest Regional</span>
+                                </div>
+                                <button onclick="toggleMedia('ashley-stewart', 1)" class="text-[8px] border border-emerald-500/50 text-emerald-400 px-1.5 py-0.5 rounded uppercase font-bold bg-emerald-950/20 hover:bg-emerald-600 hover:text-white">Specials</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">Ashley Stewart</h5>
+                                        <span class="text-[8px] bg-emerald-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">FASHION</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Bespoke fashion items, statement sets, plus-size ladies apparel and premium brands.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 Stonecrest Plaza Core, GA</div>
+                                        <div>📞 (770) 462-2053</div>
+                                        <div>🔗 ashley-stewart.burn-1.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Marshall's</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest Marketplace</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-09</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Ross Dress For Less</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest Marketplace</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-10</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">DSW Shoe Warehouse</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest Marketplace</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-11</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Shoppers World</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest Marketplace</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-12</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ================= INTERACTIVE EXPANDABLE INTER-ROW AD CANVAS 1: DUAL AD SPLIT SCREEN ================= -->
+        <div id="media-canvas-wrapper-1" class="max-h-0 overflow-hidden transition-all duration-700 ease-in-out border-0 border-cyan-500/50 rounded-2xl">
+            <div class="video-canvas p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center relative min-h-[400px]">
+                <div class="video-glow-effect"></div>
+                
+                <!-- Expanded Ad Display Frame (Left Ad) -->
+                <div class="w-full md:w-1/2 aspect-video bg-black rounded-xl border border-cyan-400 shadow-[0_0_20px_rgba(0,240,255,0.25)] relative flex items-center justify-center overflow-hidden z-10">
+                    <div class="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black/90 via-black/40 to-black/20">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 text-[10px] text-white font-black px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">● LIVE PROMO A</span>
+                            <span id="canvas-tag-1a" class="text-xs font-mono text-cyan-400 font-black tracking-widest uppercase">SHAY SLAW FEATURE</span>
+                        </div>
+                        <div class="text-center py-4">
+                            <h4 id="canvas-video-title-1a" class="text-xl md:text-2xl font-black text-white uppercase tracking-tight">SHAY SLAW SPECIALS</h4>
+                            <p class="text-xs text-zinc-300 mt-2">15% off menu items scanning direct</p>
+                            <span id="canvas-asset-id-1a" class="text-xs font-bold text-cyan-400 block mt-2 font-mono">QR-FOOD-01</span>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-zinc-500 font-mono">
+                            <span>0:00 / 0:30 (LOOP)</span>
+                            <span>HQ BROADCAST // SPLIT-1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expanded Ad Display Frame (Right Ad) -->
+                <div class="w-full md:w-1/2 aspect-video bg-black rounded-xl border border-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.25)] relative flex items-center justify-center overflow-hidden z-10">
+                    <div class="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black/90 via-black/40 to-black/20">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-indigo-600 text-[10px] text-white font-black px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">● LIVE PROMO B</span>
+                            <span id="canvas-tag-1b" class="text-xs font-mono text-indigo-400 font-black tracking-widest uppercase">DOUBLE SCOOP HUB</span>
+                        </div>
+                        <div class="text-center py-4">
+                            <h4 id="canvas-video-title-1b" class="text-xl md:text-2xl font-black text-white uppercase tracking-tight">DOUBLE SCOOP BOGO</h4>
+                            <p class="text-xs text-zinc-300 mt-2">Black-Owned Sister Shop Specialties</p>
+                            <span id="canvas-asset-id-1b" class="text-xs font-bold text-indigo-400 block mt-2 font-mono">QR-SWEETS-02</span>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-zinc-500 font-mono">
+                            <span>0:00 / 0:30 (LOOP)</span>
+                            <span>HQ BROADCAST // SPLIT-2</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Toggle controls -->
+            <div class="bg-black/90 p-4 border-t border-zinc-800 flex justify-end">
+                <button onclick="closeMediaCanvas(1)" class="bg-red-600 hover:bg-red-700 text-white font-black uppercase text-xs px-6 py-2 rounded tracking-wider transition-all">
+                    ❌ Collapse Row 1 Ads
+                </button>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION ROW 2: SALONS & SERVICES ================= -->
+        <div>
+            <div class="mb-4 flex items-center justify-between border-l-4 border-amber-500 pl-3">
+                <h2 class="text-xl font-black uppercase tracking-tight text-white">SECTION B: Personal Grooming & Wellness</h2>
+                <span class="text-xs font-mono text-slate-500">Rows B4 - B6</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- COLUMN 04: BARBER & SALON DIRECTORY A -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">04. Barber & Salon [A]</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-04</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">MIMOSA SUITES</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">82 LUXURY LEASE SUITES</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">Be Your Own Salon Boss!</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('mimosa-suites', 2)" class="text-[9px] bg-amber-600 hover:bg-amber-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('mimosa-suites', 2)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">Fresh Cuts Barbershop</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia, GA 30058</span>
+                                </div>
+                                <button onclick="toggleMedia('fresh-cuts', 2)" class="text-[8px] border border-amber-500/50 text-amber-400 px-1.5 py-0.5 rounded uppercase font-bold bg-amber-950/20 hover:bg-amber-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">Fresh Cuts Barber</h5>
+                                        <span class="text-[8px] bg-amber-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">BARBER</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Clean outlines, precision fades, customized beard services, and scheduling platform bookings.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 Lithonia, GA 30058</div>
+                                        <div>📞 (678) 555-0144</div>
+                                        <div class="text-cyan-400 mt-1 font-bold">burn-1.com/directory/fresh-cuts</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Gentlemen's Touch Barbershop</span>
+                                    <span class="text-[9px] text-zinc-500">8200 Mall Parkway</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-13</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Slammin' Cuts Barbershop</span>
+                                    <span class="text-[9px] text-zinc-500">DeKalb Medical Parkway</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-14</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Mimosa Salon Suites</span>
+                                    <span class="text-[9px] text-zinc-500">7300 Stonecrest Concourse</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-15</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Stonecrest Salon Suite</span>
+                                    <span class="text-[9px] text-zinc-500">7342 Stonecrest Concourse</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-16</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 05: BARBER & SALON DIRECTORY B -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">05. Barber & Salon [B]</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-05</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">ILOCDIT NATURAL</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">ELITE LOCTICIAN & TWISTS</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">Premium Protective Braids</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('ilocdit', 2)" class="text-[9px] bg-red-600 hover:bg-red-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('ilocdit', 2)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">iLocdit Natural Hair</span>
+                                    <span class="text-[9px] text-zinc-500">6992 Mahonia Place, Stonecrest</span>
+                                </div>
+                                <button onclick="toggleMedia('ilocdit', 2)" class="text-[8px] border border-red-500/50 text-red-400 px-1.5 py-0.5 rounded uppercase font-bold bg-red-950/20 hover:bg-red-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">iLocdit Natural</h5>
+                                        <span class="text-[8px] bg-red-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">LOCS</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Expert loc cultivation, deep clarifying hair wash, complex twists, and protective crown weaves.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 6992 Mahonia Place, Stonecrest, GA</div>
+                                        <div>★ 5.0 Rating (198+ Reviews)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Hair By Bella</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest Concourse, Suite C307</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-17</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Locz by Lola</span>
+                                    <span class="text-[9px] text-zinc-500">Flavaz Team, Main St</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-18</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Apogee Barber Shop</span>
+                                    <span class="text-[9px] text-zinc-500">Stonecrest, GA</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-19</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Barber Kingz Studio</span>
+                                    <span class="text-[9px] text-zinc-500">7245 Rockbridge Rd, Stonecrest</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-20</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 06: WELLNESS & SPORTS -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">06. Wellness & Sports</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-06</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">TADDA'S FITNESS</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">BOOTCAMP & GYM TRACKS</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">Decatur Premier Fitness</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('taddas-fitness', 2)" class="text-[9px] bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('taddas-fitness', 2)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">Tadda's Fitness Center</span>
+                                    <span class="text-[9px] text-zinc-500">2615 Park Central Blvd, Decatur</span>
+                                </div>
+                                <button onclick="toggleMedia('taddas-fitness', 2)" class="text-[8px] border border-emerald-500/50 text-emerald-400 px-1.5 py-0.5 rounded uppercase font-bold bg-emerald-950/20 hover:bg-emerald-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">Tadda's Fitness</h5>
+                                        <span class="text-[8px] bg-emerald-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">FITNESS</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">High energy bootcamps, personal health training, custom wellness plans, and group workouts.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 2615 Park Central Blvd, Decatur, GA 30035</div>
+                                        <div>📞 (404) 520-9119</div>
+                                        <div class="text-cyan-400 mt-1 font-bold">taddas-fitness.burn-1.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Gladiator Martial Arts</span>
+                                    <span class="text-[9px] text-zinc-500">6025 Covington Hwy, Decatur</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-21</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Steel Mill Wellness Center</span>
+                                    <span class="text-[9px] text-zinc-500">2500 Park Central Blvd, Decatur</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-22</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Force Xtreme Cheer & Tumbling</span>
+                                    <span class="text-[9px] text-zinc-500">2520 Park Central Blvd</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-23</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Progressive Dental Group</span>
+                                    <span class="text-[9px] text-zinc-500">2485 Park Central Blvd</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-24</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ================= INTERACTIVE EXPANDABLE INTER-ROW AD CANVAS 2: THE BIG WINDOW WITH THE QR ================= -->
+        <div id="media-canvas-wrapper-2" class="max-h-0 overflow-hidden transition-all duration-700 ease-in-out border-0 border-cyan-500/50 rounded-2xl">
+            <div class="video-canvas p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center relative min-h-[400px]">
+                <div class="video-glow-effect"></div>
+                
+                <!-- Expanded Ad Display Frame (Left) -->
+                <div class="w-full md:w-3/5 aspect-video bg-black rounded-xl border border-cyan-400 shadow-[0_0_20px_rgba(0,240,255,0.25)] relative flex items-center justify-center overflow-hidden z-10">
+                    <div class="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black/90 via-black/40 to-black/20">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 text-[10px] text-white font-black px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">● LIVE BROADCAST</span>
+                            <span id="canvas-tag-2" class="text-xs font-mono text-cyan-400 font-black tracking-widest uppercase">MIMOSA SUITES CO-OP</span>
+                        </div>
+                        <div class="text-center py-8">
+                            <h4 id="canvas-video-title-2" class="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">MIMOSA LEASING PLATFORM</h4>
+                            <p class="text-xs text-zinc-300 mt-2">Professional freedom walk-through and studio rentals</p>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-zinc-500 font-mono">
+                            <span>0:00 / 0:30 (AUTOPLAY LOOP)</span>
+                            <span>HQ STREAM // DIGITAL LOBBY PRO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Offer / QR Box (Right) -->
+                <div class="w-full md:w-2/5 flex flex-col gap-4 z-10 bg-black/80 border border-zinc-800 p-6 rounded-xl relative">
+                    <div>
+                        <span class="text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-widest">Digital Coupon & Access</span>
+                        <h3 id="canvas-promo-title-2" class="text-2xl font-black text-white uppercase mt-1">REDEEM DIGITAL CARD</h3>
+                        <p id="canvas-promo-desc-2" class="text-xs text-zinc-400 mt-2 leading-relaxed">Simply align your phone camera with the QR code on the screen to load the interactive web application, redeem coupons, or view the customized digital catalog!</p>
+                    </div>
+
+                    <!-- QR and Marketing Details -->
+                    <div class="flex gap-4 items-center bg-zinc-950 p-4 rounded-lg border border-zinc-800">
+                        <div class="w-24 h-24 bg-white p-2 rounded flex items-center justify-center shadow-lg shrink-0">
+                            <!-- SVG QR Simulation Code -->
+                            <svg class="w-full h-full text-black" viewBox="0 0 100 100">
+                                <rect x="0" y="0" width="30" height="30" fill="currentColor"/>
+                                <rect x="5" y="5" width="20" height="20" fill="white"/>
+                                <rect x="10" y="10" width="10" height="10" fill="currentColor"/>
+                                <rect x="70" y="0" width="30" height="30" fill="currentColor"/>
+                                <rect x="75" y="5" width="20" height="20" fill="white"/>
+                                <rect x="80" y="10" width="10" height="10" fill="currentColor"/>
+                                <rect x="0" y="70" width="30" height="30" fill="currentColor"/>
+                                <rect x="5" y="75" width="20" height="20" fill="white"/>
+                                <rect x="10" y="80" width="10" height="10" fill="currentColor"/>
+                                <rect x="40" y="40" width="20" height="20" fill="currentColor"/>
+                                <rect x="45" y="45" width="10" height="10" fill="white"/>
+                                <rect x="40" y="10" width="10" height="10" fill="currentColor"/>
+                                <rect x="50" y="20" width="10" height="10" fill="currentColor"/>
+                                <rect x="20" y="40" width="10" height="10" fill="currentColor"/>
+                                <rect x="80" y="40" width="15" height="15" fill="currentColor"/>
+                                <rect x="50" y="80" width="10" height="15" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="text-left font-mono">
+                            <span class="text-[9px] text-zinc-500 uppercase font-bold block">Asset Match Code</span>
+                            <span id="canvas-asset-id-2" class="text-sm font-bold text-white block">QR-SUITE-MIMOSA</span>
+                            <span id="canvas-link-2" class="text-[10px] text-cyan-400 block mt-1">mimosastonecrest.com</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="closeMediaCanvas(2)" class="w-full bg-red-600 hover:bg-red-700 text-white font-black uppercase text-xs py-2.5 rounded tracking-wider shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all">
+                            ❌ Collapse Row 2 Ads
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION ROW 3: SERVICES & INDUSTRIAL ================= -->
+        <div>
+            <div class="mb-4 flex items-center justify-between border-l-4 border-emerald-500 pl-3">
+                <h2 class="text-xl font-black uppercase tracking-tight text-white">SECTION C: Industrial & Local Services</h2>
+                <span class="text-xs font-mono text-slate-500">Rows C7 - C9</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- COLUMN 07: AUTO & TECHNICAL -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">07. Auto & Technical</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-07</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">AUTO MOTION</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">PROFESSIONAL WHEEL REPAIR</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">Panola Road Restoration</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('auto-motion', 3)" class="text-[9px] bg-red-600 hover:bg-red-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('auto-motion', 3)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">Auto Motion Wheel Repairs</span>
+                                    <span class="text-[9px] text-zinc-500">2526 Panola Rd, Lithonia</span>
+                                </div>
+                                <button onclick="toggleMedia('auto-motion', 3)" class="text-[8px] border border-red-500/50 text-red-400 px-1.5 py-0.5 rounded uppercase font-bold bg-red-950/20 hover:bg-red-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">Auto Motion Wheel</h5>
+                                        <span class="text-[8px] bg-red-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">AUTO</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Luxury rims restoration, professional rim straighteners, curb rash repairs, and wheel upgrades.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 2526 Panola Rd, Lithonia, GA 30058</div>
+                                        <div>📞 (404) 299-7255</div>
+                                        <div class="text-cyan-400 mt-1 font-bold">automotion.burn-1.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Metro Auto Repair & Collision</span>
+                                    <span class="text-[9px] text-zinc-500">2755 S Stone Mountain Lithonia Rd</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-25</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Lithonia Auto Tech</span>
+                                    <span class="text-[9px] text-zinc-500">Cafe Plaza, Lithonia, GA</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-26</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">MASSCOM Install Tech, Inc.</span>
+                                    <span class="text-[9px] text-zinc-500">2400 Park Central Blvd</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-27</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">InterPrint Communications</span>
+                                    <span class="text-[9px] text-zinc-500">2605 Park Central Blvd</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-28</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 08: LOCAL & B2B SERVICES -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">08. Local & B2B Services</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-08</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">MOWERS PLUS</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">LAWN EQUIPMENT & SMALL ENGINES</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">Decatur Premier Workshop</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('mowers-plus', 3)" class="text-[9px] bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('mowers-plus', 3)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">Mowers Plus LLC</span>
+                                    <span class="text-[9px] text-zinc-500">2513 Park Central Blvd, Decatur</span>
+                                </div>
+                                <button onclick="toggleMedia('mowers-plus', 3)" class="text-[8px] border border-indigo-500/50 text-indigo-400 px-1.5 py-0.5 rounded uppercase font-bold bg-indigo-950/20 hover:bg-indigo-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">Mowers Plus LLC</h5>
+                                        <span class="text-[8px] bg-indigo-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">REPAIR</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Professional lawn mower repair, small engine servicing, specialized maintenance. On-site mobile repair.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 2513 Park Central Blvd, Decatur, GA 30035</div>
+                                        <div>📞 (770) 482-9993</div>
+                                        <div class="text-cyan-400 mt-1 font-bold">mowersplus.burn-1.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Quick Dry Cleaners</span>
+                                    <span class="text-[9px] text-zinc-500">Redan Plaza, Lithonia, GA</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-29</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Redan Key & Lock</span>
+                                    <span class="text-[9px] text-zinc-500">Redan Plaza, Lithonia, GA</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-30</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Luxe Nails & Spa</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia, GA</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-31</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Elite Braids & Weaves</span>
+                                    <span class="text-[9px] text-zinc-500">Lithonia, GA</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-32</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN 09: DINING, LOUNGES & EDUCATION -->
+                <div class="plaza-casing flex flex-col gap-3">
+                    <div class="plaza-panel p-4 flex flex-col gap-4">
+                        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+                            <h3 class="font-black text-sm text-cyan-400 uppercase tracking-wider neon-blue-glow">09. Lounges & Public</h3>
+                            <span class="text-[9px] font-mono text-zinc-500">CABIN-09</span>
+                        </div>
+                        
+                        <!-- Video or Advertisement Window -->
+                        <div class="bg-black aspect-video rounded-lg border border-cyan-500/40 relative overflow-hidden flex flex-col justify-between p-3 text-center">
+                            <div class="absolute inset-0 bg-slate-950/70 z-0"></div>
+                            <span class="text-[9px] font-mono text-cyan-400 font-bold tracking-widest uppercase z-10 relative">THE CIGAR BAR</span>
+                            <div class="z-10 relative">
+                                <span class="text-xs font-bold text-white block">PREMIUM SMOKE LOUNGE & LIQUOR</span>
+                                <span class="text-[9px] text-zinc-400 mt-0.5 block">First & Oldest in Georgia</span>
+                            </div>
+                            <div class="z-10 relative flex justify-center gap-1.5 mt-2">
+                                <button onclick="toggleMedia('the-cigar-bar', 3)" class="text-[9px] bg-red-600 hover:bg-red-500 text-white px-2.5 py-0.5 rounded font-black uppercase tracking-wider transition-all">Specials</button>
+                                <button onclick="toggleMedia('the-cigar-bar', 3)" class="text-[9px] bg-black border border-cyan-400/40 text-cyan-400 px-2.5 py-0.5 rounded font-black uppercase tracking-wider hover:bg-cyan-400 hover:text-black transition-all">AD/Video</button>
+                            </div>
+                        </div>
+
+                        <!-- 5 Businesses List -->
+                        <div class="flex flex-col gap-0.5 text-xs">
+                            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-bold mb-1">Row Directory</span>
+                            
+                            <!-- Biz 1 -->
+                            <div class="hover-trigger relative py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-help">
+                                <div>
+                                    <span class="font-bold text-white block">The Cigar Bar</span>
+                                    <span class="text-[9px] text-zinc-500">2617 Panola Rd Suite 103, Lithonia</span>
+                                </div>
+                                <button onclick="toggleMedia('the-cigar-bar', 3)" class="text-[8px] border border-red-500/50 text-red-400 px-1.5 py-0.5 rounded uppercase font-bold bg-red-950/20 hover:bg-red-600 hover:text-white">Deal</button>
+                                
+                                <div class="hover-widget absolute left-4 bottom-full mb-2 w-64 bg-black border-2 border-cyan-400 p-4 rounded-xl shadow-2xl z-50 opacity-0 invisible pointer-events-none text-left">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h5 class="font-black text-cyan-400 text-sm">The Cigar Bar</h5>
+                                        <span class="text-[8px] bg-red-600 text-white px-1.5 py-0.5 rounded font-bold uppercase">LOUNGE</span>
+                                    </div>
+                                    <p class="text-[10px] text-zinc-400 mb-2">Oldest and premier cigar lounge in Georgia featuring hookahs, liquors, tapas, and premium blends.</p>
+                                    <div class="border-t border-zinc-800 pt-2 text-[9px] text-zinc-300 font-mono flex flex-col gap-0.5">
+                                        <div>📍 2617 Panola Rd Suite 103, Lithonia, GA 30058</div>
+                                        <div>📞 (470) 375-8879</div>
+                                        <div class="text-cyan-400 mt-1 font-bold">thecigarbar.burn-1.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biz 2 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">A&C Event Space</span>
+                                    <span class="text-[9px] text-zinc-500">2412 Park Central Blvd, Decatur</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-33</span>
+                            </div>
+
+                            <!-- Biz 3 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Spice House Restaurant & Lounge</span>
+                                    <span class="text-[9px] text-zinc-500">2617 Panola Rd, Lithonia</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-34</span>
+                            </div>
+
+                            <!-- Biz 4 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">Children For Christ Academy</span>
+                                    <span class="text-[9px] text-zinc-500">2637 Panola Rd, Lithonia</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-35</span>
+                            </div>
+
+                            <!-- Biz 5 -->
+                            <div class="py-1.5 border-b border-zinc-800 hover:bg-zinc-900/30 px-1 rounded flex justify-between items-center cursor-pointer">
+                                <div>
+                                    <span class="font-bold text-white block">DaVita Dialysis of Lithonia</span>
+                                    <span class="text-[9px] text-zinc-500">2485 Park Central Blvd</span>
+                                </div>
+                                <span class="text-[9px] text-zinc-500 font-mono">STE-36</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ================= INTERACTIVE EXPANDABLE INTER-ROW AD CANVAS 3: THE PREMIUM SPECIALS SHOWCASE ================= -->
+        <div id="media-canvas-wrapper-3" class="max-h-0 overflow-hidden transition-all duration-700 ease-in-out border-0 border-cyan-500/50 rounded-2xl">
+            <div class="video-canvas p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center relative min-h-[400px]">
+                <div class="video-glow-effect"></div>
+                
+                <!-- Expanded Ad Display Frame (Left) -->
+                <div class="w-full md:w-3/5 aspect-video bg-black rounded-xl border border-cyan-400 shadow-[0_0_20px_rgba(0,240,255,0.25)] relative flex items-center justify-center overflow-hidden z-10">
+                    <div class="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black/90 via-black/40 to-black/20">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-red-600 text-[10px] text-white font-black px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">● LIVE PROMO</span>
+                            <span id="canvas-tag-3" class="text-xs font-mono text-cyan-400 font-black tracking-widest uppercase">AUTO MOTION SPECS</span>
+                        </div>
+                        <div class="text-center py-8">
+                            <h4 id="canvas-video-title-3" class="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">AUTO MOTION WHEEL SHOWCASE</h4>
+                            <p class="text-xs text-zinc-300 mt-2">Curb rash, straighteners, and customized rim detailing</p>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-zinc-500 font-mono">
+                            <span>0:00 / 0:30 (AUTOPLAY LOOP)</span>
+                            <span>HQ STREAM // INDUSTRIAL CORRIDOR</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Offer / QR Box (Right) -->
+                <div class="w-full md:w-2/5 flex flex-col gap-4 z-10 bg-black/80 border border-zinc-800 p-6 rounded-xl relative">
+                    <div>
+                        <span class="text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-widest">Digital Coupon & Access</span>
+                        <h3 id="canvas-promo-title-3" class="text-2xl font-black text-white uppercase mt-1">SPECIAL OFFER SCANNABLE</h3>
+                        <p id="canvas-promo-desc-3" class="text-xs text-zinc-400 mt-2 leading-relaxed">Simply align your phone camera with the QR code on the screen to load the interactive web application, redeem coupons, or view the customized digital catalog!</p>
+                    </div>
+
+                    <!-- QR and Marketing Details -->
+                    <div class="flex gap-4 items-center bg-zinc-950 p-4 rounded-lg border border-zinc-800">
+                        <div class="w-24 h-24 bg-white p-2 rounded flex items-center justify-center shadow-lg shrink-0">
+                            <!-- SVG QR Simulation Code -->
+                            <svg class="w-full h-full text-black" viewBox="0 0 100 100">
+                                <rect x="0" y="0" width="30" height="30" fill="currentColor"/>
+                                <rect x="5" y="5" width="20" height="20" fill="white"/>
+                                <rect x="10" y="10" width="10" height="10" fill="currentColor"/>
+                                <rect x="70" y="0" width="30" height="30" fill="currentColor"/>
+                                <rect x="75" y="5" width="20" height="20" fill="white"/>
+                                <rect x="80" y="10" width="10" height="10" fill="currentColor"/>
+                                <rect x="0" y="70" width="30" height="30" fill="currentColor"/>
+                                <rect x="5" y="75" width="20" height="20" fill="white"/>
+                                <rect x="10" y="80" width="10" height="10" fill="currentColor"/>
+                                <rect x="40" y="40" width="20" height="20" fill="currentColor"/>
+                                <rect x="45" y="45" width="10" height="10" fill="white"/>
+                                <rect x="40" y="10" width="10" height="10" fill="currentColor"/>
+                                <rect x="50" y="20" width="10" height="10" fill="currentColor"/>
+                                <rect x="20" y="40" width="10" height="10" fill="currentColor"/>
+                                <rect x="80" y="40" width="15" height="15" fill="currentColor"/>
+                                <rect x="50" y="80" width="10" height="15" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="text-left font-mono">
+                            <span class="text-[9px] text-zinc-500 uppercase font-bold block">Asset Match Code</span>
+                            <span id="canvas-asset-id-3" class="text-sm font-bold text-white block">QR-AUTO-03</span>
+                            <span id="canvas-link-3" class="text-[10px] text-cyan-400 block mt-1">automotion.burn-1.com</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="closeMediaCanvas(3)" class="w-full bg-red-600 hover:bg-red-700 text-white font-black uppercase text-xs py-2.5 rounded tracking-wider shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all">
+                            ❌ Collapse Row 3 Ads
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Dictionary dataset of media ads matching our active pipeline
+        const adDatabase = {
+            'shay-slaw': {
+                tag: "BIZ-01 // FOOD SPECIALS",
+                videoTitle: "Shay Slaw Dogs Menu Tour",
+                promoTitle: "Get 15% Off Your First Specialty Hot Dog!",
+                promoDesc: "Scan the QR code to open our interactive digital kiosk ordering application on your phone. Skip the queue and enjoy instant custom slaw toppings!",
+                assetId: "QR-FOOD-01",
+                link: "shay-slaw-dogs.burn-1.com"
+            },
+            'double-scoop': {
+                tag: "BIZ-06 // INDEPENDENT BOUTIQUE",
+                videoTitle: "Double Scoop Handmade Ice Cream",
+                promoTitle: "Buy One Get One Free Scoop - Sister Deal!",
+                promoDesc: "Valid at our main Stonecrest shop location. Black-owned and locally operated. Scan the QR code to lock in your BOGO coupon ticket!",
+                assetId: "QR-SWEETS-02",
+                link: "doublescoop.burn-1.com"
+            },
+            'ashley-stewart': {
+                tag: "BIZ-11 // STYLE BRAND BLOCK",
+                videoTitle: "Ashley Stewart Style Lookbook",
+                promoTitle: "Receive 20% Off Plus-Size Statement Sets",
+                promoDesc: "Elevate your professional and casual style lines with our premium, high-fidelity seasonal collection. Scan the code to access our virtual fitting app.",
+                assetId: "QR-FASHION-03",
+                link: "ashley-stewart.burn-1.com"
+            },
+            'mimosa-suites': {
+                tag: "BIZ-19 // LUXURY LEASING BLOCK",
+                videoTitle: "Mimosa Salon Suites Virtual Walkthrough",
+                promoTitle: "Move-In Special: First Week Suite Lease Free!",
+                promoDesc: "Are you ready to enjoy total professional freedom? Own your own private locked entrance, styles, wash bowls, and keep 100% of your retail margins.",
+                assetId: "QR-SUITE-MIMOSA",
+                link: "mimosastonecrest.com"
+            },
+            'fresh-cuts': {
+                tag: "BIZ-16 // BARBER PLATFORM LINK",
+                videoTitle: "Fresh Cuts Hairlines & Trims Showcase",
+                promoTitle: "Redeem $5 Off First Lineup Scan!",
+                promoDesc: "Book your online slot with Adrian Hudson or other top-rated DeKalb master barbers. Zero waiting time - scan code to launch booking engine.",
+                assetId: "QR-BARBER-02",
+                link: "fresh-cuts.burn-1.com"
+            },
+            'ilocdit': {
+                tag: "BIZ-21 // ELITE PROTECTIVE HAIR",
+                videoTitle: "iLocdit Natural Loc & Protective Styles",
+                promoTitle: "Clarifying Wash + Free Dreadlocks Conditioning",
+                promoDesc: "Experience premium natural hair care with a perfect 5.0-star local reputation. Scan code to schedule your private consultation.",
+                assetId: "QR-LOCS-ILOCDIT",
+                link: "ilocdit.burn-1.com"
+            },
+            'taddas-fitness': {
+                tag: "BIZ-26 // HEALTH AND FITNESS HUB",
+                videoTitle: "Tadda's Fitness Bootcamps",
+                promoTitle: "Get a free pass to your first Bootcamp class!",
+                promoDesc: "Experience premium fat-burning circuits, strength routines, and nutritional classes. Scan code to redeem your free pass.",
+                assetId: "QR-GYM-TADDAS",
+                link: "taddas-fitness.burn-1.com"
+            },
+            'auto-motion': {
+                tag: "BIZ-31 // PROFESSIONAL WHEEL DESIGN",
+                videoTitle: "Auto Motion Rims & Curb Rash Restoration",
+                promoTitle: "10% off custom rim detailing or curb rash restoration!",
+                promoDesc: "Valid for all luxury cars, SUVs, and high-end imports. Professional wheel straighteners on-site. Scan QR to lock in your discount pass.",
+                assetId: "QR-AUTO-03",
+                link: "automotion.burn-1.com"
+            },
+            'mowers-plus': {
+                tag: "BIZ-36 // LAWN ENGINE WORKSHOP",
+                videoTitle: "Mowers Plus LLC Walkthrough",
+                promoTitle: "Book on-site mobile lawn mower repair online",
+                promoDesc: "Fast local repairs, small engine diagnostics, and equipment maintenance. Scan QR code to schedule your mobile pick-up.",
+                assetId: "QR-ENGINE-MOWERS",
+                link: "mowersplus.burn-1.com"
+            },
+            'the-cigar-bar': {
+                tag: "BIZ-39 // PREMIUM SMOKE LOUNGE",
+                videoTitle: "The Cigar Bar VIP Lounge",
+                promoTitle: "Complimentary light bite with your VIP reservation!",
+                promoDesc: "Join us for premium cigars, handcrafted tap drinks, hookahs, and great DJ vibes on weekends. Scan QR to reserve your table.",
+                assetId: "QR-LOUNGE-CIGAR",
+                link: "thecigarbar.burn-1.com"
+            }
+        };
+
+        let masterOpen = false;
+
+        // Open specific media canvas row with smooth scrolling
+        function toggleMedia(adKey, rowNum) {
+            const data = adDatabase[adKey];
+            if (!data) return;
+
+            // Populate canvas elements dynamically based on row number
+            if (rowNum === 1) {
+                // Dual ad already pre-filled or can be dynamically populated if desired.
+                // We keep Row 1 as a pre-designed beautiful side-by-side Dual Ad showcase!
+            } else if (rowNum === 2) {
+                document.getElementById('canvas-tag-2').innerText = data.tag;
+                document.getElementById('canvas-video-title-2').innerText = data.videoTitle;
+                document.getElementById('canvas-promo-title-2').innerText = data.promoTitle;
+                document.getElementById('canvas-promo-desc-2').innerText = data.promoDesc;
+                document.getElementById('canvas-asset-id-2').innerText = data.assetId;
+                document.getElementById('canvas-link-2').innerText = data.link;
+            } else if (rowNum === 3) {
+                document.getElementById('canvas-tag-3').innerText = data.tag;
+                document.getElementById('canvas-video-title-3').innerText = data.videoTitle;
+                document.getElementById('canvas-promo-title-3').innerText = data.promoTitle;
+                document.getElementById('canvas-promo-desc-3').innerText = data.promoDesc;
+                document.getElementById('canvas-asset-id-3').innerText = data.assetId;
+                document.getElementById('canvas-link-3').innerText = data.link;
+            }
+
+            // Expand specific wrapper
+            const wrapper = document.getElementById('media-canvas-wrapper-' + rowNum);
+            wrapper.style.maxHeight = "1000px";
+            wrapper.style.borderWidth = "4px";
+            wrapper.style.marginTop = "24px";
+            wrapper.style.marginBottom = "24px";
+
+            // Smooth scroll to the media container
+            wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Global master toggle expands or collapses all ads
+        function toggleMasterAds() {
+            masterOpen = !masterOpen;
+            const btn = document.getElementById('master-toggle-btn');
+            const text = document.getElementById('master-toggle-text');
+
+            for (let i = 1; i <= 3; i++) {
+                const wrapper = document.getElementById('media-canvas-wrapper-' + i);
+                if (masterOpen) {
+                    wrapper.style.maxHeight = "1000px";
+                    wrapper.style.borderWidth = "4px";
+                    wrapper.style.marginTop = "24px";
+                    wrapper.style.marginBottom = "24px";
+                } else {
+                    wrapper.style.maxHeight = "0px";
+                    wrapper.style.borderWidth = "0px";
+                    wrapper.style.marginTop = "0px";
+                    wrapper.style.marginBottom = "0px";
+                }
+            }
+
+            if (masterOpen) {
+                text.innerText = "Collapse All Ads (Master Toggle)";
+                btn.classList.add('bg-cyan-400', 'text-black');
+            } else {
+                text.innerText = "Expand All Ads (Master Toggle)";
+                btn.classList.remove('bg-cyan-400', 'text-black');
+            }
+        }
+
+        // Close specific media canvas row
+        function closeMediaCanvas(rowNum) {
+            const wrapper = document.getElementById('media-canvas-wrapper-' + rowNum);
+            wrapper.style.maxHeight = "0px";
+            wrapper.style.borderWidth = "0px";
+            wrapper.style.marginTop = "0px";
+            wrapper.style.marginBottom = "0px";
+        }
+    </script>
+</body>
+</html>

@@ -153,9 +153,7 @@
         html.day-mode .full-bg-overlay {
             display: none !important;
         }
-        html.day-mode #songToggleBtn {
-            display: none !important; /* HIDE MUSIC BUTTON IN DAY MODE */
-        }
+        /* Music button visible in both Day and Night mode */
         html.day-mode header {
             background-color: rgba(255, 255, 255, 0.95) !important;
             border-bottom: 3px solid #000000 !important;
@@ -647,14 +645,12 @@
                         Navigate through security mazes, bypass node traps, and unlock operational clearance codes in our official brutalist maze game engine.
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <a href="maze.html" class="px-5 py-2.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber text-xs font-bold uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.7)] flex items-center gap-2">
-                            <i class="fa-solid fa-play"></i> LAUNCH MAZE GAME &rarr;
-                        </a>
+                        <a href="privacy_first_protocol.html" class="px-6 py-3 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.6)] flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> PRIVACY FIRST CHALLENGE</a>
                     </div>
                 </div>
 
                 <!-- CLICKABLE MAZE GAME IMAGE PORTAL (NO OVERLAY BUTTON ON PICTURE) -->
-                <div class="w-full md:w-1/2 overflow-hidden rounded-xl border-2 border-amber-500/60 shadow-2xl group cursor-pointer" onclick="window.location.href='maze.html'">
+                <div class="w-full md:w-1/2 overflow-hidden rounded-xl border-2 border-amber-500/60 shadow-2xl group cursor-pointer" onclick="window.location.href="privacy_first_protocol.html"">
                     <img src="assets/Saved_Frame_from_Animate_brutalist_202608071942.jpeg" alt="Click to Play Burn-1 Maze Game" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
             </div>
@@ -723,179 +719,81 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
                 <div>
                     <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block mb-1">
-                        📦 SYSTEM CATALOG &amp; PRODUCT ROUTES
+                        VERIFIED SITE DIRECTORY
                     </span>
-                    <h2 class="font-cyber text-2xl md:text-3xl font-bold text-white uppercase">
-                        BURN THRU SITE DIRECTORY
+                    <h2 class="font-cyber text-2xl md:text-3xl font-bold text-white uppercase cursor-pointer hover:text-amber-400 transition-colors flex items-center gap-2" onclick="window.location.href='burn1-business-directory-v4.html'">
+                        BURN THRU SITE DIRECTORY <i class="fa-solid fa-arrow-right text-amber-400 text-lg"></i>
                     </h2>
                 </div>
-                <a href="store.html" class="text-xs font-mono text-purple-400 hover:text-purple-300 flex items-center gap-1">
-                    VIEW COMPLETE STOREFRONT <i class="fa-solid fa-arrow-right"></i>
+                <a href="burn1-digital-card.html" class="px-4 py-2 rounded bg-purple-950/80 border border-purple-500/60 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(147,51,234,0.3)]">
+                    OPEN DIGITAL CARD <i class="fa-solid fa-address-card text-amber-400"></i>
                 </a>
             </div>
 
-            <!-- DIRECTORY GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- DIRECTORY GRID (BUSINESS DIRECTORY, HELPLINE & FRIEDBRAINS WORLD) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <!-- ITEM 1: Tor Vault -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between">
+                <!-- CARD 1: ATLANTA METRO BUSINESS DIRECTORY V4 -->
+                <div class="cyber-card p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-between group hover:border-amber-400 transition-all">
                     <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: DATA-01</span>
-                            <span class="text-xs font-cyber text-purple-300 font-bold">$50.00</span>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-2.5 py-1 rounded bg-amber-950/80 border border-amber-500/50 text-amber-300 font-mono text-[10px] font-bold uppercase">
+                                Plaza & Kiosk Network
+                            </span>
+                            <i class="fa-solid fa-store text-amber-400 text-xl group-hover:scale-110 transition-transform"></i>
                         </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">Tor Privacy Vault &amp; OpSec Kit</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">6-in-1 privacy architecture, metadata scrubbers, Tor configs, and hardware killswitches.</p>
+                        <h3 class="font-cyber text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                            Atlanta Metro Business Directory
+                        </h3>
+                        <p class="text-xs font-mono text-slate-300 mb-6 leading-relaxed">
+                            Physical plaza directory portal for verified Decatur, Lithonia, & Stonecrest local merchants, interactive digital cards, and QR coupons.
+                        </p>
                     </div>
-                    <div class="flex items-center gap-2 pt-3 border-t border-purple-900/60">
-                        <a href="tor-vault/index.html" class="w-full text-center py-2 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                            OPEN VAULT HUB
-                        </a>
-                    </div>
+                    <a href="burn1-business-directory-v4.html" class="w-full py-2.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber text-xs font-black text-center uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_12px_rgba(245,158,11,0.4)]">
+                        OPEN BUSINESS DIRECTORY <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <!-- ITEM 2: Zero-Party Kiosk Intake Portal -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between">
+                <!-- CARD 2: HELPLINE DIRECTORY -->
+                <div class="cyber-card p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-between group hover:border-amber-400 transition-all">
                     <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: KIOSK-02</span>
-                            <span class="text-xs font-cyber text-purple-300 font-bold">$50.00</span>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-2.5 py-1 rounded bg-red-950/80 border border-red-500/50 text-red-300 font-mono text-[10px] font-bold uppercase">
+                                24/7 Support Hotline
+                            </span>
+                            <i class="fa-solid fa-heart-pulse text-red-400 text-xl group-hover:scale-110 transition-transform"></i>
                         </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">Zero-Party Kiosk Intake Portal</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">Zero-party data collection engine for offline &amp; online customer onboarding.</p>
+                        <h3 class="font-cyber text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                            Helpline Directory
+                        </h3>
+                        <p class="text-xs font-mono text-slate-300 mb-6 leading-relaxed">
+                            Free, confidential local crisis helplines, addiction recovery resources, and 24/7 support hotline directory for Stonecrest & Metro Atlanta.
+                        </p>
                     </div>
-                    <div class="flex items-center gap-2 pt-3 border-t border-purple-900/60">
-                        <a href="zero_party_kiosk.html" class="w-full text-center py-2 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                            VIEW KIOSK ENGINE
-                        </a>
-                    </div>
+                    <a href="helpline/index.html" class="w-full py-2.5 rounded bg-red-950/60 hover:bg-red-900/80 text-red-200 border border-red-500/50 font-cyber text-xs font-bold text-center uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                        OPEN HELPLINE DIRECTORY <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <!-- ITEM 3: Digital Menu Kit -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between">
+                <!-- CARD 3: FRIEDBRAINS WORLD -->
+                <div class="cyber-card p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-between group hover:border-amber-400 transition-all">
                     <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: MENU-07</span>
-                            <span class="text-xs font-cyber text-purple-300 font-bold">$50.00</span>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-2.5 py-1 rounded bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 font-mono text-[10px] font-bold uppercase">
+                                Privacy Investigation
+                            </span>
+                            <i class="fa-solid fa-brain text-cyan-400 text-xl group-hover:scale-110 transition-transform"></i>
                         </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">Restaurant &amp; Food Truck Digital Menu Kit</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">Instant QR mobile menu system with live price toggles and offline fallback.</p>
+                        <h3 class="font-cyber text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                            FriedBrains World
+                        </h3>
+                        <p class="text-xs font-mono text-slate-300 mb-6 leading-relaxed">
+                            Digital Pickpocket ad-tracker investigation, mobile device telemetry hardening, and Sovereignty Identity Recovery articles.
+                        </p>
                     </div>
-                    <div class="flex items-center gap-2 pt-3 border-t border-purple-900/60">
-                        <a href="digital_menu_kit.html" class="w-full text-center py-2 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                            OPEN MENU KIT
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ITEM 4: Executive Playbook -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: EXEC-04</span>
-                            <span class="text-xs font-cyber text-purple-300 font-bold">$50.00</span>
-                        </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">Executive Digital Etiquette Playbook</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">48-page executive playbook on operational communication protocols.</p>
-                    </div>
-                    <div class="flex items-center gap-2 pt-3 border-t border-purple-900/60">
-                        <a href="executive_etiquette_playbook.html" class="w-full text-center py-2 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                            OPEN PLAYBOOK
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ITEM 5: Local AI Vault -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: AI-05</span>
-                            <span class="text-xs font-cyber text-purple-300 font-bold">$50.00</span>
-                        </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">Privacy-First Local AI Vault</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">Ollama / Llama3 air-gapped local AI installer script package.</p>
-                    </div>
-                    <div class="flex items-center gap-2 pt-3 border-t border-purple-900/60">
-                        <a href="privacy_first_protocol.html" class="w-full text-center py-2 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                            VIEW LOCAL AI VAULT
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ITEM 6: E-Commerce Privacy Audit -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: AUDIT-05</span>
-                            <span class="text-xs font-cyber text-purple-300 font-bold">$50.00</span>
-                        </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">E-Commerce Privacy Audit Checklist</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">Full compliance audit framework for online stores &amp; digital payment gateways.</p>
-                    </div>
-                    <div class="flex items-center gap-2 pt-3 border-t border-purple-900/60">
-                        <a href="ecommerce_privacy_audit.html" class="w-full text-center py-2 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                            OPEN AUDIT KIT
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ITEM 7: Digital Cigarette Protocol -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between border-2 border-amber-500/80 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: VICE-08</span>
-                            <span class="text-xs font-cyber text-amber-400 font-bold">$50.00</span>
-                        </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">The Digital Cigarette Protocol</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">Interactive Vice Simulator, Dopamine Trance dissection, &amp; Hard Hat Protocol.</p>
-                    </div>
-                    <div class="flex items-center gap-2 pt-3 border-t border-purple-900/60">
-                        <a href="digital_cigarette.html" class="w-full text-center py-2.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber text-xs font-extrabold uppercase transition-all shadow-[0_0_15px_rgba(245,158,11,0.6)]">
-                            LAUNCH PROTOCOL &rarr;
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ITEM 8: ꟻriedbrains World Digital Recovery RPG -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between border-2 border-purple-500/80 shadow-[0_0_20px_rgba(147,51,234,0.3)]">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: RECOVERY-09</span>
-                            <span class="text-xs font-cyber text-purple-300 font-bold">$50.00</span>
-                        </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">ꟻriedbrains World &amp; Recovery RPG</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">Interactive terminal RPG, 12-Week Mind Roadmap, &amp; AI Image Prompts Manifest.</p>
-                    </div>
-                    <div class="flex flex-col gap-2 pt-3 border-t border-purple-900/60 font-mono text-xs">
-                        <a href="friedbrains-world/index.html" class="w-full text-center py-2 rounded bg-purple-950/60 border border-purple-500 text-purple-200 font-bold hover:bg-purple-900 transition-all">
-                            OPEN ꟻRIEDBRAINS WORLD &rarr;
-                        </a>
-                        <div class="grid grid-cols-2 gap-2">
-                            <a href="friedbrains-world/12_week_recovery_checklist.html" class="text-center py-1.5 rounded bg-amber-950/60 border border-amber-500/60 text-amber-400 text-[11px] font-bold hover:bg-amber-900 transition-all">
-                                📋 12-Wk Roadmap
-                            </a>
-                            <a href="friedbrains-world/sovereignty_case_study.html" class="text-center py-1.5 rounded bg-purple-950/60 border border-purple-500/60 text-purple-300 text-[11px] font-bold hover:bg-purple-900 transition-all">
-                                📊 Case Study
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ITEM 9: Mental Health & Addiction Support Resources Directory -->
-                <div class="cyber-card p-6 rounded-xl relative flex flex-col justify-between border-2 border-green-500/80 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-mono text-amber-400 font-bold px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/40">SYS: HELPLINE-10</span>
-                            <span class="text-xs font-cyber text-green-400 font-bold px-2 py-0.5 rounded bg-green-950/60 border border-green-500/40">LIVE DIRECTORY</span>
-                        </div>
-                        <h3 class="font-cyber text-lg font-bold text-white mb-2">Mental Health &amp; Support Directory</h3>
-                        <p class="text-xs font-mono text-slate-200 mb-4 leading-relaxed">Live keystroke search, NotebookLM /sync-brain search engine, &amp; M2M JSON endpoint.</p>
-                    </div>
-                    <div class="flex flex-col gap-2 pt-3 border-t border-purple-900/60 font-mono text-xs">
-                        <a href="helpline/index.html" class="w-full text-center py-2.5 rounded bg-green-950/60 border border-green-500 text-green-200 font-mono text-xs font-bold hover:bg-green-900 transition-all">
-                            OPEN HELPLINE DIRECTORY &rarr;
-                        </a>
-                    </div>
+                    <a href="friedbrains-world/index.html" class="w-full py-2.5 rounded bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-200 border border-cyan-500/50 font-cyber text-xs font-bold text-center uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                        EXPLORE FRIEDBRAINS WORLD <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
             </div>
@@ -917,7 +815,7 @@
             </div>
             <div class="flex flex-wrap justify-center gap-6 text-slate-300">
                 <a href="index.html" class="hover:text-amber-400 transition-colors">Burn-1 Hub</a>
-                <a href="maze.html" class="hover:text-amber-400 transition-colors">Burn-1 Maze Game</a>
+                <a href="privacy_first_protocol.html" class="px-6 py-3 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.6)] flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> PRIVACY FIRST CHALLENGE</a>
                 <a href="test-connection.html" class="hover:text-amber-400 transition-colors">Connection Test</a>
                 <a href="after-purchase.html" class="hover:text-amber-400 transition-colors">After Purchase</a>
                 <a href="store.html" class="hover:text-amber-400 transition-colors">Storefront</a>
@@ -958,16 +856,17 @@
 
             // Dynamic QR Code Rendering
             const qrContainer = document.getElementById('qr-preview-container');
-            qrContainer.innerHTML = '';
-            new QRCode(qrContainer, {
-                text: fullURL,
-                width: 100,
-                height: 100,
-                colorDark: '#000000',
-                colorLight: '#ffffff'
-            });
+            if (qrContainer && typeof QRCode !== 'undefined') {
+                qrContainer.innerHTML = '';
+                new QRCode(qrContainer, {
+                    text: fullURL,
+                    width: 100,
+                    height: 100,
+                    colorDark: '#000000',
+                    colorLight: '#ffffff'
+                });
+            }
         }
-        updateKioskPreview();
 
         function goToStep(step) {
             currentStep = step;
@@ -1003,21 +902,19 @@
             const audio = document.getElementById('bgAudio');
             const icon = document.getElementById('songIcon');
             const text = document.getElementById('songText');
-            const btn = document.getElementById('songToggleBtn');
 
             if (audio.paused) {
                 audio.play().then(() => {
-                    icon.className = "fa-solid fa-pause text-green-400 animate-pulse";
-                    text.innerText = "PAUSE MUSIC";
-                    btn.classList.add("border-green-400");
+                    if (icon) icon.className = "fa-solid fa-pause text-green-400 animate-pulse";
+                    if (text) text.innerText = "PAUSE MUSIC";
                 }).catch(err => {
                     console.log("Audio play error:", err);
+                    alert("Click anywhere on the page first, then press Play Music!");
                 });
             } else {
                 audio.pause();
-                icon.className = "fa-solid fa-music text-amber-400";
-                text.innerText = "PLAY MUSIC";
-                btn.classList.remove("border-green-400");
+                if (icon) icon.className = "fa-solid fa-music text-amber-400";
+                if (text) text.innerText = "PLAY MUSIC";
             }
         }
 
@@ -1031,41 +928,46 @@
 
             if (htmlRoot.classList.contains('day-mode')) {
                 htmlRoot.classList.remove('day-mode');
-                themeIcon.className = "fa-solid fa-sun text-amber-400";
-                themeText.innerText = "DAY MODE";
-                versionTag.innerText = "HUB";
+                if (themeIcon) themeIcon.className = "fa-solid fa-sun text-amber-400";
+                if (themeText) themeText.innerText = "DAY MODE";
+                if (versionTag) versionTag.innerText = "HUB";
                 localStorage.setItem('burn1_theme', 'night');
             } else {
                 htmlRoot.classList.add('day-mode');
-                themeIcon.className = "fa-solid fa-moon text-purple-600";
-                themeText.innerText = "NIGHT MODE";
-                versionTag.innerText = "HUB BIZ";
-                if (!bgAudio.paused) {
-                    bgAudio.pause(); // Pause music when switching to Day Mode
+                if (themeIcon) themeIcon.className = "fa-solid fa-moon text-purple-600";
+                if (themeText) themeText.innerText = "NIGHT MODE";
+                if (versionTag) versionTag.innerText = "HUB BIZ";
+                if (bgAudio && !bgAudio.paused) {
+                    bgAudio.pause();
                 }
                 localStorage.setItem('burn1_theme', 'day');
             }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('kiosk-subdomain-input')) {
+                updateKioskPreview();
+            }
             const savedTheme = localStorage.getItem('burn1_theme');
             const urlParams = new URLSearchParams(window.location.search);
             const modeParam = urlParams.get('mode');
+            
             if (modeParam === 'day' || savedTheme === 'day') {
                 document.getElementById('html-root').classList.add('day-mode');
-                document.getElementById('themeIcon').className = 'fa-solid fa-moon text-purple-600';
-                document.getElementById('themeText').innerText = 'NIGHT MODE';
-                document.getElementById('version-tag').innerText = 'HUB BIZ';
+                const themeIcon = document.getElementById('themeIcon');
+                const themeText = document.getElementById('themeText');
+                const versionTag = document.getElementById('version-tag');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-purple-600';
+                if (themeText) themeText.innerText = 'NIGHT MODE';
+                if (versionTag) versionTag.innerText = 'HUB BIZ';
             } else {
                 document.getElementById('html-root').classList.remove('day-mode');
-                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-amber-400';
-                document.getElementById('themeText').innerText = 'DAY MODE';
-                document.getElementById('version-tag').innerText = 'HUB';
-            }
-                document.getElementById('html-root').classList.add('day-mode');
-                document.getElementById('themeIcon').className = "fa-solid fa-moon text-purple-600";
-                document.getElementById('themeText').innerText = "NIGHT MODE";
-                document.getElementById('version-tag').innerText = "HUB BIZ";
+                const themeIcon = document.getElementById('themeIcon');
+                const themeText = document.getElementById('themeText');
+                const versionTag = document.getElementById('version-tag');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-400';
+                if (themeText) themeText.innerText = 'DAY MODE';
+                if (versionTag) versionTag.innerText = 'HUB';
             }
         });
     </script>
