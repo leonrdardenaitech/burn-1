@@ -3,6 +3,11 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "(?<subdomain>(?!www$)[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
+      "destination": "/cards/:subdomain.html"
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "(?<subdomain>(?!www$)[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/cards/:subdomain.html"
