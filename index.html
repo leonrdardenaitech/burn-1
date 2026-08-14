@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="dark scroll-smooth" id="html-root">
 <head>
+    <script>
+        (function() {
+            var host = window.location.hostname.toLowerCase();
+            if (host.endsWith('burn-1.com') && host !== 'burn-1.com' && host !== 'www.burn-1.com') {
+                var parts = host.split('.');
+                if (parts.length >= 3) {
+                    var sub = parts[0];
+                    if (sub && sub !== 'www') {
+                        window.location.replace('/cards/' + encodeURIComponent(sub) + '.html');
+                    }
+                }
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BURN-1 SYSTEMS | Burn Thru Site Directory</title>
