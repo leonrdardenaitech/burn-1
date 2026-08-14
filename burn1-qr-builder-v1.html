@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burn-1 QR & Subdomain Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap');
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8">
+
+    <header class="w-full max-w-md mx-auto text-center pt-4">
+        <span class="text-xs font-bold tracking-widest bg-cyan-600/20 text-cyan-400 border border-cyan-500/30 px-3 py-1 uppercase rounded-full">
+            Burn-1 Operator Tool
+        </span>
+        <h1 class="text-2xl font-black uppercase tracking-tight text-white mt-3">QR Link Generator</h1>
+    </header>
+
+    <main class="w-full max-w-md mx-auto my-auto py-6">
+        <div class="glass-panel rounded-3xl p-6 flex flex-col gap-5">
+            <div>
+                <label class="block text-[10px] uppercase font-mono tracking-widest text-slate-400 font-bold mb-1">Subdomain Name</label>
+                <div class="flex items-center bg-slate-950 border border-slate-800 rounded-xl px-3 py-2">
+                    <input id="subdomain" type="text" placeholder="slick-fades" oninput="updateLink()" class="bg-transparent text-white font-bold w-full outline-none text-sm lowercase">
+                    <span class="text-xs text-cyan-400 font-mono">.burn-1.com</span>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[10px] uppercase font-mono tracking-widest text-slate-400 font-bold mb-1">Business Name (Optional override)</label>
+                <input id="biz-name" type="text" placeholder="Slick Fades Barbershop" oninput="updateLink()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm font-bold outline-none focus:border-cyan-500 transition-all">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-[10px] uppercase font-mono tracking-widest text-slate-400 font-bold mb-1">Phone Number</label>
+                    <input id="phone" type="text" placeholder="(770) 555-1212" oninput="updateLink()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm font-bold outline-none focus:border-cyan-500 transition-all">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase font-mono tracking-widest text-slate-400 font-bold mb-1">Category</label>
+                    <input id="category" type="text" placeholder="Barber & Salon" oninput="updateLink()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm font-bold outline-none focus:border-cyan-500 transition-all">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-[10px] uppercase font-mono tracking-widest text-slate-400 font-bold mb-1">Location Address</label>
+                <input id="address" type="text" placeholder="2615 Park Central Blvd" oninput="updateLink()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-sm font-bold outline-none focus:border-cyan-500 transition-all">
+            </div>
+
+            <!-- RESULT OUTBOX -->
+            <div class="border-t border-slate-800/80 pt-4 mt-2 flex flex-col gap-3">
+                <div class="text-center">
+                    <span class="text-[10px] uppercase font-mono tracking-widest text-slate-500 font-bold block mb-1">Generated Target URL</span>
+                    <a id="generated-url" href="#" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-bold break-all text-xs underline">
+                        Enter details above...
+                    </a>
+                </div>
+
+                <div id="qr-container" class="hidden flex flex-col items-center gap-2 mt-2">
+                    <span class="text-[10px] uppercase font-mono tracking-widest text-slate-500 font-bold">Scannable QR Code</span>
+                    <div class="bg-white p-3 rounded-2xl shadow-xl">
+                        <img id="qr-image" src="" alt="QR Code" class="w-40 h-40">
+                    </div>
+                    <span class="text-[9px] text-slate-400 font-mono">Press & hold image to save to your phone</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full max-w-md mx-auto text-center pb-4 flex flex-col gap-2">
+        <div class="text-[9px] text-slate-700 font-mono">
+            © 2026 BURN-1 PLATFORM BUILDER
+        </div>
+    </footer>
+
+    <script>
+        function updateLink() {
+            const subdomain = document.getElementById('subdomain').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+            const bizName = document.getElementById('biz-name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const category = document.getElementById('category').value.trim();
+            const address = document.getElementById('address').value.trim();
+
+            if (!subdomain) {
+                document.getElementById('generated-url').innerText = "Enter subdomain...";
+                document.getElementById('generated-url').href = "#";
+                document.getElementById('qr-container').classList.add('hidden');
+                return;
+            }
+
+            // Build query params
+            const params = new URLSearchParams();
+            if (phone) params.set('p', phone);
+            if (address) params.set('a', address);
+            if (category) params.set('c', category);
+            // If custom business name is provided and differs from default Title Case slug, pass it
+            if (bizName) params.set('name', bizName);
+
+            const queryString = params.toString();
+            const targetUrl = `http://${subdomain}.burn-1.com/${queryString ? '?' + queryString : ''}`;
+
+            const urlElement = document.getElementById('generated-url');
+            urlElement.innerText = targetUrl;
+            urlElement.href = targetUrl;
+
+            // Generate scannable QR Code instantly using a secure, free API
+            const qrImg = document.getElementById('qr-image');
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=000000&data=${encodeURIComponent(targetUrl)}`;
+            
+            document.getElementById('qr-container').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

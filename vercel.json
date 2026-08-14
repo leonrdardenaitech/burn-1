@@ -4,6 +4,7 @@
   "rewrites": [
     { "source": "/directory", "destination": "/directory.html" },
     { "source": "/card", "destination": "/card.html" },
+    { "source": "/qr-builder", "destination": "/qr-builder.html" },
     { "source": "/home", "destination": "/index.html" },
     { "source": "/store", "destination": "/store.html" },
     { "source": "/admin", "destination": "/admin.html" },

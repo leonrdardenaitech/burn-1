@@ -463,7 +463,33 @@
                 }
             }
 
-            // 3. Render matched card or display fallback list
+            // 3. Dynamic Auto-Generation Fallback for On-The-Fly client pitching!
+            // If we are on a custom subdomain but it's not in our static database, we generate it on-the-fly!
+            if (!matchedKey && parts.length > 2 && parts[0] !== 'www') {
+                const subdomain = parts[0].toLowerCase();
+                
+                // Convert slug back into clean Title Case (e.g., "my-awesome-barber" -> "My Awesome Barber")
+                const formattedName = subdomain.split('-')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+                
+                // Read optional query parameter overrides, fallback to defaults
+                const urlParams = new URLSearchParams(window.location.search);
+                const customPhone = urlParams.get('phone') || urlParams.get('p') || "(678) 555-0100";
+                const customAddress = urlParams.get('address') || urlParams.get('a') || "Lithonia / Stonecrest Area, GA";
+                const customCategory = urlParams.get('category') || urlParams.get('c') || "Verified Partner";
+                
+                matchedKey = subdomain;
+                BUSINESS_DATABASE[subdomain] = {
+                    name: formattedName,
+                    category: customCategory,
+                    address: customAddress,
+                    phone: customPhone,
+                    mapSearch: `${formattedName} ${customAddress}`
+                };
+            }
+
+            // 4. Render matched card or display fallback list
             if (matchedKey) {
                 renderCard(BUSINESS_DATABASE[matchedKey]);
             } else {
