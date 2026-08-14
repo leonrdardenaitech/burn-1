@@ -2,9 +2,15 @@
   "version": 2,
   "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "(?<subdomain>(?!www$)[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
+      "destination": "/cards/:subdomain.html"
+    },
     { "source": "/directory", "destination": "/directory.html" },
     { "source": "/card", "destination": "/card.html" },
     { "source": "/qr-builder", "destination": "/qr-builder.html" },
+    { "source": "/builder", "destination": "/qr-builder.html" },
     { "source": "/home", "destination": "/index.html" },
     { "source": "/store", "destination": "/store.html" },
     { "source": "/admin", "destination": "/admin.html" },
