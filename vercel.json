@@ -3,33 +3,100 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/directory",
+      "destination": "/directory.html"
+    },
+    {
+      "source": "/card",
+      "destination": "/card.html"
+    },
+    {
+      "source": "/qr-builder",
+      "destination": "/qr-builder.html"
+    },
+    {
+      "source": "/builder",
+      "destination": "/qr-builder.html"
+    },
+    {
+      "source": "/home",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/store",
+      "destination": "/store.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/qr",
+      "destination": "/qr.html"
+    },
+    {
+      "source": "/kiosk",
+      "destination": "/kiosk.html"
+    },
+    {
+      "source": "/slawdawgs",
+      "destination": "/slawdawgs.html"
+    },
+    {
+      "source": "/universal",
+      "destination": "/universal_kiosk.html"
+    },
+    {
+      "source": "/bowdega",
+      "destination": "/bowdega.html"
+    },
+    {
+      "source": "/barber",
+      "destination": "/barber.html"
+    },
+    {
+      "source": "/malwdarazor",
+      "destination": "/malwdarazor.html"
+    },
+    {
+      "source": "/mal",
+      "destination": "/mal.html"
+    },
+    {
+      "source": "/privacy-first",
+      "destination": "/privacy_first_protocol.html"
+    },
+    {
+      "source": "/challenge",
+      "destination": "/privacy_first_challenge.html"
+    },
+    {
+      "source": "/after-purchase",
+      "destination": "/after-purchase.html"
+    },
+    {
+      "source": "/onboarding",
+      "destination": "/onboarding.html"
+    },
+    {
       "source": "/",
-      "has": [{ "type": "host", "value": "(?<subdomain>(?!www$)[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
+      "has": [{ "type": "host", "value": "www.burn-1.com" }],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "burn-1.com" }],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/cards/:subdomain.html"
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "(?<subdomain>(?!www$)[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
+      "has": [{ "type": "host", "value": "(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/cards/:subdomain.html"
-    },
-    { "source": "/directory", "destination": "/directory.html" },
-    { "source": "/card", "destination": "/card.html" },
-    { "source": "/qr-builder", "destination": "/qr-builder.html" },
-    { "source": "/builder", "destination": "/qr-builder.html" },
-    { "source": "/home", "destination": "/index.html" },
-    { "source": "/store", "destination": "/store.html" },
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/qr", "destination": "/qr.html" },
-    { "source": "/kiosk", "destination": "/kiosk.html" },
-    { "source": "/slawdawgs", "destination": "/slawdawgs.html" },
-    { "source": "/universal", "destination": "/universal_kiosk.html" },
-    { "source": "/bowdega", "destination": "/bowdega.html" },
-    { "source": "/barber", "destination": "/barber.html" },
-    { "source": "/malwdarazor", "destination": "/malwdarazor.html" },
-    { "source": "/mal", "destination": "/mal.html" },
-    { "source": "/privacy-first", "destination": "/privacy_first_protocol.html" },
-    { "source": "/challenge", "destination": "/privacy_first_challenge.html" },
-    { "source": "/after-purchase", "destination": "/after-purchase.html" },
-    { "source": "/onboarding", "destination": "/onboarding.html" }
+    }
   ]
 }
