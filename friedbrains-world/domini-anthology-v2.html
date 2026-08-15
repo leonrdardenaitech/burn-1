@@ -1432,9 +1432,12 @@ body {
         <span style="font-weight: bold;"><i class="fa-solid fa-compact-disc"></i> TRAP TECH</span>
         <span style="color: var(--neon-green); font-size: 0.7rem;">● READY</span>
       </div>
-      <audio controls style="width: 100%; height: 34px;">
-        <source src="03traptech.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
+      <audio controls preload="metadata" style="width: 100%; height: 34px;">
+        <source src="/friedbrains-world/03traptech.mp3" type="audio/mpeg">
+        <source src="03traptech.mp3" type="audio/mpeg">
+        <source src="/assets/03traptech.mp3" type="audio/mpeg">
+        <source src="assets/03traptech.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
       </audio>
     </div>
 
@@ -1457,8 +1460,10 @@ body {
 
     <!-- TOP HERO 75% SLOW VIDEO STAGE -->
     <div style="position: relative; border-radius: 14px; overflow: hidden; border: 2px solid var(--neon-cyan); box-shadow: 0 0 35px rgba(0, 240, 255, 0.25); margin-bottom: 2rem; background: #000;">
-      <video autoplay loop muted playsinline style="width: 100%; height: 220px; object-fit: cover; display: block; opacity: 0.8;" oncanplay="this.playbackRate = 0.75;">
+      <video autoplay loop muted playsinline preload="auto" style="width: 100%; height: 220px; object-fit: cover; display: block; opacity: 0.85;" oncanplay="this.playbackRate = 0.75;">
+        <source src="/friedbrains-world/Binary_code_rising_slow_75.mp4" type="video/mp4">
         <source src="Binary_code_rising_slow_75.mp4" type="video/mp4">
+        <source src="/assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
         <source src="assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
       </video>
       <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,7,12,0.2) 0%, rgba(6,7,12,0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
@@ -1473,7 +1478,7 @@ body {
 
     <!-- CENTERED TITLE BANNER (titleDomino.jpeg) -->
     <div style="text-align: center; margin: 0 0 2.5rem 0; width: 100%;">
-      <img src="titleDomino.jpeg" alt="The Domini Anthology Title Banner" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 30px rgba(0, 240, 255, 0.25); display: inline-block;">
+      <img src="/friedbrains-world/titleDomino.jpeg" data-name="titleDomino.jpeg" onerror="this.onerror=null;this.src=\'/assets/titleDomino.jpeg\'" alt="The Domini Anthology Title Banner" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 30px rgba(0, 240, 255, 0.25); display: inline-block;">
     </div>
 
     <!-- ARTICLE 1: Invisible Pickpocket -->
@@ -1485,14 +1490,14 @@ body {
         
         <!-- IMAGE 1: CONNECTION (01connection.jpeg) -->
         <div style="margin: 2rem 0; text-align: center;">
-          <img src="01connection.jpeg" alt="Cognitive Connection & Surveillance" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-cyan); box-shadow: 0 8px 25px rgba(0, 240, 255, 0.2);">
+          <img src="/friedbrains-world/01connection.jpeg" data-name="01connection.jpeg" onerror="this.onerror=null;this.src=\'/assets/01connection.jpeg\'" alt="Cognitive Connection & Surveillance" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-cyan); box-shadow: 0 8px 25px rgba(0, 240, 255, 0.2); display: block; margin: 0 auto;">
         </div>
 
         <p>The gleaming smartphone nestled inside your waistcoat is not a tool; it is a double agent. We have welcomed an electronic spy into our most intimate routines—one engineered from its glass screen to its silicon core to function as a clinical, digital needle, loaded and ready to inject a tiny, chemical bribe of dopamine directly into your brain’s reward pathways the absolute moment you experience a momentary pause in your day.</p>
         
         <!-- IMAGE 2: VOODOO DOLL (02vodoodoll.jpeg) -->
         <div style="margin: 2rem 0; text-align: center;">
-          <img src="02vodoodoll.jpeg" alt="The Digital Voodoo Doll" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-magenta); box-shadow: 0 8px 25px rgba(255, 0, 127, 0.25);">
+          <img src="/friedbrains-world/02vodoodoll.jpeg" data-name="02vodoodoll.jpeg" onerror="this.onerror=null;this.src=\'/assets/02vodoodoll.jpeg\'" alt="The Digital Voodoo Doll" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-magenta); box-shadow: 0 8px 25px rgba(255, 0, 127, 0.25); display: block; margin: 0 auto;">
         </div>
 
         <blockquote>
@@ -1548,7 +1553,13 @@ body {
           </div>
 
           <div style="border-radius: 10px; overflow: hidden; border: 2px solid #334155; position: relative; background: #000;">
-            <video id="corporateArmVideo" src="04aboveRedtext.mp4" controls playsinline style="width: 100%; height: auto; display: block;"></video>
+            <video controls playsinline preload="metadata" style="width: 100%; height: auto; display: block; max-height: 480px; background: #000;">
+              <source src="/friedbrains-world/04aboveRedtext.mp4" type="video/mp4">
+              <source src="04aboveRedtext.mp4" type="video/mp4">
+              <source src="/assets/04aboveRedtext.mp4" type="video/mp4">
+              <source src="assets/04aboveRedtext.mp4" type="video/mp4">
+              Your browser does not support video playback.
+            </video>
           </div>
         </div>
 
@@ -1601,7 +1612,7 @@ body {
         
         <!-- FIG 01: THE SPARK (digital_cigarette_spark.jpeg) -->
         <div style="margin: 2rem 0; text-align: center;">
-          <img src="digital_cigarette_spark.jpeg" alt="Fig 1: The Spark (Initial Trigger)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-yellow); box-shadow: 0 8px 25px rgba(255, 251, 0, 0.2);">
+          <img src="/friedbrains-world/digital_cigarette_spark.jpeg" data-name="digital_cigarette_spark.jpeg" onerror="this.onerror=null;this.src=\'/assets/digital_cigarette_spark.jpeg\'" alt="Fig 1: The Spark (Initial Trigger)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-yellow); box-shadow: 0 8px 25px rgba(255, 251, 0, 0.2); display: block; margin: 0 auto;">
           <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-yellow); margin-top: 0.5rem;">
             FIG 01 // THE SPARK (INITIAL TRIGGER)
           </div>
@@ -1653,7 +1664,7 @@ body {
 
         <!-- FIG 02: THE INHALE / TRANCE (digital_cigarette_trance.jpeg) -->
         <div style="margin: 2rem 0; text-align: center;">
-          <img src="digital_cigarette_trance.jpeg" alt="Fig 2: The Inhale (Dopamine Trance)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-magenta); box-shadow: 0 8px 25px rgba(255, 0, 127, 0.2);">
+          <img src="/friedbrains-world/digital_cigarette_trance.jpeg" data-name="digital_cigarette_trance.jpeg" onerror="this.onerror=null;this.src=\'/assets/digital_cigarette_trance.jpeg\'" alt="Fig 2: The Inhale (Dopamine Trance)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-magenta); box-shadow: 0 8px 25px rgba(255, 0, 127, 0.2); display: block; margin: 0 auto;">
           <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-magenta); margin-top: 0.5rem;">
             FIG 02 // THE INHALE (THE DOPAMINE TRANCE)
           </div>
@@ -1663,7 +1674,7 @@ body {
 
         <!-- FIG 03: THE HARD HAT PROTOCOL (digital_cigarette_hardhat.jpeg) -->
         <div style="margin: 2rem 0; text-align: center;">
-          <img src="digital_cigarette_hardhat.jpeg" alt="Fig 3: The Hard Hat (Cognitive Sovereignty)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-green); box-shadow: 0 8px 25px rgba(57, 255, 20, 0.2);">
+          <img src="/friedbrains-world/digital_cigarette_hardhat.jpeg" data-name="digital_cigarette_hardhat.jpeg" onerror="this.onerror=null;this.src=\'/assets/digital_cigarette_hardhat.jpeg\'" alt="Fig 3: The Hard Hat (Cognitive Sovereignty)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-green); box-shadow: 0 8px 25px rgba(57, 255, 20, 0.2); display: block; margin: 0 auto;">
           <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); margin-top: 0.5rem;">
             FIG 03 // THE HARD HAT (COGNITIVE SOVEREIGNTY)
           </div>
@@ -1708,10 +1719,13 @@ body {
           <span style="font-weight: bold;"><i class="fa-solid fa-music"></i> SOUNDTRACK: JUST SAY HI</span>
           <span style="color: var(--neon-magenta);">● FRIEDBRAINS SOUNDTRACK</span>
         </div>
-        <audio controls style="width: 100%;">
-          <source src="Just Say Hi song for 3.mp3" type="audio/mp3">
-          <source src="Just Say Hi.mp3" type="audio/mp3">
-          Your browser does not support the audio element.
+        <audio controls preload="metadata" style="width: 100%;">
+          <source src="/friedbrains-world/Just%20Say%20Hi.mp3" type="audio/mpeg">
+          <source src="/friedbrains-world/Just%20Say%20Hi%20song%20for%203.mp3" type="audio/mpeg">
+          <source src="Just%20Say%20Hi.mp3" type="audio/mpeg">
+          <source src="Just%20Say%20Hi%20song%20for%203.mp3" type="audio/mpeg">
+          <source src="/assets/Just%20Say%20Hi.mp3" type="audio/mpeg">
+          Your browser does not support audio playback.
         </audio>
       </div>
 
@@ -1852,7 +1866,7 @@ body {
           <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #f59e0b; font-weight: bold; margin-bottom: 0.75rem; text-transform: uppercase;">
             <i class="fa-solid fa-hard-hat"></i> HARDHAT PROTOCOL — COGNITIVE SOVEREIGNTY BANNER
           </div>
-          <img src="05hardhat.jpeg" alt="05 Hardhat Protocol" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid #334155; box-shadow: 0 8px 25px rgba(0,0,0,0.5);">
+          <img src="/friedbrains-world/05hardhat.jpeg" data-name="05hardhat.jpeg" onerror="this.onerror=null;this.src=\'/assets/05hardhat.jpeg\'" alt="05 Hardhat Protocol" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid #334155; box-shadow: 0 8px 25px rgba(0,0,0,0.5); display: block; margin: 0 auto;">
         </div>
 
       </div>
