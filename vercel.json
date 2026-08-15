@@ -79,6 +79,22 @@
       "destination": "/onboarding.html"
     },
     {
+      "source": "/helpline",
+      "destination": "/helpline/index.html"
+    },
+    {
+      "source": "/friedbrains-world/12_week_recovery_checklist",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/friedbrains-world/12-week-roadmap",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/friedbrains-world/helpline",
+      "destination": "/friedbrains-world/helpline.html"
+    },
+    {
       "source": "/",
       "has": [{ "type": "host", "value": "www.burn-1.com" }],
       "destination": "/index.html"
@@ -90,12 +106,12 @@
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
+      "has": [{ "type": "host", "value": "^(?!www\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/cards/:subdomain.html"
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
+      "has": [{ "type": "host", "value": "^(?!www\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/cards/:subdomain.html"
     }
   ]
