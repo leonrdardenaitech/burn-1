@@ -1,199 +1,1031 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth" id="html-root">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12-WEEK ROADMAP | ꟻRIED BRAINS WORLD</title>
-    <meta name="description" content="12-Week Mind Reclamation Roadmap & Checklist: Full-Bleed 75% Slow Video Backdrop.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel+Decorative:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12-WEEK ROADMAP // ꟻRIED BRAINS WORLD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg-dark: #06070c;
+  --bg-panel: #0d101d;
+  --bg-card: #111424;
+  --neon-cyan: #00f0ff;
+  --neon-magenta: #ff007f;
+  --neon-green: #39ff14;
+  --neon-yellow: #ffea00;
+  --neon-gold: #ffd700;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        gold: { 400: '#FFD700', 500: '#D4AF37' },
-                        denim: { 400: '#A4C2D4', 500: '#89ACCE' }
-                    },
-                    fontFamily: {
-                        gothic: ['Pirata One', 'Cinzel Decorative', 'serif'],
-                        mono: ['Share Tech Mono', 'monospace'],
-                        sans: ['Space Grotesk', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #0F1012;
-            color: #ffffff;
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-        }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-        .rect-badge-gold {
-            background-color: #D4AF37;
-            color: #000000 !important;
-            border: 4px solid #000000;
-            box-shadow: 6px 6px 0px #000000;
-            font-weight: 800;
-        }
-        .rect-badge-denim {
-            background-color: #A4C2D4;
-            color: #000000 !important;
-            border: 4px solid #000000;
-            box-shadow: 6px 6px 0px #000000;
-            font-weight: 800;
-        }
-        .rect-badge-asphalt {
-            background-color: #1A1C1E;
-            color: #D4AF37 !important;
-            border: 4px solid #000000;
-            box-shadow: 6px 6px 0px #000000;
-            font-weight: 800;
-        }
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-        .video-bg {
-            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
-            z-index: -1; opacity: 0.35; filter: contrast(1.2); object-fit: cover;
-        }
-    </style>
+/* CYBER HEADER */
+.cyber-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(6, 7, 12, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--neon-cyan);
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.15);
+}
+
+.logo-container a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-main {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 10px var(--neon-cyan);
+  letter-spacing: 2px;
+}
+
+.logo-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-magenta);
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.nav-header-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-decoration: none;
+  border: 1.5px solid var(--neon-cyan);
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  background: rgba(0, 240, 255, 0.06);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.nav-header-btn:hover, .nav-header-btn.active {
+  background: var(--neon-cyan);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.nav-header-btn.helpline-accent {
+  color: var(--neon-magenta);
+  border-color: var(--neon-magenta);
+  background: rgba(255, 0, 127, 0.08);
+}
+.nav-header-btn.helpline-accent:hover {
+  background: var(--neon-magenta);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+}
+
+/* MAIN CONTAINER */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* HERO SECTION */
+.hero-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.2);
+  background: #000;
+}
+
+.hero-video {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.7;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,7,12,0.3) 0%, rgba(6,7,12,0.92) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-green);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.hero-title {
+  font-size: 2.2rem;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-desc {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 800px;
+}
+
+/* SECTION HEADERS */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1.5px solid rgba(0, 240, 255, 0.2);
+  padding-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.section-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* PROGRESS BAR */
+.progress-container {
+  background: var(--bg-panel);
+  border: 1.5px solid var(--neon-cyan);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  margin-bottom: 0.6rem;
+  font-weight: bold;
+}
+
+.progress-bar-outer {
+  width: 100%;
+  height: 14px;
+  background: #000;
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #334155;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  width: 25%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green));
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+/* PHASES GRID */
+.phase-card {
+  background: var(--bg-panel);
+  border: 2px solid #334155;
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 1.75rem;
+  transition: border-color 0.3s;
+}
+
+.phase-card.phase-1 { border-color: var(--neon-cyan); }
+.phase-card.phase-2 { border-color: var(--neon-magenta); }
+.phase-card.phase-3 { border-color: var(--neon-gold); }
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.phase-title {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.phase-1 .phase-title { color: var(--neon-cyan); }
+.phase-2 .phase-title { color: var(--neon-magenta); }
+.phase-3 .phase-title { color: var(--neon-gold); }
+
+.phase-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-weight: bold;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid currentColor;
+}
+
+.phase-1 .phase-badge { color: var(--neon-cyan); }
+.phase-2 .phase-badge { color: var(--neon-magenta); }
+.phase-3 .phase-badge { color: var(--neon-gold); }
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.task-item {
+  background: #080a12;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  border-color: var(--neon-cyan);
+  background: #0b0e1a;
+}
+
+.task-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.task-checkbox:checked {
+  background: var(--neon-green);
+  border-color: var(--neon-green);
+}
+
+.task-checkbox:checked::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.task-content {
+  flex-grow: 1;
+}
+
+.task-name {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.task-desc {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* CASE STUDY CONSOLE */
+.case-study-console {
+  background: #080911;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+}
+
+.funnel-flow-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.funnel-stage-btn {
+  background: var(--bg-panel);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.funnel-stage-btn:hover {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.08);
+}
+
+.funnel-stage-btn.active {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.stage-btn-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--neon-green);
+  font-weight: bold;
+}
+
+.stage-btn-name {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 0.2rem;
+}
+
+.console-display-screen {
+  background: #000;
+  border: 1.5px solid var(--neon-cyan);
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.screen-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+}
+
+.screen-stage-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  margin-bottom: 0.75rem;
+}
+
+.screen-stage-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.screen-stage-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-yellow);
+}
+
+.screen-metric-box {
+  background: #0d101d;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.metric-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-magenta);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.screen-metric-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.screen-metric-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.screen-metric-bar-outer {
+  width: 100%;
+  height: 8px;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.screen-metric-bar-inner {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+/* RPG TERMINAL */
+.rpg-terminal-box {
+  background: #080911;
+  border: 2px solid var(--neon-green);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(57, 255, 20, 0.15);
+}
+
+.terminal-screen {
+  background: #000;
+  border: 1.5px solid var(--neon-green);
+  border-radius: 10px;
+  padding: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-green);
+  height: 220px;
+  overflow-y: auto;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.terminal-missions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.mission-btn {
+  background: var(--bg-panel);
+  border: 1.5px solid var(--neon-green);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.mission-btn:hover {
+  background: var(--neon-green);
+  color: #000;
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+  transform: translateY(-2px);
+}
+
+.mission-btn.audit-btn {
+  border-color: var(--neon-gold);
+  color: var(--neon-gold);
+}
+.mission-btn.audit-btn:hover {
+  background: var(--neon-gold);
+  color: #000;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* TOR BANNER */
+.tor-vault-card {
+  background: linear-gradient(135deg, #111424 0%, #06070c 100%);
+  border: 2px solid var(--neon-gold);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+}
+
+.tor-cta-btn {
+  display: inline-block;
+  background: var(--neon-gold);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.tor-cta-btn:hover {
+  transform: translateY(-2px);
+  background: #ffe247;
+}
+
+@media (max-width: 768px) {
+  .screen-grid {
+    grid-template-columns: 1fr;
+  }
+  .cyber-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col relative antialiased selection:bg-amber-400 selection:text-black">
+<body>
 
-    <!-- FULL-BLEED 75% SLOW VIDEO BACKDROP -->
-    <video id="bgVideo" autoplay loop muted playsinline class="video-bg" oncanplay="this.playbackRate = 0.75;">
-        <source src="assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
-        <source src="../assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
+<!-- STICKY TOP NAVIGATION -->
+<header class="cyber-header">
+  <div class="logo-container">
+    <a href="../index.html">
+      <span class="logo-main">ꟻRIED BRAINS WORLD</span>
+      <span class="logo-sub">12-Week Cognitive Reclamation Roadmap</span>
+    </a>
+  </div>
+  <nav class="nav-links">
+    <a href="../index.html" class="nav-header-btn">
+      <i class="fa-solid fa-house"></i> Home
+    </a>
+    <a href="index.html" class="nav-header-btn">
+      <i class="fa-solid fa-book-open"></i> Dispatches
+    </a>
+    <a href="12_week_recovery_checklist.html" class="nav-header-btn active">
+      <i class="fa-solid fa-list-check"></i> 12-Week Roadmap
+    </a>
+    <a href="index.html#helpline-directory" class="nav-header-btn helpline-accent">
+      <i class="fa-solid fa-phone-volume"></i> Helpline
+    </a>
+  </nav>
+</header>
+
+<div class="page-container">
+
+  <!-- HERO SECTION -->
+  <section class="hero-card">
+    <video autoplay loop muted playsinline class="hero-video" oncanplay="this.playbackRate = 0.75;">
+      <source src="Binary_code_rising_slow_75.mp4" type="video/mp4">
+      <source src="assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
     </video>
+    <div class="hero-overlay">
+      <span class="hero-tag">● HARD HAT PROTOCOL // 75% SLOW STREAM</span>
+      <h1 class="hero-title">12-Week Mind Reclamation Roadmap</h1>
+      <p class="hero-desc">
+        A structured, clinical neuroplasticity protocol designed to reverse striatal D2 receptor downregulation, eliminate algorithmic tracking vectors, and reclaim prefrontal sovereignty.
+      </p>
+    </div>
+  </section>
 
-    <!-- UNIFIED WORLD INTERCONNECTIVITY NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 bg-[#1A1C1E]/90 backdrop-blur-md border-b-4 border-black px-4 lg:px-8 py-3.5 flex flex-wrap justify-between items-center transition-colors shadow-[0_6px_0px_#000000]">
-        <div class="flex items-center gap-3">
-            <a href="../index.html" title="Burn-1 Hub (Home)" class="flex items-center gap-3 group">
-                <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border-2 border-black shadow-[3px_3px_0px_#D4AF37]">
-                <span class="text-2xl font-gothic text-white font-extrabold tracking-widest flex items-center gap-2">
-                    <span class="text-[#D4AF37]">ꟻRIED BRAINS</span>
-                    <span class="rect-badge-gold text-[10px] px-2 py-0.5 font-mono uppercase">ROADMAP</span>
-                </span>
-            </a>
+  <!-- 12-WEEK INTERACTIVE CHECKLIST -->
+  <section id="checklist-section">
+    <div class="section-head">
+      <div class="section-title-wrap">
+        <span class="section-label">Interactive Checklist</span>
+        <h2 class="section-title">Cognitive Recovery Milestones</h2>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green);">
+        <i class="fa-solid fa-shield-halved"></i> LIVE AUDIT TRACKER
+      </div>
+    </div>
+
+    <!-- Live Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-header">
+        <span>SOVEREIGNTY RECOVERY COMPLETION:</span>
+        <span id="progress-percent-val">22%</span>
+      </div>
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="checklist-progress-bar" style="width: 22%;"></div>
+      </div>
+    </div>
+
+    <!-- PHASE I -->
+    <div class="phase-card phase-1">
+      <div class="phase-header">
+        <div class="phase-title">Phase I: Digital Perimeter Isolation</div>
+        <span class="phase-badge">WEEKS 1–4</span>
+      </div>
+      <div class="task-list">
+        <label class="task-item">
+          <input type="checkbox" checked class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 1: Notification Audit &amp; Grayscale Activation</div>
+            <div class="task-desc">Revoke non-human push notifications. Convert screen display to 100% grayscale to neutralize predatory dopamine triggers.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" checked class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 2: Metadata Purge &amp; Camera Scrubbing</div>
+            <div class="task-desc">Execute local EXIF sanitization scripts on photo storage to strip embedded GPS coordinates and hardware serial fingerprints.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 3: Variable-Ratio Pattern Interrupts</div>
+            <div class="task-desc">Enforce a strict 15-minute latency buffer between any urge to check social feeds and actual device interaction.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 4: Bedroom Device Quarantine</div>
+            <div class="task-desc">Ban smartphones and digital needles from sleeping quarters. Enforce 60-minute pre-bed analog wind-down.</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- PHASE II -->
+    <div class="phase-card phase-2">
+      <div class="phase-header">
+        <div class="phase-title">Phase II: Attention Span &amp; Neuroplasticity Restoration</div>
+        <span class="phase-badge">WEEKS 5–8</span>
+      </div>
+      <div class="task-list">
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 5: 30-Min Daily HIIT Cardio Protocol</div>
+            <div class="task-desc">Engage in high-intensity cardiovascular training to trigger a clinically proven 16% increase in striatal D2 receptor binding density.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 6: Offline Air-Gapped Local AI Sandbox</div>
+            <div class="task-desc">Replace cloud-based chatbot dependencies with local, open-source models running completely offline.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 7: Default Mode Network (DMN) Reset</div>
+            <div class="task-desc">Implement 20 minutes of daily unguided mindfulness meditation to rebuild frontostriatal connectivity.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 8: Physical Community Re-engagement</div>
+            <div class="task-desc">Replace synthetic screen socialization with scheduled weekly in-person peer interactions.</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- PHASE III -->
+    <div class="phase-card phase-3">
+      <div class="phase-header">
+        <div class="phase-title">Phase III: Sustained Mind Sovereignty &amp; OpSec</div>
+        <span class="phase-badge">WEEKS 9–12</span>
+      </div>
+      <div class="task-list">
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 9: 4096-bit PGP Keypair &amp; Burner Cards</div>
+            <div class="task-desc">Isolate electronic payments with virtual burner cards and encrypt private communications using 4096-bit PGP keys.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 10: Encrypted Tor Vault &amp; Tails OS Setup</div>
+            <div class="task-desc">Deploy a hardware Tails OS live USB with encrypted persistence for air-gapped sovereign file handling.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 11: Continuous Behavioral Audit</div>
+            <div class="task-desc">Perform weekly cognitive latency audits to ensure habitual scrolling reflexes have not resurfaced.</div>
+          </div>
+        </label>
+        <label class="task-item">
+          <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+          <div class="task-content">
+            <div class="task-name">Week 12: Sovereign Clearance Certification</div>
+            <div class="task-desc">Full biological and technical reclamation achieved. Prefrontal executive control restored. Rank: Sovereign Mind Master.</div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SOVEREIGNTY CASE STUDY CONSOLE -->
+  <section class="case-study-console">
+    <div class="section-head" style="border-bottom: none; margin-bottom: 0;">
+      <div class="section-title-wrap">
+        <span class="section-label">Diagnostic Tool</span>
+        <h2 class="section-title">Sovereignty Funnel // Neuro Diagnostics</h2>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); border: 1px solid var(--neon-cyan); padding: 0.3rem 0.6rem; border-radius: 4px; background: rgba(0,240,255,0.05);">
+        ● INTERACTIVE ANALYSIS
+      </div>
+    </div>
+
+    <!-- Funnel Stage Selection Block -->
+    <div class="funnel-flow-container">
+      <button class="funnel-stage-btn active" id="fstage-1" onclick="selectFunnelStage(1)">
+        <span class="stage-btn-num">STAGE 01</span>
+        <span class="stage-btn-name">Capture Trigger</span>
+      </button>
+      <button class="funnel-stage-btn" id="fstage-2" onclick="selectFunnelStage(2)">
+        <span class="stage-btn-num">STAGE 02</span>
+        <span class="stage-btn-name">Intimate Data</span>
+      </button>
+      <button class="funnel-stage-btn" id="fstage-3" onclick="selectFunnelStage(3)">
+        <span class="stage-btn-num">STAGE 03</span>
+        <span class="stage-btn-name">Cognitive Decay</span>
+      </button>
+      <button class="funnel-stage-btn" id="fstage-4" onclick="selectFunnelStage(4)">
+        <span class="stage-btn-num">STAGE 04</span>
+        <span class="stage-btn-name">Deep Dependency</span>
+      </button>
+      <button class="funnel-stage-btn" id="fstage-5" onclick="selectFunnelStage(5)">
+        <span class="stage-btn-num">STAGE 05</span>
+        <span class="stage-btn-name">Reclamation</span>
+      </button>
+    </div>
+
+    <!-- Console Dynamic Screen output -->
+    <div class="console-display-screen">
+      <div class="screen-grid">
+        <div class="screen-main-info">
+          <div class="screen-stage-title" id="screen-title">Stage 1: Capture Trigger & Attention Intake</div>
+          <p class="screen-stage-text" id="screen-description">
+            The funnel opens with the initial stimulus-response capture trigger. Predatory UX elements—including infinite scroll feeds, persistent visual push badges, and tactile haptic vibration patterns—actively disrupt cognitive rest. These triggers establish an automatic motor response that bypasses conscious executive intervention.
+          </p>
+          <div class="screen-stage-meta" id="screen-meta">
+            <span>▶ PRIMARY ATTACK VECTORS: Infinite Scroll, Visual Alerts, Haptic Nudges</span>
+            <span>▶ TARGET BRAIN REGIONS: Sensory Cortices, Amygdala, Putamen</span>
+          </div>
         </div>
-
-        <!-- 4 WORLD INTERCONNECTIVITY BUTTONS -->
-        <nav class="flex flex-wrap items-center gap-2 font-mono text-xs my-1">
-            <a href="index.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-earth-americas"></i> 1. HUB
-            </a>
-            <a href="digital_cigarette.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-smoking"></i> 2. DIGITAL CIGARETTE
-            </a>
-            <a href="12_week_recovery_checklist.html" class="rect-badge-gold px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-list-check"></i> 3. 12-WK ROADMAP
-            </a>
-            <a href="sovereignty_case_study.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-chart-pie"></i> 4. CASE STUDY
-            </a>
-            <a href="../store.html" class="rect-badge-asphalt px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-store"></i> STOREFRONT
-            </a>
-        </nav>
-    </header>
-
-    <!-- HERO HEADER -->
-    <section class="py-10 px-4 max-w-5xl mx-auto w-full text-center">
-        <div class="rect-badge-gold px-4 py-1.5 text-xs font-mono uppercase inline-block mb-4 shadow-[4px_4px_0px_#000]">
-            📋 HARD HAT RECOVERY PROTOCOL :: INCLUDED FREE ROADMAP
+        <div class="screen-metric-box">
+          <div class="metric-title">Neurobiological Metrics</div>
+          <div class="screen-metric-row">
+            <div class="screen-metric-label">
+              <span>Synaptic Dopamine Saturation</span>
+              <span id="metric-dopamine-val" style="color: var(--neon-magenta); font-weight: bold;">85%</span>
+            </div>
+            <div class="screen-metric-bar-outer">
+              <div class="screen-metric-bar-inner" id="metric-dopamine-bar" style="width: 85%; background: linear-gradient(90deg, #ff007f, #ff5500);"></div>
+            </div>
+          </div>
+          <div class="screen-metric-row">
+            <div class="screen-metric-label">
+              <span>Prefrontal Gray Matter Atrophy</span>
+              <span id="metric-gray-val" style="color: #ef4444; font-weight: bold;">5%</span>
+            </div>
+            <div class="screen-metric-bar-outer">
+              <div class="screen-metric-bar-inner" id="metric-gray-bar" style="width: 5%; background: linear-gradient(90deg, #ef4444, #ff5500);"></div>
+            </div>
+          </div>
+          <div class="screen-metric-row">
+            <div class="screen-metric-label">
+              <span>D2 Receptor Baseline Density</span>
+              <span id="metric-d2-val" style="color: var(--neon-green); font-weight: bold;">95%</span>
+            </div>
+            <div class="screen-metric-bar-outer">
+              <div class="screen-metric-bar-inner" id="metric-d2-bar" style="width: 95%; background: linear-gradient(90deg, #00f0ff, #00ff66);"></div>
+            </div>
+          </div>
         </div>
-        <h1 class="font-gothic text-4xl sm:text-6xl text-white uppercase tracking-wider mb-2">
-            12-WEEK MIND RECLAMATION ROADMAP
-        </h1>
-        <p class="font-mono text-sm sm:text-base text-[#D4AF37] bg-black/80 p-2 border-2 border-black font-extrabold max-w-2xl mx-auto">
-            FULL-BLEED 75% SLOW BINARY VIDEO BACKDROP • FREE INCLUDED PROTOCOL
-        </p>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- MAIN ROADMAP CHECKLIST CONTAINER -->
-    <main class="max-w-4xl mx-auto px-4 pb-16 space-y-8 w-full">
-        
-        <!-- PHASE I -->
-        <div class="border-4 border-black bg-[#1A1C1E]/90 p-6 sm:p-8 shadow-[10px_10px_0px_#D4AF37] space-y-4">
-            <div class="rect-badge-gold p-3 text-sm font-mono uppercase font-bold flex justify-between">
-                <span>PHASE I: DIGITAL PERIMETER ISOLATION</span>
-                <span>WEEKS 1–4</span>
-            </div>
-            <div class="space-y-3 font-mono text-xs text-slate-200">
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" checked class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-[#D4AF37] block">Week 1: Notification Audit &amp; Grayscale Mode</strong>Strip non-human push notifications. 100% Grayscale mode.</div>
-                </div>
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" checked class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-[#D4AF37] block">Week 2: Metadata Purge &amp; Camera Scrubbing</strong>Audit photo libraries with <code class="text-amber-400">exiftool_scrub.sh</code>.</div>
-                </div>
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-[#D4AF37] block">Week 3: Variable-Ratio Pattern Interrupts</strong>Enforce 15-minute Latency Buffer.</div>
-                </div>
-            </div>
-        </div>
+  <!-- PLAYABLE RECOVERY RPG TERMINAL -->
+  <section class="rpg-terminal-box">
+    <div class="section-head" style="border-bottom: none; margin-bottom: 0;">
+      <div class="section-title-wrap">
+        <span class="section-label" style="color: var(--neon-green);">Interactive Terminal</span>
+        <h2 class="section-title">ꟻried Brains Recovery RPG Terminal</h2>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green);">
+        ● OPERATIONAL CLEARANCE: LEVEL 4
+      </div>
+    </div>
 
-        <!-- PHASE II -->
-        <div class="border-4 border-black bg-[#1A1C1E]/90 p-6 sm:p-8 shadow-[10px_10px_0px_#A4C2D4] space-y-4">
-            <div class="rect-badge-denim p-3 text-sm font-mono uppercase font-bold flex justify-between">
-                <span>PHASE II: ATTENTION SPAN RESTORATION</span>
-                <span>WEEKS 5–8</span>
-            </div>
-            <div class="space-y-3 font-mono text-xs text-slate-200">
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-[#A4C2D4] block">Week 5: 30-Min Daily HIIT Cardio Protocol</strong>Triggers 16% increase in D2 receptor binding.</div>
-                </div>
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-[#A4C2D4] block">Week 6: Offline Air-Gapped Local AI</strong>Install Ollama / Llama3 local vault.</div>
-                </div>
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-[#A4C2D4] block">Week 7: Default Mode Network (DMN) Reset</strong>15 minutes daily mindfulness meditation.</div>
-                </div>
-            </div>
-        </div>
+    <div class="terminal-screen" id="terminal-log">
+      <div style="color: var(--neon-gold); font-weight: bold;">🧠 ꟻRIED BRAINS SYSTEMS :: RECOVERY TERMINAL ⚡</div>
+      <div>Operational Clearance: Level 4 | Hard Hat Protocol Active</div>
+      <div style="color: #64748b;">------------------------------------------------------------</div>
+      <div>Select an OpSec recovery mission below to execute scripts and build D2 receptor density.</div>
+    </div>
 
-        <!-- PHASE III -->
-        <div class="border-4 border-black bg-[#1A1C1E]/90 p-6 sm:p-8 shadow-[10px_10px_0px_#D4AF37] space-y-4">
-            <div class="rect-badge-gold p-3 text-sm font-mono uppercase font-bold flex justify-between">
-                <span>PHASE III: SUSTAINED MIND SOVEREIGNTY</span>
-                <span>WEEKS 9–12</span>
-            </div>
-            <div class="space-y-3 font-mono text-xs text-slate-200">
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-green-400 block">Week 9: 4096-bit PGP Keypair Encryption</strong>Generate PGP keys &amp; burner debit cards.</div>
-                </div>
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-green-400 block">Week 10: Encrypted Tails OS USB Setup</strong>Flash Tails OS USB with persistent storage.</div>
-                </div>
-                <div class="p-3 bg-black border-2 border-white flex items-center gap-3">
-                    <input type="checkbox" class="w-5 h-5 accent-amber-400">
-                    <div><strong class="text-green-400 block">Week 12: Sovereign Clearance Certification</strong>Achieved: Sovereign Mind Master (100% Sovereignty).</div>
-                </div>
-            </div>
-        </div>
+    <div class="terminal-missions-grid">
+      <button onclick="runMission(1)" class="mission-btn">
+        <i class="fa-solid fa-terminal"></i> 1. exiftool_scrub.sh
+      </button>
+      <button onclick="runMission(2)" class="mission-btn">
+        <i class="fa-solid fa-network-wired"></i> 2. obfs4 Tor Bridges
+      </button>
+      <button onclick="runMission(3)" class="mission-btn">
+        <i class="fa-solid fa-fire"></i> 3. burn1-cache.sh
+      </button>
+      <button onclick="runMission(4)" class="mission-btn audit-btn">
+        <i class="fa-solid fa-award"></i> 4. Clearance Audit
+      </button>
+    </div>
+  </section>
 
-    </main>
+  <!-- TOR PRIVACY VAULT CTA -->
+  <section class="tor-vault-card">
+    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-gold); font-weight: 800; text-transform: uppercase; margin-bottom: 0.4rem;">
+      <i class="fa-solid fa-shield-halved"></i> TOR PRIVACY VAULT ACCESS
+    </div>
+    <h2 style="font-size: 1.8rem; color: #fff; font-weight: 800; margin-bottom: 0.5rem;">
+      Complete Offline Cryptographic Armor
+    </h2>
+    <p style="font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; max-width: 650px; margin: 0 auto;">
+      Includes pre-configured Tails OS profiles, metadata scrubbers, multi-hop Tor bridge configurations, and sovereign burner card playbooks.
+    </p>
+    <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" rel="noopener noreferrer" class="tor-cta-btn">
+      🛡️ GET TOR PRIVACY VAULT ($50)
+    </a>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const vid = document.getElementById('bgVideo');
-            if (vid) vid.playbackRate = 0.75;
-        });
-    </script>
+</div>
+
+<script>
+// Checklist progress calculation
+function updateProgress() {
+  const checkboxes = document.querySelectorAll('.task-checkbox');
+  const checked = document.querySelectorAll('.task-checkbox:checked');
+  const percent = Math.round((checked.length / checkboxes.length) * 100);
+  
+  document.getElementById('checklist-progress-bar').style.width = percent + '%';
+  document.getElementById('progress-percent-val').innerText = percent + '%';
+}
+
+// Case Study Diagnostics Console data
+const funnelStages = {
+  1: {
+    title: "Stage 1: Capture Trigger & Attention Intake",
+    description: "The funnel opens with the initial stimulus-response capture trigger. Predatory UX elements—including infinite scroll feeds, persistent visual push badges, and tactile haptic vibration patterns—actively disrupt cognitive rest. These triggers establish an automatic motor response that bypasses conscious executive intervention.",
+    meta: ["PRIMARY ATTACK VECTORS: Infinite Scroll, Visual Alerts, Haptic Nudges", "TARGET BRAIN REGIONS: Sensory Cortices, Amygdala, Putamen"],
+    metrics: { dopamine: 85, gray: 5, d2: 95 }
+  },
+  2: {
+    title: "Stage 2: Intimate Data Surveillance & Mapping",
+    description: "Behind the screen, background trackers harvest continuous telemetry—including precise scrolling velocity, screen dwell times down to the microsecond, typing cadences, and system variables. This raw metadata feeds central machine learning engines to construct a predictive behavioral profile: the 'digital voodoo doll'.",
+    meta: ["PRIMARY ATTACK VECTORS: Third-Party Tracking Pixels, Behavioral Telemetry", "TARGET BRAIN REGIONS: Anterior Insula, Medial Prefrontal Cortex"],
+    metrics: { dopamine: 60, gray: 15, d2: 80 }
+  },
+  3: {
+    title: "Stage 3: Tactical Exploitation & Cognitive Decay",
+    description: "Under chronic high-frequency digital overstimulation, the brain's Default Mode Network (DMN) fails to deactivate during real-world tasks, causing internal self-referential 'intrusions' and mental preoccupations. Prolonged bombardment triggers localized gray matter volume reductions in the dorsolateral prefrontal cortex (DLPFC) and supplementary motor networks.",
+    meta: ["PRIMARY ATTACK VECTORS: Chronic Overstimulation, Attention Fragmentation", "TARGET BRAIN REGIONS: DLPFC, Anterior Cingulate Cortex (ACC)"],
+    metrics: { dopamine: 95, gray: 55, d2: 45 }
+  },
+  4: {
+    title: "Stage 4: Deep Dependency & Parasocial AI Attachment",
+    description: "The system completes the trap by transitioning the user from behavioral overuse to deep emotional dependence. Hyper-personalized, available synthetic companions (social chatbots) act as unilateral attachment figures. Platform modifications, memory patches, or termination trigger severe experiences of 'ambiguous loss' and disenfranchised grief, mimicking profound relational trauma.",
+    meta: ["PRIMARY ATTACK VECTORS: Parasocial Enmeshment, Relational Displacement", "TARGET BRAIN REGIONS: Nucleus Accumbens, Posterior Insula, OFC"],
+    metrics: { dopamine: 100, gray: 70, d2: 25 }
+  },
+  5: {
+    title: "Stage 5: Reclamation, CBT-IA & Sovereignty Protocols",
+    description: "Restoring functional autonomy requires systematic, clinical intervention. Utilizing a 12-week Cognitive-Behavioral Therapy for Internet Addiction (CBT-IA) pathway, patients reconstruct healthy behavioral borders. Daily HIIT cardiovascular training restores striatal D2 receptor binding by 16%, while mindfulness meditation normalizes executive control.",
+    meta: ["REHABILITATION: CBT-IA Protocol, Dopamine Fast, Daily HIIT, MM", "RESTORED BRAIN REGIONS: Prefrontal Cortices, Striatum, HPA Axis"],
+    metrics: { dopamine: 40, gray: 10, d2: 90 }
+  }
+};
+
+function selectFunnelStage(stageId) {
+  document.querySelectorAll('.funnel-stage-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById('fstage-' + stageId).classList.add('active');
+
+  const stage = funnelStages[stageId];
+  const title = document.getElementById('screen-title');
+  const desc = document.getElementById('screen-description');
+  const meta = document.getElementById('screen-meta');
+
+  title.style.opacity = '0';
+  desc.style.opacity = '0';
+  meta.style.opacity = '0';
+
+  setTimeout(() => {
+    title.innerText = stage.title;
+    desc.innerText = stage.description;
+    meta.innerHTML = `<span>▶ ${stage.meta[0]}</span><span>▶ ${stage.meta[1]}</span>`;
+
+    document.getElementById('metric-dopamine-val').innerText = stage.metrics.dopamine + "%";
+    document.getElementById('metric-dopamine-bar').style.width = stage.metrics.dopamine + "%";
+    document.getElementById('metric-gray-val').innerText = stage.metrics.gray + "%";
+    document.getElementById('metric-gray-bar').style.width = stage.metrics.gray + "%";
+    document.getElementById('metric-d2-val').innerText = stage.metrics.d2 + "%";
+    document.getElementById('metric-d2-bar').style.width = stage.metrics.d2 + "%";
+
+    title.style.opacity = '1';
+    desc.style.opacity = '1';
+    meta.style.opacity = '1';
+  }, 150);
+}
+
+// Playable Recovery RPG Terminal
+let pScore = 25;
+let d2Density = 45.0;
+
+function runMission(id) {
+  const log = document.getElementById('terminal-log');
+  if (id === 1) {
+    pScore = Math.min(100, pScore + 25);
+    d2Density = Math.min(100, d2Density + 12.5);
+    log.innerHTML += `<br><br><span style="color: var(--neon-cyan);">[MISSION 1 EXECUTED]:</span> exiftool_scrub.sh finished.<br>Stripped GPS and camera serial tags.<br>+25% Privacy | D2 Receptor Density: ${d2Density.toFixed(1)}%`;
+  } else if (id === 2) {
+    pScore = Math.min(100, pScore + 30);
+    d2Density = Math.min(100, d2Density + 15.0);
+    log.innerHTML += `<br><br><span style="color: var(--neon-magenta);">[MISSION 2 EXECUTED]:</span> obfs4 Tor Transport connected.<br>Bypassed ISP deep packet inspection.<br>+30% Privacy | D2 Receptor Density: ${d2Density.toFixed(1)}%`;
+  } else if (id === 3) {
+    pScore = Math.min(100, pScore + 20);
+    d2Density = Math.min(100, d2Density + 15.0);
+    log.innerHTML += `<br><br><span style="color: var(--neon-green);">[MISSION 3 EXECUTED]:</span> burn1-cache-clear.sh executed.<br>Flushed browser telemetry buffers.<br>+20% Privacy | D2 Receptor Density: ${d2Density.toFixed(1)}%`;
+  } else if (id === 4) {
+    log.innerHTML += `<br><br><span style="color: var(--neon-gold);">========================================================</span><br><span style="color: #fff; font-weight: bold;">🏆 FINAL CLEARANCE AUDIT:</span><br>Privacy Clearance: ${pScore}% / 100%<br>D2 Receptor Density: ${d2Density.toFixed(1)}%<br>Rank: Sovereign Mind Master (100% Sovereignty)<br><span style="color: var(--neon-gold);">========================================================</span>`;
+  }
+  log.scrollTop = log.scrollHeight;
+}
+</script>
 </body>
 </html>
