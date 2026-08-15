@@ -87,6 +87,38 @@ body {
   gap: 0.5rem;
 }
 
+.nav-header-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-decoration: none;
+  border: 1.5px solid var(--neon-cyan);
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  background: rgba(0, 240, 255, 0.06);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.nav-header-btn:hover {
+  background: var(--neon-cyan);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+  transform: translateY(-1px);
+}
+.nav-header-btn.helpline-accent {
+  color: var(--neon-magenta);
+  border-color: var(--neon-magenta);
+  background: rgba(255, 0, 127, 0.08);
+}
+.nav-header-btn.helpline-accent:hover {
+  background: var(--neon-magenta);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+}
+
 @keyframes pulse {
   0% { opacity: 0.7; }
   100% { opacity: 1; }
@@ -1355,18 +1387,22 @@ body {
 
 <header class="cyber-header">
   <div class="logo-container">
-    <span class="logo-main">THE DOMINI ANTHOLOGY</span>
-    <span class="logo-sub">Compiled and Curated by LoRd DoMiNo</span>
-  </div>
-  <div style="display: flex; align-items: center; gap: 1rem;">
-    <a href="../index.html" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan); text-decoration: none; border: 1px solid var(--neon-cyan); padding: 0.4rem 0.8rem; border-radius: 4px; background: rgba(0,240,255,0.05); transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem;">
-      <i class="fa-solid fa-arrow-left"></i> BURN-1 HUB
+    <a href="../index.html" style="text-decoration: none; color: inherit;">
+      <span class="logo-main">ꟻRIED BRAINS WORLD</span>
+      <span class="logo-sub">The Domini Anthology // Compiled by LoRd DoMiNo</span>
     </a>
-    <div class="header-status">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-      COGNITIVE ARMOR: ACTIVE
-    </div>
   </div>
+  <nav style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+    <a href="../index.html" class="nav-header-btn">
+      <i class="fa-solid fa-house"></i> Home
+    </a>
+    <a href="12_week_recovery_checklist.html" class="nav-header-btn">
+      <i class="fa-solid fa-list-check"></i> 12-Week Roadmap
+    </a>
+    <a href="#helpline-directory" class="nav-header-btn helpline-accent">
+      <i class="fa-solid fa-phone-volume"></i> Helpline
+    </a>
+  </nav>
 </header>
 
 <div class="app-container">
@@ -1401,12 +1437,41 @@ body {
         Your browser does not support the audio element.
       </audio>
     </div>
+
+    <!-- TOR PRIVACY VAULT AD IN LEFT SIDEBAR -->
+    <div style="margin-top: 1.25rem; background: linear-gradient(135deg, #111420 0%, #080a10 100%); border: 2px solid #ffd700; border-radius: 12px; padding: 1.2rem; box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); text-align: center;">
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #ffd700; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 0.4rem; text-transform: uppercase;">
+        <i class="fa-solid fa-shield-halved"></i> TOR PRIVACY VAULT
+      </div>
+      <p style="font-family: var(--font-mono); font-size: 0.72rem; color: #cbd5e1; margin: 0 0 0.8rem 0; line-height: 1.4;">
+        Offline Cryptographic Armor & OpSec Recovery Protocols.
+      </p>
+      <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; background: #ffd700; color: #000; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 900; text-decoration: none; padding: 0.6rem 0.5rem; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: transform 0.2s, background 0.2s;">
+        🛡️ GET TOR VAULT ($50)
+      </a>
+    </div>
   </aside>
 
   <!-- Central Content Area -->
   <main class="content-panel">
 
-    <!-- CENTERED TOP TITLE BANNER (titleDomino.jpeg) -->
+    <!-- TOP HERO 75% SLOW VIDEO STAGE -->
+    <div style="position: relative; border-radius: 14px; overflow: hidden; border: 2px solid var(--neon-cyan); box-shadow: 0 0 35px rgba(0, 240, 255, 0.25); margin-bottom: 2rem; background: #000;">
+      <video autoplay loop muted playsinline style="width: 100%; height: 220px; object-fit: cover; display: block; opacity: 0.8;" oncanplay="this.playbackRate = 0.75;">
+        <source src="Binary_code_rising_slow_75.mp4" type="video/mp4">
+        <source src="assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
+      </video>
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,7,12,0.2) 0%, rgba(6,7,12,0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem;">
+          ● 75% SLOW STREAM // COGNITIVE PRESERVATION
+        </span>
+        <h2 style="font-family: var(--font-sans); font-size: 1.5rem; color: #fff; margin: 0; font-weight: 800; letter-spacing: -0.02em;">
+          ꟻRIED BRAINS WORLD DISPATCHES
+        </h2>
+      </div>
+    </div>
+
+    <!-- CENTERED TITLE BANNER (titleDomino.jpeg) -->
     <div style="text-align: center; margin: 0 0 2.5rem 0; width: 100%;">
       <img src="titleDomino.jpeg" alt="The Domini Anthology Title Banner" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 30px rgba(0, 240, 255, 0.25); display: inline-block;">
     </div>
@@ -1793,86 +1858,65 @@ body {
       </div>
     </article>
 
-    <!-- CONSOLIDATED SECTION: Interactive Sovereignty Case Study Console -->
-    <section class="case-study-console">
-      <div class="console-header">
-        <div class="console-title-block">
-          <span class="console-label">Sovereignty Funnel // Diagnostic Console</span>
-          <h2 class="console-title">Sovereignty_Interactive_Case_Study.txt</h2>
+    <!-- COMPREHENSIVE CLINICAL HELPLINE DIRECTORY -->
+    <section id="helpline-directory" style="margin: 3rem 0 1.5rem 0; background: #0c0e18; border: 2px solid var(--neon-magenta); border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(255, 0, 127, 0.25);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-magenta); font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase;">
+            <i class="fa-solid fa-phone-volume"></i> 24/7 SUPPORT &amp; CRISIS INTERVENTION
+          </span>
+          <h2 style="font-family: var(--font-sans); font-size: 1.6rem; color: #fff; margin: 0.25rem 0 0 0; font-weight: 800;">
+            Immediate Cognitive &amp; Mental Health Helplines
+          </h2>
         </div>
-        <div class="header-status" style="border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0,240,255,0.05);">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-          ANALYSIS MODULE ACTIVE
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); border: 1px solid var(--neon-green); padding: 0.35rem 0.75rem; border-radius: 4px; background: rgba(57, 255, 20, 0.05);">
+          ● CONFIDENTIAL &amp; FREE
         </div>
       </div>
 
-      <!-- Funnel Stage Selection Block -->
-      <div class="funnel-flow-container">
-        <button class="funnel-stage-btn active" id="fstage-1" onclick="selectFunnelStage(1)">
-          <span class="stage-btn-num">STAGE 01</span>
-          <span class="stage-btn-name">Capture Trigger</span>
-        </button>
-        <button class="funnel-stage-btn" id="fstage-2" onclick="selectFunnelStage(2)">
-          <span class="stage-btn-num">STAGE 02</span>
-          <span class="stage-btn-name">Intimate Data</span>
-        </button>
-        <button class="funnel-stage-btn" id="fstage-3" onclick="selectFunnelStage(3)">
-          <span class="stage-btn-num">STAGE 03</span>
-          <span class="stage-btn-name">Cognitive Decay</span>
-        </button>
-        <button class="funnel-stage-btn" id="fstage-4" onclick="selectFunnelStage(4)">
-          <span class="stage-btn-num">STAGE 04</span>
-          <span class="stage-btn-name">Deep Dependency</span>
-        </button>
-        <button class="funnel-stage-btn" id="fstage-5" onclick="selectFunnelStage(5)">
-          <span class="stage-btn-num">STAGE 05</span>
-          <span class="stage-btn-name">Reclamation</span>
-        </button>
-      </div>
+      <p style="font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1.5rem;">
+        If you or someone you know is experiencing acute burnout, digital dependency, isolation from synthetic relationships, or mental health distress, immediate human support is available 24/7.
+      </p>
 
-      <!-- Console Dynamic Screen output -->
-      <div class="console-display-screen">
-        <div class="screen-grid">
-          <div class="screen-main-info">
-            <div class="screen-stage-title" id="screen-title">Stage 1: Initial Contact & Capture Trigger</div>
-            <p class="screen-stage-text" id="screen-description">
-              The initial trigger points represent the frictionless, rapid interface hooks designed to bypass the conscious prefrontal "brakes." These include highly variable, randomized notification schedules and visual alerts (like red notification badges) that demand immediate motor compliance. They establish an automatic, hypodermic action-reward cycle.
-            </p>
-            <div class="screen-stage-meta" id="screen-meta">
-              <span>▶ PRIMARY ATTACK VECTORS: Infinite Scroll, Visual Alerts, Haptic Nudges</span>
-              <span>▶ TARGET BRAIN REGIONS: Amygdala, Sensory Cortices, Early Striatum</span>
-            </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+        <div style="background: #111420; border: 1px solid rgba(255, 0, 127, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-magenta); font-weight: bold;">SAMHSA NATIONAL HELPLINE</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">Substance abuse & mental health support.</div>
           </div>
-          <div class="screen-metric-box">
-            <div class="metric-title">Neurobiological Diagnostics</div>
-            <div class="screen-metric-row">
-              <div class="screen-metric-label">
-                <span>Synaptic Dopamine Saturation</span>
-                <span id="metric-dopamine-val">85%</span>
-              </div>
-              <div class="screen-metric-bar-outer">
-                <div class="screen-metric-bar-inner" id="metric-dopamine-bar" style="width: 85%; background: linear-gradient(90deg, #ff007f, #ff5500);"></div>
-              </div>
-            </div>
-            <div class="screen-metric-row">
-              <div class="screen-metric-label">
-                <span>Prefrontal Gray Matter Atrophy</span>
-                <span id="metric-gray-val">5%</span>
-              </div>
-              <div class="screen-metric-bar-outer">
-                <div class="screen-metric-bar-inner" id="metric-gray-bar" style="width: 5%; background: linear-gradient(90deg, #ef4444, #ff5500);"></div>
-              </div>
-            </div>
-            <div class="screen-metric-row">
-              <div class="screen-metric-label">
-                <span>D2 Receptor Baseline Density</span>
-                <span id="metric-d2-val">95%</span>
-              </div>
-              <div class="screen-metric-bar-outer">
-                <div class="screen-metric-bar-inner" id="metric-d2-bar" style="width: 95%; background: linear-gradient(90deg, #00f0ff, #00ff66);"></div>
-              </div>
-            </div>
+          <a href="tel:1-800-662-4357" style="background: var(--neon-magenta); color: #fff; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-phone"></i> 1-800-662-4357
+          </a>
+        </div>
+
+        <div style="background: #111420; border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); font-weight: bold;">988 SUICIDE &amp; CRISIS LIFELINE</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">24/7 call or text service across the US.</div>
           </div>
+          <a href="tel:988" style="background: var(--neon-cyan); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-phone"></i> Call or Text 988
+          </a>
+        </div>
+
+        <div style="background: #111420; border: 1px solid rgba(57, 255, 20, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); font-weight: bold;">CRISIS TEXT LINE</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">Free, 24/7 crisis counseling via text.</div>
+          </div>
+          <a href="sms:741741?body=HOME" style="background: var(--neon-green); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-comment-sms"></i> Text HOME to 741741
+          </a>
+        </div>
+
+        <div style="background: #111420; border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #ffd700; font-weight: bold;">reSTART TECH ADDICTION</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">Specialized gaming & screen recovery.</div>
+          </div>
+          <a href="tel:1-800-301-4028" style="background: #ffd700; color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-phone"></i> 1-800-301-4028
+          </a>
         </div>
       </div>
     </section>
@@ -2021,73 +2065,6 @@ function fireSmokeBomb() {
       textInd.style.color = "var(--neon-yellow)";
     }
   }, 100);
-}
-
-// Case Study Diagnostics Console data
-const funnelStages = {
-  1: {
-    title: "Stage 1: Capture Trigger & Attention Intake",
-    description: "The funnel opens with the initial stimulus-response capture trigger. Predatory UX elements—including infinite scroll feeds, persistent visual push badges, and tactile haptic vibration patterns—actively disrupt cognitive rest. These triggers establish an automatic motor response that bypasses conscious executive intervention.",
-    meta: ["PRIMARY THREATS: Infinite Scroll, Red Badges, Haptic Nudges", "TARGET BRAIN REGIONS: Sensory Cortices, Amygdala, Putamen"],
-    metrics: { dopamine: 85, gray: 5, d2: 95 }
-  },
-  2: {
-    title: "Stage 2: Intimate Data Surveillance & Mapping",
-    description: "Behind the screen, background trackers harvest continuous telemetry—including precise scrolling velocity, screen dwell times down to the microsecond, typing cadences, and system variables. This raw metadata feeds central machine learning engines to construct a predictive behavioral profile: the 'digital voodoo doll'.",
-    meta: ["PRIMARY THREATS: Third-Party Tracking Pixels, Behavioral Telemetry", "TARGET BRAIN REGIONS: Anterior Insula, Medial Prefrontal Cortex"],
-    metrics: { dopamine: 60, gray: 15, d2: 80 }
-  },
-  3: {
-    title: "Stage 3: Tactical Exploitation & Cognitive Decay",
-    description: "Under chronic high-frequency digital overstimulation, the brain's Default Mode Network (DMN) fails to deactivate during real-world tasks, causing internal self-referential 'intrusions' and mental preoccupations. Prolonged bombardment triggers localized gray matter volume reductions in the dorsolateral prefrontal cortex (DLPFC) and supplementary motor networks.",
-    meta: ["PRIMARY THREATS: Chronic Overstimulation, Attention Fragmentation", "TARGET BRAIN REGIONS: DLPFC, Anterior Cingulate Cortex (ACC)"],
-    metrics: { dopamine: 95, gray: 55, d2: 45 }
-  },
-  4: {
-    title: "Stage 4: Deep Dependency & Parasocial AI Attachment",
-    description: "The system completes the trap by transitioning the user from behavioral overuse to deep emotional dependence. Hyper-personalized, available synthetic companions (social chatbots) act as unilateral attachment figures. Platform modifications, memory patches, or termination trigger severe experiences of 'ambiguous loss' and disenfranchised grief, mimicking profound relational trauma.",
-    meta: ["PRIMARY THREATS: Parasocial Enmeshment, Relational Displace", "TARGET BRAIN REGIONS: Nucleus Accumbens, Posterior Insula, OFC"],
-    metrics: { dopamine: 100, gray: 70, d2: 25 }
-  },
-  5: {
-    title: "Stage 5: Reclamation, CBT-IA & Sovereignty Protocols",
-    description: "Restoring functional autonomy requires systematic, clinical intervention. Utilizing a 12-week Cognitive-Behavioral Therapy for Internet Addiction (CBT-IA) pathway, patients reconstruct healthy behavioral borders. Daily HIIT cardiovascular training restores striatal D2 receptor binding by 16%, while mindfulness meditation normalizes executive control.",
-    meta: ["REHABILITATION: CBT-IA Protocol, Dopamine Fast, Daily HIIT, MM", "RESTORED BRAIN REGIONS: Prefrontal Cortices, Striatum, HPA Axis"],
-    metrics: { dopamine: 40, gray: 10, d2: 90 }
-  }
-};
-
-function selectFunnelStage(stageId) {
-  document.querySelectorAll('.funnel-stage-btn').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  document.getElementById('fstage-' + stageId).classList.add('active');
-
-  const stage = funnelStages[stageId];
-  const title = document.getElementById('screen-title');
-  const desc = document.getElementById('screen-description');
-  const meta = document.getElementById('screen-meta');
-
-  title.style.opacity = '0';
-  desc.style.opacity = '0';
-  meta.style.opacity = '0';
-
-  setTimeout(() => {
-    title.innerText = stage.title;
-    desc.innerText = stage.description;
-    meta.innerHTML = `<span>▶ ${stage.meta[0]}</span><span>▶ ${stage.meta[1]}</span>`;
-
-    document.getElementById('metric-dopamine-val').innerText = stage.metrics.dopamine + "%";
-    document.getElementById('metric-dopamine-bar').style.width = stage.metrics.dopamine + "%";
-    document.getElementById('metric-gray-val').innerText = stage.metrics.gray + "%";
-    document.getElementById('metric-gray-bar').style.width = stage.metrics.gray + "%";
-    document.getElementById('metric-d2-val').innerText = stage.metrics.d2 + "%";
-    document.getElementById('metric-d2-bar').style.width = stage.metrics.d2 + "%";
-
-    title.style.opacity = '1';
-    desc.style.opacity = '1';
-    meta.style.opacity = '1';
-  }, 150);
 }
 </script>
 </body>

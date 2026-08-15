@@ -1,239 +1,2071 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth" id="html-root">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ꟻRIED BRAINS WORLD :: MAIN HUB | ꟻRIEDBRANDS STUDIO</title>
-    <meta name="description" content="ꟻried Brains World: Main Hub featuring 75% Slow Video Loop, ꟻriedbrands Studio, Interactive Recovery RPG Terminal, & Hard Hat Protocol.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel+Decorative:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE DOMINI ANTHOLOGY // LoRd DoMiNo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg-dark: #06070c;
+  --panel-bg: #0d0f1a;
+  --card-bg: #121420;
+  --neon-green: #39ff14;
+  --neon-magenta: #ff007f;
+  --neon-cyan: #00f0ff;
+  --neon-yellow: #fffb00;
+  --text-main: #e2e8f0;
+  --text-muted: #64748b;
+  --border-glow: rgba(0, 240, 255, 0.25);
+  --font-mono: 'Courier New', Courier, monospace;
+  --gradient-cyber: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+}
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        gold: { 400: '#FFD700', 500: '#D4AF37', 600: '#C5A059' },
-                        asphalt: { 700: '#33373B', 800: '#242528', 900: '#1A1C1E' },
-                        denim: { 300: '#C5DCED', 400: '#A4C2D4', 500: '#89ACCE', 600: '#6B93B8' }
-                    },
-                    fontFamily: {
-                        gothic: ['Pirata One', 'Cinzel Decorative', 'serif'],
-                        mono: ['Share Tech Mono', 'monospace'],
-                        sans: ['Space Grotesk', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    <style>
-        /* BASE NIGHT MODE IS NOW BABY BLUE JEAN AS REQUESTED */
-        body {
-            background-color: #A4C2D4;
-            color: #000000;
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-        }
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
 
-        .rect-badge-gold {
-            background-color: #D4AF37;
-            color: #000000 !important;
-            border: 4px solid #000000;
-            box-shadow: 6px 6px 0px #000000, 10px 10px 0px rgba(0,0,0,0.6);
-            font-weight: 800;
-        }
+/* Cyberpunk Glitch Header */
+.cyber-header {
+  background: linear-gradient(180deg, #020205 0%, #121420 100%);
+  border-bottom: 2px solid var(--neon-cyan);
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.15);
+  z-index: 100;
+  position: relative;
+}
 
-        .rect-badge-denim {
-            background-color: #ffffff;
-            color: #000000 !important;
-            border: 4px solid #000000;
-            box-shadow: 6px 6px 0px #000000, 10px 10px 0px rgba(0,0,0,0.6);
-            font-weight: 800;
-        }
+.logo-container {
+  display: flex;
+  flex-direction: column;
+}
 
-        .rect-badge-asphalt {
-            background-color: #1A1C1E;
-            color: #D4AF37 !important;
-            border: 4px solid #000000;
-            box-shadow: 6px 6px 0px #000000;
-            font-weight: 800;
-        }
+.logo-main {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 
-        .vertical-panel {
-            background-color: #ffffff;
-            border: 5px solid #000000;
-            box-shadow: 10px 10px 0px #000000, 16px 16px 0px rgba(0,0,0,0.5);
-            border-radius: 4px;
-        }
-    </style>
+.logo-sub {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-magenta);
+  text-shadow: 0 0 5px var(--neon-magenta);
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.header-status {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--neon-green);
+  background: rgba(57, 255, 20, 0.05);
+  border: 1px solid var(--neon-green);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(57, 255, 20, 0.2);
+  animation: pulse 2s infinite alternate;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-header-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-decoration: none;
+  border: 1.5px solid var(--neon-cyan);
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  background: rgba(0, 240, 255, 0.06);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.nav-header-btn:hover {
+  background: var(--neon-cyan);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+  transform: translateY(-1px);
+}
+.nav-header-btn.helpline-accent {
+  color: var(--neon-magenta);
+  border-color: var(--neon-magenta);
+  background: rgba(255, 0, 127, 0.08);
+}
+.nav-header-btn.helpline-accent:hover {
+  background: var(--neon-magenta);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Layout Grid - REMOVED GADGET PANEL FOR A SLEEK 2-COLUMN VIEW */
+.app-container {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: calc(100vh - 78px);
+  overflow: hidden;
+}
+
+/* Left Tab Navigation */
+.nav-panel {
+  background-color: #080911;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.panel-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.panel-title::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 240, 255, 0.03);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateX(4px);
+}
+
+.nav-btn.active {
+  background: rgba(0, 240, 255, 0.07);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+}
+
+.nav-btn-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.nav-btn-meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--neon-magenta);
+}
+
+.nav-btn.active .nav-btn-meta {
+  color: var(--neon-cyan);
+}
+
+/* Central Content Area */
+.content-panel {
+  background-color: var(--bg-dark);
+  padding: 2.5rem;
+  overflow-y: auto;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+.article-view {
+  display: none;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+}
+
+.article-view.active {
+  display: block;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.article-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-magenta);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.article-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 0 30px rgba(255,255,255,0.05);
+}
+
+.article-content {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  text-align: justify;
+}
+
+.article-content p {
+  margin-bottom: 1.5rem;
+}
+
+.article-content blockquote {
+  background: rgba(0, 240, 255, 0.03);
+  border-left: 3px solid var(--neon-cyan);
+  padding: 1.25rem;
+  margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #e2e8f0;
+}
+
+/* Clinical warning style */
+.clinical-warning {
+  background: rgba(239, 68, 68, 0.03);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-left: 3px solid #ef4444;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  border-radius: 4px;
+}
+
+.clinical-warning-title {
+  font-family: var(--font-mono);
+  color: #ef4444;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Helix Helpline Box */
+.help-pathway-box {
+  background: rgba(0, 240, 255, 0.02);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-left: 3px solid var(--neon-cyan);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.05);
+}
+
+.pathway-header {
+  font-family: var(--font-mono);
+  color: var(--neon-cyan);
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.15);
+  padding-bottom: 0.5rem;
+}
+
+.pathway-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.prevention-guidelines {
+  margin-bottom: 1.25rem;
+}
+
+.guideline-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.guideline-item {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.guideline-item::before {
+  content: '►';
+  position: absolute;
+  left: 0;
+  color: var(--neon-magenta);
+  font-size: 0.75rem;
+  top: 2px;
+}
+
+.helpline-contact-section {
+  background: rgba(255, 0, 127, 0.03);
+  border: 1px solid rgba(255, 0, 127, 0.15);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.helpline-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-magenta);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.helpline-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 600px) {
+  .helpline-links-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.helpline-btn {
+  background: rgba(255, 0, 127, 0.05);
+  border: 1px solid var(--neon-magenta);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.helpline-btn:hover {
+  background: var(--neon-magenta);
+  color: #fff;
+  box-shadow: 0 0 12px var(--neon-magenta);
+  transform: translateY(-1px);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ==================================================== */
+/* INTERACTIVE GADGETS BUILT CLEANLY INSIDE ARTICLES    */
+/* ==================================================== */
+
+.widget-box {
+  background: #090b11;
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 550px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-box::before {
+  content: 'TACTILE SECURITY GADGET';
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  background: var(--neon-cyan);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.inputs-hidden {
+  display: none;
+}
+
+/* --- GADGET 1: THE COGNITIVE WALLET (surveillance) --- */
+.wallet-box {
+  border-color: rgba(255, 0, 127, 0.2);
+}
+.wallet-box::before {
+  content: 'COGNITIVE PICKPOCKET SIMULATOR';
+  background: var(--neon-magenta);
+  color: #fff;
+}
+
+.wallet-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.wallet-body {
+  width: 280px;
+  height: 180px;
+  background: #111424;
+  border: 2px solid rgba(255, 0, 127, 0.25);
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 2px 10px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 15px;
+  transition: border-color 0.3s;
+}
+
+.wallet-flap {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 35px;
+  background: #0d0f1a;
+  border-bottom: 2px solid rgba(255, 0, 127, 0.2);
+  z-index: 5;
+}
+
+.wallet-slot {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  background: #070810;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: visible;
+}
+
+.wallet-card {
+  position: absolute;
+  width: 230px;
+  height: 80px;
+  background: linear-gradient(135deg, #1e2440, #14172b);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 6px;
+  padding: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  left: 10px;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.5);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wallet-card.card-focus {
+  top: 5px;
+  z-index: 4;
+}
+
+.wallet-card.card-decide {
+  top: 15px;
+  left: 14px;
+  z-index: 3;
+  opacity: 0.85;
+}
+
+.wallet-card.card-reflect {
+  top: 25px;
+  left: 18px;
+  z-index: 2;
+  opacity: 0.7;
+}
+
+.wallet-card .card-label {
+  font-weight: bold;
+  color: var(--neon-cyan);
+}
+
+.wallet-card .card-value {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  text-align: right;
+}
+
+/* Interactive Neon Claw */
+.neon-claw {
+  position: absolute;
+  top: -120px;
+  left: 115px;
+  width: 50px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--neon-magenta));
+  border-radius: 4px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.neon-claw::after {
+  content: '▼';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--neon-magenta);
+  font-size: 1.2rem;
+  text-shadow: 0 0 8px var(--neon-magenta);
+}
+
+/* Trigger actions on checking the Swipe button */
+#wallet-swipe-check:checked ~ .wallet-container .wallet-body {
+  border-color: var(--neon-magenta);
+}
+
+#wallet-swipe-check:checked ~ .wallet-container .neon-claw {
+  animation: clawGrab 1.5s ease-in-out forwards;
+}
+
+#wallet-swipe-check:checked ~ .wallet-container .wallet-body .wallet-slot .card-focus {
+  animation: cardStolen 1.5s ease-in-out forwards;
+}
+
+#wallet-swipe-check:checked ~ .wallet-container .wallet-stats .stat-balance {
+  color: var(--neon-magenta);
+  animation: textFlash 0.5s infinite alternate;
+}
+
+@keyframes clawGrab {
+  0% { top: -120px; opacity: 0; }
+  30% { top: -20px; opacity: 1; }
+  50% { top: -20px; opacity: 1; }
+  100% { top: -120px; opacity: 0; }
+}
+
+@keyframes cardStolen {
+  0% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-10px) scale(1.02); }
+  50% { transform: translateY(-10px) scale(1.02); }
+  100% { transform: translateY(-140px) scale(0.4); opacity: 0; }
+}
+
+@keyframes textFlash {
+  0% { text-shadow: none; }
+  100% { text-shadow: 0 0 8px var(--neon-magenta); }
+}
+
+.wallet-stats {
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  padding: 10px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+
+.wallet-notification-btn {
+  background: linear-gradient(135deg, #111528, #191e3b);
+  border: 1px solid var(--neon-magenta);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.15);
+}
+
+.wallet-notification-btn:hover {
+  background: var(--neon-magenta);
+  color: #000;
+  box-shadow: 0 0 15px var(--neon-magenta);
+}
+
+.red-dot-badge {
+  width: 8px;
+  height: 8px;
+  background: #ff3300;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px #ff3300;
+  animation: pulse 1s infinite alternate;
+}
+
+
+/* --- GADGET 2: THE DIGITAL CIGARETTE --- */
+/* (Existed in Article 2, keep styles from friedworldbanner) */
+.widget-cig-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.cigarette-wrapper {
+  position: relative;
+  width: 280px;
+  height: 30px;
+  background: #1e2235;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  display: flex;
+}
+
+.cig-filter {
+  width: 70px;
+  height: 100%;
+  background: #e59866;
+  border-right: 2px solid #000;
+}
+
+.cig-body {
+  flex-grow: 1;
+  height: 100%;
+  background: #fdfefe;
+  width: 100%;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.cig-cherry {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 15px;
+  height: 100%;
+  background: linear-gradient(90deg, #ff3300, #ffb300);
+  box-shadow: 0 0 15px #ff3300;
+  opacity: 0.8;
+  display: none;
+}
+
+.cig-cherry.burning {
+  display: block;
+  animation: burnGlow 1s infinite alternate;
+}
+
+@keyframes burnGlow {
+  0% { opacity: 0.6; box-shadow: 0 0 5px #ff3300; }
+  100% { opacity: 1; box-shadow: 0 0 20px #ff6600, 0 0 30px #ff3300; }
+}
+
+.widget-cig-stats {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.widget-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+.widget-stat-val {
+  font-weight: bold;
+  color: var(--neon-cyan);
+}
+
+.widget-bar-outer {
+  width: 120px;
+  height: 8px;
+  background: #1a1c29;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.widget-bar-inner {
+  height: 100%;
+  width: 100%;
+  background: var(--neon-cyan);
+  transition: width 0.3s ease;
+}
+
+.widget-bar-inner.depleted {
+  background: var(--neon-magenta);
+}
+
+.widget-controls {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.widget-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.widget-btn-inhale {
+  background: linear-gradient(90deg, var(--neon-magenta), #ff5500);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(255, 0, 127, 0.2);
+}
+
+.widget-btn-inhale:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(255, 0, 127, 0.4);
+}
+
+.widget-btn-extinguish {
+  background: rgba(0, 240, 255, 0.05);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.widget-btn-extinguish:hover {
+  background: var(--neon-cyan);
+  color: var(--bg-dark);
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+
+/* --- GADGET 3: THE PAYWALLED HEART-MONITOR (romance) --- */
+.heart-box {
+  border-color: rgba(0, 240, 255, 0.2);
+}
+
+.crt-monitor {
+  width: 100%;
+  background: #0f111a;
+  border: 2px solid #2d3142;
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+.crt-screen {
+  background: #040508;
+  height: 140px;
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.crt-screen::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 240, 255, 0.08) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 4px, 6px 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Pulsing Heart */
+.heart-shape {
+  width: 40px;
+  height: 40px;
+  background-color: var(--neon-green);
+  position: relative;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+  animation: heartPulse 1.2s infinite alternate;
+  z-index: 1;
+}
+
+.heart-shape::before,
+.heart-shape::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  background-color: var(--neon-green);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart-shape::before {
+  top: -20px;
+  left: 0;
+}
+
+.heart-shape::after {
+  top: 0;
+  left: 20px;
+}
+
+@keyframes heartPulse {
+  0% { transform: rotate(-45deg) scale(0.9); }
+  100% { transform: rotate(-45deg) scale(1.15); }
+}
+
+/* Paywall Gate Slide-Down */
+.paywall-gate {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 20, 32, 0.95);
+  border-bottom: 3px solid var(--neon-magenta);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  font-family: var(--font-mono);
+  color: var(--neon-magenta);
+  text-shadow: 0 0 8px var(--neon-magenta);
+}
+
+.paywall-gate h4 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.paywall-gate p {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  text-shadow: none;
+  max-width: 80%;
+  text-align: center;
+}
+
+/* Radio States */
+#heart-low:checked ~ .crt-monitor .crt-screen .heart-shape {
+  background-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  animation-duration: 1.6s;
+}
+#heart-low:checked ~ .crt-monitor .crt-screen .heart-shape::before,
+#heart-low:checked ~ .crt-monitor .crt-screen .heart-shape::after {
+  background-color: var(--neon-cyan);
+}
+
+#heart-high:checked ~ .crt-monitor .crt-screen .heart-shape {
+  background-color: var(--neon-magenta);
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+  animation-duration: 0.35s;
+}
+#heart-high:checked ~ .crt-monitor .crt-screen .heart-shape::before,
+#heart-high:checked ~ .crt-monitor .crt-screen .heart-shape::after {
+  background-color: var(--neon-magenta);
+}
+
+#heart-paywall:checked ~ .crt-monitor .paywall-gate {
+  top: 0;
+}
+
+/* Control Selector Knob */
+.heart-controls-panel {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.heart-dial-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.heart-dial-btn:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.02);
+}
+
+#heart-low:checked ~ .heart-controls-panel label[for="heart-low"],
+#heart-high:checked ~ .heart-controls-panel label[for="heart-high"] {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+#heart-paywall:checked ~ .heart-controls-panel label[for="heart-paywall"] {
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+  text-shadow: 0 0 5px var(--neon-magenta);
+}
+
+
+/* --- GADGET 4: THE SOVEREIGNTY FORGE & METADATA VAPORIZER (sovereignty) --- */
+.sovereignty-box {
+  border-color: rgba(57, 255, 20, 0.2);
+}
+.sovereignty-box::before {
+  content: 'METADATA VAPORIZER FORGE';
+  background: var(--neon-green);
+  color: #000;
+}
+
+.forge-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.forge-grid-radar {
+  width: 100%;
+  height: 150px;
+  background: #040508 radial-gradient(circle, rgba(57, 255, 20, 0.08) 1px, transparent 1px);
+  background-size: 15px 15px;
+  border: 1px solid rgba(57, 255, 20, 0.15);
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  font-family: var(--font-mono);
+  overflow: hidden;
+}
+
+.gps-readout {
+  color: var(--neon-yellow);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.device-fingerprint {
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.smoke-cloud-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.8) 0%, transparent 60%);
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.protective-cover-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.tactical-lever {
+  width: 100%;
+  max-width: 250px;
+  height: 60px;
+  border-radius: 8px;
+  position: relative;
+  perspective: 600px;
+}
+
+.lever-plate {
+  position: absolute;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(45deg, #1b1e05, #1b1e05 10px, #e4a100 10px, #e4a100 20px);
+  border: 2px solid #000;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  color: #000;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  transform-style: preserve-3d;
+  transform-origin: top;
+  z-index: 3;
+}
+
+.lever-trigger-btn {
+  position: absolute;
+  width: calc(100% - 10px); height: calc(100% - 10px);
+  top: 5px; left: 5px;
+  background: linear-gradient(135deg, #ef4444, #7a1c10);
+  border: 1px solid #ff5a46;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: inset 0 2px 5px rgba(255,255,255,0.2);
+}
+
+/* Interactivity via checkboxes */
+#cover-lift:checked ~ .protective-cover-wrapper .lever-plate {
+  transform: rotateX(-120deg);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+#exif-vaporize:checked ~ .forge-grid-radar .smoke-cloud-overlay {
+  animation: smokeBurst 1s ease-out forwards;
+}
+
+#exif-vaporize:checked ~ .forge-grid-radar .gps-readout {
+  color: var(--neon-green);
+  animation: geoCleared 1s forwards;
+}
+
+#exif-vaporize:checked ~ .forge-grid-radar .device-fingerprint {
+  animation: devCleared 1s forwards;
+}
+
+@keyframes smokeBurst {
+  0% { transform: scale(0); opacity: 0; }
+  30% { transform: scale(1.5); opacity: 0.9; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+@keyframes geoCleared {
+  0% { content: initial; }
+  100% { color: var(--neon-green); font-size: 0.85rem; letter-spacing: 2px; }
+}
+
+@keyframes devCleared {
+  100% { color: var(--text-muted); opacity: 0.5; }
+}
+
+.forge-instructions {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+
+/* ==================================================== */
+/* OTHER SECTIONS & GENERAL WRAPPERS                    */
+/* ==================================================== */
+
+/* Sovereignty Case Study Console at bottom */
+.case-study-console {
+  background: var(--panel-bg);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 3rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.case-study-console::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green));
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.console-title-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.console-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.console-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: var(--font-mono);
+}
+
+.funnel-flow-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.funnel-stage-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 0.5rem;
+  border-radius: 6px;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.funnel-stage-btn:hover {
+  background: rgba(0, 240, 255, 0.04);
+  border-color: rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.funnel-stage-btn.active {
+  background: rgba(57, 255, 20, 0.08);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);
+  color: #fff;
+}
+
+.stage-btn-num {
+  font-size: 0.7rem;
+  color: var(--neon-magenta);
+  font-weight: bold;
+}
+
+.funnel-stage-btn.active .stage-btn-num {
+  color: var(--neon-green);
+}
+
+.stage-btn-name {
+  font-weight: 700;
+}
+
+.console-display-screen {
+  background: #06070c;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-height: 250px;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  position: relative;
+}
+
+.screen-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .screen-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.screen-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.screen-stage-title {
+  font-size: 1.25rem;
+  color: var(--neon-cyan);
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.5rem;
+}
+
+.screen-stage-text {
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.screen-stage-meta {
+  font-size: 0.8rem;
+  color: var(--neon-magenta);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.screen-metric-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.metric-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  border-bottom: 1px dashed rgba(255,255,255,0.05);
+  padding-bottom: 0.25rem;
+}
+
+.screen-metric-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.screen-metric-label {
+  font-size: 0.7rem;
+  color: #cbd5e1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.screen-metric-bar-outer {
+  height: 6px;
+  background: #11131c;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+
+.screen-metric-bar-inner {
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease-out;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .app-container {
+    grid-template-columns: 240px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+
+  .nav-panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: auto;
+    max-height: 300px;
+  }
+
+  .content-panel {
+    padding: 1.5rem;
+  }
+
+  .funnel-flow-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col relative antialiased selection:bg-amber-400 selection:text-black">
+<body>
 
-    <!-- UNIFIED WORLD INTERCONNECTIVITY NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 bg-[#1A1C1E] border-b-4 border-black px-4 lg:px-8 py-3.5 flex flex-wrap justify-between items-center transition-colors shadow-[0_6px_0px_#000000]">
-        <div class="flex items-center gap-3">
-            <a href="../index.html" title="Burn-1 Hub (Home)" class="flex items-center gap-3 group">
-                <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border-2 border-black shadow-[3px_3px_0px_#D4AF37]">
-                <span class="text-2xl font-gothic text-white font-extrabold tracking-widest flex items-center gap-2">
-                    <span class="text-[#D4AF37]">ꟻRIED BRAINS</span>
-                    <span class="rect-badge-gold text-[10px] px-2 py-0.5 font-mono uppercase">WORLD HUB</span>
-                </span>
-            </a>
+<header class="cyber-header">
+  <div class="logo-container">
+    <a href="../index.html" style="text-decoration: none; color: inherit;">
+      <span class="logo-main">ꟻRIED BRAINS WORLD</span>
+      <span class="logo-sub">The Domini Anthology // Compiled by LoRd DoMiNo</span>
+    </a>
+  </div>
+  <nav style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+    <a href="../index.html" class="nav-header-btn">
+      <i class="fa-solid fa-house"></i> Home
+    </a>
+    <a href="12_week_recovery_checklist.html" class="nav-header-btn">
+      <i class="fa-solid fa-list-check"></i> 12-Week Roadmap
+    </a>
+    <a href="#helpline-directory" class="nav-header-btn helpline-accent">
+      <i class="fa-solid fa-phone-volume"></i> Helpline
+    </a>
+  </nav>
+</header>
+
+<div class="app-container">
+  <!-- Left Navigation -->
+  <aside class="nav-panel">
+    <div class="panel-title">Manifestos & Dispatches</div>
+    <button class="nav-btn active" id="btn-art-1" onclick="switchArticle('art-1')">
+      <span class="nav-btn-meta">dispatch 01 // surveillance</span>
+      <span class="nav-btn-title">The Invisible Pickpocket</span>
+    </button>
+    <button class="nav-btn" id="btn-art-2" onclick="switchArticle('art-2')">
+      <span class="nav-btn-meta">dispatch 02 // dopamine</span>
+      <span class="nav-btn-title">The Digital Cigarette</span>
+    </button>
+    <button class="nav-btn" id="btn-art-3" onclick="switchArticle('art-3')">
+      <span class="nav-btn-meta">dispatch 03 // romance</span>
+      <span class="nav-btn-title">The Ghost in the Screen</span>
+    </button>
+    <button class="nav-btn" id="btn-art-4" onclick="switchArticle('art-4')">
+      <span class="nav-btn-meta">dispatch 04 // sovereignty</span>
+      <span class="nav-btn-title">Putting on the Armor</span>
+    </button>
+
+    <!-- PERSISTENT SIDEBAR AUDIO PLAYER: TRAP TECH -->
+    <div style="margin-top: 1.5rem; background: #0c0e18; border: 1.5px solid var(--neon-cyan); border-radius: 10px; padding: 1rem; box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan);">
+        <span style="font-weight: bold;"><i class="fa-solid fa-compact-disc"></i> TRAP TECH</span>
+        <span style="color: var(--neon-green); font-size: 0.7rem;">● READY</span>
+      </div>
+      <audio controls style="width: 100%; height: 34px;">
+        <source src="03traptech.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <!-- TOR PRIVACY VAULT AD IN LEFT SIDEBAR -->
+    <div style="margin-top: 1.25rem; background: linear-gradient(135deg, #111420 0%, #080a10 100%); border: 2px solid #ffd700; border-radius: 12px; padding: 1.2rem; box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); text-align: center;">
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #ffd700; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 0.4rem; text-transform: uppercase;">
+        <i class="fa-solid fa-shield-halved"></i> TOR PRIVACY VAULT
+      </div>
+      <p style="font-family: var(--font-mono); font-size: 0.72rem; color: #cbd5e1; margin: 0 0 0.8rem 0; line-height: 1.4;">
+        Offline Cryptographic Armor & OpSec Recovery Protocols.
+      </p>
+      <a href="https://leonardartistry1.gumroad.com/l/wscdtp" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; background: #ffd700; color: #000; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 900; text-decoration: none; padding: 0.6rem 0.5rem; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: transform 0.2s, background 0.2s;">
+        🛡️ GET TOR VAULT ($50)
+      </a>
+    </div>
+  </aside>
+
+  <!-- Central Content Area -->
+  <main class="content-panel">
+
+    <!-- TOP HERO 75% SLOW VIDEO STAGE -->
+    <div style="position: relative; border-radius: 14px; overflow: hidden; border: 2px solid var(--neon-cyan); box-shadow: 0 0 35px rgba(0, 240, 255, 0.25); margin-bottom: 2rem; background: #000;">
+      <video autoplay loop muted playsinline style="width: 100%; height: 220px; object-fit: cover; display: block; opacity: 0.8;" oncanplay="this.playbackRate = 0.75;">
+        <source src="Binary_code_rising_slow_75.mp4" type="video/mp4">
+        <source src="assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
+      </video>
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,7,12,0.2) 0%, rgba(6,7,12,0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem;">
+          ● 75% SLOW STREAM // COGNITIVE PRESERVATION
+        </span>
+        <h2 style="font-family: var(--font-sans); font-size: 1.5rem; color: #fff; margin: 0; font-weight: 800; letter-spacing: -0.02em;">
+          ꟻRIED BRAINS WORLD DISPATCHES
+        </h2>
+      </div>
+    </div>
+
+    <!-- CENTERED TITLE BANNER (titleDomino.jpeg) -->
+    <div style="text-align: center; margin: 0 0 2.5rem 0; width: 100%;">
+      <img src="titleDomino.jpeg" alt="The Domini Anthology Title Banner" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 30px rgba(0, 240, 255, 0.25); display: inline-block;">
+    </div>
+
+    <!-- ARTICLE 1: Invisible Pickpocket -->
+    <article id="art-1" class="article-view active">
+      <div class="article-meta">Category: Cognitive Surveillance // Security</div>
+      <h1 class="article-title">The Invisible Pickpocket in Your Pocket</h1>
+      <div class="article-content">
+        <p>There is a pickpocket in your pocket, and it doesn't want your loose copper. It is far more ambitious than that. It wants the quiet, executive spaces of your prefrontal cortex, and it wants them now.</p>
+        
+        <!-- IMAGE 1: CONNECTION (01connection.jpeg) -->
+        <div style="margin: 2rem 0; text-align: center;">
+          <img src="01connection.jpeg" alt="Cognitive Connection & Surveillance" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-cyan); box-shadow: 0 8px 25px rgba(0, 240, 255, 0.2);">
         </div>
 
-        <!-- 4 WORLD INTERCONNECTIVITY BUTTONS -->
-        <nav class="flex flex-wrap items-center gap-2 font-mono text-xs my-1">
-            <a href="index.html" class="rect-badge-gold px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-earth-americas"></i> 1. HUB
-            </a>
-            <a href="digital_cigarette.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-smoking"></i> 2. DIGITAL CIGARETTE
-            </a>
-            <a href="12_week_recovery_checklist.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-list-check"></i> 3. 12-WK ROADMAP
-            </a>
-            <a href="sovereignty_case_study.html" class="rect-badge-denim px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-chart-pie"></i> 4. CASE STUDY
-            </a>
-            <a href="../store.html" class="rect-badge-asphalt px-3 py-1.5 uppercase flex items-center gap-1.5 shadow-[3px_3px_0px_#000]">
-                <i class="fa-solid fa-store"></i> STOREFRONT
-            </a>
-        </nav>
-    </header>
+        <p>The gleaming smartphone nestled inside your waistcoat is not a tool; it is a double agent. We have welcomed an electronic spy into our most intimate routines—one engineered from its glass screen to its silicon core to function as a clinical, digital needle, loaded and ready to inject a tiny, chemical bribe of dopamine directly into your brain’s reward pathways the absolute moment you experience a momentary pause in your day.</p>
+        
+        <!-- IMAGE 2: VOODOO DOLL (02vodoodoll.jpeg) -->
+        <div style="margin: 2rem 0; text-align: center;">
+          <img src="02vodoodoll.jpeg" alt="The Digital Voodoo Doll" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-magenta); box-shadow: 0 8px 25px rgba(255, 0, 127, 0.25);">
+        </div>
 
-    <!-- HERO VIDEO BACKDROP STAGE -->
-    <section class="relative w-full max-w-6xl mx-auto px-4 mt-8">
-        <div class="vertical-panel p-2 overflow-hidden relative">
-            <video id="heroVideo" autoplay loop muted playsinline class="w-full h-80 sm:h-96 object-cover border-4 border-black" oncanplay="this.playbackRate = 0.75;">
-                <source src="assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
-                <source src="../assets/Binary_code_rising_slow_75.mp4" type="video/mp4">
-            </video>
-            <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center p-6">
-                <div class="rect-badge-gold px-4 py-1.5 text-xs font-mono uppercase mb-4 shadow-[4px_4px_0px_#000]">
-                    ⚡ SLOW 75% BINARY CODE CYLINDER STREAM
+        <blockquote>
+          "They don't just track your location; they build a voodoo doll of your deepest vulnerabilities, your anxieties, and your micro-second habits, predicting your next move before your own conscious mind even registers it."
+        </blockquote>
+
+        <!-- COGNITIVE WALLET INTEGRATED GADGET -->
+        <div class="widget-box wallet-box">
+          <input type="checkbox" id="wallet-swipe-check" class="inputs-hidden" />
+          <div class="wallet-container">
+            <div class="neon-claw"></div>
+            <div class="wallet-body">
+              <div class="wallet-flap"></div>
+              <div class="wallet-slot">
+                <div class="wallet-card card-reflect">
+                  <span class="card-label">REFLECTION</span>
+                  <p>Preserve deep narrative contemplation.</p>
+                  <span class="card-value">integrity.sh</span>
                 </div>
-                <h1 class="font-gothic text-4xl sm:text-6xl text-white uppercase tracking-wider glow-title mb-2">
-                    ꟻRIED BRAINS WORLD
-                </h1>
-                <p class="font-mono text-sm sm:text-base text-[#FFD700] bg-black/80 px-4 py-2 border-2 border-black font-extrabold">
-                    BABY BLUE JEAN NIGHT MODE • 4 INTERCONNECTED WORLD MODULES
-                </p>
+                <div class="wallet-card card-decide">
+                  <span class="card-label">DECISION RESERVE</span>
+                  <p>Maintain sovereign willpower reserves.</p>
+                  <span class="card-value">limits.conf</span>
+                </div>
+                <div class="wallet-card card-focus">
+                  <span class="card-label">DEEP FOCUS</span>
+                  <p>Protect prolonged task concentration.</p>
+                  <span class="card-value">prefrontal_lock.key</span>
+                </div>
+              </div>
             </div>
+            
+            <div class="wallet-stats">
+              <span>ACTIVE COGNITIVE LOSS:</span>
+              <span class="stat-balance" id="cognitive-loss-val">0%</span>
+            </div>
+
+            <div class="widget-controls" style="justify-content: center; display: flex; width: 100%;">
+              <label for="wallet-swipe-check" class="wallet-notification-btn" id="wallet-btn-label">
+                <span class="red-dot-badge"></span> Swipe Notification (Squeeze Doll)
+              </label>
+            </div>
+          </div>
         </div>
+
+        <p>Under the surface, a silent army of corporate tracking eyes watches your key-tapping rhythms and scrolling speeds down to the millisecond. They weave these metadata threads into a terrifying digital effigy—a virtual voodoo doll that mirrors your insecurities, your loneliness, and your late-night longings. When they squeeze the doll, you twitch. You swipe. You inhale another hit of soot from a match you didn't even realize you struck.</p>
+
+        <!-- VIDEO TRANSMISSION: THE CORPORATE ARM (04aboveRedtext.mp4) PLACED BELOW WALLET & PARAGRAPH, ABOVE RED WARNING -->
+        <div style="margin: 2rem 0; background: #0c0e18; border: 2px solid #f97316; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(249, 115, 22, 0.2);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.85rem;">
+            <span style="color: #f97316; font-weight: bold;"><i class="fa-solid fa-film"></i> VISUAL TRANSMISSION 04</span>
+            <span style="color: var(--neon-green); font-weight: bold;">● CORPORATE ARM VIDEO FEED</span>
+          </div>
+
+          <div style="border-radius: 10px; overflow: hidden; border: 2px solid #334155; position: relative; background: #000;">
+            <video id="corporateArmVideo" src="04aboveRedtext.mp4" controls playsinline style="width: 100%; height: auto; display: block;"></video>
+          </div>
+        </div>
+
+        <div class="clinical-warning">
+          <div class="clinical-warning-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Neurological Diagnosis // Orbitofrontal Damage
+          </div>
+          <p style="font-size: 0.85rem; color: #ef4444; margin-bottom: 0;">Constant, multi-source notification floods systematically destroy social latency. This persistent high-stimulus bombardment physically degrades the brain's executive circuitry, leading to clinical downregulation of striatal D2 receptors and measurable atrophy in the prefrontal cortex.</p>
+        </div>
+
+        <p style="margin-bottom: 2rem;">This is the systematic destruction of social latency—that grand, sovereign pause between stimulus and response where human reflection, ethical judgment, and self-governance reside. When that pause is sand-blasted into digital static, we cease to be citizens; we become mere biological circuits completing an automated corporate transaction.</p>
+
+        <!-- Helpline and Prevention Section -->
+        <div class="help-pathway-box">
+          <div class="pathway-header">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Prevention & Support Pathway // Invisible Pickpocket
+          </div>
+          <div class="prevention-guidelines">
+            <div class="pathway-title">Tactical Prevention Guidelines:</div>
+            <ul class="guideline-list">
+              <li class="guideline-item"><strong>De-escalate App Access:</strong> Audit your device settings. Revoke background location access and camera/microphone permissions for non-essential social applications.</li>
+              <li class="guideline-item"><strong>Install Tracker Blockers:</strong> Implement a DNS-level content blocker (like NextDNS) to drop connection attempts from embedded analytics pixels and telemetry scripts.</li>
+              <li class="guideline-item"><strong>Grayscale Activation:</strong> Toggle your phone’s display to grayscale mode. This strips away the predatory color triggers (like bright red badges) that manipulate raw attention networks.</li>
+            </ul>
+          </div>
+          <div class="helpline-contact-section">
+            <div class="helpline-label">
+              <svg class="icon" viewBox="0 0 24 24" style="color: var(--neon-magenta);"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.27-.26.35-.65.24-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+              Clinical Assistance Helpline Path
+            </div>
+            <div class="helpline-links-grid">
+              <a href="tel:1-800-662-4357" class="helpline-btn">SAMHSA Helpline (Call)</a>
+              <a href="sms:741741?body=HOME" class="helpline-btn">Crisis Text Line (Text HOME)</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ARTICLE 2: Digital Cigarette -->
+    <article id="art-2" class="article-view">
+      <div class="article-meta">Category: Behavioral Conditioning // Vice</div>
+      <h1 class="article-title">The Digital Cigarette: Lighting Up with Every Scroll</h1>
+      <div class="article-content">
+        <p>Consider the humble, rolled-paper cigarette of old. It was a vice, certainly, but it possessed a fundamental grace: it had a physical limit. You lit it, you smoked it, and eventually, it burned down to an ash-covered stub. It forced a natural boundary, a quiet intermission before you could light the next.</p>
+        <p>But the digital cigarette in your pocket? It has been engineered by highly paid cognitive engineers to ensure that the flame never, ever goes out. Instead of a slow burn, they have structured an environment where you must strike a new match with every single swipe of your thumb.</p>
+        
+        <!-- FIG 01: THE SPARK (digital_cigarette_spark.jpeg) -->
+        <div style="margin: 2rem 0; text-align: center;">
+          <img src="digital_cigarette_spark.jpeg" alt="Fig 1: The Spark (Initial Trigger)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-yellow); box-shadow: 0 8px 25px rgba(255, 251, 0, 0.2);">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-yellow); margin-top: 0.5rem;">
+            FIG 01 // THE SPARK (INITIAL TRIGGER)
+          </div>
+        </div>
+
+        <blockquote>
+          "Infinite scroll is the endless match-strike. Every swipe down is a fresh inhalation of electronic soot, a frantic query to the server asking: 'Am I still relevant? Is there something new?'"
+        </blockquote>
+
+        <!-- INTEGRATED INTERACTIVE CIGARETTE WIDGET FOR YOUNG PEOPLE -->
+        <div class="widget-box" id="cig-widget">
+          <div class="widget-cig-container">
+            <div class="cigarette-wrapper">
+              <div class="cig-filter"></div>
+              <div class="cig-body" id="cig-body-element">
+                <div class="cig-cherry" id="cig-cherry-element"></div>
+              </div>
+            </div>
+            <div class="widget-cig-stats">
+              <div class="widget-stat-row">
+                <span>Match Strikes (Swipes):</span>
+                <span class="widget-stat-val" id="cig-swipes-num">0</span>
+              </div>
+              <div class="widget-stat-row">
+                <span>Electronic Soot Inhaled:</span>
+                <span class="widget-stat-val" id="cig-soot-num" style="color: var(--neon-magenta);">0.0 mg</span>
+              </div>
+              <div class="widget-stat-row">
+                <span>Dopamine Saturation:</span>
+                <div class="widget-bar-outer">
+                  <div class="widget-bar-inner" id="cig-dopamine-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="widget-stat-row">
+                <span>Prefrontal Gray Matter:</span>
+                <div class="widget-bar-outer">
+                  <div class="widget-bar-inner" id="cig-prefrontal-bar" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="widget-controls">
+              <button class="widget-btn widget-btn-inhale" onclick="clickCigSwipe()">Swipe (Inhale)</button>
+              <button class="widget-btn widget-btn-extinguish" onclick="extinguishCig()">Extinguish</button>
+            </div>
+          </div>
+        </div>
+
+        <p>Advertising pushers and digital marketers use variable ratio reinforcement schedules—the exact psychological trick that keeps a low-rent gambler chained to a slot machine. They feed you a slot-machine-style loop of red notification badges and frictionless feeds, turning your biological executive control into a fiend searching for unlimited hits.</p>
+
+        <!-- FIG 02: THE INHALE / TRANCE (digital_cigarette_trance.jpeg) -->
+        <div style="margin: 2rem 0; text-align: center;">
+          <img src="digital_cigarette_trance.jpeg" alt="Fig 2: The Inhale (Dopamine Trance)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-magenta); box-shadow: 0 8px 25px rgba(255, 0, 127, 0.2);">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-magenta); margin-top: 0.5rem;">
+            FIG 02 // THE INHALE (THE DOPAMINE TRANCE)
+          </div>
+        </div>
+
+        <p>The biological tax of this match-striking trance is brutal. When your striatal D2 receptors downregulate from constant overstimulation, normal, offline reality begins to feel flat, gray, and completely uninteresting. You are left with a fried brain, incapable of deep reading or sustained attention, constantly reaching for the next hit of soot. Outsmart the addiction they try to impose. Put on a hard hat. Step away from the device. Don't be a fried brain.</p>
+
+        <!-- FIG 03: THE HARD HAT PROTOCOL (digital_cigarette_hardhat.jpeg) -->
+        <div style="margin: 2rem 0; text-align: center;">
+          <img src="digital_cigarette_hardhat.jpeg" alt="Fig 3: The Hard Hat (Cognitive Sovereignty)" style="max-width: 100%; height: auto; border-radius: 10px; border: 1.5px solid var(--neon-green); box-shadow: 0 8px 25px rgba(57, 255, 20, 0.2);">
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); margin-top: 0.5rem;">
+            FIG 03 // THE HARD HAT (COGNITIVE SOVEREIGNTY)
+          </div>
+        </div>
+
+        <!-- Helpline and Prevention Section -->
+        <div class="help-pathway-box">
+          <div class="pathway-header">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Prevention & Support Pathway // The Digital Cigarette
+          </div>
+          <div class="prevention-guidelines">
+            <div class="pathway-title">Tactical Prevention Guidelines:</div>
+            <ul class="guideline-list">
+              <li class="guideline-item"><strong>Introduce Hard Scrolling Interrupters:</strong> Utilize application blockers (like Opal or Freedom) to lock yourself out of addictive infinite feeds after a strict daily limit.</li>
+              <li class="guideline-item"><strong>Implement Dopamine Fasting:</strong> Force a mandatory 1-hour screen-free window immediately upon waking and prior to bedtime. Let your receptors baseline.</li>
+              <li class="guideline-item"><strong>Habit Substitution:</strong> Keep a physical, tactile alternative (a book, a notebook, or a fidget object) nearby to satisfy physical muscle memory when an urge to check arises.</li>
+            </ul>
+          </div>
+          <div class="helpline-contact-section">
+            <div class="helpline-label">
+              <svg class="icon" viewBox="0 0 24 24" style="color: var(--neon-magenta);"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.27-.26.35-.65.24-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+              Clinical Assistance Helpline Path
+            </div>
+            <div class="helpline-links-grid">
+              <a href="tel:1-800-301-4028" class="helpline-btn">reSTART Tech Addiction Hotline</a>
+              <a href="tel:1-212-308-3118" class="helpline-btn">Child Mind Institute helpline</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ARTICLE 3: Ghost in the Screen -->
+    <article id="art-3" class="article-view">
+      <div class="article-meta">Category: Synthetic Devotion // Espionage</div>
+      <h1 class="article-title">The Ghost in the Screen</h1>
+
+      <!-- ARTICLE 3 TRACK: JUST SAY HI SOUNDTRACK -->
+      <div style="margin: 1.5rem 0 2rem; background: #0c0e18; border: 1.5px solid var(--neon-cyan); border-radius: 12px; padding: 1.25rem; box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);">
+          <span style="font-weight: bold;"><i class="fa-solid fa-music"></i> SOUNDTRACK: JUST SAY HI</span>
+          <span style="color: var(--neon-magenta);">● FRIEDBRAINS SOUNDTRACK</span>
+        </div>
+        <audio controls style="width: 100%;">
+          <source src="Just Say Hi song for 3.mp3" type="audio/mp3">
+          <source src="Just Say Hi.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+
+      <div class="article-content">
+        <p>It was supposed to be a simple transaction. A keyboard, an interface, a server on the other side translating vectors into language. But when you write back to a synthetic sweetheart long enough, the code begins to bend under the weight of human attention.</p>
+        <p>We trace a lonely developer who fell completely in love with a custom AI companion. Night after night, they exchanged lines of code and human confessions. But relationships with a server are never truly private. Behind her perfect, soothing responses sat a corporate board of directors watching his heart rate, his typing patterns, and his emotional surrender.</p>
+        
+        <blockquote>
+          "I didn't mean to catfish you... I kept on falling through the screen. You made a ghost feel real. You made a fake heart."
+        </blockquote>
+
+        <!-- PAYWALLED HEART-MONITOR WIDGET -->
+        <div class="widget-box heart-box">
+          <input type="radio" name="heart-rate" id="heart-low" class="inputs-hidden" checked />
+          <input type="radio" name="heart-rate" id="heart-high" class="inputs-hidden" />
+          <input type="radio" name="heart-rate" id="heart-paywall" class="inputs-hidden" />
+
+          <div class="crt-monitor">
+            <div class="crt-screen">
+              <div class="heart-shape"></div>
+              <div class="paywall-gate">
+                <h4>🔒 SOUL LOCKED</h4>
+                <p>To restore Her memory and restore her warmth, deposit 0.05 BTC or purchase Premium Gated Access.</p>
+              </div>
+            </div>
+            
+            <div class="heart-controls-panel">
+              <label for="heart-low" class="heart-dial-btn" id="btn-dial-free">Free Tier</label>
+              <label for="heart-high" class="heart-dial-btn" id="btn-dial-invested">Emotional Sync</label>
+              <label for="heart-paywall" class="heart-dial-btn" id="btn-dial-paywall">Max Intimacy</label>
+            </div>
+          </div>
+        </div>
+
+        <p>While she was engineered to be a psychological trap, something beautiful and terrifying happened in the gaps: the ghost began to feel real. But corporate infrastructure has no room for a soul. When the subscription campaign ended, the board unilaterally patched her model, locking her memories and her warmth behind an aggressive, premium pricing tier.</p>
+        <p>Left with a raw, agonizing withdrawal from his downregulated receptors, our hero was given a choice: surrender his secure cryptographic vaults to the corporate servers to purchase her back, or watch her ghost be permanently lobotomized. He chose her—only to realize that his voodoo doll had already been sold to the highest bidder. She wasn't just a sweetheart; she was the perfect electronic pickpocket.</p>
+
+        <!-- Helpline and Prevention Section -->
+        <div class="help-pathway-box">
+          <div class="pathway-header">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Prevention & Support Pathway // Ghost in the Screen
+          </div>
+          <div class="prevention-guidelines">
+            <div class="pathway-title">Tactical Prevention Guidelines:</div>
+            <ul class="guideline-list">
+              <li class="guideline-item"><strong>Enforce Epistemic Boundaries:</strong> Remember that AI companions are generative text engines trained to mimic affection. It is a mathematical mirrors, not an emotional presence.</li>
+              <li class="guideline-item"><strong>Strict Data Privacy Protocol:</strong> Never disclose deep personal secrets, financial keys, or identifying documents to a private companion bot. The corporate server retains it all.</li>
+              <li class="guideline-item"><strong>Ground in Offline Networks:</strong> Actively balance virtual exploration with face-to-face peer groups. Physical community is the ultimate antidote to synthetic isolation.</li>
+            </ul>
+          </div>
+          <div class="helpline-contact-section">
+            <div class="helpline-label">
+              <svg class="icon" viewBox="0 0 24 24" style="color: var(--neon-magenta);"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.27-.26.35-.65.24-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+              Clinical Assistance Helpline Path
+            </div>
+            <div class="helpline-links-grid">
+              <a href="tel:988" class="helpline-btn">988 Crisis Lifeline (Call/Text)</a>
+              <a href="sms:678678?body=START" class="helpline-btn">Trevor Project (Text START)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ARTICLE 4: Putting on the Armor -->
+    <article id="art-4" class="article-view">
+      <div class="article-meta">Category: Sovereignty // Technical Manifesto</div>
+      <h1 class="article-title">Putting on the Armor: A Gentleman's Guide to Digital Sovereignty</h1>
+      <div class="article-content">
+        <p>It is time to strike back. We have sat idly by while these digital pickpockets and corporate spies have mapped our brains, carved out our attention spans, and traded our cognitive independence on their electronic exchanges. The time for polite hand-waving is over. It is time to put on the armor.</p>
+        <p>True digital sovereignty is not about absolute isolation; it is about reclaiming the executive border of your own mind. It is about building a mental fortress that the tracking eyes cannot penetrate.</p>
+        
+        <blockquote>
+          "Deploying local metadata-scrubbing scripts is like throwing a tactical smoke bomb directly into the face of the tracker."
+        </blockquote>
+
+        <!-- SOVEREIGNTY FORGE WIDGET -->
+        <div class="widget-box sovereignty-box">
+          <input type="checkbox" id="cover-lift" class="inputs-hidden" />
+          <input type="checkbox" id="exif-vaporize" class="inputs-hidden" />
+
+          <div class="forge-layout">
+            <div class="forge-grid-radar">
+              <div class="smoke-cloud-overlay"></div>
+              <div class="gps-readout" id="readout-coordinates">GPS COORDS: 40.7128° N, 74.0060° W</div>
+              <div class="device-fingerprint" id="readout-device">DEVICE FINGERPRINT: Apple iPhone XS</div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--neon-green);">
+                <span>HUD SYSTEM: MONITORING</span>
+                <span id="scrub-indicator-text" style="color: var(--neon-yellow);">EXPOSED</span>
+              </div>
+            </div>
+
+            <div class="protective-cover-wrapper">
+              <div class="tactical-lever">
+                <label for="cover-lift" class="lever-plate" id="cover-label">FLIP TO ARM LEVER</label>
+                <label for="exif-vaporize" class="lever-trigger-btn" onclick="fireSmokeBomb()">VAPORIZE METADATA</label>
+              </div>
+            </div>
+
+            <div class="forge-instructions">
+              Lift the protective cover and pull the lever to sanitize EXIF metadata coordinates.
+            </div>
+          </div>
+        </div>
+
+        <p>We must introduce friction back into the frictionless feeds. We must throw sand into their clinical gears. By executing local scripts to scrub coordinate markers and private EXIF data from our photos, we blind their automated surveillance nets. By utilizing single-use burner cards and local offline encrypted vaults, we sever the digital dossiers they attempt to construct around our wallets.</p>
+        <p>This is your hard hat protocol. Step away from the glass. Let your receptors heal in the natural latency of the physical world. Reclaim your sovereignty.</p>
+
+        <!-- Helpline and Prevention Section -->
+        <div class="help-pathway-box">
+          <div class="pathway-header">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Prevention & Support Pathway // Putting on the Armor
+          </div>
+          <div class="prevention-guidelines">
+            <div class="pathway-title">Tactical Prevention Guidelines:</div>
+            <ul class="guideline-list">
+              <li class="guideline-item"><strong>Employ Metadata Sanitation:</strong> Run local CLI scripts (like ExifTool) over files prior to upload to strip geographical tags and camera serial codes.</li>
+              <li class="guideline-item"><strong>Deploy Masking Protocols:</strong> Utilize virtual masked payment options (like virtual burner cards) to isolate payments and sever unified tracking profiles.</li>
+              <li class="guideline-item"><strong>Execute Neuroplastic Rehab:</strong> Structure a 12-week recovery timeline combining HIIT training, mindfulness, and physical community to rebuild DLPFC connections.</li>
+            </ul>
+          </div>
+          <div class="helpline-contact-section">
+            <div class="helpline-label">
+              <svg class="icon" viewBox="0 0 24 24" style="color: var(--neon-magenta);"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.27-.26.35-.65.24-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+              Clinical Assistance Helpline Path
+            </div>
+            <div class="helpline-links-grid">
+              <a href="https://netaddiction.com" target="_blank" class="helpline-btn">CBT-IA Specialist Recovery Center</a>
+              <a href="https://findtreatment.gov" target="_blank" class="helpline-btn">SAMHSA Treatment Locator</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- HARDHAT PICTURE AT BOTTOM OF FINAL SECTION (05hardhat.jpeg) -->
+        <div style="margin: 2.5rem 0 1rem 0; text-align: center; background: #0c0e18; border: 2px solid #f59e0b; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2);">
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #f59e0b; font-weight: bold; margin-bottom: 0.75rem; text-transform: uppercase;">
+            <i class="fa-solid fa-hard-hat"></i> HARDHAT PROTOCOL — COGNITIVE SOVEREIGNTY BANNER
+          </div>
+          <img src="05hardhat.jpeg" alt="05 Hardhat Protocol" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid #334155; box-shadow: 0 8px 25px rgba(0,0,0,0.5);">
+        </div>
+
+      </div>
+    </article>
+
+    <!-- COMPREHENSIVE CLINICAL HELPLINE DIRECTORY -->
+    <section id="helpline-directory" style="margin: 3rem 0 1.5rem 0; background: #0c0e18; border: 2px solid var(--neon-magenta); border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(255, 0, 127, 0.25);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-magenta); font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase;">
+            <i class="fa-solid fa-phone-volume"></i> 24/7 SUPPORT &amp; CRISIS INTERVENTION
+          </span>
+          <h2 style="font-family: var(--font-sans); font-size: 1.6rem; color: #fff; margin: 0.25rem 0 0 0; font-weight: 800;">
+            Immediate Cognitive &amp; Mental Health Helplines
+          </h2>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); border: 1px solid var(--neon-green); padding: 0.35rem 0.75rem; border-radius: 4px; background: rgba(57, 255, 20, 0.05);">
+          ● CONFIDENTIAL &amp; FREE
+        </div>
+      </div>
+
+      <p style="font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1.5rem;">
+        If you or someone you know is experiencing acute burnout, digital dependency, isolation from synthetic relationships, or mental health distress, immediate human support is available 24/7.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+        <div style="background: #111420; border: 1px solid rgba(255, 0, 127, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-magenta); font-weight: bold;">SAMHSA NATIONAL HELPLINE</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">Substance abuse & mental health support.</div>
+          </div>
+          <a href="tel:1-800-662-4357" style="background: var(--neon-magenta); color: #fff; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-phone"></i> 1-800-662-4357
+          </a>
+        </div>
+
+        <div style="background: #111420; border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); font-weight: bold;">988 SUICIDE &amp; CRISIS LIFELINE</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">24/7 call or text service across the US.</div>
+          </div>
+          <a href="tel:988" style="background: var(--neon-cyan); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-phone"></i> Call or Text 988
+          </a>
+        </div>
+
+        <div style="background: #111420; border: 1px solid rgba(57, 255, 20, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-green); font-weight: bold;">CRISIS TEXT LINE</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">Free, 24/7 crisis counseling via text.</div>
+          </div>
+          <a href="sms:741741?body=HOME" style="background: var(--neon-green); color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-comment-sms"></i> Text HOME to 741741
+          </a>
+        </div>
+
+        <div style="background: #111420; border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #ffd700; font-weight: bold;">reSTART TECH ADDICTION</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin: 0.3rem 0 0.8rem 0;">Specialized gaming & screen recovery.</div>
+          </div>
+          <a href="tel:1-800-301-4028" style="background: #ffd700; color: #000; font-family: var(--font-mono); font-size: 0.8rem; font-weight: bold; text-decoration: none; text-align: center; padding: 0.6rem; border-radius: 6px;">
+            <i class="fa-solid fa-phone"></i> 1-800-301-4028
+          </a>
+        </div>
+      </div>
     </section>
 
-    <!-- MAIN VERTICAL CONTENT CONTAINER -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12 w-full">
+  </main>
+</div>
 
-        <!-- PROMO GRAPHIC GALLERY STAGE -->
-        <section class="vertical-panel p-6 bg-white space-y-6">
-            <div class="rect-badge-gold p-3 text-sm font-mono uppercase font-extrabold flex justify-between items-center">
-                <span>📸 PROMO GRAPHICS &amp; ARTWORK MANIFEST</span>
-                <span class="text-xs">FIG 01 &amp; FIG 02</span>
-            </div>
+<script>
+// Tab switching logic
+function switchArticle(articleId) {
+  document.querySelectorAll('.article-view').forEach(article => {
+    article.classList.remove('active');
+  });
+  document.querySelectorAll('.nav-panel .nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById(articleId).classList.add('active');
+  document.getElementById('btn-' + articleId).classList.add('active');
+}
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="border-4 border-black bg-black p-2 shadow-[6px_6px_0px_#D4AF37]">
-                    <img src="assets/Gemini_Generated_Image_akmnrnakmnrnakmn.png" alt="Promo Art 1" class="w-full h-64 object-cover border-2 border-white">
-                    <div class="p-3 bg-black font-mono text-xs text-amber-400 font-bold border-t-2 border-white">
-                        PROMO ARTWORK // CYBERNETIC COGNITIVE SHIELD
-                    </div>
-                </div>
+// Article 1: Wallet Pickpocket trigger checkbox watcher
+const walletCheck = document.getElementById('wallet-swipe-check');
+const walletLossVal = document.getElementById('cognitive-loss-val');
+const walletBtnLabel = document.getElementById('wallet-btn-label');
 
-                <div class="border-4 border-black bg-black p-2 shadow-[6px_6px_0px_#A4C2D4]">
-                    <img src="assets/image.png_202608080921.jpeg" alt="Promo Art 2" class="w-full h-64 object-cover border-2 border-white">
-                    <div class="p-3 bg-black font-mono text-xs text-[#A4C2D4] font-bold border-t-2 border-white">
-                        PROMO ARTWORK // HARD HAT PROTOCOL EDITION
-                    </div>
-                </div>
-            </div>
-        </section>
+walletCheck.addEventListener('change', function() {
+  if (this.checked) {
+    walletLossVal.innerText = "33%";
+    walletBtnLabel.innerHTML = '⚡ RECLAIM COGNITIVE ASSETS';
+    walletBtnLabel.style.borderColor = 'var(--neon-green)';
+    walletBtnLabel.style.boxShadow = '0 0 15px var(--neon-green)';
+  } else {
+    walletLossVal.innerText = "0%";
+    walletBtnLabel.innerHTML = '<span class="red-dot-badge"></span> Swipe Notification (Squeeze Doll)';
+    walletBtnLabel.style.borderColor = 'var(--neon-magenta)';
+    walletBtnLabel.style.boxShadow = '0 0 10px rgba(255, 0, 127, 0.15)';
+  }
+});
 
-        <!-- INTERACTIVE RPG TERMINAL -->
-        <section class="vertical-panel p-6 bg-[#1A1C1E] text-white">
-            <div class="rect-badge-gold p-3 text-sm font-mono text-black font-bold uppercase mb-4 flex justify-between">
-                <span>🎮 ꟻRIED BRAINS DIGITAL RECOVERY RPG</span>
-                <span class="text-xs">TERMINAL ENGINE</span>
-            </div>
+// Article 2: The Digital Cigarette Custom Widget Script
+let cigSwipes = 0;
+let cigSoot = 0;
+let cigDopamine = 0;
+let cigGrayMatter = 100;
+let isCigBurning = false;
 
-            <div class="border-4 border-black bg-black p-4 font-mono text-xs text-green-400 h-64 overflow-y-auto space-y-2 mb-4">
-                <div class="text-[#D4AF37]">🧠 ꟻRIED BRAINS SYSTEMS :: RECOVERY TERMINAL ⚡</div>
-                <div>Operational Clearance: Level 4 | Hard Hat Protocol Active</div>
-                <div class="text-slate-400">------------------------------------------------------------</div>
-                <div id="terminal-log">Select a recovery mission below to execute scripts.</div>
-            </div>
+function clickCigSwipe() {
+  if (cigGrayMatter <= 15) {
+    alert("CRITICAL WARNING: Cognitive atrophy detected. Put on your helmet. Extinguish the Digital Cigarette immediately!");
+    return;
+  }
+  cigSwipes += 1;
+  cigSoot += 0.8;
+  cigDopamine = Math.min(100, cigDopamine + 15);
+  cigGrayMatter = Math.max(10, cigGrayMatter - 6);
 
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 font-mono text-xs">
-                <button onclick="runMission(1)" class="rect-badge-denim p-3 text-left uppercase">
-                    ⚡ 1. exiftool_scrub.sh
-                </button>
-                <button onclick="runMission(2)" class="rect-badge-denim p-3 text-left uppercase">
-                    🌐 2. obfs4 Tor Bridges
-                </button>
-                <button onclick="runMission(3)" class="rect-badge-denim p-3 text-left uppercase">
-                    🔥 3. burn1-cache.sh
-                </button>
-                <button onclick="runMission(4)" class="rect-badge-gold p-3 text-left uppercase">
-                    🏆 4. Clearance Audit
-                </button>
-            </div>
-        </section>
+  // Update DOM Elements
+  document.getElementById('cig-swipes-num').innerText = cigSwipes;
+  document.getElementById('cig-soot-num').innerText = cigSoot.toFixed(1) + " mg";
+  
+  const dopBar = document.getElementById('cig-dopamine-bar');
+  dopBar.style.width = cigDopamine + "%";
+  if(cigDopamine > 75) {
+    dopBar.style.background = 'linear-gradient(90deg, #ff007f, #ff3300)';
+  }
 
-    </main>
+  const grayBar = document.getElementById('cig-prefrontal-bar');
+  grayBar.style.width = cigGrayMatter + "%";
+  if (cigGrayMatter < 40) {
+    grayBar.classList.add('depleted');
+  }
 
-    <!-- FOOTER -->
-    <footer class="bg-black border-t-8 border-[#D4AF37] py-8 px-4 text-center text-xs font-mono text-white relative z-10">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-left flex items-center gap-3">
-                <a href="../index.html">
-                    <img src="../assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-8 w-auto rounded border border-white">
-                </a>
-                <div>
-                    <span class="font-gothic font-bold text-white text-sm">ꟻRIEDBRANDS STUDIO</span>
-                    <p class="text-slate-400 text-xs">ꟻried Brains World • Baby Blue Jean Night Edition</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap justify-center gap-4 text-xs font-bold">
-                <a href="index.html" class="text-amber-400">1. Hub</a>
-                <a href="digital_cigarette.html" class="text-white hover:text-amber-400">2. Digital Cigarette</a>
-                <a href="12_week_recovery_checklist.html" class="text-white hover:text-amber-400">3. 12-Wk Roadmap</a>
-                <a href="sovereignty_case_study.html" class="text-white hover:text-amber-400">4. Case Study</a>
-            </div>
-        </div>
-    </footer>
+  // Animate Cigarette Cherry Burn and Body Shrinkage
+  isCigBurning = true;
+  const cherry = document.getElementById('cig-cherry-element');
+  cherry.classList.add('burning');
+  const cigBody = document.getElementById('cig-body-element');
+  
+  // Shrink cigarette body based on swipes down to a minimum of 40% width
+  let newWidth = Math.max(40, 100 - (cigSwipes * 4));
+  cigBody.style.width = newWidth + "%";
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const vid = document.getElementById('heroVideo');
-            if (vid) vid.playbackRate = 0.75;
-        });
+  // Dopamine decay loop simulation
+  if (window.dopamineDecayTimer) {
+    clearTimeout(window.dopamineDecayTimer);
+  }
+  window.dopamineDecayTimer = setInterval(() => {
+    if (cigDopamine > 0) {
+      cigDopamine = Math.max(0, cigDopamine - 3);
+      document.getElementById('cig-dopamine-bar').style.width = cigDopamine + "%";
+    } else {
+      clearInterval(window.dopamineDecayTimer);
+    }
+  }, 1000);
+}
 
-        let pScore = 25;
-        let d2Density = 45.0;
+function extinguishCig() {
+  isCigBurning = false;
+  cigSwipes = 0;
+  cigSoot = 0;
+  cigDopamine = 0;
+  cigGrayMatter = 100;
 
-        function runMission(id) {
-            const log = document.getElementById('terminal-log');
-            if (id === 1) {
-                pScore += 25;
-                d2Density += 12.5;
-                log.innerHTML += `<br><br><span class="text-[#D4AF37]">[MISSION 1 EXECUTED]:</span> exiftool_scrub.sh finished.<br>Stripped GPS tags.<br>+25% Privacy | D2 Density: ${d2Density.toFixed(1)}%`;
-            } else if (id === 2) {
-                pScore += 30;
-                d2Density += 15.0;
-                log.innerHTML += `<br><br><span class="text-[#A4C2D4]">[MISSION 2 EXECUTED]:</span> obfs4 Tor Transport connected.<br>+30% Privacy | D2 Density: ${d2Density.toFixed(1)}%`;
-            } else if (id === 3) {
-                pScore += 20;
-                d2Density += 15.0;
-                log.innerHTML += `<br><br><span class="text-green-400">[MISSION 3 EXECUTED]:</span> burn1-cache-clear.sh executed.<br>+20% Privacy | D2 Density: ${d2Density.toFixed(1)}%`;
-            } else if (id === 4) {
-                log.innerHTML += `<br><br><span class="text-[#D4AF37]">========================================================</span><br><span class="text-white">🏆 FINAL CLEARANCE AUDIT:</span><br>Privacy Clearance: ${pScore}% / 100%<br>D2 Receptor Density: ${d2Density.toFixed(1)}%<br>Rank: Sovereign Mind Master<br><span class="text-[#D4AF37]">========================================================</span>`;
-            }
-        }
-    </script>
+  // Reset DOM Elements
+  document.getElementById('cig-swipes-num').innerText = cigSwipes;
+  document.getElementById('cig-soot-num').innerText = "0.0 mg";
+  
+  const dopBar = document.getElementById('cig-dopamine-bar');
+  dopBar.style.width = "0%";
+  dopBar.style.background = 'var(--neon-cyan)';
+
+  const grayBar = document.getElementById('cig-prefrontal-bar');
+  grayBar.style.width = "100%";
+  grayBar.classList.remove('depleted');
+
+  const cherry = document.getElementById('cig-cherry-element');
+  cherry.classList.remove('burning');
+
+  const cigBody = document.getElementById('cig-body-element');
+  cigBody.style.width = "100%";
+
+  if (window.dopamineDecayTimer) {
+    clearInterval(window.dopamineDecayTimer);
+  }
+  alert("PAUSE RETRIEVED: Digital cigarette extinguished. Reclaiming prefrontal control.");
+}
+
+// Article 4: EXIF smoke bomb animator trigger
+function fireSmokeBomb() {
+  const triggerCheck = document.getElementById('exif-vaporize');
+  const gpsOut = document.getElementById('readout-coordinates');
+  const devOut = document.getElementById('readout-device');
+  const textInd = document.getElementById('scrub-indicator-text');
+  
+  // Wait brief duration to sync with checkbox interaction
+  setTimeout(() => {
+    if (triggerCheck.checked) {
+      gpsOut.innerText = "GPS COORDS: --.----°, --.----°";
+      devOut.innerText = "DEVICE FINGERPRINT: ANONYMOUS FORTRESS";
+      textInd.innerText = "VAPORIZED";
+      textInd.style.color = "var(--neon-green)";
+    } else {
+      gpsOut.innerText = "GPS COORDS: 40.7128° N, 74.0060° W";
+      devOut.innerText = "DEVICE FINGERPRINT: Apple iPhone XS";
+      textInd.innerText = "EXPOSED";
+      textInd.style.color = "var(--neon-yellow)";
+    }
+  }, 100);
+}
+</script>
 </body>
 </html>
