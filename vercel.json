@@ -75,12 +75,40 @@
       "destination": "/after-purchase.html"
     },
     {
-      "source": "/onboarding",
-      "destination": "/onboarding.html"
-    },
-    {
       "source": "/helpline",
       "destination": "/helpline/index.html"
+    },
+    {
+      "source": "/12_week_recovery_checklist",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/12-week-recovery-checklist",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/12-week-roadmap",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/12_week",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/12-week",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/roadmap",
+      "destination": "/friedbrains-world/12_week_recovery_checklist.html"
+    },
+    {
+      "source": "/friedbrains",
+      "destination": "/friedbrains-world/index.html"
+    },
+    {
+      "source": "/friedbrains-world",
+      "destination": "/friedbrains-world/index.html"
     },
     {
       "source": "/friedbrains-world/12_week_recovery_checklist",
