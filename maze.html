@@ -225,26 +225,27 @@ body {
    ----------------------------------- */
 #mobile-dpad-container {
     position: absolute;
-    bottom: 40px; 
-    right: 40px; 
+    bottom: 85px; /* Elevated cleanly above bottom edge and browser navigation bars */
+    right: 32px; 
     pointer-events: auto;
-    z-index: 10;
+    z-index: 40;
+    touch-action: none;
 }
 
 #mobile-dpad {
     display: grid;
-    grid-template-columns: repeat(3, 48px);
-    grid-template-rows: repeat(3, 48px);
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(3, 50px);
     gap: 6px;
 }
 
 .dpad-btn {
     background-color: var(--card-white);
     border: 3px solid var(--ink-black);
-    box-shadow: 2px 2px 0px var(--ink-black);
-    border-radius: 8px;
+    box-shadow: 3px 3px 0px var(--ink-black);
+    border-radius: 10px;
     color: var(--ink-black);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 900;
     display: flex;
     align-items: center;
@@ -265,6 +266,30 @@ body {
 #dpad-left { grid-column: 1; grid-row: 2; }
 #dpad-right { grid-column: 3; grid-row: 2; }
 #dpad-down { grid-column: 2; grid-row: 3; }
+
+/* Responsive Elevation for Mobile & Landscape Viewports */
+@media (max-height: 550px) and (orientation: landscape) {
+    #mobile-dpad-container {
+        bottom: 75px; 
+        right: 20px;
+    }
+    #mobile-dpad {
+        grid-template-columns: repeat(3, 44px);
+        grid-template-rows: repeat(3, 44px);
+        gap: 5px;
+    }
+    .dpad-btn {
+        font-size: 16px;
+        border-width: 2.5px;
+    }
+}
+
+@media (max-width: 768px) {
+    #mobile-dpad-container {
+        bottom: 85px;
+        right: 24px;
+    }
+}
 
 /* Portrait Warning Intercept */
 #portrait-gate {
@@ -347,8 +372,11 @@ body {
 
 <div id="game-container">
     <!-- Day Mode Looping Video Background loaded natively -->
-    <video id="background-video" autoplay loop muted playsinline draggable="false">
-        <source src="Ruined_city_with_zombie_hordes_202608051153.mp4" type="video/mp4">
+    <video id="background-video" autoplay loop muted playsinline preload="auto" draggable="false" onended="this.play()">
+        <source src="animate_this_into_a_still_pano.mp4" type="video/mp4">
+        <source src="/animate_this_into_a_still_pano.mp4" type="video/mp4">
+        <source src="assets/animate_this_into_a_still_pano.mp4" type="video/mp4">
+        <source src="/assets/animate_this_into_a_still_pano.mp4" type="video/mp4">
     </video>
 
     <!-- Playable Canvas -->
@@ -971,6 +999,17 @@ function toggleDebug() {
 }
 
 resizeCanvas();
+window.addEventListener('DOMContentLoaded', () => {
+    resizeCanvas();
+    if (bgVideo) {
+        bgVideo.loop = true;
+        bgVideo.play().catch(e => console.log('Autoplay handled:', e));
+    }
+});
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', () => {
+    setTimeout(resizeCanvas, 200);
+});
 </script>
 </body>
 </html>
