@@ -1,133 +1,514 @@
 <!DOCTYPE html>
-<html lang="en" class="day-mode">
+<html lang="en" class="dark scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BURN-1 // EXECUTIVE DIGITAL ETIQUETTE PLAYBOOK</title>
+    <title>EXECUTIVE DIGITAL ETIQUETTE PLAYBOOK | BURN-1 BROWSER EDITION</title>
+    <meta name="description" content="Burn-1 Executive Digital Etiquette Playbook: Complete 48-Page Interactive Browser Edition with Training Videos.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cyber: ['Orbitron', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                        code: ['Fira Code', 'monospace'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            background-color: #050505;
-            color: #00f3ff;
-            font-family: 'Share Tech Mono', monospace;
-            margin: 0;
-            padding: 0;
-        }
-        .font-cyber { font-family: 'Orbitron', sans-serif; }
-        .font-mono-code { font-family: 'Fira Code', monospace; }
-
-        .brutal-card {
-            background: #0a0e17;
-            border: 3px solid #00f3ff;
-            box-shadow: 6px 6px 0px #00f3ff;
+            background-color: #070913;
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .brutal-btn {
-            background: #39ff14;
-            color: #000000;
-            font-weight: 900;
-            border: 2px solid #39ff14;
-            box-shadow: 4px 4px 0px #ffffff;
-            transition: all 0.1s ease-in-out;
-            cursor: pointer;
+        .ambient-glow-purple {
+            background: radial-gradient(circle at 50% 10%, rgba(147, 51, 234, 0.18) 0%, rgba(7, 9, 19, 0) 70%);
         }
-        .brutal-btn:hover {
-            background: #00f3ff;
-            border-color: #00f3ff;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #39ff14;
+        .ambient-glow-orange {
+            background: radial-gradient(circle at 80% 30%, rgba(255, 87, 34, 0.15) 0%, rgba(7, 9, 19, 0) 60%);
+        }
+
+        .brutal-card-dark {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 87, 34, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+        }
+
+        .toc-link {
+            transition: all 0.2s ease;
+        }
+        .toc-link:hover {
+            transform: translateX(4px);
+            color: #ff5722;
+        }
+
+        /* Day Mode Overrides */
+        html.day-mode body {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+        }
+        html.day-mode .ambient-glow-purple,
+        html.day-mode .ambient-glow-orange {
+            display: none !important;
+        }
+        html.day-mode header {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 2px solid #000000 !important;
+        }
+        html.day-mode .brutal-card-dark {
+            background: #ffffff !important;
+            border: 2px solid #000000 !important;
+            box-shadow: 6px 6px 0px #000000 !important;
+            color: #0f172a !important;
+        }
+        html.day-mode h1, html.day-mode h2, html.day-mode h3, html.day-mode h4 {
+            color: #0f172a !important;
+        }
+        html.day-mode p, html.day-mode li {
+            color: #334155 !important;
+        }
+        html.day-mode .table-dark th {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+        }
+        html.day-mode .table-dark td {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        html.day-mode .callout-box {
+            background-color: #f1f5f9 !important;
+            border-left: 4px solid #ff5722 !important;
+            color: #0f172a !important;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+<body class="min-h-screen flex flex-col justify-between relative antialiased selection:bg-orange-500 selection:text-white">
 
-    <!-- HEADER -->
-    <header class="w-full max-w-7xl mx-auto border-4 border-cyan-400 bg-black p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[8px_8px_0px_#00f3ff]">
+    <!-- AMBIENT BACKGROUND GLOWS -->
+    <div class="fixed inset-0 pointer-events-none z-0 ambient-glow-purple"></div>
+    <div class="fixed inset-0 pointer-events-none z-0 ambient-glow-orange"></div>
+
+    <!-- STICKY TOP NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-orange-500/30 px-4 sm:px-8 py-3.5 flex justify-between items-center transition-colors">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-cyan-400 text-black flex items-center justify-center font-cyber font-black text-2xl border-2 border-white">
-                📘
-            </div>
-            <div>
-                <h1 class="font-cyber text-2xl md:text-3xl font-black text-white uppercase tracking-widest">EXECUTIVE ETIQUETTE PLAYBOOK</h1>
-                <p class="text-xs text-cyan-400 font-mono-code uppercase">DIGITAL HYGIENE &amp; FRONT-FACING INDUSTRIAL PROTOCOL MANUAL</p>
-            </div>
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-gradient-to-tr from-orange-600 to-amber-500 rounded-lg flex items-center justify-center text-black font-black text-xl shadow-[0_0_15px_rgba(255,87,34,0.4)]">
+                    📘
+                </div>
+                <div>
+                    <span class="text-lg sm:text-xl font-cinzel text-white font-bold tracking-wider group-hover:text-orange-400 transition-colors">EXECUTIVE PLAYBOOK</span>
+                    <span class="text-[10px] text-orange-400 font-mono block uppercase">SYS: PLAYBOOK-09 · BROWSER EDITION</span>
+                </div>
+            </a>
         </div>
 
-        <nav class="flex flex-wrap items-center gap-3 text-xs font-bold font-mono">
-            <a href="store.html" class="px-4 py-2 border-2 border-white bg-black text-white hover:bg-white hover:text-black transition-colors uppercase">← STORE VAULT</a>
-        </nav>
+        <!-- RIGHT NAV ACTIONS -->
+        <div class="flex items-center gap-3">
+            <a href="store.html" class="hidden sm:flex px-3.5 py-1.5 rounded-lg bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 font-mono text-xs transition-all">
+                ← STORE
+            </a>
+            <a href="assets/Executive_Digital_Etiquette_Playbook.pdf" download class="px-3.5 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-500 text-white font-cyber text-xs font-black uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(255,87,34,0.5)] flex items-center gap-1.5">
+                <i class="fa-solid fa-file-pdf"></i> DOWNLOAD PDF
+            </a>
+            <button onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 font-mono text-xs hover:bg-slate-800 transition-all flex items-center gap-1.5">
+                <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
+                <span id="themeText" class="hidden sm:inline">DAY MODE</span>
+            </button>
+        </div>
     </header>
 
-    <!-- MAIN PRODUCT WORKSPACE -->
-    <main class="w-full max-w-7xl mx-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+    <!-- MAIN WRAPPER -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
-        <!-- LEFT COLUMN: TABLE OF CONTENTS & MODULE PREVIEW (7 COLS) -->
-        <div class="lg:col-span-7 brutal-card p-6 space-y-6">
-            <div class="border-b-2 border-cyan-400 pb-3 flex justify-between items-center">
-                <h2 class="font-cyber text-xl font-bold text-white uppercase">1. PROTOCOL TABLE OF CONTENTS</h2>
-                <span class="text-xs text-emerald-400 font-mono">[ PURE CONSUMPTION ]</span>
-            </div>
-
-            <p class="text-xs text-gray-300 font-mono-code leading-relaxed">
-                A 48-page executive PDF protocol manual engineered for remote teams, corporate leaders, and client-facing personnel:
+        <!-- HERO SECTION -->
+        <div class="text-center max-w-4xl mx-auto mb-12">
+            <span class="px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/40 text-orange-400 font-mono text-xs uppercase tracking-widest mb-4 inline-block shadow-[0_0_15px_rgba(255,87,34,0.2)]">
+                ⚡ 48-PAGE EXECUTIVE COMPENDIUM · ONLINE MASTER READER
+            </span>
+            <h1 class="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight mb-4">
+                Executive Digital <span class="text-orange-500">Etiquette</span> Playbook
+            </h1>
+            <p class="text-gray-300 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto font-sans font-medium">
+                The non-negotiable operational standard for client-facing leadership, silent hospitality mechanics, and high-stakes remote communications.
             </p>
+        </div>
 
-            <div class="space-y-3 font-mono text-xs">
-                <div class="p-3.5 bg-black border border-cyan-500/40 rounded">
-                    <span class="text-cyan-400 font-bold block mb-1">CHAPTER 01: ELITE HOSPITALITY &amp; CLIENT-FACING STANDARDS</span>
-                    <p class="text-gray-400 text-[11px]">De-escalation mechanics, VIP guest reception, and non-verbal executive presence.</p>
+        <!-- ========================================== -->
+        <!-- FEATURED VIDEO TRAINING MASTERCLASSES      -->
+        <!-- ========================================== -->
+        <div class="brutal-card-dark p-6 sm:p-8 rounded-2xl mb-12 border-t-4 border-t-orange-500 shadow-2xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-700/80 pb-4 mb-6 gap-3">
+                <div>
+                    <span class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block">
+                        🎬 OFFICIAL VIDEO MASTERCLASSES
+                    </span>
+                    <h2 class="font-cyber text-xl sm:text-2xl text-white font-extrabold uppercase mt-1">
+                        Executive Training Video Broadcasts
+                    </h2>
                 </div>
-
-                <div class="p-3.5 bg-black border border-cyan-500/40 rounded">
-                    <span class="text-cyan-400 font-bold block mb-1">CHAPTER 02: CYBERSECURITY &amp; DATA HYGIENE PROTOCOLS</span>
-                    <p class="text-gray-400 text-[11px]">Air-gapped communications, password entropy, zero-trust file sharing, and mobile security.</p>
-                </div>
-
-                <div class="p-3.5 bg-black border border-cyan-500/40 rounded">
-                    <span class="text-cyan-400 font-bold block mb-1">CHAPTER 03: INDUSTRIAL &amp; FRONT-FACING ETIQUETTE</span>
-                    <p class="text-gray-400 text-[11px]">Operational discipline, venue maintenance standards, and remote team async communication guidelines.</p>
-                </div>
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1 rounded-full uppercase font-bold">
+                    ● YOUTUBE HD STREAM
+                </span>
             </div>
 
-            <div class="pt-4 border-t border-cyan-500/30 flex justify-between items-center text-xs font-mono">
-                <span class="text-emerald-400 font-bold">✓ ZERO SUPPORT BURDEN</span>
-                <span class="text-cyan-300">PDF FORMAT // 12.4 MB</span>
+            <!-- TWO FEATURED TRAINING VIDEOS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- VIDEO 1 -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono text-gray-400">
+                        <span class="text-orange-400 font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> PART 01: ELITE HOSPITALITY &amp; FIRST IMPRESSIONS
+                        </span>
+                    </div>
+                    <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-orange-500/50 bg-black shadow-xl">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/CeZ_YpqWwGE" title="Executive Digital Etiquette - Part 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-xs text-gray-300 font-medium">
+                        Master the 10-4 distance rule, the 30-second first impression window, and silent table choreography.
+                    </p>
+                </div>
+
+                <!-- VIDEO 2 -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono text-gray-400">
+                        <span class="text-purple-400 font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> PART 02: HIGH-STAKES OPSEC &amp; PRECISION COMM
+                        </span>
+                    </div>
+                    <div class="relative aspect-video rounded-xl overflow-hidden border-2 border-purple-500/50 bg-black shadow-xl">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/kVph0UQ6SBo" title="Executive Digital Etiquette - Part 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-xs text-gray-300 font-medium">
+                        Explore precision communication, the Radio Voice echo technique, email cognitive load signaling, and de-escalation.
+                    </p>
+                </div>
+
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: DOWNLOAD & DELIVERY DETAILS (5 COLS) -->
-        <div class="lg:col-span-5 brutal-card p-6 flex flex-col justify-between">
-            <div>
-                <div class="border-b-2 border-cyan-400 pb-3 mb-6 flex justify-between items-center">
-                    <h2 class="font-cyber text-xl font-bold text-white uppercase">2. IMMEDIATE FULFILLMENT</h2>
-                    <span class="text-xs text-cyan-400 font-mono">PDF DELIVERY</span>
+        <!-- ========================================== -->
+        <!-- TWO-COLUMN WORKSPACE: TOC (LEFT) + MODULES -->
+        <!-- ========================================== -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-start">
+
+            <!-- LEFT COLUMN: STICKY TABLE OF CONTENTS (4 COLS) -->
+            <div class="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
+                
+                <div class="brutal-card-dark p-6 rounded-2xl border-t-4 border-t-orange-500">
+                    <div class="flex justify-between items-center border-b border-slate-700/80 pb-3 mb-4">
+                        <h3 class="font-cinzel text-lg font-bold text-white uppercase">Table of Contents</h3>
+                        <span class="text-[11px] font-mono text-orange-400">8 MODULES</span>
+                    </div>
+
+                    <nav class="space-y-2 font-mono text-xs">
+                        <a href="#mod-1" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>01.</strong> First Impressions &amp; 10-4 Rule
+                        </a>
+                        <a href="#mod-2" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>02.</strong> Elite Table Mechanics &amp; Dialogue
+                        </a>
+                        <a href="#mod-3" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>03.</strong> Anticipatory Service &amp; The Scan
+                        </a>
+                        <a href="#mod-4" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>04.</strong> Industrial Protocols &amp; The Pivot
+                        </a>
+                        <a href="#mod-5" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>05.</strong> Precision Communication &amp; Radio Voice
+                        </a>
+                        <a href="#mod-6" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>06.</strong> Professional Email Etiquette for 2026
+                        </a>
+                        <a href="#mod-7" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>07.</strong> L.A.S.T. Recovery &amp; Tipping Matrix
+                        </a>
+                        <a href="#mod-8" class="toc-link block p-2 rounded hover:bg-orange-500/10 border-l-2 border-transparent hover:border-orange-500">
+                            <strong>08.</strong> Operational Readiness Accord
+                        </a>
+                    </nav>
+
+                    <div class="pt-4 mt-6 border-t border-slate-700/80">
+                        <a href="assets/Executive_Digital_Etiquette_Playbook.pdf" download class="w-full py-3 rounded-lg bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-cyber text-xs font-black uppercase tracking-wider text-center block shadow-[0_0_15px_rgba(255,87,34,0.4)]">
+                            <i class="fa-solid fa-download mr-1.5"></i> GET FULL 48-PAGE PDF
+                        </a>
+                    </div>
                 </div>
 
-                <div class="space-y-3 text-xs font-mono text-gray-300 p-4 bg-black border border-cyan-500/40 rounded mb-6">
-                    <p class="text-white font-bold uppercase">Package Includes:</p>
-                    <ul class="space-y-2 text-[11px] text-gray-300">
-                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Full 48-Page Clickable PDF Manual</li>
-                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Executive Quick-Reference Cheat Sheet</li>
-                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Team Onboarding Checklist</li>
+                <!-- FOREWORD NOTE -->
+                <div class="p-5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-300 leading-relaxed">
+                    <span class="text-orange-400 font-bold uppercase block mb-1">🧠 Human-to-Human Philosophy</span>
+                    In an AI-automated world, intentional human etiquette is your ultimate operational advantage.
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: FULL 8 MODULE READER (8 COLS) -->
+            <div class="lg:col-span-8 space-y-10">
+
+                <!-- ========================================== -->
+                <!-- MODULE 1                                   -->
+                <!-- ========================================== -->
+                <section id="mod-1" class="brutal-card-dark p-6 sm:p-8 rounded-2xl border-l-4 border-l-orange-500">
+                    <span class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1">MODULE 01 · SYS: EXEC-01</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">1. The Psychology of the First Impression</h2>
+                    
+                    <h3 class="font-cinzel text-lg text-orange-300 font-bold mb-2">1.1. The Critical 30 Seconds &amp; The 10-4 Rule</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                        First impressions are forged within the initial 30 seconds. To dominate this decisive window, execute the <strong>10-4 Rule</strong> with clinical spatial discipline:
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div class="p-4 bg-black/60 border border-slate-800 rounded-xl">
+                            <span class="font-mono text-orange-400 font-bold text-xs uppercase block mb-1">AT 10 FEET // THE ANCHOR</span>
+                            <p class="text-xs text-gray-300">Anchor the interaction. Establish deliberate eye contact and project a sincere smile to acknowledge the guest before they reach your perimeter.</p>
+                        </div>
+                        <div class="p-4 bg-black/60 border border-slate-800 rounded-xl">
+                            <span class="font-mono text-orange-400 font-bold text-xs uppercase block mb-1">AT 4 FEET // THE ENGAGEMENT</span>
+                            <p class="text-xs text-gray-300">Execute the engagement. Deliver a clear, confident verbal greeting while projecting warmth and authority.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="font-cinzel text-lg text-orange-300 font-bold mb-2">1.2. The Art of Professional Introductions</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed mb-3">
+                        Introductions reflect organizational hierarchy and social intelligence. Always introduce the younger or less prominent individual to the older or more prominent person first:
+                    </p>
+                    <div class="p-3.5 bg-black/80 border-l-4 border-orange-500 rounded text-xs font-mono text-orange-200 mb-4">
+                        <em>"Executive Director Smith, I would like to introduce our Associate Strategist, James Reed."</em>
+                    </div>
+                    <p class="text-xs text-gray-400 font-mono">
+                        ● Always enforce first and last names.<br>
+                        ● Always use formal titles (Doctor, Professor, Chair) during initial introductions.<br>
+                        ● Name Tag Placement: Affix strictly to the <strong>right front shoulder</strong> for natural gaze progression during handshakes.
+                    </p>
+                </section>
+
+                <!-- ========================================== -->
+                <!-- MODULE 2                                   -->
+                <!-- ========================================== -->
+                <section id="mod-2" class="brutal-card-dark p-6 sm:p-8 rounded-2xl border-l-4 border-l-orange-500">
+                    <span class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1">MODULE 02 · SYS: EXEC-02</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">2. Elite Table Mechanics &amp; Dining Protocols</h2>
+
+                    <h3 class="font-cinzel text-lg text-orange-300 font-bold mb-2">2.1. The Invisible Server: Movement &amp; Mechanics</h3>
+                    <div class="p-3.5 bg-black/80 border-l-4 border-orange-500 rounded text-xs font-mono text-orange-200 mb-4">
+                        <strong>THE GOLDEN RULE:</strong> Serve from the Left, Clear from the Right. Never cross your arm across a guest's field of vision (Open-Hand Service).
+                    </div>
+
+                    <h3 class="font-cinzel text-lg text-orange-300 font-bold mb-2">2.2. Refining the Dialogue: Transactional vs. Elite</h3>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-xs text-left border border-slate-700 table-dark">
+                            <thead class="bg-black text-orange-400 font-mono uppercase">
+                                <tr>
+                                    <th class="p-3 border border-slate-700">COMMON SERVICE LANGUAGE</th>
+                                    <th class="p-3 border border-slate-700">ELITE SERVICE REPLACEMENT</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800 text-gray-300">
+                                <tr>
+                                    <td class="p-3 border border-slate-800">"What do you want?"</td>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">"What may I prepare for you?"</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border border-slate-800">"Is that all?"</td>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">"Excellent choice."</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border border-slate-800">"I'll get that for you."</td>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">"It would be my pleasure."</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border border-slate-800">"Hold on a second."</td>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">"Thank you for your patience."</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="font-cinzel text-lg text-orange-300 font-bold mb-2">2.3. Napkin &amp; Apparel Protocols</h3>
+                    <ul class="text-xs text-gray-300 space-y-1.5 font-mono list-disc pl-5">
+                        <li>Place napkin on lap immediately upon being seated; fold towards you.</li>
+                        <li>Temporary departure: Place loosely folded napkin on chair.</li>
+                        <li>Completion: Place napkin loosely folded to the left of your plate.</li>
+                        <li>Do not remove suit jacket unless the host does so first.</li>
                     </ul>
-                </div>
+                </section>
+
+                <!-- ========================================== -->
+                <!-- MODULE 3 & 4                               -->
+                <!-- ========================================== -->
+                <section id="mod-3" class="brutal-card-dark p-6 sm:p-8 rounded-2xl border-l-4 border-l-orange-500">
+                    <span class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1">MODULE 03 · SYS: EXEC-03</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">3. Anticipatory Service &amp; Behavioral Decoding</h2>
+                    <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                        Exceptional service is never requested; it is delivered in advance. Execute the <strong>"Scan"</strong> on every floor pass:
+                    </p>
+                    <ul class="text-xs text-gray-300 space-y-2 font-mono bg-black/60 p-4 rounded-xl border border-slate-800 mb-6">
+                        <li>[ ] <strong>Clearance:</strong> Identify finished plates and clear immediately from the right.</li>
+                        <li>[ ] <strong>Refill Velocity:</strong> Refill beverage glasses before dropping below the 1/3 mark.</li>
+                        <li>[ ] <strong>Napkin Grooming:</strong> Replace soiled napkins when a guest steps away.</li>
+                        <li>[ ] <strong>Decoding Cues:</strong> Leaning back signals completion; searching eyes signal need for immediate interception.</li>
+                    </ul>
+
+                    <span id="mod-4" class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1 mt-8">MODULE 04 · SYS: EXEC-04</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">4. Industrial Facility Protocols &amp; The Hand-Off Pivot</h2>
+                    <div class="p-4 bg-black/80 border-l-4 border-orange-500 rounded text-xs font-mono text-orange-200 mb-4">
+                        <strong>THE HAND-OFF PIVOT:</strong> When approached on the facility floor, protect operational focus while honoring the guest:<br>
+                        <em>"I want to ensure you get the exact technical data you need; let me introduce you to my supervisor who handles those specifications."</em>
+                    </div>
+                </section>
+
+                <!-- ========================================== -->
+                <!-- MODULE 5 & 6                               -->
+                <!-- ========================================== -->
+                <section id="mod-5" class="brutal-card-dark p-6 sm:p-8 rounded-2xl border-l-4 border-l-orange-500">
+                    <span class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1">MODULE 05 · SYS: EXEC-05</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">5. Precision Communication in High-Decibel Settings</h2>
+                    <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                        Shouting causes panic. Employ the <strong>Radio Voice</strong> (low pitch, deliberate tempo, sharp articulation) and the <strong>Echo Technique</strong>:
+                    </p>
+                    <div class="p-3 bg-black/60 border border-slate-800 rounded font-mono text-xs text-sky-400 mb-6">
+                        <em>"Copy that, moving shipment pallet B to Bay 4 by 14:00."</em>
+                    </div>
+
+                    <span id="mod-6" class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1 mt-8">MODULE 06 · SYS: EXEC-06</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">6. Professional Email Etiquette for 2026</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div class="p-4 bg-black/60 border border-slate-800 rounded-xl">
+                            <span class="font-mono text-orange-400 font-bold text-xs uppercase block mb-1">COGNITIVE LOAD SIGNAL</span>
+                            <p class="text-xs text-gray-300">State time investment at top: <code>[FYI / 30-sec scan]</code> or <code>[Decision Req / 3-min read]</code>.</p>
+                        </div>
+                        <div class="p-4 bg-black/60 border border-slate-800 rounded-xl">
+                            <span class="font-mono text-orange-400 font-bold text-xs uppercase block mb-1">THE 3-5 SENTENCE RULE</span>
+                            <p class="text-xs text-gray-300">Keep email bodies strictly under five sentences. State the Ask and Deadline in the subject line.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================== -->
+                <!-- MODULE 7 & 8                               -->
+                <!-- ========================================== -->
+                <section id="mod-7" class="brutal-card-dark p-6 sm:p-8 rounded-2xl border-l-4 border-l-orange-500">
+                    <span class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1">MODULE 07 · SYS: EXEC-07</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">7. Service Recovery &amp; The 2026 Tipping Matrix</h2>
+
+                    <div class="p-4 bg-black/80 border-l-4 border-orange-500 rounded text-xs font-mono text-orange-200 mb-6">
+                        <strong>THE L.A.S.T. DE-ESCALATION METHOD:</strong><br>
+                        <strong>L — Listen:</strong> Allow the guest to vent without interruption.<br>
+                        <strong>A — Apologize:</strong> Genuinely acknowledge frustration without deflection.<br>
+                        <strong>S — Solve:</strong> Provide an immediate, concrete solution.<br>
+                        <strong>T — Thank:</strong> Express gratitude for the feedback.
+                    </div>
+
+                    <h3 class="font-cinzel text-lg text-orange-300 font-bold mb-2">The 2026 Tipping Framework</h3>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-xs text-left border border-slate-700 table-dark">
+                            <thead class="bg-black text-orange-400 font-mono uppercase">
+                                <tr>
+                                    <th class="p-3 border border-slate-700">SERVICE TYPE</th>
+                                    <th class="p-3 border border-slate-700">2026 STANDARD GUIDELINE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800 text-gray-300 font-mono">
+                                <tr>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">Sit-Down Restaurant</td>
+                                    <td class="p-3 border border-slate-800">15% (Standard), 18% (Good), 20% (Excellent)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">Bartenders</td>
+                                    <td class="p-3 border border-slate-800">$1 (Simple Pour), $2 (Craft Cocktail)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">Food Delivery</td>
+                                    <td class="p-3 border border-slate-800">$3–$5 (Nearby), $6–$10 (Typical Distance)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 border border-slate-800 font-bold text-white">Counter Service</td>
+                                    <td class="p-3 border border-slate-800 text-emerald-400 font-bold">Optional ($0 is fully acceptable)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <span id="mod-8" class="text-xs font-mono text-orange-400 font-bold uppercase tracking-widest block mb-1 mt-8">MODULE 08 · SYS: EXEC-08</span>
+                    <h2 class="font-cinzel text-2xl font-black text-white uppercase mb-4">8. Operational Readiness Accord</h2>
+                    
+                    <div class="p-5 rounded-xl bg-black/90 border border-slate-700 text-xs font-mono text-gray-300 space-y-4">
+                        <p>
+                            "I acknowledge that as an Executive Lead and Brand Ambassador, my adherence to these protocols defines the client experience. I commit to maintaining spatial pride, enforcing safety as etiquette, and delivering proactive, elite-tier service in every professional interaction."
+                        </p>
+                        <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between gap-4 text-orange-400">
+                            <div>SIGNATURE: ____________________________________</div>
+                            <div>DATE: _______________</div>
+                        </div>
+                    </div>
+                </section>
+
             </div>
 
-            <div class="pt-6 border-t-2 border-cyan-400">
-                <div class="font-cyber text-2xl font-black text-white mb-3">$50 <span class="text-xs font-mono font-normal text-gray-400">FLAT FEE</span></div>
-                <a href="store.html" class="brutal-btn block w-full text-center py-3 text-xs uppercase font-cyber tracking-widest">
-                    GET ETIQUETTE PLAYBOOK ($50) &rarr;
-                </a>
-            </div>
         </div>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="w-full max-w-7xl mx-auto border-t-4 border-white pt-6 pb-4 text-center text-xs font-mono text-gray-400">
-        <p class="uppercase font-bold text-white mb-2">BURN-1 SYSTEMS // EXECUTIVE DIGITAL ETIQUETTE PLAYBOOK © 2026</p>
+    <footer class="bg-black/90 border-t border-orange-500/30 py-8 px-4 text-center text-xs font-mono text-slate-400 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-left flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-orange-600 text-white font-bold flex items-center justify-center">
+                    📘
+                </div>
+                <div>
+                    <span class="font-cinzel font-bold text-white text-sm">BURN-1 SYSTEMS // EXECUTIVE PLAYBOOK</span>
+                    <p class="text-slate-400 text-xs">Reputation Architecture · Remote Operational Hygiene</p>
+                </div>
+            </div>
+            <div class="flex gap-6 text-slate-300">
+                <a href="index.html" class="hover:text-orange-400 transition-colors">Burn-1 Hub</a>
+                <a href="store.html" class="hover:text-orange-400 transition-colors">Storefront</a>
+                <a href="privacy_first_protocol.html" class="hover:text-orange-400 transition-colors">Privacy Suite</a>
+                <a href="assets/Executive_Digital_Etiquette_Playbook.pdf" download class="text-orange-400 hover:underline">Download PDF</a>
+            </div>
+            <div>
+                <span class="text-orange-400">© 2026 BURN-1.COM</span>
+            </div>
+        </div>
     </footer>
 
+    <script>
+        function toggleTheme() {
+            const htmlRoot = document.getElementById('html-root');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (htmlRoot.classList.contains('day-mode')) {
+                htmlRoot.classList.remove('day-mode');
+                htmlRoot.classList.add('dark');
+                themeIcon.className = "fa-solid fa-sun text-amber-400";
+                themeText.innerText = "DAY MODE";
+            } else {
+                htmlRoot.classList.remove('dark');
+                htmlRoot.classList.add('day-mode');
+                themeIcon.className = "fa-solid fa-moon text-purple-400";
+                themeText.innerText = "NIGHT MODE";
+            }
+        }
+    </script>
 </body>
 </html>
