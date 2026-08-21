@@ -138,12 +138,17 @@
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "^(?!www\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
-      "destination": "/cards/:subdomain.html"
+      "has": [{ "type": "host", "value": "jasonkuts.burn-1.com" }],
+      "destination": "/cards/jasonkuts.html"
     },
     {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "^(?!www\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
+      "source": "/cards/jasonkuts",
+      "has": [{ "type": "host", "value": "jasonkuts.burn-1.com" }],
+      "destination": "/cards/jasonkuts.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com" }],
       "destination": "/cards/:subdomain.html"
     }
   ]
