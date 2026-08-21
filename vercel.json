@@ -63,6 +63,10 @@
       "destination": "/mal.html"
     },
     {
+      "source": "/jasonkuts",
+      "destination": "/cards/jasonkuts.html"
+    },
+    {
       "source": "/privacy-first",
       "destination": "/privacy_first_protocol.html"
     },
