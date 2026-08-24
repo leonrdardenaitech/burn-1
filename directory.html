@@ -3918,12 +3918,74 @@
             activeDrawers[rowNum] = null;
         }
 
-        // Default open Chou Lee's Chinese promo at Top!
-        window.onload = () => {
-            setTimeout(() => {
-                toggleMedia('chou-lees-chinese', 1);
-            }, 500);
-        };
+        // Master Toggle for All 5 Inter-Row Ad Drawers
+        let masterActive = false;
+        function toggleMasterAds() {
+            const btnText = document.getElementById('master-toggle-text');
+            const btn = document.getElementById('master-toggle-btn');
+            
+            masterActive = !masterActive;
+            
+            if (masterActive) {
+                // Populate and expand all 5 media drawers
+                const defaultPromos = {
+                    1: 'chou-lees-chinese',
+                    2: 'wow-burger-seafood',
+                    3: 'gladiator-martial-arts',
+                    4: 'thecigarbar',
+                    5: 'unclaimed-freight-vacancy'
+                };
+                
+                for (let r = 1; r <= 5; r++) {
+                    const adKey = defaultPromos[r];
+                    const data = adDatabase[adKey];
+                    if (data) {
+                        const tagEl = document.getElementById(`canvas-tag-${r}`);
+                        const videoTitleEl = document.getElementById(`canvas-video-title-${r}`);
+                        const promoTitleEl = document.getElementById(`canvas-promo-title-${r}`);
+                        const promoDescEl = document.getElementById(`canvas-promo-desc-${r}`);
+                        const assetIdEl = document.getElementById(`canvas-asset-id-${r}`);
+                        const qrImageEl = document.getElementById(`canvas-qr-image-${r}`);
+
+                        if (tagEl) tagEl.innerText = data.tag || "";
+                        if (videoTitleEl) videoTitleEl.innerText = data.videoTitle || "";
+                        if (promoTitleEl) promoTitleEl.innerText = data.promoTitle || "";
+                        if (promoDescEl) promoDescEl.innerText = data.promoDesc || "";
+                        if (assetIdEl) assetIdEl.innerText = data.assetId || "";
+                        
+                        if (qrImageEl) {
+                            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent('https://' + data.link)}`;
+                            qrImageEl.src = qrUrl;
+                        }
+                    }
+                    
+                    const wrapper = document.getElementById(`media-canvas-wrapper-${r}`);
+                    if (wrapper) {
+                        wrapper.style.maxHeight = "1000px";
+                        wrapper.style.borderWidth = "4px";
+                        wrapper.style.marginTop = "24px";
+                        wrapper.style.marginBottom = "24px";
+                    }
+                    activeDrawers[r] = adKey;
+                }
+                
+                if (btnText) btnText.innerText = "Collapse All Ads (Master Toggle)";
+                if (btn) {
+                    btn.classList.add('border-emerald-400', 'text-emerald-400');
+                    btn.classList.remove('text-cyan-400');
+                }
+            } else {
+                // Collapse all 5 media drawers
+                for (let r = 1; r <= 5; r++) {
+                    closeMediaCanvas(r);
+                }
+                if (btnText) btnText.innerText = "Expand All Ads (Master Toggle)";
+                if (btn) {
+                    btn.classList.remove('border-emerald-400', 'text-emerald-400');
+                    btn.classList.add('text-cyan-400');
+                }
+            }
+        }
     </script>
 </body>
 </html>
