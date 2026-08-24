@@ -1,59 +1,26 @@
-import os
+﻿import os
+import sys
 import re
 
-# 1. Path setup
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-TEMPLATE_PATH = os.path.join(CURRENT_DIR, "burn1-digital-card-v3.html")
+CURRENT_DIR = r"C:\Users\Leonr\projects\burn-1.com"
 CARDS_DIR = os.path.join(CURRENT_DIR, "cards")
-
 os.makedirs(CARDS_DIR, exist_ok=True)
 
-# 2. Read the card template
-if not os.path.exists(TEMPLATE_PATH):
-    # Fallback to Downloads if not found in root
-    TEMPLATE_PATH = os.path.expanduser(r"~\Downloads\burn1-digital-card-v3.txt")
+SOURCE_V3 = r"C:\Users\Leonr\Downloads\burn1-card-generator-v3.txt"
+with open(SOURCE_V3, "r", encoding="utf-8") as f:
+    code_text = f.read()
 
-with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
-    template_content = f.read()
+start_idx = code_text.find("businesses_db = {")
+end_idx = code_text.find("\nos.makedirs(")
+if end_idx == -1:
+    end_idx = code_text.find("\ncorporate_slugs =")
 
-# 3. Extract and parse the BUSINESS_DATABASE using regex
-blocks = re.findall(r'\"([a-zA-Z0-9-]+)\"\s*:\s*\{([\s\S]+?)\s*\}', template_content)
-if not blocks:
-    print("Error: Could not extract BUSINESS_DATABASE from card template.")
-    exit(1)
+db_code = code_text[start_idx:end_idx]
+local_scope = {}
+exec(db_code, {}, local_scope)
+businesses_db = local_scope["businesses_db"]
+print(f"Extracted {len(businesses_db)} businesses from v3 database!")
 
-business_db = {}
-for slug, body in blocks:
-    fields = dict(re.findall(r'(\w+)\s*:\s*\"([^\"]+)\"', body))
-    business_db[slug] = fields
-
-print(f"Loaded {len(business_db)} businesses from database.")
-
-# 4. Corporate exclusions
-exclusions = {
-    'ashley-stewart',
-    'marshalls',
-    'ross',
-    'dsw',
-    'shoppers-world',
-    'davita'
-}
-
-# 5. Slug Aliases mapping (so both directory links and base slugs resolve perfectly)
-aliases = {
-    'automotion': 'auto-motion-wheel-repairs',
-    'plaza-grill': 'plaza-grill-wings',
-    'elite-braids': 'elite-braids-weaves',
-    'ilocdit': 'ilocdit-natural-hair',
-    'barber-kingz': 'barber-kingz-studio',
-    'luxe-nails': 'luxe-nails-spa',
-    'mowersplus': 'mowers-plus',
-    'island-spice': 'island-spice-hut',
-    'apogee-barber': 'apogee-barber-shop',
-    'mimosa-suites': 'mimosa-salon-suites'
-}
-
-# 6. Static HTML template base
 static_template_base = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,9 +62,7 @@ static_template_base = """<!DOCTYPE html>
 
     <!-- TOP HEADER / BRANDING -->
     <header class="w-full max-w-md mx-auto text-center pt-4">
-        <span class="text-xs font-bold tracking-widest bg-cyan-600/20 text-cyan-400 border border-cyan-500/30 px-3 py-1 uppercase rounded-full">
-            Burn-1 Platform Verified
-        </span>
+        __BADGE__
     </header>
 
     <!-- MAIN STATIC CARD CONTAINER -->
@@ -164,13 +129,41 @@ static_template_base = """<!DOCTYPE html>
 </body>
 </html>"""
 
+corporate_slugs = [
+    'ashley-stewart', 'marshalls', 'ross', 'dsw-warehouse', 'shoppers-world', 'davita',
+    'kroger', 'wells-fargo', 'dollar-tree', 'little-caesars', 'goodwill',
+    'staples', 'us-army-recruiting', 'hr-block', 'wendys', 'subway'
+]
+
+aliases = {
+    'automotion': 'auto-motion-wheel-repairs',
+    'plaza-grill': 'plaza-grill-wings',
+    'elite-braids': 'elite-braids-weaves',
+    'ilocdit': 'ilocdit-natural-hair',
+    'barber-kingz': 'barber-kingz-studio',
+    'luxe-nails': 'luxe-nails-spa',
+    'mowersplus': 'mowers-plus',
+    'island-spice': 'island-spice-hut',
+    'apogee-barber': 'apogee-barber-shop',
+    'mimosa-suites': 'mimosa-salon-suites',
+    'doublescoop': 'double-scoop',
+    'double-scoop': 'doublescoop'
+}
+
 def render_and_save(target_slug, data):
     biz_name = data.get('name', 'VERIFIED MERCHANT')
     biz_category = data.get('category', 'LOCAL SERVICE')
     biz_address = data.get('address', 'Stonecrest / Lithonia Area, GA')
     biz_phone = data.get('phone', '')
+    
+    is_corporate = any(c in target_slug for c in corporate_slugs) or any(c in biz_name.lower() for c in ['kroger', 'wells fargo', 'dollar tree', 'little caesars', 'goodwill', 'staples', 'army recruiting', 'h&r block', 'wendy', 'subway'])
+    if is_corporate:
+        badge = '<span class="text-xs font-bold tracking-widest bg-slate-800/40 text-slate-400 border border-slate-700/30 px-3 py-1 uppercase rounded-full">Public Community Listing</span>'
+    else:
+        badge = '<span class="text-xs font-bold tracking-widest bg-cyan-600/20 text-cyan-400 border border-cyan-500/30 px-3 py-1 uppercase rounded-full">Burn-1 Platform Verified</span>'
+
     raw_phone = re.sub(r'[^0-9]', '', biz_phone)
-    map_query = re.sub(r'\s+', '+', data.get('mapSearch', biz_name))
+    map_query = re.sub(r'\s+', '+', data.get('name', '') + ' ' + biz_address)
     
     page_content = static_template_base
     page_content = page_content.replace('__BIZ_NAME__', biz_name)
@@ -179,25 +172,17 @@ def render_and_save(target_slug, data):
     page_content = page_content.replace('__BIZ_PHONE__', biz_phone)
     page_content = page_content.replace('__RAW_PHONE__', raw_phone)
     page_content = page_content.replace('__MAP_QUERY__', map_query)
+    page_content = page_content.replace('__BADGE__', badge)
     
     file_path = os.path.join(CARDS_DIR, f"{target_slug}.html")
     with open(file_path, 'w', encoding='utf-8') as out_f:
         out_f.write(page_content)
 
-generated_count = 0
-for slug, data in business_db.items():
-    if slug in exclusions:
-        print(f"Skipping corporate exclusion: {slug}")
-        continue
-    
-    # Render primary slug
+count = 0
+for slug, data in businesses_db.items():
     render_and_save(slug, data)
-    generated_count += 1
-    
-    # If alias exists, render alias as well
+    count += 1
     if slug in aliases:
-        alias_slug = aliases[slug]
-        render_and_save(alias_slug, data)
-        print(f"Generated alias: {alias_slug}.html -> {slug}")
+        render_and_save(aliases[slug], data)
 
-print(f"\nSuccessfully generated {generated_count} core merchant cards (plus aliases) in {CARDS_DIR}!")
+print(f"Successfully generated {count} merchant cards + aliases to {CARDS_DIR}!")
