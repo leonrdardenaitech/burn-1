@@ -3847,41 +3847,39 @@
             document.getElementById('search-clear-btn').classList.add('hidden');
         }
 
-        // Open specific media canvas row with smooth scrolling
+        // Open specific media canvas row with smooth scrolling - Fully Dynamic V15 Engine
         function toggleMedia(adKey, rowNum) {
             const data = adDatabase[adKey];
             if (!data) return;
 
-            // Populate correct row canvas elements dynamically
-            if (rowNum === 1) {
-                // Row 1 (Chou Lee's Chinese at Top)
-                document.getElementById('canvas-video-title-1').innerText = data.videoTitle;
-                document.getElementById('canvas-promo-title-1').innerText = data.promoTitle;
-                document.getElementById('canvas-promo-desc-1').innerText = data.promoDesc;
-                document.getElementById('canvas-asset-id-1').innerText = data.assetId;
-                
+            // Dynamically populate target elements based on the exact rowNum suffix
+            const tagEl = document.getElementById(`canvas-tag-${rowNum}`);
+            const videoTitleEl = document.getElementById(`canvas-video-title-${rowNum}`);
+            const promoTitleEl = document.getElementById(`canvas-promo-title-${rowNum}`);
+            const promoDescEl = document.getElementById(`canvas-promo-desc-${rowNum}`);
+            const assetIdEl = document.getElementById(`canvas-asset-id-${rowNum}`);
+            const qrImageEl = document.getElementById(`canvas-qr-image-${rowNum}`);
+
+            if (tagEl) tagEl.innerText = data.tag || "";
+            if (videoTitleEl) videoTitleEl.innerText = data.videoTitle || "";
+            if (promoTitleEl) promoTitleEl.innerText = data.promoTitle || "";
+            if (promoDescEl) promoDescEl.innerText = data.promoDesc || "";
+            if (assetIdEl) assetIdEl.innerText = data.assetId || "";
+            
+            if (qrImageEl) {
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent('https://' + data.link)}`;
-                document.getElementById('canvas-qr-image-1').src = qrUrl;
-            } else if (rowNum === 2) {
-                // Row 2 is Gladiator Martial Arts or other video loops
-                document.getElementById('canvas-tag-3').innerText = data.tag;
-                document.getElementById('canvas-video-title-3').innerText = data.videoTitle;
-                document.getElementById('canvas-promo-title-3').innerText = data.promoTitle;
-                document.getElementById('canvas-promo-desc-3').innerText = data.promoDesc;
-                document.getElementById('canvas-asset-id-3').innerText = data.assetId;
-                
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent('https://' + data.link)}`;
-                document.getElementById('canvas-qr-image-3').src = qrUrl;
-            } else if (rowNum === 3) {
-                // Row 3 is Cigar Bar or partner promotions
-                document.getElementById('canvas-tag-4').innerText = data.tag;
-                document.getElementById('canvas-video-title-4').innerText = data.videoTitle;
-                document.getElementById('canvas-promo-title-4').innerText = data.promoTitle;
-                document.getElementById('canvas-promo-desc-4').innerText = data.promoDesc;
-                document.getElementById('canvas-asset-id-4').innerText = data.assetId;
-                
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent('https://' + data.link)}`;
-                document.getElementById('canvas-qr-image-4').src = qrUrl;
+                qrImageEl.src = qrUrl;
+            }
+
+            // Dual ad split-screen specific additions for Row 2
+            if (rowNum === 2) {
+                if (adKey === 'doublescoop') {
+                    const splitTitleB = document.getElementById('canvas-split-title-b');
+                    if (splitTitleB) splitTitleB.classList.add('text-pink-400');
+                } else if (adKey === 'wow-burger-seafood') {
+                    const splitTitleA = document.getElementById('canvas-split-title-a');
+                    if (splitTitleA) splitTitleA.classList.add('text-cyan-400');
+                }
             }
 
             // Collapse other drawers to keep layout clean
