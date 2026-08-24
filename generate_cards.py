@@ -6,6 +6,7 @@ CURRENT_DIR = r"C:\Users\Leonr\projects\burn-1.com"
 CARDS_DIR = os.path.join(CURRENT_DIR, "cards")
 os.makedirs(CARDS_DIR, exist_ok=True)
 
+# 1. Base database from v3
 SOURCE_V3 = r"C:\Users\Leonr\Downloads\burn1-card-generator-v3.txt"
 with open(SOURCE_V3, "r", encoding="utf-8") as f:
     code_text = f.read()
@@ -19,7 +20,71 @@ db_code = code_text[start_idx:end_idx]
 local_scope = {}
 exec(db_code, {}, local_scope)
 businesses_db = local_scope["businesses_db"]
-print(f"Extracted {len(businesses_db)} businesses from v3 database!")
+
+# 2. Add additions from v4
+new_survey_additions = {
+    'champion-muffler': {
+        'name': "Champion Muffler & Brake Service", 'category': "Auto Services",
+        'address': "5978 Covington Hwy, Decatur, GA 30035", 'phone': "(770) 322-6065",
+        'corridor': 'covington', 'subtext': '📍 Covington Strip'
+    },
+    'tacos-acapulco': {
+        'name': "Tacos Acapulco & Roadside BBQ Lot", 'category': "Food & Dining",
+        'address': "5995 Covington Hwy, Decatur, GA 30035", 'phone': "(404) 555-0190",
+        'corridor': 'covington', 'subtext': '📍 Covington Strip'
+    },
+    'elite-vision-events': {
+        'name': "Elite Vision Event Center", 'category': "Entertainment & Venues",
+        'address': "2348 Panola Rd, Lithonia, GA 30058", 'phone': "(678) 739-9801",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'extra-space-panola': {
+        'name': "Extra Space Storage", 'category': "Self-Storage",
+        'address': "2329 Panola Rd, Lithonia, GA 30058", 'phone': "(770) 323-2917",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'spiritual-faith-house': {
+        'name': "Spiritual / Faith Sanctuary House", 'category': "Faith & Community",
+        'address': "2418 Panola Rd, Lithonia, GA 30058", 'phone': "N/A",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'hillendale-care': {
+        'name': "Hillendale Primary Care", 'category': "Healthcare & Medical",
+        'address': "2523 Panola Rd, Lithonia, GA 30058", 'phone': "(770) 322-9660",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'super-suds': {
+        'name': "Super Suds Car Wash", 'category': "Auto Services",
+        'address': "2563 Panola Rd, Lithonia, GA 30058", 'phone': "(470) 385-6241",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'space-shop-panola': {
+        'name': "Space Shop Self Storage", 'category': "Self-Storage",
+        'address': "2590 Panola Rd, Lithonia, GA 30058", 'phone': "(770) 593-4270",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'family-dollar': {
+        'name': "Family Dollar", 'category': "Retail",
+        'address': "2627 Panola Rd, Lithonia, GA 30058", 'phone': "N/A",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'state-farm-joseph-marshall': {
+        'name': "Joseph Marshall — State Farm Insurance Agency", 'category': "Insurance & Financial Services",
+        'address': "2661 Panola Rd, Lithonia, GA 30058", 'phone': "(770) 322-0756",
+        'corridor': 'panola', 'subtext': '📍 Panola Corridor'
+    },
+    'unclaimed-freight-vacancy': {
+        'name': "Former Unclaimed Freight Building", 'category': "Commercial Real Estate Vacancy",
+        'address': "6151 Covington Hwy, Stonecrest, GA 30058", 'phone': "N/A",
+        'corridor': 'covington', 'subtext': '📍 Covington Strip'
+    }
+}
+businesses_db.update(new_survey_additions)
+
+if 'cartopia-car-wash' in businesses_db:
+    businesses_db['cartopia-car-wash']['phone'] = '(470) 385-6241'
+
+print(f"Total businesses in V14 compiled database: {len(businesses_db)}")
 
 static_template_base = """<!DOCTYPE html>
 <html lang="en">
@@ -132,7 +197,7 @@ static_template_base = """<!DOCTYPE html>
 corporate_slugs = [
     'ashley-stewart', 'marshalls', 'ross', 'dsw-warehouse', 'shoppers-world', 'davita',
     'kroger', 'wells-fargo', 'dollar-tree', 'little-caesars', 'goodwill',
-    'staples', 'us-army-recruiting', 'hr-block', 'wendys', 'subway'
+    'staples', 'us-army-recruiting', 'hr-block', 'wendys', 'subway', 'family-dollar', 'unclaimed-freight-vacancy'
 ]
 
 aliases = {
@@ -156,7 +221,7 @@ def render_and_save(target_slug, data):
     biz_address = data.get('address', 'Stonecrest / Lithonia Area, GA')
     biz_phone = data.get('phone', '')
     
-    is_corporate = any(c in target_slug for c in corporate_slugs) or any(c in biz_name.lower() for c in ['kroger', 'wells fargo', 'dollar tree', 'little caesars', 'goodwill', 'staples', 'army recruiting', 'h&r block', 'wendy', 'subway'])
+    is_corporate = any(c in target_slug for c in corporate_slugs) or any(c in biz_name.lower() for c in ['kroger', 'wells fargo', 'dollar tree', 'little caesars', 'goodwill', 'staples', 'army recruiting', 'h&r block', 'wendy', 'subway', 'family dollar', 'unclaimed freight'])
     if is_corporate:
         badge = '<span class="text-xs font-bold tracking-widest bg-slate-800/40 text-slate-400 border border-slate-700/30 px-3 py-1 uppercase rounded-full">Public Community Listing</span>'
     else:
