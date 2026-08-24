@@ -41,6 +41,8 @@
             border: 4px solid #d4d4d8; /* Reflective silver chrome-like casing border */
             border-radius: 16px;
             padding: 12px;
+            align-self: start;
+            height: fit-content;
             box-shadow: 
                 0 10px 25px -5px rgba(0, 0, 0, 0.7),
                 inset 0 1px 3px rgba(255, 255, 255, 0.4),
@@ -187,11 +189,15 @@
     <main class="p-4 md:p-8 max-w-[1700px] mx-auto flex flex-col gap-10">
 
         
-    <!-- ACTIVE DEALS PANEL TRIGGER AT TOP -->
-    <div class="max-w-[1600px] mx-auto px-4 md:px-8 mt-6">
-        <button onclick="toggleMedia('chou-lees-chinese', 1)" class="w-full py-4 bg-emerald-950/50 hover:bg-emerald-900/60 border-2 border-emerald-500/40 text-emerald-400 font-black text-sm uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.15)]">
-            🚨 ACTIVE PLATFORM SPECIALS DEALS PANEL ➔ [ ACTIVATE ROAD-STREET DEALS ]
-        </button>
+    <!-- METROPOLITAN REGIONAL TITLE BANNER -->
+    <div class="max-w-[1600px] mx-auto px-4 md:px-8 mt-2 text-center">
+        <div class="py-3.5 px-6 bg-slate-950/80 border border-cyan-500/30 rounded-xl shadow-[0_0_15px_rgba(0,240,255,0.08)] flex items-center justify-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <h2 class="text-sm md:text-base font-black text-white uppercase tracking-wider font-mono">
+                Serving the <span class="text-cyan-400">Stonecrest</span> &amp; <span class="text-cyan-400">Lithonia</span> Area
+            </h2>
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        </div>
     </div>
 
     <!-- ================= AD DRAWER 1: TOP CHOU LEE'S CHINESE BOARD (REPLACES CIGAR BAR / SHAY SLAW IN MAIN SPOTLIGHT) ================= -->
@@ -243,7 +249,7 @@
                 <span class="text-xs font-mono text-slate-500">Rows A1 - A3</span>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                                 <!-- COLUMN 01: FOOD & DINING [A] -->
                 <div class="plaza-casing flex flex-col gap-3">
                     <div class="plaza-panel p-4 flex flex-col gap-4">
@@ -795,7 +801,7 @@
                 <span class="text-xs font-mono text-slate-500">Rows B4 - B6</span>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                                 <!-- COLUMN 04: BARBER & SALON [A] -->
                 <div class="plaza-casing flex flex-col gap-3">
                     <div class="plaza-panel p-4 flex flex-col gap-4">
@@ -1362,7 +1368,7 @@
                 <span class="text-xs font-mono text-slate-500">Rows C7 - C9</span>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                                 <!-- COLUMN 07: AUTO, TIRES & WASH -->
                 <div class="plaza-casing flex flex-col gap-3">
                     <div class="plaza-panel p-4 flex flex-col gap-4">
@@ -2186,7 +2192,7 @@
                 <span class="text-xs font-mono text-slate-500">Rows D10 - D12</span>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                                 <!-- COLUMN 10: LOUNGES & EVENTS -->
                 <div class="plaza-casing flex flex-col gap-3">
                     <div class="plaza-panel p-4 flex flex-col gap-4">
