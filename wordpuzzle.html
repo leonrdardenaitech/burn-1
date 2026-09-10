@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow">
   <title>World of Words - Puzzle Game</title>
   <!-- Tailwind CSS CDN -->
@@ -14,10 +14,15 @@
     :root {
       --bg-color: #e6ffe6;
       --primary-dark: #006400;
-      --primary-main: #32CD32;
-      --accent-color: #FFA500;
-      --border-light: #c2f0c2;
+      --primary-main: #2eb82e;
+      --accent-color: #f59e0b;
+      --border-light: #bbf7d0;
       --text-dark: #004d00;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -48,35 +53,36 @@
       max-width: 1100px;
       margin: 0 auto;
       flex-grow: 1;
-      padding: 20px;
+      padding: 16px;
       gap: 20px;
       justify-content: center;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     #word-list-panel {
       background-color: white;
-      border: 8px solid var(--primary-main);
+      border: 6px solid var(--primary-main);
       border-radius: 24px;
-      padding: 20px;
+      padding: 18px;
       flex: 1;
-      min-width: 260px;
-      max-width: 350px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      min-width: 250px;
+      max-width: 320px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
       transition: border-color 0.5s ease;
     }
 
     #grid-panel {
       background-color: white;
-      border: 8px solid var(--primary-dark);
+      border: 6px solid var(--primary-dark);
       border-radius: 24px;
-      padding: 20px;
+      padding: 16px;
       flex: 2;
       min-width: 300px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      max-width: 530px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -87,80 +93,84 @@
     .list-item {
       display: flex;
       align-items: center;
-      font-size: 1.8rem;
-      padding: 10px 15px;
+      justify-content: space-between;
+      font-size: 1.25rem;
+      padding: 8px 12px;
       background-color: var(--bg-color);
-      border-radius: 16px;
-      border: 4px solid var(--border-light);
+      border-radius: 14px;
+      border: 3px solid var(--border-light);
       transition: all 0.3s ease;
     }
 
     .list-item.found {
       text-decoration: line-through;
-      text-decoration-color: var(--accent-color);
-      text-decoration-thickness: 6px;
-      opacity: 0.6;
-      background-color: #f0f0f0;
-      border-color: #ddd;
+      text-decoration-color: #ca8a04;
+      text-decoration-thickness: 4px;
+      opacity: 0.65;
+      background-color: #fef08a;
+      border-color: #eab308;
+      color: #713f12;
     }
 
     .icon {
-      font-size: 2.5rem;
-      margin-right: 15px;
+      font-size: 1.8rem;
+      margin-right: 8px;
     }
 
+    /* 10x10 Word Search Grid */
     .puzzle-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 5px;
       width: 100%;
-      max-width: 550px;
-    }
-
-    .puzzle-row {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
+      max-width: 480px;
+      margin: 0 auto;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .letter-cell {
-      width: 60px;
-      height: 60px;
-      background-color: var(--primary-main);
-      color: white;
-      font-size: 2.5rem;
+      aspect-ratio: 1 / 1;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 14px;
-      border: 4px solid var(--primary-dark);
+      background-color: var(--primary-main);
+      color: white;
+      font-size: clamp(1.1rem, 3.4vw, 1.7rem);
+      font-weight: 800;
+      border-radius: 10px;
+      border: 3px solid var(--primary-dark);
       cursor: pointer;
-      box-shadow: 0 6px 0 var(--primary-dark);
-      transition: transform 0.1s, box-shadow 0.1s, background-color 0.3s, border-color 0.3s;
+      box-shadow: 0 4px 0 var(--primary-dark);
+      transition: transform 0.08s, box-shadow 0.08s, background-color 0.15s, border-color 0.15s;
       text-transform: uppercase;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .letter-cell:active {
-      transform: translateY(6px);
-      box-shadow: 0 0px 0 var(--primary-dark);
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--primary-dark);
     }
 
     .letter-cell.selected {
-      background-color: var(--accent-color);
-      color: #000;
-      border-color: #1a1a1a;
-      box-shadow: 0 6px 0 #1a1a1a;
+      background-color: var(--accent-color) !important;
+      color: #0f172a !important;
+      border-color: #78350f !important;
+      box-shadow: 0 4px 0 #78350f !important;
+      transform: scale(1.06);
+      z-index: 5;
     }
 
     .letter-cell.found {
-      background-color: var(--primary-dark);
-      color: #ffffff;
-      border-color: #000;
-      box-shadow: 0 0px 0 transparent;
-      transform: translateY(6px);
-      cursor: default;
+      background-color: #facc15 !important;
+      color: #713f12 !important;
+      border-color: #ca8a04 !important;
+      box-shadow: 0 2px 0 #854d0e !important;
+      font-weight: 900;
     }
 
     #confetti-canvas {
@@ -186,24 +196,37 @@
 <body>
 
   <!-- Video Game Header -->
-  <header id="main-header" class="w-full py-5 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500">
+  <header id="main-header" class="w-full py-4 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500">
     <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="text-left">
         <h1 class="arcade-title text-2xl md:text-3xl text-yellow-300 tracking-wider">WORLD OF WORDS</h1>
-        <p class="text-sm md:text-base text-white/90 mt-1">🎮 Arcade Word Challenge</p>
+        <p class="text-sm md:text-base text-white/90 mt-1">🎮 Arcade 10×10 Word Search Challenge</p>
       </div>
-      <div id="level-badge" class="bg-yellow-400 text-slate-950 font-extrabold px-4 py-2 rounded-full border-4 border-yellow-200 text-lg shadow-lg">
+      <div id="level-badge" class="bg-yellow-400 text-slate-950 font-extrabold px-4 py-2 rounded-full border-4 border-yellow-200 text-base md:text-lg shadow-lg">
         LEVEL 1: ANIMALS
       </div>
     </div>
   </header>
 
+  <!-- Helpful Instruction Tip for Grandma -->
+  <div class="w-full max-w-4xl mx-auto px-4 mt-3">
+    <div class="bg-white/90 backdrop-blur rounded-2xl py-2 px-4 text-center border-4 border-emerald-600/30 shadow-sm text-xs sm:text-sm md:text-base text-gray-800 font-bold flex items-center justify-center gap-2">
+      <span>💡 <strong>Tip for Tablet:</strong> Drag your finger across a word, or tap the first & last letter!</span>
+    </div>
+  </div>
+
   <!-- Main Game Container -->
   <div id="game-container">
     <!-- Left Panel: Targets -->
     <div id="word-list-panel">
-      <h2 id="list-title" class="text-2xl text-center font-bold text-[var(--accent-color)] drop-shadow">Targets to Find</h2>
-      <div id="list-container" class="flex flex-col gap-3"></div>
+      <div class="flex items-center justify-between">
+        <h2 id="list-title" class="text-xl md:text-2xl font-bold text-[var(--accent-color)] drop-shadow">Targets to Find</h2>
+        <button onclick="reloadCurrentLevel()" title="Shuffle & Re-place" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg border border-slate-300 font-bold transition-all shadow-sm">
+          🔄 Shuffle
+        </button>
+      </div>
+      <div id="targets-counter" class="text-xs font-bold text-gray-500 tracking-wide uppercase">0 / 6 Words Found</div>
+      <div id="list-container" class="flex flex-col gap-2"></div>
     </div>
 
     <!-- Right Panel: Puzzle Grid -->
@@ -217,7 +240,7 @@
     <div class="bg-white border-8 border-yellow-400 rounded-3xl p-8 max-w-md w-11/12 text-center shadow-2xl animate-modal relative">
       <div class="text-6xl mb-2">🏆</div>
       <h2 id="modal-title" class="text-3xl font-extrabold text-green-700 mb-2">LEVEL COMPLETE!</h2>
-      <p id="modal-sub" class="text-gray-600 text-lg mb-6">Awesome job! You solved all words on this grid!</p>
+      <p id="modal-sub" class="text-gray-600 text-lg mb-6">Awesome job! You found all words on this 10×10 grid!</p>
       <button id="next-level-btn" onclick="nextLevel()" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-950 font-black text-2xl rounded-2xl border-b-8 border-orange-700 active:border-b-0 active:translate-y-2 transition-all shadow-lg">
         CONTINUE ➔
       </button>
@@ -230,13 +253,14 @@
   <!-- Footer -->
   <footer id="main-footer" class="w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500">
     <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
-      <p>© World of Words. All Rights Reserved.</p>
+      <p>© World of Words. Dedicated Brain Exercise.</p>
       <p class="text-xs opacity-80">Powered by Web Audio API & Tailwind CSS</p>
     </div>
   </footer>
 
   <!-- Game Logic Script -->
   <script>
+    const GRID_SIZE = 10;
     const levelsData = [
       {
         id: 1,
@@ -289,37 +313,43 @@
     ];
 
     let currentLevelIndex = 0;
-    let gameState = [];
+    let gridMatrix = [];
+    let placedWords = []; // [ { word: 'CAT', original: item, cells: [{r,c}], found: false } ]
     let audioCtx = null;
     let isAudioInitialized = false;
+
+    // Selection tracking
+    let isPointerDown = false;
+    let dragStart = null; // { r, c }
+    let twoTapStart = null; // { r, c } for two-tap mode
+    let currentSelection = []; // [{ r, c }]
 
     function applyLevelTheme(levelIdx) {
       const root = document.documentElement;
       const header = document.getElementById('main-header');
       const footer = document.getElementById('main-footer');
 
-      // Every 2 levels, toggle theme (Levels 1-2 = Green Theme, Levels 3-4 = Orange/Brown Theme)
       const themeCycle = Math.floor(levelIdx / 2) % 2;
 
       if (themeCycle === 0) {
-        // Levels 1 & 2: Green, Lime & Orange Theme
+        // Levels 1 & 2: Green & Orange Theme
         root.style.setProperty('--bg-color', '#e6ffe6');
         root.style.setProperty('--primary-dark', '#006400');
-        root.style.setProperty('--primary-main', '#32CD32');
-        root.style.setProperty('--accent-color', '#FFA500');
-        root.style.setProperty('--border-light', '#c2f0c2');
+        root.style.setProperty('--primary-main', '#2eb82e');
+        root.style.setProperty('--accent-color', '#f59e0b');
+        root.style.setProperty('--border-light', '#bbf7d0');
         
-        header.className = "w-full py-5 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500";
+        header.className = "w-full py-4 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500";
         footer.className = "w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500";
       } else {
-        // Levels 3 & 4: Chocolate Brown, Vibrant Orange & Neon Green Accent
-        root.style.setProperty('--bg-color', '#3d2314'); // Rich Chocolate Brown
-        root.style.setProperty('--primary-dark', '#231107'); // Dark Espresso
-        root.style.setProperty('--primary-main', '#e65c00'); // Warm Orange
-        root.style.setProperty('--accent-color', '#39FF14'); // High-Contrast Neon Green
+        // Levels 3 & 4: Chocolate Brown, Orange & Neon Green
+        root.style.setProperty('--bg-color', '#3d2314');
+        root.style.setProperty('--primary-dark', '#231107');
+        root.style.setProperty('--primary-main', '#e65c00');
+        root.style.setProperty('--accent-color', '#39FF14');
         root.style.setProperty('--border-light', '#6e3c1e');
         
-        header.className = "w-full py-5 px-4 bg-gradient-to-r from-amber-950 via-orange-900 to-yellow-950 text-white text-center shadow-2xl border-b-8 border-green-400 transition-all duration-500";
+        header.className = "w-full py-4 px-4 bg-gradient-to-r from-amber-950 via-orange-900 to-yellow-950 text-white text-center shadow-2xl border-b-8 border-green-400 transition-all duration-500";
         footer.className = "w-full py-4 bg-amber-950 text-amber-200 text-center text-sm border-t-4 border-amber-800 mt-auto transition-all duration-500";
       }
     }
@@ -347,13 +377,13 @@
         const osc = audioCtx.createOscillator();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(600, now);
-        osc.frequency.exponentialRampToValueAtTime(800, now + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
         gainNode.gain.setValueAtTime(0, now);
-        gainNode.gain.linearRampToValueAtTime(0.4, now + 0.02);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        gainNode.gain.linearRampToValueAtTime(0.3, now + 0.02);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
         osc.connect(gainNode);
         osc.start(now);
-        osc.stop(now + 0.25);
+        osc.stop(now + 0.18);
       } else if (type === 'wordMatch') {
         [440, 554.37, 659.25].forEach(freq => {
           const osc = audioCtx.createOscillator();
@@ -382,117 +412,274 @@
 
     function speakWord(text) {
       if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.85;
-        utterance.pitch = 1.1;
-        const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(v => v.lang.includes('en-US') || v.lang.includes('en-GB'));
-        if (englishVoice) utterance.voice = englishVoice;
-        window.speechSynthesis.speak(utterance);
+        try {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.rate = 0.85;
+          utterance.pitch = 1.05;
+          const voices = window.speechSynthesis.getVoices();
+          const englishVoice = voices.find(v => v.lang && (v.lang.includes('en-US') || v.lang.includes('en-GB') || v.lang.includes('en')));
+          if (englishVoice) utterance.voice = englishVoice;
+          window.speechSynthesis.speak(utterance);
+        } catch(e) {}
       }
+    }
+
+    // Generate a clean 10x10 Word Search layout with words placed at various rows and columns
+    function generate10x10Board(wordsList) {
+      const directions = [
+        { dr: 0, dc: 1 }, // Horizontal (Left-to-Right)
+        { dr: 1, dc: 0 }  // Vertical (Top-to-Bottom)
+      ];
+
+      for (let attempt = 0; attempt < 200; attempt++) {
+        const matrix = Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(''));
+        const placements = [];
+        let allPlaced = true;
+
+        // Sort longest words first
+        const sorted = [...wordsList].sort((a, b) => b.word.length - a.word.length);
+
+        for (const item of sorted) {
+          const wordUpper = item.word.toUpperCase();
+          const len = wordUpper.length;
+          let placed = false;
+          const shuffledDirs = [...directions].sort(() => Math.random() - 0.5);
+
+          for (let tries = 0; tries < 250 && !placed; tries++) {
+            const dir = shuffledDirs[tries % shuffledDirs.length];
+            const maxR = dir.dr === 0 ? GRID_SIZE - 1 : GRID_SIZE - len;
+            const maxC = dir.dc === 0 ? GRID_SIZE - 1 : GRID_SIZE - len;
+            const r = Math.floor(Math.random() * (maxR + 1));
+            const c = Math.floor(Math.random() * (maxC + 1));
+
+            let canFit = true;
+            for (let i = 0; i < len; i++) {
+              const checkR = r + i * dir.dr;
+              const checkC = c + i * dir.dc;
+              const curVal = matrix[checkR][checkC];
+              if (curVal !== '' && curVal !== wordUpper[i]) {
+                canFit = false;
+                break;
+              }
+            }
+
+            if (canFit) {
+              const coords = [];
+              for (let i = 0; i < len; i++) {
+                const fillR = r + i * dir.dr;
+                const fillC = c + i * dir.dc;
+                matrix[fillR][fillC] = wordUpper[i];
+                coords.push({ r: fillR, c: fillC });
+              }
+              placements.push({
+                word: wordUpper,
+                original: item,
+                cells: coords,
+                found: false
+              });
+              placed = true;
+            }
+          }
+
+          if (!placed) {
+            allPlaced = false;
+            break;
+          }
+        }
+
+        if (allPlaced) {
+          // Fill empty cells with random natural letters
+          const fillerAlphabet = "AAABCDEEEFGHIIIJKLMNNNOOOPQRSTUUUVWXYZ";
+          for (let r = 0; r < GRID_SIZE; r++) {
+            for (let c = 0; c < GRID_SIZE; c++) {
+              if (matrix[r][c] === '') {
+                matrix[r][c] = fillerAlphabet[Math.floor(Math.random() * fillerAlphabet.length)];
+              }
+            }
+          }
+          return { matrix, placements };
+        }
+      }
+      return null;
     }
 
     function loadLevel(levelIndex) {
       applyLevelTheme(levelIndex);
       const level = levelsData[levelIndex];
       document.getElementById('level-badge').textContent = level.title;
-      
+
+      twoTapStart = null;
+      currentSelection = [];
+      isPointerDown = false;
+      dragStart = null;
+
+      const boardData = generate10x10Board(level.words);
+      gridMatrix = boardData.matrix;
+      placedWords = boardData.placements;
+
+      renderTargetsList(level.words);
+      renderGrid();
+      updateCounter();
+    }
+
+    function reloadCurrentLevel() {
+      loadLevel(currentLevelIndex);
+    }
+
+    function renderTargetsList(originalWords) {
       const listContainer = document.getElementById('list-container');
-      const puzzleContainer = document.getElementById('puzzle-container');
       listContainer.innerHTML = '';
-      puzzleContainer.innerHTML = '';
 
-      gameState = level.words.map(item => ({
-        word: item.word.toUpperCase(),
-        letters: item.word.toUpperCase().split(''),
-        tappedStatus: new Array(item.word.length).fill(false),
-        completed: false
-      }));
-
-      // Render Word Targets List
-      level.words.forEach((item, index) => {
+      originalWords.forEach((item, index) => {
         const div = document.createElement('div');
         div.className = 'list-item';
-        div.id = `list-item-${index}`;
-        div.innerHTML = `<span class="icon">${item.icon}</span> <span class="uppercase tracking-wider font-bold">${item.word}</span>`;
+        div.id = `target-${item.word.toUpperCase()}`;
+        div.innerHTML = `
+          <div class="flex items-center">
+            <span class="icon">${item.icon}</span>
+            <span class="uppercase tracking-wider font-bold text-gray-800">${item.word}</span>
+          </div>
+          <span class="status-indicator text-lg">⏳</span>
+        `;
         listContainer.appendChild(div);
       });
+    }
 
-      // Render Grid Rows
-      gameState.forEach((row, rowIndex) => {
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'puzzle-row';
+    function updateCounter() {
+      const foundCount = placedWords.filter(p => p.found).length;
+      const total = placedWords.length;
+      const counter = document.getElementById('targets-counter');
+      if (counter) {
+        counter.textContent = `${foundCount} / ${total} Words Found`;
+      }
+    }
 
-        row.letters.forEach((letter, letterIndex) => {
+    function renderGrid() {
+      const puzzleContainer = document.getElementById('puzzle-container');
+      puzzleContainer.innerHTML = '';
+
+      for (let r = 0; r < GRID_SIZE; r++) {
+        for (let c = 0; c < GRID_SIZE; c++) {
           const cell = document.createElement('div');
           cell.className = 'letter-cell';
-          cell.textContent = letter;
+          cell.id = `cell-${r}-${c}`;
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          cell.textContent = gridMatrix[r][c];
 
-          cell.addEventListener('mousedown', () => handleTap(rowIndex, letterIndex, cell));
-          cell.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            handleTap(rowIndex, letterIndex, cell);
-          }, { passive: false });
+          puzzleContainer.appendChild(cell);
+        }
+      }
+    }
 
-          rowDiv.appendChild(cell);
-        });
+    // --- Interaction Engine (Drag + Two-Tap for Tablets) ---
+    function getCellFromElement(el) {
+      if (!el) return null;
+      const cell = el.closest('.letter-cell');
+      if (!cell) return null;
+      return {
+        r: parseInt(cell.dataset.row, 10),
+        c: parseInt(cell.dataset.col, 10),
+        element: cell
+      };
+    }
 
-        puzzleContainer.appendChild(rowDiv);
+    function getLineCells(start, end) {
+      const cells = [];
+      const dr = end.r - start.r;
+      const dc = end.c - start.c;
+
+      if (dr === 0 && dc === 0) {
+        cells.push({ r: start.r, c: start.c });
+        return cells;
+      }
+
+      // Horizontal line
+      if (dr === 0) {
+        const step = dc > 0 ? 1 : -1;
+        for (let c = start.c; ; c += step) {
+          cells.push({ r: start.r, c });
+          if (c === end.c) break;
+        }
+        return cells;
+      }
+
+      // Vertical line
+      if (dc === 0) {
+        const step = dr > 0 ? 1 : -1;
+        for (let r = start.r; ; r += step) {
+          cells.push({ r, c: start.c });
+          if (r === end.r) break;
+        }
+        return cells;
+      }
+
+      return [];
+    }
+
+    function highlightSelection(cells) {
+      // Clear previous temporary selection highlight
+      document.querySelectorAll('.letter-cell.selected').forEach(el => {
+        el.classList.remove('selected');
+      });
+
+      currentSelection = cells;
+
+      cells.forEach(pt => {
+        const el = document.getElementById(`cell-${pt.r}-${pt.c}`);
+        if (el) el.classList.add('selected');
       });
     }
 
-    function handleTap(rowIndex, letterIndex, cellElement) {
-      initAudio();
-      if (gameState[rowIndex].completed) return;
+    function checkWordMatch(cells) {
+      if (!cells || cells.length < 2) return false;
 
-      if (!gameState[rowIndex].tappedStatus[letterIndex]) {
-        gameState[rowIndex].tappedStatus[letterIndex] = true;
-        cellElement.classList.add('selected');
-        playSound('letterTap');
-      } else {
-        gameState[rowIndex].tappedStatus[letterIndex] = false;
-        cellElement.classList.remove('selected');
-        playSound('letterTap');
-      }
+      const forwardStr = cells.map(pt => gridMatrix[pt.r][pt.c]).join('');
+      const reverseStr = [...cells].reverse().map(pt => gridMatrix[pt.r][pt.c]).join('');
 
-      checkRowCompletion(rowIndex);
-    }
+      for (const pw of placedWords) {
+        if (!pw.found && (pw.word === forwardStr || pw.word === reverseStr)) {
+          // Success! Found a word!
+          pw.found = true;
 
-    function checkRowCompletion(rowIndex) {
-      const row = gameState[rowIndex];
-      const currentLevel = levelsData[currentLevelIndex];
-      const allTapped = row.tappedStatus.every(status => status === true);
+          // Highlight cells as permanently found
+          pw.cells.forEach(pt => {
+            const el = document.getElementById(`cell-${pt.r}-${pt.c}`);
+            if (el) {
+              el.classList.remove('selected');
+              el.classList.add('found');
+            }
+          });
 
-      if (allTapped && !row.completed) {
-        row.completed = true;
+          // Mark target list item
+          const targetEl = document.getElementById(`target-${pw.word}`);
+          if (targetEl) {
+            targetEl.classList.add('found');
+            const indicator = targetEl.querySelector('.status-indicator');
+            if (indicator) indicator.textContent = '✅';
+          }
 
-        // Highlight cells as found
-        const rowElement = document.getElementById('puzzle-container').children[rowIndex];
-        Array.from(rowElement.children).forEach(cell => {
-          cell.classList.remove('selected');
-          cell.classList.add('found');
-        });
+          updateCounter();
+          playSound('wordMatch');
+          setTimeout(() => {
+            speakWord(pw.original.word);
+          }, 350);
 
-        // Strike through word on target panel
-        const listItem = document.getElementById(`list-item-${rowIndex}`);
-        if (listItem) {
-          listItem.classList.add('found');
+          highlightSelection([]);
+          twoTapStart = null;
+
+          checkGameCompletion();
+          return true;
         }
-
-        // Sound & speech feedback
-        playSound('wordMatch');
-        setTimeout(() => {
-          speakWord(currentLevel.words[rowIndex].word);
-        }, 350);
-
-        checkGameCompletion();
       }
+
+      return false;
     }
 
     function checkGameCompletion() {
-      const allDone = gameState.every(row => row.completed);
-      if (allDone) {
+      const allFound = placedWords.every(p => p.found);
+      if (allFound) {
         playSound('levelWin');
         setTimeout(() => {
           startConfetti();
@@ -501,6 +688,100 @@
       }
     }
 
+    // --- Pointer & Touch Event Handlers ---
+    const puzzleContainer = document.getElementById('puzzle-container');
+
+    // Pointer Down (Mouse or Touch)
+    function onPointerStart(e) {
+      initAudio();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const target = document.elementFromPoint(clientX, clientY);
+      const cell = getCellFromElement(target);
+      if (!cell) return;
+
+      isPointerDown = true;
+      dragStart = { r: cell.r, c: cell.c };
+      highlightSelection([dragStart]);
+      playSound('letterTap');
+    }
+
+    // Pointer Move (Mouse or Touch Drag)
+    function onPointerMove(e) {
+      if (!isPointerDown || !dragStart) return;
+      if (e.cancelable) e.preventDefault();
+
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const target = document.elementFromPoint(clientX, clientY);
+      const cell = getCellFromElement(target);
+      if (!cell) return;
+
+      const line = getLineCells(dragStart, { r: cell.r, c: cell.c });
+      if (line.length > 0) {
+        highlightSelection(line);
+      }
+    }
+
+    // Pointer End (Mouse up or Finger lift)
+    function onPointerEnd(e) {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+
+      // If user dragged across multiple cells
+      if (currentSelection.length > 1) {
+        const matched = checkWordMatch(currentSelection);
+        if (!matched) {
+          highlightSelection([]);
+        }
+        twoTapStart = null;
+        dragStart = null;
+        return;
+      }
+
+      // Single Tap (Two-Tap Support for Seniors)
+      if (currentSelection.length === 1) {
+        const tapped = currentSelection[0];
+
+        if (!twoTapStart) {
+          twoTapStart = tapped;
+          highlightSelection([tapped]);
+        } else if (twoTapStart.r === tapped.r && twoTapStart.c === tapped.c) {
+          // Tapped same cell again -> toggle off
+          twoTapStart = null;
+          highlightSelection([]);
+        } else {
+          // Second tap: test straight line between twoTapStart and tapped
+          const line = getLineCells(twoTapStart, tapped);
+          if (line.length > 1) {
+            highlightSelection(line);
+            const matched = checkWordMatch(line);
+            if (!matched) {
+              twoTapStart = tapped;
+              highlightSelection([tapped]);
+            }
+          } else {
+            // Not in straight line: re-anchor to new cell
+            twoTapStart = tapped;
+            highlightSelection([tapped]);
+          }
+        }
+      }
+
+      dragStart = null;
+    }
+
+    // Attach Touch & Mouse Events
+    puzzleContainer.addEventListener('mousedown', onPointerStart);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerEnd);
+
+    puzzleContainer.addEventListener('touchstart', onPointerStart, { passive: false });
+    window.addEventListener('touchmove', onPointerMove, { passive: false });
+    window.addEventListener('touchend', onPointerEnd);
+    window.addEventListener('touchcancel', onPointerEnd);
+
+    // --- Modal & Level Progression ---
     function showWinModal() {
       const modal = document.getElementById('win-modal');
       const title = document.getElementById('modal-title');
@@ -509,11 +790,11 @@
 
       if (currentLevelIndex < levelsData.length - 1) {
         title.textContent = "LEVEL COMPLETE!";
-        sub.textContent = `Great work clearing ${levelsData[currentLevelIndex].title}! Get ready for the next level!`;
-        btn.textContent = "CONTINUE ➔";
+        sub.textContent = `Wonderful job! You found every hidden word in ${levelsData[currentLevelIndex].title}!`;
+        btn.textContent = "NEXT LEVEL ➔";
       } else {
         title.textContent = "GRAND VICTORY!";
-        sub.textContent = "Incredible job! You mastered all 4 Levels across Animals, Foods, Colors, and Vehicles!";
+        sub.textContent = "Incredible brainpower! You cleared all 4 levels of the 10×10 Word Search!";
         btn.textContent = "PLAY AGAIN 🔄";
       }
 
@@ -526,7 +807,7 @@
       if (currentLevelIndex < levelsData.length - 1) {
         currentLevelIndex++;
       } else {
-        currentLevelIndex = 0; // Loop back to Level 1
+        currentLevelIndex = 0;
       }
       loadLevel(currentLevelIndex);
     }
