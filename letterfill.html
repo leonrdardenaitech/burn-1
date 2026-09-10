@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow">
+  <title>World of Words: Letter Pull</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for Arcade & Cartoon Aesthetics -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables for Dynamic Theme Switching */
+    :root {
+      --bg-color: #e6ffe6;
+      --primary-dark: #006400;
+      --primary-main: #32CD32;
+      --accent-color: #FFA500;
+      --border-light: #c2f0c2;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Fredoka One', cursive, sans-serif;
+      color: var(--primary-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      transition: background-color 0.5s ease;
+    }
+
+    /* Arcade title font styling */
+    .arcade-title {
+      font-family: 'Press Start 2P', cursive;
+      text-shadow: 3px 3px 0px #000, -2px -2px 0px var(--accent-color);
+    }
+
+    #main-layout {
+      display: flex;
+      flex-direction: column;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 15px;
+      gap: 16px;
+      flex-grow: 1;
+    }
+
+    #game-top-section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    /* Left Target Words Panel */
+    #word-list-panel {
+      background-color: white;
+      border: 8px solid var(--primary-main);
+      border-radius: 24px;
+      padding: 18px;
+      flex: 1;
+      min-width: 250px;
+      max-width: 320px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.5s ease;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      padding: 8px 12px;
+      background-color: var(--bg-color);
+      border-radius: 16px;
+      border: 4px solid var(--border-light);
+      transition: all 0.3s ease;
+    }
+
+    .list-item.found {
+      text-decoration: line-through;
+      text-decoration-color: var(--accent-color);
+      text-decoration-thickness: 5px;
+      opacity: 0.55;
+      background-color: #f0f0f0;
+      border-color: #ddd;
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-right: 10px;
+    }
+
+    /* Center Fill-in-the-Blanks Panel */
+    #blanks-panel {
+      background-color: white;
+      border: 8px solid var(--primary-dark);
+      border-radius: 24px;
+      padding: 18px;
+      flex: 2;
+      min-width: 300px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      transition: border-color 0.5s ease;
+    }
+
+    .word-blank-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 16px;
+      border: 3px transparent dashed;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.2s ease;
+    }
+
+    .word-blank-row.active-row {
+      border-color: var(--accent-color);
+      background-color: rgba(255, 165, 0, 0.12);
+    }
+
+    .blank-slot {
+      width: 50px;
+      height: 50px;
+      background-color: #f5f5f5;
+      border: 4px solid #ccc;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.9rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      box-shadow: inset 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .blank-slot.filled {
+      background-color: #ffffff;
+      border-color: var(--primary-dark);
+      color: var(--primary-dark);
+      transform: scale(1.03);
+    }
+
+    .blank-slot.correct {
+      background-color: var(--primary-dark);
+      border-color: #000;
+      color: #ffffff;
+      box-shadow: 0 4px 0 #000;
+    }
+
+    /* Bottom Letter Bank Container */
+    #letter-bank-panel {
+      background-color: white;
+      border: 8px solid var(--primary-main);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.5s ease;
+    }
+
+    .letter-blocks-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 800px;
+    }
+
+    .letter-block-btn {
+      width: 58px;
+      height: 58px;
+      background-color: var(--primary-main);
+      color: white;
+      font-size: 2.1rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      border: 4px solid var(--primary-dark);
+      box-shadow: 0 6px 0 var(--primary-dark);
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
+      text-transform: uppercase;
+    }
+
+    .letter-block-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 var(--primary-dark);
+    }
+
+    .letter-block-btn.used {
+      opacity: 0.35;
+      transform: translateY(4px);
+      box-shadow: 0 0px 0 transparent;
+      cursor: not-allowed;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      80% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-modal {
+      animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video Game Header -->
+  <header id="main-header" class="w-full py-4 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="text-left">
+        <h1 class="arcade-title text-2xl md:text-3xl text-yellow-300 tracking-wider">WORLD OF WORDS</h1>
+        <p class="text-sm md:text-base text-white/90 mt-1">🧩 Letter Pull: Fill in the Blanks!</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- Switch Game Button for Grandma -->
+        <a href="/wordpuzzle" class="bg-white/95 hover:bg-white text-emerald-950 font-extrabold px-3.5 py-2 rounded-xl text-sm md:text-base shadow-md border-2 border-yellow-400 hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5">
+          <span>🔍</span> <span>Word Search ➔</span>
+        </a>
+        <div id="level-badge" class="bg-yellow-400 text-slate-950 font-extrabold px-4 py-2 rounded-full border-4 border-yellow-200 text-base md:text-lg shadow-lg">
+          LEVEL 1: VEHICLES
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Helpful Instruction Tip for Grandma -->
+  <div class="w-full max-w-4xl mx-auto px-4 mt-3">
+    <div class="bg-white/90 backdrop-blur rounded-2xl py-2 px-4 text-center border-4 border-emerald-600/30 shadow-sm text-xs sm:text-sm md:text-base text-gray-800 font-bold flex items-center justify-center gap-2">
+      <span>💡 <strong>Tip for Tablet:</strong> Tap a word row, then push the letter blocks below to fill the blanks!</span>
+    </div>
+  </div>
+
+  <!-- Main Game Layout -->
+  <div id="main-layout">
+    <div id="game-top-section">
+      <!-- Left Panel: Target Words -->
+      <div id="word-list-panel">
+        <h2 id="list-title" class="text-2xl text-center font-bold text-[var(--accent-color)] drop-shadow">Targets</h2>
+        <div id="list-container" class="flex flex-col gap-2"></div>
+      </div>
+
+      <!-- Center Panel: Blanks Field -->
+      <div id="blanks-panel">
+        <h2 class="text-lg md:text-xl font-bold text-gray-600 mb-1 text-center">Tap a row or push letters below!</h2>
+        <div id="blanks-container" class="flex flex-col gap-2.5 w-full items-center"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Panel: Pushable Letter Bank -->
+    <div id="letter-bank-panel">
+      <h3 class="text-base md:text-lg font-bold text-[var(--primary-dark)] tracking-wide uppercase">👇 Push Letters to Fill the Blank</h3>
+      <div id="letter-buttons-container" class="letter-blocks-grid"></div>
+    </div>
+  </div>
+
+  <!-- Win Modal Window -->
+  <div id="win-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+    <div class="bg-white border-8 border-yellow-400 rounded-3xl p-8 max-w-md w-11/12 text-center shadow-2xl animate-modal relative">
+      <div class="text-6xl mb-2">🏆</div>
+      <h2 id="modal-title" class="text-3xl font-extrabold text-green-700 mb-2">LEVEL COMPLETE!</h2>
+      <p id="modal-sub" class="text-gray-600 text-lg mb-6">Awesome job! You pulled all the right letters!</p>
+      <button id="next-level-btn" onclick="nextLevel()" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-950 font-black text-2xl rounded-2xl border-b-8 border-orange-700 active:border-b-0 active:translate-y-2 transition-all shadow-lg">
+        CONTINUE ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- Canvas for Confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Footer -->
+  <footer id="main-footer" class="w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p>© World of Words. Dedicated Brain Exercise.</p>
+      <p class="text-xs opacity-80">Powered by Web Audio API & Tailwind CSS</p>
+    </div>
+  </footer>
+
+  <!-- Game Logic Script -->
+  <script>
+    const levelsData = [
+      {
+        id: 1,
+        title: "LEVEL 1: VEHICLES",
+        words: [
+          { word: "Car", icon: "🚗" },
+          { word: "Plane", icon: "✈️" },
+          { word: "Train", icon: "🚆" },
+          { word: "Bus", icon: "🚌" },
+          { word: "Boat", icon: "🚤" },
+          { word: "Bike", icon: "🚲" }
+        ]
+      },
+      {
+        id: 2,
+        title: "LEVEL 2: FOODS",
+        words: [
+          { word: "Pie", icon: "🥧" },
+          { word: "Cake", icon: "🍰" },
+          { word: "Taco", icon: "🌮" },
+          { word: "Milk", icon: "🥛" },
+          { word: "Soup", icon: "🥣" },
+          { word: "Apple", icon: "🍎" }
+        ]
+      },
+      {
+        id: 3,
+        title: "LEVEL 3: ANIMALS",
+        words: [
+          { word: "Cat", icon: "🐱" },
+          { word: "Dog", icon: "🐶" },
+          { word: "Bird", icon: "🐦" },
+          { word: "Lion", icon: "🦁" },
+          { word: "Duck", icon: "🦆" },
+          { word: "Bear", icon: "🐻" }
+        ]
+      },
+      {
+        id: 4,
+        title: "LEVEL 4: COLORS",
+        words: [
+          { word: "Red", icon: "🔴" },
+          { word: "Blue", icon: "🔵" },
+          { word: "Pink", icon: "🩷" },
+          { word: "Gold", icon: "🪙" },
+          { word: "Lime", icon: "🟢" },
+          { word: "Teal", icon: "🩵" }
+        ]
+      }
+    ];
+
+    let currentLevelIndex = 0;
+    let wordStates = [];
+    let activeRowIndex = 0;
+    let audioCtx = null;
+    let isAudioInitialized = false;
+
+    function applyLevelTheme(levelIdx) {
+      const root = document.documentElement;
+      const header = document.getElementById('main-header');
+      const footer = document.getElementById('main-footer');
+
+      const themeCycle = Math.floor(levelIdx / 2) % 2;
+
+      if (themeCycle === 0) {
+        // Levels 1 & 2: Green & Lime Theme
+        root.style.setProperty('--bg-color', '#e6ffe6');
+        root.style.setProperty('--primary-dark', '#006400');
+        root.style.setProperty('--primary-main', '#32CD32');
+        root.style.setProperty('--accent-color', '#FFA500');
+        root.style.setProperty('--border-light', '#c2f0c2');
+        
+        header.className = "w-full py-4 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500";
+        footer.className = "w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500";
+      } else {
+        // Levels 3 & 4: Brown, Orange & Neon Green Theme
+        root.style.setProperty('--bg-color', '#3d2314');
+        root.style.setProperty('--primary-dark', '#231107');
+        root.style.setProperty('--primary-main', '#e65c00');
+        root.style.setProperty('--accent-color', '#39FF14');
+        root.style.setProperty('--border-light', '#6e3c1e');
+        
+        header.className = "w-full py-4 px-4 bg-gradient-to-r from-amber-950 via-orange-900 to-yellow-950 text-white text-center shadow-2xl border-b-8 border-green-400 transition-all duration-500";
+        footer.className = "w-full py-4 bg-amber-950 text-amber-200 text-center text-sm border-t-4 border-amber-800 mt-auto transition-all duration-500";
+      }
+    }
+
+    function initAudio() {
+      if (!isAudioInitialized) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          audioCtx = new AudioContext();
+          isAudioInitialized = true;
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSound(type) {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const gainNode = audioCtx.createGain();
+      gainNode.connect(audioCtx.destination);
+
+      if (type === 'zap') {
+        const osc = audioCtx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(300, now + 0.15);
+        gainNode.gain.setValueAtTime(0.3, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+        osc.connect(gainNode);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      } else if (type === 'ding') {
+        const osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(1600, now + 0.2);
+        gainNode.gain.setValueAtTime(0.4, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+        osc.connect(gainNode);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } else if (type === 'wordMatch') {
+        [523.25, 659.25, 783.99].forEach(freq => {
+          const osc = audioCtx.createOscillator();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now);
+          osc.connect(gainNode);
+          osc.start(now);
+          osc.stop(now + 0.7);
+        });
+        gainNode.gain.setValueAtTime(0.3, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+      } else if (type === 'levelWin') {
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+          osc.connect(gainNode);
+          osc.start(now + idx * 0.12);
+          osc.stop(now + idx * 0.12 + 0.4);
+        });
+        gainNode.gain.setValueAtTime(0.4, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
+      } else if (type === 'wrong') {
+        const osc = audioCtx.createOscillator();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(200, now);
+        osc.frequency.setValueAtTime(150, now + 0.1);
+        gainNode.gain.setValueAtTime(0.3, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        osc.connect(gainNode);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
+    }
+
+    function speakWord(text) {
+      if ('speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.rate = 0.85;
+          utterance.pitch = 1.1;
+          const voices = window.speechSynthesis.getVoices();
+          const englishVoice = voices.find(v => v.lang && (v.lang.includes('en-US') || v.lang.includes('en-GB') || v.lang.includes('en')));
+          if (englishVoice) utterance.voice = englishVoice;
+          window.speechSynthesis.speak(utterance);
+        } catch(e) {}
+      }
+    }
+
+    function loadLevel(levelIndex) {
+      applyLevelTheme(levelIndex);
+      const level = levelsData[levelIndex];
+      document.getElementById('level-badge').textContent = level.title;
+
+      const listContainer = document.getElementById('list-container');
+      const blanksContainer = document.getElementById('blanks-container');
+      const letterButtonsContainer = document.getElementById('letter-buttons-container');
+
+      listContainer.innerHTML = '';
+      blanksContainer.innerHTML = '';
+      letterButtonsContainer.innerHTML = '';
+
+      wordStates = level.words.map(item => ({
+        target: item.word.toUpperCase(),
+        current: new Array(item.word.length).fill(''),
+        completed: false
+      }));
+
+      activeRowIndex = 0;
+
+      // 1. Render Left Targets List
+      level.words.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'list-item';
+        div.id = `target-item-${idx}`;
+        div.innerHTML = `<span class="icon">${item.icon}</span> <span class="uppercase tracking-wider font-bold">${item.word}</span>`;
+        listContainer.appendChild(div);
+      });
+
+      // 2. Render Blanks Field
+      wordStates.forEach((state, rIdx) => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = `word-blank-row ${rIdx === 0 ? 'active-row' : ''}`;
+        rowDiv.id = `blank-row-${rIdx}`;
+        rowDiv.addEventListener('click', () => setActiveRow(rIdx));
+
+        state.target.split('').forEach((_, cIdx) => {
+          const slot = document.createElement('div');
+          slot.className = 'blank-slot';
+          slot.id = `slot-${rIdx}-${cIdx}`;
+          slot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            removeLetterFromSlot(rIdx, cIdx);
+          });
+          rowDiv.appendChild(slot);
+        });
+
+        blanksContainer.appendChild(rowDiv);
+      });
+
+      // 3. Extract exact unique letters for these 6 words & shuffle
+      let allLetters = [];
+      level.words.forEach(w => {
+        allLetters.push(...w.word.toUpperCase().split(''));
+      });
+      const uniqueLetters = Array.from(new Set(allLetters));
+      uniqueLetters.sort(() => Math.random() - 0.5);
+
+      uniqueLetters.forEach((char) => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-block-btn';
+        btn.textContent = char;
+        btn.addEventListener('click', () => pushLetter(char, btn));
+        letterButtonsContainer.appendChild(btn);
+      });
+    }
+
+    function setActiveRow(rIdx) {
+      if (wordStates[rIdx].completed) return;
+      document.querySelectorAll('.word-blank-row').forEach((row, i) => {
+        if (i === rIdx) row.classList.add('active-row');
+        else row.classList.remove('active-row');
+      });
+      activeRowIndex = rIdx;
+    }
+
+    function pushLetter(char) {
+      initAudio();
+
+      if (wordStates[activeRowIndex].completed) {
+        const firstIncomplete = wordStates.findIndex(w => !w.completed);
+        if (firstIncomplete !== -1) {
+          setActiveRow(firstIncomplete);
+        } else {
+          return;
+        }
+      }
+
+      const activeState = wordStates[activeRowIndex];
+      const emptySlotIdx = activeState.current.findIndex(val => val === '');
+
+      if (emptySlotIdx !== -1) {
+        activeState.current[emptySlotIdx] = char;
+        const slotEl = document.getElementById(`slot-${activeRowIndex}-${emptySlotIdx}`);
+        slotEl.textContent = char;
+        slotEl.classList.add('filled');
+
+        playSound('zap');
+
+        checkWordCompletion(activeRowIndex);
+      } else {
+        playSound('wrong');
+      }
+    }
+
+    function removeLetterFromSlot(rIdx, cIdx) {
+      initAudio();
+      const state = wordStates[rIdx];
+      if (state.completed) return;
+
+      if (state.current[cIdx] !== '') {
+        state.current[cIdx] = '';
+        const slotEl = document.getElementById(`slot-${rIdx}-${cIdx}`);
+        slotEl.textContent = '';
+        slotEl.classList.remove('filled');
+        playSound('ding');
+      }
+    }
+
+    function checkWordCompletion(rIdx) {
+      const state = wordStates[rIdx];
+      const formedWord = state.current.join('');
+
+      if (formedWord === state.target) {
+        state.completed = true;
+
+        state.target.split('').forEach((_, cIdx) => {
+          const slotEl = document.getElementById(`slot-${rIdx}-${cIdx}`);
+          slotEl.classList.remove('filled');
+          slotEl.classList.add('correct');
+        });
+
+        const targetEl = document.getElementById(`target-item-${rIdx}`);
+        if (targetEl) targetEl.classList.add('found');
+
+        playSound('wordMatch');
+        setTimeout(() => {
+          speakWord(levelsData[currentLevelIndex].words[rIdx].word);
+        }, 300);
+
+        const nextIncomplete = wordStates.findIndex(w => !w.completed);
+        if (nextIncomplete !== -1) {
+          setActiveRow(nextIncomplete);
+        }
+
+        checkLevelCompletion();
+      }
+    }
+
+    function checkLevelCompletion() {
+      const allDone = wordStates.every(w => w.completed);
+      if (allDone) {
+        playSound('levelWin');
+        setTimeout(() => {
+          startConfetti();
+          showWinModal();
+        }, 1200);
+      }
+    }
+
+    function showWinModal() {
+      const modal = document.getElementById('win-modal');
+      const title = document.getElementById('modal-title');
+      const sub = document.getElementById('modal-sub');
+      const btn = document.getElementById('next-level-btn');
+
+      if (currentLevelIndex < levelsData.length - 1) {
+        title.textContent = "LEVEL COMPLETE!";
+        sub.textContent = `You cleared ${levelsData[currentLevelIndex].title}! Ready for the next level?`;
+        btn.textContent = "CONTINUE ➔";
+      } else {
+        title.textContent = "GRAND CHAMPION!";
+        sub.textContent = "Awesome! You completed all 4 levels of World of Words: Letter Pull!";
+        btn.textContent = "PLAY AGAIN 🔄";
+      }
+
+      modal.classList.remove('hidden');
+      speakWord(title.textContent);
+    }
+
+    function nextLevel() {
+      document.getElementById('win-modal').classList.add('hidden');
+      if (currentLevelIndex < levelsData.length - 1) {
+        currentLevelIndex++;
+      } else {
+        currentLevelIndex = 0;
+      }
+      loadLevel(currentLevelIndex);
+    }
+
+    // --- Confetti Animation ---
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function startConfetti() {
+      const colors = ['#39FF14', '#FFA500', '#FFD700', '#FF6347', '#3B82F6', '#8B5CF6', '#32CD32'];
+      particles = [];
+      for (let i = 0; i < 200; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          r: Math.random() * 8 + 4,
+          dx: Math.random() * 14 - 7,
+          dy: Math.random() * -14 - 7,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+      animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, index) => {
+        p.dy += 0.25;
+        p.x += p.dx;
+        p.y += p.dy;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        if (p.y > canvas.height) particles.splice(index, 1);
+      });
+
+      if (particles.length > 0) {
+        animationId = requestAnimationFrame(animateConfetti);
+      } else {
+        cancelAnimationFrame(animationId);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLevel(0);
+    });
+  </script>
+</body>
+</html>
