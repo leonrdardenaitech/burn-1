@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>World of Words - Puzzle Game</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for Arcade & Cartoon Aesthetics -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables for Dynamic Level Theming */
+    :root {
+      --bg-color: #e6ffe6;
+      --primary-dark: #006400;
+      --primary-main: #32CD32;
+      --accent-color: #FFA500;
+      --border-light: #c2f0c2;
+      --text-dark: #004d00;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Fredoka One', cursive, sans-serif;
+      color: var(--primary-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      transition: background-color 0.5s ease;
+    }
+
+    /* Arcade title font styling */
+    .arcade-title {
+      font-family: 'Press Start 2P', cursive;
+      text-shadow: 3px 3px 0px #000, -2px -2px 0px var(--accent-color);
+    }
+
+    #game-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      flex-grow: 1;
+      padding: 20px;
+      gap: 20px;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    #word-list-panel {
+      background-color: white;
+      border: 8px solid var(--primary-main);
+      border-radius: 24px;
+      padding: 20px;
+      flex: 1;
+      min-width: 260px;
+      max-width: 350px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: border-color 0.5s ease;
+    }
+
+    #grid-panel {
+      background-color: white;
+      border: 8px solid var(--primary-dark);
+      border-radius: 24px;
+      padding: 20px;
+      flex: 2;
+      min-width: 300px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.5s ease;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      font-size: 1.8rem;
+      padding: 10px 15px;
+      background-color: var(--bg-color);
+      border-radius: 16px;
+      border: 4px solid var(--border-light);
+      transition: all 0.3s ease;
+    }
+
+    .list-item.found {
+      text-decoration: line-through;
+      text-decoration-color: var(--accent-color);
+      text-decoration-thickness: 6px;
+      opacity: 0.6;
+      background-color: #f0f0f0;
+      border-color: #ddd;
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-right: 15px;
+    }
+
+    .puzzle-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 550px;
+    }
+
+    .puzzle-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .letter-cell {
+      width: 60px;
+      height: 60px;
+      background-color: var(--primary-main);
+      color: white;
+      font-size: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 14px;
+      border: 4px solid var(--primary-dark);
+      cursor: pointer;
+      box-shadow: 0 6px 0 var(--primary-dark);
+      transition: transform 0.1s, box-shadow 0.1s, background-color 0.3s, border-color 0.3s;
+      text-transform: uppercase;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .letter-cell:active {
+      transform: translateY(6px);
+      box-shadow: 0 0px 0 var(--primary-dark);
+    }
+
+    .letter-cell.selected {
+      background-color: var(--accent-color);
+      color: #000;
+      border-color: #1a1a1a;
+      box-shadow: 0 6px 0 #1a1a1a;
+    }
+
+    .letter-cell.found {
+      background-color: var(--primary-dark);
+      color: #ffffff;
+      border-color: #000;
+      box-shadow: 0 0px 0 transparent;
+      transform: translateY(6px);
+      cursor: default;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      80% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-modal {
+      animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video Game Header -->
+  <header id="main-header" class="w-full py-5 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="text-left">
+        <h1 class="arcade-title text-2xl md:text-3xl text-yellow-300 tracking-wider">WORLD OF WORDS</h1>
+        <p class="text-sm md:text-base text-white/90 mt-1">🎮 Arcade Word Challenge</p>
+      </div>
+      <div id="level-badge" class="bg-yellow-400 text-slate-950 font-extrabold px-4 py-2 rounded-full border-4 border-yellow-200 text-lg shadow-lg">
+        LEVEL 1: ANIMALS
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Game Container -->
+  <div id="game-container">
+    <!-- Left Panel: Targets -->
+    <div id="word-list-panel">
+      <h2 id="list-title" class="text-2xl text-center font-bold text-[var(--accent-color)] drop-shadow">Targets to Find</h2>
+      <div id="list-container" class="flex flex-col gap-3"></div>
+    </div>
+
+    <!-- Right Panel: Puzzle Grid -->
+    <div id="grid-panel">
+      <div id="puzzle-container" class="puzzle-grid"></div>
+    </div>
+  </div>
+
+  <!-- Win Modal Window -->
+  <div id="win-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+    <div class="bg-white border-8 border-yellow-400 rounded-3xl p-8 max-w-md w-11/12 text-center shadow-2xl animate-modal relative">
+      <div class="text-6xl mb-2">🏆</div>
+      <h2 id="modal-title" class="text-3xl font-extrabold text-green-700 mb-2">LEVEL COMPLETE!</h2>
+      <p id="modal-sub" class="text-gray-600 text-lg mb-6">Awesome job! You solved all words on this grid!</p>
+      <button id="next-level-btn" onclick="nextLevel()" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-950 font-black text-2xl rounded-2xl border-b-8 border-orange-700 active:border-b-0 active:translate-y-2 transition-all shadow-lg">
+        CONTINUE ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- Canvas for Confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Footer -->
+  <footer id="main-footer" class="w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p>© World of Words. All Rights Reserved.</p>
+      <p class="text-xs opacity-80">Powered by Web Audio API & Tailwind CSS</p>
+    </div>
+  </footer>
+
+  <!-- Game Logic Script -->
+  <script>
+    const levelsData = [
+      {
+        id: 1,
+        title: "LEVEL 1: ANIMALS",
+        words: [
+          { word: "Cat", icon: "🐱" },
+          { word: "Dog", icon: "🐶" },
+          { word: "Rat", icon: "🐀" },
+          { word: "Bird", icon: "🐦" },
+          { word: "Fish", icon: "🐟" },
+          { word: "Bull", icon: "🐂" }
+        ]
+      },
+      {
+        id: 2,
+        title: "LEVEL 2: FOODS",
+        words: [
+          { word: "Burger", icon: "🍔" },
+          { word: "Hotdog", icon: "🌭" },
+          { word: "Pizza", icon: "🍕" },
+          { word: "Pie", icon: "🥧" },
+          { word: "Cake", icon: "🍰" },
+          { word: "Soup", icon: "🥣" }
+        ]
+      },
+      {
+        id: 3,
+        title: "LEVEL 3: COLORS",
+        words: [
+          { word: "Red", icon: "🔴" },
+          { word: "Blue", icon: "🔵" },
+          { word: "Pink", icon: "🩷" },
+          { word: "Gold", icon: "🪙" },
+          { word: "Lime", icon: "🟢" },
+          { word: "Teal", icon: "🩵" }
+        ]
+      },
+      {
+        id: 4,
+        title: "LEVEL 4: VEHICLES",
+        words: [
+          { word: "Bus", icon: "🚌" },
+          { word: "Car", icon: "🚗" },
+          { word: "Van", icon: "🚐" },
+          { word: "Bike", icon: "🚲" },
+          { word: "Taxi", icon: "🚕" },
+          { word: "Boat", icon: "🚤" }
+        ]
+      }
+    ];
+
+    let currentLevelIndex = 0;
+    let gameState = [];
+    let audioCtx = null;
+    let isAudioInitialized = false;
+
+    function applyLevelTheme(levelIdx) {
+      const root = document.documentElement;
+      const header = document.getElementById('main-header');
+      const footer = document.getElementById('main-footer');
+
+      // Every 2 levels, toggle theme (Levels 1-2 = Green Theme, Levels 3-4 = Orange/Brown Theme)
+      const themeCycle = Math.floor(levelIdx / 2) % 2;
+
+      if (themeCycle === 0) {
+        // Levels 1 & 2: Green, Lime & Orange Theme
+        root.style.setProperty('--bg-color', '#e6ffe6');
+        root.style.setProperty('--primary-dark', '#006400');
+        root.style.setProperty('--primary-main', '#32CD32');
+        root.style.setProperty('--accent-color', '#FFA500');
+        root.style.setProperty('--border-light', '#c2f0c2');
+        
+        header.className = "w-full py-5 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500";
+        footer.className = "w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500";
+      } else {
+        // Levels 3 & 4: Chocolate Brown, Vibrant Orange & Neon Green Accent
+        root.style.setProperty('--bg-color', '#3d2314'); // Rich Chocolate Brown
+        root.style.setProperty('--primary-dark', '#231107'); // Dark Espresso
+        root.style.setProperty('--primary-main', '#e65c00'); // Warm Orange
+        root.style.setProperty('--accent-color', '#39FF14'); // High-Contrast Neon Green
+        root.style.setProperty('--border-light', '#6e3c1e');
+        
+        header.className = "w-full py-5 px-4 bg-gradient-to-r from-amber-950 via-orange-900 to-yellow-950 text-white text-center shadow-2xl border-b-8 border-green-400 transition-all duration-500";
+        footer.className = "w-full py-4 bg-amber-950 text-amber-200 text-center text-sm border-t-4 border-amber-800 mt-auto transition-all duration-500";
+      }
+    }
+
+    function initAudio() {
+      if (!isAudioInitialized) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          audioCtx = new AudioContext();
+          isAudioInitialized = true;
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSound(type) {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const gainNode = audioCtx.createGain();
+      gainNode.connect(audioCtx.destination);
+
+      if (type === 'letterTap') {
+        const osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.1);
+        gainNode.gain.setValueAtTime(0, now);
+        gainNode.gain.linearRampToValueAtTime(0.4, now + 0.02);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        osc.connect(gainNode);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'wordMatch') {
+        [440, 554.37, 659.25].forEach(freq => {
+          const osc = audioCtx.createOscillator();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now);
+          osc.connect(gainNode);
+          osc.start(now);
+          osc.stop(now + 0.8);
+        });
+        gainNode.gain.setValueAtTime(0, now);
+        gainNode.gain.linearRampToValueAtTime(0.3, now + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.8);
+      } else if (type === 'levelWin') {
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+          osc.connect(gainNode);
+          osc.start(now + idx * 0.12);
+          osc.stop(now + idx * 0.12 + 0.4);
+        });
+        gainNode.gain.setValueAtTime(0.4, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
+      }
+    }
+
+    function speakWord(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.85;
+        utterance.pitch = 1.1;
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang.includes('en-US') || v.lang.includes('en-GB'));
+        if (englishVoice) utterance.voice = englishVoice;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function loadLevel(levelIndex) {
+      applyLevelTheme(levelIndex);
+      const level = levelsData[levelIndex];
+      document.getElementById('level-badge').textContent = level.title;
+      
+      const listContainer = document.getElementById('list-container');
+      const puzzleContainer = document.getElementById('puzzle-container');
+      listContainer.innerHTML = '';
+      puzzleContainer.innerHTML = '';
+
+      gameState = level.words.map(item => ({
+        word: item.word.toUpperCase(),
+        letters: item.word.toUpperCase().split(''),
+        tappedStatus: new Array(item.word.length).fill(false),
+        completed: false
+      }));
+
+      // Render Word Targets List
+      level.words.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'list-item';
+        div.id = `list-item-${index}`;
+        div.innerHTML = `<span class="icon">${item.icon}</span> <span class="uppercase tracking-wider font-bold">${item.word}</span>`;
+        listContainer.appendChild(div);
+      });
+
+      // Render Grid Rows
+      gameState.forEach((row, rowIndex) => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'puzzle-row';
+
+        row.letters.forEach((letter, letterIndex) => {
+          const cell = document.createElement('div');
+          cell.className = 'letter-cell';
+          cell.textContent = letter;
+
+          cell.addEventListener('mousedown', () => handleTap(rowIndex, letterIndex, cell));
+          cell.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            handleTap(rowIndex, letterIndex, cell);
+          }, { passive: false });
+
+          rowDiv.appendChild(cell);
+        });
+
+        puzzleContainer.appendChild(rowDiv);
+      });
+    }
+
+    function handleTap(rowIndex, letterIndex, cellElement) {
+      initAudio();
+      if (gameState[rowIndex].completed) return;
+
+      if (!gameState[rowIndex].tappedStatus[letterIndex]) {
+        gameState[rowIndex].tappedStatus[letterIndex] = true;
+        cellElement.classList.add('selected');
+        playSound('letterTap');
+      } else {
+        gameState[rowIndex].tappedStatus[letterIndex] = false;
+        cellElement.classList.remove('selected');
+        playSound('letterTap');
+      }
+
+      checkRowCompletion(rowIndex);
+    }
+
+    function checkRowCompletion(rowIndex) {
+      const row = gameState[rowIndex];
+      const currentLevel = levelsData[currentLevelIndex];
+      const allTapped = row.tappedStatus.every(status => status === true);
+
+      if (allTapped && !row.completed) {
+        row.completed = true;
+
+        // Highlight cells as found
+        const rowElement = document.getElementById('puzzle-container').children[rowIndex];
+        Array.from(rowElement.children).forEach(cell => {
+          cell.classList.remove('selected');
+          cell.classList.add('found');
+        });
+
+        // Strike through word on target panel
+        const listItem = document.getElementById(`list-item-${rowIndex}`);
+        if (listItem) {
+          listItem.classList.add('found');
+        }
+
+        // Sound & speech feedback
+        playSound('wordMatch');
+        setTimeout(() => {
+          speakWord(currentLevel.words[rowIndex].word);
+        }, 350);
+
+        checkGameCompletion();
+      }
+    }
+
+    function checkGameCompletion() {
+      const allDone = gameState.every(row => row.completed);
+      if (allDone) {
+        playSound('levelWin');
+        setTimeout(() => {
+          startConfetti();
+          showWinModal();
+        }, 1200);
+      }
+    }
+
+    function showWinModal() {
+      const modal = document.getElementById('win-modal');
+      const title = document.getElementById('modal-title');
+      const sub = document.getElementById('modal-sub');
+      const btn = document.getElementById('next-level-btn');
+
+      if (currentLevelIndex < levelsData.length - 1) {
+        title.textContent = "LEVEL COMPLETE!";
+        sub.textContent = `Great work clearing ${levelsData[currentLevelIndex].title}! Get ready for the next level!`;
+        btn.textContent = "CONTINUE ➔";
+      } else {
+        title.textContent = "GRAND VICTORY!";
+        sub.textContent = "Incredible job! You mastered all 4 Levels across Animals, Foods, Colors, and Vehicles!";
+        btn.textContent = "PLAY AGAIN 🔄";
+      }
+
+      modal.classList.remove('hidden');
+      speakWord(title.textContent);
+    }
+
+    function nextLevel() {
+      document.getElementById('win-modal').classList.add('hidden');
+      if (currentLevelIndex < levelsData.length - 1) {
+        currentLevelIndex++;
+      } else {
+        currentLevelIndex = 0; // Loop back to Level 1
+      }
+      loadLevel(currentLevelIndex);
+    }
+
+    // --- Confetti Animation ---
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function startConfetti() {
+      const colors = ['#39FF14', '#FFA500', '#FFD700', '#FF6347', '#3B82F6', '#8B5CF6', '#32CD32'];
+      particles = [];
+      for (let i = 0; i < 200; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          r: Math.random() * 8 + 4,
+          dx: Math.random() * 14 - 7,
+          dy: Math.random() * -14 - 7,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+      animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, index) => {
+        p.dy += 0.25;
+        p.x += p.dx;
+        p.y += p.dy;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        if (p.y > canvas.height) particles.splice(index, 1);
+      });
+
+      if (particles.length > 0) {
+        animationId = requestAnimationFrame(animateConfetti);
+      } else {
+        cancelAnimationFrame(animationId);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLevel(0);
+    });
+  </script>
+</body>
+</html>
