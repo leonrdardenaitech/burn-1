@@ -17,7 +17,12 @@
       --primary-main: #2eb82e;
       --accent-color: #f59e0b;
       --border-light: #bbf7d0;
-      --text-dark: #004d00;
+      --panel-bg: #ffffff;
+      --list-item-bg: #f0fdf4;
+      --list-item-text: #14532d;
+      --list-item-border: #86efac;
+      --counter-color: #475569;
+      --title-color: #d97706;
     }
 
     * {
@@ -60,7 +65,7 @@
     }
 
     #word-list-panel {
-      background-color: white;
+      background-color: var(--panel-bg, white);
       border: 6px solid var(--primary-main);
       border-radius: 24px;
       padding: 18px;
@@ -71,11 +76,21 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: border-color 0.5s ease;
+      transition: all 0.5s ease;
+    }
+
+    #list-title {
+      color: var(--title-color, var(--accent-color));
+      transition: color 0.5s ease;
+    }
+
+    #targets-counter {
+      color: var(--counter-color, #64748b);
+      transition: color 0.5s ease;
     }
 
     #grid-panel {
-      background-color: white;
+      background-color: var(--panel-bg, white);
       border: 6px solid var(--primary-dark);
       border-radius: 24px;
       padding: 16px;
@@ -87,7 +102,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: border-color 0.5s ease;
+      transition: all 0.5s ease;
     }
 
     .list-item {
@@ -96,20 +111,30 @@
       justify-content: space-between;
       font-size: 1.25rem;
       padding: 8px 12px;
-      background-color: var(--bg-color);
+      background-color: var(--list-item-bg, #f0fdf4);
+      color: var(--list-item-text, #1e293b);
       border-radius: 14px;
-      border: 3px solid var(--border-light);
+      border: 3px solid var(--list-item-border, var(--border-light));
       transition: all 0.3s ease;
+    }
+
+    .word-label {
+      color: var(--list-item-text, #1e293b);
+      transition: color 0.3s ease;
     }
 
     .list-item.found {
       text-decoration: line-through;
       text-decoration-color: #ca8a04;
       text-decoration-thickness: 4px;
-      opacity: 0.65;
-      background-color: #fef08a;
-      border-color: #eab308;
-      color: #713f12;
+      opacity: 0.8;
+      background-color: #fef08a !important;
+      border-color: #eab308 !important;
+      color: #713f12 !important;
+    }
+
+    .list-item.found .word-label {
+      color: #713f12 !important;
     }
 
     .icon {
@@ -217,7 +242,7 @@
   <!-- Helpful Instruction Tip for Grandma -->
   <div class="w-full max-w-4xl mx-auto px-4 mt-3">
     <div class="bg-white/90 backdrop-blur rounded-2xl py-2 px-4 text-center border-4 border-emerald-600/30 shadow-sm text-xs sm:text-sm md:text-base text-gray-800 font-bold flex items-center justify-center gap-2">
-      <span>💡 <strong>Tip for Tablet:</strong> Drag your finger across a word, or tap the first & last letter!</span>
+      <span>💡 <strong>Tip for Tablet:</strong> Tap letters one by one (or drag across) — the word clears on the last letter!</span>
     </div>
   </div>
 
@@ -226,12 +251,12 @@
     <!-- Left Panel: Targets -->
     <div id="word-list-panel">
       <div class="flex items-center justify-between">
-        <h2 id="list-title" class="text-xl md:text-2xl font-bold text-[var(--accent-color)] drop-shadow">Targets to Find</h2>
-        <button onclick="reloadCurrentLevel()" title="Shuffle & Re-place" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg border border-slate-300 font-bold transition-all shadow-sm">
+        <h2 id="list-title" class="text-xl md:text-2xl font-bold drop-shadow">Targets to Find</h2>
+        <button onclick="reloadCurrentLevel()" title="Shuffle & Re-place" class="text-xs bg-slate-200/60 hover:bg-slate-300/80 text-current px-2.5 py-1.5 rounded-lg border border-current font-bold transition-all shadow-sm">
           🔄 Shuffle
         </button>
       </div>
-      <div id="targets-counter" class="text-xs font-bold text-gray-500 tracking-wide uppercase">0 / 6 Words Found</div>
+      <div id="targets-counter" class="text-xs font-bold tracking-wide uppercase">0 / 6 Words Found</div>
       <div id="list-container" class="flex flex-col gap-2"></div>
     </div>
 
@@ -271,6 +296,7 @@
       {
         id: 1,
         title: "LEVEL 1: ANIMALS",
+        horizontalOnly: false,
         words: [
           { word: "Cat", icon: "🐱" },
           { word: "Dog", icon: "🐶" },
@@ -283,6 +309,7 @@
       {
         id: 2,
         title: "LEVEL 2: FOODS",
+        horizontalOnly: true, // Only Horizontal words (easier for bigger words)
         words: [
           { word: "Burger", icon: "🍔" },
           { word: "Hotdog", icon: "🌭" },
@@ -295,6 +322,7 @@
       {
         id: 3,
         title: "LEVEL 3: COLORS",
+        horizontalOnly: false,
         words: [
           { word: "Red", icon: "🔴" },
           { word: "Blue", icon: "🔵" },
@@ -307,6 +335,7 @@
       {
         id: 4,
         title: "LEVEL 4: VEHICLES",
+        horizontalOnly: false,
         words: [
           { word: "Bus", icon: "🚌" },
           { word: "Car", icon: "🚗" },
@@ -327,7 +356,7 @@
     // Selection tracking
     let isPointerDown = false;
     let dragStart = null; // { r, c }
-    let twoTapStart = null; // { r, c } for two-tap mode
+    let twoTapStart = null; // { r, c } anchor for letter-by-letter tap & two-tap
     let currentSelection = []; // [{ r, c }]
 
     function applyLevelTheme(levelIdx) {
@@ -344,16 +373,28 @@
         root.style.setProperty('--primary-main', '#2eb82e');
         root.style.setProperty('--accent-color', '#f59e0b');
         root.style.setProperty('--border-light', '#bbf7d0');
+        root.style.setProperty('--panel-bg', '#ffffff');
+        root.style.setProperty('--list-item-bg', '#f0fdf4');
+        root.style.setProperty('--list-item-text', '#14532d');
+        root.style.setProperty('--list-item-border', '#86efac');
+        root.style.setProperty('--counter-color', '#475569');
+        root.style.setProperty('--title-color', '#d97706');
         
         header.className = "w-full py-4 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500";
         footer.className = "w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500";
       } else {
-        // Levels 3 & 4: Chocolate Brown, Orange & Neon Green
+        // Levels 3 & 4: Chocolate Brown with Crisp Light/White Text
         root.style.setProperty('--bg-color', '#3d2314');
         root.style.setProperty('--primary-dark', '#231107');
         root.style.setProperty('--primary-main', '#e65c00');
         root.style.setProperty('--accent-color', '#39FF14');
         root.style.setProperty('--border-light', '#6e3c1e');
+        root.style.setProperty('--panel-bg', '#26140a');
+        root.style.setProperty('--list-item-bg', '#3d1e0d');
+        root.style.setProperty('--list-item-text', '#ffffff'); // Pure white text for Grandma!
+        root.style.setProperty('--list-item-border', '#ea580c');
+        root.style.setProperty('--counter-color', '#fed7aa'); // Light warm peach counter
+        root.style.setProperty('--title-color', '#39FF14'); // High contrast neon green title
         
         header.className = "w-full py-4 px-4 bg-gradient-to-r from-amber-950 via-orange-900 to-yellow-950 text-white text-center shadow-2xl border-b-8 border-green-400 transition-all duration-500";
         footer.className = "w-full py-4 bg-amber-950 text-amber-200 text-center text-sm border-t-4 border-amber-800 mt-auto transition-all duration-500";
@@ -431,12 +472,14 @@
       }
     }
 
-    // Generate a clean 10x10 Word Search layout with words placed at various rows and columns
-    function generate10x10Board(wordsList) {
-      const directions = [
-        { dr: 0, dc: 1 }, // Horizontal (Left-to-Right)
-        { dr: 1, dc: 0 }  // Vertical (Top-to-Bottom)
-      ];
+    // Generate a 10x10 Word Search layout with optional horizontal-only constraint
+    function generate10x10Board(wordsList, horizontalOnly = false) {
+      const directions = horizontalOnly
+        ? [{ dr: 0, dc: 1 }] // Horizontal Only (Left-to-Right)
+        : [
+            { dr: 0, dc: 1 }, // Horizontal (Left-to-Right)
+            { dr: 1, dc: 0 }  // Vertical (Top-to-Bottom)
+          ];
 
       for (let attempt = 0; attempt < 200; attempt++) {
         const matrix = Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(''));
@@ -520,7 +563,7 @@
       isPointerDown = false;
       dragStart = null;
 
-      const boardData = generate10x10Board(level.words);
+      const boardData = generate10x10Board(level.words, !!level.horizontalOnly);
       gridMatrix = boardData.matrix;
       placedWords = boardData.placements;
 
@@ -544,7 +587,7 @@
         div.innerHTML = `
           <div class="flex items-center">
             <span class="icon">${item.icon}</span>
-            <span class="uppercase tracking-wider font-bold text-gray-800">${item.word}</span>
+            <span class="word-label uppercase tracking-wider font-bold">${item.word}</span>
           </div>
           <span class="status-indicator text-lg">⏳</span>
         `;
@@ -579,7 +622,7 @@
       }
     }
 
-    // --- Interaction Engine (Drag + Two-Tap for Tablets) ---
+    // --- Interaction Engine (Letter-by-Letter, Two-Tap & Drag) ---
     function getCellFromElement(el) {
       if (!el) return null;
       const cell = el.closest('.letter-cell');
@@ -670,7 +713,7 @@
           playSound('wordMatch');
           setTimeout(() => {
             speakWord(pw.original.word);
-          }, 350);
+          }, 300);
 
           highlightSelection([]);
           twoTapStart = null;
@@ -734,8 +777,10 @@
       if (!isPointerDown) return;
       isPointerDown = false;
 
-      // If user dragged across multiple cells
-      if (currentSelection.length > 1) {
+      // 1. If user dragged across multiple cells
+      if (currentSelection.length > 1 && dragStart && 
+          (dragStart.r !== currentSelection[currentSelection.length - 1].r || 
+           dragStart.c !== currentSelection[currentSelection.length - 1].c)) {
         const matched = checkWordMatch(currentSelection);
         if (!matched) {
           highlightSelection([]);
@@ -745,29 +790,32 @@
         return;
       }
 
-      // Single Tap (Two-Tap Support for Seniors)
+      // 2. Single Tap Interaction (Instant trigger on last letter!)
       if (currentSelection.length === 1) {
         const tapped = currentSelection[0];
 
         if (!twoTapStart) {
+          // Start of a tap sequence
           twoTapStart = tapped;
           highlightSelection([tapped]);
         } else if (twoTapStart.r === tapped.r && twoTapStart.c === tapped.c) {
-          // Tapped same cell again -> toggle off
+          // Tapped the same origin cell again -> toggle off/cancel
           twoTapStart = null;
           highlightSelection([]);
         } else {
-          // Second tap: test straight line between twoTapStart and tapped
+          // Check if tapped cell continues the line from origin
           const line = getLineCells(twoTapStart, tapped);
           if (line.length > 1) {
             highlightSelection(line);
             const matched = checkWordMatch(line);
-            if (!matched) {
-              twoTapStart = tapped;
-              highlightSelection([tapped]);
+            if (matched) {
+              // Word cleared immediately on the last letter!
+              twoTapStart = null;
+              highlightSelection([]);
             }
+            // If not matched yet, we stay anchored at twoTapStart so the next letter can complete the word!
           } else {
-            // Not in straight line: re-anchor to new cell
+            // Not in straight line with origin: start new sequence from this new cell
             twoTapStart = tapped;
             highlightSelection([tapped]);
           }

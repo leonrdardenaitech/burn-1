@@ -66,7 +66,7 @@
 
     /* Left Target Words Panel */
     #word-list-panel {
-      background-color: white;
+      background-color: var(--panel-bg, white);
       border: 8px solid var(--primary-main);
       border-radius: 24px;
       padding: 18px;
@@ -77,7 +77,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: border-color 0.5s ease;
+      transition: all 0.5s ease;
     }
 
     .list-item {
@@ -85,14 +85,31 @@
       align-items: center;
       font-size: 1.5rem;
       padding: 8px 12px;
-      background-color: var(--bg-color);
+      background-color: var(--list-item-bg, var(--bg-color));
+      color: var(--list-item-text, inherit);
       border-radius: 16px;
-      border: 4px solid var(--border-light);
+      border: 4px solid var(--list-item-border, var(--border-light));
       transition: all 0.3s ease;
+    }
+
+    .word-label {
+      color: var(--list-item-text, inherit);
+      transition: color 0.3s ease;
     }
 
     .list-item.found {
       text-decoration: line-through;
+      text-decoration-color: var(--accent-color);
+      text-decoration-thickness: 5px;
+      opacity: 0.75;
+      background-color: #fef08a !important;
+      border-color: #eab308 !important;
+      color: #713f12 !important;
+    }
+
+    .list-item.found .word-label {
+      color: #713f12 !important;
+    }
       text-decoration-color: var(--accent-color);
       text-decoration-thickness: 5px;
       opacity: 0.55;
@@ -390,16 +407,24 @@
         root.style.setProperty('--primary-main', '#32CD32');
         root.style.setProperty('--accent-color', '#FFA500');
         root.style.setProperty('--border-light', '#c2f0c2');
+        root.style.setProperty('--panel-bg', '#ffffff');
+        root.style.setProperty('--list-item-bg', '#f0fdf4');
+        root.style.setProperty('--list-item-text', '#14532d');
+        root.style.setProperty('--list-item-border', '#86efac');
         
         header.className = "w-full py-4 px-4 bg-gradient-to-r from-green-800 via-emerald-700 to-green-900 text-white text-center shadow-2xl border-b-8 border-yellow-400 transition-all duration-500";
         footer.className = "w-full py-4 bg-emerald-950 text-emerald-200 text-center text-sm border-t-4 border-emerald-800 mt-auto transition-all duration-500";
       } else {
-        // Levels 3 & 4: Brown, Orange & Neon Green Theme
+        // Levels 3 & 4: Brown with Crisp White Text
         root.style.setProperty('--bg-color', '#3d2314');
         root.style.setProperty('--primary-dark', '#231107');
         root.style.setProperty('--primary-main', '#e65c00');
         root.style.setProperty('--accent-color', '#39FF14');
         root.style.setProperty('--border-light', '#6e3c1e');
+        root.style.setProperty('--panel-bg', '#26140a');
+        root.style.setProperty('--list-item-bg', '#3d1e0d');
+        root.style.setProperty('--list-item-text', '#ffffff'); // Crisp white text!
+        root.style.setProperty('--list-item-border', '#ea580c');
         
         header.className = "w-full py-4 px-4 bg-gradient-to-r from-amber-950 via-orange-900 to-yellow-950 text-white text-center shadow-2xl border-b-8 border-green-400 transition-all duration-500";
         footer.className = "w-full py-4 bg-amber-950 text-amber-200 text-center text-sm border-t-4 border-amber-800 mt-auto transition-all duration-500";
@@ -521,7 +546,7 @@
         const div = document.createElement('div');
         div.className = 'list-item';
         div.id = `target-item-${idx}`;
-        div.innerHTML = `<span class="icon">${item.icon}</span> <span class="uppercase tracking-wider font-bold">${item.word}</span>`;
+        div.innerHTML = `<span class="icon">${item.icon}</span> <span class="word-label uppercase tracking-wider font-bold">${item.word}</span>`;
         listContainer.appendChild(div);
       });
 
