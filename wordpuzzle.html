@@ -457,18 +457,62 @@
       }
     }
 
-    function speakWord(text) {
+    let isSpeechReady = false;
+    let availableVoices = [];
+
+    function loadVoices() {
       if ('speechSynthesis' in window) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    function primeSpeech() {
+      if (!isSpeechReady && 'speechSynthesis' in window) {
         try {
-          window.speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.rate = 0.85;
-          utterance.pitch = 1.05;
-          const voices = window.speechSynthesis.getVoices();
-          const englishVoice = voices.find(v => v.lang && (v.lang.includes('en-US') || v.lang.includes('en-GB') || v.lang.includes('en')));
-          if (englishVoice) utterance.voice = englishVoice;
-          window.speechSynthesis.speak(utterance);
+          const dummy = new SpeechSynthesisUtterance(' ');
+          dummy.volume = 0.01;
+          window.speechSynthesis.speak(dummy);
+          isSpeechReady = true;
         } catch(e) {}
+      }
+    }
+
+    function speakWord(text) {
+      if (!('speechSynthesis' in window)) return;
+      try {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+        }
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.78; // Gentle, clear cadence so Grandma can comfortably hear and repeat the word!
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+
+        if (!availableVoices || availableVoices.length === 0) {
+          availableVoices = window.speechSynthesis.getVoices();
+        }
+
+        if (availableVoices && availableVoices.length > 0) {
+          const preferredVoice = availableVoices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('Samantha') || v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Female') || v.default)) ||
+                                 availableVoices.find(v => v.lang && v.lang.startsWith('en'));
+          if (preferredVoice) {
+            utterance.voice = preferredVoice;
+          }
+        }
+
+        // Keep reference alive so mobile browser garbage collection does not silence it
+        window._activeUtterance = utterance;
+        window.speechSynthesis.speak(utterance);
+      } catch(err) {
+        console.warn('SpeechSynthesis error:', err);
       }
     }
 
@@ -582,15 +626,24 @@
 
       originalWords.forEach((item, index) => {
         const div = document.createElement('div');
-        div.className = 'list-item';
+        div.className = 'list-item cursor-pointer hover:scale-[1.02] active:scale-95 transition-transform';
         div.id = `target-${item.word.toUpperCase()}`;
+        div.title = `Tap to hear "${item.word}" spoken aloud!`;
         div.innerHTML = `
           <div class="flex items-center">
             <span class="icon">${item.icon}</span>
             <span class="word-label uppercase tracking-wider font-bold">${item.word}</span>
           </div>
-          <span class="status-indicator text-lg">⏳</span>
+          <div class="flex items-center gap-2">
+            <button type="button" class="speaker-btn text-base hover:scale-125 active:scale-90 transition-transform px-1 py-0.5" title="Hear word">🔊</button>
+            <span class="status-indicator text-lg">⏳</span>
+          </div>
         `;
+        div.addEventListener('click', () => {
+          initAudio();
+          primeSpeech();
+          speakWord(item.word);
+        });
         listContainer.appendChild(div);
       });
     }
@@ -711,9 +764,7 @@
 
           updateCounter();
           playSound('wordMatch');
-          setTimeout(() => {
-            speakWord(pw.original.word);
-          }, 300);
+          speakWord(pw.original.word);
 
           highlightSelection([]);
           twoTapStart = null;
@@ -743,6 +794,7 @@
     // Pointer Down (Mouse or Touch)
     function onPointerStart(e) {
       initAudio();
+      primeSpeech();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
       const target = document.elementFromPoint(clientX, clientY);

@@ -505,18 +505,61 @@
       }
     }
 
-    function speakWord(text) {
+    let isSpeechReady = false;
+    let availableVoices = [];
+
+    function loadVoices() {
       if ('speechSynthesis' in window) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    function primeSpeech() {
+      if (!isSpeechReady && 'speechSynthesis' in window) {
         try {
-          window.speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.rate = 0.85;
-          utterance.pitch = 1.1;
-          const voices = window.speechSynthesis.getVoices();
-          const englishVoice = voices.find(v => v.lang && (v.lang.includes('en-US') || v.lang.includes('en-GB') || v.lang.includes('en')));
-          if (englishVoice) utterance.voice = englishVoice;
-          window.speechSynthesis.speak(utterance);
+          const dummy = new SpeechSynthesisUtterance(' ');
+          dummy.volume = 0.01;
+          window.speechSynthesis.speak(dummy);
+          isSpeechReady = true;
         } catch(e) {}
+      }
+    }
+
+    function speakWord(text) {
+      if (!('speechSynthesis' in window)) return;
+      try {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+        }
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.78; // Gentle, clear speed for Grandma to hear each sound!
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+
+        if (!availableVoices || availableVoices.length === 0) {
+          availableVoices = window.speechSynthesis.getVoices();
+        }
+
+        if (availableVoices && availableVoices.length > 0) {
+          const preferredVoice = availableVoices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('Samantha') || v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Female') || v.default)) ||
+                                 availableVoices.find(v => v.lang && v.lang.startsWith('en'));
+          if (preferredVoice) {
+            utterance.voice = preferredVoice;
+          }
+        }
+
+        window._activeUtterance = utterance;
+        window.speechSynthesis.speak(utterance);
+      } catch(err) {
+        console.warn('Speech error:', err);
       }
     }
 
@@ -541,12 +584,24 @@
 
       activeRowIndex = 0;
 
-      // 1. Render Left Targets List
+      // 1. Render Left Targets List (Clickable to hear word spoken aloud)
       level.words.forEach((item, idx) => {
         const div = document.createElement('div');
-        div.className = 'list-item';
+        div.className = 'list-item cursor-pointer hover:scale-[1.02] active:scale-95 transition-transform';
         div.id = `target-item-${idx}`;
-        div.innerHTML = `<span class="icon">${item.icon}</span> <span class="word-label uppercase tracking-wider font-bold">${item.word}</span>`;
+        div.title = `Tap to hear "${item.word}" spoken aloud!`;
+        div.innerHTML = `
+          <div class="flex items-center">
+            <span class="icon">${item.icon}</span>
+            <span class="word-label uppercase tracking-wider font-bold">${item.word}</span>
+          </div>
+          <button type="button" class="speaker-btn text-base hover:scale-125 active:scale-90 transition-transform px-1 py-0.5" title="Hear word">🔊</button>
+        `;
+        div.addEventListener('click', () => {
+          initAudio();
+          primeSpeech();
+          speakWord(item.word);
+        });
         listContainer.appendChild(div);
       });
 
@@ -589,6 +644,8 @@
     }
 
     function setActiveRow(rIdx) {
+      initAudio();
+      primeSpeech();
       if (wordStates[rIdx].completed) return;
       document.querySelectorAll('.word-blank-row').forEach((row, i) => {
         if (i === rIdx) row.classList.add('active-row');
@@ -599,6 +656,7 @@
 
     function pushLetter(char) {
       initAudio();
+      primeSpeech();
 
       if (wordStates[activeRowIndex].completed) {
         const firstIncomplete = wordStates.findIndex(w => !w.completed);
@@ -657,9 +715,7 @@
         if (targetEl) targetEl.classList.add('found');
 
         playSound('wordMatch');
-        setTimeout(() => {
-          speakWord(levelsData[currentLevelIndex].words[rIdx].word);
-        }, 300);
+        speakWord(levelsData[currentLevelIndex].words[rIdx].word);
 
         const nextIncomplete = wordStates.findIndex(w => !w.completed);
         if (nextIncomplete !== -1) {
