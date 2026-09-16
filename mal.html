@@ -278,29 +278,54 @@
         <p class="text-xs text-cyan-400 font-mono mt-1">@Malwdarazor Intake System</p>
       </div>
 
-      <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+        <input type="hidden" name="action" value="malwdarazor_booking">
         <div>
           <label class="text-xs font-cyber text-gray-300 block mb-1">CLIENT NAME</label>
-          <input type="text" required placeholder="Enter your full name" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+          <input type="text" name="client_name" required placeholder="Enter your full name" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
         </div>
         <div>
           <label class="text-xs font-cyber text-gray-300 block mb-1">PHONE NUMBER</label>
-          <input type="tel" required placeholder="(470) 000-0000" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+          <input type="tel" name="phone" required placeholder="(470) 000-0000" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-cyber text-gray-300 block mb-1">APPOINTMENT DATE</label>
+            <input type="date" name="booking_date" required class="w-full bg-black/90 border border-gray-800 rounded-lg px-3 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none [color-scheme:dark]">
+          </div>
+          <div>
+            <label class="text-xs font-cyber text-gray-300 block mb-1">TIME SLOT</label>
+            <select name="booking_time" required class="w-full bg-black/90 border border-gray-800 rounded-lg px-3 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+              <option value="">Select Time</option>
+              <option value="9:00 AM">9:00 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="1:00 PM">1:00 PM</option>
+              <option value="2:00 PM">2:00 PM</option>
+              <option value="3:00 PM">3:00 PM</option>
+              <option value="4:00 PM">4:00 PM</option>
+              <option value="5:00 PM">5:00 PM</option>
+              <option value="6:00 PM">6:00 PM</option>
+            </select>
+          </div>
         </div>
         <div>
           <label class="text-xs font-cyber text-gray-300 block mb-1">LOCATION</label>
-          <select class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
-            <option>Lithonia, GA</option>
+          <select name="location" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+            <option value="Lithonia, GA">Lithonia, GA</option>
           </select>
         </div>
         <div>
           <label class="text-xs font-cyber text-gray-300 block mb-1">SELECT SERVICE</label>
-          <select class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
-            <option>Fresh Haircut ($15)</option>
-            <option>Line Up & Shape-Up ($10)</option>
+          <select name="service" class="w-full bg-black/90 border border-gray-800 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-red-500 focus:outline-none">
+            <option value="Fresh Haircut ($15)">Fresh Haircut ($15)</option>
+            <option value="Line Up & Shape-Up ($10)">Line Up & Shape-Up ($10)</option>
+            <option value="House Calls ($25)">House Calls ($25)</option>
           </select>
         </div>
-        <button type="submit" class="w-full py-4 bg-red-600 hover:bg-red-500 text-black font-cyber font-bold rounded-xl transition-all shadow-lg shadow-red-600/30">
+        <div id="bookingStatus" class="hidden text-center text-xs font-mono py-2"></div>
+        <button id="submitBtn" type="submit" class="w-full py-4 bg-red-600 hover:bg-red-500 text-black font-cyber font-bold rounded-xl transition-all shadow-lg shadow-red-600/30 cursor-pointer">
           CONFIRM RESERVATION WITH MAL
         </button>
       </form>
@@ -357,10 +382,47 @@
     function closeQRModal() {
       document.getElementById('qrModal').classList.add('hidden');
     }
-    function handleBookingSubmit(e) {
+    // Malcolm's Google Webhook Endpoint
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwRmhcQSC135lIkFjUo2-6SrT6kx85DVj-azhpZ7sB3fbc8tfN35X81BMZQ7TfX27IH/exec";
+
+    async function handleBookingSubmit(e) {
       e.preventDefault();
-      alert("Reservation received! Malcolm (@Malwdarazor) will text confirmation to your phone shortly.");
-      closeBookingModal();
+      const form = document.getElementById('bookingForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const statusDiv = document.getElementById('bookingStatus');
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "TRANSMITTING TO CHAIR...";
+      statusDiv.classList.remove('hidden');
+      statusDiv.className = "text-center text-xs font-mono py-2 text-cyan-400";
+      statusDiv.innerText = "Connecting to Malwdarazor dispatch...";
+
+      const formData = new FormData(form);
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: formData,
+          mode: "no-cors"
+        });
+
+        statusDiv.className = "text-center text-xs font-mono py-2 text-amber-300";
+        statusDiv.innerText = "✓ Reservation received! Malcolm will text your confirmation.";
+        form.reset();
+
+        setTimeout(() => {
+          closeBookingModal();
+          submitBtn.disabled = false;
+          submitBtn.innerText = "CONFIRM RESERVATION WITH MAL";
+          statusDiv.classList.add('hidden');
+        }, 2800);
+
+      } catch (err) {
+        statusDiv.className = "text-center text-xs font-mono py-2 text-red-400";
+        statusDiv.innerText = "Error sending reservation. Please call Malcolm directly.";
+        submitBtn.disabled = false;
+        submitBtn.innerText = "TRY AGAIN";
+      }
     }
   </script>
 
