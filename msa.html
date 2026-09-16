@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M.S.A. // Managed Security Architecture & Dual-Engine Incident Response</title>
+  <meta name="description" content="Managed Security Architecture (M.S.A.) & Dual-Engine Incident Response. 3-Hour SLA triage, autonomous IaC hardening, and multi-framework compliance reporting.">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #040612;
+      --card-bg: #0b0f24;
+      --card-border: rgba(99, 102, 241, 0.25);
+      --accent-indigo: #6366f1;
+      --accent-purple: #c084fc;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-bottom: 6rem;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(192, 132, 252, 0.06) 0%, transparent 45%);
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* TOP BAR */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-logo {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: #fff;
+      font-size: 1rem;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+    }
+    .brand-title {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .brand-collab {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      color: #fff;
+      border-color: var(--accent-purple);
+      transform: translateX(-2px);
+    }
+
+    /* HERO */
+    .hero-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--accent-emerald);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      align-self: flex-start;
+    }
+    .pulse-dot-green {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-indigo) 75%, var(--accent-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 880px;
+    }
+
+    /* SECTION CONTAINERS */
+    .section-box {
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .section-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple), transparent);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--accent-purple);
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .section-heading {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 0.25rem;
+    }
+    .section-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 750px;
+    }
+
+    /* PROTOCOL COUNTDOWN SIMULATOR */
+    .timer-console {
+      background: #060814;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (max-width: 850px) {
+      .timer-console { grid-template-columns: 1fr; }
+    }
+    .timer-display-box {
+      background: #0a0d1d;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .timer-clock {
+      font-family: var(--font-mono);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+    }
+    .timer-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .sim-btn {
+      margin-top: 0.75rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .sim-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+    }
+
+    /* 4-PHASE PROTOCOL PIPELINE */
+    .protocol-stages {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 900px) {
+      .protocol-stages { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .protocol-stages { grid-template-columns: 1fr; }
+    }
+    .stage-card {
+      background: rgba(14, 19, 38, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .stage-card.active-stage {
+      border-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.08);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+    }
+    .stage-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+    .stage-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .stage-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .stage-badge {
+      align-self: flex-start;
+      margin-top: auto;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--accent-purple);
+    }
+
+    /* DATA TRANSLATOR (RAW VS EXECUTIVE) */
+    .translator-toggle-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #060814;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      align-self: flex-start;
+    }
+    .toggle-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .toggle-switch-btn {
+      display: flex;
+      border-radius: 8px;
+      background: #0f142b;
+      padding: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .toggle-opt {
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle-opt.active {
+      background: var(--accent-indigo);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+    }
+
+    .translator-viewport {
+      min-height: 280px;
+      position: relative;
+    }
+    .view-panel {
+      transition: opacity 0.3s ease;
+    }
+    .view-panel.hidden {
+      display: none;
+    }
+
+    /* RAW TELEMETRY VIEW */
+    .raw-terminal {
+      background: #03050c;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .raw-header-notice {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f87171;
+      font-weight: bold;
+    }
+    .raw-log-warn { color: #f87171; }
+    .raw-log-info { color: #64748b; }
+
+    /* EXECUTIVE TRANSLATED VIEW */
+    .executive-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (max-width: 768px) {
+      .executive-card-grid { grid-template-columns: 1fr; }
+    }
+    .kpi-card {
+      background: #080c1d;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .kpi-num {
+      font-family: var(--font-mono);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-emerald);
+    }
+    .kpi-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .kpi-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .executive-narrative-box {
+      background: #080c1d;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-left: 4px solid var(--accent-emerald);
+      border-radius: 12px;
+      padding: 1.25rem;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    .executive-narrative-box strong { color: #fff; }
+
+    /* DUAL-ENGINE TOPOLOGY DIAGRAM */
+    .dual-engine-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 850px) {
+      .dual-engine-grid { grid-template-columns: 1fr; }
+    }
+    .engine-box {
+      border: 1px solid var(--card-border);
+      background: #080c1d;
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .engine-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .engine-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .icon-blue {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .icon-purple {
+      background: rgba(192, 132, 252, 0.15);
+      color: var(--accent-purple);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+    }
+    .engine-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .engine-sub {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .engine-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+    .engine-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .engine-points li i {
+      color: var(--accent-emerald);
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+    }
+
+    /* COMPLIANCE PIR TABS */
+    .pir-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.75rem;
+    }
+    .pir-tab-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pir-tab-btn:hover { color: #fff; }
+    .pir-tab-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--accent-indigo);
+      color: #fff;
+    }
+    .pir-content-panel {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .pir-content-panel.active {
+      display: flex;
+    }
+    .compliance-matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      margin-top: 0.5rem;
+    }
+    .compliance-matrix-table th {
+      text-align: left;
+      padding: 0.75rem;
+      background: #080c1d;
+      color: var(--accent-purple);
+      border-bottom: 1px solid var(--card-border);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+    .compliance-matrix-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    .badge-pass {
+      color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+    .badge-remediated {
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+
+    /* CODE TERMINAL */
+    .code-box {
+      background: #03050c;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+    .code-comment { color: #64748b; }
+    .code-cmd { color: var(--accent-purple); }
+    .code-val { color: var(--accent-cyan); }
+
+    /* DUAL CTA BOX */
+    .dual-cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 850px) {
+      .dual-cta-grid { grid-template-columns: 1fr; }
+    }
+    .cta-card {
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      background: #080c1d;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+    .cta-badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      align-self: flex-start;
+    }
+    .cta-badge-sales {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .cta-badge-talent {
+      background: rgba(192, 132, 252, 0.1);
+      color: var(--accent-purple);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+    }
+    .cta-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .cta-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .cta-btn {
+      padding: 0.8rem 1.4rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .cta-btn-primary {
+      background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+      color: #fff;
+    }
+    .cta-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    }
+    .cta-btn-outline {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: #fff;
+    }
+    .cta-btn-outline:hover {
+      border-color: var(--accent-purple);
+      color: var(--accent-purple);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- TOP NAV -->
+    <nav class="top-nav">
+      <div class="brand-group">
+        <div class="brand-logo">B1</div>
+        <div>
+          <div class="brand-title">M.S.A. // MANAGED SECURITY ARCHITECTURE</div>
+          <div class="brand-collab">Architected by Leon R. Darden • In Strategic Alignment with Anergi.io</div>
+        </div>
+      </div>
+      <a href="collide.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i> Return to COLLIDE Showcase
+      </a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero-box">
+      <div class="status-pill">
+        <span class="pulse-dot-green"></span>
+        3-Hour MDR Window Active • Enterprise SLA Standard
+      </div>
+      <h1 class="hero-title">Dual-Engine Incident Response & <span>Automated Compliance Hardening.</span></h1>
+      <p class="hero-subtitle">
+        Going beyond the diagnostic Mini S.P.A. wedge. A scalable managed security service providing rapid 3-hour reactive containment, root-cause threat deconstruction, and institutional PIR compliance deliverables.
+      </p>
+    </header>
+
+    <!-- MODULE 1: 3-HOUR MDR INCIDENT PROTOCOL SIMULATOR -->
+    <section class="section-box">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Phase Execution • 3-Hour SLA Window</span>
+          <h2 class="section-heading">The 3-Hour Incident Response Lifecycle</h2>
+        </div>
+        <p class="section-desc">
+          When an active signal breaches baseline operational thresholds, the dual-engine triage activates automatically. Watch the four containment and compliance phases execute in sequence.
+        </p>
+      </div>
+
+      <!-- TIMER CONSOLE -->
+      <div class="timer-console">
+        <div class="timer-display-box">
+          <span class="timer-label">MDR Guaranteed Response Clock</span>
+          <div class="timer-clock" id="sim-clock">03:00:00</div>
+          <span class="timer-label" id="sim-status-label">STATUS: STANDBY MONITORING</span>
+          <button onclick="runIncidentSimulation()" id="sim-trigger-btn" class="sim-btn">
+            <i class="fa-solid fa-play"></i> Simulate Active Breach ➔
+          </button>
+        </div>
+
+        <!-- 4-PHASE CARDS -->
+        <div class="protocol-stages">
+          <div class="stage-card active-stage" id="stage-1">
+            <span class="stage-num">PHASE 01 • 00:00 - 00:30</span>
+            <div class="stage-name">Signal Filtering</div>
+            <p class="stage-desc">Daily baseline mapping filters false noise. Anomaly deviation flagged.</p>
+            <span class="stage-badge">Noise-Gate</span>
+          </div>
+
+          <div class="stage-card" id="stage-2">
+            <span class="stage-num">PHASE 02 • 00:30 - 01:15</span>
+            <div class="stage-name">Reactive Call-Out</div>
+            <p class="stage-desc">Frontline Blue Team executes host isolation & credential revocation.</p>
+            <span class="stage-badge">Containment</span>
+          </div>
+
+          <div class="stage-card" id="stage-3">
+            <span class="stage-num">PHASE 03 • 01:15 - 02:15</span>
+            <div class="stage-name">Proactive IR</div>
+            <p class="stage-desc">Reverse-engineers attacker TTPs to root cause via MITRE ATT&CK.</p>
+            <span class="stage-badge">Attack Graph</span>
+          </div>
+
+          <div class="stage-card" id="stage-4">
+            <span class="stage-num">PHASE 04 • 02:15 - 03:00</span>
+            <div class="stage-name">Hardening & PIR</div>
+            <p class="stage-desc">Synthesizes IaC Terraform rules & delivers compliance-mapped PIR.</p>
+            <span class="stage-badge">Deliverable</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 2: THE "BULK-TO-EXECUTIVE" DATA TRANSLATOR -->
+    <section class="section-box">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Our Signature Differentiator • Readability Engine</span>
+          <h2 class="section-heading">The B1 Data Translator: Bulk Telemetry ➔ Executive Intelligence</h2>
+        </div>
+        <p class="section-desc">
+          Traditional vendors dump raw, unreadable port logs that stall decision-making. We translate thousands of telemetry streams into clean board metrics and executable developer code.
+        </p>
+      </div>
+
+      <div class="translator-toggle-bar">
+        <span class="toggle-label">Select Perspective:</span>
+        <div class="toggle-switch-btn">
+          <button onclick="switchTranslatorView('raw')" id="btn-raw" class="toggle-opt">
+            <i class="fa-solid fa-code"></i> Raw Bulk Telemetry
+          </button>
+          <button onclick="switchTranslatorView('exec')" id="btn-exec" class="toggle-opt active">
+            <i class="fa-solid fa-chart-pie"></i> B1 Executive Briefing
+          </button>
+        </div>
+      </div>
+
+      <div class="translator-viewport">
+        <!-- RAW VIEW -->
+        <div id="view-raw" class="view-panel hidden">
+          <div class="raw-terminal">
+            <div class="raw-header-notice">
+              <span>[!] RAW DAEMON LOG STREAM: 4,812 UNPARSED LOG LINES</span>
+              <span>PARSER OVERHEAD: 100% RAW</span>
+            </div>
+            <p class="raw-log-warn">09:14:22.104231 IP 192.168.1.52.445 > 10.0.0.14.59821: Flags [P.], seq 104:256, ack 1, win 501, options [nop,nop,TS val 942183 ecr 318492]</p>
+            <p class="raw-log-info">09:14:22.104402 SMB2_NEGOTIATE_REQUEST: DialectRevision=0x0311, Capabilities=0x0000007f, ClientGuid={8a91c4e2-7491-4d1a-b384-9021a84f329e}</p>
+            <p class="raw-log-warn">09:14:22.108920 ALERT: SnortRule [1:201842:2] ET EXPLOIT SMB2 Ingress Session Setup NTLMSSP Challenge Without Signature Verification</p>
+            <p class="raw-log-info">09:14:22.110291 TLS_HANDSHAKE: Cipher=ECDHE-RSA-AES128-SHA (Deprecated), ServerNameIndication=anergi.io, CertExpire=2026-11-04</p>
+            <p class="raw-log-warn">09:14:22.112440 KERNEL_AUDIT: process_create /usr/bin/python3 -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET..." [PID=4819]</p>
+            <p class="raw-log-info">09:14:22.114102 IPTABLES: Ingress DROP on interface eth0: SRC=192.168.1.50 DST=10.0.0.25 PROTO=TCP SPT=49152 DPT=445</p>
+          </div>
+        </div>
+
+        <!-- EXECUTIVE VIEW -->
+        <div id="view-exec" class="view-panel">
+          <div class="executive-card-grid">
+            <div class="kpi-card">
+              <span class="kpi-num">0 Hosts</span>
+              <span class="kpi-title">Blast Radius Expansion</span>
+              <span class="kpi-desc">Lateral SMB movement quarantined within 14 minutes of deviation</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-num">$0.00</span>
+              <span class="kpi-title">Direct Financial Exposure</span>
+              <span class="kpi-desc">Zero ransomware execution or database exfiltration achieved</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-num">1h 42m</span>
+              <span class="kpi-title">Total Mean Time to Contain</span>
+              <span class="kpi-desc">Surpassed contractual 3-Hour MDR SLA by 1 hour and 18 minutes</span>
+            </div>
+          </div>
+          <div class="executive-narrative-box">
+            <strong>Executive CISO Briefing:</strong> At 09:14 EDT, automated signal gates detected an unauthorized SMB relay attempt (MITRE <code>T1021.002</code>) across perimeter subnet Node <code>192.168.1.52</code>. The <strong>Reactive Call-Out Team</strong> isolated the host in 14 minutes. The <strong>Proactive IR Team</strong> deconstructed the vector and generated a zero-trust boundary rule, auto-immunizing all edge nodes. The incident is permanently resolved and documented in your SOC 2 Type II audit trail.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 3: DUAL-ENGINE TOPOLOGY -->
+    <section class="section-box">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Organizational Architecture • Blue & Purple Alignment</span>
+          <h2 class="section-heading">Dual-Engine Operational Architecture</h2>
+        </div>
+        <p class="section-desc">
+          How our two specialized units divide and conquer: Rapid firefighting on one side, permanent engineering resilience on the other.
+        </p>
+      </div>
+
+      <div class="dual-engine-grid">
+        <div class="engine-box">
+          <div class="engine-header">
+            <div class="engine-icon icon-blue">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+              <div class="engine-title">Reactive Call-Out Team</div>
+              <div class="engine-sub">Frontline Blue Team Firefighters</div>
+            </div>
+          </div>
+          <ul class="engine-points">
+            <li><i class="fa-solid fa-check"></i> <strong>Guaranteed 3-Hour SLA:</strong> Rapid triage and emergency isolation window.</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Active Threat Signaling:</strong> Continuous deviation alerts without false positive noise.</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Host Fencing & Quarantining:</strong> Disconnecting compromised boundaries in real time.</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Credential & Session Invalidation:</strong> Revoking exploited API tokens and admin tokens.</li>
+          </ul>
+        </div>
+
+        <div class="engine-box">
+          <div class="engine-header">
+            <div class="engine-icon icon-purple">
+              <i class="fa-solid fa-dna"></i>
+            </div>
+            <div>
+              <div class="engine-title">Proactive IR & Research Team</div>
+              <div class="engine-sub">Purple Team Engineers & Hardening</div>
+            </div>
+          </div>
+          <ul class="engine-points">
+            <li><i class="fa-solid fa-check"></i> <strong>Root Cause Analysis:</strong> Deconstructing the adversary's exact entry mechanism.</li>
+            <li><i class="fa-solid fa-check"></i> <strong>MITRE ATT&CK Mapping:</strong> Cataloging attacker TTPs to upgrade the threat base.</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Autonomous IaC Synthesis:</strong> Compiling Terraform and PowerShell patches.</li>
+            <li><i class="fa-solid fa-check"></i> <strong>PIR Compliance Integration:</strong> Binding the incident to SOC 2 and NIST controls.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 4: INTERACTIVE COMPLIANCE PIR PREVIEW -->
+    <section class="section-box">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Audit-Ready Deliverable • Framework Mapping</span>
+          <h2 class="section-heading">Multi-Framework Post-Incident Report (PIR)</h2>
+        </div>
+        <p class="section-desc">
+          Every closed incident produces a board-ready compliance deliverable that satisfies enterprise auditors across all four major regulatory frameworks.
+        </p>
+      </div>
+
+      <div class="pir-tabs">
+        <button onclick="switchPIRTab('soc2')" class="pir-tab-btn active" id="tab-btn-soc2">
+          SOC 2 Type II
+        </button>
+        <button onclick="switchPIRTab('nist')" class="pir-tab-btn" id="tab-btn-nist">
+          NIST CSF 2.0
+        </button>
+        <button onclick="switchPIRTab('iso')" class="pir-tab-btn" id="tab-btn-iso">
+          ISO/IEC 27001
+        </button>
+        <button onclick="switchPIRTab('airmf')" class="pir-tab-btn" id="tab-btn-airmf">
+          NIST AI RMF 1.0
+        </button>
+        <button onclick="switchPIRTab('iac')" class="pir-tab-btn" id="tab-btn-iac">
+          Remediation Code (IaC)
+        </button>
+      </div>
+
+      <!-- SOC 2 PANEL -->
+      <div id="panel-soc2" class="pir-content-panel active">
+        <table class="compliance-matrix-table">
+          <thead>
+            <tr>
+              <th>Trust Services Criteria</th>
+              <th>Requirement</th>
+              <th>Incident Remediation Mapping</th>
+              <th>Audit Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CC6.1 (Logical Access)</td>
+              <td>Prevent unauthorized perimeter credential relay</td>
+              <td>Revoked unauthenticated SMB credentials and enforced Kerberos signing</td>
+              <td><span class="badge-pass">Verified Compliant</span></td>
+            </tr>
+            <tr>
+              <td>CC6.6 (Boundary Protection)</td>
+              <td>Isolate internal VPC subnets from untrusted traffic</td>
+              <td>Synthesized Terraform security group denying port 445 ingress</td>
+              <td><span class="badge-remediated">Hardened</span></td>
+            </tr>
+            <tr>
+              <td>CC6.7 (Transmission Integrity)</td>
+              <td>Enforce modern cryptography across edge gateways</td>
+              <td>Deprecated legacy cipher suites on Nginx reverse proxy</td>
+              <td><span class="badge-pass">Verified Compliant</span></td>
+            </tr>
+            <tr>
+              <td>CC7.1 (Vulnerability Management)</td>
+              <td>Detect and remediate configuration deviations</td>
+              <td>Noise-gate delta engine logged finding in persistent audit trail</td>
+              <td><span class="badge-pass">Verified Compliant</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIST CSF 2.0 PANEL -->
+      <div id="panel-nist" class="pir-content-panel">
+        <table class="compliance-matrix-table">
+          <thead>
+            <tr>
+              <th>NIST Function</th>
+              <th>Control ID</th>
+              <th>Incident Response Action</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GOVERN (GV)</td>
+              <td>GV.OC-01</td>
+              <td>Incident classified and reported to executive leadership within 3-hour SLA</td>
+              <td><span class="badge-pass">Delivered</span></td>
+            </tr>
+            <tr>
+              <td>DETECT (DE)</td>
+              <td>DE.AE-02</td>
+              <td>Behavioral deviation engine flagged anomalous SMB lateral attempt</td>
+              <td><span class="badge-pass">Triggered</span></td>
+            </tr>
+            <tr>
+              <td>RESPOND (RS)</td>
+              <td>RS.MI-01</td>
+              <td>Host quarantined; malicious sessions terminated before persistence established</td>
+              <td><span class="badge-remediated">Contained</span></td>
+            </tr>
+            <tr>
+              <td>RECOVER (RC)</td>
+              <td>RC.RP-01</td>
+              <td>Automated IaC deployed to return affected node to verified baseline state</td>
+              <td><span class="badge-pass">Restored</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ISO 27001 PANEL -->
+      <div id="panel-iso" class="pir-content-panel">
+        <table class="compliance-matrix-table">
+          <thead>
+            <tr>
+              <th>Annex A Control</th>
+              <th>Description</th>
+              <th>Technical Verification</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A.5.7</td>
+              <td>Threat Intelligence Integration</td>
+              <td>Adversary TTPs extracted and injected into SOAR threat intelligence base</td>
+              <td><span class="badge-pass">Documented</span></td>
+            </tr>
+            <tr>
+              <td>A.5.24</td>
+              <td>Information Security Incident Management</td>
+              <td>Full forensic timeline established with cryptographically timestamped logs</td>
+              <td><span class="badge-pass">Compliant</span></td>
+            </tr>
+            <tr>
+              <td>A.8.20</td>
+              <td>Network Security & Segmentation</td>
+              <td>Internal subnet microsegmentation enforced via zero-trust firewall rules</td>
+              <td><span class="badge-remediated">Hardened</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIST AI RMF 1.0 PANEL -->
+      <div id="panel-airmf" class="pir-content-panel">
+        <table class="compliance-matrix-table">
+          <thead>
+            <tr>
+              <th>AI RMF Function</th>
+              <th>AI Risk Dimension</th>
+              <th>Protection Protocol</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MAP 1.5</td>
+              <td>Context & Model Boundary Assessment</td>
+              <td>Verified external attack vectors cannot pivot into internal AI embedding vectors</td>
+              <td><span class="badge-pass">Isolated</span></td>
+            </tr>
+            <tr>
+              <td>MEASURE 2.6</td>
+              <td>Model Input/Output Leakage</td>
+              <td>Validated that edge LLM copilot instances do not leak system configuration telemetry</td>
+              <td><span class="badge-pass">Secured</span></td>
+            </tr>
+            <tr>
+              <td>MANAGE 2.4</td>
+              <td>Autonomous Risk Response</td>
+              <td>Agentic copilot autonomously authored zero-trust IaC scripts without human delay</td>
+              <td><span class="badge-remediated">Autonomous</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- IAC CODE PANEL -->
+      <div id="panel-iac" class="pir-content-panel">
+        <div class="code-box">
+<span class="code-comment"># ==============================================================================</span>
+<span class="code-comment"># AUTONOMOUS TERRAFORM REMEDIATION ARTIFACT // GENERATED BY M.S.A. CO-PILOT</span>
+<span class="code-comment"># Control: SOC 2 CC6.6 & NIST CSF 2.0 RS.MI-01</span>
+<span class="code-comment"># ==============================================================================</span>
+
+<span class="code-cmd">resource "aws_security_group_rule" "isolate_smb_boundary"</span> {
+  type              = <span class="code-val">"ingress"</span>
+  from_port         = 445
+  to_port           = 445
+  protocol          = <span class="code-val">"tcp"</span>
+  cidr_blocks       = [<span class="code-val">"10.0.10.0/24"</span>] <span class="code-comment"># Restricted strictly to hardened internal bastion jumpbox</span>
+  security_group_id = <span class="code-val">"sg-08492af7b184a2"</span>
+  description       = <span class="code-val">"PIR Remediation: Block unauthenticated SMB relay across Node 192.168.1.52"</span>
+}
+
+<span class="code-comment"># ==============================================================================</span>
+<span class="code-comment"># POWERSHELL ZERO-TRUST BOUNDARY ISOLATION SCRIPT</span>
+<span class="code-comment"># ==============================================================================</span>
+<span class="code-cmd">New-NetFirewallRule</span> -DisplayName <span class="code-val">"Block-Inbound-SMB-Edge"</span> `
+  -Direction Inbound -LocalPort 445 -Protocol TCP -Action Block `
+  -Description <span class="code-val">"M.S.A. Automated Containment Policy"</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 5: DUAL CALL TO ACTION (HIRING MAGNET & SALES OPPORTUNITY) -->
+    <section class="dual-cta-grid">
+      <!-- BOX 1: SALES OPPORTUNITY FOR ANERGI & M.S.A. -->
+      <div class="cta-card">
+        <div>
+          <span class="cta-badge cta-badge-sales">Enterprise Engagement • Anergi.io Collaboration</span>
+          <h3 class="cta-title" style="margin-top: 0.5rem;">Deploy M.S.A. for Your Enterprise</h3>
+          <p class="cta-desc" style="margin-top: 0.5rem;">
+            Ready to upgrade from static port scans to continuous 3-Hour MDR and multi-framework compliance reporting? Partner with Anergi.io and our engineering network to safeguard your infrastructure.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <a href="https://anergi.io" target="_blank" class="cta-btn cta-btn-primary">
+            <i class="fa-solid fa-shield"></i> Explore Anergi.io Solutions ➔
+          </a>
+          <a href="mailto:leonrdarden@gmail.com?subject=Enterprise%20M.S.A.%20Inquiry%20via%20COLLIDE" class="cta-btn cta-btn-outline">
+            <i class="fa-solid fa-envelope"></i> Request Full Architecture Assessment
+          </a>
+        </div>
+      </div>
+
+      <!-- BOX 2: TALENT & ARCHITECTURAL LEADERSHIP -->
+      <div class="cta-card">
+        <div>
+          <span class="cta-badge cta-badge-talent">Talent & Leadership • COLLIDE Oct 1, 2026</span>
+          <h3 class="cta-title" style="margin-top: 0.5rem;">Connect with the Architect</h3>
+          <p class="cta-desc" style="margin-top: 0.5rem;">
+            Leon R. Darden architects AI-driven autonomous security, resilient distributed systems, and modern cloud infrastructure. Open to Principal Solutions Architect and Engineering Leadership roles.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <a href="tel:6787630580" class="cta-btn cta-btn-primary">
+            <i class="fa-solid fa-phone"></i> Call Leon (678) 763-0580
+          </a>
+          <a href="collide.html" class="cta-btn cta-btn-outline">
+            <i class="fa-solid fa-id-card"></i> View Full COLLIDE Showcase & vCard
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // 1. DATA TRANSLATOR TOGGLE
+    function switchTranslatorView(view) {
+      const rawPanel = document.getElementById('view-raw');
+      const execPanel = document.getElementById('view-exec');
+      const btnRaw = document.getElementById('btn-raw');
+      const btnExec = document.getElementById('btn-exec');
+
+      if (view === 'raw') {
+        rawPanel.classList.remove('hidden');
+        execPanel.classList.add('hidden');
+        btnRaw.classList.add('active');
+        btnExec.classList.remove('active');
+      } else {
+        execPanel.classList.remove('hidden');
+        rawPanel.classList.add('hidden');
+        btnExec.classList.add('active');
+        btnRaw.classList.remove('active');
+      }
+    }
+
+    // 2. COMPLIANCE PIR TABS
+    function switchPIRTab(tabId) {
+      const panels = ['soc2', 'nist', 'iso', 'airmf', 'iac'];
+      panels.forEach(p => {
+        const panel = document.getElementById('panel-' + p);
+        const btn = document.getElementById('tab-btn-' + p);
+        if (p === tabId) {
+          panel.classList.add('active');
+          btn.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // 3. 3-HOUR INCIDENT RESPONSE SIMULATOR
+    let simInterval = null;
+    let isRunning = false;
+
+    function runIncidentSimulation() {
+      if (isRunning) return;
+      isRunning = true;
+
+      const clock = document.getElementById('sim-clock');
+      const statusLabel = document.getElementById('sim-status-label');
+      const triggerBtn = document.getElementById('sim-trigger-btn');
+      triggerBtn.disabled = true;
+      triggerBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Simulation in Progress...';
+
+      let secondsRemaining = 10800; // 3 hours = 10800 seconds
+      const stages = [
+        { name: 'PHASE 01: Signal Filtering', id: 'stage-1', atSec: 10800 },
+        { name: 'PHASE 02: Reactive Call-Out & Quarantine', id: 'stage-2', atSec: 9000 },
+        { name: 'PHASE 03: Proactive IR & MITRE Analysis', id: 'stage-3', atSec: 6300 },
+        { name: 'PHASE 04: Hardening & Compliance PIR', id: 'stage-4', atSec: 2700 }
+      ];
+
+      // Accelerated simulation loop (runs 3 hours in 6 seconds for demo)
+      let tick = 0;
+      simInterval = setInterval(() => {
+        tick++;
+        secondsRemaining -= 1800; // drops 30 mins per tick
+
+        if (secondsRemaining <= 0) {
+          secondsRemaining = 0;
+          clearInterval(simInterval);
+          isRunning = false;
+          statusLabel.innerText = "✓ INCIDENT CONTAINED & RESOLVED IN 1H 42M";
+          statusLabel.style.color = "var(--accent-emerald)";
+          triggerBtn.disabled = false;
+          triggerBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Rerun Simulation';
+        }
+
+        // Format Clock HH:MM:SS
+        const h = String(Math.floor(secondsRemaining / 3600)).padStart(2, '0');
+        const m = String(Math.floor((secondsRemaining % 3600) / 60)).padStart(2, '0');
+        const s = String(secondsRemaining % 60).padStart(2, '0');
+        clock.innerText = `${h}:${m}:${s}`;
+
+        // Highlight active stage
+        if (secondsRemaining > 9000) {
+          highlightStage('stage-1', 'PHASE 01: Active Deviation Triage');
+        } else if (secondsRemaining > 6300) {
+          highlightStage('stage-2', 'PHASE 02: Reactive Call-Out Isolation');
+        } else if (secondsRemaining > 2700) {
+          highlightStage('stage-3', 'PHASE 03: Proactive Threat Deconstruction');
+        } else {
+          highlightStage('stage-4', 'PHASE 04: Automated Hardening & PIR Delivery');
+        }
+      }, 700);
+    }
+
+    function highlightStage(activeId, label) {
+      const allStages = ['stage-1', 'stage-2', 'stage-3', 'stage-4'];
+      allStages.forEach(s => {
+        const el = document.getElementById(s);
+        if (s === activeId) {
+          el.classList.add('active-stage');
+        } else {
+          el.classList.remove('active-stage');
+        }
+      });
+      document.getElementById('sim-status-label').innerText = label;
+      document.getElementById('sim-status-label').style.color = "var(--accent-cyan)";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SOC 2 Multi-Node Inventory & Exposure Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans h-screen flex overflow-hidden">
+  <div id="sidebar" class="w-80 bg-gray-900 border-r border-gray-800 flex flex-col transition-all duration-300 z-20 shrink-0">
+    <div class="p-5 border-b border-gray-800 flex justify-between items-center bg-gray-950/40">
+      <div>
+        <h2 class="font-extrabold text-white text-base">Network Map</h2>
+        <p class="text-xs text-gray-400">Filter nodes by posture</p>
+      </div>
+      <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white p-1 rounded hover:bg-gray-800 cursor-pointer">✕</button>
+    </div>
+    <div class="p-4 space-y-2 overflow-y-auto flex-1">
+      <button onclick="filterDevices('ALL')" class="w-full text-left px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 hover:bg-gray-700 text-xs font-semibold flex justify-between items-center transition">
+        <span>All Active Nodes</span>
+        <span id="badge-all" class="bg-gray-700 px-2 py-0.5 rounded text-gray-300">0</span>
+      </button>
+      <button onclick="filterDevices('Core')" class="w-full text-left px-3 py-2 rounded-lg bg-indigo-950/30 border border-indigo-900/60 text-indigo-300 text-xs font-semibold flex justify-between items-center transition">
+        <span>Core Assets</span>
+        <span id="badge-core" class="bg-indigo-900 px-2 py-0.5 rounded text-indigo-200">0</span>
+      </button>
+      <button onclick="filterDevices('High Risk')" class="w-full text-left px-3 py-2 rounded-lg bg-red-950/30 border border-red-900/60 text-red-300 text-xs font-semibold flex justify-between items-center transition">
+        <span>High Risk Attachments</span>
+        <span id="badge-high" class="bg-red-900 px-2 py-0.5 rounded text-red-200">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    <header class="p-6 border-b border-gray-800 bg-gray-900/80 backdrop-blur sticky top-0 flex justify-between items-center z-10">
+      <div class="flex items-center gap-3">
+        <button id="expand-btn" onclick="toggleSidebar()" class="hidden bg-gray-800 border border-gray-700 text-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-700 cursor-pointer">☰ Map</button>
+        <div>
+          <h1 class="text-xl font-extrabold text-white">SOC 2 Scope Assessment Platform</h1>
+          <p class="text-xs text-gray-400">Timeline Delta & Configuration Audit</p>
+        </div>
+      </div>
+      <button onclick="exportToPDF()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-4 rounded-lg shadow cursor-pointer transition">
+        Export PDF Report
+      </button>
+    </header>
+
+    <main class="p-8 max-w-5xl w-full mx-auto" id="dashboard-content">
+      <div class="mb-6 text-xs font-mono text-gray-400 bg-gray-900 p-3 rounded-lg border border-gray-800 flex justify-between flex-wrap gap-2">
+        <span>⏱️ <strong>Active Scan:</strong> 2026-09-13 01:19:50</span>
+        <span>📁 <strong>Baseline File:</strong> 2026-09-13 01:19:36</span>
+      </div>
+
+      <div class="grid grid-cols-3 gap-5 mb-8">
+        <div class="bg-gray-900 p-5 rounded-xl border border-gray-800">
+          <p class="text-gray-400 text-xs uppercase font-semibold">Total Scanned Hosts</p>
+          <p class="text-3xl font-black text-white mt-1" id="stat-hosts">0</p>
+        </div>
+        <div class="bg-gray-900 p-5 rounded-xl border border-gray-800 border-l-4 border-l-orange-500">
+          <p class="text-orange-400 text-xs uppercase font-semibold">New Flaws [NEW]</p>
+          <p class="text-3xl font-black text-white mt-1" id="stat-new">0</p>
+        </div>
+        <div class="bg-gray-900 p-5 rounded-xl border border-gray-800 border-l-4 border-l-red-500">
+          <p class="text-red-400 text-xs uppercase font-semibold">Unresolved [PERSISTENT]</p>
+          <p class="text-3xl font-black text-white mt-1" id="stat-persistent">0</p>
+        </div>
+      </div>
+
+      <div class="space-y-5" id="hosts-container"></div>
+    </main>
+  </div>
+
+  <script>
+    const payload = {
+  "active_scan_time": "2026-09-13 01:19:50",
+  "archive_baseline_time": "2026-09-13 01:19:36",
+  "scan_nodes": [
+    {
+      "ip": "127.0.0.1",
+      "is_main_target": true,
+      "dependency_type": "Core Infrastructure Asset",
+      "os_fingerprint": "Standard Network Device",
+      "findings": [
+        {
+          "type": "Port Flaw",
+          "port": 445,
+          "service": "SMB",
+          "soc2_criterion": "CC6.6 (Boundary Protection)",
+          "risk_level": "High",
+          "recommendation": "Isolate SMB file sharing from unauthorized network segments.",
+          "history_status": "Persistent"
+        }
+      ]
+    }
+  ]
+};
+    const networkReport = payload.scan_nodes || [];
+    let activeFilter = 'ALL';
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const expandBtn = document.getElementById('expand-btn');
+      if (sidebar.classList.contains('w-80')) {
+        sidebar.classList.remove('w-80');
+        sidebar.classList.add('w-0', 'border-r-0');
+        expandBtn.classList.remove('hidden');
+      } else {
+        sidebar.classList.remove('w-0', 'border-r-0');
+        sidebar.classList.add('w-80');
+        expandBtn.classList.add('hidden');
+      }
+    }
+
+    function filterDevices(filterType) {
+      activeFilter = filterType;
+      renderReport();
+    }
+
+    function renderReport() {
+      const container = document.getElementById('hosts-container');
+      container.innerHTML = '';
+      let countNew = 0;
+      let countPersistent = 0;
+      let counts = { all: 0, core: 0, high: 0 };
+
+      networkReport.forEach(host => {
+        counts.all++;
+        if (host.is_main_target) counts.core++;
+        else if (host.dependency_type.includes('High Risk')) counts.high++;
+
+        if (activeFilter === 'Core' && !host.is_main_target) return;
+        if (activeFilter === 'High Risk' && !host.dependency_type.includes('High Risk')) return;
+
+        let hostHTML = `
+          <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow">
+            <div class="px-6 py-4 bg-gray-950/50 border-b border-gray-800 flex justify-between items-start gap-4">
+              <div>
+                <h3 class="text-base font-bold text-white font-mono">${host.ip}</h3>
+                <p class="text-xs text-indigo-400 font-mono mt-0.5">⚙️ OS: ${host.os_fingerprint}</p>
+                <p class="text-xs text-gray-400 mt-0.5">${host.dependency_type}</p>
+              </div>
+              <span class="text-xs font-semibold px-2.5 py-1 rounded-md border ${host.is_main_target ? 'bg-indigo-500/10 border-indigo-500/40 text-indigo-400' : 'bg-gray-800 border-gray-700 text-gray-400'}">
+                ${host.is_main_target ? 'Target Asset' : 'Subnet Node'}
+              </span>
+            </div>
+            <div class="p-6 divide-y divide-gray-800">
+        `;
+
+        if (!host.findings || host.findings.length === 0) {
+          hostHTML += '<p class="text-sm text-gray-400 italic py-2">🎉 No vulnerabilities identified.</p>';
+        } else {
+          host.findings.forEach(f => {
+            if (f.history_status === 'New') countNew++;
+            else countPersistent++;
+
+            let statusColor = f.history_status === 'New'
+              ? 'bg-orange-500/10 text-orange-400 border-orange-500/30'
+              : 'bg-red-500/10 text-red-400 border-red-500/30';
+
+            hostHTML += `
+              <div class="py-4 first:pt-0 last:pb-0">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-bold text-gray-200">Port ${f.port} (${f.service})</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded border ${statusColor}">
+                    ${f.history_status}
+                  </span>
+                </div>
+                <p class="text-xs text-indigo-300 font-medium mt-1">📋 SOC 2: ${f.soc2_criterion}</p>
+                <div class="mt-2 bg-gray-950/60 p-3 rounded-lg border border-gray-800 text-xs text-gray-300">
+                  <strong>Remediation:</strong> ${f.recommendation}
+                </div>
+              </div>
+            `;
+          });
+        }
+
+        hostHTML += '</div></div>';
+        container.innerHTML += hostHTML;
+      });
+
+      document.getElementById('stat-hosts').innerText = counts.all;
+      document.getElementById('stat-new').innerText = countNew;
+      document.getElementById('stat-persistent').innerText = countPersistent;
+      document.getElementById('badge-all').innerText = counts.all;
+      document.getElementById('badge-core').innerText = counts.core;
+      document.getElementById('badge-high').innerText = counts.high;
+    }
+
+    function exportToPDF() {
+      const sidebar = document.getElementById('sidebar');
+      const hadOpen = sidebar.classList.contains('w-80');
+      if (hadOpen) toggleSidebar();
+      html2pdf().set({
+        margin: [0.4, 0.4, 0.4, 0.4],
+        filename: 'SOC2_Timeline_Trend_Report.pdf',
+        html2canvas: { scale: 2, backgroundColor: '#030712' },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      }).from(document.getElementById('dashboard-content')).save().then(() => {
+        if (hadOpen) toggleSidebar();
+      });
+    }
+
+    renderReport();
+  </script>
+</body>
+</html>
