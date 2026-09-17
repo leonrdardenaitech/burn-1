@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Private personal in-house site rule: do not index -->
+    <meta name="robots" content="noindex, nofollow">
+    <title>Bingo Lingo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 100%);
+            min-height: 100vh;
+            touch-action: manipulation; /* Prevents double-tap zoom on mobile */
+            user-select: none;
+            overflow-x: hidden;
+        }
+
+        .btn-3d-blue {
+            background-color: #3b82f6;
+            color: white;
+            box-shadow: 0 6px 0 #1d4ed8, 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.1s ease;
+        }
+        .btn-3d-blue:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #1d4ed8, 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn-3d-pink {
+            background-color: #ec4899;
+            color: white;
+            box-shadow: 0 6px 0 #be185d, 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.1s ease;
+        }
+        .btn-3d-pink:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #be185d, 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .card-3d {
+            background-color: #ffffff;
+            box-shadow: 0 12px 0 #bfdbfe, 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 4px solid #dbeafe;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(236, 72, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
+        }
+        .highlight-col {
+            background-color: #fce7f3 !important; /* light pink */
+            transition: background-color 0.3s;
+        }
+
+        /* The Bingo Dauber Stamp */
+        .dauber-stamp {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            background: radial-gradient(circle, #f472b6 20%, #db2777 90%);
+            border-radius: 50%;
+            opacity: 0.9;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none; /* Let clicks pass through to the cell */
+        }
+        .is-stamped .dauber-stamp {
+            transform: scale(1);
+        }
+        .is-stamped span {
+            color: white;
+            z-index: 10;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .cell-3d {
+            box-shadow: 0 4px 0 #e2e8f0;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .cell-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #e2e8f0;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-start min-h-screen py-3 px-2 sm:px-4">
+
+    <!-- Suite Navigation Header for Grandma -->
+    <div class="w-full max-w-md flex items-center justify-between gap-2.5 mb-2">
+        <a href="/wordpuzzle" class="flex-1 bg-white/95 hover:bg-white text-emerald-950 font-extrabold py-2 px-3 rounded-2xl text-center text-xs sm:text-sm shadow-md border-2 border-emerald-500 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1.5">
+            <span>🔍</span> <span>Word Search</span>
+        </a>
+        <a href="/letterfill" class="flex-1 bg-white/95 hover:bg-white text-emerald-950 font-extrabold py-2 px-3 rounded-2xl text-center text-xs sm:text-sm shadow-md border-2 border-yellow-400 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1.5">
+            <span>🧩</span> <span>Letter Fill</span>
+        </a>
+    </div>
+
+    <div class="w-full max-w-md flex flex-col items-center gap-3 sm:gap-4 relative z-10">
+        
+        <!-- Header -->
+        <h1 class="text-4xl sm:text-5xl font-black text-blue-600 tracking-wider uppercase text-center" style="text-shadow: 2px 2px 0px #fff, 4px 4px 0px #bfdbfe;">
+            Bingo Lingo
+        </h1>
+
+        <!-- Call Out Area -->
+        <div class="w-full bg-white rounded-2xl p-4 shadow-lg border-2 border-blue-100 flex flex-col items-center justify-center min-h-[135px] relative overflow-hidden">
+            <div class="absolute inset-0 bg-blue-50 opacity-50"></div>
+            <p class="text-gray-500 font-bold text-base sm:text-lg mb-1 relative z-10 uppercase tracking-widest">Current Call</p>
+            <div id="currentCallDisplay" class="text-6xl sm:text-7xl font-black text-pink-500 relative z-10 drop-shadow-md">
+                --
+            </div>
+            <!-- Small history of last 3 calls -->
+            <div id="callHistory" class="absolute bottom-2 right-4 text-xs sm:text-sm font-bold text-blue-400 flex gap-2">
+            </div>
+        </div>
+
+        <!-- Control Button -->
+        <button id="callNumberBtn" class="btn-3d-blue w-full py-4 rounded-2xl text-xl sm:text-2xl font-black uppercase tracking-wide">
+            Call Next Number 📢
+        </button>
+
+        <div class="card-3d w-full rounded-2xl p-2 sm:p-4 mt-1">
+            <!-- Headers -->
+            <div class="grid grid-cols-5 gap-1 sm:gap-2 mb-2">
+                <div id="header-B" class="text-center font-black text-2xl sm:text-3xl text-pink-500 pb-2 border-b-4 border-pink-200">B</div>
+                <div id="header-I" class="text-center font-black text-2xl sm:text-3xl text-pink-500 pb-2 border-b-4 border-pink-200">I</div>
+                <div id="header-N" class="text-center font-black text-2xl sm:text-3xl text-pink-500 pb-2 border-b-4 border-pink-200">N</div>
+                <div id="header-G" class="text-center font-black text-2xl sm:text-3xl text-pink-500 pb-2 border-b-4 border-pink-200">G</div>
+                <div id="header-O" class="text-center font-black text-2xl sm:text-3xl text-pink-500 pb-2 border-b-4 border-pink-200">O</div>
+            </div>
+            
+            <!-- Grid Cells -->
+            <div id="bingoGrid" class="grid grid-cols-5 gap-1 sm:gap-2">
+                <!-- Cells generated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Win Modal Screen -->
+    <div id="winScreen" class="fixed inset-0 bg-blue-900 bg-opacity-90 z-50 hidden flex-col items-center justify-center p-4 backdrop-blur-sm">
+        <h2 class="text-6xl sm:text-8xl font-black text-white mb-6 animate-pop text-center" style="text-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+            BINGO!
+        </h2>
+        <p class="text-2xl text-pink-200 font-bold mb-8 text-center animate-pop" style="animation-delay: 0.2s;">
+            Great job! You won!
+        </p>
+        <button id="nextGameBtn" class="btn-3d-pink text-2xl sm:text-3xl font-black py-4 sm:py-5 px-8 sm:px-12 rounded-3xl animate-pop mb-6" style="animation-delay: 0.4s;">
+            Yeah... Next Game! 🌟
+        </button>
+        <!-- Quick Switcher on Win Modal -->
+        <div class="flex items-center gap-3 animate-pop" style="animation-delay: 0.5s;">
+            <a href="/wordpuzzle" class="bg-white/95 hover:bg-white text-emerald-950 font-extrabold py-2 px-4 rounded-xl text-sm shadow-md border-2 border-emerald-400 flex items-center gap-1.5">
+                <span>🔍</span> <span>Word Search</span>
+            </a>
+            <a href="/letterfill" class="bg-white/95 hover:bg-white text-emerald-950 font-extrabold py-2 px-4 rounded-xl text-sm shadow-md border-2 border-yellow-400 flex items-center gap-1.5">
+                <span>🧩</span> <span>Letter Fill</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Automatic link resolver for local file:// access
+        if (window.location.protocol === 'file:') {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('a[href^="/"]').forEach(a => {
+                    const target = a.getAttribute('href').replace(/^\//, '');
+                    a.setAttribute('href', target.endsWith('.html') ? target : target + '.html');
+                });
+            });
+        }
+
+        const BINGO_LETTERS = ['B', 'I', 'N', 'G', 'O'];
+        const COL_RANGES = [
+            { min: 1, max: 15 },
+            { min: 16, max: 30 },
+            { min: 31, max: 45 },
+            { min: 46, max: 60 },
+            { min: 61, max: 75 }
+        ];
+
+        let currentCard = []; // 5x5 array of numbers
+        let markedState = []; // 5x5 array of booleans
+        let availablePool = []; // Pool of numbers left to call
+        let calledNumbers = new Set(); // Numbers already called
+        let lastCalled = []; // Array to track history
+        let isSpeaking = false; // Prevent rapid clicking while speaking
+        let availableVoices = [];
+
+        function loadVoices() {
+            if ('speechSynthesis' in window) {
+                availableVoices = window.speechSynthesis.getVoices();
+            }
+        }
+        if ('speechSynthesis' in window) {
+            loadVoices();
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        // DOM Elements
+        const gridEl = document.getElementById('bingoGrid');
+        const callBtn = document.getElementById('callNumberBtn');
+        const currentCallDisplay = document.getElementById('currentCallDisplay');
+        const callHistoryDisplay = document.getElementById('callHistory');
+        const winScreen = document.getElementById('winScreen');
+        const nextGameBtn = document.getElementById('nextGameBtn');
+
+        function initGame() {
+            // Reset states
+            currentCard = [];
+            markedState = Array(5).fill().map(() => Array(5).fill(false));
+            availablePool = Array.from({length: 75}, (_, i) => i + 1);
+            calledNumbers.clear();
+            lastCalled = [];
+            
+            // Clear UI
+            currentCallDisplay.innerText = "READY!";
+            currentCallDisplay.classList.remove('animate-pop');
+            callHistoryDisplay.innerHTML = "";
+            winScreen.classList.remove('flex');
+            winScreen.classList.add('hidden');
+            callBtn.disabled = false;
+            callBtn.style.opacity = '1';
+            
+            // Remove header highlights
+            BINGO_LETTERS.forEach(letter => {
+                const hdr = document.getElementById(`header-${letter}`);
+                if (hdr) hdr.classList.remove('highlight-col');
+            });
+
+            generateCard();
+            renderGrid();
+            
+            // Auto mark free space
+            markedState[2][2] = true; 
+            calledNumbers.add("FREE");
+            const freeCell = document.getElementById('cell-2-2');
+            if(freeCell) freeCell.classList.add('is-stamped');
+        }
+
+        function generateCard() {
+            // Generate columns B, I, N, G, O
+            let cols = [];
+            for (let c = 0; c < 5; c++) {
+                cols.push(getRandomNumbers(COL_RANGES[c].min, COL_RANGES[c].max, 5));
+            }
+
+            // Transpose to rows for easier rendering (currentCard[row][col])
+            for (let r = 0; r < 5; r++) {
+                let row = [];
+                for (let c = 0; c < 5; c++) {
+                    if (r === 2 && c === 2) {
+                        row.push("FREE");
+                    } else {
+                        row.push(cols[c][r]);
+                    }
+                }
+                currentCard.push(row);
+            }
+        }
+
+        function getRandomNumbers(min, max, count) {
+            let nums = new Set();
+            while(nums.size < count) {
+                let num = Math.floor(Math.random() * (max - min + 1)) + min;
+                nums.add(num);
+            }
+            return Array.from(nums);
+        }
+
+        function renderGrid() {
+            gridEl.innerHTML = '';
+            for (let r = 0; r < 5; r++) {
+                for (let c = 0; c < 5; c++) {
+                    const num = currentCard[r][c];
+                    const cell = document.createElement('div');
+                    cell.id = `cell-${r}-${c}`;
+                    
+                    // Base styles for cell
+                    cell.className = `
+                        cell-3d relative w-full aspect-square border-2 border-blue-100 rounded-xl 
+                        flex items-center justify-center text-xl sm:text-2xl font-black text-blue-900 
+                        bg-slate-50 cursor-pointer select-none overflow-hidden
+                    `;
+                    
+                    if(num === "FREE") {
+                        cell.innerHTML = `
+                            <span class="z-10 text-pink-600 text-lg sm:text-xl font-black">FREE</span>
+                            <div class="dauber-stamp"></div>
+                        `;
+                    } else {
+                        cell.innerHTML = `
+                            <span class="z-10 relative">${num}</span>
+                            <div class="dauber-stamp"></div>
+                        `;
+                    }
+
+                    // Click event to stamp
+                    cell.addEventListener('click', () => handleCellClick(r, c, num));
+                    gridEl.appendChild(cell);
+                }
+            }
+        }
+
+        function handleCellClick(row, col, num) {
+            if (num === "FREE") return; // Already stamped
+            
+            // Only allow marking if the number has actually been called
+            if (calledNumbers.has(num)) {
+                const cell = document.getElementById(`cell-${row}-${col}`);
+                
+                // Toggle state
+                markedState[row][col] = !markedState[row][col];
+                
+                if (markedState[row][col]) {
+                    cell.classList.add('is-stamped');
+                    playDauberSound();
+                    checkWin();
+                } else {
+                    cell.classList.remove('is-stamped');
+                }
+            } else {
+                // Gentle visual hint (mistake feedback)
+                const cell = document.getElementById(`cell-${row}-${col}`);
+                cell.classList.add('bg-red-50');
+                setTimeout(() => cell.classList.remove('bg-red-50'), 300);
+            }
+        }
+
+        function callNextNumber() {
+            if (availablePool.length === 0 || isSpeaking) return;
+
+            // Pick random index from available pool
+            const randIndex = Math.floor(Math.random() * availablePool.length);
+            const num = availablePool[randIndex];
+            
+            // Remove from pool, add to called
+            availablePool.splice(randIndex, 1);
+            calledNumbers.add(num);
+
+            // Determine Letter
+            let letter = '';
+            if (num <= 15) { letter = 'B'; }
+            else if (num <= 30) { letter = 'I'; }
+            else if (num <= 45) { letter = 'N'; }
+            else if (num <= 60) { letter = 'G'; }
+            else { letter = 'O'; }
+
+            const callString = `${letter} ${num}`;
+            
+            updateCallUI(callString, letter, num);
+            speakCallOut(letter, num);
+        }
+
+        function updateCallUI(callString, letter, num) {
+            // Update main display with animation
+            currentCallDisplay.innerText = callString;
+            currentCallDisplay.classList.remove('animate-pop');
+            void currentCallDisplay.offsetWidth; // trigger reflow
+            currentCallDisplay.classList.add('animate-pop');
+
+            // Highlight column header
+            BINGO_LETTERS.forEach(l => {
+                const header = document.getElementById(`header-${l}`);
+                if (header) {
+                    if (l === letter) {
+                        header.classList.add('highlight-col');
+                    } else {
+                        header.classList.remove('highlight-col');
+                    }
+                }
+            });
+
+            // Update History
+            lastCalled.unshift(callString);
+            if (lastCalled.length > 3) lastCalled.pop();
+            callHistoryDisplay.innerHTML = lastCalled.slice(1).join(" &bull; ");
+        }
+
+        function speakCallOut(letter, num) {
+            if (!('speechSynthesis' in window)) return;
+            
+            try {
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                }
+                window.speechSynthesis.cancel();
+            } catch(e) {}
+
+            isSpeaking = true;
+            callBtn.disabled = true;
+            callBtn.style.opacity = '0.7';
+
+            // Create utterance. Add slight pause between letter and number for clarity.
+            const textToSpeak = `${letter}... ${num}`;
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.82; 
+            utterance.pitch = 1.05;
+
+            if (!availableVoices || availableVoices.length === 0) {
+                availableVoices = window.speechSynthesis.getVoices();
+            }
+            if (availableVoices && availableVoices.length > 0) {
+                const preferredVoice = availableVoices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('Samantha') || v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Female') || v.default)) ||
+                                       availableVoices.find(v => v.lang && v.lang.startsWith('en'));
+                if (preferredVoice) utterance.voice = preferredVoice;
+            }
+
+            // Keep reference alive to prevent garbage collection silencing speech
+            window._activeUtterance = utterance;
+
+            utterance.onend = () => {
+                isSpeaking = false;
+                callBtn.disabled = false;
+                callBtn.style.opacity = '1';
+            };
+            
+            // Fallback safety timeout if onend is skipped by browser
+            setTimeout(() => {
+                if (isSpeaking) {
+                    isSpeaking = false;
+                    callBtn.disabled = false;
+                    callBtn.style.opacity = '1';
+                }
+            }, 3200);
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Soft dauber stamp audio effect using Web Audio API
+        function playDauberSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if(!AudioContext) return;
+                const audioCtx = new AudioContext();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.1);
+            } catch (e) {
+                // ignore audio errors
+            }
+        }
+
+        function checkWin() {
+            let won = false;
+
+            // Check Rows
+            for (let r = 0; r < 5; r++) {
+                if (markedState[r].every(val => val === true)) won = true;
+            }
+            // Check Cols
+            for (let c = 0; c < 5; c++) {
+                let colWin = true;
+                for (let r = 0; r < 5; r++) {
+                    if (!markedState[r][c]) colWin = false;
+                }
+                if (colWin) won = true;
+            }
+            // Check Diagonals
+            let diag1Win = true;
+            let diag2Win = true;
+            for (let i = 0; i < 5; i++) {
+                if (!markedState[i][i]) diag1Win = false;
+                if (!markedState[i][4 - i]) diag2Win = false;
+            }
+            if (diag1Win || diag2Win) won = true;
+
+            if (won) {
+                handleWin();
+            }
+        }
+
+        function handleWin() {
+            if ('speechSynthesis' in window) {
+                try {
+                    if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+                    const utterance = new SpeechSynthesisUtterance("Bingo! Great job Grandma, you won!");
+                    utterance.rate = 0.85;
+                    window._activeUtterance = utterance;
+                    window.speechSynthesis.speak(utterance);
+                } catch(e) {}
+            }
+            
+            setTimeout(() => {
+                winScreen.classList.remove('hidden');
+                winScreen.classList.add('flex');
+            }, 500);
+        }
+
+        callBtn.addEventListener('click', () => {
+            // Ensure audio context and speech are primed on first interaction
+            if('speechSynthesis' in window) {
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                }
+                if(calledNumbers.size === 1) { // Only Free space was in there
+                   try {
+                       let u = new SpeechSynthesisUtterance(' ');
+                       u.volume = 0.01;
+                       window.speechSynthesis.speak(u);
+                   } catch(e) {}
+                }
+            }
+            callNextNumber();
+        });
+
+        nextGameBtn.addEventListener('click', () => {
+            initGame();
+        });
+
+        // Initialize on load
+        window.onload = initGame;
+    </script>
+</body>
+</html>

@@ -26,6 +26,22 @@
   ],
   "rewrites": [
     {
+      "source": "/wordpuzzle",
+      "destination": "/wordpuzzle.html"
+    },
+    {
+      "source": "/letterfill",
+      "destination": "/letterfill.html"
+    },
+    {
+      "source": "/bingo_lingo",
+      "destination": "/bingo_lingo.html"
+    },
+    {
+      "source": "/bingolingo",
+      "destination": "/bingo_lingo.html"
+    },
+    {
       "source": "/directory",
       "destination": "/directory.html"
     },
