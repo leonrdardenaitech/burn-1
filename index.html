@@ -541,7 +541,7 @@
                                 </div>
                             </div>
 
-                            <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(245,158,11,0.8)] flex items-center justify-center gap-3">
+                            <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" onclick="handlePreCheckout(event)" class="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(245,158,11,0.8)] flex items-center justify-center gap-3">
                                 <i class="fa-brands fa-paypal text-xl"></i> PAY WITH PAYPAL / CARD ($150 + $50/MO)
                             </a>
                         </div>
@@ -659,11 +659,11 @@
                     <!-- VIDEO 1 -->
                     <div class="rounded-xl overflow-hidden border-2 border-purple-600/60 bg-black/80 shadow-2xl">
                         <div class="aspect-video w-full">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/1wgpzp3MFl0" title="Burn-1 System AI Commercial #1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/9e6SZe3uKj4" title="S.P.A. Security Posture Assessment - Anergi.io Cybersecurity Consulting" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                         <div class="p-4 bg-purple-950/60 border-t border-purple-900/60 flex justify-between items-center">
-                            <span class="font-mono text-xs text-white font-bold">PROMO AD #1: SYSTEM ENGINE</span>
-                            <a href="https://youtu.be/1wgpzp3MFl0" target="_blank" class="text-xs font-mono text-amber-400 hover:underline">
+                            <span class="font-mono text-xs text-white font-bold">PROMO AD #1: S.P.A. SECURITY POSTURE ASSESSMENT</span>
+                            <a href="https://youtu.be/9e6SZe3uKj4" target="_blank" class="text-xs font-mono text-amber-400 hover:underline">
                                 YOUTUBE LINK <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                             </a>
                         </div>
@@ -746,14 +746,14 @@
                             <i class="fa-solid fa-brain text-cyan-400 text-xl group-hover:scale-110 transition-transform"></i>
                         </div>
                         <h3 class="font-cyber text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
-                            FriedBrains World
+                            &#xA7FB;riedBrains World
                         </h3>
                         <p class="text-xs font-mono text-slate-300 mb-6 leading-relaxed">
                             Digital Pickpocket ad-tracker investigation, mobile device telemetry hardening, and Sovereignty Identity Recovery articles.
                         </p>
                     </div>
                     <a href="friedbrains-world/index.html" class="w-full py-2.5 rounded bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-200 border border-cyan-500/50 font-cyber text-xs font-bold text-center uppercase tracking-wider transition-all flex items-center justify-center gap-2">
-                        EXPLORE FRIEDBRAINS WORLD <i class="fa-solid fa-arrow-right"></i>
+                        EXPLORE &#xA7FB;RIEDBRAINS WORLD <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
 
@@ -829,7 +829,38 @@
             }
         }
 
+        const GOOGLE_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwimfju5pZrroUlwR7Z0mAn3zCaUKr7_NkFaJd1ri7hgsywZG5KC4kCossnhLsBljCWHg/exec";
+
         function goToStep(step) {
+            // Validation guard: Step 1 -> Step 2
+            if (step === 2) {
+                const inputSub = (document.getElementById('kiosk-subdomain-input').value || '').trim();
+                const cleanSub = inputSub.toLowerCase().replace(/[^a-z0-9-]/g, '');
+                const reserved = ['www', 'admin', 'api', 'cards', 'store', 'directory', 'mail', 'app', 'burn-1', 'helpline'];
+                if (!cleanSub || cleanSub.length < 2) {
+                    alert('Please enter a valid subdomain name (at least 2 letters or numbers).');
+                    return;
+                }
+                if (reserved.includes(cleanSub)) {
+                    alert(`The subdomain "${cleanSub}" is a reserved system route. Please choose another name.`);
+                    return;
+                }
+            }
+
+            // Validation guard: Step 3 -> Step 4
+            if (step === 4) {
+                const bizName = (document.getElementById('biz-name-input').value || '').trim();
+                const contact = (document.getElementById('biz-contact-input').value || '').trim();
+                if (!bizName) {
+                    alert('Please enter your business or brand name.');
+                    return;
+                }
+                if (!contact || !contact.includes('@') || !contact.includes('.')) {
+                    alert('Please enter a valid contact email address to receive your confirmation receipt.');
+                    return;
+                }
+            }
+
             currentStep = step;
             document.getElementById('wizard-step-indicator').innerText = `STEP ${step} OF 4`;
             document.getElementById('wizard-progress-bar').style.width = `${step * 25}%`;
@@ -840,6 +871,58 @@
                     el.classList.remove('hidden');
                 } else {
                     el.classList.add('hidden');
+                }
+            }
+        }
+
+        function handlePreCheckout(e) {
+            const inputSub = (document.getElementById('kiosk-subdomain-input').value || '').trim();
+            const cleanSub = inputSub.toLowerCase().replace(/[^a-z0-9-]/g, '') || 'mybusinessname';
+            const bizName = (document.getElementById('biz-name-input').value || 'Apex Security Kiosks').trim();
+            const personName = (document.getElementById('biz-person-input').value || 'Leon Darden').trim();
+            const contactEmail = (document.getElementById('biz-contact-input').value || 'leonrdarden@gmail.com').trim();
+            const industry = document.getElementById('kiosk-industry-select').value;
+            const scope = document.getElementById('kiosk-scope-select').value;
+            const fullURL = `https://${cleanSub}.burn-1.com`;
+            const orderId = `#PORT-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            const reservationPayload = {
+                orderId: orderId,
+                brand: bizName,
+                personName: personName,
+                email: contactEmail,
+                subdomain: cleanSub,
+                fullURL: fullURL,
+                industry: industry,
+                scope: scope,
+                timestamp: new Date().toISOString(),
+                package: "1-Page Custom Site + QR + Digital Card ($150 + $50/mo)"
+            };
+
+            // 1. Persist locally so after-purchase.html renders customized receipt
+            try {
+                localStorage.setItem('burn1_reservation', JSON.stringify(reservationPayload));
+            } catch (err) {
+                console.warn('Storage save notice:', err);
+            }
+
+            // 2. Dispatch to Google Apps Script Webhook in background for Google Sheets logging & automated email
+            if (GOOGLE_WEBHOOK_URL && GOOGLE_WEBHOOK_URL.startsWith('http')) {
+                try {
+                    fetch(GOOGLE_WEBHOOK_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            brand: bizName,
+                            email: contactEmail,
+                            description: `Subdomain Reservation: ${fullURL} | Owner: ${personName} | Industry: ${industry} (${scope}) | Order: ${orderId}`,
+                            links: fullURL,
+                            timestamp: reservationPayload.timestamp
+                        })
+                    }).catch(err => console.warn("Webhook async transmit notice:", err));
+                } catch (err) {
+                    console.warn("Intake webhook notice:", err);
                 }
             }
         }
