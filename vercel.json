@@ -102,14 +102,6 @@
       "destination": "/mal.html"
     },
     {
-      "source": "/collide",
-      "destination": "/collide.html"
-    },
-    {
-      "source": "/msa",
-      "destination": "/msa.html"
-    },
-    {
       "source": "/jasonkuts",
       "destination": "/cards/jasonkuts.html"
     },
