@@ -159,51 +159,120 @@
         }
 
         /* =========================================================
-           DAY MODE (CORPORATE EDITION)
+           SMOKE & MIRROR CORPORATE EDITION (DAY MODE)
+           Adapted from silver_mirror_clock.html // Silver & Greyscale
            ========================================================= */
-        html.day-mode body {
-            background-color: #f8fafc !important;
-            background-image: url('assets/Saved_Frame_from_Animate_brutalist_202608061504.jpeg') !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-attachment: fixed !important;
-            color: #0f172a !important;
+        html.day-mode {
+            --bg-color: #ffffff;
+            --silver-light: #fdfdfd;
+            --silver-mid: #e4e4e4;
+            --silver-dark: #b0b0b0;
+            --silver-edge: #d4d4d4;
         }
+
+        html.day-mode body {
+            background-color: #ffffff !important;
+            background: radial-gradient(circle at center, #ffffff 0%, #f4f4f6 50%, #e2e8f0 100%) !important;
+            background-attachment: fixed !important;
+            color: #09090b !important;
+        }
+
         html.day-mode #fixed-bg-video-container,
-        html.day-mode .full-bg-overlay {
+        html.day-mode .full-bg-overlay,
+        html.day-mode .ambient-glow-purple,
+        html.day-mode .ambient-glow-cyan,
+        html.day-mode .ambient-glow-amber,
+        html.day-mode .ambient-glow {
             display: none !important;
         }
+
         html.day-mode header {
-            background-color: rgba(255, 255, 255, 0.98) !important;
-            border-bottom: 3px solid #000000 !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+            border-bottom: 2px solid #d4d4d4 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
         }
-        html.day-mode header span, html.day-mode header a {
-            color: #000000 !important;
+
+        html.day-mode header span, 
+        html.day-mode header a {
+            color: #09090b !important;
             text-shadow: none !important;
         }
-        html.day-mode h1, html.day-mode h2, html.day-mode h3, html.day-mode h4,
-        html.day-mode p, html.day-mode span, html.day-mode label {
-            color: #000000 !important;
-            text-shadow: none !important;
-        }
+
+        /* Smoke & Mirror Section & Card Styling */
         html.day-mode .cyber-card,
         html.day-mode .glass-panel {
-            background-color: rgba(255, 255, 255, 0.98) !important;
-            border: 3px solid #000000 !important;
-            box-shadow: 6px 6px 0px #000000 !important;
-            color: #000000 !important;
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 45%, #f4f4f5 100%) !important;
+            border: 2px solid #d4d4d4 !important;
+            border-radius: 1.5rem !important;
+            box-shadow: 
+                0 10px 25px -5px rgba(0, 0, 0, 0.05),
+                inset 0 0 14px rgba(255, 255, 255, 0.9),
+                inset 0 0 2px #b0b0b0 !important;
+            color: #09090b !important;
         }
+
+        html.day-mode .cyber-card:hover,
+        html.day-mode .glass-panel:hover {
+            border-color: #f59e0b !important; /* Burn-1 orange accent on hover */
+            box-shadow: 
+                0 15px 30px -5px rgba(245, 158, 11, 0.2),
+                inset 0 0 16px rgba(255, 255, 255, 0.9),
+                inset 0 0 2px #d4d4d4 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Highlighting: Dark black highlight box with light letters */
+        html.day-mode .highlight-badge,
+        html.day-mode .status-tag,
+        html.day-mode .treatment-pill.active {
+            background-color: #09090b !important;
+            color: #ffffff !important;
+            border: 1px solid #d4d4d4 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html.day-mode h1, 
+        html.day-mode h2, 
+        html.day-mode h3, 
+        html.day-mode h4 {
+            color: #09090b !important;
+            text-shadow: none !important;
+        }
+
+        html.day-mode p, 
+        html.day-mode label {
+            color: #334155 !important;
+            text-shadow: none !important;
+        }
+
+        html.day-mode .treatment-pill {
+            background: #ffffff !important;
+            border: 1px solid #d4d4d4 !important;
+            color: #09090b !important;
+        }
+
+        html.day-mode .treatment-pill span,
+        html.day-mode .treatment-pill p {
+            color: #09090b !important;
+        }
+
         html.day-mode .marker-divider,
         html.day-mode .marker-divider-amber,
         html.day-mode .marker-divider-cyan {
-            background: #000000 !important;
-            box-shadow: none !important;
-            height: 3px !important;
+            background: linear-gradient(90deg, transparent 0%, #d4d4d4 25%, #09090b 50%, #d4d4d4 75%, transparent 100%) !important;
+            box-shadow: 0 0 10px rgba(212, 212, 212, 0.5) !important;
+            height: 2px !important;
         }
+
         html.day-mode footer {
-            background-color: rgba(255, 255, 255, 0.98) !important;
-            border-top: 3px solid #000000 !important;
-            color: #000000 !important;
+            background: #ffffff !important;
+            border-top: 2px solid #d4d4d4 !important;
+            color: #64748b !important;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
+        }
+        html.day-mode footer span, 
+        html.day-mode footer a {
+            color: #09090b !important;
         }
     </style>
 </head>
@@ -369,6 +438,69 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- THIN GLOWING AMBER MAGIC-MARKER DIVIDER -->
+        <div class="marker-divider-amber"></div>
+
+        <!-- =========================================================
+             TRUE BURNER GHOST BROWSER KINETIC SELF-DESTRUCTING AD
+             Under Underwriting Header // Pure Bold B&W Typography with Silver Mirror Frame
+             ========================================================= -->
+        <section id="ghost-browser-kinetic-ad" class="mb-14">
+            <div id="ghost-ad-casing" class="p-8 sm:p-12 rounded-3xl relative overflow-hidden text-center bg-black border-2 border-[#d4d4d4] shadow-[0_0_40px_rgba(0,0,0,0.9)] transition-all">
+                <!-- Smoke Screen Volatile Aura -->
+                <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-800/40 via-black to-black"></div>
+
+                <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[240px]">
+                    <!-- Step 1: Thick Bold Typography TRUE BURNER -->
+                    <div id="ghost-step-brand" class="transition-all duration-700">
+                        <h2 class="text-4xl sm:text-6xl md:text-7xl font-cyber font-black text-white tracking-widest uppercase">
+                            TRUE BURNER
+                        </h2>
+                    </div>
+
+                    <!-- Step 2: Fading in slowly, very slowly: GHOST BROWSER -->
+                    <div id="ghost-step-product" class="transition-opacity duration-1000 ease-in-out opacity-0 mt-2">
+                        <h3 class="text-3xl sm:text-5xl md:text-6xl font-cyber font-extrabold text-white tracking-wider uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.75)]">
+                            GHOST BROWSER
+                        </h3>
+                    </div>
+
+                    <!-- Step 3: Quick POWERED BY R.E.P.™ -->
+                    <div id="ghost-step-sub" class="transition-all duration-500 opacity-0 mt-3">
+                        <span class="text-xs sm:text-sm font-mono text-neutral-300 font-bold uppercase tracking-widest px-3.5 py-1 bg-neutral-900 border border-neutral-600 rounded">
+                            POWERED BY R.E.P.<span class="text-[9px] align-super">TM</span>
+                        </span>
+                    </div>
+
+                    <!-- Step 4: Slogans for Disposable Time-Sensitive Sessions -->
+                    <div id="ghost-step-slogan" class="transition-all duration-500 opacity-0 mt-4 max-w-2xl">
+                        <p class="font-mono text-xs sm:text-sm text-neutral-200 font-bold uppercase tracking-wider">
+                            TIME-SENSITIVE SMOKE SCREEN SESSIONS &bull; ZERO TRACE
+                        </p>
+                        <p class="font-mono text-[11px] text-neutral-400 mt-1 uppercase tracking-widest">
+                            VOLATILE RAM ISOLATION &bull; ZERO DISK FOOTPRINT &bull; GHOST VACUUM ACTIVATION
+                        </p>
+                    </div>
+
+                    <!-- Step 5 & 6: Self-Destruct Countdown & Sample Session Button -->
+                    <div id="ghost-step-destruct" class="transition-all duration-500 opacity-0 mt-5 flex flex-col items-center gap-3">
+                        <div class="font-mono text-xs sm:text-sm font-bold text-red-400 uppercase tracking-widest">
+                            ⚠️ THIS AD WILL SELF-DESTRUCT IN <span id="ghost-destruct-timer" class="font-cyber font-black text-white text-base sm:text-lg px-2.5 py-0.5 rounded bg-red-950 border border-red-500">5</span>
+                        </div>
+                        <a href="http://129.212.176.154/" target="_blank" class="px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(255,255,255,0.85)] border-2 border-neutral-300 flex items-center gap-2">
+                            <span>CLICK HERE TO GET A SAMPLE SESSION</span> ⚡
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Corner Frame Accents -->
+                <div class="absolute top-3 left-4 text-[10px] font-mono text-neutral-500 uppercase select-none">B1 // AD-001</div>
+                <div class="absolute top-3 right-4 text-[10px] font-mono text-neutral-500 uppercase select-none">VOLATILE RAM CORE</div>
+                <div class="absolute bottom-3 left-4 text-[10px] font-mono text-neutral-500 uppercase select-none">ENCRYPTED STREAM</div>
+                <div class="absolute bottom-3 right-4 text-[10px] font-mono text-neutral-500 uppercase select-none">DISPOSABLE INSTANCE</div>
             </div>
         </section>
 
@@ -607,68 +739,6 @@
         <div class="marker-divider"></div>
 
         <!-- =========================================================
-             SECTION 3: FRIEDBRAINS WORLD FEATURE ARTICLE & INVESTIGATIVE AD
-             ========================================================= -->
-        <section id="friedbrains-feature" class="mb-14">
-            <div class="bg-transparent backdrop-blur-sm p-8 md:p-12 rounded-3xl relative border-2 border-purple-500/50 shadow-[0_0_35px_rgba(147,51,234,0.25)]">
-                
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    
-                    <!-- Left: Editorial Content -->
-                    <div class="lg:col-span-8">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-400 text-cyan-300 font-mono text-[10px] font-bold uppercase tracking-wider">
-                                🧠 &#xA7FB;RIEDBRAINS™ WORLD // SPECIAL INVESTIGATIVE REPORT
-                            </span>
-                            <span class="px-2.5 py-1 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">
-                                ISSUE #04
-                            </span>
-                        </div>
-                        
-                        <h2 class="text-2xl sm:text-4xl font-cyber font-extrabold text-white uppercase tracking-wider mb-4 leading-tight glow-title">
-                            The Digital Pickpocket: How Modern Ad-Trackers Harvest Your Cognitive Bandwidth
-                        </h2>
-                        
-                        <p class="text-sm sm:text-base font-mono text-slate-200 mb-4 leading-relaxed">
-                            Consumer mobile apps secretly execute over 1,200 background telemetry calls per day—cross-correlating device gyro movements, variable-ratio dopamine taps, and location beacons to auction your focus in real-time.
-                        </p>
-                        
-                        <div class="p-4 rounded-xl bg-transparent border-l-4 border-amber-500 mb-6 font-mono text-xs text-slate-300 leading-relaxed border border-purple-900/40">
-                            <strong class="text-amber-400 font-cyber">THE HARD HAT PROTOCOL:</strong> Privacy is no longer passive paranoia. It is an active cognitive engineering protocol designed to sever telemetry cords, eliminate ghost listeners, and restore prefrontal sovereignty.
-                        </div>
-
-                        <div class="flex flex-wrap gap-4 items-center">
-                            <a href="friedbrains-world/index.html" class="px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2">
-                                <i class="fa-solid fa-brain"></i> READ FULL ARTICLE AT &#xA7FB;RIEDBRAINS WORLD &rarr;
-                            </a>
-                            <a href="helpline/index.html" class="px-5 py-3 rounded-xl bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-shield-halved text-amber-400"></i> SCREEN DETOX PROTOCOLS
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Right: Visual Badge / Art Card -->
-                    <div class="lg:col-span-4 flex justify-center">
-                        <div class="w-full max-w-xs p-6 rounded-2xl bg-transparent border-2 border-purple-500/70 shadow-2xl text-center relative overflow-hidden group">
-                            <div class="absolute -top-12 -right-12 w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl"></div>
-                            <img src="assets/digital_cigarette_hardhat.jpeg" alt="Hard Hat Protocol" class="w-32 h-32 mx-auto rounded-full object-cover border-2 border-cyan-400 mb-4 shadow-[0_0_20px_rgba(6,182,212,0.4)]">
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-1">SOVEREIGN MIND</h3>
-                            <p class="font-mono text-xs text-slate-400 mb-4">Hard Hat Protocol &bull; Telemetry Severing</p>
-                            <span class="inline-block px-3 py-1 rounded bg-black/60 border border-amber-500/60 text-amber-300 font-mono text-[10px] font-bold">
-                                FREE PUBLIC INVESTIGATION
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- THIN GLOWING AMBER MAGIC-MARKER DIVIDER -->
-        <div class="marker-divider-amber"></div>
-
-        <!-- =========================================================
              SECTION 4: SYSTEM MEDIA BROADCAST
              ========================================================= -->
         <section id="ai-ads" class="mb-14">
@@ -793,6 +863,110 @@
 
             </div>
         </section>
+
+        <!-- THIN GLOWING CYAN MAGIC-MARKER DIVIDER -->
+        <div class="marker-divider-cyan"></div>
+
+        <!-- =========================================================
+             SECTION 5: FRIEDBRAINS WORLD & DIGITAL CIGARETTE WIDGET
+             (Placed Directly Above Helpline)
+             ========================================================= -->
+        <section id="friedbrains-feature" class="mb-14">
+            <div class="bg-transparent backdrop-blur-sm p-8 md:p-10 rounded-3xl relative border-2 border-purple-500/60 shadow-[0_0_35px_rgba(147,51,234,0.25)]">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Left: Editorial Content (6 Cols) -->
+                    <div class="lg:col-span-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-400 text-cyan-300 font-mono text-[10px] font-bold uppercase tracking-wider">
+                                🧠 &#xA7FB;RIEDBRAINS™ WORLD // SPECIAL INVESTIGATIVE REPORT
+                            </span>
+                            <span class="px-2.5 py-1 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">
+                                ISSUE #04
+                            </span>
+                        </div>
+                        
+                        <h2 class="text-2xl sm:text-3xl font-cyber font-extrabold text-white uppercase tracking-wider mb-3 leading-tight glow-title">
+                            The Digital Pickpocket: How Modern Ad-Trackers Harvest Your Cognitive Bandwidth
+                        </h2>
+                        
+                        <p class="text-xs sm:text-sm font-mono text-slate-200 mb-4 leading-relaxed">
+                            Consumer mobile apps secretly execute over 1,200 background telemetry calls per day—cross-correlating device gyro movements, variable-ratio dopamine taps, and location beacons to auction your focus in real-time.
+                        </p>
+                        
+                        <div class="p-3.5 rounded-xl bg-transparent border-l-4 border-amber-500 mb-4 font-mono text-xs text-slate-300 leading-relaxed border border-purple-900/40">
+                            <strong class="text-amber-400 font-cyber">THE HARD HAT PROTOCOL:</strong> Privacy is no longer passive paranoia. It is an active cognitive engineering protocol designed to sever telemetry cords and restore prefrontal sovereignty.
+                        </div>
+
+                        <div class="flex flex-wrap gap-3 items-center">
+                            <a href="friedbrains-world/index.html" class="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)] flex items-center gap-2">
+                                <i class="fa-solid fa-brain"></i> READ FULL ARTICLE AT &#xA7FB;RIEDBRAINS WORLD &rarr;
+                            </a>
+                            <a href="friedbrains-world/index.html" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-2">
+                                <span>CLICK HERE FOR MORE...</span> &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Middle: Visual Badge / Art Card (3 Cols) -->
+                    <div class="lg:col-span-3 flex justify-center">
+                        <div class="w-full max-w-xs p-5 rounded-2xl bg-black/60 border-2 border-purple-500/70 shadow-2xl text-center relative overflow-hidden group">
+                            <div class="absolute -top-10 -right-10 w-28 h-28 bg-cyan-500/20 rounded-full blur-2xl"></div>
+                            <img src="assets/digital_cigarette_hardhat.jpeg" alt="Hard Hat Protocol" class="w-28 h-28 mx-auto rounded-full object-cover border-2 border-cyan-400 mb-3 shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                            <h3 class="font-cyber text-base font-bold text-white uppercase mb-1">SOVEREIGN MIND</h3>
+                            <p class="font-mono text-[11px] text-slate-400 mb-3">Hard Hat Protocol &bull; Telemetry Severing</p>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-black/70 border border-amber-500/60 text-amber-300 font-mono text-[10px] font-bold">
+                                FREE PUBLIC INVESTIGATION
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Digital Cigarette Widget (3 Cols) -->
+                    <div class="lg:col-span-3 flex justify-center">
+                        <div class="w-full max-w-xs p-5 rounded-2xl bg-black border-2 border-[#d4d4d4] shadow-[0_0_25px_rgba(0,0,0,0.85)] text-center flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-neutral-700">
+                                    <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider">DIGITAL CIGARETTE</span>
+                                    <span id="detox-status-badge" class="text-[10px] font-mono text-green-400 px-1.5 py-0.5 rounded bg-green-950/80 border border-green-600">IDLE</span>
+                                </div>
+
+                                <!-- Animated Cigarette Graphic -->
+                                <div class="py-3 flex items-center justify-center">
+                                    <div class="flex items-center shadow-lg">
+                                        <!-- Filter -->
+                                        <div class="w-7 h-4 bg-[#c89d7c] rounded-l-sm border border-neutral-700"></div>
+                                        <!-- Paper Barrel -->
+                                        <div class="w-20 h-4 bg-gradient-to-r from-neutral-200 to-white border-y border-neutral-400"></div>
+                                        <!-- Glowing Ember Tip -->
+                                        <div id="cig-ember" class="w-4 h-4 bg-gradient-to-r from-amber-500 to-red-500 rounded-r-sm shadow-[0_0_12px_rgba(245,158,11,0.9)] transition-all"></div>
+                                    </div>
+                                </div>
+
+                                <div class="my-2">
+                                    <div id="detox-display" class="font-cyber font-black text-3xl text-amber-400 tracking-wider">01:00</div>
+                                    <div id="detox-status-text" class="text-[10px] font-mono text-slate-300 mt-1 uppercase">60-SEC VOLATILE DETOX</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <button type="button" onclick="toggleDigitalDetox()" id="detox-btn" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+                                    🚬 TAKE 60-SEC BREAK
+                                </button>
+                                <a href="friedbrains-world/index.html" class="block text-center mt-2.5 text-[10px] font-mono text-cyan-400 hover:underline">
+                                    CLICK HERE FOR MORE &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- THIN GLOWING RED MAGIC-MARKER DIVIDER -->
+        <div class="marker-divider-amber"></div>
 
         <!-- =========================================================
              SECTION 6: 24/7 CRISIS & DETOX HELPLINE (NO SCRIM)
@@ -1371,6 +1545,126 @@
             }
         }
 
+        // =========================================================
+        // GHOST BROWSER KINETIC SELF-DESTRUCT AD SEQUENCER
+        // =========================================================
+        function runGhostAdLoop() {
+            const brand = document.getElementById('ghost-step-brand');
+            const product = document.getElementById('ghost-step-product');
+            const sub = document.getElementById('ghost-step-sub');
+            const slogan = document.getElementById('ghost-step-slogan');
+            const destruct = document.getElementById('ghost-step-destruct');
+            const timer = document.getElementById('ghost-destruct-timer');
+            const casing = document.getElementById('ghost-ad-casing');
+
+            if (!brand || !product) return;
+
+            // Reset initial state
+            brand.style.opacity = '1';
+            product.style.opacity = '0';
+            sub.style.opacity = '0';
+            slogan.style.opacity = '0';
+            destruct.style.opacity = '0';
+            if (timer) timer.innerText = '5';
+
+            // Step 2: GHOST BROWSER fades in slowly, very slowly (after 1.8s)
+            setTimeout(() => {
+                product.style.opacity = '1';
+            }, 1800);
+
+            // Step 3: Quick POWERED BY R.E.P.™ (after 3.8s)
+            setTimeout(() => {
+                sub.style.opacity = '1';
+            }, 3800);
+
+            // Step 4: Slogans for disposable time-sensitive sessions (after 5s)
+            setTimeout(() => {
+                slogan.style.opacity = '1';
+            }, 5000);
+
+            // Step 5: Countdown begins (after 6.8s)
+            setTimeout(() => {
+                destruct.style.opacity = '1';
+                let count = 5;
+                const countdownInterval = setInterval(() => {
+                    count--;
+                    if (timer) timer.innerText = count > 0 ? count : '0';
+                    if (count <= 0) {
+                        clearInterval(countdownInterval);
+                        // Brief self-destruct glitch inversion
+                        setTimeout(() => {
+                            if (casing) {
+                                casing.style.filter = 'invert(1)';
+                                setTimeout(() => {
+                                    casing.style.filter = 'none';
+                                    setTimeout(runGhostAdLoop, 1200);
+                                }, 250);
+                            } else {
+                                setTimeout(runGhostAdLoop, 1200);
+                            }
+                        }, 800);
+                    }
+                }, 1000);
+            }, 6800);
+        }
+
+        // =========================================================
+        // DIGITAL CIGARETTE DETOX WIDGET SIMULATOR
+        // =========================================================
+        let detoxInterval = null;
+        let detoxSecs = 60;
+        function toggleDigitalDetox() {
+            const btn = document.getElementById('detox-btn');
+            const display = document.getElementById('detox-display');
+            const statusText = document.getElementById('detox-status-text');
+            const statusBadge = document.getElementById('detox-status-badge');
+            const ember = document.getElementById('cig-ember');
+
+            if (detoxInterval) {
+                clearInterval(detoxInterval);
+                detoxInterval = null;
+                detoxSecs = 60;
+                if (display) display.innerText = '01:00';
+                if (btn) btn.innerText = '🚬 TAKE 60-SEC BREAK';
+                if (statusText) statusText.innerText = '60-SEC VOLATILE DETOX';
+                if (statusBadge) {
+                    statusBadge.innerText = 'IDLE';
+                    statusBadge.className = 'text-[10px] font-mono text-green-400 px-1.5 py-0.5 rounded bg-green-950/80 border border-green-600';
+                }
+                if (ember) ember.classList.remove('scale-125', 'animate-pulse');
+                return;
+            }
+
+            if (ember) ember.classList.add('scale-125', 'animate-pulse');
+            if (btn) btn.innerText = '⏹️ CANCEL DETOX';
+            if (statusBadge) {
+                statusBadge.innerText = 'BURNING';
+                statusBadge.className = 'text-[10px] font-mono text-amber-400 px-1.5 py-0.5 rounded bg-amber-950/80 border border-amber-500 animate-pulse';
+            }
+
+            detoxInterval = setInterval(() => {
+                detoxSecs--;
+                const m = Math.floor(detoxSecs / 60).toString().padStart(2, '0');
+                const s = (detoxSecs % 60).toString().padStart(2, '0');
+                if (display) display.innerText = `${m}:${s}`;
+                if (statusText) statusText.innerText = `SEVERING TELEMETRY... [ ${60 - detoxSecs} TRACKERS PURGED ]`;
+
+                if (detoxSecs <= 0) {
+                    clearInterval(detoxInterval);
+                    detoxInterval = null;
+                    detoxSecs = 60;
+                    if (display) display.innerText = '00:00';
+                    if (statusText) statusText.innerText = 'SOVEREIGNTY RESTORED (100% RECLAIMED)';
+                    if (btn) btn.innerText = '🚬 RESTART DETOX BREAK';
+                    if (statusBadge) {
+                        statusBadge.innerText = 'CLEARED';
+                        statusBadge.className = 'text-[10px] font-mono text-green-400 px-1.5 py-0.5 rounded bg-green-950/80 border border-green-500';
+                    }
+                    if (ember) ember.classList.remove('scale-125', 'animate-pulse');
+                }
+            }, 1000);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('burn1_theme');
             const urlParams = new URLSearchParams(window.location.search);
@@ -1385,6 +1679,9 @@
                 if (themeText) themeText.innerText = 'NIGHT';
                 if (versionTag) versionTag.innerText = 'HUB BIZ';
             }
+
+            // Start Ghost Browser Ad Sequencer Loop
+            setTimeout(runGhostAdLoop, 500);
         });
     </script>
 </body>

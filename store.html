@@ -84,38 +84,105 @@
             transform: translateY(-4px);
         }
 
-        /* Day Mode */
+        /* =========================================================
+           SMOKE & MIRROR CORPORATE EDITION (DAY MODE)
+           Adapted from silver_mirror_clock.html // Silver & Greyscale
+           ========================================================= */
+        html.day-mode {
+            --bg-color: #ffffff;
+            --silver-light: #fdfdfd;
+            --silver-mid: #e4e4e4;
+            --silver-dark: #b0b0b0;
+            --silver-edge: #d4d4d4;
+        }
+
         html.day-mode body {
             background-color: #ffffff !important;
-            background-image: url('assets/daybackground.png') !important;
-            background-size: cover !important;
-            background-position: top right !important;
+            background: radial-gradient(circle at center, #ffffff 0%, #f4f4f6 50%, #e2e8f0 100%) !important;
             background-attachment: fixed !important;
-            color: #000000 !important;
+            color: #09090b !important;
         }
+
         html.day-mode .ambient-glow-purple,
         html.day-mode .ambient-glow-orange {
             display: none !important;
         }
+
         html.day-mode header {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-            border-bottom: 3px solid #000000 !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+            border-bottom: 2px solid #d4d4d4 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
         }
-        html.day-mode header span, html.day-mode header a {
-            color: #000000 !important;
+
+        html.day-mode header span, 
+        html.day-mode header a {
+            color: #09090b !important;
             text-shadow: none !important;
         }
-        html.day-mode h1, html.day-mode h2, html.day-mode h3, html.day-mode h4,
-        html.day-mode p, html.day-mode span, html.day-mode label {
-            color: #000000 !important;
-            text-shadow: none !important;
-        }
+
+        /* Smoke & Mirror Section & Card Styling */
         html.day-mode .cyber-card,
         html.day-mode .glass-panel {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-            border: 3px solid #000000 !important;
-            box-shadow: 6px 6px 0px #000000 !important;
-            color: #000000 !important;
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 45%, #f4f4f5 100%) !important;
+            border: 2px solid #d4d4d4 !important;
+            border-radius: 1.5rem !important;
+            box-shadow: 
+                0 10px 25px -5px rgba(0, 0, 0, 0.05),
+                inset 0 0 14px rgba(255, 255, 255, 0.9),
+                inset 0 0 2px #b0b0b0 !important;
+            color: #09090b !important;
+        }
+
+        html.day-mode .cyber-card:hover,
+        html.day-mode .glass-panel:hover {
+            border-color: #f59e0b !important; /* Burn-1 orange accent on hover */
+            box-shadow: 
+                0 15px 30px -5px rgba(245, 158, 11, 0.2),
+                inset 0 0 16px rgba(255, 255, 255, 0.9),
+                inset 0 0 2px #d4d4d4 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Highlighting: Dark black highlight box with light letters */
+        html.day-mode .highlight-badge,
+        html.day-mode .status-tag {
+            background-color: #09090b !important;
+            color: #ffffff !important;
+            border: 1px solid #d4d4d4 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html.day-mode h1, 
+        html.day-mode h2, 
+        html.day-mode h3, 
+        html.day-mode h4 {
+            color: #09090b !important;
+            text-shadow: none !important;
+        }
+
+        html.day-mode p, 
+        html.day-mode label {
+            color: #334155 !important;
+            text-shadow: none !important;
+        }
+
+        html.day-mode .marker-divider,
+        html.day-mode .marker-divider-amber,
+        html.day-mode .marker-divider-cyan {
+            background: linear-gradient(90deg, transparent 0%, #d4d4d4 25%, #09090b 50%, #d4d4d4 75%, transparent 100%) !important;
+            box-shadow: 0 0 10px rgba(212, 212, 212, 0.5) !important;
+            height: 2px !important;
+        }
+
+        html.day-mode footer {
+            background: #ffffff !important;
+            border-top: 2px solid #d4d4d4 !important;
+            color: #64748b !important;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
+        }
+        html.day-mode footer span, 
+        html.day-mode footer a {
+            color: #09090b !important;
         }
     </style>
 </head>
