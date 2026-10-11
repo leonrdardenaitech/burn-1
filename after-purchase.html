@@ -97,6 +97,36 @@
 
         <div class="marker-divider"></div>
 
+        <!-- DYNAMIC INTAKE RESERVATION CONFIRMATION (IF RESERVED ON HOMEPAGE) -->
+        <div id="reservation-receipt-card" class="hidden mb-10 cyber-card p-6 rounded-2xl border-2 border-amber-500 bg-amber-950/20 shadow-[0_0_25px_rgba(245,158,11,0.25)]">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-purple-900/60 pb-4 mb-4 gap-2">
+                <div>
+                    <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-wider">RESERVATION INTAKE LOCKED IN</span>
+                    <h2 id="receipt-biz-name" class="text-xl font-cyber font-bold text-white uppercase mt-1">Apex Security Kiosks</h2>
+                    <p id="receipt-route" class="text-xs font-mono text-purple-300 font-bold mt-0.5">https://mybusinessname.burn-1.com</p>
+                </div>
+                <span id="receipt-order-id" class="px-3 py-1 rounded bg-black border border-amber-500/50 text-amber-400 font-mono text-xs font-bold whitespace-nowrap">#PORT-LIVE</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs text-slate-300 mb-4">
+                <div>
+                    <span class="text-slate-500 block text-[10px] uppercase">Deliver Confirmation To:</span>
+                    <span id="receipt-email" class="text-white font-bold">leonrdarden@gmail.com</span>
+                </div>
+                <div>
+                    <span class="text-slate-500 block text-[10px] uppercase">Scope Category:</span>
+                    <span id="receipt-category" class="text-white">Business &amp; Retail</span>
+                </div>
+                <div>
+                    <span class="text-slate-500 block text-[10px] uppercase">Deployment Turnaround:</span>
+                    <span class="text-emerald-400 font-bold">7-Day Turnaround</span>
+                </div>
+            </div>
+            <div class="p-3.5 rounded-lg bg-black/60 border border-purple-900/60 font-mono text-[11px] text-slate-300 flex items-center gap-2.5">
+                <i class="fa-solid fa-envelope-circle-check text-amber-400 text-sm flex-shrink-0"></i>
+                <span>Intake record transmitted to our Google Vault &amp; confirmation dispatched to your email.</span>
+            </div>
+        </div>
+
         <!-- ACTION BUTTONS CONTAINER -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
 
@@ -172,5 +202,28 @@
         </div>
     </footer>
 
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const raw = localStorage.getItem('burn1_reservation');
+                if (raw) {
+                    const data = JSON.parse(raw);
+                    if (data && (data.subdomain || data.brand)) {
+                        const card = document.getElementById('reservation-receipt-card');
+                        if (card) {
+                            card.classList.remove('hidden');
+                            document.getElementById('receipt-biz-name').innerText = data.brand || 'Custom System Order';
+                            document.getElementById('receipt-route').innerText = data.fullURL || `https://${data.subdomain}.burn-1.com`;
+                            document.getElementById('receipt-order-id').innerText = data.orderId || '#PORT-LIVE';
+                            document.getElementById('receipt-email').innerText = data.email || 'Registered Email';
+                            document.getElementById('receipt-category').innerText = `${data.industry || 'Business'} (${data.scope || 'Commercial'})`;
+                        }
+                    }
+                }
+            } catch (err) {
+                console.warn('Could not read reservation intake:', err);
+            }
+        });
+    </script>
 </body>
 </html>
