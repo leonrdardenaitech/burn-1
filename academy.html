@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BURN-1 CYBER ACADEMY | Dual-Compliance &amp; Underwriting Training Hub</title>
-    <meta name="description" content="Gamified 8-stage compliance training console, Zero-Cost MFA setup, and Star Wars regulatory codex for Chubb &amp; Travelers cyber insurance underwriters.">
+    <title>BURN-1 CYBER ACADEMY | Zero-Cost Underwriting &amp; Compliance Curriculum</title>
+    <meta name="description" content="100% Free Public Cyber Underwriting Training: 8-stage step-by-step curriculum for zero-cost MFA, phishing triage, immutable backups, and Darden Trust Directory verification.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,11 +41,96 @@
             color: #ffffff;
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* 3D PERSPECTIVE REGULATORY CODEX CRAWL */
+        .ambient-glow-purple {
+            background: radial-gradient(circle at 50% 15%, rgba(147, 51, 234, 0.22) 0%, rgba(7, 5, 13, 0) 70%);
+        }
+        .ambient-glow-cyan {
+            background: radial-gradient(circle at 80% 60%, rgba(6, 182, 212, 0.16) 0%, rgba(7, 5, 13, 0) 70%);
+        }
+        .ambient-glow-amber {
+            background: radial-gradient(circle at 20% 85%, rgba(245, 158, 11, 0.15) 0%, rgba(7, 5, 13, 0) 70%);
+        }
+
+        .glow-title {
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.95), 0 0 45px rgba(147, 51, 234, 0.9), 0 0 70px rgba(245, 158, 11, 0.8);
+        }
+        .glow-amber {
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.95), 0 0 35px rgba(251, 191, 36, 0.8);
+        }
+        .glow-cyan {
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.95), 0 0 35px rgba(34, 211, 238, 0.8);
+        }
+
+        .glass-panel {
+            background: rgba(12, 8, 24, 0.8) !important;
+            backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(147, 51, 234, 0.4) !important;
+        }
+
+        /* 3D FLIP CARD MECHANICS */
+        .card-stage-container {
+            perspective: 1000px;
+            min-height: 400px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card-stage-container.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        .card-front {
+            background: rgba(14, 10, 26, 0.88);
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            backdrop-filter: blur(8px);
+        }
+        .card-front:hover {
+            border-color: rgba(245, 158, 11, 0.8);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+            transform: translateY(-2px);
+        }
+        .card-back {
+            transform: rotateY(180deg);
+            background: rgba(20, 14, 38, 0.96);
+            border: 2px solid #f59e0b;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
+            backdrop-filter: blur(14px);
+        }
+
+        /* Cleared / Passed State */
+        .card-stage-container.cleared .card-front {
+            border-color: #10b981 !important;
+            background: rgba(6, 32, 22, 0.9) !important;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4) !important;
+        }
+        .card-stage-container.cleared .card-back {
+            border-color: #10b981 !important;
+            background: rgba(6, 36, 24, 0.95) !important;
+        }
+
+        /* Star Wars Regulatory Crawl in toggle view */
         .codex-viewport {
-            height: 180px;
+            height: 190px;
             perspective: 350px;
             overflow: hidden;
             position: relative;
@@ -67,551 +152,803 @@
             100% { top: -250%; }
         }
 
-        /* 3D FLIP CARD MECHANICS */
-        .card-stage-container {
-            perspective: 1000px;
-            min-height: 380px;
+        /* Day Mode */
+        html.day-mode body {
+            background-color: #ffffff !important;
+            background-image: url('assets/daybackground.png') !important;
+            background-size: cover !important;
+            background-position: top right !important;
+            background-attachment: fixed !important;
+            color: #000000 !important;
         }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
+        html.day-mode .ambient-glow-purple,
+        html.day-mode .ambient-glow-cyan,
+        html.day-mode .ambient-glow-amber {
+            display: none !important;
         }
-        .card-stage-container.flipped .flip-card-inner {
-            transform: rotateY(180deg);
+        html.day-mode header {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 3px solid #000000 !important;
         }
-        .card-face {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
+        html.day-mode header span, html.day-mode header a {
+            color: #000000 !important;
+            text-shadow: none !important;
         }
-        .card-front {
-            background: rgba(13, 10, 24, 0.85);
-            border: 1px solid rgba(147, 51, 234, 0.4);
-            backdrop-filter: blur(8px);
+        html.day-mode h1, html.day-mode h2, html.day-mode h3, html.day-mode h4,
+        html.day-mode p, html.day-mode span, html.day-mode label {
+            color: #000000 !important;
+            text-shadow: none !important;
         }
-        .card-back {
-            transform: rotateY(180deg);
-            background: rgba(18, 12, 34, 0.95);
-            border: 2px solid #f59e0b;
-            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
-            backdrop-filter: blur(12px);
-        }
-
-        /* Card Cleared / Passed State */
-        .card-stage-container.cleared .card-front {
-            border-color: #10b981 !important;
-            background: rgba(6, 30, 20, 0.9) !important;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.35) !important;
-        }
-        .card-stage-container.cleared .card-back {
-            border-color: #10b981 !important;
-            background: rgba(6, 30, 20, 0.95) !important;
-        }
-
-        /* Glowing text & markers */
-        .glow-title {
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(147, 51, 234, 0.8);
-        }
-        .glow-amber {
-            text-shadow: 0 0 15px rgba(245, 158, 11, 0.9);
-        }
-        .glow-cyan {
-            text-shadow: 0 0 15px rgba(6, 182, 212, 0.9);
+        html.day-mode .glass-panel,
+        html.day-mode .card-front,
+        html.day-mode .card-back {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border: 3px solid #000000 !important;
+            box-shadow: 6px 6px 0px #000000 !important;
+            color: #000000 !important;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col relative antialiased selection:bg-purple-600 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between relative antialiased selection:bg-purple-600 selection:text-white">
+
+    <!-- AUDIO ELEMENT -->
+    <audio id="bgAudio" loop preload="auto" src="assets/slip_and_slide.mp3"></audio>
+
+    <!-- AMBIENT GLOWS -->
+    <div class="fixed inset-0 pointer-events-none z-0 ambient-glow-purple"></div>
+    <div class="fixed inset-0 pointer-events-none z-0 ambient-glow-cyan"></div>
+    <div class="fixed inset-0 pointer-events-none z-0 ambient-glow-amber"></div>
 
     <!-- GLOBAL NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-purple-900/60 px-4 lg:px-8 py-3 flex justify-between items-center">
+    <header class="sticky top-0 z-50 bg-black/85 backdrop-blur-md border-b border-purple-900/60 px-4 lg:px-8 py-3 flex justify-between items-center transition-colors">
         <div class="flex items-center gap-3">
-            <a href="index.html" class="flex items-center gap-3 group">
+            <a href="index.html" title="Burn-1 Hub" class="flex items-center gap-3 group">
                 <img src="assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border border-purple-500/60 group-hover:border-amber-400 transition-colors">
                 <span class="text-xl sm:text-2xl font-cyber text-white font-extrabold tracking-widest flex items-center gap-2">
                     <span class="text-amber-500 glow-amber">BURN-1</span>
-                    <span class="text-cyan-400 text-xs px-2 py-0.5 rounded border border-cyan-500/50 bg-cyan-950/40 font-mono">ACADEMY</span>
+                    <span id="version-tag" class="text-cyan-400 text-xs px-2 py-0.5 rounded border border-cyan-500/50 bg-cyan-950/40 font-mono">ACADEMY</span>
                 </span>
             </a>
         </div>
 
-        <div class="flex items-center gap-3 text-xs font-mono">
-            <a href="index.html" class="px-3.5 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 hover:text-white uppercase font-bold transition-all">
-                &larr; BURN-1 HUB
-            </a>
-            <a href="directory.html" class="px-3.5 py-1.5 rounded-lg bg-cyan-950/80 border border-cyan-400 text-cyan-200 hover:text-white uppercase font-bold transition-all flex items-center gap-1.5">
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end text-xs font-mono">
+            <!-- DIRECTORY BUTTON -->
+            <a href="directory.html" title="Metro Plaza Directory" class="px-3.5 py-1.5 rounded-lg bg-cyan-950/80 border border-cyan-400 text-cyan-200 font-cyber font-extrabold uppercase tracking-wider hover:bg-cyan-900 transition-all shadow-[0_0_12px_rgba(6,182,212,0.4)] flex items-center gap-1.5">
                 <i class="fa-solid fa-compass text-cyan-400"></i> DIRECTORY
             </a>
-            <a href="store.html" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold uppercase transition-all flex items-center gap-1.5">
+
+            <!-- STORE BUTTON -->
+            <a href="store.html" title="Hardening Vault & Store" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(245,158,11,0.5)]">
                 <i class="fa-solid fa-store"></i> STORE
             </a>
+
+            <!-- HUB BUTTON -->
+            <a href="index.html" class="px-3 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 hover:text-white uppercase font-bold transition-all">
+                &larr; HUB
+            </a>
+
+            <!-- MUSIC TOGGLE -->
+            <button id="songToggleBtn" onclick="toggleSong()" class="px-3 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5">
+                <i id="songIcon" class="fa-solid fa-music text-amber-400"></i>
+                <span id="songText" class="hidden sm:inline">MUSIC</span>
+            </button>
+
+            <!-- DAY / NIGHT TOGGLE -->
+            <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5">
+                <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
+                <span id="themeText" class="hidden sm:inline">DAY</span>
+            </button>
         </div>
     </header>
 
+    <!-- MAIN ACADEMY CONTENT -->
     <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
         <!-- =========================================================
-             SECTION 1: THE REGULATORY CODEX STREAM (STAR WARS CRAWL)
+             SECTION 1: PRESTIGIOUS CURRICULUM HEADER & VALUE PROPOSITION
              ========================================================= -->
         <section class="mb-10">
-            <div class="flex items-center justify-between mb-3 px-1">
-                <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-satellite-dish animate-pulse"></i> STATUTORY CODEX STREAM // CARRIER &amp; REGULATORY BENCHMARKS
-                </span>
-                <span class="text-[11px] font-mono text-slate-400">
-                    NIST CSF 2.0 &bull; HIPAA 164.312 &bull; NYDFS 500 &bull; CHUBB &amp; TRAVELERS
-                </span>
-            </div>
+            <div class="glass-panel p-8 sm:p-10 rounded-3xl relative overflow-hidden border-2 border-purple-500/50 shadow-[0_0_40px_rgba(147,51,234,0.25)]">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                    <div class="max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded bg-purple-950/90 border border-purple-500 text-purple-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+                                🎓 100% FREE PUBLIC TRAINING AMENITY
+                            </span>
+                            <span class="px-3 py-1 rounded bg-green-950/90 border border-green-500 text-green-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+                                POTENTIAL 25% - 35% CARRIER PREMIUM DISCOUNT
+                            </span>
+                            <span class="px-3 py-1 rounded bg-amber-950/90 border border-amber-500 text-amber-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+                                ZERO VENDOR SOFTWARE COST
+                            </span>
+                        </div>
 
-            <!-- 3D Perspective Codex Window -->
-            <div class="codex-viewport p-6 text-center">
-                <div class="codex-crawl-content font-mono text-xs sm:text-sm text-cyan-300 font-bold space-y-4 tracking-wider leading-relaxed">
-                    <div class="text-amber-400 font-cyber text-base uppercase">=== SECTION A: HEALTHCARE &amp; HIPAA SECURITY RULE (45 CFR § 164.312) ===</div>
-                    <div>§ 164.312(a)(2)(iv) ENCRYPTION AT REST &bull; § 164.312(b) AUDIT CONTROLS &bull; HITECH BREACH SAFE HARBOR EXEMPTION</div>
-                    
-                    <div class="text-purple-400 font-cyber text-base uppercase mt-4">=== SECTION B: FINANCIAL &amp; NYDFS 23 NYCRR PART 500 ===</div>
-                    <div>500.12 MANDATORY MULTI-FACTOR AUTHENTICATION &bull; 500.07 ACCESS PRIVILEGES &bull; 500.17 72-HOUR REGULATORY DISCLOSURE</div>
-                    
-                    <div class="text-green-400 font-cyber text-base uppercase mt-4">=== SECTION C: CARRIER UNDERWRITING WARRANTY (CHUBB &amp; TRAVELERS) ===</div>
-                    <div>ITEM 4B: ZERO-COST FIDO2 PASSKEYS REQUIRED ON ALL ADMIN INGRESS &bull; ITEM 6A: IMMUTABLE S3 OBJECT LOCK BACKUPS</div>
-                    
-                    <div class="text-cyan-400 font-cyber text-base uppercase mt-4">=== SECTION D: DEFENSE &amp; NIST CSF 2.0 / CMMC 2.0 ===</div>
-                    <div>PR.AC-5 IDENTITY MANAGEMENT &bull; PR.DS-1 DATA REST INTEGRITY &bull; DE.CM-1 CONTINUOUS ATTACK SURFACE MONITORING</div>
+                        <h1 class="text-3xl sm:text-5xl font-cyber text-white font-extrabold uppercase glow-title tracking-tight mb-3">
+                            Cyber Underwriting &amp; Pre-Renewal Academy
+                        </h1>
+
+                        <p class="text-sm sm:text-base font-mono text-slate-200 leading-relaxed mb-4">
+                            Commercial underwriters at <strong class="text-amber-400">Chubb, Travelers, and Beazley</strong> do not mandate costly enterprise security contracts. They require verified, signed proof that 8 core operational hygiene controls are enforced. This curriculum trains your engineers and staff step-by-step to satisfy warranty requirements and waive sublimits.
+                        </p>
+
+                        <div class="flex flex-wrap gap-3 font-mono text-xs text-slate-300">
+                            <div class="flex items-center gap-1.5 text-cyan-300">
+                                <i class="fa-solid fa-check-double text-cyan-400"></i> NIST CSF 2.0 Aligned
+                            </div>
+                            <div class="flex items-center gap-1.5 text-purple-300">
+                                <i class="fa-solid fa-shield-halved text-purple-400"></i> HIPAA § 164.312 Safe Harbor
+                            </div>
+                            <div class="flex items-center gap-1.5 text-amber-300">
+                                <i class="fa-solid fa-award text-amber-400"></i> Darden Trust Verified Seal
+                            </div>
+                            <div class="flex items-center gap-1.5 text-emerald-300">
+                                <i class="fa-solid fa-store text-emerald-400"></i> Metro Plaza Directory Badge
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fast-Track / Automated Audit Bridge CTA -->
+                    <div class="w-full lg:w-80 p-6 rounded-2xl bg-black/90 border-2 border-amber-500 text-center shrink-0 shadow-2xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider block mb-1">
+                                NEED INSTANT PROOF IN 60 SECONDS?
+                            </span>
+                            <h3 class="font-cyber text-base font-bold text-white uppercase mb-2">Automated SLM Audit</h3>
+                            <p class="text-[11px] font-mono text-slate-300 mb-4">
+                                Skip manual training. Let our resident engine inspect your domain and compile your Chubb Evidence Binder automatically.
+                            </p>
+                        </div>
+                        <a href="store.html#audit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.6)] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt"></i> GET INSTANT AUDIT ($499)
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- =========================================================
-             SECTION 2: MASTER PROGRESS HUD
+             SECTION 2: STATUTORY UNDERWRITING CODEX (INTERACTIVE DOSSIER)
              ========================================================= -->
-        <section class="mb-10 p-6 rounded-2xl bg-black/80 border border-purple-500/40">
+        <section class="mb-10">
+            <div class="glass-panel p-6 rounded-2xl border border-cyan-500/40">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 pb-3 border-b border-purple-900/60">
+                    <div>
+                        <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced"></i> STATUTORY CODEX // UNDERWRITING &amp; REGULATORY BENCHMARKS
+                        </span>
+                        <p class="text-xs font-mono text-slate-300 mt-0.5">
+                            Select an institutional framework to inspect statutory citations, carrier mandates, and zero-cost remediation formulas:
+                        </p>
+                    </div>
+
+                    <button id="toggleCrawlBtn" onclick="toggleCrawlStream()" class="px-3 py-1.5 rounded bg-purple-950 border border-purple-500 text-purple-200 font-mono text-xs hover:bg-purple-900 transition-all flex items-center gap-1.5 shrink-0">
+                        <i class="fa-solid fa-film text-amber-400"></i>
+                        <span id="crawlToggleText">PLAY REGULATORY STREAM</span>
+                    </button>
+                </div>
+
+                <!-- Codex Framework Tabs -->
+                <div class="flex flex-wrap gap-2 mb-4 font-mono text-xs">
+                    <button onclick="selectCodex('chubb')" id="codex-btn-chubb" class="codex-tab-btn active px-3.5 py-2 rounded-lg bg-amber-500 text-black font-bold uppercase transition-all">
+                        🛡️ CHUBB WARRANTY (SCHEDULE B)
+                    </button>
+                    <button onclick="selectCodex('travelers')" id="codex-btn-travelers" class="codex-tab-btn px-3.5 py-2 rounded-lg bg-black/60 border border-purple-500 text-purple-200 hover:text-white uppercase transition-all">
+                        📄 TRAVELERS (ITEM 6A)
+                    </button>
+                    <button onclick="selectCodex('hipaa')" id="codex-btn-hipaa" class="codex-tab-btn px-3.5 py-2 rounded-lg bg-black/60 border border-purple-500 text-purple-200 hover:text-white uppercase transition-all">
+                        🏥 HIPAA § 164.312 HEALTHCARE
+                    </button>
+                    <button onclick="selectCodex('nydfs')" id="codex-btn-nydfs" class="codex-tab-btn px-3.5 py-2 rounded-lg bg-black/60 border border-purple-500 text-purple-200 hover:text-white uppercase transition-all">
+                        🏦 NYDFS 23 NYCRR 500
+                    </button>
+                    <button onclick="selectCodex('nist')" id="codex-btn-nist" class="codex-tab-btn px-3.5 py-2 rounded-lg bg-black/60 border border-purple-500 text-purple-200 hover:text-white uppercase transition-all">
+                        ⚡ NIST CSF 2.0 BENCHMARK
+                    </button>
+                </div>
+
+                <!-- Codex Content Display Box -->
+                <div id="codex-content-box" class="p-5 rounded-xl bg-black/90 border border-cyan-500/30 font-mono text-xs leading-relaxed text-slate-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-amber-400 font-bold uppercase text-sm" id="codex-title">CHUBB CYBER UNDERWRITING WARRANTY // SCHEDULE B</span>
+                        <span class="px-2 py-0.5 rounded bg-green-950 text-green-300 text-[10px] border border-green-500" id="codex-status">DISCOUNT CREDIT: 15% - 20%</span>
+                    </div>
+                    <p class="text-slate-300 mb-2" id="codex-body">
+                        Chubb cyber liability policies mandate phishing-resistant Multi-Factor Authentication (FIDO2 or authenticator app) on 100% of remote ingress, cloud administration portals, and email accounts. Failure to attest to this control triggers complete claim denial under the MFA Warranty Exclusion.
+                    </p>
+                    <div class="text-[11px] text-cyan-300 bg-cyan-950/40 p-2.5 rounded border border-cyan-500/30" id="codex-formula">
+                        <strong>ZERO-COST REMEDIATION:</strong> Enforce free Microsoft/Google Authenticator passkeys, deactivate SMS fallback tokens, and export active IdP enrollment telemetry for the evidence binder.
+                    </div>
+                </div>
+
+                <!-- Optional Star Wars 3D Crawl (Hidden by Default) -->
+                <div id="codex-crawl-container" class="mt-4 hidden">
+                    <div class="codex-viewport p-6 text-center">
+                        <div class="codex-crawl-content font-mono text-xs sm:text-sm text-cyan-300 font-bold space-y-4 tracking-wider leading-relaxed">
+                            <div class="text-amber-400 font-cyber text-base uppercase">=== SECTION A: HEALTHCARE &amp; HIPAA SECURITY RULE (45 CFR § 164.312) ===</div>
+                            <div>§ 164.312(a)(2)(iv) ENCRYPTION AT REST &bull; § 164.312(b) AUDIT CONTROLS &bull; HITECH BREACH SAFE HARBOR EXEMPTION</div>
+                            
+                            <div class="text-purple-400 font-cyber text-base uppercase mt-4">=== SECTION B: FINANCIAL &amp; NYDFS 23 NYCRR PART 500 ===</div>
+                            <div>500.12 MANDATORY MULTI-FACTOR AUTHENTICATION &bull; 500.07 ACCESS PRIVILEGES &bull; 500.17 72-HOUR REGULATORY DISCLOSURE</div>
+                            
+                            <div class="text-green-400 font-cyber text-base uppercase mt-4">=== SECTION C: CARRIER UNDERWRITING WARRANTY (CHUBB &amp; TRAVELERS) ===</div>
+                            <div>ITEM 4B: ZERO-COST FIDO2 PASSKEYS REQUIRED ON ALL ADMIN INGRESS &bull; ITEM 6A: IMMUTABLE S3 OBJECT LOCK BACKUPS</div>
+                            
+                            <div class="text-cyan-400 font-cyber text-base uppercase mt-4">=== SECTION D: DEFENSE &amp; NIST CSF 2.0 / CMMC 2.0 ===</div>
+                            <div>PR.AC-5 IDENTITY MANAGEMENT &bull; PR.DS-1 DATA REST INTEGRITY &bull; DE.CM-1 CONTINUOUS ATTACK SURFACE MONITORING</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             SECTION 3: MASTER PROGRESS HUD & EVIDENCE EXPORT
+             ========================================================= -->
+        <section class="mb-12 p-6 rounded-2xl bg-black/85 border border-purple-500/50 shadow-xl">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
                 <div>
                     <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block mb-1">
-                        TRAINING STATUS // R.E.P. SLM ENGINE CONSOLE
+                        LIVE TELEMETRY // 8-MODULE VERIFICATION HUD
                     </span>
                     <h2 class="font-cyber text-2xl font-bold text-white uppercase">
-                        Dual-Compliance Underwriting Matrix
+                        Master Underwriting Progress Matrix
                     </h2>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 flex-wrap">
                     <div class="text-right font-mono">
-                        <span class="text-[10px] text-slate-400 uppercase block">Stages Cleared</span>
-                        <span id="hud-stages-text" class="text-lg font-cyber font-bold text-amber-400">0 / 8 STAGES</span>
+                        <span class="text-[10px] text-slate-400 uppercase block">Curriculum Status</span>
+                        <span id="hud-stages-text" class="text-lg font-cyber font-bold text-amber-400">0 / 8 MODULES (0%)</span>
                     </div>
-                    <button onclick="exportInsuranceProof()" class="px-4 py-2.5 rounded-lg bg-green-950 border border-green-500 text-green-300 font-mono text-xs font-bold hover:bg-green-900 transition-all flex items-center gap-2 shadow-[0_0_12px_rgba(16,185,129,0.3)]">
-                        <i class="fa-solid fa-file-shield text-green-400"></i> EXPORT INSURANCE PROOF
+                    <button onclick="exportInsuranceProof()" class="px-5 py-2.5 rounded-lg bg-green-500 hover:bg-green-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        <i class="fa-solid fa-file-shield"></i> EXPORT UNDERWRITING PROOF
                     </button>
                 </div>
             </div>
 
             <!-- Progress Bar -->
-            <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden border border-slate-800">
+            <div class="w-full bg-slate-900 h-3.5 rounded-full overflow-hidden border border-slate-800">
                 <div id="hud-progress-bar" class="bg-gradient-to-r from-purple-500 via-amber-400 to-green-400 h-full w-0 transition-all duration-500"></div>
             </div>
         </section>
 
         <!-- =========================================================
-             SECTION 3: 8-STAGE 3-STATE FLIP CARDS CONSOLE
+             SECTION 4: 8-STAGE CURRICULUM ORGANIZED BY 4 CLEAR PHASES
              ========================================================= -->
-        <section id="stages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
 
-            <!-- STAGE 1: ZERO-COST MFA -->
-            <div class="card-stage-container" id="stage-card-1">
-                <div class="flip-card-inner">
-                    <!-- Front (Static) -->
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 01 &bull; MOD-007</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">NIST PR.AC-5</span>
+        <!-- PHASE 1: IDENTITY ACCESS & HUMAN DEFENSE -->
+        <div class="mb-12">
+            <div class="flex items-center gap-3 mb-6 pb-2 border-b border-purple-500/40">
+                <span class="px-3 py-1 rounded bg-purple-950 border border-purple-400 text-purple-300 font-mono text-xs font-bold uppercase">
+                    PHASE 01
+                </span>
+                <h3 class="font-cyber text-xl font-bold text-white uppercase">
+                    Identity Access &amp; Human Defense Layer
+                </h3>
+                <span class="text-xs font-mono text-slate-400 hidden sm:inline">&bull; Eliminates credential stuffing &amp; executive spearphish hooks</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- MODULE 1: ZERO-COST MFA -->
+                <div class="card-stage-container" id="stage-card-1">
+                    <div class="flip-card-inner">
+                        <!-- Front Face -->
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 01 &bull; IDENTITY</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">CHUBB ITEM 4B</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Zero-Cost MFA Hardening</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Eliminate carrier SMS bypass vulnerabilities by enforcing FIDO2 passkeys and Google/Microsoft Authenticator across 100% of admin and remote portals.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Disables SMS fallbacks. Waives $250k MFA ransomware sublimits.
+                                </div>
                             </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Zero-Cost MFA Setup</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Eliminate carrier SMS bypasses by enforcing FIDO2 passkeys &amp; Google/Microsoft Authenticator across all administrative portals.
-                            </p>
+                            <button onclick="flipStage(1)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="flipStage(1)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
+                        <!-- Back Face -->
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 01 VERIFICATION</span>
+                                    <button onclick="flipStage(1)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-1-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Disable SMS &amp; Email 2FA tokens</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-1-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Enforce FIDO2 WebAuthn Passkeys</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-1-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Export IdP Enrollment Audit CSV</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(1)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                                VERIFY &amp; PASS MODULE &rarr;
+                            </button>
+                        </div>
                     </div>
-                    <!-- Back (Checklist & Action) -->
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 01 CHECKLIST</span>
-                                <button onclick="flipStage(1)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
+                </div>
+
+                <!-- MODULE 2: SPEARPHISHING TRIAGE -->
+                <div class="card-stage-container" id="stage-card-2">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 02 &bull; SOCIAL OPS</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">NIST AT-2(2)</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Anti-Spearphish Triage Drill</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Conduct interactive role-based spearphishing simulations and wire up a 1-click Outlook/Google reporting beacon for immediate threat containment.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Proves click-rate &lt; 3.5% across finance and executive teams.
+                                </div>
                             </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-1-1" class="rounded accent-amber-400">
-                                    <span>Disable SMS &amp; Email 2FA fallbacks</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-1-2" class="rounded accent-amber-400">
-                                    <span>Enforce FIDO2 WebAuthn Passkeys</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-1-3" class="rounded accent-amber-400">
-                                    <span>Export IdP Enrollment Evidence CSV</span>
-                                </label>
-                            </div>
+                            <button onclick="flipStage(2)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="verifyAndAdvance(1)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                            VERIFY &amp; PASS STAGE &rarr;
-                        </button>
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 02 VERIFICATION</span>
+                                    <button onclick="flipStage(2)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-2-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Simulate executive wire/invoice hook</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-2-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Verify click rate stays under 3.5%</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-2-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Log remedial micro-training completion</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(2)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                                VERIFY &amp; PASS MODULE &rarr;
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- STAGE 2: PHISHING SIMULATION -->
-            <div class="card-stage-container" id="stage-card-2">
-                <div class="flip-card-inner">
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 02 &bull; MOD-001</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">CHUBB ITEM 4B</span>
+        <!-- PHASE 2: PERIMETER HARDENING & DISASTER AIR-GAP -->
+        <div class="mb-12">
+            <div class="flex items-center gap-3 mb-6 pb-2 border-b border-cyan-500/40">
+                <span class="px-3 py-1 rounded bg-cyan-950 border border-cyan-400 text-cyan-300 font-mono text-xs font-bold uppercase">
+                    PHASE 02
+                </span>
+                <h3 class="font-cyber text-xl font-bold text-white uppercase">
+                    Perimeter Hardening &amp; Disaster Air-Gap
+                </h3>
+                <span class="text-xs font-mono text-slate-400 hidden sm:inline">&bull; Ransomware-proof backups and public ingress port cloaking</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- MODULE 3: IMMUTABLE AIR-GAP BACKUPS -->
+                <div class="card-stage-container" id="stage-card-3">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 03 &bull; RECOVERY</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">TRAVELERS 6A</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Immutable Air-Gap Backups</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Implement 3-2-1-1-0 architecture utilizing open-source Restic/Rclone with S3 Object Lock compliance retention to guarantee ransomware immunity.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Eliminates 50% ransomware co-insurance penalty on claim payouts.
+                                </div>
                             </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Anti-Spearphish Triage</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Deploy interactive role-based spearphishing simulations and wire up a 1-click Outlook/Google reporting beacon.
-                            </p>
+                            <button onclick="flipStage(3)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="flipStage(2)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 03 VERIFICATION</span>
+                                    <button onclick="flipStage(3)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-3-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Enable S3 Compliance Object Lock (90d)</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-3-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Air-gap offsite replication destination</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-3-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Execute documented restore recovery drill</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(3)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                                VERIFY &amp; PASS MODULE &rarr;
+                            </button>
+                        </div>
                     </div>
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 02 CHECKLIST</span>
-                                <button onclick="flipStage(2)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
+                </div>
+
+                <!-- MODULE 4: PERIMETER PORT CLOAKING -->
+                <div class="card-stage-container" id="stage-card-4">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 04 &bull; INGRESS</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">BEAZLEY AUDIT</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Perimeter Port Cloaking</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Sever external exposure on carrier red-flag ports: RDP (3389), SMB (445), Telnet (23), and unauthenticated databases to block automated crawler attacks.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Open RDP/SMB causes instant renewal rejection or policy cancellation.
+                                </div>
                             </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-2-1" class="rounded accent-amber-400">
-                                    <span>Simulate executive invoice wire hook</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-2-2" class="rounded accent-amber-400">
-                                    <span>Verify click-rate stays under 3.5%</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-2-3" class="rounded accent-amber-400">
-                                    <span>Log remedial micro-training completion</span>
-                                </label>
-                            </div>
+                            <button onclick="flipStage(4)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="verifyAndAdvance(2)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                            VERIFY &amp; PASS STAGE &rarr;
-                        </button>
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 04 VERIFICATION</span>
+                                    <button onclick="flipStage(4)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-4-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Close public Port 3389 (RDP) WAN exposure</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-4-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Filter SMB 445 &amp; NetBIOS at WAN gateway</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-4-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Enforce WireGuard or Tailscale VPN tunnel</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(4)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                                VERIFY &amp; PASS MODULE &rarr;
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- STAGE 3: IMMUTABLE BACKUPS -->
-            <div class="card-stage-container" id="stage-card-3">
-                <div class="flip-card-inner">
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 03 &bull; MOD-008</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">NIST PR.DS-1</span>
+        <!-- PHASE 3: OPERATIONAL RESILIENCE & TELEMETRY SEVERING -->
+        <div class="mb-12">
+            <div class="flex items-center gap-3 mb-6 pb-2 border-b border-amber-500/40">
+                <span class="px-3 py-1 rounded bg-amber-950 border border-amber-400 text-amber-300 font-mono text-xs font-bold uppercase">
+                    PHASE 03
+                </span>
+                <h3 class="font-cyber text-xl font-bold text-white uppercase">
+                    Operational Resilience &amp; Telemetry Severing
+                </h3>
+                <span class="text-xs font-mono text-slate-400 hidden sm:inline">&bull; CIRCIA legal notifications and volatile memory anti-fingerprinting</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- MODULE 5: TABLETOP INCIDENT DRILL -->
+                <div class="card-stage-container" id="stage-card-5">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 05 &bull; RESPONSE</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">CIRCIA 72H</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Tabletop Incident Drill</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Execute full-scale ransomware tabletop exercise simulating data extortion, out-of-band leadership communications, and the 72-hour CIRCIA regulatory notice.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Satisfies mandatory annual incident response tabletop certification.
+                                </div>
                             </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Immutable Air-Gap Backups</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Implement 3-2-1-1-0 architecture using open-source Restic/Rclone with S3 Object Lock compliance retention.
-                            </p>
+                            <button onclick="flipStage(5)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="flipStage(3)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 05 VERIFICATION</span>
+                                    <button onclick="flipStage(5)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-5-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Run out-of-band communication triage</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-5-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Draft 72h CIRCIA incident notification</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-5-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Compile after-action remediation ledger</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(5)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                                VERIFY &amp; PASS MODULE &rarr;
+                            </button>
+                        </div>
                     </div>
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 03 CHECKLIST</span>
-                                <button onclick="flipStage(3)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
+                </div>
+
+                <!-- MODULE 6: TELEMETRY SEVERING -->
+                <div class="card-stage-container" id="stage-card-6">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 06 &bull; OPSEC</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">GHOST CLOAK</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Telemetry Severing &amp; Ghost RAM</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Enforce True Burner RAM isolation, canvas fingerprint poisoning, and mobile telemetry lockdown to prevent credential leakage into dark web breach aggregators.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Eliminates continuous credential spray attacks against enterprise domains.
+                                </div>
                             </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-3-1" class="rounded accent-amber-400">
-                                    <span>Enable S3 Compliance Object Lock (90d)</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-3-2" class="rounded accent-amber-400">
-                                    <span>Air-gap offsite replication destination</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-3-3" class="rounded accent-amber-400">
-                                    <span>Execute automated test restoration drill</span>
-                                </label>
-                            </div>
+                            <button onclick="flipStage(6)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="verifyAndAdvance(3)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                            VERIFY &amp; PASS STAGE &rarr;
-                        </button>
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 06 VERIFICATION</span>
+                                    <button onclick="flipStage(6)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-6-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Sweep domain across breach databases</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-6-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Deploy Ghost Vacuum RAM wiper protocol</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-6-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Lock ad tracking &amp; hardware identifiers</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(6)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                                VERIFY &amp; PASS MODULE &rarr;
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- STAGE 4: PERIMETER LOCKDOWN -->
-            <div class="card-stage-container" id="stage-card-4">
-                <div class="flip-card-inner">
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 04 &bull; MOD-002</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">TRAVELERS 6A</span>
+        <!-- PHASE 4: UNDERWRITING EVIDENCE & DIRECTORY CERTIFICATION -->
+        <div class="mb-14">
+            <div class="flex items-center gap-3 mb-6 pb-2 border-b border-emerald-500/40">
+                <span class="px-3 py-1 rounded bg-emerald-950 border border-emerald-400 text-emerald-300 font-mono text-xs font-bold uppercase">
+                    PHASE 04
+                </span>
+                <h3 class="font-cyber text-xl font-bold text-white uppercase">
+                    Underwriting Evidence &amp; Directory Certification
+                </h3>
+                <span class="text-xs font-mono text-slate-400 hidden sm:inline">&bull; Carrier Evidence Binder compilation &amp; Darden Trust Gold Seal</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- MODULE 7: EVIDENCE BINDER ASSEMBLY -->
+                <div class="card-stage-container" id="stage-card-7">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 07 &bull; UNDERWRITER</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">CARRIER BINDER</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Evidence Binder Assembly</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Assemble verified technical artifacts into an executive Evidence Binder ready for Chubb/Travelers underwriters to claim 15-25% premium discount credits.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Furnishes required self-attestation proof to eliminate warranty repudiation.
+                                </div>
                             </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Perimeter Port Cloaking</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Sever external exposure on high-risk underwriting ports: RDP 3389, SMB 445, Telnet 23, and unauthenticated Redis.
-                            </p>
+                            <button onclick="flipStage(7)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="flipStage(4)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 07 VERIFICATION</span>
+                                    <button onclick="flipStage(7)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-7-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Map verified controls to Chubb SAQ form</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-7-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Attach immutable backup lock receipts</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-7-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Generate signed executive summary</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(7)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                                VERIFY &amp; PASS MODULE &rarr;
+                            </button>
+                        </div>
                     </div>
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 04 CHECKLIST</span>
-                                <button onclick="flipStage(4)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
+                </div>
+
+                <!-- MODULE 8: DARDEN TRUST GOLD SEAL -->
+                <div class="card-stage-container" id="stage-card-8">
+                    <div class="flip-card-inner">
+                        <div class="card-face card-front">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 08 &bull; CERTIFICATION</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">DARDEN TRUST</span>
+                                </div>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Darden Trust Directory Seal</h4>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                                    Mint cryptographic SHA-256 verification seal &bull; Issue dated compliance certificate &bull; Permanently stamp Verified Audit-Ready status on your Metro Plaza Directory listing.
+                                </p>
+                                <div class="p-2.5 rounded bg-black/60 border border-purple-900/40 text-[11px] font-mono text-slate-400">
+                                    <strong class="text-cyan-300">Carrier Warranty:</strong> Delivers publicly verifiable cryptographic trust trail for insurance auditors.
+                                </div>
                             </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-4-1" class="rounded accent-amber-400">
-                                    <span>Close public RDP Port 3389 ingress</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-4-2" class="rounded accent-amber-400">
-                                    <span>Filter SMB 445 &amp; NetBIOS at WAN router</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-4-3" class="rounded accent-amber-400">
-                                    <span>Enforce WireGuard/Tailscale VPN tunnel</span>
-                                </label>
-                            </div>
+                            <button onclick="flipStage(8)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                <span>OPEN 3-STEP CHECKLIST</span> &rarr;
+                            </button>
                         </div>
-                        <button onclick="verifyAndAdvance(4)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                            VERIFY &amp; PASS STAGE &rarr;
-                        </button>
+                        <div class="card-face card-back">
+                            <div>
+                                <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
+                                    <span class="font-mono text-xs text-amber-400 font-bold">MODULE 08 VERIFICATION</span>
+                                    <button onclick="flipStage(8)" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                                </div>
+                                <div class="space-y-2.5 font-mono text-xs text-slate-200 mb-4">
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-8-1" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Compute SHA-256 evidence package hash</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-8-2" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Sync timestamp checkpoint to Bee ledger</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 cursor-pointer">
+                                        <input type="checkbox" id="chk-8-3" class="rounded accent-amber-400 w-4 h-4">
+                                        <span>Issue Darden Trust Gold Verification Seal</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button onclick="verifyAndAdvance(8)" class="w-full py-2.5 rounded-lg bg-green-500 hover:bg-green-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_15px_rgba(16,185,129,0.7)]">
+                                MINT FINAL CERTIFICATE ⚡
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- STAGE 5: TABLETOP INCIDENT RESPONSE -->
-            <div class="card-stage-container" id="stage-card-5">
-                <div class="flip-card-inner">
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 05 &bull; MOD-003</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">CIRCIA 72H</span>
-                            </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Tabletop Incident Drill</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Simulate full ransomware exfiltration event with executive legal triage and 72-hour CIRCIA regulatory notification workflow.
-                            </p>
+        <!-- =========================================================
+             SECTION 5: DARDEN TRUST BADGE & METRO PLAZA DIRECTORY BRIDGE
+             ========================================================= -->
+        <section id="directory-bridge" class="mb-14">
+            <div class="glass-panel p-8 sm:p-10 rounded-3xl border-2 border-cyan-500/60 shadow-[0_0_35px_rgba(6,182,212,0.25)] relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-8">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded bg-cyan-950 border border-cyan-400 text-cyan-300 font-mono text-[10px] font-bold uppercase tracking-wider">
+                                🏢 DIRECTORY INTEGRATION GATEWAY
+                            </span>
+                            <span class="text-xs font-mono text-amber-400 font-bold">
+                                METRO ATLANTA BUSINESS DIRECTORY
+                            </span>
                         </div>
-                        <button onclick="flipStage(5)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
-                    </div>
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 05 CHECKLIST</span>
-                                <button onclick="flipStage(5)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
-                            </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-5-1" class="rounded accent-amber-400">
-                                    <span>Run out-of-band communication triage</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-5-2" class="rounded accent-amber-400">
-                                    <span>Draft 72h CIRCIA incident notification</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-5-3" class="rounded accent-amber-400">
-                                    <span>Compile After-Action Remediation Report</span>
-                                </label>
-                            </div>
+
+                        <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase mb-3 glow-title">
+                            The Darden Trust Verification Badge
+                        </h2>
+
+                        <p class="text-sm font-mono text-slate-200 leading-relaxed mb-4">
+                            When your business completes the 8 Academy modules or runs an Automated SLM Audit, your company receives the <strong class="text-amber-400">Darden Trust Gold Underwriting Seal</strong>. This cryptographic seal is permanently displayed on your merchant profile in the <strong class="text-cyan-300">Metro Plaza Directory</strong>, signaling to insurance carriers, clients, and partners that your digital infrastructure is fully audit-ready.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4 items-center">
+                            <a href="directory.html" class="px-6 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2">
+                                <i class="fa-solid fa-compass"></i> EXPLORE METRO PLAZA DIRECTORY &rarr;
+                            </a>
+                            <a href="mailto:leonrdarden@gmail.com?subject=Claim%20Directory%20Badge" class="px-5 py-3 rounded-xl bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-id-badge text-amber-400"></i> CLAIM MERCHANT BADGE
+                            </a>
                         </div>
-                        <button onclick="verifyAndAdvance(5)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                            VERIFY &amp; PASS STAGE &rarr;
-                        </button>
                     </div>
+
+                    <!-- Seal Preview Card -->
+                    <div class="lg:col-span-4 flex justify-center">
+                        <div class="w-full max-w-xs p-6 rounded-2xl bg-black border-2 border-amber-500 text-center shadow-2xl relative">
+                            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-amber-400 to-purple-600 flex items-center justify-center text-black text-3xl shadow-[0_0_25px_rgba(245,158,11,0.6)] mb-3">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold tracking-widest block">DARDEN TRUST SEAL</span>
+                            <h4 class="font-cyber text-base font-bold text-white uppercase mt-1">VERIFIED AUDIT-READY</h4>
+                            <div class="my-3 p-2 rounded bg-slate-900/90 font-mono text-[10px] text-slate-300 border border-slate-800">
+                                <div>SHA-256 SEAL ISSUED</div>
+                                <div class="text-amber-400 font-bold mt-0.5">CHUBB &amp; TRAVELERS PREP</div>
+                            </div>
+                            <span class="text-[10px] font-mono text-green-400 flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-check-circle"></i> ACTIVE ON METRO DIRECTORY
+                            </span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- STAGE 6: DARK WEB & TELEMETRY -->
-            <div class="card-stage-container" id="stage-card-6">
-                <div class="flip-card-inner">
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 06 &bull; MOD-005</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">GHOST CLOAK</span>
-                            </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Telemetry Severing</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Apply Burn-1 Ghost Browser isolation and mobile telemetry hardening to eliminate dark web credential residue.
-                            </p>
-                        </div>
-                        <button onclick="flipStage(6)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
-                    </div>
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 06 CHECKLIST</span>
-                                <button onclick="flipStage(6)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
-                            </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-6-1" class="rounded accent-amber-400">
-                                    <span>Sweep domain against credential dumps</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-6-2" class="rounded accent-amber-400">
-                                    <span>Deploy Ghost Vacuum RAM wiper script</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-6-3" class="rounded accent-amber-400">
-                                    <span>Lock device tracking &amp; advertising IDs</span>
-                                </label>
-                            </div>
-                        </div>
-                        <button onclick="verifyAndAdvance(6)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                            VERIFY &amp; PASS STAGE &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STAGE 7: EVIDENCE BINDER ASSEMBLY -->
-            <div class="card-stage-container" id="stage-card-7">
-                <div class="flip-card-inner">
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 07 &bull; MOD-006</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">UNDERWRITER</span>
-                            </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Evidence Binder Assembly</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Compile verified artifacts into an executive Evidence Binder ready for Chubb/Travelers underwriters to claim 15-25% discounts.
-                            </p>
-                        </div>
-                        <button onclick="flipStage(7)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
-                    </div>
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 07 CHECKLIST</span>
-                                <button onclick="flipStage(7)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
-                            </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-7-1" class="rounded accent-amber-400">
-                                    <span>Map controls to Chubb renewal form</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-7-2" class="rounded accent-amber-400">
-                                    <span>Attach immutable backup lock receipts</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-7-3" class="rounded accent-amber-400">
-                                    <span>Generate signed executive summary</span>
-                                </label>
-                            </div>
-                        </div>
-                        <button onclick="verifyAndAdvance(7)" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                            VERIFY &amp; PASS STAGE &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STAGE 8: DARDEN TRUST SEAL -->
-            <div class="card-stage-container" id="stage-card-8">
-                <div class="flip-card-inner">
-                    <div class="card-face card-front">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 08 &bull; FINAL</span>
-                                <span class="status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-300">TRUST SEAL</span>
-                            </div>
-                            <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">Darden Trust Verification</h3>
-                            <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
-                                Mint cryptographic verification seal &bull; Issue dated compliance transcript &bull; Grant Verified Business status on Metro Plaza Directory.
-                            </p>
-                        </div>
-                        <button onclick="flipStage(8)" class="w-full py-2.5 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-500 text-purple-200 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <span>FLIP TO EXECUTE</span> &rarr;
-                        </button>
-                    </div>
-                    <div class="card-face card-back">
-                        <div>
-                            <div class="flex justify-between items-center pb-2 mb-3 border-b border-amber-900/60">
-                                <span class="font-mono text-xs text-amber-400 font-bold">STAGE 08 CHECKLIST</span>
-                                <button onclick="flipStage(8)" class="text-slate-400 hover:text-white text-xs">&times; Back</button>
-                            </div>
-                            <div class="space-y-2 font-mono text-xs text-slate-200 mb-4">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-8-1" class="rounded accent-amber-400">
-                                    <span>Compute SHA-256 evidence package hash</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-8-2" class="rounded accent-amber-400">
-                                    <span>Sync timestamp checkpoint to Bee ledger</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" id="chk-8-3" class="rounded accent-amber-400">
-                                    <span>Issue Darden Trust Gold Verification Seal</span>
-                                </label>
-                            </div>
-                        </div>
-                        <button onclick="verifyAndAdvance(8)" class="w-full py-2.5 rounded-lg bg-green-500 hover:bg-green-400 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_15px_rgba(16,185,129,0.7)]">
-                            MINT FINAL CERTIFICATE ⚡
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-black/95 border-t border-purple-900/80 py-6 px-4 text-center text-xs font-mono text-slate-400">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div>
-                <span class="font-cyber text-white font-bold">BURN-1 CYBER ACADEMY</span> &bull; Underwriting &amp; Dual-Compliance Engine
+    <footer class="bg-black/95 border-t border-purple-900/80 py-8 px-4 text-center text-xs font-mono text-slate-400 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-left flex items-center gap-3">
+                <a href="index.html">
+                    <img src="assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-8 w-auto rounded border border-purple-500/50">
+                </a>
+                <div>
+                    <span class="font-cyber font-bold text-white text-sm">BURN-1 CYBER ACADEMY</span>
+                    <p class="text-slate-400 text-xs">Zero-Cost Underwriting Preparation &bull; Pre-Renewal Audit Ready &bull; Metro Plaza</p>
+                </div>
             </div>
-            <div class="flex gap-4">
-                <a href="index.html" class="hover:text-amber-400">Burn-1 Hub</a>
-                <a href="directory.html" class="hover:text-cyan-400">Directory</a>
-                <a href="store.html" class="hover:text-amber-400">Storefront</a>
-                <a href="helpline/index.html" class="hover:text-red-400">Helpline</a>
+            <div class="flex flex-wrap justify-center gap-6 text-slate-300">
+                <a href="index.html" class="hover:text-amber-400 transition-colors">Burn-1 Hub</a>
+                <a href="directory.html" class="hover:text-cyan-400 transition-colors font-bold text-cyan-300">Directory Matrix</a>
+                <a href="store.html" class="hover:text-amber-400 transition-colors">Compliance Store</a>
+                <a href="helpline/index.html" class="hover:text-red-400 transition-colors">Crisis Helpline</a>
+                <a href="mailto:leonrdarden@gmail.com" class="hover:text-amber-400 transition-colors">Carrier Consulting</a>
+            </div>
+            <div>
+                <span class="text-purple-400">&copy; 2026 BURN-1.COM</span>
             </div>
         </div>
     </footer>
@@ -621,6 +958,71 @@
         const clearedStages = new Set();
         const stageCheckpoints = {};
 
+        // Statutory Codex Tabs Data
+        const codexData = {
+            chubb: {
+                title: "CHUBB CYBER UNDERWRITING WARRANTY // SCHEDULE B",
+                status: "DISCOUNT CREDIT: 15% - 20%",
+                body: "Chubb cyber liability policies mandate phishing-resistant Multi-Factor Authentication (FIDO2 or authenticator app) on 100% of remote ingress, cloud administration portals, and email accounts. Failure to attest to this control triggers complete claim denial under the MFA Warranty Exclusion.",
+                formula: "ZERO-COST REMEDIATION: Enforce free Microsoft/Google Authenticator passkeys, deactivate SMS fallback tokens, and export active IdP enrollment telemetry for the evidence binder."
+            },
+            travelers: {
+                title: "TRAVELERS CYBER WARRANTY // ITEM 6A (AIR-GAP BACKUPS)",
+                status: "DISCOUNT CREDIT: 10% - 15%",
+                body: "Travelers requires verifiable air-gapped, immutable backups with Object Lock compliance retention. Backups connected to the domain controller without separate MFA credentials incur a mandatory 50% co-payment penalty during ransomware extortion claims.",
+                formula: "ZERO-COST REMEDIATION: Implement 3-2-1-1-0 architecture with S3 Object Lock (Compliance Mode) using open-source Rclone/Restic and document quarterly restore verification."
+            },
+            hipaa: {
+                title: "HIPAA SECURITY RULE // 45 CFR § 164.312 (HEALTHCARE)",
+                status: "REGULATORY SAFE HARBOR: FULL EXEMPTION",
+                body: "45 CFR § 164.312(a)(2)(iv) and § 164.312(e)(2)(ii) govern technical safeguards for electronic protected health information (ePHI). Implementing end-to-end AES-256 encryption at rest and in transit establishes HITECH Breach Notification Safe Harbor, shielding against mandatory OCR reporting.",
+                formula: "ZERO-COST REMEDIATION: Verify TLS 1.3 encryption across all patient portals, enable full-disk BitLocker/LUKS encryption on endpoints, and enforce access audit logging."
+            },
+            nydfs: {
+                title: "NYDFS 23 NYCRR PART 500 // FINANCIAL SERVICES REGULATION",
+                status: "STATUTORY SLA: 72-HOUR MANDATORY DISCLOSURE",
+                body: "Section 500.12 mandates MFA for all individuals accessing internal networks from external networks. Section 500.17 requires notification to the Superintendent within 72 hours of any cybersecurity event that has a reasonable likelihood of materially harming normal operations.",
+                formula: "ZERO-COST REMEDIATION: Formalize incident response playbook with templated 72-hour CIRCIA/NYDFS notification letters and conduct tabletop drill verification."
+            },
+            nist: {
+                title: "NIST CSF 2.0 // PR.AC-5 & PR.DS-1 CORE CONTROLS",
+                status: "DEFENSE BENCHMARK: CMMC 2.0 ALIGNED",
+                body: "NIST Cybersecurity Framework 2.0 establishes gold-standard baseline controls: PR.AC-5 (Identity Management, Authentication, and Access Control) and PR.DS-1 (Data-at-Rest Protection). Adherence proves baseline due diligence across civil litigation and insurance warranties.",
+                formula: "ZERO-COST REMEDIATION: Conduct annual role-based phishing triage drills and maintain an active Plan of Action and Milestones (POA&M) remediation register."
+            }
+        };
+
+        function selectCodex(key) {
+            const data = codexData[key];
+            if (!data) return;
+
+            document.getElementById('codex-title').innerText = data.title;
+            document.getElementById('codex-status').innerText = data.status;
+            document.getElementById('codex-body').innerText = data.body;
+            document.getElementById('codex-formula').innerHTML = `<strong>ZERO-COST REMEDIATION:</strong> ${data.formula.replace('ZERO-COST REMEDIATION: ', '')}`;
+
+            // Update button styles
+            document.querySelectorAll('.codex-tab-btn').forEach(btn => {
+                btn.className = 'codex-tab-btn px-3.5 py-2 rounded-lg bg-black/60 border border-purple-500 text-purple-200 hover:text-white uppercase transition-all';
+            });
+            const activeBtn = document.getElementById(`codex-btn-${key}`);
+            if (activeBtn) {
+                activeBtn.className = 'codex-tab-btn active px-3.5 py-2 rounded-lg bg-amber-500 text-black font-bold uppercase transition-all';
+            }
+        }
+
+        function toggleCrawlStream() {
+            const container = document.getElementById('codex-crawl-container');
+            const text = document.getElementById('crawlToggleText');
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                text.innerText = 'HIDE REGULATORY STREAM';
+            } else {
+                container.classList.add('hidden');
+                text.innerText = 'PLAY REGULATORY STREAM';
+            }
+        }
+
         function flipStage(stageNum) {
             const card = document.getElementById(`stage-card-${stageNum}`);
             if (card) {
@@ -629,13 +1031,11 @@
         }
 
         function verifyAndAdvance(stageNum) {
-            // Mark stage as cleared
             clearedStages.add(stageNum);
             const timestamp = new Date().toISOString();
             const checkpointId = `CKPT-${stageNum}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
             stageCheckpoints[stageNum] = { checkpointId, timestamp };
 
-            // Update card UI
             const card = document.getElementById(`stage-card-${stageNum}`);
             if (card) {
                 card.classList.remove('flipped');
@@ -643,15 +1043,13 @@
                 const front = card.querySelector('.card-front');
                 const tag = front.querySelector('.status-tag');
                 if (tag) {
-                    tag.className = 'status-tag font-mono text-[10px] px-2 py-0.5 rounded bg-green-950 text-green-300 border border-green-500 font-bold';
-                    tag.innerText = 'CLEARED';
+                    tag.className = 'status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-green-950 text-green-300 border border-green-500 font-bold';
+                    tag.innerText = 'CLEARED & VERIFIED';
                 }
             }
 
-            // Update Master Progress HUD
             updateHud();
 
-            // Auto-flip next card if available
             if (stageNum < 8) {
                 setTimeout(() => {
                     const nextCard = document.getElementById(`stage-card-${stageNum + 1}`);
@@ -660,7 +1058,7 @@
                     }
                 }, 400);
             } else {
-                alert('CONGRATULATIONS: Master Underwriting Dual-Compliance Protocol 100% Cleared! Click Export Insurance Proof to generate your signed certificate.');
+                alert('CONGRATULATIONS: All 8 Underwriting Preparation Modules 100% Cleared! Click Export Underwriting Proof to download your signed certificate.');
             }
         }
 
@@ -670,7 +1068,7 @@
             const bar = document.getElementById('hud-progress-bar');
             const text = document.getElementById('hud-stages-text');
             if (bar) bar.style.width = `${pct}%`;
-            if (text) text.innerText = `${count} / 8 STAGES (${Math.round(pct)}%)`;
+            if (text) text.innerText = `${count} / 8 MODULES (${Math.round(pct)}%)`;
         }
 
         function exportInsuranceProof() {
@@ -686,14 +1084,16 @@
 Date Issued: ${dateStr}
 Compliance Framework: NIST CSF 2.0 / HIPAA Security Rule / NYDFS 23 NYCRR 500
 Carrier Alignment: Chubb & Travelers Cyber Renewal Warranty Eligible
-Stages Verified: ${count} of 8 Total Modules
+Estimated Policy Credit: Potential Up to 25% - 35% Premium Reduction
+Modules Verified: ${count} of 8 Total Academy Modules
 
-CRYPTOGRAPHIC AUDIT TRAIL:
-${Object.keys(stageCheckpoints).map(k => `[STAGE 0${k}] ${stageCheckpoints[k].checkpointId} | ${stageCheckpoints[k].timestamp} | CLEARED`).join('\n') || 'Initial Baseline Self-Assessment Recorded.'}
+CRYPTOGRAPHIC AUDIT CHECKPOINTS:
+${Object.keys(stageCheckpoints).map(k => `[MODULE 0${k}] ${stageCheckpoints[k].checkpointId} | ${stageCheckpoints[k].timestamp} | CLEARED & VERIFIED`).join('\n') || 'Baseline Self-Attestation Recorded. 0 Modules Cleared.'}
 
-DIGITAL CERTIFICATION SEAL:
+DARDEN TRUST VERIFICATION SEAL:
 SHA-256: 4F197B247DE5D59124E8D209004426A9
-Authority: Leon R. Darden & Darden Trust Infrastructure
+Authority: Leon R. Darden // Darden Trust Infrastructure
+Directory Listing: Metro Plaza Directory (https://burn-1.com/directory.html)
 Platform: Burn-1 Systems (burn-1.com)
 ================================================================================
             `.trim();
@@ -708,6 +1108,68 @@ Platform: Burn-1 Systems (burn-1.com)
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
+
+        // Music player toggle
+        function toggleSong() {
+            const audio = document.getElementById('bgAudio');
+            const icon = document.getElementById('songIcon');
+            const text = document.getElementById('songText');
+
+            if (audio.paused) {
+                audio.play().then(() => {
+                    if (icon) icon.className = "fa-solid fa-pause text-green-400 animate-pulse";
+                    if (text) text.innerText = "PAUSE";
+                }).catch(err => {
+                    console.log("Audio play error:", err);
+                    alert("Click anywhere on page first, then press Music!");
+                });
+            } else {
+                audio.pause();
+                if (icon) icon.className = "fa-solid fa-music text-amber-400";
+                if (text) text.innerText = "MUSIC";
+            }
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            const htmlRoot = document.getElementById('html-root');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const versionTag = document.getElementById('version-tag');
+            const bgAudio = document.getElementById('bgAudio');
+
+            if (htmlRoot.classList.contains('day-mode')) {
+                htmlRoot.classList.remove('day-mode');
+                if (themeIcon) themeIcon.className = "fa-solid fa-sun text-amber-400";
+                if (themeText) themeText.innerText = "DAY";
+                if (versionTag) versionTag.innerText = "ACADEMY";
+                localStorage.setItem('burn1_theme', 'night');
+            } else {
+                htmlRoot.classList.add('day-mode');
+                if (themeIcon) themeIcon.className = "fa-solid fa-moon text-purple-600";
+                if (themeText) themeText.innerText = "NIGHT";
+                if (versionTag) versionTag.innerText = "ACADEMY BIZ";
+                if (bgAudio && !bgAudio.paused) {
+                    bgAudio.pause();
+                }
+                localStorage.setItem('burn1_theme', 'day');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('burn1_theme');
+            const urlParams = new URLSearchParams(window.location.search);
+            const modeParam = urlParams.get('mode');
+            if (modeParam === 'day' || savedTheme === 'day') {
+                document.getElementById('html-root').classList.add('day-mode');
+                const themeIcon = document.getElementById('themeIcon');
+                const themeText = document.getElementById('themeText');
+                const versionTag = document.getElementById('version-tag');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-purple-600';
+                if (themeText) themeText.innerText = 'NIGHT';
+                if (versionTag) versionTag.innerText = 'ACADEMY BIZ';
+            }
+        });
     </script>
 </body>
 </html>
