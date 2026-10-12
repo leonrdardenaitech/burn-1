@@ -457,18 +457,18 @@
         }
 
         /* INGRAINED PANELS: Indented/Debossed Look that lets Mirror Clock Shards Shine */
+        /* TRUE SEE-THROUGH TRANSPARENT GLASS PANELS (MIRROR CLOCK SHINES THROUGH) */
         html.day-mode .cyber-card,
         html.day-mode .glass-panel {
-            background-image: linear-gradient(to top, rgba(242, 244, 247, 0.88), rgba(225, 228, 234, 0.82)) !important;
-            backdrop-filter: blur(2px) !important;
-            -webkit-backdrop-filter: blur(2px) !important;
-            border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
-            outline: 1px solid rgba(195, 194, 194, 0.4) !important;
+            background: rgba(255, 255, 255, 0.20) !important;
+            backdrop-filter: blur(4px) !important;
+            -webkit-backdrop-filter: blur(4px) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+            outline: 1px solid rgba(195, 194, 194, 0.35) !important;
             border-radius: 1.5rem !important;
             box-shadow: 
-                inset 0 6px 14px rgba(0, 0, 0, 0.10),
-                inset 0 -3px 8px rgba(255, 255, 255, 0.85),
-                0 6px 18px rgba(0, 0, 0, 0.05) !important;
+                0 10px 30px rgba(0, 0, 0, 0.05),
+                inset 0 1px 3px rgba(255, 255, 255, 0.9) !important;
             color: #09090b !important;
             will-change: transform;
             transition: all 0.35s ease !important;
@@ -477,16 +477,15 @@
         /* HOVER GROWTH: Large Sections and Cards Smoothly Elevate on Hover */
         html.day-mode .cyber-card:hover,
         html.day-mode .glass-panel:hover {
-            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(232, 235, 240, 0.88)) !important;
+            background: rgba(255, 255, 255, 0.32) !important;
             transform: translateY(-3px) !important;
             box-shadow: 
-                0 14px 28px rgba(0, 0, 0, 0.10),
-                inset 0 4px 10px rgba(255, 255, 255, 0.95),
-                inset 0 -2px 6px rgba(0, 0, 0, 0.06) !important;
+                0 16px 36px rgba(0, 0, 0, 0.08),
+                inset 0 2px 4px rgba(255, 255, 255, 0.95) !important;
             border-color: #ffffff !important;
         }
 
-        /* ELIMINATE MULTI-COLOR CLUTTER: Inner text wells receive sculpted indented panels */
+        /* INNER SEE-THROUGH WELLS (MATCHING DIGITAL CIGARETTE & HELPLINE) */
         html.day-mode .bg-black,
         html.day-mode .bg-black\/50,
         html.day-mode .bg-black\/60,
@@ -499,10 +498,10 @@
         html.day-mode .bg-red-950\/30,
         html.day-mode #treatment-breakdown-drawer,
         html.day-mode .widget-cig-stats {
-            background: rgba(222, 222, 222, 0.72) !important;
-            border: 1px solid #d4d4d4 !important;
+            background: rgba(255, 255, 255, 0.28) !important;
+            border: 1px solid rgba(255, 255, 255, 0.7) !important;
             border-radius: 1rem !important;
-            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(255, 255, 255, 0.8) !important;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(255, 255, 255, 0.5) !important;
             color: #09090b !important;
         }
 
@@ -1086,10 +1085,10 @@
                             <span>•</span>
                             <button type="button" onclick="setOmniTarget('chou-lees-chinese.burn-1.com')" class="underline hover:text-white">chou-lees.burn-1.com</button>
                             <span>•</span>
-                            <button type="button" onclick="setOmniTarget('target.com')" class="underline hover:text-white">target.com</button>
+                            <button type="button" onclick="setOmniTarget('example.com')" class="underline hover:text-white">example.com</button>
                         </div>
                         <span class="text-[11px] font-mono text-purple-300 flex items-center gap-1.5">
-                            <i class="fa-solid fa-lock text-green-400"></i> Non-destructive, Zero-Credential Assessment
+                            <i class="fa-solid fa-lock text-green-400"></i> Non-destructive, Zero-Credential Assessment &middot; Only scan domains you own or are authorized to test
                         </span>
                     </div>
                 </div>
@@ -1178,48 +1177,35 @@
                 <!-- Smoke Screen Volatile Aura -->
                 <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-800/40 via-black to-black"></div>
 
-                <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[240px]">
-                    <!-- Step 1: Thick Bold Typography TRUE BURNER -->
-                    <div id="ghost-step-brand" class="transition-all duration-700">
-                        <h2 class="text-4xl sm:text-6xl md:text-7xl font-cyber font-black text-white tracking-widest uppercase">
-                            TRUE BURNER
+                <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center justify-center py-6">
+                    <!-- Brand & Product -->
+                    <div class="mb-2">
+                        <span class="text-xs font-mono text-neutral-400 font-bold uppercase tracking-widest px-3.5 py-1 bg-neutral-900 border border-neutral-700 rounded-full inline-block mb-3">
+                            DISPOSABLE PRIVACY PROTOCOL // POWERED BY R.E.P.<span class="text-[9px] align-super">TM</span>
+                        </span>
+                        <h2 class="text-3xl sm:text-5xl md:text-6xl font-cyber font-black text-white tracking-widest uppercase">
+                            TRUE BURNER // GHOST BROWSER
                         </h2>
                     </div>
 
-                    <!-- Step 2: Fading in slowly, very slowly: GHOST BROWSER -->
-                    <div id="ghost-step-product" class="transition-opacity duration-1000 ease-in-out opacity-0 mt-2">
-                        <h3 class="text-3xl sm:text-5xl md:text-6xl font-cyber font-extrabold text-white tracking-wider uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.75)]">
-                            GHOST BROWSER
-                        </h3>
-                    </div>
-
-                    <!-- Step 3: Quick POWERED BY R.E.P.™ -->
-                    <div id="ghost-step-sub" class="transition-all duration-500 opacity-0 mt-3">
-                        <span class="text-xs sm:text-sm font-mono text-neutral-300 font-bold uppercase tracking-widest px-3.5 py-1 bg-neutral-900 border border-neutral-600 rounded">
-                            POWERED BY R.E.P.<span class="text-[9px] align-super">TM</span>
-                        </span>
-                    </div>
-
-                    <!-- Step 4: Slogans for Disposable Time-Sensitive Sessions -->
-                    <div id="ghost-step-slogan" class="transition-all duration-500 opacity-0 mt-4 max-w-2xl">
+                    <!-- Slogans for Disposable Time-Sensitive Sessions -->
+                    <div class="mt-2 max-w-2xl text-center">
                         <p class="font-mono text-xs sm:text-sm text-neutral-200 font-bold uppercase tracking-wider">
-                            TIME-SENSITIVE SMOKE SCREEN SESSIONS &bull; ZERO TRACE
+                            TIME-SENSITIVE SMOKE SCREEN SESSIONS &bull; NOTHING SAVED ON YOUR DEVICE
                         </p>
                         <p class="font-mono text-[11px] text-neutral-400 mt-1 uppercase tracking-widest">
                             VOLATILE RAM ISOLATION &bull; ZERO DISK FOOTPRINT &bull; GHOST VACUUM ACTIVATION
                         </p>
                     </div>
 
-                    <!-- Step 5: Sample Session Action Button -->
-                    <div id="ghost-step-btn-container" class="transition-all duration-700 opacity-0 mt-5">
-                        <a href="store.html#ghost-browser" class="px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(255,255,255,0.85)] border-2 border-neutral-300 flex items-center gap-2">
-                            <span>CLICK HERE TO GET A SAMPLE SESSION</span> ⚡
+                    <!-- Sample Session Action Button -->
+                    <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+                        <a href="store.html#ghost-browser" class="px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(255,255,255,0.7)] border-2 border-neutral-300 flex items-center gap-2">
+                            <span>GET A SAMPLE SESSION</span> ⚡
                         </a>
-                    </div>
-
-                    <!-- Step 6: Self-Destruct Countdown Warning Box -->
-                    <div id="ghost-step-countdown-box" class="transition-all duration-500 opacity-0 mt-3 font-mono text-xs sm:text-sm font-bold text-red-400 uppercase tracking-widest">
-                        ⚠️ THIS AD WILL SELF-DESTRUCT IN <span id="ghost-destruct-timer" class="font-cyber font-black text-white text-base sm:text-lg px-2.5 py-0.5 rounded bg-red-950 border border-red-500">5</span>
+                        <a href="store.html#ghost-browser" class="px-6 py-3.5 rounded-xl bg-black hover:bg-neutral-900 text-neutral-200 font-mono text-xs font-bold uppercase tracking-wider border border-neutral-700 flex items-center gap-2">
+                            <span>JOIN FREE BETA WAITLIST</span> &rarr;
+                        </a>
                     </div>
                 </div>
 
@@ -1248,7 +1234,7 @@
                                 Show Off Your Anti-Phishing Certificate &amp; MFA2 Badge
                             </h2>
                             <p class="text-sm font-mono text-slate-200 mt-2 max-w-2xl leading-relaxed">
-                                Direct verification pipeline connecting the Burn-1 Academy to verified merchant profiles. Prove compliance, gain customer trust, and showcase verifiable perimeter defense credentials across 50+ local businesses.
+                                Direct verification pipeline connecting the Burn-1 Academy to verified merchant profiles. Show customers you have completed security training and enabled MFA, alongside 50+ local businesses.
                             </p>
                         </div>
                         
@@ -1290,7 +1276,7 @@
                             <div class="flex items-center gap-2 mb-2 text-green-400 font-cyber text-xs font-bold uppercase">
                                 <i class="fa-solid fa-certificate"></i> Darden Trust Seals
                             </div>
-                            <p class="font-mono text-xs text-slate-300 mb-2">Zero-Trust verified compliance cards with dynamic QR targets.</p>
+                            <p class="font-mono text-xs text-slate-300 mb-2">Academy-completion cards with dynamic QR targets.</p>
                             <a href="directory.html" class="text-[11px] font-mono text-amber-400 hover:underline">Explore Badges &rarr;</a>
                         </div>
                     </div>
@@ -1431,7 +1417,7 @@
                                         <div class="p-6 rounded-2xl bg-gradient-to-br from-purple-950/80 to-black border-2 border-purple-500">
                                             <div class="flex justify-between items-start mb-4">
                                                 <h4 id="card-preview-biz" class="font-cyber text-xl font-bold text-amber-400">Apex Security Kiosks</h4>
-                                                <span class="text-[10px] font-mono bg-purple-900 px-2 py-0.5 rounded text-purple-200 uppercase">VERIFIED</span>
+                                                <span class="text-[10px] font-mono bg-purple-900 px-2 py-0.5 rounded text-purple-200 uppercase">PREVIEW</span>
                                             </div>
                                             <p id="card-preview-person" class="font-mono text-sm text-white mb-1">Operations Lead</p>
                                             <p id="card-preview-handle" class="font-mono text-xs text-cyan-400 mb-3">https://mybusinessname.burn-1.com</p>
@@ -1448,8 +1434,8 @@
                                     <button type="button" onclick="goToStep(3)" class="px-6 py-3 rounded bg-purple-950 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
                                         &larr; Back
                                     </button>
-                                    <a href="https://leonrdarden.gumroad.com/l/Burn-1" onclick="handlePreCheckout(event)" target="_blank" class="px-8 py-3.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.7)] flex items-center gap-2">
-                                        <i class="fa-solid fa-lock"></i> COMPLETE RESERVATION ($150)
+                                    <a href="https://leonrdarden.gumroad.com/l/Burn-1" onclick="handlePreCheckout(event)" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.7)] flex items-center gap-2">
+                                        <i class="fa-solid fa-lock"></i> COMPLETE RESERVATION ($150 + $50/mo)
                                     </a>
                                 </div>
                             </div>
@@ -1501,7 +1487,7 @@
                         </a>
                         <div class="p-5 flex flex-col justify-between flex-grow">
                             <p class="font-mono text-xs text-slate-300 mb-4 leading-relaxed">
-                                Free cybersecurity readiness training engineered to satisfy Chubb &amp; Travelers underwriting mandates before renewal quotes arrive. Clear the boss and get your certificate and badge.
+                                Free cybersecurity readiness training aligned with the security questions cyber insurers commonly ask at renewal. Not affiliated with any insurer. Clear the boss and get your certificate and badge.
                             </p>
                             <a href="academy.html" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase text-center tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)] flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-graduation-cap"></i> START READINESS PREP &rarr;
@@ -1521,7 +1507,7 @@
                         </a>
                         <div class="p-5 flex flex-col justify-between flex-grow">
                             <p class="font-mono text-xs text-slate-300 mb-4 leading-relaxed">
-                                Interactive phishing simulation defenses and the step-by-step MFA2 authentication blueprint. Eliminate carrier warranty exclusions and claim your Gold Directory Seal.
+                                Interactive phishing simulation defenses and the step-by-step MFA2 authentication blueprint. Practice spotting phishing, set up MFA, then claim your Directory Seal.
                             </p>
                             <a href="academy.html" class="w-full py-3 rounded-xl bg-black border-2 border-cyan-400 hover:bg-cyan-950 text-cyan-200 font-cyber font-extrabold text-xs uppercase text-center tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
                                 <i class="fa-solid fa-shield-halved"></i> ENTER ACADEMY COURSES &rarr;
@@ -1711,11 +1697,11 @@
                     <div class="p-4 rounded-xl bg-transparent border border-red-500/40 flex flex-col justify-between">
                         <div>
                             <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase">Digital Overload</span>
-                            <h4 class="font-cyber text-sm font-bold text-white mt-1">Burn-1 Screen Detox Hotline</h4>
-                            <p class="font-mono text-xs text-slate-300 mt-1">Digital addiction triage, screen fatigue, and dopamine reset.</p>
+                            <h4 class="font-cyber text-sm font-bold text-white mt-1">Crisis Text Line</h4>
+                            <p class="font-mono text-xs text-slate-300 mt-1">Free 24/7 text support with a trained crisis counselor, for any kind of distress.</p>
                         </div>
-                        <a href="sms:741741?&body=SHIELD" class="mt-3 block text-center py-2 rounded bg-cyan-600/80 hover:bg-cyan-600 text-black font-mono font-bold text-xs uppercase">
-                            TEXT "SHIELD" TO 741741
+                        <a href="sms:741741?&body=HOME" class="mt-3 block text-center py-2 rounded bg-cyan-600/80 hover:bg-cyan-600 text-black font-mono font-bold text-xs uppercase">
+                            TEXT "HOME" TO 741741
                         </a>
                     </div>
 
@@ -1765,7 +1751,7 @@
          ========================================================= -->
     <!-- =========================================================
          POP-UP LUXURY REPORT MODAL (WHITE EXECUTIVE REPORT)
-         Modeled after mini_spa_burn-1_com.html
+         Executive Perimeter Surface Inspection
          ========================================================= -->
     <div id="spa-result-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
         <div class="relative w-full max-w-3xl bg-white text-slate-900 border-2 border-slate-300 rounded-3xl p-6 sm:p-8 shadow-2xl my-auto max-h-[92vh] overflow-y-auto">
@@ -1812,7 +1798,7 @@
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="led-indicator led-green"></span>
-                            <span class="text-[10px] font-mono uppercase tracking-widest font-black text-emerald-600">VERIFIED LIVE // MACHINE SCAN COMPLETE</span>
+                            <span id="spa-live-label" class="text-[10px] font-mono uppercase tracking-widest font-black text-emerald-600">LIVE EXTERNAL SCAN COMPLETE</span>
                         </div>
                         <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight uppercase" id="spa-result-target">burn-1.com</h2>
                         <p class="text-slate-500 text-xs font-mono mt-0.5" id="spa-result-timestamp">Timestamp: 2026-10-12 00:00:00 EST</p>
@@ -1862,7 +1848,7 @@
                         <h4 class="font-cyber font-bold text-sm text-slate-900 uppercase">Start Your Evidence Binder</h4>
                     </div>
                     <p class="text-xs font-mono text-slate-600 mb-4 leading-relaxed">
-                        Reconcile this point-in-time surface telemetry into an official audit repository. Furnish continuous posture proof, underwriting questionnaires, and carrier discount credit playbooks.
+                        Reconcile this point-in-time surface telemetry into an official audit repository. Build documented proof of your controls and prepare accurate answers for insurer questionnaires. Results vary; no premium savings are guaranteed.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3">
                         <a href="store.html#audit" class="flex-1 py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase text-center tracking-wider transition-all shadow-md flex items-center justify-center gap-2">
@@ -1916,6 +1902,13 @@
 
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
+        // Must be HTTPS: browsers block http:// calls from an https page. Put Caddy/nginx + a cert in front of the droplet API.
+        const AUDIT_API_URL = 'https://audit.burn-1.com/api/audit/run';
+        const escHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        const safeLS = {
+            get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+            set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }
+        };
         let currentTreatment = 'surface';
 
         const treatmentConfigs = {
@@ -1931,7 +1924,7 @@
                 placeholder: 'Enter domain or business name (e.g. company.com)',
                 icon: 'fa-user-secret',
                 title: 'BREACH & DARK WEB EXPOSURE BREAKDOWN',
-                tested: 'Dark web corporate domain paste mentions, dumped employee hashes, leaked API tokens, and compromised secondary vendor credentials across threat intelligence archives.',
+                tested: 'Not part of the free 60-second scan; offered in the paid Evidence Binder. Covers dark web corporate domain paste mentions, dumped employee hashes, leaked API tokens, and compromised secondary vendor credentials across threat intelligence archives.',
                 pain: 'Stolen credentials linger unnoticed on hacker forums for 200+ days. Adversaries use recycled passwords to bypass single-factor admin portals without tripping firewalls.',
                 status: 'Querying exposed credential leaks & breach databases...'
             },
@@ -1939,7 +1932,7 @@
                 placeholder: 'Enter URL or QR target (e.g. https://... or card link)',
                 icon: 'fa-qrcode',
                 title: 'LINK & PHISH TRAP INSPECTION BREAKDOWN',
-                tested: 'Inbound/outbound URI redirection traps, homoglyph lookalike domains, deceptive QR code routing payloads, and weaponized attachment headers.',
+                tested: 'Not part of the free 60-second scan; offered in the paid Evidence Binder. Covers inbound/outbound URI redirection traps, homoglyph lookalike domains, deceptive QR code routing payloads, and weaponized attachment headers.',
                 pain: 'A single misdirected QR code or spear-phishing link delivers a session stealer straight past corporate antivirus, granting attackers immediate browser session hijacking.',
                 status: 'Unmasking redirect chains, phish traps & payload hashes...'
             }
@@ -2039,7 +2032,9 @@
             let auditData = null;
             try {
                 const cleanDomain = target.replace(/^https?:\/\//, '').split('/')[0];
-                const res = await fetch('http://129.212.176.154/api/audit/run', {
+                if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(cleanDomain)) throw new Error('invalid domain');
+                const ctrl = new AbortController(); setTimeout(() => ctrl.abort(), 8000);
+                const res = await fetch(AUDIT_API_URL, { signal: ctrl.signal,
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ domain: cleanDomain })
@@ -2076,7 +2071,8 @@
 
             let grade = "GRADE A";
             let score = 95;
-            let rating = "Hardened / Low Risk";
+            let rating = "Sample data (not a live result)";
+            let isLive = false;
             let findings = [
                 {
                     icon: 'fa-circle-check text-emerald-500',
@@ -2109,18 +2105,20 @@
             ];
 
             if (remoteData && remoteData.report) {
+                isLive = true;
+                rating = 'Live external scan';
                 const rep = remoteData.report;
                 grade = `GRADE ${rep.letter_grade || 'A'}`;
                 score = rep.darden_trust_score || 95;
                 if (rep.carrier_matrix && rep.carrier_matrix.total_potential_discount) {
-                    rating = `Hardened / ${rep.carrier_matrix.total_potential_discount} Discount Ready`;
+                    rating = 'Live external scan';
                 }
                 if (rep.telemetry) {
                     findings = [
                         {
                             icon: rep.telemetry.ssl_valid ? 'fa-circle-check text-emerald-500' : 'fa-triangle-exclamation text-red-500',
                             severity: rep.telemetry.ssl_valid ? 'LOW RISK' : 'HIGH RISK',
-                            title: `SSL / TLS Security (${rep.telemetry.ssl_issuer || 'Verified'})`,
+                            title: `SSL / TLS Security (${escHtml(rep.telemetry.ssl_issuer || 'Verified')})`,
                             desc: rep.telemetry.https_enforced ? 'HTTPS enforced, TLS 1.3 negotiated without cipher downgrade risk.' : 'Plaintext HTTP accepted. Vulnerable to interception.',
                             remediation: 'Mandate strict HTTPS 301 redirection at edge router.'
                         },
@@ -2149,9 +2147,14 @@
                 }
             }
 
-            scoreEl.innerText = `${score} / 100`;
+            scoreEl.innerText = isLive ? `${score} / 100` : 'n/a (sample)';
             discountEl.innerText = rating;
-            gradeEl.innerText = grade;
+            gradeEl.innerText = isLive ? grade : 'SAMPLE';
+            const lbl = document.getElementById('spa-live-label');
+            if (lbl) {
+                lbl.innerText = isLive ? 'LIVE EXTERNAL SCAN COMPLETE' : 'SAMPLE REPORT // LIVE SCAN UNAVAILABLE';
+                lbl.className = 'text-[10px] font-mono uppercase tracking-widest font-black ' + (isLive ? 'text-emerald-600' : 'text-amber-600');
+            }
 
             findingsList.innerHTML = findings.map(f => {
                 let isHigh = f.severity.includes('HIGH') || f.severity.includes('CRITICAL');
@@ -2180,6 +2183,7 @@
                 `;
             }).join('');
 
+            if (!isLive) findingsList.insertAdjacentHTML('afterbegin', '<div class="p-3 rounded-xl bg-amber-50 border border-amber-300 text-amber-800 text-xs font-mono">The live scanner did not respond, so the findings below are generic sample data and do NOT describe this domain. Request an Evidence Binder for a real assessment.</div>');
             scanningState.classList.add('hidden');
             resultState.classList.remove('hidden');
         }
@@ -2201,7 +2205,7 @@
 
         function updateKioskPreview() {
             const inputSub = document.getElementById('kiosk-subdomain-input').value.trim() || 'mybusinessname';
-            const cleanSub = inputSub.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const cleanSub = inputSub.toLowerCase().replace(/[^a-z0-9-]/g, '');
             const fullURL = `https://${cleanSub}.burn-1.com`;
             
             const bizName = document.getElementById('biz-name-input').value.trim() || 'Apex Security Kiosks';
@@ -2296,7 +2300,7 @@
             };
 
             try {
-                localStorage.setItem('burn1_reservation', JSON.stringify(reservationPayload));
+                safeLS.set('burn1_reservation', JSON.stringify(reservationPayload));
             } catch (err) {
                 console.warn('Storage save notice:', err);
             }
@@ -2355,7 +2359,7 @@
                 if (themeIcon) themeIcon.className = "fa-solid fa-sun text-amber-400";
                 if (themeText) themeText.innerText = "DAY";
                 if (versionTag) versionTag.innerText = "HUB";
-                localStorage.setItem('burn1_theme', 'night');
+                safeLS.set('burn1_theme', 'night');
             } else {
                 htmlRoot.classList.add('day-mode');
                 if (themeIcon) themeIcon.className = "fa-solid fa-moon text-purple-600";
@@ -2364,102 +2368,8 @@
                 if (bgAudio && !bgAudio.paused) {
                     bgAudio.pause();
                 }
-                localStorage.setItem('burn1_theme', 'day');
+                safeLS.set('burn1_theme', 'day');
             }
-        }
-
-        // =========================================================
-        // GHOST BROWSER KINETIC SELF-DESTRUCT AD SEQUENCER
-        // =========================================================
-        let ghostLoopTimer = null;
-        function runGhostAdLoop() {
-            if (ghostLoopTimer) clearTimeout(ghostLoopTimer);
-
-            const brand = document.getElementById('ghost-step-brand');
-            const product = document.getElementById('ghost-step-product');
-            const sub = document.getElementById('ghost-step-sub');
-            const slogan = document.getElementById('ghost-step-slogan');
-            const btnContainer = document.getElementById('ghost-step-btn-container');
-            const countdownBox = document.getElementById('ghost-step-countdown-box');
-            const timer = document.getElementById('ghost-destruct-timer');
-            const casing = document.getElementById('ghost-ad-casing');
-
-            if (!brand || !product) return;
-
-            // Step 1: Initial state - TRUE BURNER visible, reset others
-            brand.style.opacity = '1';
-            product.style.transition = 'opacity 7s ease-in-out';
-            product.style.opacity = '0';
-            if (sub) { sub.style.transition = 'opacity 0.6s ease'; sub.style.opacity = '0'; }
-            if (slogan) { slogan.style.transition = 'opacity 0.8s ease'; slogan.style.opacity = '0'; }
-            if (btnContainer) { btnContainer.style.transition = 'opacity 0.8s ease'; btnContainer.style.opacity = '0'; }
-            if (countdownBox) { countdownBox.style.transition = 'opacity 0.5s ease'; countdownBox.style.opacity = '0'; }
-            if (timer) timer.innerText = '5';
-            if (casing) casing.style.filter = 'none';
-
-            // Step 2: GHOST BROWSER takes 7 seconds to finish fading in
-            setTimeout(() => {
-                product.style.opacity = '1';
-            }, 100);
-
-            // Step 3: Quick POWERED BY R.E.P.™ badge (fades in around 4s)
-            setTimeout(() => {
-                if (sub) sub.style.opacity = '1';
-            }, 4000);
-
-            // Step 4 & 5: When GHOST BROWSER finishes 7s fade-in, slogans & button appear
-            setTimeout(() => {
-                if (slogan) slogan.style.opacity = '1';
-                if (btnContainer) btnContainer.style.opacity = '1';
-
-                // Countdown begins 15 seconds after the button fades in
-                setTimeout(() => {
-                    if (countdownBox) countdownBox.style.opacity = '1';
-                    let count = 5;
-                    if (timer) timer.innerText = '5';
-
-                    const countdownInterval = setInterval(() => {
-                        count--;
-                        if (timer) timer.innerText = count > 0 ? count : '0';
-                        if (count <= 0) {
-                            clearInterval(countdownInterval);
-
-                            // Rapid color invert flash 3 times back-to-back
-                            if (casing) {
-                                casing.style.filter = 'invert(1)';
-                                setTimeout(() => {
-                                    casing.style.filter = 'none';
-                                    setTimeout(() => {
-                                        casing.style.filter = 'invert(1)';
-                                        setTimeout(() => {
-                                            casing.style.filter = 'none';
-                                            setTimeout(() => {
-                                                casing.style.filter = 'invert(1)';
-                                                setTimeout(() => {
-                                                    casing.style.filter = 'none';
-
-                                                    // Hide countdown, button, and slogans but leave TRUE BURNER and GHOST BROWSER on
-                                                    if (countdownBox) countdownBox.style.opacity = '0';
-                                                    if (btnContainer) btnContainer.style.opacity = '0';
-                                                    if (slogan) slogan.style.opacity = '0';
-                                                    if (sub) sub.style.opacity = '0';
-
-                                                    // Delay 2 seconds with TRUE BURNER and GHOST BROWSER on at the same time
-                                                    setTimeout(() => {
-                                                        runGhostAdLoop();
-                                                    }, 2000);
-                                                }, 140);
-                                            }, 140);
-                                        }, 140);
-                                    }, 140);
-                                }, 140);
-                            } else {
-                                setTimeout(runGhostAdLoop, 2000);
-                            }
-                        }
-                    }, 1000);
-                }, 15000); // 15-second delay from button appearance!
-            }, 7000); // 7s fade-in duration
         }
 
         // =========================================================
@@ -2577,7 +2487,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('burn1_theme');
+            const savedTheme = safeLS.get('burn1_theme');
             const urlParams = new URLSearchParams(window.location.search);
             const modeParam = urlParams.get('mode');
             
@@ -2590,9 +2500,6 @@
                 if (themeText) themeText.innerText = 'NIGHT';
                 if (versionTag) versionTag.innerText = 'HUB BIZ';
             }
-
-            // Start Ghost Browser Ad Sequencer Loop
-            setTimeout(runGhostAdLoop, 500);
         });
     </script>
 </body>

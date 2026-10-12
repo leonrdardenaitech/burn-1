@@ -681,20 +681,20 @@
             text-shadow: none !important;
         }
 
-        /* TRANSLUCENT SEE-THROUGH GLASS PANELS (MIRROR CLOCK SHARDS SHINE THROUGH) */
+        /* TRUE SEE-THROUGH GLASS PANELS (MIRROR CLOCK SHARDS SHINE THROUGH) */
         html.day-mode .glass-panel,
         html.day-mode .card-front,
         html.day-mode .card-back {
-            background: rgba(255, 255, 255, 0.55) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-            border: 1.5px solid rgba(255, 255, 255, 0.92) !important;
-            outline: 1px solid rgba(195, 194, 194, 0.4) !important;
+            background: rgba(255, 255, 255, 0.20) !important;
+            backdrop-filter: blur(4px) !important;
+            -webkit-backdrop-filter: blur(4px) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+            outline: 1px solid rgba(195, 194, 194, 0.35) !important;
             border-radius: 1.25rem !important;
             box-shadow: 
-                0 10px 28px rgba(0, 0, 0, 0.06),
-                inset 0 2px 6px rgba(255, 255, 255, 0.95),
-                inset 0 -2px 6px rgba(0, 0, 0, 0.04) !important;
+                0 10px 28px rgba(0, 0, 0, 0.05),
+                inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                inset 0 -1px 3px rgba(0, 0, 0, 0.03) !important;
             color: #09090b !important;
             will-change: transform;
             transition: all 0.35s ease !important;
@@ -703,11 +703,11 @@
         /* HOVER GROWTH: Cards Grow on Mouse Hover */
         html.day-mode .card-front:hover,
         html.day-mode .glass-panel:hover {
-            background: rgba(255, 255, 255, 0.72) !important;
+            background: rgba(255, 255, 255, 0.32) !important;
             transform: translateY(-3px) !important;
             box-shadow: 
-                0 16px 36px rgba(0, 0, 0, 0.10),
-                inset 0 3px 8px rgba(255, 255, 255, 0.98) !important;
+                0 16px 36px rgba(0, 0, 0, 0.08),
+                inset 0 2px 4px rgba(255, 255, 255, 0.95) !important;
             border-color: #ffffff !important;
         }
 
@@ -716,16 +716,45 @@
         html.day-mode .video-placeholder,
         html.day-mode .quiz-box,
         html.day-mode .bg-black,
+        html.day-mode .bg-black\/50,
+        html.day-mode .bg-black\/60,
+        html.day-mode .bg-black\/70,
+        html.day-mode .bg-black\/80,
+        html.day-mode .bg-black\/85,
+        html.day-mode .bg-black\/90,
+        html.day-mode .bg-slate-900,
         html.day-mode .bg-slate-900\/90,
+        html.day-mode .bg-slate-800,
+        html.day-mode .bg-neutral-800,
+        html.day-mode .bg-neutral-900,
+        html.day-mode .bg-neutral-900\/90,
+        html.day-mode .bg-neutral-950,
         html.day-mode .bg-cyan-950,
-        html.day-mode .bg-purple-950\/80 {
-            background: rgba(255, 255, 255, 0.65) !important;
-            backdrop-filter: blur(6px) !important;
-            -webkit-backdrop-filter: blur(6px) !important;
+        html.day-mode .bg-purple-950,
+        html.day-mode .bg-purple-950\/80,
+        html.day-mode .bg-purple-950\/90,
+        html.day-mode #codex-content-box {
+            background: rgba(255, 255, 255, 0.28) !important;
+            backdrop-filter: blur(4px) !important;
+            -webkit-backdrop-filter: blur(4px) !important;
             border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
             border-radius: 1rem !important;
             box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(255, 255, 255, 0.75) !important;
             color: #09090b !important;
+        }
+
+        html.day-mode .sector-tab-btn,
+        html.day-mode .codex-tab-btn {
+            background: rgba(255, 255, 255, 0.4) !important;
+            border-color: #cbd5e1 !important;
+            color: #09090b !important;
+        }
+        html.day-mode .sector-tab-btn.active,
+        html.day-mode .codex-tab-btn.active {
+            background: linear-gradient(to top, #ffffff, #fef3c7) !important;
+            border-color: #f59e0b !important;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25) !important;
+            color: #000000 !important;
         }
 
         html.day-mode .report-highlight {
@@ -1018,6 +1047,71 @@
                             <i class="fa-solid fa-bolt"></i> GET INSTANT AUDIT ($499)
                         </a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             SECTION 1B: WHAT WE ARE DOING // THE DATA RISK ASSESSMENT (DRA) CORE
+             ========================================================= -->
+        <section class="mb-10">
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/50">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-4 border-b border-purple-900/60">
+                    <div>
+                        <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-microscope text-amber-400"></i> DIAGNOSTIC CORE // WHAT WE ARE DOING
+                        </span>
+                        <h2 class="text-xl sm:text-2xl font-cyber text-white font-extrabold uppercase mt-1">
+                            Data Risk Assessments (DRAs) + Verified Evidence Binders
+                        </h2>
+                    </div>
+                    <span class="px-3 py-1 rounded bg-black/60 border border-cyan-500 text-cyan-300 font-mono text-xs font-bold">
+                        ZERO VENDOR SOFTWARE EXPENSES
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                    <div class="p-4 rounded-2xl bg-black/60 border border-neutral-800">
+                        <div class="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-3">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <h3 class="font-cyber text-sm font-bold text-white uppercase mb-1.5">1. Public File Exposure</h3>
+                        <p class="font-mono text-xs text-slate-300 leading-relaxed">
+                            Detecting sensitive payroll, passwords, HR files, or company records accidentally left accessible to anonymous "Anyone with the link" visitors across cloud storage and file shares.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-black/60 border border-neutral-800">
+                        <div class="w-9 h-9 rounded-xl bg-amber-950 border border-amber-500 flex items-center justify-center text-amber-300 mb-3">
+                            <i class="fa-solid fa-id-card-clip"></i>
+                        </div>
+                        <h3 class="font-cyber text-sm font-bold text-white uppercase mb-1.5">2. Identity Vulnerabilities</h3>
+                        <p class="font-mono text-xs text-slate-300 leading-relaxed">
+                            Pinpointing stale/unmonitored accounts, non-MFA ingress points, and legacy password-only entryways that void cyber insurance policies under carrier warranty clauses.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-black/60 border border-neutral-800">
+                        <div class="w-9 h-9 rounded-xl bg-purple-950 border border-purple-500 flex items-center justify-center text-purple-300 mb-3">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <h3 class="font-cyber text-sm font-bold text-white uppercase mb-1.5">3. Over-Privileged Access</h3>
+                        <p class="font-mono text-xs text-slate-300 leading-relaxed">
+                            Locating non-admin users or third-party OAuth apps holding dangerous global export privileges, enforcing the principle of least privilege required by underwriters.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-black/80 border border-amber-500/40 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-database text-amber-400 text-lg"></i>
+                        <span class="text-slate-300">
+                            <strong class="text-white">The Diagnostic Engine:</strong> All assessment findings compile into your verified <strong class="text-amber-400">Evidence Binder</strong>, attested on the Darden Trust Directory for carrier renewals.
+                        </span>
+                    </div>
+                    <a href="store.html#audit" class="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold uppercase tracking-wider shrink-0 transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                        ORDER BINDER ($499) &rarr;
+                    </a>
                 </div>
             </div>
         </section>
@@ -1462,12 +1556,25 @@
                                         </p>
                                     </div>
 
-                                    <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                        <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                            <i class="fa-solid fa-crosshairs ml-0.5"></i>
+                                    <div class="rounded-xl border border-cyan-500/50 bg-black/70 overflow-hidden mb-3 relative group">
+                                        <div class="relative h-28 overflow-hidden bg-slate-950">
+                                            <img src="anti_phish_quest_stage2/anti_phish_quest_visual_concept.png" alt="Anti-Phish Quest Simulator" class="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                                            <div class="absolute bottom-2 left-3 right-3 flex items-center justify-between">
+                                                <span class="font-cyber text-[11px] font-bold text-white uppercase flex items-center gap-1.5">
+                                                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> STAGE 2 QUEST SIMULATOR
+                                                </span>
+                                                <span class="font-mono text-[10px] text-amber-400 font-bold bg-black/80 px-2 py-0.5 rounded border border-amber-500/60">+150 XP &bull; 2 BADGES</span>
+                                            </div>
                                         </div>
-                                        <span class="font-cyber text-[11px] font-bold text-white uppercase">Interactive Phish &amp; BEC Simulator</span>
-                                        <span class="font-mono text-[9px] text-cyan-300 uppercase tracking-widest mt-0.5">Click "Live Phish Drill" Tab Above to Test Skills</span>
+                                        <div class="p-2.5 flex items-center justify-between gap-2 bg-black/50">
+                                            <p class="font-mono text-[10px] text-slate-300 leading-tight">
+                                                Full interactive scenario engine across Healthcare, Finance, Defense &amp; Retail.
+                                            </p>
+                                            <a href="anti_phish_quest_stage2/index.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-bold text-[10px] uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(6,182,212,0.5)] shrink-0 flex items-center gap-1">
+                                                <span>PLAY</span> &rarr;
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1503,6 +1610,12 @@
                                             <button type="button" onclick="verifyDrill()" class="py-1.5 px-1 rounded bg-purple-950 hover:bg-purple-900 text-purple-200 border border-purple-500 text-[10px] font-cyber font-bold uppercase transition-all">
                                                 🔐 Verify
                                             </button>
+                                        </div>
+                                        <div class="mt-2.5 pt-2 border-t border-neutral-800 flex items-center justify-between text-[10px] font-mono">
+                                            <span class="text-slate-400">Want full 5-sector simulator?</span>
+                                            <a href="anti_phish_quest_stage2/index.html" target="_blank" class="text-cyan-400 hover:underline font-bold flex items-center gap-1">
+                                                <span>Launch Full App</span> &rarr;
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

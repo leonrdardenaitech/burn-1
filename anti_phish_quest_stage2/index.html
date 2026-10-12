@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANTI-PHISH QUEST // Stage 2 Interactive Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg: #040914;
+  --panel: rgba(11, 29, 53, 0.75);
+  --cyan: #00f0ff;
+  --blue: #38bdf8;
+  --purple: #9333ea;
+  --green: #10b981;
+  --gold: #f59e0b;
+  --red: #ef4444;
+  --ink: #f8fafc;
+  --muted: #94a3b8;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 15% 0%, #172554 0, transparent 45%), radial-gradient(ellipse at 90% 20%, #4c1d95 0, transparent 35%), var(--bg);
+  color: var(--ink);
+  font: 15px/1.6 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+button, select { font: inherit; }
+button { cursor: pointer; }
+.wrap { max-width: 1240px; margin: auto; padding: 20px; }
+
+/* NAV / HEADER */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+}
+.brand { display: flex; gap: 14px; align-items: center; }
+.logo { font-size: 42px; filter: drop-shadow(0 0 16px var(--cyan)); }
+.brand h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1;
+  margin: 0;
+  letter-spacing: .06em;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+}
+.brand small {
+  color: var(--gold);
+  letter-spacing: .18em;
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: bold;
+}
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+.pill {
+  border: 1.5px solid var(--cyan);
+  border-radius: 99px;
+  padding: 8px 16px;
+  color: var(--cyan);
+  background: rgba(0, 240, 255, 0.08);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+.back-btn {
+  text-decoration: none;
+  border: 1.5px solid var(--purple);
+  border-radius: 99px;
+  padding: 8px 16px;
+  color: #fff;
+  background: rgba(147, 51, 234, 0.25);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.back-btn:hover {
+  background: var(--purple);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.6);
+}
+
+/* HERO VISUAL BANNER */
+.hero-art-banner {
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.2);
+  position: relative;
+  max-height: 220px;
+}
+.hero-art-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+.hero-art-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(4,9,20,0.92) 0%, rgba(4,9,20,0.6) 50%, rgba(4,9,20,0.85) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+}
+.hero-art-text h2 {
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  font-size: 1.6rem;
+  margin: 0 0 6px 0;
+  text-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+.hero-art-text p {
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* GRID LAYOUT */
+.grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 18px; }
+.panel {
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(56, 189, 248, 0.3);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.panel:hover {
+  border-color: rgba(0, 240, 255, 0.6);
+  box-shadow: 0 12px 40px rgba(0, 240, 255, 0.15);
+}
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+  color: var(--cyan);
+  letter-spacing: 0.5px;
+}
+h3 { margin: 0 0 8px; font-family: 'Orbitron', sans-serif; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; }
+.stat {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(7, 24, 43, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  text-align: center;
+}
+.stat strong {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.6rem;
+  color: var(--gold);
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+}
+.bar { height: 10px; background: #0f172a; border-radius: 99px; overflow: hidden; margin-top: 8px; border: 1px solid rgba(0, 240, 255, 0.2); }
+.bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--gold));
+  width: 0;
+  transition: width .5s ease;
+}
+
+/* INDUSTRY SELECTOR */
+.selector { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 18px; }
+.industry {
+  background: rgba(10, 32, 56, 0.8);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  color: var(--ink);
+  padding: 9px 14px;
+  border-radius: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.25s ease;
+}
+.industry:hover {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.25);
+}
+.industry.active {
+  border-color: var(--gold);
+  background: rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+  color: #fff;
+}
+
+/* 3D FLIP SCENARIO CARD */
+.scenario { perspective: 1200px; min-height: 360px; }
+.flip-inner {
+  position: relative;
+  min-height: 360px;
+  transform-style: preserve-3d;
+  transition: transform .7s cubic-bezier(.2,.8,.2,1);
+}
+.scenario.flipped .flip-inner { transform: rotateY(180deg); }
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 24px;
+  background: linear-gradient(145deg, rgba(16, 43, 73, 0.95), rgba(7, 21, 40, 0.95));
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+.back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, rgba(16, 47, 55, 0.95), rgba(7, 27, 43, 0.95));
+  border-color: var(--green);
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.3);
+}
+.emailhead { border-bottom: 1px solid rgba(56, 189, 248, 0.25); padding-bottom: 12px; margin-bottom: 14px; }
+.emailhead strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; color: #fff; display: block; margin-bottom: 4px; }
+.emailhead span { display: block; color: var(--muted); font-size: .88rem; font-family: 'Share Tech Mono', monospace; }
+.emailbody { font-size: 1.05rem; flex: 1; line-height: 1.6; }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  padding: 5px 12px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid var(--red);
+  color: #fca5a5;
+  font-size: .8rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: bold;
+  width: max-content;
+  margin-bottom: 10px;
+}
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  color: #000;
+  font-weight: 800;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, var(--cyan), #83ffdb);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  transition: all 0.2s;
+}
+.btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+}
+.btn.secondary {
+  background: rgba(23, 47, 75, 0.8);
+  color: var(--ink);
+  border: 1.5px solid rgba(56, 189, 248, 0.5);
+  box-shadow: none;
+}
+.btn.secondary:hover {
+  border-color: var(--cyan);
+  color: #fff;
+}
+.btn.purple {
+  background: linear-gradient(90deg, #a94cff, #6e78ff);
+  color: white;
+  box-shadow: 0 0 20px rgba(169, 76, 255, 0.4);
+}
+.btn.purple:hover {
+  box-shadow: 0 0 30px rgba(169, 76, 255, 0.7);
+}
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.feedback {
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(8, 44, 44, 0.8);
+  border: 1.5px solid var(--green);
+  margin: 10px 0;
+  font-size: 0.95rem;
+  color: #a7f3d0;
+}
+
+/* BADGES */
+.badgegrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.badgecard {
+  text-align: center;
+  padding: 16px 8px;
+  border: 1.5px solid rgba(0, 240, 255, 0.3);
+  border-radius: 14px;
+  background: rgba(7, 26, 46, 0.85);
+  transition: all 0.3s;
+}
+.badgeicon {
+  font-size: 2.4rem;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
+}
+.locked {
+  filter: grayscale(1);
+  opacity: .4;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+.badgecard:not(.locked) {
+  border-color: var(--gold);
+  background: linear-gradient(145deg, rgba(245, 158, 11, 0.15), rgba(7, 26, 46, 0.95));
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+  transform: translateY(-2px);
+}
+.badgecard strong {
+  display: block;
+  font-size: .88rem;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+}
+
+/* LEADERBOARD */
+.leader { width: 100%; border-collapse: collapse; }
+.leader td, .leader th { text-align: left; padding: 10px 8px; border-bottom: 1px solid rgba(56, 189, 248, 0.2); }
+.leader th { color: var(--muted); font-size: .82rem; font-family: 'Share Tech Mono', monospace; text-transform: uppercase; }
+.rate { color: var(--green); font-weight: 800; font-family: 'Share Tech Mono', monospace; }
+
+/* QUIZ */
+.quizq {
+  padding: 14px;
+  margin: 12px 0;
+  border: 1.5px solid rgba(56, 189, 248, 0.3);
+  border-radius: 14px;
+  background: rgba(8, 25, 43, 0.8);
+}
+.quizq strong { font-size: 1rem; color: #fff; display: block; margin-bottom: 8px; }
+.quizq label { display: block; margin: 8px 0; color: #e2e8f0; cursor: pointer; }
+.quizq input { accent-color: var(--cyan); margin-right: 8px; }
+.note { font-size: .87rem; color: var(--muted); font-family: 'Share Tech Mono', monospace; line-height: 1.5; }
+.foot { margin: 20px 0 4px; color: #7f9bb8; font-size: .82rem; text-align: center; }
+.wide { grid-column: 1 / -1; }
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #0c2d40;
+  border: 2px solid var(--cyan);
+  padding: 14px 22px;
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  transform: translateY(140%);
+  transition: transform .35s ease;
+  z-index: 50;
+}
+.toast.show { transform: translateY(0); }
+
+@media(max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .wide { grid-column: auto; }
+  .stats { grid-template-columns: 1fr; }
+  .badgegrid { grid-template-columns: 1fr; }
+  .hero-art-overlay { flex-direction: column; text-align: center; gap: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">🛡️</div>
+      <div>
+        <h1>ANTI-PHISH QUEST</h1>
+        <small>STAGE 2 · TRAIN • SPOT • REPORT • REPURPOSE</small>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a href="../academy.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> ACADEMY HUB</a>
+      <div class="pill">⚡ CYBER DEFENDER CONSOLE</div>
+    </div>
+  </header>
+
+  <!-- HERO VISUAL ART BANNER -->
+  <div class="hero-art-banner">
+    <img src="anti_phish_quest_visual_concept.png" alt="Anti-Phish Quest Visual Concept Art">
+    <div class="hero-art-overlay">
+      <div class="hero-art-text">
+        <h2>DEFEND THE METRO FRONTIER</h2>
+        <p>Interactive Triage Drill: Train on 5 Real-World Industry Scenarios &bull; Bank XP &bull; Unlock Seals</p>
+      </div>
+      <div>
+        <a href="#scenario" class="btn"><i class="fa-solid fa-play"></i> START DRILL</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT COLUMN: DRILL ENGINE -->
+    <div>
+      <section class="panel">
+        <h2>🚀 Your Mission Dashboard</h2>
+        <div class="stats">
+          <div class="stat">
+            <span class="muted">TOTAL XP</span>
+            <strong id="xp">0</strong>
+            <div class="bar"><span id="xpbar"></span></div>
+          </div>
+          <div class="stat">
+            <span class="muted">LEVEL</span>
+            <strong id="level">1</strong>
+            <span class="note" id="rank">Rookie Defender</span>
+          </div>
+          <div class="stat">
+            <span class="muted">SCENARIOS</span>
+            <strong id="done">0 / 5</strong>
+            <span class="note">Training progress</span>
+          </div>
+        </div>
+
+        <h2>🌐 Choose Your Industry Sector</h2>
+        <p class="muted">Select an industry to simulate sector-specific threats, executive lures, and wire transfer traps.</p>
+        <div class="selector" id="industries">
+          <button class="industry active" data-ind="Healthcare">🏥 Healthcare</button>
+          <button class="industry" data-ind="Financial Services">🏦 Finance</button>
+          <button class="industry" data-ind="Defense & Government">🛰️ Defense</button>
+          <button class="industry" data-ind="Manufacturing & OT">🏭 Manufacturing</button>
+          <button class="industry" data-ind="Retail & E-Commerce">🛒 Retail</button>
+        </div>
+
+        <div class="scenario" id="scenario">
+          <div class="flip-inner">
+            <!-- Front Face: Simulated Inbound Email -->
+            <div class="face front">
+              <div class="tag">📨 INCOMING MESSAGE · SIMULATION</div>
+              <div class="emailhead">
+                <strong id="subject">Urgent: Review this document</strong>
+                <span id="from">From: external.sender@example.net</span>
+                <span id="to">To: You · Sent: Today 09:14</span>
+              </div>
+              <div class="emailbody">
+                <p id="bodycopy">Please open the attached file immediately and confirm.</p>
+                <p class="muted" id="hint">Mission clue: inspect the message before you act.</p>
+              </div>
+              <div class="actions">
+                <button class="btn" id="flip">🔍 Inspect &amp; Decide</button>
+                <button class="btn secondary" id="report">🚨 Report Suspicious</button>
+              </div>
+            </div>
+
+            <!-- Back Face: Decision Review -->
+            <div class="face back">
+              <div class="tag" style="border-color:var(--green); background:rgba(16,185,129,0.2); color:#a7f3d0;">🧠 DECISION REVIEW</div>
+              <h2 id="resultTitle" style="color:#fff;">Good catch!</h2>
+              <div class="feedback" id="explain">Check sender identity and verify through a known trusted channel.</div>
+              <p id="rule" class="note"></p>
+              <div class="actions">
+                <button class="btn" id="next">➡️ Next Scenario (+100 XP)</button>
+                <button class="btn secondary" id="back">↩ Return to Email</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="note" style="margin-top:14px;">Tip: In real work, use your organization’s reporting button and established escalation policy. Never test a suspicious link or attachment.</p>
+      </section>
+
+      <!-- 3-QUESTION DRILL QUIZ -->
+      <section class="panel">
+        <h2>🧪 Module Quiz · 3 Questions</h2>
+        <p class="muted">Choose one answer for each question, then submit for instant feedback and +250 XP.</p>
+        <form id="quiz">
+          <div class="quizq">
+            <strong>1. You receive an unexpected request to change a vendor’s bank details. What next?</strong>
+            <label><input type="radio" name="q1" value="a"> Reply to the email asking if it is genuine</label>
+            <label><input type="radio" name="q1" value="b"> Verify using a known, independent phone number and required dual approval</label>
+            <label><input type="radio" name="q1" value="c"> Process it if the logo looks correct</label>
+            <div class="note" id="f1" style="color:var(--gold); font-weight:bold; margin-top:6px;"></div>
+          </div>
+          <div class="quizq">
+            <strong>2. What should you do with a suspicious message?</strong>
+            <label><input type="radio" name="q2" value="a"> Use the approved phishing-report button</label>
+            <label><input type="radio" name="q2" value="b"> Forward it to coworkers to ask their opinion</label>
+            <label><input type="radio" name="q2" value="c"> Open the attachment in case it is important</label>
+            <div class="note" id="f2" style="color:var(--gold); font-weight:bold; margin-top:6px;"></div>
+          </div>
+          <div class="quizq">
+            <strong>3. A senior executive asks for gift cards urgently and says to keep it secret. This is:</strong>
+            <label><input type="radio" name="q3" value="a"> Normal if the signature matches</label>
+            <label><input type="radio" name="q3" value="b"> Safe when the email says “urgent”</label>
+            <label><input type="radio" name="q3" value="c"> A warning sign; verify independently and report</label>
+            <div class="note" id="f3" style="color:var(--gold); font-weight:bold; margin-top:6px;"></div>
+          </div>
+          <button class="btn purple" type="submit">✨ Submit Quiz (+250 XP if perfect)</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN: BADGES & READINESS -->
+    <div>
+      <aside class="panel">
+        <h2>🏆 Collectible Security Badges</h2>
+        <div class="badgegrid">
+          <div class="badgecard locked" id="b-report">
+            <div class="badgeicon">📡</div>
+            <strong>Phish Hunter Beacon</strong>
+            <small class="muted">1-click reporting</small>
+          </div>
+          <div class="badgecard locked" id="b-wire">
+            <div class="badgeicon">🔐</div>
+            <strong>Wire Vault Guardian</strong>
+            <small class="muted">Out-of-band verification</small>
+          </div>
+          <div class="badgecard locked" id="b-bec">
+            <div class="badgeicon">🕵️</div>
+            <strong>BEC Destroyer</strong>
+            <small class="muted">Executive impersonation</small>
+          </div>
+        </div>
+
+        <hr style="border-color:rgba(56, 189, 248, 0.2); margin:20px 0;">
+
+        <h2>📊 Department Leaderboard</h2>
+        <p class="note">Illustrative benchmark data — models workforce training progress.</p>
+        <table class="leader">
+          <thead>
+            <tr><th>Department</th><th>Click rate</th><th>Avg. time</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🛠️ Engineering</td><td class="rate">1.2%</td><td>6m 12s</td></tr>
+            <tr><td>💳 Finance</td><td class="rate">2.1%</td><td>7m 48s</td></tr>
+            <tr><td>📈 Sales</td><td style="color:var(--gold);font-weight:800;font-family:'Share Tech Mono',monospace;">3.0%</td><td>8m 22s</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="margin-top:10px;">A &lt;3.5% workforce click rate satisfies underwriter questionnaires across Chubb &amp; Travelers renewals.</p>
+      </aside>
+
+      <!-- EVIDENCE & COMPLIANCE READINESS -->
+      <section class="panel">
+        <h2>🧾 Evidence &amp; Compliance Readiness</h2>
+        <p class="muted">Turn staff completion into verifiable underwriting artifacts for your Evidence Binder.</p>
+        <ul style="font-family:'Share Tech Mono',monospace; font-size:0.9rem; padding-left:18px; line-height:1.8;">
+          <li>📅 Simulation dates and participation records</li>
+          <li>📉 Click-rate and pass-rate calculations</li>
+          <li>🔏 SHA-256 integrity hash verification</li>
+          <li>📄 Underwriter-formatted completion proof</li>
+        </ul>
+        <button class="btn secondary" id="mint" style="width:100%; margin-top:10px;">🪙 Mint Demo Proof Badge (+500 XP)</button>
+        <p class="note" style="margin-top:10px;">Anchors completion telemetry to a mathematical hash proof ready for inclusion in your Cyber Insurance Binder.</p>
+      </section>
+
+      <!-- QUICK DOWNLOADS -->
+      <section class="panel">
+        <h2>📥 Zero-Jargon Guides</h2>
+        <p class="muted">Step-by-step cheatsheets and Python evidence exporters included in this bundle:</p>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+          <a href="zero_jargon_cheat_sheet.pdf" download class="btn secondary" style="text-align:center; text-decoration:none;">📄 Download 1-Page PDF Cheatsheet</a>
+          <a href="evidence_exporter.py" download class="btn secondary" style="text-align:center; text-decoration:none;">🐍 Download Evidence Exporter (.py)</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- WIDE MATRIX BREAKDOWN -->
+    <section class="panel wide">
+      <h2>📚 Industry Scenario Matrix (Repurposable Across Stages)</h2>
+      <div id="matrix" style="font-family:'Share Tech Mono',monospace; font-size:0.95rem; line-height:1.7;"></div>
+    </section>
+  </div>
+
+  <p class="foot">Anti-Phish Quest: Stage 2 &bull; Educational Prototype &bull; BURN-1 CYBER ACADEMY</p>
+</div>
+
+<div class="toast" id="toast">+100 XP earned!</div>
+
+<script>
+const scenarios = {
+  "Healthcare": [
+    { s: "URGENT: Clinician shift coverage", f: "From: staffing-desk@clinic-support.example", b: "A message asks you to open an unexpected “shift roster” attachment and enter your sign-in details before your next shift.", h: "Unexpected attachment + credential request", e: "Confirm schedule changes in the approved staffing system. Report the message; do not open the attachment.", type: "report" },
+    { s: "IRB review document ready", f: "From: research-office@external-example.net", b: "An unexpected message claims an IRB protocol will be suspended unless you enable macros in an attached document.", h: "Pressure, unusual sender, macro request", e: "Contact the research office through a known directory number and report the email.", type: "report" },
+    { s: "Emergency: update payment details", f: "From: billing@vendor-example.net", b: "A supplier requests a new bank account and says the invoice must be paid before end of day.", h: "Bank detail change requires independent verification", e: "Pause payment and follow the approved dual-verification process. HIPAA audit logging is not a substitute for phishing reporting.", type: "wire" }
+  ],
+  "Financial Services": [
+    { s: "CEO: urgent confidential wire", f: "From: ceo-office@lookalike-example.net", b: "An apparent executive asks for an urgent wire transfer and says not to call because they are in a meeting.", h: "Executive impersonation + secrecy + money", e: "Do not reply to verify. Call a known number and follow dual authorization before any transfer.", type: "bec" },
+    { s: "Vendor ACH account updated", f: "From: accounts@vendor-example.net", b: "A vendor email announces a new ACH routing number and attaches a replacement invoice.", h: "Payment instruction change", e: "Verify out-of-band using contact details already on file; record approvals per policy.", type: "wire" },
+    { s: "Security review notice", f: "From: compliance-alert@external-example.net", b: "A message asks you to sign in through a link to avoid an alleged NYDFS audit finding.", h: "Unexpected sign-in link and pressure", e: "Navigate to the official internal portal yourself and report the suspicious email.", type: "report" }
+  ],
+  "Defense & Government": [
+    { s: "CMMC audit evidence required", f: "From: audit-team@compliance-example.net", b: "An unexpected link asks you to upload controlled project files to a new portal immediately.", h: "Sensitive data request through an unverified portal", e: "Do not upload CUI. Verify with your security/contracting team and follow incident-reporting procedures.", type: "report" },
+    { s: "DFARS action required today", f: "From: contracts-office@external-example.net", b: "A message requests a password and a CUI export to “validate” a contract record.", h: "Credential request + data extraction", e: "Never provide credentials by email. Use approved channels and report to security.", type: "report" },
+    { s: "Executive wire request", f: "From: director@lookalike-example.net", b: "A leader requests an urgent payment to a new subcontractor and asks you to skip normal checks.", h: "Urgency and bypassing controls", e: "Pause, verify through known contact details, and follow finance authorization policy.", type: "bec" }
+  ],
+  "Manufacturing & OT": [
+    { s: "PLC firmware update attached", f: "From: controls-vendor@external-example.net", b: "A vendor says to install an attached firmware update on a production controller immediately.", h: "Unexpected executable/update via email", e: "Never install from an email. Validate through approved vendor channels and OT change-control procedures.", type: "report" },
+    { s: "Revised supplier invoice", f: "From: billing@suppl1er-example.net", b: "A supplier asks for a new bank account and a same-day transfer.", h: "Lookalike sender and changed bank details", e: "Call the known supplier contact, use dual approval, and document verification.", type: "wire" },
+    { s: "Plant network alert", f: "From: ot-alerts@external-example.net", b: "A link asks you to enter remote-access credentials to prevent a production shutdown.", h: "Urgency + credential collection", e: "Use approved monitoring tools and report the email to IT/OT security.", type: "report" }
+  ],
+  "Retail & E-Commerce": [
+    { s: "CEO gift card request", f: "From: ceo@lookalike-example.net", b: "An apparent executive requests gift cards and asks you to send the redemption codes privately.", h: "Gift cards + secrecy + impersonation", e: "Do not buy or send codes. Verify using a known channel and report the message.", type: "bec" },
+    { s: "Payment gateway credential expiry", f: "From: merchant-support@external-example.net", b: "A link says your payment gateway will be disabled unless you sign in now.", h: "Unexpected login link", e: "Open the official service through a saved bookmark or known address, then report the email.", type: "report" },
+    { s: "New fulfillment vendor bank details", f: "From: vendor-finance@external-example.net", b: "An invoice asks you to change ACH details before the next payout run.", h: "Payment change request", e: "Use independently sourced contact details and the approved dual-authorization workflow.", type: "wire" }
+  ]
+};
+
+let industry = "Healthcare", idx = 0, xp = 0, done = new Set(), earned = { report: false, wire: false, bec: false }, quizDone = false, proof = false;
+const $ = id => document.getElementById(id);
+
+function toast(t) {
+  $("toast").textContent = t;
+  $("toast").classList.add("show");
+  setTimeout(() => $("toast").classList.remove("show"), 2200);
+}
+
+function award(n) {
+  xp += n;
+  $("xp").textContent = xp.toLocaleString();
+  $("level").textContent = 1 + Math.floor(xp / 500);
+  $("rank").textContent = ["Rookie Defender", "Signal Scout", "Threat Tracker", "Phishing Specialist", "Cyber Guardian"][Math.min(4, Math.floor(xp / 500))];
+  $("xpbar").style.width = (xp % 500 / 5) + "%";
+}
+
+function active() { return scenarios[industry][idx % scenarios[industry].length]; }
+
+function render() {
+  let s = active();
+  $("subject").textContent = s.s;
+  $("from").textContent = s.f;
+  $("bodycopy").textContent = s.b;
+  $("hint").textContent = "Mission clue: " + s.h;
+  $("scenario").classList.remove("flipped");
+  $("resultTitle").textContent = "Decision Review";
+  $("explain").textContent = "Choose a safe next step. Use the reporting control for suspicious messages; for payment changes, verify independently.";
+  $("rule").textContent = "Industry focus: " + industry;
+  $("done").textContent = done.size + " / 5";
+
+  const matrixData = {
+    Healthcare: ["Fake IRB attachments and protocol review lures", "Emergency clinician shift roster credential harvesters", "Protect audit logs and follow HIPAA § 164.312 dual-verification"],
+    "Financial Services": ["CFO wire-transfer impersonation (Executive BEC)", "Fraudulent ACH routing changes on supplier invoices", "Follow NYDFS 23 NYCRR 500 out-of-band callback protocol"],
+    "Defense & Government": ["Fake CMMC 2.0 Level 2 compliance audit notices", "Controlled Unclassified Information (CUI) extraction attempts", "Enforce DFARS 252.204-7012 and CIRCIA 72h disclosure rules"],
+    "Manufacturing & OT": ["Trojanized PLC and SCADA firmware update attachments", "Lookalike invoice spoofing during fiscal month-end", "Follow NIST SP 800-82 Rev 3 OT change-control protocols"],
+    "Retail & E-Commerce": ["Executive gift card urgent emergency requests", "Payment gateway checkout credential expiration lures", "Reinforce PCI DSS v4.0 requirement 12 staff awareness controls"]
+  };
+
+  $("matrix").innerHTML = "<strong style='color:var(--cyan); font-size:1.05rem; display:block; margin-bottom:6px;'>Selected Sector: " + industry + "</strong><ul style='margin:0; padding-left:20px;'>" +
+    matrixData[industry].map(x => "<li style='margin-bottom:4px;'>" + x + "</li>").join("") + "</ul>";
+}
+
+function reveal(ok, reason) {
+  $("scenario").classList.add("flipped");
+  $("resultTitle").textContent = ok ? "✅ Correct Defensive Action" : "⚠️ Review the Safer Action";
+  $("explain").textContent = reason;
+  $("rule").textContent = ok ? "You reduced organizational risk by pausing and using the approved channel." : "Remember: urgency is a reason to slow down, not skip controls.";
+  if (ok) {
+    if (!done.has(industry + idx)) {
+      done.add(industry + idx);
+      award(100);
+      toast("+100 XP · Scenario Completed! 🎯");
+    }
+    let t = active().type;
+    if (t === "report" && !earned.report) {
+      earned.report = true;
+      $("b-report").classList.remove("locked");
+      toast("🏆 Unlocked: Phish Hunter Beacon!");
+    }
+    if (t === "wire" && !earned.wire) {
+      earned.wire = true;
+      $("b-wire").classList.remove("locked");
+      toast("🏆 Unlocked: Wire Vault Guardian!");
+    }
+    if (t === "bec" && !earned.bec) {
+      earned.bec = true;
+      $("b-bec").classList.remove("locked");
+      toast("🏆 Unlocked: BEC Destroyer!");
+    }
+  }
+}
+
+document.querySelectorAll(".industry").forEach(b => b.onclick = () => {
+  industry = b.dataset.ind;
+  idx = 0;
+  document.querySelectorAll(".industry").forEach(x => x.classList.toggle("active", x === b));
+  render();
+});
+
+$("flip").onclick = () => reveal(true, active().e);
+$("report").onclick = () => {
+  let s = active();
+  let ok = s.type === "report";
+  reveal(ok, ok ? "Correct: report with the approved one-click tool; do not forward broadly or open attachments." : s.e);
+};
+$("back").onclick = () => $("scenario").classList.remove("flipped");
+$("next").onclick = () => { idx++; render(); };
+
+$("quiz").onsubmit = e => {
+  e.preventDefault();
+  let ans = { q1: "b", q2: "a", q3: "c" };
+  let feedback = {
+    q1: "Pause payment changes and verify independently via known phone number, with required dual approval.",
+    q2: "Use the organization-approved phishing reporting button.",
+    q3: "Urgency and secrecy are executive impersonation red flags; verify independently and report."
+  };
+  let score = 0;
+  for (let q of ["q1", "q2", "q3"]) {
+    let v = document.querySelector('input[name="' + q + '"]:checked');
+    let good = v && v.value === ans[q];
+    if (good) score++;
+    $(q.replace("q", "f")).textContent = (good ? "✅ Correct: " : "❌ Safer choice: ") + feedback[q];
+  }
+  if (score === 3 && !quizDone) {
+    award(250);
+    quizDone = true;
+    toast("✨ Perfect Quiz Score · +250 XP!");
+  } else if (score < 3) {
+    toast(score + "/3 correct · Review feedback notes above");
+  }
+};
+
+$("mint").onclick = () => {
+  if (!proof) {
+    award(500);
+    proof = true;
+    toast("🪙 Demo Proof Badge Minted · +500 XP!");
+  } else {
+    toast("Proof Badge already minted in your active session");
+  }
+};
+
+render();
+</script>
+</body>
+</html>
