@@ -652,8 +652,14 @@
         html.day-mode #ghost-ad-casing p {
             color: #e5e5e5 !important;
         }
-        html.day-mode #ghost-ad-casing span {
+        html.day-mode #ghost-ad-casing span:not(.btn-txt-dark) {
             color: #ffffff !important;
+        }
+        html.day-mode #ghost-ad-casing a.bg-white,
+        html.day-mode #ghost-ad-casing a.bg-white span,
+        html.day-mode #ghost-ad-casing a.bg-white * {
+            color: #000000 !important;
+            font-weight: 900 !important;
         }
 
         /* --- LED RADIAL STATUS INDICATORS --- */
@@ -1188,20 +1194,33 @@
                         </h2>
                     </div>
 
-                    <!-- Slogans for Disposable Time-Sensitive Sessions -->
-                    <div class="mt-2 max-w-2xl text-center">
-                        <p class="font-mono text-xs sm:text-sm text-neutral-200 font-bold uppercase tracking-wider">
+                    <!-- Big Black Screen Volatile Countdown Display -->
+                    <div class="my-5 p-5 sm:p-7 rounded-2xl bg-neutral-950/95 border-2 border-neutral-700/80 shadow-[inset_0_0_25px_rgba(0,0,0,0.95)] max-w-xl w-full flex flex-col items-center">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                            <span class="font-mono text-[10px] sm:text-xs text-red-400 font-bold uppercase tracking-widest">
+                                DISPOSABLE SESSION AUTO-SHRED TIMER
+                            </span>
+                        </div>
+                        <div id="ghost-countdown-display" class="font-cyber font-black text-4xl sm:text-6xl text-white tracking-widest my-1 drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] select-none">
+                            14:59.80
+                        </div>
+                        <div class="font-mono text-[10px] sm:text-[11px] text-neutral-400 uppercase tracking-wider mt-1">
+                            VOLATILE RAM DESTROYED ON DISCONNECT &bull; ZERO DISK FOOTPRINT
+                        </div>
+                    </div>
+
+                    <!-- Cycling Slogans -->
+                    <div class="max-w-2xl text-center min-h-[44px] flex items-center justify-center my-2">
+                        <p id="ghost-rotating-slogan" class="font-mono text-xs sm:text-sm text-neutral-200 font-bold uppercase tracking-wider transition-opacity duration-300">
                             TIME-SENSITIVE SMOKE SCREEN SESSIONS &bull; NOTHING SAVED ON YOUR DEVICE
-                        </p>
-                        <p class="font-mono text-[11px] text-neutral-400 mt-1 uppercase tracking-widest">
-                            VOLATILE RAM ISOLATION &bull; ZERO DISK FOOTPRINT &bull; GHOST VACUUM ACTIVATION
                         </p>
                     </div>
 
                     <!-- Sample Session Action Button -->
-                    <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+                    <div class="mt-4 flex flex-wrap items-center justify-center gap-4">
                         <a href="store.html#ghost-browser" class="px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(255,255,255,0.7)] border-2 border-neutral-300 flex items-center gap-2">
-                            <span>GET A SAMPLE SESSION</span> ⚡
+                            <span class="btn-txt-dark text-black font-black">GET A SAMPLE SESSION</span> ⚡
                         </a>
                         <a href="store.html#ghost-browser" class="px-6 py-3.5 rounded-xl bg-black hover:bg-neutral-900 text-neutral-200 font-mono text-xs font-bold uppercase tracking-wider border border-neutral-700 flex items-center gap-2">
                             <span>JOIN FREE BETA WAITLIST</span> &rarr;
@@ -1274,7 +1293,7 @@
 
                         <div class="p-4 rounded-xl bg-transparent border border-cyan-500/40">
                             <div class="flex items-center gap-2 mb-2 text-green-400 font-cyber text-xs font-bold uppercase">
-                                <i class="fa-solid fa-certificate"></i> Darden Trust Seals
+                                <i class="fa-solid fa-certificate"></i> BURN-1 Academy Seals
                             </div>
                             <p class="font-mono text-xs text-slate-300 mb-2">Academy-completion cards with dynamic QR targets.</p>
                             <a href="directory.html" class="text-[11px] font-mono text-amber-400 hover:underline">Explore Badges &rarr;</a>
@@ -2499,6 +2518,40 @@
                 if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-purple-600';
                 if (themeText) themeText.innerText = 'NIGHT';
                 if (versionTag) versionTag.innerText = 'HUB BIZ';
+            }
+
+            // Lightweight Ghost Browser Volatile Countdown & Slogan Cycler
+            let ghostTimeLeft = 14 * 60 + 59;
+            const ghostCountEl = document.getElementById('ghost-countdown-display');
+            const ghostSloganEl = document.getElementById('ghost-rotating-slogan');
+            const ghostSlogans = [
+                "TIME-SENSITIVE SMOKE SCREEN SESSIONS \u2022 NOTHING SAVED ON YOUR DEVICE",
+                "VOLATILE RAM ISOLATION \u2022 CANVAS & GPU FINGERPRINT SPOOFING",
+                "OPEN SUSPICIOUS LINKS IN ISOLATION AWAY FROM YOUR PHYSICAL HARD DRIVE",
+                "SESSION SHREDDED ON CLOSE \u2022 ZERO BYTES SAVED TO HARD DRIVE OR SSD"
+            ];
+            let ghostSloganIdx = 0;
+
+            if (ghostCountEl) {
+                setInterval(() => {
+                    if (ghostTimeLeft <= 0) ghostTimeLeft = 15 * 60;
+                    ghostTimeLeft--;
+                    const mins = String(Math.floor(ghostTimeLeft / 60)).padStart(2, '0');
+                    const secs = String(ghostTimeLeft % 60).padStart(2, '0');
+                    const ms = String(Math.floor(Math.random() * 90) + 10);
+                    ghostCountEl.textContent = `${mins}:${secs}.${ms}`;
+                }, 1000);
+            }
+
+            if (ghostSloganEl) {
+                setInterval(() => {
+                    ghostSloganIdx = (ghostSloganIdx + 1) % ghostSlogans.length;
+                    ghostSloganEl.style.opacity = '0';
+                    setTimeout(() => {
+                        ghostSloganEl.textContent = ghostSlogans[ghostSloganIdx];
+                        ghostSloganEl.style.opacity = '1';
+                    }, 350);
+                }, 4500);
             }
         });
     </script>

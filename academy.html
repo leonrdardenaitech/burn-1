@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BURN-1 CYBER ACADEMY | Zero-Cost Underwriting &amp; Compliance Curriculum</title>
-    <meta name="description" content="100% Free Public Cyber Underwriting Training: 8-stage step-by-step curriculum for zero-cost MFA, phishing triage, immutable backups, and Darden Trust Directory verification.">
+    <meta name="description" content="100% Free Public Cyber Underwriting Training: 8-stage step-by-step curriculum for zero-cost MFA, phishing triage, immutable backups, and BURN-1 Academy Directory verification.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -927,15 +927,27 @@
         }
 
         html.day-mode footer {
-            background: rgba(255, 255, 255, 0.85) !important;
-            backdrop-filter: blur(8px) !important;
-            border-top: 2px solid #d4d4d4 !important;
-            color: #64748b !important;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            backdrop-filter: blur(10px) !important;
+            border-top: 2px solid #cbd5e1 !important;
+            color: #334155 !important;
+            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.05) !important;
         }
         html.day-mode footer span, 
         html.day-mode footer a {
             color: #09090b !important;
+        }
+        html.day-mode footer p {
+            color: #334155 !important;
+        }
+        html.day-mode footer .footer-card {
+            background: rgba(255, 255, 255, 0.75) !important;
+            border-color: #cbd5e1 !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03) !important;
+        }
+        html.day-mode footer .footer-card:hover {
+            background: #ffffff !important;
+            border-color: #94a3b8 !important;
         }
     </style>
 </head>
@@ -1024,7 +1036,7 @@
                                 <i class="fa-solid fa-shield-halved text-purple-400"></i> HIPAA § 164.312 Safe Harbor
                             </div>
                             <div class="flex items-center gap-1.5 text-amber-300">
-                                <i class="fa-solid fa-award text-amber-400"></i> Darden Trust Verified Seal
+                                <i class="fa-solid fa-award text-amber-400"></i> BURN-1 Academy Seal
                             </div>
                             <div class="flex items-center gap-1.5 text-emerald-300">
                                 <i class="fa-solid fa-store text-emerald-400"></i> Metro Plaza Directory Badge
@@ -1106,7 +1118,7 @@
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-database text-amber-400 text-lg"></i>
                         <span class="text-slate-300">
-                            <strong class="text-white">The Diagnostic Engine:</strong> All assessment findings compile into your verified <strong class="text-amber-400">Evidence Binder</strong>, attested on the Darden Trust Directory for carrier renewals.
+                            <strong class="text-white">The Diagnostic Engine:</strong> All assessment findings compile into your verified <strong class="text-amber-400">Evidence Binder</strong>, attested on the Metro Plaza Directory for carrier renewals.
                         </span>
                     </div>
                     <a href="store.html#audit" class="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold uppercase tracking-wider shrink-0 transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
@@ -1328,58 +1340,58 @@
                 <div class="badge-case-grid" id="badge-case-container">
                     <!-- Badge 1 -->
                     <div class="badge-case-item locked" id="badge-item-mfa" title="Module 01: FIDO2 WebAuthn Passkeys Hardening">
-                        <span class="badge-ico">🔑</span>
-                        <strong class="font-cyber text-[10px] text-white block uppercase">Shield Master</strong>
-                        <small class="font-mono text-[9px] text-slate-400 block">Chubb 4B</small>
+                        <img src="assets/multifactorbadge1.jpg" alt="MFA Badge" class="badge-ico w-8 h-8 mx-auto rounded-full object-cover">
+                        <strong class="font-cyber text-[10px] text-white block uppercase mt-1">Shield Master</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">NIST PR.AA</small>
                     </div>
 
                     <!-- Badge 2 -->
-                    <div class="badge-case-item locked" id="badge-item-phish" title="Module 02: 1-Click Reporting & Click Rate &lt;3.5%">
-                        <span class="badge-ico">📡</span>
-                        <strong class="font-cyber text-[10px] text-white block uppercase">Phish Hunter</strong>
-                        <small class="font-mono text-[9px] text-slate-400 block">NIST AT-2</small>
+                    <div class="badge-case-item locked" id="badge-item-phish" title="Module 02: 1-Click Reporting & BEC Defense">
+                        <img src="assets/antiphishing_badge.jpg" alt="Phish Hunter Badge" class="badge-ico w-8 h-8 mx-auto rounded-full object-cover">
+                        <strong class="font-cyber text-[10px] text-white block uppercase mt-1">Phish Hunter</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">FBI IC3 BEC</small>
                     </div>
 
                     <!-- Badge 3 -->
                     <div class="badge-case-item locked" id="badge-item-wire" title="Module 02 Drill: Out-of-Band Dual Wire Verification">
-                        <span class="badge-ico">🔐</span>
+                        <span class="badge-ico text-xl">🔐</span>
                         <strong class="font-cyber text-[10px] text-white block uppercase">Wire Guardian</strong>
-                        <small class="font-mono text-[9px] text-slate-400 block">Travelers 4C</small>
+                        <small class="font-mono text-[9px] text-slate-400 block">Dual Auth</small>
                     </div>
 
                     <!-- Badge 4 -->
                     <div class="badge-case-item locked" id="badge-item-vault" title="Module 03: S3 WORM 3-2-1-1-0 Immutable Backups">
-                        <span class="badge-ico">🛡️</span>
+                        <span class="badge-ico text-xl">🛡️</span>
                         <strong class="font-cyber text-[10px] text-white block uppercase">Vault Keeper</strong>
-                        <small class="font-mono text-[9px] text-slate-400 block">Travelers 6A</small>
+                        <small class="font-mono text-[9px] text-slate-400 block">CISA 3-2-1-1-0</small>
                     </div>
 
                     <!-- Badge 5 -->
                     <div class="badge-case-item locked" id="badge-item-ghost" title="Module 04: Port 3389/445 Mesh VPN WAN Cloaking">
-                        <span class="badge-ico">👻</span>
+                        <span class="badge-ico text-xl">👻</span>
                         <strong class="font-cyber text-[10px] text-white block uppercase">Ghost Operator</strong>
-                        <small class="font-mono text-[9px] text-slate-400 block">Beazley WAN</small>
+                        <small class="font-mono text-[9px] text-slate-400 block">CISA RDP/SMB</small>
                     </div>
 
                     <!-- Badge 6 -->
                     <div class="badge-case-item locked" id="badge-item-crisis" title="Module 05: CIRCIA 72h Tabletop Response Drill">
-                        <span class="badge-ico">🚨</span>
+                        <span class="badge-ico text-xl">🚨</span>
                         <strong class="font-cyber text-[10px] text-white block uppercase">Crisis Boss</strong>
                         <small class="font-mono text-[9px] text-slate-400 block">CIRCIA 72h</small>
                     </div>
 
                     <!-- Badge 7 -->
                     <div class="badge-case-item locked" id="badge-item-ram" title="Module 06: Volatile RAM Isolation & Credential Sweeps">
-                        <span class="badge-ico">🪙</span>
+                        <span class="badge-ico text-xl">🪙</span>
                         <strong class="font-cyber text-[10px] text-white block uppercase">Ghost RAM</strong>
                         <small class="font-mono text-[9px] text-slate-400 block">True Burner</small>
                     </div>
 
                     <!-- Badge 8 -->
-                    <div class="badge-case-item locked" id="badge-item-seal" title="Module 08: Darden Trust Gold Underwriting Seal">
-                        <span class="badge-ico">🏆</span>
-                        <strong class="font-cyber text-[10px] text-white block uppercase">Darden Seal</strong>
-                        <small class="font-mono text-[9px] text-slate-400 block">Gold Seal</small>
+                    <div class="badge-case-item locked" id="badge-item-seal" title="Module 08: BURN-1 Academy Seal (Metro Plaza Directory)">
+                        <img src="assets/Burn1logosilver.jpg" alt="Academy Seal" class="badge-ico w-8 h-8 mx-auto rounded-full object-cover">
+                        <strong class="font-cyber text-[10px] text-white block uppercase mt-1">Academy Seal</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">Metro Directory</small>
                     </div>
                 </div>
             </div>
@@ -1410,21 +1422,21 @@
                             <div>
                                 <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
                                     <span class="font-mono text-xs text-amber-400 font-bold uppercase tracking-wider">MODULE 01 &bull; IDENTITY ACCESS</span>
-                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">CHUBB ITEM 4B</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">NIST 800-63B</span>
                                 </div>
                                 <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Zero-Cost MFA Hardening</h4>
                                 
                                 <!-- General Report Placeholder per Stage -->
                                 <div id="report-text-1" class="report-box p-3 rounded-xl bg-black/70 border border-purple-900/40 text-xs font-mono text-slate-300 mb-3 transition-all">
                                     <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-neutral-800">
-                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Executive Audit Briefing</span>
-                                        <span class="text-[10px] text-slate-400">Ref: NIST PR.AC-5</span>
+                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Underwriter Readiness Briefing</span>
+                                        <span class="text-[10px] text-slate-400">Ref: NIST CSF 2.0 PR.AA</span>
                                     </div>
                                     <p class="leading-relaxed text-[11px] mb-1.5">
-                                        <strong class="text-white">Audit Finding:</strong> Underwriters at Chubb &amp; Travelers reject SMS/voice verification fallbacks due to SIM-swapping exploits. Policies mandate <span class="text-amber-400 font-bold underline">100% of remote and administrative ingress</span> enforce phishing-resistant MFA.
+                                        <strong class="text-white">Why Underwriters Care:</strong> Cyber insurance renewal questionnaires routinely mandate that MFA protects 100% of remote access and admin portals. In <em>Travelers v. International Kitchen Extravaganza</em> (S.D.N.Y. 2022), a court sided with the insurer after a policyholder's false MFA attestation voided coverage.
                                     </p>
                                     <p class="leading-relaxed text-[11px]">
-                                        <strong class="text-white">Remediation Protocol:</strong> Enforce zero-cost <span class="text-cyan-300 font-bold underline">FIDO2 WebAuthn Passkeys</span> and authenticator apps across all accounts to waive the $250k ransomware sublimit.
+                                        <strong class="text-white">Zero-Cost Remediation:</strong> Enforce zero-cost <span class="text-cyan-300 font-bold underline">FIDO2 WebAuthn Passkeys</span> or free authenticator apps across all ingress points, disable SMS fallback tokens, and export active IdP enrollment telemetry for your binder.
                                     </p>
                                 </div>
 
@@ -1545,14 +1557,14 @@
                                 <div id="mod2-briefing-view" class="block">
                                     <div id="report-text-2" class="report-box p-3 rounded-xl bg-black/70 border border-purple-900/40 text-xs font-mono text-slate-300 mb-3 transition-all">
                                         <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-neutral-800">
-                                            <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Executive Audit Briefing</span>
-                                            <span class="text-[10px] text-slate-400">Ref: Travelers Item 4C</span>
+                                            <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Underwriter Readiness Briefing</span>
+                                            <span class="text-[10px] text-slate-400">Ref: FBI IC3 &bull; NIST 800-53 AT-2</span>
                                         </div>
                                         <p class="leading-relaxed text-[11px] mb-1.5">
-                                            <strong class="text-white">Audit Finding:</strong> Business Email Compromise (BEC) accounts for 38% of insurance payouts. Carrier warranties mandate annual workforce phishing drills with employee click rates verified <span class="text-amber-400 font-bold underline">below 3.5%</span>.
+                                            <strong class="text-white">Why Underwriters Care:</strong> Business Email Compromise is consistently the costliest cybercrime category the FBI tracks — <span class="text-amber-400 font-bold">$2.9B in reported losses in 2023 alone</span>. Carriers commonly ask for proof of employee phishing drills and verified dual payment controls.
                                         </p>
                                         <p class="leading-relaxed text-[11px]">
-                                            <strong class="text-white">Remediation Protocol:</strong> Deploy <span class="text-cyan-300 font-bold underline">1-click reporting beacons</span> and enforce mandatory <span class="text-amber-400 font-bold underline">out-of-band dual verbal authorization</span> for wire or vendor account changes.
+                                            <strong class="text-white">Zero-Cost Remediation:</strong> Deploy <span class="text-cyan-300 font-bold underline">1-click reporting beacons</span> in your mail client, and enforce mandatory <span class="text-amber-400 font-bold underline">out-of-band dual verbal authorization</span> on a known number for any wire or vendor account changes.
                                         </p>
                                     </div>
 
@@ -1724,20 +1736,20 @@
                             <div>
                                 <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
                                     <span class="font-mono text-xs text-amber-400 font-bold uppercase tracking-wider">MODULE 03 &bull; RECOVERY</span>
-                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">TRAVELERS 6A</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">CISA 3-2-1-1-0</span>
                                 </div>
                                 <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Immutable Air-Gap Backups</h4>
                                 
                                 <div id="report-text-3" class="report-box p-3 rounded-xl bg-black/70 border border-purple-900/40 text-xs font-mono text-slate-300 mb-3 transition-all">
                                     <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-neutral-800">
-                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Executive Audit Briefing</span>
-                                        <span class="text-[10px] text-slate-400">Ref: CISA Ransomware Guidance</span>
+                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Underwriter Readiness Briefing</span>
+                                        <span class="text-[10px] text-slate-400">Ref: CISA #StopRansomware</span>
                                     </div>
                                     <p class="leading-relaxed text-[11px] mb-1.5">
-                                        <strong class="text-white">Audit Finding:</strong> Threat actors wipe online backups during intrusion. Travelers Cyber Warranty Item 6A penalizes unshielded backups with a mandatory <span class="text-amber-400 font-bold underline">50% co-insurance loss penalty</span>.
+                                        <strong class="text-white">Why Underwriters Care:</strong> Threat actors hunt and wipe connected online backups during intrusions. CISA guidance and renewal questionnaires ask for at least one backup copy that is offline, immutable, or unreachable from production.
                                     </p>
                                     <p class="leading-relaxed text-[11px]">
-                                        <strong class="text-white">Remediation Protocol:</strong> Implement <span class="text-cyan-300 font-bold underline">3-2-1-1-0 architecture</span> with <span class="text-amber-400 font-bold underline">S3 Compliance Object Lock</span> to guarantee ransomware immunity without vendor licensing fees.
+                                        <strong class="text-white">Zero-Cost Remediation:</strong> Implement <span class="text-cyan-300 font-bold underline">3-2-1-1-0 architecture</span> with native <span class="text-amber-400 font-bold underline">AWS S3 Compliance Object Lock</span> to guarantee ransomware immunity without vendor licensing fees.
                                     </p>
                                 </div>
 
@@ -1846,20 +1858,20 @@
                             <div>
                                 <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
                                     <span class="font-mono text-xs text-amber-400 font-bold uppercase tracking-wider">MODULE 04 &bull; INGRESS</span>
-                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">BEAZLEY AUDIT</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">CISA RDP/SMB</span>
                                 </div>
                                 <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Perimeter Port Cloaking</h4>
                                 
                                 <div id="report-text-4" class="report-box p-3 rounded-xl bg-black/70 border border-purple-900/40 text-xs font-mono text-slate-300 mb-3 transition-all">
                                     <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-neutral-800">
-                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Executive Audit Briefing</span>
-                                        <span class="text-[10px] text-slate-400">Ref: Beazley Critical Underwriting</span>
+                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Underwriter Readiness Briefing</span>
+                                        <span class="text-[10px] text-slate-400">Ref: CISA &bull; MS-ISAC Ingress Guidance</span>
                                     </div>
                                     <p class="leading-relaxed text-[11px] mb-1.5">
-                                        <strong class="text-white">Audit Finding:</strong> Public WAN exposure on <span class="text-amber-400 font-bold underline">Port 3389 (RDP) &amp; Port 445 (SMB)</span> triggers instant policy non-renewal or immediate refusal to quote by carriers.
+                                        <strong class="text-white">Why Underwriters Care:</strong> Internet-exposed <span class="text-amber-400 font-bold underline">Port 3389 (RDP) &amp; Port 445 (SMB)</span> are leading initial intrusion vectors. Exposure of admin ports is a frequent knockout question leading to declined renewal quotes.
                                     </p>
                                     <p class="leading-relaxed text-[11px]">
-                                        <strong class="text-white">Remediation Protocol:</strong> Cloak administrative ports behind <span class="text-cyan-300 font-bold underline">WireGuard or Tailscale VPN tunnels</span> and maintain <span class="text-amber-400 font-bold underline">continuous automated 60-second perimeter sweeps</span>.
+                                        <strong class="text-white">Zero-Cost Remediation:</strong> Cloak administrative ports behind <span class="text-cyan-300 font-bold underline">WireGuard or Tailscale VPN tunnels</span> and maintain <span class="text-amber-400 font-bold underline">automated perimeter sweeps</span> using our resident engine.
                                     </p>
                                 </div>
 
@@ -2214,7 +2226,7 @@
                 <h3 class="font-cyber text-xl font-bold text-white uppercase">
                     Underwriting Evidence &amp; Directory Certification
                 </h3>
-                <span class="text-xs font-mono text-slate-400 hidden sm:inline">&bull; Carrier Evidence Binder compilation &amp; Darden Trust Gold Seal</span>
+                <span class="text-xs font-mono text-slate-400 hidden sm:inline">&bull; Carrier Evidence Binder compilation &amp; BURN-1 Academy Seal</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -2249,9 +2261,9 @@
                                         <span class="text-green-400 font-bold">DISCOUNT: 15-25%</span>
                                     </div>
                                     <div class="space-y-1 text-slate-300">
-                                        <div class="flex items-center justify-between"><span>[✔] IdP MFA 100% Attestation Telemetry</span><span class="text-green-400">CHUBB 4B</span></div>
-                                        <div class="flex items-center justify-between"><span>[✔] WORM Compliance Backup Lock Hash</span><span class="text-green-400">TRAVELERS 6A</span></div>
-                                        <div class="flex items-center justify-between"><span>[✔] 60-Sec WAN Ingress Zero-Port Audit</span><span class="text-green-400">BEAZLEY WAN</span></div>
+                                        <div class="flex items-center justify-between"><span>[✔] IdP MFA 100% Attestation Telemetry</span><span class="text-green-400">NIST PR.AA</span></div>
+                                        <div class="flex items-center justify-between"><span>[✔] WORM Compliance Backup Lock Hash</span><span class="text-green-400">CISA 3-2-1-1-0</span></div>
+                                        <div class="flex items-center justify-between"><span>[✔] 60-Sec WAN Ingress Zero-Port Audit</span><span class="text-green-400">CISA RDP/SMB</span></div>
                                     </div>
                                     <div class="mt-2 text-[9px] text-slate-400 border-t border-neutral-800/80 pt-1">
                                         📁 Ready for executive signature &bull; Eliminates warranty claim denials.
@@ -2340,43 +2352,43 @@
                     </div>
                 </div>
 
-                <!-- MODULE 8: DARDEN TRUST GOLD SEAL -->
+                <!-- MODULE 8: BURN-1 ACADEMY SEAL -->
                 <div class="card-stage-container" id="stage-card-8">
                     <div class="flip-card-inner">
                         <div class="card-face card-front flex flex-col justify-between">
                             <div>
                                 <div class="flex justify-between items-center pb-2 mb-3 border-b border-purple-900/60">
                                     <span class="font-mono text-xs text-amber-400 font-bold uppercase tracking-wider">MODULE 08 &bull; CERTIFICATION</span>
-                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">DARDEN TRUST</span>
+                                    <span class="status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">BURN-1 SEAL</span>
                                 </div>
-                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Darden Trust Directory Seal</h4>
+                                <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">BURN-1 Academy Seal &bull; Directory Integration</h4>
                                 
                                 <div id="report-text-8" class="report-box p-3 rounded-xl bg-black/70 border border-purple-900/40 text-xs font-mono text-slate-300 mb-3 transition-all">
                                     <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-neutral-800">
-                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Executive Audit Briefing</span>
-                                        <span class="text-[10px] text-slate-400">Ref: Darden Trust Standard</span>
+                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Completion Credential Briefing</span>
+                                        <span class="text-[10px] text-slate-400">Ref: BURN-1 Training Standard</span>
                                     </div>
                                     <p class="leading-relaxed text-[11px] mb-1.5">
-                                        <strong class="text-white">Audit Finding:</strong> Clients and underwriters require public cryptographic transparency verifying that an organization maintains active perimeter hygiene.
+                                        <strong class="text-white">Why It Matters:</strong> Completing all eight modules documents that your team completed operational security training. A public completion record gives clients and partners a concrete artifact to verify.
                                     </p>
                                     <p class="leading-relaxed text-[11px]">
-                                        <strong class="text-white">Remediation Protocol:</strong> Anchor verified audit telemetry to a cryptographic <span class="text-cyan-300 font-bold underline">SHA-256 hash</span> and publish the active Trust Seal onto the <span class="text-amber-400 font-bold underline">Metro Plaza Business Directory listing</span> to deliver <span class="text-emerald-400 font-bold underline">independently verifiable proof of operational hardening</span>.
+                                        <strong class="text-white">What You Receive:</strong> A signed completion record, a public listing on the <span class="text-amber-400 font-bold underline">Metro Plaza Directory</span>, and a cryptographic <span class="text-cyan-300 font-bold underline">SHA-256 hash</span> anchoring the completion date. It is a training credential issued solely by BURN-1 Systems.
                                     </p>
                                 </div>
 
-                                <!-- Darden Trust Gold Seal Engine Container -->
+                                <!-- Academy Seal Engine Container -->
                                 <div class="p-3 rounded-xl bg-black/90 border border-emerald-900/60 font-mono text-[10px] mb-3">
                                     <div class="flex items-center justify-between pb-1 mb-1.5 border-b border-neutral-800 text-slate-400">
-                                        <span class="text-emerald-400 font-bold"><i class="fa-solid fa-stamp text-amber-400"></i> DARDEN TRUST // GOLD SEAL ENGINE</span>
+                                        <span class="text-emerald-400 font-bold"><i class="fa-solid fa-stamp text-amber-400"></i> BURN-1 ACADEMY // SEAL ENGINE</span>
                                         <span class="text-amber-400 font-bold">SHA-256</span>
                                     </div>
                                     <div class="space-y-1 text-slate-300">
-                                        <div><span class="text-slate-400">Authority:</span> Leon R. Darden // Darden Trust Infrastructure</div>
+                                        <div><span class="text-slate-400">Issuer:</span> BURN-1 Systems // Training Credential</div>
                                         <div><span class="text-slate-400">Ledger Hash:</span> <span class="text-cyan-300">4F197B247DE5D59124E8D209004426A9</span></div>
                                         <div class="text-emerald-300"><span class="text-slate-400">Directory Status:</span> Verified Merchant on Metro Plaza Directory</div>
                                     </div>
                                     <div class="mt-2 text-[9px] text-slate-400 border-t border-neutral-800/80 pt-1">
-                                        🛡️ Public cryptographic proof of verified operational hardening.
+                                        🛡️ Cryptographic completion record anchored to your merchant profile.
                                     </div>
                                 </div>
                             </div>
@@ -2395,7 +2407,7 @@
                                 
                                 <form id="quiz-form-8" class="space-y-3 font-mono text-[11px] text-slate-200" onsubmit="event.preventDefault(); submitStageQuiz(8);">
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
-                                        <p class="font-bold text-white mb-1.5">1. What cryptographic algorithm anchors the Darden Trust verification seal?</p>
+                                        <p class="font-bold text-white mb-1.5">1. What cryptographic algorithm anchors the BURN-1 Academy verification seal?</p>
                                         <div class="space-y-1">
                                             <label class="quiz-opt-label">
                                                 <input type="radio" name="q-8-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
@@ -2433,7 +2445,7 @@
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
-                                        <p class="font-bold text-white mb-1.5">3. What does the Darden Trust certificate furnish to prospective clients and underwriters?</p>
+                                        <p class="font-bold text-white mb-1.5">3. What does the BURN-1 Academy certificate furnish to prospective clients and underwriters?</p>
                                         <div class="space-y-1">
                                             <label class="quiz-opt-label">
                                                 <input type="radio" name="q-8-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
@@ -2465,7 +2477,7 @@
         </div>
 
         <!-- =========================================================
-             SECTION 5: DARDEN TRUST BADGE & METRO PLAZA DIRECTORY BRIDGE
+             SECTION 5: BURN-1 ACADEMY SEAL & METRO PLAZA DIRECTORY BRIDGE
              ========================================================= -->
         <section id="directory-bridge" class="mb-14">
             <div class="glass-panel p-8 sm:p-10 rounded-3xl border-2 border-cyan-500/60 shadow-[0_0_35px_rgba(6,182,212,0.25)] relative overflow-hidden">
@@ -2482,18 +2494,18 @@
                         </div>
 
                         <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase mb-3 glow-title">
-                            The Darden Trust Verification Badge
+                            The BURN-1 Academy Seal // Directory Integration
                         </h2>
 
                         <p class="text-sm font-mono text-slate-200 leading-relaxed mb-4">
-                            When your business completes the 8 Academy modules or runs an Automated SLM Audit, your company receives the <strong class="text-amber-400">Darden Trust Gold Underwriting Seal</strong>. This cryptographic seal is permanently displayed on your merchant profile in the <strong class="text-cyan-300">Metro Plaza Directory</strong>, signaling to insurance carriers, clients, and partners that your digital infrastructure is fully audit-ready.
+                            When your business completes the 8 Academy modules or runs an Automated Audit, your company receives the <strong class="text-amber-400">BURN-1 Academy Seal</strong>. This cryptographic completion record is permanently anchored to your merchant profile in the <strong class="text-cyan-300">Metro Plaza Directory</strong>, signaling to clients, underwriters, and partners that your digital infrastructure adheres to verified operational hygiene standards.
                         </p>
 
                         <div class="flex flex-wrap gap-4 items-center">
                             <a href="directory.html" class="px-6 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2">
                                 <i class="fa-solid fa-compass"></i> EXPLORE METRO PLAZA DIRECTORY &rarr;
                             </a>
-                            <button type="button" onclick="triggerSwipeCert(this)" class="container-btn-swipe" title="Swipe to confirm Darden Trust Certification">
+                            <button type="button" onclick="triggerSwipeCert(this)" class="container-btn-swipe" title="Swipe to confirm Academy Completion Seal">
                                 <div class="content-swipe">
                                     <div class="icon-lock">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -2549,18 +2561,21 @@
                     <!-- Seal Preview Card -->
                     <div class="lg:col-span-4 flex justify-center">
                         <div class="w-full max-w-xs p-6 rounded-2xl bg-black border-2 border-amber-500 text-center shadow-2xl relative">
-                            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-amber-400 to-purple-600 flex items-center justify-center text-black text-3xl shadow-[0_0_25px_rgba(245,158,11,0.6)] mb-3">
-                                <i class="fa-solid fa-shield-halved"></i>
+                            <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.6)] mb-3 bg-slate-950">
+                                <img src="assets/Burn1logosilver.jpg" alt="BURN-1 Academy Seal" class="w-full h-full object-cover">
                             </div>
-                            <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold tracking-widest block">DARDEN TRUST SEAL</span>
-                            <h4 class="font-cyber text-base font-bold text-white uppercase mt-1">VERIFIED AUDIT-READY</h4>
+                            <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold tracking-widest block">BURN-1 ACADEMY SEAL</span>
+                            <h4 class="font-cyber text-base font-bold text-white uppercase mt-1">COMPLETION CREDENTIAL</h4>
                             <div class="my-3 p-2 rounded bg-slate-900/90 font-mono text-[10px] text-slate-300 border border-slate-800">
-                                <div>SHA-256 SEAL ISSUED</div>
-                                <div class="text-amber-400 font-bold mt-0.5">CHUBB &amp; TRAVELERS PREP</div>
+                                <div>SHA-256 HASH ISSUED</div>
+                                <div class="text-amber-400 font-bold mt-0.5">8 OF 8 MODULES CLEARED</div>
                             </div>
                             <span class="text-[10px] font-mono text-green-400 flex items-center justify-center gap-1">
                                 <i class="fa-solid fa-check-circle"></i> ACTIVE ON METRO DIRECTORY
                             </span>
+                            <p class="text-[9px] font-mono text-slate-400 mt-2">
+                                Issued by BURN-1 Systems &bull; Training credential
+                            </p>
                         </div>
                     </div>
 
@@ -2571,27 +2586,131 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-black/95 border-t border-purple-900/80 py-8 px-4 text-center text-xs font-mono text-slate-400 relative z-10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-left flex items-center gap-3">
-                <a href="index.html">
-                    <img src="assets/burn1_logo.jpg" alt="Burn-1 Logo" class="h-8 w-auto rounded border border-purple-500/50">
-                </a>
-                <div>
-                    <span class="font-cyber font-bold text-white text-sm">BURN-1 CYBER ACADEMY</span>
-                    <p class="text-slate-400 text-xs">Zero-Cost Underwriting Preparation &bull; Pre-Renewal Audit Ready &bull; Metro Plaza</p>
+    <footer class="bg-black/95 border-t border-purple-900/80 py-12 px-4 font-mono text-xs text-slate-400 relative z-10">
+        <div class="max-w-7xl mx-auto space-y-10">
+
+            <!-- 4-PART REGULATORY & OPERATIONAL DISCLAIMERS BLOCK -->
+            <div class="p-6 rounded-2xl bg-black/60 border border-purple-900/50 backdrop-blur-md footer-card">
+                <div class="flex items-center gap-2 mb-4 pb-2 border-b border-purple-900/40">
+                    <i class="fa-solid fa-scale-balanced text-amber-400 text-sm"></i>
+                    <span class="font-cyber text-xs uppercase tracking-wider text-white font-bold">
+                        LEGAL, STATUTORY &amp; OPERATIONAL DISCLOSURES
+                    </span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 text-left text-[11px] leading-relaxed">
+                    <div class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 footer-card">
+                        <div class="text-amber-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-building-shield"></i> Independent &amp; Unaffiliated
+                        </div>
+                        <p class="text-slate-300">
+                            BURN-1 Systems is an independent cybersecurity training and underwriting preparation platform. We are not an insurance carrier, broker, or agent, and have no corporate affiliation with Travelers, Chubb, Beazley, Lloyd's of London, CISA, or NIST. Citations reference publicly available underwriting guidance and legal precedent.
+                        </p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 footer-card">
+                        <div class="text-cyan-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-gavel"></i> Not Legal or Insurance Advice
+                        </div>
+                        <p class="text-slate-300">
+                            All materials, checklists, and automated surface scans are published for informational preparation and operational hygiene only. Nothing herein constitutes formal legal advice, insurance underwriting, or a guarantee of coverage approval, claims settlement, or premium reduction. Consult licensed counsel and an authorized broker.
+                        </p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 footer-card">
+                        <div class="text-purple-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-certificate"></i> About the Academy Seal
+                        </div>
+                        <p class="text-slate-300">
+                            The BURN-1 Academy Seal and SHA-256 tokens are internal educational training credentials issued solely by BURN-1 Systems. They serve as self-attested documentation of operational diligence linked to merchant profiles on the Metro Plaza Directory. They do not constitute underwriter certification or regulatory licensing.
+                        </p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 footer-card">
+                        <div class="text-emerald-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-virus"></i> Scan Responsibly &amp; Auth Scope
+                        </div>
+                        <p class="text-slate-300">
+                            All diagnostic audits execute strictly non-invasive public perimeter queries (TLS handshakes, HTTP security headers, public DNS). Never input domains, IP blocks, or hostnames you do not own or lack express written authorization to test. Users assume sole responsibility for scanning authorization.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-wrap justify-center gap-6 text-slate-300">
-                <a href="index.html" class="hover:text-amber-400 transition-colors">Burn-1 Hub</a>
-                <a href="directory.html" class="hover:text-cyan-400 transition-colors font-bold text-cyan-300">Directory Matrix</a>
-                <a href="store.html" class="hover:text-amber-400 transition-colors">Compliance Store</a>
-                <a href="helpline/index.html" class="hover:text-red-400 transition-colors">Crisis Helpline</a>
-                <a href="mailto:leonrdarden@gmail.com" class="hover:text-amber-400 transition-colors">Carrier Consulting</a>
+
+            <!-- 4 CRISIS & COMMUNITY WELLBEING RESOURCE CARDS -->
+            <div class="p-6 rounded-2xl bg-black/60 border border-red-950/60 backdrop-blur-md footer-card">
+                <div class="flex items-center gap-2 mb-4 pb-2 border-b border-red-900/30">
+                    <i class="fa-solid fa-heart-pulse text-red-400 text-sm"></i>
+                    <span class="font-cyber text-xs uppercase tracking-wider text-white font-bold">
+                        FREE CONFIDENTIAL CRISIS &amp; WELLBEING HELPLINES
+                    </span>
+                    <span class="text-[10px] text-slate-400 hidden sm:inline">&bull; 24/7 Support Resources</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                    <a href="tel:988" class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 hover:border-red-500/60 transition-all block group footer-card">
+                        <div class="text-red-400 font-bold text-xs uppercase mb-1 flex items-center justify-between">
+                            <span><i class="fa-solid fa-phone-volume mr-1.5"></i> 988 Lifeline</span>
+                            <span class="text-[10px] font-mono text-slate-400 group-hover:text-red-300">Call / Text 988</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Suicide &amp; Crisis Lifeline. Free, confidential support for anyone in emotional distress or crisis. Available 24/7 across the US.
+                        </p>
+                    </a>
+
+                    <a href="sms:741741?body=HOME" class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 hover:border-amber-500/60 transition-all block group footer-card">
+                        <div class="text-amber-400 font-bold text-xs uppercase mb-1 flex items-center justify-between">
+                            <span><i class="fa-solid fa-comment-sms mr-1.5"></i> Crisis Text Line</span>
+                            <span class="text-[10px] font-mono text-slate-400 group-hover:text-amber-300">Text HOME to 741741</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Text <strong>HOME</strong> to <strong>741741</strong> to connect with a crisis counselor 24/7. Free, confidential crisis support via SMS.
+                        </p>
+                    </a>
+
+                    <a href="tel:18006624357" class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 hover:border-cyan-500/60 transition-all block group footer-card">
+                        <div class="text-cyan-400 font-bold text-xs uppercase mb-1 flex items-center justify-between">
+                            <span><i class="fa-solid fa-hand-holding-medical mr-1.5"></i> SAMHSA Helpline</span>
+                            <span class="text-[10px] font-mono text-slate-400 group-hover:text-cyan-300">1-800-662-4357</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Substance Abuse &amp; Mental Health Services Administration. 24/7 free treatment referral and information in English and Spanish.
+                        </p>
+                    </a>
+
+                    <a href="https://cgaa.info" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-black/40 border border-neutral-800 hover:border-purple-500/60 transition-all block group footer-card">
+                        <div class="text-purple-400 font-bold text-xs uppercase mb-1 flex items-center justify-between">
+                            <span><i class="fa-solid fa-gamepad mr-1.5"></i> CGAA Fellowship</span>
+                            <span class="text-[10px] font-mono text-slate-400 group-hover:text-purple-300">cgaa.info &rarr;</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Computer Gaming &amp; Tech Addiction support. Free worldwide peer fellowship meetings helping members recover from compulsive digital overuse.
+                        </p>
+                    </a>
+                </div>
             </div>
-            <div>
-                <span class="text-purple-400">&copy; 2026 BURN-1.COM</span>
+
+            <!-- BOTTOM BRANDING & NAVIGATION BAR -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-6 border-t border-neutral-800/80">
+                <div class="text-left flex items-center gap-3">
+                    <a href="index.html">
+                        <img src="assets/Burn1logosilver.jpg" alt="Burn-1 Logo" class="h-9 w-auto rounded border border-purple-500/50">
+                    </a>
+                    <div>
+                        <span class="font-cyber font-bold text-white text-sm">BURN-1 CYBER ACADEMY</span>
+                        <p class="text-slate-400 text-xs">Zero-Cost Underwriting Preparation &bull; Pre-Renewal Audit Ready &bull; Metro Plaza Directory</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 text-slate-300">
+                    <a href="index.html" class="hover:text-amber-400 transition-colors">Burn-1 Hub</a>
+                    <a href="directory.html" class="hover:text-cyan-400 transition-colors font-bold text-cyan-300">Directory Matrix</a>
+                    <a href="store.html" class="hover:text-amber-400 transition-colors">Compliance Store</a>
+                    <a href="helpline/index.html" class="hover:text-red-400 transition-colors">Crisis Helpline</a>
+                    <a href="mailto:leonrdarden@gmail.com" class="hover:text-amber-400 transition-colors">Carrier Consulting</a>
+                </div>
+                <div>
+                    <span class="text-purple-400 font-bold">&copy; 2026 BURN-1 SYSTEMS</span>
+                </div>
             </div>
+
         </div>
     </footer>
 
@@ -3126,16 +3245,16 @@
             },
             8: {
                 q1: {
-                    pass: "✓ The Darden Trust verification seal generates an immutable SHA-256 cryptographic hash linking the company's verified audit telemetry to its directory listing.",
+                    pass: "✓ The BURN-1 Academy completion seal generates an immutable SHA-256 cryptographic hash linking the company's verified audit telemetry to its directory listing.",
                     fail: "❌ MD5 is deprecated and cryptographically broken; SHA-256 is the modern cryptographic standard for immutable compliance attestation."
                 },
                 q2: {
-                    pass: "✓ The verified Darden Trust seal is permanently anchored to the company's merchant profile in the Metro Plaza Business Directory, signaling trust to partners and clients.",
+                    pass: "✓ The verified BURN-1 Academy seal is permanently anchored to the company's merchant profile in the Metro Plaza Business Directory, signaling trust to partners and clients.",
                     fail: "❌ Hiding records locally prevents clients and insurance underwriters from validating your proactive cybersecurity posture."
                 },
                 q3: {
-                    pass: "✓ Darden Trust certification provides third-party verifiable evidence that your business enforces zero-cost carrier-approved underwriting safeguards.",
-                    fail: "❌ The Trust seal certifies operational cyber hardening and pre-renewal audit readiness to brokers, underwriters, and clients."
+                    pass: "✓ BURN-1 Academy certification provides independently verifiable training evidence that your business enforces operational underwriting safeguards.",
+                    fail: "❌ The Academy seal certifies operational cyber hardening and pre-renewal training readiness to brokers, underwriters, and clients."
                 },
                 badge: 'seal'
             }
@@ -3308,7 +3427,7 @@ Governing Policy: Dual Authorization & Anti-Wire Fraud Operational Procedure
 
 CRYPTOGRAPHIC EVIDENCE INTEGRITY:
 SHA-256 Hash: 8A1907CB249DF1E38902AA710499C4187E601C33800B
-Issued By: Leon R. Darden // Darden Trust Infrastructure
+Issued By: BURN-1 Systems // Out-of-Band Wire Verification Protocol
 Directory Anchor: Metro Plaza Directory (burn-1.com/directory.html)
 ================================================================================
             `.trim();
@@ -3325,7 +3444,7 @@ Directory Anchor: Metro Plaza Directory (burn-1.com/directory.html)
 
             addXP(100);
             unlockBadge('wire');
-            alert(`✓ Out-of-Band Wire Protocol Generated & Downloaded!\nRecord ID: ${certId}\nTravelers 4C compliance logged.`);
+            alert(`✓ Out-of-Band Wire Protocol Generated & Downloaded!\nRecord ID: ${certId}\nWire fraud prevention procedure logged.`);
             closeWireModal();
         }
 
@@ -3339,17 +3458,17 @@ Directory Anchor: Metro Plaza Directory (burn-1.com/directory.html)
                 "Tabletop Incident Drill",
                 "Telemetry Severing & Ghost RAM",
                 "Evidence Binder Assembly",
-                "Darden Trust Directory Seal"
+                "BURN-1 Academy Directory Seal"
             ];
             const standards = [
-                "Chubb Item 4B",
-                "Travelers Item 4C / NIST AT-2(2)",
-                "Travelers Item 6A (WORM)",
-                "Beazley Public WAN Cloak",
-                "CIRCIA § 2242 (72H)",
-                "True Burner Memory Shield",
-                "Chubb/Travelers Pre-Renewal",
-                "Darden Trust Gold Seal"
+                "Travelers v. Int'l Kitchen / NIST 800-63B",
+                "FBI IC3 BEC / NIST AT-2(2)",
+                "CISA #StopRansomware 3-2-1-1-0",
+                "CISA RDP/SMB Cloaking",
+                "CIRCIA § 2242 (72H Incident Log)",
+                "True Burner Volatile Shield",
+                "Pre-Renewal Evidence Binder",
+                "BURN-1 Academy Standard"
             ];
 
             for (let i = 1; i <= 8; i++) {
@@ -3372,26 +3491,32 @@ Directory Anchor: Metro Plaza Directory (burn-1.com/directory.html)
 
         function exportInsuranceProof() {
             const count = clearedStages.size;
-            const certId = `DARDEN-PROOF-${Math.floor(100000 + Math.random() * 900000)}`;
+            const certId = `BURN1-PROOF-${Math.floor(100000 + Math.random() * 900000)}`;
             const dateStr = new Date().toLocaleDateString('en-US', { dateStyle: 'full' });
             
             const proofContent = `
 ================================================================================
-              DARDEN TRUST // CYBER UNDERWRITING PROOF PACKAGE
-                          CERTIFICATE ID: ${certId}
+          BURN-1 ACADEMY // OPERATIONAL READINESS TRAINING RECORD
+                      CREDENTIAL ID: ${certId}
 ================================================================================
 Date Issued: ${dateStr}
-Compliance Framework: NIST CSF 2.0 / HIPAA Security Rule / NYDFS 23 NYCRR 500
-Carrier Alignment: Chubb & Travelers Cyber Renewal Warranty Eligible
-Estimated Policy Credit: Potential Up to 25% - 35% Premium Reduction
+Curriculum: Zero-Cost Cyber Hygiene & Underwriting Preparation
+Framework Alignment: NIST CSF 2.0 PR.AA / NIST 800-63B / CISA #StopRansomware
+Case Precedent Review: Travelers v. Int'l Kitchen (S.D.N.Y. 2022) MFA Warranty
 Modules Verified: ${count} of 8 Total Academy Modules
+
+DISCLOSURE & DISCLAIMER:
+This record confirms completion of internal operational training published by
+BURN-1 Systems. It is an educational attestation anchored to the Metro Plaza
+Directory. It is NOT issued by an insurance company, underwriter, or broker,
+and does not guarantee policy approval or premium discounts.
 
 CRYPTOGRAPHIC AUDIT CHECKPOINTS:
 ${Object.keys(stageCheckpoints).map(k => `[MODULE 0${k}] ${stageCheckpoints[k].checkpointId} | ${stageCheckpoints[k].timestamp} | CLEARED & VERIFIED`).join('\n') || 'Baseline Self-Attestation Recorded. 0 Modules Cleared.'}
 
-DARDEN TRUST VERIFICATION SEAL:
+BURN-1 ACADEMY COMPLETION SEAL:
 SHA-256: 4F197B247DE5D59124E8D209004426A9
-Authority: Leon R. Darden // Darden Trust Infrastructure
+Issuer: BURN-1 Systems (burn-1.com)
 Directory Listing: Metro Plaza Directory (https://burn-1.com/directory.html)
 Platform: Burn-1 Systems (burn-1.com)
 ================================================================================
@@ -3429,12 +3554,12 @@ Platform: Burn-1 Systems (burn-1.com)
             }
         }
 
-        // Cobp Swipe Trigger for Darden Trust Certification
+        // Cobp Swipe Trigger for BURN-1 Academy Completion Seal
         function triggerSwipeCert(btn) {
             if (!btn) return;
             btn.classList.add('swiped');
             setTimeout(() => {
-                alert("🛡️ DARDEN TRUST VERIFICATION UNLOCKED: Your SHA-256 seal has been authorized for Metro Plaza Directory integration.");
+                alert("🛡️ BURN-1 ACADEMY SEAL UNLOCKED: Your SHA-256 completion record has been authorized for Metro Plaza Directory integration.");
                 setTimeout(() => {
                     btn.classList.remove('swiped');
                 }, 3000);
