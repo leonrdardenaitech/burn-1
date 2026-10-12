@@ -287,6 +287,244 @@
         /* =========================================================
            SMOKE & MIRROR CORPORATE EDITION (DAY MODE)
            Adapted from silver_mirror_clock.html // Silver & Greyscale
+        /* =========================================================
+           UIVERSE-INSPIRED COBP INGRAINED PANEL & SWIPE BUTTON ENGINE
+           ========================================================= */
+        .container-btn-swipe {
+            background-image: linear-gradient(to top, #ebebeb, #c3c2c2);
+            width: 280px;
+            height: 64px;
+            border-radius: 50px;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            outline: none;
+            cursor: pointer;
+            transform: scale(0.96);
+            transition: all 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .container-btn-swipe:hover {
+            background-image: linear-gradient(to top, #ffffff, #cbcbcb);
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .container-btn-swipe:hover .icon-lock {
+            box-shadow: inset 0 8px 12px #ffffff;
+            border: 2px solid #eeeeee;
+        }
+
+        .container-btn-swipe:hover .letters.false {
+            opacity: 0;
+        }
+
+        .container-btn-swipe:hover .content-swipe::after {
+            box-shadow: inset 0 8px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .container-btn-swipe:hover .arrows-right,
+        .container-btn-swipe:hover::after {
+            opacity: 1;
+        }
+
+        .container-btn-swipe:hover .arrows-right svg {
+            animation: animated-arrow 3s calc(var(--delay) * 0.1s) cubic-bezier(0.5, 0, 0.3, 1) infinite;
+        }
+
+        .container-btn-swipe:focus,
+        .container-btn-swipe.swiped {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15), 0 -2px 10px #ffffff;
+        }
+
+        .container-btn-swipe:focus .letters.false,
+        .container-btn-swipe.swiped .letters.false {
+            opacity: 0;
+        }
+
+        .container-btn-swipe:focus .content-swipe::after,
+        .container-btn-swipe.swiped .content-swipe::after {
+            box-shadow: inset 0 8px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .container-btn-swipe:focus .icon-lock,
+        .container-btn-swipe.swiped .icon-lock {
+            box-shadow: inset 0 8px 12px #ffffff;
+            border: 2px solid #eeeeee;
+            transform: translateX(214px);
+        }
+
+        .container-btn-swipe:focus .icon-lock svg,
+        .container-btn-swipe.swiped .icon-lock svg {
+            animation: jello-vertical 0.8s 1s linear;
+        }
+
+        .container-btn-swipe:focus .icon-lock svg path,
+        .container-btn-swipe.swiped .icon-lock svg path {
+            transition: all 0.3s ease;
+            stroke-dashoffset: 63;
+        }
+
+        .container-btn-swipe:focus .arrows-right,
+        .container-btn-swipe:focus .letters.false span,
+        .container-btn-swipe:focus::after,
+        .container-btn-swipe.swiped .arrows-right,
+        .container-btn-swipe.swiped .letters.false span,
+        .container-btn-swipe.swiped::after {
+            opacity: 0;
+        }
+
+        .container-btn-swipe:focus .letters.true span,
+        .container-btn-swipe.swiped .letters.true span {
+            opacity: 0;
+            animation: emerge 2s calc((var(--delay)) * 0.06s) ease forwards;
+        }
+
+        .container-btn-swipe:active {
+            transform: scale(1);
+        }
+
+        .container-btn-swipe::after {
+            content: "keep pressed";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 35px);
+            color: #777777;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: all 0.5s;
+            pointer-events: none;
+        }
+
+        .content-swipe {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: #dedede;
+            margin: 2px;
+            border-radius: 50px;
+            width: 276px;
+            height: 60px;
+        }
+
+        .content-swipe::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            transition: all 0.5s;
+            box-shadow: inset 0 6px 14px rgba(0, 0, 0, 0.15);
+            z-index: 9;
+        }
+
+        .icon-lock {
+            margin: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            border-radius: 50px;
+            background-color: #dedede;
+            color: #444444;
+            box-shadow: inset 0 -8px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #dedede;
+            transition: all 0.3s, transform 1s ease;
+            z-index: 10;
+        }
+
+        .letters {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #222222;
+            transition: all 0.5s;
+        }
+
+        .letters span {
+            transition: all 0.5s;
+        }
+
+        .letters.true span:nth-child(7),
+        .letters.false span:nth-child(8),
+        .letters.false span:nth-child(6) {
+            margin-left: 0.25rem;
+        }
+
+        .letters.true {
+            transform: translate(-70%, -50%);
+        }
+
+        .letters.true span {
+            opacity: 0;
+        }
+
+        .letters.false {
+            transform: translate(-35%, -50%);
+        }
+
+        .letters.false span {
+            animation: animated-text 3s calc(var(--delay) * 0.06s) cubic-bezier(0.5, 0, 0.3, 1) infinite;
+        }
+
+        .arrows-right {
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            gap: 0.5rem;
+            transform: translate(-35%, -50%);
+            color: #777777;
+            transition: all 0.5s;
+        }
+
+        @keyframes jello-vertical {
+            0% { transform: scale3d(1, 1, 1); }
+            30% { transform: scale3d(0.75, 1.25, 1); }
+            40% { transform: scale3d(1.25, 0.75, 1); }
+            50% { transform: scale3d(0.85, 1.15, 1); }
+            65% { transform: scale3d(1.05, 0.95, 1); }
+            75% { transform: scale3d(0.95, 1.05, 1); }
+            100% { transform: scale3d(1, 1, 1); }
+        }
+
+        @keyframes animated-text {
+            5% { transform: translateY(2px) scale(0.95); opacity: 1; }
+            15% { transform: translateY(-2px) scale(1.25); opacity: 0.5; }
+            30%, 100% { transform: translateY(0px) scale(1); opacity: 1; }
+        }
+
+        @keyframes animated-arrow {
+            25% { transform: scale(1.25) translateX(4px); color: #222222; }
+            50%, 100% { transform: scale(1); color: #777777; }
+        }
+
+        @keyframes emerge {
+            0% { transform: scale(10); opacity: 0; filter: blur(20px); }
+            50%, 100% { transform: scale(1); opacity: 1; filter: blur(0px); }
+        }
+
+        /* =========================================================
+           SMOKE & MIRROR CORPORATE EDITION (DAY MODE)
+           Ingrained Debossed Panels & Sculpted Metallic Buttons
            ========================================================= */
         html.day-mode {
             --bg-color: #ffffff;
@@ -297,8 +535,8 @@
         }
 
         html.day-mode body {
-            background-color: #f8fafc !important;
-            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.85) 0%, rgba(241, 245, 249, 0.75) 60%, rgba(226, 232, 240, 0.7) 100%) !important;
+            background-color: #f1f3f6 !important;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.85) 0%, rgba(235, 238, 242, 0.78) 50%, rgba(218, 224, 233, 0.85) 100%) !important;
             background-attachment: fixed !important;
             color: #09090b !important;
         }
@@ -322,47 +560,133 @@
             text-shadow: none !important;
         }
 
-        /* Smoke & Mirror Translucent Section & Card Styling */
+        /* INGRAINED PANELS: Indented/Debossed Look that lets Mirror Clock Shards Shine */
         html.day-mode .glass-panel,
         html.day-mode .card-front,
         html.day-mode .card-back {
-            background: rgba(255, 255, 255, 0.40) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-            border: 2px solid #d4d4d4 !important;
+            background-image: linear-gradient(to top, rgba(235, 235, 235, 0.76), rgba(195, 194, 194, 0.65)) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+            outline: 1px solid rgba(195, 194, 194, 0.5) !important;
             border-radius: 1.25rem !important;
             box-shadow: 
-                0 10px 30px -5px rgba(0, 0, 0, 0.06),
-                inset 0 0 16px rgba(255, 255, 255, 0.8) !important;
+                inset 0 6px 14px rgba(0, 0, 0, 0.12),
+                inset 0 -3px 8px rgba(255, 255, 255, 0.85),
+                0 8px 22px rgba(0, 0, 0, 0.06) !important;
             color: #09090b !important;
+            transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
 
-        html.day-mode .card-front:hover {
-            border-color: #f59e0b !important; /* Burn-1 orange accent on hover */
+        /* HOVER GROWTH: Cards Grow on Mouse Hover */
+        html.day-mode .card-front:hover,
+        html.day-mode .glass-panel:hover {
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.92), rgba(203, 203, 203, 0.78)) !important;
+            transform: translateY(-4px) scale(1.02) !important;
             box-shadow: 
-                0 15px 35px -5px rgba(245, 158, 11, 0.25),
-                inset 0 0 20px rgba(255, 255, 255, 0.9) !important;
-            transform: translateY(-2px);
+                0 18px 36px rgba(0, 0, 0, 0.14),
+                inset 0 4px 10px rgba(255, 255, 255, 0.95),
+                inset 0 -2px 6px rgba(0, 0, 0, 0.08) !important;
+            border-color: #ffffff !important;
         }
 
-        /* Inner box styling in Day Mode */
+        /* ELIMINATE MULTI-COLOR CLUTTER: Inner text sections receive sculpted indented panels */
         html.day-mode .report-box,
         html.day-mode .video-placeholder,
-        html.day-mode .quiz-box {
-            background: rgba(255, 255, 255, 0.65) !important;
+        html.day-mode .quiz-box,
+        html.day-mode .bg-black,
+        html.day-mode .bg-slate-900\/90,
+        html.day-mode .bg-cyan-950,
+        html.day-mode .bg-purple-950\/80 {
+            background: rgba(222, 222, 222, 0.72) !important;
             border: 1px solid #d4d4d4 !important;
+            border-radius: 1rem !important;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(255, 255, 255, 0.8) !important;
             color: #09090b !important;
         }
+
         html.day-mode .report-highlight {
-            background: rgba(254, 243, 199, 0.90) !important;
+            background: rgba(254, 243, 199, 0.92) !important;
             border-color: #f59e0b !important;
             box-shadow: 0 0 20px rgba(245, 158, 11, 0.4) !important;
         }
-        html.day-mode .report-box p,
-        html.day-mode .report-box span,
-        html.day-mode .quiz-box p,
-        html.day-mode .quiz-box label {
+
+        /* RAZOR-SHARP DARK TYPOGRAPHY (NO MORE TOO DARK SECTIONS OR WASHED-OUT TEXT) */
+        html.day-mode h1, 
+        html.day-mode h2, 
+        html.day-mode h3, 
+        html.day-mode h4,
+        html.day-mode h5,
+        html.day-mode h6 {
+            color: #000000 !important;
+            font-weight: 800 !important;
+            text-shadow: none !important;
+        }
+
+        html.day-mode p, 
+        html.day-mode label,
+        html.day-mode li {
+            color: #111827 !important;
+            font-weight: 600 !important;
+            text-shadow: none !important;
+        }
+
+        html.day-mode strong,
+        html.day-mode b {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+
+        html.day-mode span:not(.letters span):not(.status-tag):not(.highlight-badge) {
+            color: #1f2937;
+        }
+
+        html.day-mode .text-slate-200,
+        html.day-mode .text-slate-300,
+        html.day-mode .text-slate-400,
+        html.day-mode .text-purple-200,
+        html.day-mode .text-purple-300,
+        html.day-mode .text-cyan-200,
+        html.day-mode .text-cyan-300,
+        html.day-mode .text-amber-300,
+        html.day-mode .text-amber-400 {
+            color: #111827 !important;
+        }
+
+        /* SCULPTED METALLIC PILL BUTTONS (UIVERSE AESTHETIC) */
+        html.day-mode button:not(#themeToggleBtn):not(#songToggleBtn):not(.container-btn-swipe),
+        html.day-mode a.bg-amber-500,
+        html.day-mode a.bg-cyan-400,
+        html.day-mode a.bg-purple-950,
+        html.day-mode .card-front button {
+            background-image: linear-gradient(to top, #ebebeb, #c3c2c2) !important;
             color: #09090b !important;
+            border: 1.5px solid #ffffff !important;
+            box-shadow: 
+                inset 0 -3px 6px rgba(0, 0, 0, 0.12),
+                inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                0 4px 10px rgba(0, 0, 0, 0.08) !important;
+            font-weight: 800 !important;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+
+        html.day-mode button:not(#themeToggleBtn):not(#songToggleBtn):not(.container-btn-swipe):hover,
+        html.day-mode a.bg-amber-500:hover,
+        html.day-mode a.bg-cyan-400:hover,
+        html.day-mode a.bg-purple-950:hover,
+        html.day-mode .card-front button:hover {
+            background-image: linear-gradient(to top, #ffffff, #cbcbcb) !important;
+            transform: scale(1.05) !important;
+            box-shadow: 
+                0 10px 22px rgba(0, 0, 0, 0.16),
+                inset 0 2px 6px #ffffff !important;
+            color: #000000 !important;
+        }
+
+        html.day-mode button:active,
+        html.day-mode a.bg-amber-500:active {
+            transform: scale(0.98) !important;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.22) !important;
         }
 
         /* Highlighting: Dark black highlight box with light letters */
@@ -372,20 +696,6 @@
             color: #ffffff !important;
             border: 1px solid #d4d4d4 !important;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
-        }
-
-        html.day-mode h1, 
-        html.day-mode h2, 
-        html.day-mode h3, 
-        html.day-mode h4 {
-            color: #09090b !important;
-            text-shadow: none !important;
-        }
-
-        html.day-mode p, 
-        html.day-mode label {
-            color: #1e293b !important;
-            text-shadow: none !important;
         }
 
         html.day-mode footer {
@@ -1609,6 +1919,53 @@
                             <a href="directory.html" class="px-6 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2">
                                 <i class="fa-solid fa-compass"></i> EXPLORE METRO PLAZA DIRECTORY &rarr;
                             </a>
+                            <button type="button" onclick="triggerSwipeCert(this)" class="container-btn-swipe" title="Swipe to confirm Darden Trust Certification">
+                                <div class="content-swipe">
+                                    <div class="icon-lock">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <g class="lock" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                                                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-dasharray="80"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="letters true">
+                                        <span style="--delay: 0">S</span>
+                                        <span style="--delay: 1">e</span>
+                                        <span style="--delay: 2">a</span>
+                                        <span style="--delay: 3">l</span>
+                                        <span style="--delay: 4">G</span>
+                                        <span style="--delay: 5">r</span>
+                                        <span style="--delay: 6">a</span>
+                                        <span style="--delay: 7">n</span>
+                                        <span style="--delay: 8">t</span>
+                                        <span style="--delay: 9">e</span>
+                                        <span style="--delay: 10">d</span>
+                                    </div>
+                                    <div class="letters false">
+                                        <span style="--delay: 1">S</span>
+                                        <span style="--delay: 2">w</span>
+                                        <span style="--delay: 3">i</span>
+                                        <span style="--delay: 4">p</span>
+                                        <span style="--delay: 5">e</span>
+                                        <span style="--delay: 6">t</span>
+                                        <span style="--delay: 7">o</span>
+                                        <span style="--delay: 8">v</span>
+                                        <span style="--delay: 9">e</span>
+                                        <span style="--delay: 10">r</span>
+                                        <span style="--delay: 11">i</span>
+                                        <span style="--delay: 12">f</span>
+                                        <span style="--delay: 13">y</span>
+                                    </div>
+                                    <div class="arrows-right">
+                                        <svg style="--delay: 0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
+                                        <svg style="--delay: 1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
+                                        <svg style="--delay: 2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
+                                        <svg style="--delay: 3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
+                                        <svg style="--delay: 4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
+                                    </div>
+                                </div>
+                            </button>
                             <a href="mailto:leonrdarden@gmail.com?subject=Claim%20Directory%20Badge" class="px-5 py-3 rounded-xl bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-2">
                                 <i class="fa-solid fa-id-badge text-amber-400"></i> CLAIM MERCHANT BADGE
                             </a>
@@ -1920,6 +2277,18 @@ Platform: Burn-1 Systems (burn-1.com)
                 }
                 localStorage.setItem('burn1_theme', 'day');
             }
+        }
+
+        // Cobp Swipe Trigger for Darden Trust Certification
+        function triggerSwipeCert(btn) {
+            if (!btn) return;
+            btn.classList.add('swiped');
+            setTimeout(() => {
+                alert("🛡️ DARDEN TRUST VERIFICATION UNLOCKED: Your SHA-256 seal has been authorized for Metro Plaza Directory integration.");
+                setTimeout(() => {
+                    btn.classList.remove('swiped');
+                }, 3000);
+            }, 1100);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
