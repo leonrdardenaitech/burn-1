@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth" id="html-root">
+<html lang="en" class="day-mode scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -675,11 +675,6 @@
                 <span id="songText" class="hidden sm:inline">MUSIC</span>
             </button>
 
-            <!-- DAY / NIGHT TOGGLE -->
-            <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5">
-                <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
-                <span id="themeText" class="hidden sm:inline">DAY</span>
-            </button>
         </div>
     </header>
 
@@ -1395,18 +1390,9 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('burn1_theme');
-            const urlParams = new URLSearchParams(window.location.search);
-            const modeParam = urlParams.get('mode');
-            if (modeParam === 'day' || savedTheme === 'day') {
-                document.getElementById('html-root').classList.add('day-mode');
-                const themeIcon = document.getElementById('themeIcon');
-                const themeText = document.getElementById('themeText');
-                const versionTag = document.getElementById('version-tag');
-                if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-purple-600';
-                if (themeText) themeText.innerText = 'NIGHT';
-                if (versionTag) versionTag.innerText = 'STORE BIZ';
-            }
+            document.getElementById('html-root').classList.add('day-mode');
+            const versionTag = document.getElementById('version-tag');
+            if (versionTag) versionTag.innerText = 'STORE BIZ';
         });
     </script>
 </body>

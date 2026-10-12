@@ -606,6 +606,20 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
         }
 
+        /* Day Mode Pill Contrast Fix for Friedbrains Feature */
+        html.day-mode #friedbrains-feature .bg-cyan-950\/80,
+        html.day-mode #friedbrains-feature .bg-purple-950 {
+            background-image: linear-gradient(to top, #ebebeb, #c3c2c2) !important;
+            color: #09090b !important;
+            border: 1.5px solid #ffffff !important;
+            box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 2px 5px rgba(0, 0, 0, 0.08) !important;
+            font-weight: 800 !important;
+        }
+        html.day-mode #friedbrains-feature .text-cyan-300,
+        html.day-mode #friedbrains-feature .text-purple-300 {
+            color: #09090b !important;
+        }
+
         html.day-mode .marker-divider,
         html.day-mode .marker-divider-amber,
         html.day-mode .marker-divider-cyan {
@@ -1515,81 +1529,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- THIN GLOWING CYAN MAGIC-MARKER DIVIDER -->
-        <div class="marker-divider-cyan"></div>
-
-        <!-- =========================================================
-             SECTION 5: 3-CARD ECOSYSTEM (STOREFRONT, HELPLINE, ACADEMY)
-             ========================================================= -->
-        <section id="ecosystem-cards" class="mb-14">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <!-- CARD 1: STOREFRONT & AUDITS -->
-                <div class="cyber-card p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-between group hover:border-amber-400 transition-all">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-2.5 py-1 rounded bg-amber-950/80 border border-amber-500/50 text-amber-300 font-mono text-[10px] font-bold uppercase">
-                                Monetization Engine
-                            </span>
-                            <i class="fa-solid fa-store text-amber-400 text-xl group-hover:scale-110 transition-transform"></i>
-                        </div>
-                        <h3 class="font-cyber text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
-                            Digital Front &amp; Store
-                        </h3>
-                        <p class="text-xs font-mono text-slate-300 mb-6 leading-relaxed">
-                            Automated Underwriting Audits ($499), True Burner Pro ($29/mo), and the $39 Barn Fire Sale clearance toolkit.
-                        </p>
-                    </div>
-                    <a href="store.html" class="w-full py-2.5 rounded bg-amber-500 hover:bg-amber-400 text-black font-cyber text-xs font-black text-center uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_12px_rgba(245,158,11,0.4)]">
-                        EXPLORE STOREFRONT <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- CARD 2: HELPLINE DIRECTORY -->
-                <div class="cyber-card p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-between group hover:border-red-400 transition-all">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-2.5 py-1 rounded bg-red-950/80 border border-red-500/50 text-red-300 font-mono text-[10px] font-bold uppercase">
-                                24/7 Crisis Support
-                            </span>
-                            <i class="fa-solid fa-heart-pulse text-red-400 text-xl group-hover:scale-110 transition-transform"></i>
-                        </div>
-                        <h3 class="font-cyber text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
-                            Helpline Directory
-                        </h3>
-                        <p class="text-xs font-mono text-slate-300 mb-6 leading-relaxed">
-                            Free, confidential crisis lifelines, addiction recovery support, and screen detox resources for Stonecrest &amp; Metro Atlanta.
-                        </p>
-                    </div>
-                    <a href="helpline/index.html" class="w-full py-2.5 rounded bg-red-950/60 hover:bg-red-900/80 text-red-200 border border-red-500/50 font-cyber text-xs font-bold text-center uppercase tracking-wider transition-all flex items-center justify-center gap-2">
-                        OPEN HELPLINE DIRECTORY <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- CARD 3: CYBER ACADEMY -->
-                <div class="cyber-card p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-between group hover:border-cyan-400 transition-all">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-2.5 py-1 rounded bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 font-mono text-[10px] font-bold uppercase">
-                                Dual-Compliance Training
-                            </span>
-                            <i class="fa-solid fa-graduation-cap text-cyan-400 text-xl group-hover:scale-110 transition-transform"></i>
-                        </div>
-                        <h3 class="font-cyber text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                            Cyber Academy
-                        </h3>
-                        <p class="text-xs font-mono text-slate-300 mb-6 leading-relaxed">
-                            Gamified 8-stage 3-state flip cards, Zero-Cost MFA setup, and Pre-Renewal regulatory codex for underwriters.
-                        </p>
-                    </div>
-                    <a href="academy.html" class="w-full py-2.5 rounded bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-200 border border-cyan-500/50 font-cyber text-xs font-bold text-center uppercase tracking-wider transition-all flex items-center justify-center gap-2">
-                        ENTER CYBER ACADEMY <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-
             </div>
         </section>
 
