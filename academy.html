@@ -165,6 +165,144 @@
             100% { top: -250%; }
         }
 
+        /* GAMIFICATION HUD & BADGE CASE */
+        .xp-pill {
+            background: rgba(147, 51, 234, 0.25);
+            border: 1.5px solid #a855f7;
+            color: #38bdf8;
+            font-weight: bold;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+            transition: all 0.3s ease;
+        }
+        .pulse-xp {
+            animation: pulse-xp-anim 0.5s ease-out;
+        }
+        @keyframes pulse-xp-anim {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.18); color: #f59e0b; text-shadow: 0 0 20px #f59e0b; }
+            100% { transform: scale(1); }
+        }
+
+        .badge-case-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        @media (min-width: 768px) {
+            .badge-case-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+        .badge-case-item {
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            border-radius: 12px;
+            padding: 10px 4px;
+            text-align: center;
+            background: rgba(10, 8, 22, 0.85);
+            transition: all 0.35s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .badge-case-item.locked {
+            filter: grayscale(1);
+            opacity: 0.42;
+        }
+        .badge-case-item.unlocked {
+            filter: none;
+            opacity: 1;
+            border-color: #f59e0b;
+            background: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(147, 51, 234, 0.2));
+            box-shadow: 0 0 18px rgba(245, 158, 11, 0.35), inset 0 0 10px rgba(245, 158, 11, 0.1);
+            transform: translateY(-2px);
+        }
+        .badge-case-item .badge-ico {
+            font-size: 1.75rem;
+            display: block;
+            margin-bottom: 4px;
+            filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
+        }
+
+        /* PER-QUESTION INTERACTIVE OPTION & FEEDBACK */
+        .quiz-opt-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quiz-opt-label:hover {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+        .quiz-opt-label.active-choice {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .question-feedback-box {
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 10.5px;
+            line-height: 1.45;
+            margin-top: 6px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .question-feedback-box.show-pass {
+            display: block;
+            background: rgba(6, 78, 59, 0.75);
+            border: 1px solid #10b981;
+            color: #d1fae5;
+        }
+        .question-feedback-box.show-fail {
+            display: block;
+            background: rgba(127, 29, 29, 0.75);
+            border: 1px solid #ef4444;
+            color: #fee2e2;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-3px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-window {
+            max-width: 680px;
+            width: 100%;
+            background: #090d16;
+            border: 2px solid #00f0ff;
+            border-radius: 20px;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.4);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px;
+            color: #e2e8f0;
+        }
+
         /* --- SILVER MIRROR CLOCK ANIMATION --- */
         #clock-mirror-bg {
             position: fixed;
@@ -595,6 +733,45 @@
             box-shadow: 0 0 20px rgba(245, 158, 11, 0.4) !important;
         }
 
+        html.day-mode .xp-pill {
+            background: linear-gradient(to top, #e2e8f0, #ffffff) !important;
+            border-color: #d4d4d4 !important;
+            color: #0f172a !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+        }
+        html.day-mode .badge-case-item {
+            background: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+            color: #1e293b !important;
+        }
+        html.day-mode .badge-case-item.locked {
+            background: #e2e8f0 !important;
+            opacity: 0.45 !important;
+        }
+        html.day-mode .badge-case-item.unlocked {
+            background: linear-gradient(to top, #ffffff, #fef3c7) !important;
+            border-color: #f59e0b !important;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25) !important;
+        }
+        html.day-mode .quiz-opt-label {
+            color: #1e293b !important;
+        }
+        html.day-mode .quiz-opt-label:hover {
+            background: #f8fafc !important;
+            border-color: #cbd5e1 !important;
+        }
+        html.day-mode .quiz-opt-label.active-choice {
+            background: #fef3c7 !important;
+            border-color: #f59e0b !important;
+            color: #000000 !important;
+        }
+        html.day-mode .modal-window {
+            background: #ffffff !important;
+            border-color: #0284c7 !important;
+            color: #0f172a !important;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25) !important;
+        }
+
         /* RAZOR-SHARP DARK TYPOGRAPHY (NO MORE TOO DARK SECTIONS OR WASHED-OUT TEXT) */
         html.day-mode h1, 
         html.day-mode h2, 
@@ -888,32 +1065,189 @@
         </section>
 
         <!-- =========================================================
-             SECTION 3: MASTER PROGRESS HUD & EVIDENCE EXPORT
+             SECTION 3: MASTER GAMIFICATION HUD & INDUSTRY SECTOR MATRIX
              ========================================================= -->
-        <section class="mb-12 p-6 rounded-2xl bg-black/85 border border-purple-500/50 shadow-xl">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-                <div>
-                    <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block mb-1">
-                        LIVE TELEMETRY // 8-MODULE VERIFICATION HUD
+        <section class="mb-12 p-6 sm:p-8 rounded-3xl bg-black/90 border-2 border-purple-500/60 shadow-[0_0_40px_rgba(147,51,234,0.3)]">
+            
+            <!-- Industry / Sector Matrix Tabs -->
+            <div class="mb-6 pb-5 border-b border-purple-900/60">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+                    <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-amber-400"></i> STEP 1: SELECT YOUR INDUSTRY FIELD // DYNAMIC AUDIT &amp; RISK PROFILER
                     </span>
-                    <h2 class="font-cyber text-2xl font-bold text-white uppercase">
-                        Master Underwriting Progress Matrix
-                    </h2>
+                    <span class="text-[11px] font-mono text-slate-400">Customizes regulatory warranties &amp; insurance discount tier</span>
                 </div>
-                <div class="flex items-center gap-4 flex-wrap">
-                    <div class="text-right font-mono">
-                        <span class="text-[10px] text-slate-400 uppercase block">Curriculum Status</span>
-                        <span id="hud-stages-text" class="text-lg font-cyber font-bold text-amber-400">0 / 8 MODULES (0%)</span>
-                    </div>
-                    <button onclick="exportInsuranceProof()" class="px-5 py-2.5 rounded-lg bg-green-500 hover:bg-green-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.5)]">
-                        <i class="fa-solid fa-file-shield"></i> EXPORT UNDERWRITING PROOF
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5" id="sector-btn-group">
+                    <button type="button" onclick="selectSector('healthcare')" id="sector-btn-healthcare" class="sector-tab-btn active p-3 rounded-xl bg-purple-950/80 border-2 border-amber-400 text-left transition-all group">
+                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🏥</div>
+                        <div class="font-cyber text-xs font-bold text-white uppercase">Healthcare</div>
+                        <div class="text-[10px] font-mono text-cyan-300">HIPAA &bull; 25-35% Credit</div>
                     </button>
+
+                    <button type="button" onclick="selectSector('financial')" id="sector-btn-financial" class="sector-tab-btn p-3 rounded-xl bg-black/60 border border-neutral-700 text-left transition-all hover:border-cyan-400 group">
+                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🏦</div>
+                        <div class="font-cyber text-xs font-bold text-white uppercase">Finance &amp; Banking</div>
+                        <div class="text-[10px] font-mono text-slate-400">NYDFS &bull; 20-30% Credit</div>
+                    </button>
+
+                    <button type="button" onclick="selectSector('defense')" id="sector-btn-defense" class="sector-tab-btn p-3 rounded-xl bg-black/60 border border-neutral-700 text-left transition-all hover:border-cyan-400 group">
+                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🛡️</div>
+                        <div class="font-cyber text-xs font-bold text-white uppercase">Defense &amp; CMMC</div>
+                        <div class="text-[10px] font-mono text-slate-400">DFARS &bull; Preferred Tier</div>
+                    </button>
+
+                    <button type="button" onclick="selectSector('industrial')" id="sector-btn-industrial" class="sector-tab-btn p-3 rounded-xl bg-black/60 border border-neutral-700 text-left transition-all hover:border-cyan-400 group">
+                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">⚡</div>
+                        <div class="font-cyber text-xs font-bold text-white uppercase">Energy &amp; OT</div>
+                        <div class="text-[10px] font-mono text-slate-400">NERC &bull; 15-25% Credit</div>
+                    </button>
+
+                    <button type="button" onclick="selectSector('retail')" id="sector-btn-retail" class="sector-tab-btn p-3 rounded-xl bg-black/60 border border-neutral-700 text-left transition-all hover:border-cyan-400 group">
+                        <div class="text-xl mb-1 group-hover:scale-110 transition-transform">🛒</div>
+                        <div class="font-cyber text-xs font-bold text-white uppercase">Retail &amp; SaaS</div>
+                        <div class="text-[10px] font-mono text-slate-400">PCI DSS &bull; 20-35% Credit</div>
+                    </button>
+                </div>
+
+                <!-- Active Sector Info Card -->
+                <div id="sector-info-card" class="mt-4 p-4 rounded-2xl bg-slate-950/80 border border-cyan-500/40 text-xs font-mono flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-cyan-300 font-bold uppercase text-sm" id="sec-card-title">🏥 Healthcare &amp; Life Sciences</span>
+                            <span class="px-2 py-0.5 rounded bg-green-950 text-green-300 border border-green-500 text-[10px] font-bold" id="sec-card-discount">25% - 35% Premium Credit</span>
+                        </div>
+                        <p class="text-slate-300 text-[11px]" id="sec-card-bodies">
+                            <strong>Governing Bodies Handled:</strong> HIPAA § 164.312, HITECH Breach Safe Harbor, FDA 524B SBOM
+                        </p>
+                        <p class="text-amber-400 text-[11px] mt-0.5" id="sec-card-risk">
+                            ⚠️ <strong>Sublimit Risk Penalty:</strong> $250,000 Ransomware Cap / Potential Claim Denial if unshielded.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+                        <a href="assets/zero_jargon_cheat_sheet.pdf" download="Anti_Phish_Employee_Cheat_Sheet.pdf" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-[11px] uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+                            <i class="fa-solid fa-file-pdf"></i> Cheat Sheet PDF
+                        </a>
+                        <button type="button" onclick="openWireModal()" class="px-3.5 py-2 rounded-xl bg-purple-950 hover:bg-purple-900 border border-purple-400 text-purple-200 font-cyber font-bold text-[11px] uppercase tracking-wider flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-money-bill-transfer"></i> Wire Protocol
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Progress Bar -->
-            <div class="w-full bg-slate-900 h-3.5 rounded-full overflow-hidden border border-slate-800">
-                <div id="hud-progress-bar" class="bg-gradient-to-r from-purple-500 via-amber-400 to-green-400 h-full w-0 transition-all duration-500"></div>
+            <!-- Gamified HUD Score & Rank Bar -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-5">
+                <div>
+                    <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block mb-1">
+                        LIVE TELEMETRY // 8-MODULE CYBER ACADEMY HUD
+                    </span>
+                    <h2 class="font-cyber text-xl sm:text-2xl font-bold text-white uppercase flex items-center gap-3">
+                        <span>Underwriting Progress Matrix</span>
+                    </h2>
+                </div>
+
+                <div class="flex items-center gap-3 flex-wrap">
+                    <!-- XP Pill -->
+                    <div class="xp-pill" id="hud-xp-pill">
+                        <i class="fa-solid fa-bolt text-amber-400"></i>
+                        <span id="hud-xp-display" class="font-cyber">0 XP</span>
+                    </div>
+
+                    <!-- Level & Rank Badge -->
+                    <span id="hud-rank-display" class="px-3 py-1.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 font-mono text-xs font-bold uppercase">
+                        LVL 1: ROOKIE DEFENDER
+                    </span>
+
+                    <!-- Export Actions -->
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" onclick="exportInsuranceProof()" title="Export Signed Underwriting Proof Certificate" class="px-3.5 py-2 rounded-lg bg-green-500 hover:bg-green-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                            <i class="fa-solid fa-file-shield"></i> CERTIFICATE
+                        </button>
+                        <button type="button" onclick="exportTelemetryCsv()" title="Export Telemetry CSV" class="px-2.5 py-2 rounded-lg bg-cyan-950 hover:bg-cyan-900 border border-cyan-400 text-cyan-300 font-mono text-xs font-bold transition-all">
+                            CSV
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Curriculum Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between text-xs font-mono mb-1.5">
+                    <span class="text-slate-400">Curriculum Clearance Level:</span>
+                    <span id="hud-stages-text" class="text-amber-400 font-bold">0 / 8 MODULES (0%)</span>
+                </div>
+                <div class="w-full bg-slate-900 h-3.5 rounded-full overflow-hidden border border-slate-800">
+                    <div id="hud-progress-bar" class="bg-gradient-to-r from-purple-500 via-amber-400 to-green-400 h-full w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <!-- Collectible Security Badges Showcase Case -->
+            <div>
+                <div class="flex justify-between items-center mb-2.5">
+                    <span class="text-[11px] font-mono text-slate-300 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-trophy text-amber-400"></i> COLLECTIBLE UNDERWRITING BADGES CASE (8 BADGES)
+                    </span>
+                    <span class="text-[10px] font-mono text-slate-400">Pass module flip quizzes to unlock full color &amp; SHA-256 seal</span>
+                </div>
+
+                <div class="badge-case-grid" id="badge-case-container">
+                    <!-- Badge 1 -->
+                    <div class="badge-case-item locked" id="badge-item-mfa" title="Module 01: FIDO2 WebAuthn Passkeys Hardening">
+                        <span class="badge-ico">🔑</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Shield Master</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">Chubb 4B</small>
+                    </div>
+
+                    <!-- Badge 2 -->
+                    <div class="badge-case-item locked" id="badge-item-phish" title="Module 02: 1-Click Reporting & Click Rate &lt;3.5%">
+                        <span class="badge-ico">📡</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Phish Hunter</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">NIST AT-2</small>
+                    </div>
+
+                    <!-- Badge 3 -->
+                    <div class="badge-case-item locked" id="badge-item-wire" title="Module 02 Drill: Out-of-Band Dual Wire Verification">
+                        <span class="badge-ico">🔐</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Wire Guardian</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">Travelers 4C</small>
+                    </div>
+
+                    <!-- Badge 4 -->
+                    <div class="badge-case-item locked" id="badge-item-vault" title="Module 03: S3 WORM 3-2-1-1-0 Immutable Backups">
+                        <span class="badge-ico">🛡️</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Vault Keeper</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">Travelers 6A</small>
+                    </div>
+
+                    <!-- Badge 5 -->
+                    <div class="badge-case-item locked" id="badge-item-ghost" title="Module 04: Port 3389/445 Mesh VPN WAN Cloaking">
+                        <span class="badge-ico">👻</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Ghost Operator</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">Beazley WAN</small>
+                    </div>
+
+                    <!-- Badge 6 -->
+                    <div class="badge-case-item locked" id="badge-item-crisis" title="Module 05: CIRCIA 72h Tabletop Response Drill">
+                        <span class="badge-ico">🚨</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Crisis Boss</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">CIRCIA 72h</small>
+                    </div>
+
+                    <!-- Badge 7 -->
+                    <div class="badge-case-item locked" id="badge-item-ram" title="Module 06: Volatile RAM Isolation & Credential Sweeps">
+                        <span class="badge-ico">🪙</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Ghost RAM</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">True Burner</small>
+                    </div>
+
+                    <!-- Badge 8 -->
+                    <div class="badge-case-item locked" id="badge-item-seal" title="Module 08: Darden Trust Gold Underwriting Seal">
+                        <span class="badge-ico">🏆</span>
+                        <strong class="font-cyber text-[10px] text-white block uppercase">Darden Seal</strong>
+                        <small class="font-mono text-[9px] text-slate-400 block">Gold Seal</small>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -960,13 +1294,12 @@
                                     </p>
                                 </div>
 
-                                <!-- Video Briefing Placeholder -->
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
-                                    </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 01 Video Briefing [04:15]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+                                <!-- Video Briefing Player -->
+                                <div class="video-container aspect-video w-full rounded-xl bg-black/90 border border-purple-900/50 relative overflow-hidden mb-3">
+                                    <video id="video-module-1" controls class="w-full h-full object-cover rounded-xl" preload="metadata">
+                                        <source src="assets/Why_You_Need_A_Security_Posture_Assessment.mp4" type="video/mp4">
+                                        Your browser does not support HTML5 video.
+                                    </video>
                                 </div>
                             </div>
 
@@ -988,55 +1321,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. Which 2FA method is strictly prohibited by Chubb Schedule B due to SIM-swapping?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) SMS / Voice Call Fallback Tokens</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Hardware FIDO2 Passkeys</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Dedicated Authenticator Apps</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-1-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. What percentage of remote/admin ingress must enforce MFA to satisfy carrier warranties?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) 50% of staff</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) 100% of remote and administrative access</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Only executive leadership</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-1-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. What zero-cost open standard protocol replaces vulnerable passwords?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Unencrypted Telnet</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) FIDO2 WebAuthn Passkeys</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-1-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-1-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Shared plaintext spreadsheets</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-1-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-1" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -1061,25 +1397,74 @@
                                 </div>
                                 <h4 class="font-cyber text-lg font-bold text-white uppercase mb-2">Anti-Spearphish Triage Drill</h4>
                                 
-                                <div id="report-text-2" class="report-box p-3 rounded-xl bg-black/70 border border-purple-900/40 text-xs font-mono text-slate-300 mb-3 transition-all">
-                                    <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-neutral-800">
-                                        <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Executive Audit Briefing</span>
-                                        <span class="text-[10px] text-slate-400">Ref: Travelers Item 4C</span>
-                                    </div>
-                                    <p class="leading-relaxed text-[11px] mb-1.5">
-                                        <strong class="text-white">Audit Finding:</strong> Business Email Compromise (BEC) accounts for 38% of insurance payouts. Carrier warranties mandate annual workforce phishing drills with employee click rates verified <span class="text-amber-400 font-bold underline">below 3.5%</span>.
-                                    </p>
-                                    <p class="leading-relaxed text-[11px]">
-                                        <strong class="text-white">Remediation Protocol:</strong> Deploy <span class="text-cyan-300 font-bold underline">1-click reporting beacons</span> and enforce mandatory <span class="text-amber-400 font-bold underline">out-of-band dual verbal authorization</span> for wire or vendor account changes.
-                                    </p>
+                                <!-- Tab Switcher -->
+                                <div class="flex items-center gap-2 mb-3 p-1 rounded-lg bg-black/60 border border-neutral-800 font-mono text-[10px]">
+                                    <button type="button" id="tab-btn-mod2-briefing" onclick="switchMod2Tab('briefing')" class="flex-1 py-1 rounded bg-amber-500 text-black font-bold uppercase transition-all">
+                                        📋 Audit Briefing
+                                    </button>
+                                    <button type="button" id="tab-btn-mod2-drill" onclick="switchMod2Tab('drill')" class="flex-1 py-1 rounded text-slate-300 hover:text-white uppercase transition-all">
+                                        🎮 Live Phish Drill
+                                    </button>
                                 </div>
 
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
+                                <!-- Tab 1: Audit Briefing Container -->
+                                <div id="mod2-briefing-view" class="block">
+                                    <div id="report-text-2" class="report-box p-3 rounded-xl bg-black/70 border border-purple-900/40 text-xs font-mono text-slate-300 mb-3 transition-all">
+                                        <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-neutral-800">
+                                            <span class="text-cyan-300 font-bold uppercase text-[10px]"><i class="fa-solid fa-file-lines text-amber-400"></i> Executive Audit Briefing</span>
+                                            <span class="text-[10px] text-slate-400">Ref: Travelers Item 4C</span>
+                                        </div>
+                                        <p class="leading-relaxed text-[11px] mb-1.5">
+                                            <strong class="text-white">Audit Finding:</strong> Business Email Compromise (BEC) accounts for 38% of insurance payouts. Carrier warranties mandate annual workforce phishing drills with employee click rates verified <span class="text-amber-400 font-bold underline">below 3.5%</span>.
+                                        </p>
+                                        <p class="leading-relaxed text-[11px]">
+                                            <strong class="text-white">Remediation Protocol:</strong> Deploy <span class="text-cyan-300 font-bold underline">1-click reporting beacons</span> and enforce mandatory <span class="text-amber-400 font-bold underline">out-of-band dual verbal authorization</span> for wire or vendor account changes.
+                                        </p>
                                     </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 02 Video Briefing [03:50]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+
+                                    <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
+                                        <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
+                                            <i class="fa-solid fa-crosshairs ml-0.5"></i>
+                                        </div>
+                                        <span class="font-cyber text-[11px] font-bold text-white uppercase">Interactive Phish &amp; BEC Simulator</span>
+                                        <span class="font-mono text-[9px] text-cyan-300 uppercase tracking-widest mt-0.5">Click "Live Phish Drill" Tab Above to Test Skills</span>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 2: Live Phish Drill Container -->
+                                <div id="mod2-drill-view" class="hidden">
+                                    <div class="p-3 rounded-xl bg-black/85 border border-cyan-500/60 mb-3 text-xs font-mono">
+                                        <div class="flex items-center justify-between pb-1 mb-2 border-b border-neutral-800">
+                                            <span class="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800 text-[9px] font-bold uppercase tracking-wider">
+                                                📨 INCOMING MESSAGE SIMULATION
+                                            </span>
+                                            <span id="drill-sector-tag" class="text-[9px] text-cyan-400 font-bold">HEALTHCARE</span>
+                                        </div>
+                                        <div class="space-y-0.5 text-[11px] text-slate-300 mb-2">
+                                            <div><strong class="text-white">Subject:</strong> <span id="drill-subject" class="text-amber-300 font-bold">URGENT: Clinician shift coverage</span></div>
+                                            <div class="text-[10px] text-slate-400"><strong class="text-slate-300">From:</strong> <span id="drill-from">staffing-desk@clinic-support.example</span></div>
+                                            <div class="text-[10px] text-slate-400"><strong class="text-slate-300">To:</strong> You &bull; Sent Today 09:14</div>
+                                        </div>
+                                        <div class="p-2 rounded bg-neutral-900/90 border border-neutral-800 text-[11px] text-slate-200 leading-relaxed mb-2" id="drill-body">
+                                            A message asks you to open an unexpected "shift roster" attachment and enter your sign-in details before your next shift.
+                                        </div>
+                                        <div class="text-[10px] text-amber-400 italic mb-2.5" id="drill-hint">
+                                            💡 Clue: Unexpected attachment + credential request
+                                        </div>
+                                        <div id="drill-feedback-box" class="hidden p-2 rounded text-[10px] mb-2 font-mono"></div>
+                                        <!-- Drill Action Buttons -->
+                                        <div class="grid grid-cols-3 gap-1.5 pt-1 border-t border-neutral-800">
+                                            <button type="button" onclick="inspectDrill()" class="py-1.5 px-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-800 text-[10px] font-bold uppercase transition-all">
+                                                🔍 Inspect
+                                            </button>
+                                            <button type="button" onclick="reportDrill()" class="py-1.5 px-1 rounded bg-amber-500 hover:bg-amber-400 text-black text-[10px] font-cyber font-bold uppercase transition-all shadow-[0_0_10px_rgba(245,158,11,0.4)]">
+                                                🚨 Report
+                                            </button>
+                                            <button type="button" onclick="verifyDrill()" class="py-1.5 px-1 rounded bg-purple-950 hover:bg-purple-900 text-purple-200 border border-purple-500 text-[10px] font-cyber font-bold uppercase transition-all">
+                                                🔐 Verify
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -1099,55 +1484,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. Carrier warranty clauses require workforce simulation click rates to remain under what threshold?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Below 3.5%</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Below 35%</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Exactly 0%</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-2-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. What operational safeguard is required before executing executive wire or bank changes?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Out-of-band dual verbal authorization</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Replying to the incoming email faster</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Transferring the funds immediately without verification</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-2-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. How should employees triage suspicious emails under NIST AT-2(2)?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Forwarding to all staff</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) 1-click reporting beacon to SOC/IR triage team</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-2-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-2-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Silently deleting without logging</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-2-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-2" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -1200,12 +1588,20 @@
                                     </p>
                                 </div>
 
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
+                                <!-- AWS S3 Object Lock Terminal Snippet -->
+                                <div class="p-3 rounded-xl bg-black/90 border border-purple-900/60 font-mono text-[10px] mb-3">
+                                    <div class="flex items-center justify-between pb-1 mb-1.5 border-b border-neutral-800 text-slate-400">
+                                        <span class="text-cyan-300 font-bold"><i class="fa-solid fa-terminal text-amber-400"></i> AWS CLI // S3 WORM COMPLIANCE LOCK</span>
+                                        <span class="text-green-400 font-bold">STATUS: LOCKED</span>
                                     </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 03 Video Briefing [05:02]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+                                    <div class="space-y-1 text-slate-300">
+                                        <div class="text-slate-400"># Enforce immutable WORM retention (root cannot bypass):</div>
+                                        <div class="text-amber-300 font-bold">$ aws s3api put-object-legal-hold --bucket burn1-vault --key snap-db.tar.gz --legal-hold Status=ON</div>
+                                        <div class="text-cyan-300 font-bold">$ aws s3api put-object-retention --bucket burn1-vault --key snap-db.tar.gz --retention 'Mode=COMPLIANCE,RetainUntilDate=2027-01-01T00:00:00'</div>
+                                    </div>
+                                    <div class="mt-2 text-[9px] text-slate-400 border-t border-neutral-800/80 pt-1">
+                                        🛡️ Travelers Item 6A: Satisfies 3-2-1-1-0 architecture &amp; waives 50% co-insurance penalty.
+                                    </div>
                                 </div>
                             </div>
 
@@ -1225,55 +1621,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. What storage feature prevents ransomware actors from deleting snapshots even with root credentials?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) S3 Compliance Object Lock</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Standard unencrypted FTP sync</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Local unmounted USB memory stick</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-3-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. What severe penalty do carriers enforce if connected backups are wiped during ransomware?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) 50% co-insurance penalty or total claim denial</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) A minor $50 warning fine</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Free hardware replacement</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-3-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. What standard backup architecture is mandated for enterprise resilience?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) 1-1-0 local rule</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) 3-2-1-1-0 architecture</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-3-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-3-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Zero offsite copies</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-3-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-3" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -1311,12 +1710,12 @@
                                     </p>
                                 </div>
 
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
-                                    </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 04 Video Briefing [03:20]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+                                <!-- Assessment Guides Video Player -->
+                                <div class="video-container aspect-video w-full rounded-xl bg-black/90 border border-purple-900/50 relative overflow-hidden mb-3">
+                                    <video id="video-module-4" controls class="w-full h-full object-cover rounded-xl" preload="metadata">
+                                        <source src="assets/Assessment_Guides4.mp4" type="video/mp4">
+                                        Your browser does not support HTML5 video.
+                                    </video>
                                 </div>
                             </div>
 
@@ -1336,55 +1735,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. Which two critical Windows ports trigger instant automated carrier renewal rejection?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Port 80 (HTTP) &amp; Port 443 (HTTPS)</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Port 3389 (RDP) &amp; Port 445 (SMB)</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Port 22 (SSH) only</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-4-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. What zero-cost method allows administrative access without public port exposure?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) WireGuard or Tailscale encrypted VPN tunnel</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Leaving RDP open on alternate port 3390</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Unauthenticated public web dashboards</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-4-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. How frequently should perimeter attack surfaces be inspected for exposed services?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Once every 3 years</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Continuous / automated 60-second sweeps</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-4-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-4-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Only after a confirmed ransom note appears</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-4-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-4" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -1394,7 +1796,6 @@
                                     </button>
                                 </form>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1437,12 +1838,12 @@
                                     </p>
                                 </div>
 
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
-                                    </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 05 Video Briefing [04:40]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+                                <!-- Assessment Guides 6 Video Player -->
+                                <div class="video-container aspect-video w-full rounded-xl bg-black/90 border border-purple-900/50 relative overflow-hidden mb-3">
+                                    <video id="video-module-5" controls class="w-full h-full object-cover rounded-xl" preload="metadata">
+                                        <source src="assets/Assessment_Guides6.mp4" type="video/mp4">
+                                        Your browser does not support HTML5 video.
+                                    </video>
                                 </div>
                             </div>
 
@@ -1462,55 +1863,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. Under federal CIRCIA rules, within how many hours must a covered entity report a substantial incident?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) 72 hours</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) 30 days</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) 6 months</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-5-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. What communication channel should leadership use if corporate email is encrypted by ransomware?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Compromised corporate email server</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Out-of-band verified secondary channel (Signal/Wire)</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Public social media comment threads</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-5-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. What formal documentation must be produced following an annual incident response simulation?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) After-Action Report (AAR) &amp; remediation ledger</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Vendor marketing pamphlet</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-5-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-5-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Verbal discussion with zero records</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-5-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-5" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -1548,12 +1952,20 @@
                                     </p>
                                 </div>
 
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
+                                <!-- True Burner Volatile RAM Terminal Snippet -->
+                                <div class="p-3 rounded-xl bg-black/90 border border-purple-900/60 font-mono text-[10px] mb-3">
+                                    <div class="flex items-center justify-between pb-1 mb-1.5 border-b border-neutral-800 text-slate-400">
+                                        <span class="text-cyan-300 font-bold"><i class="fa-solid fa-ghost text-amber-400"></i> TRUE BURNER // VOLATILE RAM ISOLATION</span>
+                                        <span class="text-amber-400 font-bold">ZERO TRACE</span>
                                     </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 06 Video Briefing [03:45]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+                                    <div class="space-y-1 text-slate-300">
+                                        <div class="text-slate-400">&gt; Browser runtime isolated in encrypted tmpfs RAM sandbox</div>
+                                        <div class="text-green-400">&gt; WebGL &amp; Canvas hardware fingerprint spoofing: ACTIVE</div>
+                                        <div class="text-cyan-300">&gt; On process termination: 100% volatile memory zero-wiped</div>
+                                    </div>
+                                    <div class="mt-2 text-[9px] text-slate-400 border-t border-neutral-800/80 pt-1">
+                                        🪙 True Burner Standard: Prevents forensic workstation fingerprinting &amp; tracker cross-profiling.
+                                    </div>
                                 </div>
                             </div>
 
@@ -1573,55 +1985,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. Where does True Burner Ghost isolation execute volatile sessions to ensure zero trace?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Encrypted SSD hard disk</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Volatile RAM memory core wiped on exit</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Shared network file server</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-6-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. How do tracking aggregators map employee browsing habits without cookies?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Canvas &amp; WebGL hardware fingerprinting</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Standard telephone audio tones</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Desktop monitor brightness levels</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-6-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. What is the operational purpose of running automated dark web credential sweeps?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Identify leaked passwords before adversaries exploit them</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Purchase stolen credentials for illegal resale</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-6-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-6-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Lock down all employee computers permanently</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-6-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-6" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -1674,12 +2089,20 @@
                                     </p>
                                 </div>
 
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
+                                <!-- Carrier Renewal Binder Docket Container -->
+                                <div class="p-3 rounded-xl bg-black/90 border border-purple-900/60 font-mono text-[10px] mb-3">
+                                    <div class="flex items-center justify-between pb-1 mb-1.5 border-b border-neutral-800 text-slate-400">
+                                        <span class="text-cyan-300 font-bold"><i class="fa-solid fa-folder-closed text-amber-400"></i> CARRIER RENEWAL BINDER DOCKET</span>
+                                        <span class="text-green-400 font-bold">DISCOUNT: 15-25%</span>
                                     </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 07 Video Briefing [04:10]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+                                    <div class="space-y-1 text-slate-300">
+                                        <div class="flex items-center justify-between"><span>[✔] IdP MFA 100% Attestation Telemetry</span><span class="text-green-400">CHUBB 4B</span></div>
+                                        <div class="flex items-center justify-between"><span>[✔] WORM Compliance Backup Lock Hash</span><span class="text-green-400">TRAVELERS 6A</span></div>
+                                        <div class="flex items-center justify-between"><span>[✔] 60-Sec WAN Ingress Zero-Port Audit</span><span class="text-green-400">BEAZLEY WAN</span></div>
+                                    </div>
+                                    <div class="mt-2 text-[9px] text-slate-400 border-t border-neutral-800/80 pt-1">
+                                        📁 Ready for executive signature &bull; Eliminates warranty claim denials.
+                                    </div>
                                 </div>
                             </div>
 
@@ -1699,55 +2122,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. What documentation is required to waive insurer sublimits and claim 15-25% premium credits?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Consolidated executive Evidence Binder with technical logs</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Verbal telephone assurance to the broker</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Blank insurance renewal application</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-7-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. Who must sign the final cyber warranty questionnaire submitted to carrier underwriters?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Executive leadership / authorized technical officer</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) An outsourced junior sales intern</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) No signature or verification is needed</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-7-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. What occurs if an organization claims active controls that are missing during claim investigation?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Total claim denial under fraud &amp; warranty exclusions</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Carrier waives deductible for free</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-7-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-7-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Automatic policy discount renewal</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-7-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-7" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -1785,12 +2211,20 @@
                                     </p>
                                 </div>
 
-                                <div class="video-placeholder aspect-video w-full rounded-xl bg-black/80 border border-purple-900/50 flex flex-col items-center justify-center p-3 text-center mb-3 relative overflow-hidden group">
-                                    <div class="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400 flex items-center justify-center text-amber-400 text-sm shadow-[0_0_15px_rgba(245,158,11,0.5)] mb-1.5 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-play ml-0.5"></i>
+                                <!-- Darden Trust Gold Seal Engine Container -->
+                                <div class="p-3 rounded-xl bg-black/90 border border-emerald-900/60 font-mono text-[10px] mb-3">
+                                    <div class="flex items-center justify-between pb-1 mb-1.5 border-b border-neutral-800 text-slate-400">
+                                        <span class="text-emerald-400 font-bold"><i class="fa-solid fa-stamp text-amber-400"></i> DARDEN TRUST // GOLD SEAL ENGINE</span>
+                                        <span class="text-amber-400 font-bold">SHA-256</span>
                                     </div>
-                                    <span class="font-cyber text-[11px] font-bold text-white uppercase">Module 08 Video Briefing [05:15]</span>
-                                    <span class="font-mono text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Curriculum Recording Placeholder</span>
+                                    <div class="space-y-1 text-slate-300">
+                                        <div><span class="text-slate-400">Authority:</span> Leon R. Darden // Darden Trust Infrastructure</div>
+                                        <div><span class="text-slate-400">Ledger Hash:</span> <span class="text-cyan-300">4F197B247DE5D59124E8D209004426A9</span></div>
+                                        <div class="text-emerald-300"><span class="text-slate-400">Directory Status:</span> Verified Merchant on Metro Plaza Directory</div>
+                                    </div>
+                                    <div class="mt-2 text-[9px] text-slate-400 border-t border-neutral-800/80 pt-1">
+                                        🛡️ Public cryptographic proof of verified operational hardening.
+                                    </div>
                                 </div>
                             </div>
 
@@ -1810,55 +2244,58 @@
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">1. What cryptographic algorithm anchors the Darden Trust verification seal?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-1" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-1" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) SHA-256 cryptographic hash</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-1" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-1" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) MD5 legacy hash</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-1" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-1" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) ROT-13 text shift</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-8-1" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">2. Where is the verified audit-ready status permanently displayed to signal trust?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-2" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-2" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Metro Plaza Business Directory listing</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-2" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-2" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Hidden local text file</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-2" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-2" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Discarded browser history cache</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-8-2" class="question-feedback-box"></div>
                                     </div>
 
                                     <div class="quiz-box p-2.5 rounded-lg bg-black/60 border border-neutral-700">
                                         <p class="font-bold text-white mb-1.5">3. What does the Darden Trust certificate furnish to prospective clients and underwriters?</p>
                                         <div class="space-y-1">
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-3" value="a" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-3" value="a" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>A) Independently verifiable proof of operational cybersecurity hardening</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-3" value="b" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-3" value="b" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>B) Guaranteed corporate stock appreciation</span>
                                             </label>
-                                            <label class="flex items-center gap-2 cursor-pointer hover:text-amber-300">
-                                                <input type="radio" name="q-8-3" value="c" class="accent-amber-400">
+                                            <label class="quiz-opt-label">
+                                                <input type="radio" name="q-8-3" value="c" class="accent-amber-400" onchange="highlightOpt(this)">
                                                 <span>C) Free hardware replacement warranty</span>
                                             </label>
                                         </div>
+                                        <div id="q-explain-8-3" class="question-feedback-box"></div>
                                     </div>
 
                                     <div id="quiz-feedback-8" class="hidden p-2 rounded bg-red-950/80 border border-red-500 text-red-200 text-[10px]"></div>
@@ -2005,6 +2442,85 @@
         </div>
     </footer>
 
+    <!-- OUT-OF-BAND WIRE TRANSFER PROTOCOL MODAL -->
+    <div id="wireModal" class="modal-overlay" onclick="if(event.target===this) closeWireModal()">
+        <div class="modal-window font-mono text-xs">
+            <div class="flex justify-between items-center pb-3 mb-4 border-b border-cyan-500/50">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-cyan-950 border border-cyan-400 text-cyan-300 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </span>
+                    <div>
+                        <h3 class="font-cyber text-base font-bold text-white uppercase">Out-of-Band Wire Verification Protocol</h3>
+                        <p class="text-[10px] text-slate-400">Travelers Cyber Warranty Item 4C &bull; Dual Verbal Authorization</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeWireModal()" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+            </div>
+
+            <p class="text-[11px] text-slate-300 mb-4 leading-relaxed">
+                To satisfy carrier warranties and eliminate Business Email Compromise (BEC) liability, all modifications to vendor wiring or ACH instructions require this protocol to be completed and signed by two authorized officers.
+            </p>
+
+            <form id="wire-protocol-form" class="space-y-3" onsubmit="event.preventDefault(); printWireProtocol();">
+                <div>
+                    <label class="block text-slate-400 text-[10px] uppercase font-bold mb-1">Requesting Vendor / Counterparty:</label>
+                    <input type="text" id="wire-vendor" value="MedTech Solutions LLC" class="w-full px-3 py-2 rounded-lg bg-black/80 border border-neutral-700 text-white font-mono text-xs focus:border-cyan-400 outline-none" required>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-400 text-[10px] uppercase font-bold mb-1">Invoice / Payment Reference:</label>
+                        <input type="text" id="wire-ref" value="INV-2026-9481" class="w-full px-3 py-2 rounded-lg bg-black/80 border border-neutral-700 text-white font-mono text-xs focus:border-cyan-400 outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] uppercase font-bold mb-1">Requested Change Type:</label>
+                        <select id="wire-type" class="w-full px-3 py-2 rounded-lg bg-black/80 border border-neutral-700 text-white font-mono text-xs focus:border-cyan-400 outline-none">
+                            <option value="New ACH Routing & Account Number">New ACH Routing & Account Number</option>
+                            <option value="Domestic Wire Transfer Instructions">Domestic Wire Transfer Instructions</option>
+                            <option value="International Wire / SWIFT Code">International Wire / SWIFT Code</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="p-3 rounded-lg bg-amber-950/40 border border-amber-600/50 text-[10px] text-amber-200">
+                    ⚠️ <strong>CRITICAL WARRANTY RULE:</strong> Never call the phone number listed in the incoming email or invoice header. The callback number below MUST be sourced from the original signed vendor contract on file.
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-400 text-[10px] uppercase font-bold mb-1">Contract Callback Phone # (On File):</label>
+                        <input type="text" id="wire-phone" value="+1 (404) 555-0199" class="w-full px-3 py-2 rounded-lg bg-black/80 border border-neutral-700 text-white font-mono text-xs focus:border-cyan-400 outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] uppercase font-bold mb-1">Vendor Contact Spoken With:</label>
+                        <input type="text" id="wire-contact" value="Sarah Jenkins (Controller)" class="w-full px-3 py-2 rounded-lg bg-black/80 border border-neutral-700 text-white font-mono text-xs focus:border-cyan-400 outline-none" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-400 text-[10px] uppercase font-bold mb-1">Dual Approver 1 (Operations / IT):</label>
+                        <input type="text" id="wire-approver-1" value="Leon R. Darden" class="w-full px-3 py-2 rounded-lg bg-black/80 border border-neutral-700 text-white font-mono text-xs focus:border-cyan-400 outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 text-[10px] uppercase font-bold mb-1">Dual Approver 2 (Finance Officer):</label>
+                        <input type="text" id="wire-approver-2" value="Authorized Chief Financial Officer" class="w-full px-3 py-2 rounded-lg bg-black/80 border border-neutral-700 text-white font-mono text-xs focus:border-cyan-400 outline-none" required>
+                    </div>
+                </div>
+
+                <div class="pt-3 flex gap-2">
+                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+                        🖨️ Generate Printable Authorization Protocol
+                    </button>
+                    <button type="button" onclick="closeWireModal()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs uppercase transition-all">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
         const clearedStages = new Set();
@@ -2075,6 +2591,267 @@
             }
         }
 
+        // 5-SECTOR INDUSTRY MATRIX & SIMULATION DRILLS
+        const sectorMatrix = {
+            healthcare: {
+                name: "Healthcare & Life Sciences",
+                icon: "🏥",
+                discount: "25% - 35% Premium Credit",
+                governance: "HIPAA § 164.312, HITECH Breach Safe Harbor, FDA 524B SBOM",
+                risk: "$250,000 Ransomware Cap / Potential Claim Denial if unshielded.",
+                drill: {
+                    tag: "HEALTHCARE",
+                    subject: "URGENT: Clinician shift coverage",
+                    from: "staffing-desk@clinic-support.example",
+                    body: "A message asks you to open an unexpected \"shift roster\" attachment and enter your sign-in details before your next shift.",
+                    hint: "Unexpected attachment + credential request",
+                    type: "report",
+                    inspect: "LURE ANALYSIS: Sender domain is clinic-support.example (unverified external third-party). Requesting login credentials via an attached macro-enabled roster file is a classic credential-harvesting trap.",
+                    correctAction: "report"
+                }
+            },
+            financial: {
+                name: "Banking & Financial Services",
+                icon: "🏦",
+                discount: "20% - 30% Premium Credit",
+                governance: "NYDFS 23 NYCRR 500, GLBA Safeguards Rule, FINRA Cybersecurity Guidance",
+                risk: "Mandatory 72-Hour Superintendent Disclosure & 50% Extortion Co-Payment.",
+                drill: {
+                    tag: "FINANCIAL SERVICES",
+                    subject: "CEO: Confidential immediate wire transfer",
+                    from: "ceo-office@lookalike-corporate.net",
+                    body: "An apparent executive requests an urgent $145,000 wire transfer for a confidential acquisition and says: \"Do not call my phone, I am in an executive board meeting. Wire immediately.\"",
+                    hint: "Executive impersonation + secrecy + bypassing controls",
+                    type: "wire",
+                    inspect: "LURE ANALYSIS: Classic Business Email Compromise (BEC). The sender address is spoofed (lookalike domain). Artificial urgency and demanding secrecy to bypass verbal callbacks violates Travelers Item 4C.",
+                    correctAction: "verify"
+                }
+            },
+            defense: {
+                name: "Defense & Government Contractors",
+                icon: "🛰️",
+                discount: "15% - 25% Premium Credit",
+                governance: "CMMC 2.0 Level 2, DFARS 252.204-7012, NIST SP 800-171 Rev 3",
+                risk: "Immediate Contract Revocation & False Claims Act Treble Civil Damages.",
+                drill: {
+                    tag: "DEFENSE & GOV",
+                    subject: "CMMC Audit Evidence Required Today",
+                    from: "audit-desk@dod-assessment-portal.net",
+                    body: "An email requests you upload controlled unclassified technical diagrams (CUI) to a third-party upload link immediately to pass pre-award assessment.",
+                    hint: "Sensitive data extraction through unverified portal",
+                    type: "report",
+                    inspect: "LURE ANALYSIS: Nation-state espionage attempt seeking Controlled Unclassified Information (CUI). Legitimate defense audits never ask for project blueprints via unauthenticated external links.",
+                    correctAction: "report"
+                }
+            },
+            industrial: {
+                name: "Energy, Manufacturing & OT",
+                icon: "⚡",
+                discount: "15% - 25% Premium Credit",
+                governance: "NERC CIP-005/CIP-007, NIST SP 800-82, ISA/IEC 62443",
+                risk: "Physical Plant Shutdown & Industrial Environmental Liability Sublimits.",
+                drill: {
+                    tag: "MANUFACTURING & OT",
+                    subject: "Critical PLC Controller Firmware Patch Attached",
+                    from: "field-engineering@siemens-patch-desk.net",
+                    body: "A notification instructs engineering staff to flash an attached .bin firmware update directly to plant floor PLCs to avoid an emergency turbine stoppage.",
+                    hint: "Unexpected firmware binary via email + plant stoppage pressure",
+                    type: "report",
+                    inspect: "LURE ANALYSIS: Stuxnet-style malware payload. Industrial controller firmware must ALWAYS be verified cryptographically via vendor hash signatures through formal OT change control.",
+                    correctAction: "report"
+                }
+            },
+            retail: {
+                name: "Retail, Hospitality & SaaS",
+                icon: "🛒",
+                discount: "20% - 35% Premium Credit",
+                governance: "PCI DSS v4.0 Requirement 8, FTC Safeguards, CCPA/CPRA Privacy Audit",
+                risk: "Card Brand Fines ($5,000 - $100,000/mo) & Forensic Investigation Assessments.",
+                drill: {
+                    tag: "RETAIL & SAAS",
+                    subject: "Urgent: Payment Gateway Account Expiring",
+                    from: "merchant-ops@stripe-renewal-support.net",
+                    body: "An alert claims your merchant gateway account will be frozen within 2 hours unless the administrator signs in through the provided payment link.",
+                    hint: "Panic timing + fake portal credential capture",
+                    type: "report",
+                    inspect: "LURE ANALYSIS: Phishing lure targeting payment gateway API keys and credentials. Payment processors never enforce 2-hour account suspension via external email links.",
+                    correctAction: "report"
+                }
+            }
+        };
+
+        let activeSectorKey = 'healthcare';
+
+        function selectSector(secKey) {
+            const sec = sectorMatrix[secKey];
+            if (!sec) return;
+            activeSectorKey = secKey;
+
+            // Update UI card
+            const titleEl = document.getElementById('sec-card-title');
+            const discountEl = document.getElementById('sec-card-discount');
+            const bodiesEl = document.getElementById('sec-card-bodies');
+            const riskEl = document.getElementById('sec-card-risk');
+
+            if (titleEl) titleEl.innerText = `${sec.icon} ${sec.name}`;
+            if (discountEl) discountEl.innerText = sec.discount;
+            if (bodiesEl) bodiesEl.innerHTML = `<strong>Governing Bodies Handled:</strong> ${sec.governance}`;
+            if (riskEl) riskEl.innerHTML = `⚠️ <strong>Sublimit Risk Penalty:</strong> ${sec.risk}`;
+
+            // Highlight button
+            document.querySelectorAll('.sector-tab-btn').forEach(btn => {
+                btn.className = 'sector-tab-btn p-3 rounded-xl bg-black/60 border border-neutral-700 text-left transition-all hover:border-cyan-400 group';
+            });
+            const activeBtn = document.getElementById(`sector-btn-${secKey}`);
+            if (activeBtn) {
+                activeBtn.className = 'sector-tab-btn p-3 rounded-xl bg-slate-900 border-2 border-cyan-400 text-left transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)] group';
+            }
+
+            // Update Module 2 Drill
+            updateDrillView();
+        }
+
+        function updateDrillView() {
+            const sec = sectorMatrix[activeSectorKey];
+            if (!sec || !sec.drill) return;
+            const d = sec.drill;
+
+            const tagEl = document.getElementById('drill-sector-tag');
+            const subjEl = document.getElementById('drill-subject');
+            const fromEl = document.getElementById('drill-from');
+            const bodyEl = document.getElementById('drill-body');
+            const hintEl = document.getElementById('drill-hint');
+            const fbEl = document.getElementById('drill-feedback-box');
+
+            if (tagEl) tagEl.innerText = d.tag;
+            if (subjEl) subjEl.innerText = d.subject;
+            if (fromEl) fromEl.innerText = d.from;
+            if (bodyEl) bodyEl.innerText = d.body;
+            if (hintEl) hintEl.innerText = `💡 Clue: ${d.hint}`;
+            if (fbEl) {
+                fbEl.className = 'hidden';
+                fbEl.innerHTML = '';
+            }
+        }
+
+        function switchMod2Tab(tab) {
+            const bView = document.getElementById('mod2-briefing-view');
+            const dView = document.getElementById('mod2-drill-view');
+            const bBtn = document.getElementById('tab-btn-mod2-briefing');
+            const dBtn = document.getElementById('tab-btn-mod2-drill');
+
+            if (tab === 'drill') {
+                if (bView) bView.classList.add('hidden');
+                if (dView) dView.classList.remove('hidden');
+                if (bBtn) bBtn.className = 'flex-1 py-1 rounded text-slate-300 hover:text-white uppercase transition-all';
+                if (dBtn) dBtn.className = 'flex-1 py-1 rounded bg-amber-500 text-black font-bold uppercase transition-all';
+                updateDrillView();
+            } else {
+                if (bView) bView.classList.remove('hidden');
+                if (dView) dView.classList.add('hidden');
+                if (bBtn) bBtn.className = 'flex-1 py-1 rounded bg-amber-500 text-black font-bold uppercase transition-all';
+                if (dBtn) dBtn.className = 'flex-1 py-1 rounded text-slate-300 hover:text-white uppercase transition-all';
+            }
+        }
+
+        function inspectDrill() {
+            const sec = sectorMatrix[activeSectorKey];
+            const fbEl = document.getElementById('drill-feedback-box');
+            if (!sec || !fbEl) return;
+            fbEl.className = 'p-2 rounded bg-cyan-950/80 border border-cyan-400 text-cyan-200 text-[10px] mb-2 font-mono block';
+            fbEl.innerHTML = `🔍 <strong>INSPECTION:</strong> ${sec.drill.inspect}`;
+        }
+
+        function reportDrill() {
+            const sec = sectorMatrix[activeSectorKey];
+            const fbEl = document.getElementById('drill-feedback-box');
+            if (!sec || !fbEl) return;
+            if (sec.drill.correctAction === 'report') {
+                fbEl.className = 'p-2 rounded bg-green-950/80 border border-green-500 text-green-200 text-[10px] mb-2 font-mono block';
+                fbEl.innerHTML = `✅ <strong>SUCCESS (+100 XP):</strong> 1-Click Phishing Beacon dispatched to SOC/Incident Response! NIST AT-2(2) compliance satisfied.`;
+                addXP(100);
+                unlockBadge('phish');
+            } else {
+                fbEl.className = 'p-2 rounded bg-amber-950/80 border border-amber-500 text-amber-200 text-[10px] mb-2 font-mono block';
+                fbEl.innerHTML = `⚠️ <strong>NOTE:</strong> Reported beacon sent, but this request involves a wire transfer! Travelers 4C requires verbal Out-of-Band Dual Verification. Click "Verify" to execute protocol.`;
+                addXP(50);
+            }
+        }
+
+        function verifyDrill() {
+            const sec = sectorMatrix[activeSectorKey];
+            const fbEl = document.getElementById('drill-feedback-box');
+            if (!sec || !fbEl) return;
+            if (sec.drill.correctAction === 'verify') {
+                fbEl.className = 'p-2 rounded bg-green-950/80 border border-green-500 text-green-200 text-[10px] mb-2 font-mono block';
+                fbEl.innerHTML = `✅ <strong>OUT-OF-BAND PROTOCOL ACTIVATED (+100 XP):</strong> Verbal phone authorization initiated with vendor on file! Wire fraud prevented.`;
+                addXP(100);
+                unlockBadge('wire');
+                openWireModal();
+            } else {
+                fbEl.className = 'p-2 rounded bg-cyan-950/80 border border-cyan-400 text-cyan-200 text-[10px] mb-2 font-mono block';
+                fbEl.innerHTML = `ℹ️ Out-of-Band verification protocol launched. For standard phishing emails, use "Report Beacon" to alert IR.`;
+                openWireModal();
+            }
+        }
+
+        // GAMIFICATION HUD & XP ENGINE
+        let userXP = 0;
+        const ranks = [
+            { threshold: 0, title: "LVL 1: ROOKIE DEFENDER" },
+            { threshold: 300, title: "LVL 2: SIGNAL SCOUT" },
+            { threshold: 750, title: "LVL 3: THREAT TRACKER" },
+            { threshold: 1250, title: "LVL 4: TRIAGE SPECIALIST" },
+            { threshold: 1800, title: "LVL 5: CRISIS COMMANDER" }
+        ];
+
+        function addXP(amount) {
+            userXP += amount;
+            const xpDisplay = document.getElementById('hud-xp-display');
+            const xpPill = document.getElementById('hud-xp-pill');
+            const rankDisplay = document.getElementById('hud-rank-display');
+
+            if (xpDisplay) xpDisplay.innerText = `${userXP.toLocaleString()} XP`;
+
+            // Calculate level
+            let currentRank = ranks[0].title;
+            for (let i = ranks.length - 1; i >= 0; i--) {
+                if (userXP >= ranks[i].threshold) {
+                    currentRank = ranks[i].title;
+                    break;
+                }
+            }
+            if (rankDisplay) rankDisplay.innerText = currentRank;
+
+            // Pulse animation
+            if (xpPill) {
+                xpPill.classList.add('pulse-xp');
+                setTimeout(() => xpPill.classList.remove('pulse-xp'), 600);
+            }
+        }
+
+        function unlockBadge(badgeKey) {
+            const badgeEl = document.getElementById(`badge-item-${badgeKey}`);
+            if (badgeEl && badgeEl.classList.contains('locked')) {
+                badgeEl.classList.remove('locked');
+                badgeEl.style.borderColor = '#10b981';
+                badgeEl.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.4)';
+            }
+        }
+
+        function highlightOpt(radio) {
+            if (!radio) return;
+            const form = radio.closest('form');
+            if (!form) return;
+            const groupName = radio.name;
+            form.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+                const label = r.closest('.quiz-opt-label');
+                if (label) label.classList.remove('active');
+            });
+            const parentLabel = radio.closest('.quiz-opt-label');
+            if (parentLabel) parentLabel.classList.add('active');
+        }
+
         // 8 Stage Quiz Answer Key
         const stageQuizAnswers = {
             1: { q1: 'a', q2: 'b', q3: 'b' },
@@ -2087,12 +2864,137 @@
             8: { q1: 'a', q2: 'a', q3: 'a' }
         };
 
+        // Comprehensive Plain-English Underwriter Explanations
+        const stageExplanations = {
+            1: {
+                q1: {
+                    pass: "✓ Chubb Schedule B strictly excludes SMS & voice call OTPs due to SS7 redirection and SIM-swapping exploits. FIDO2 Passkeys or App-based TOTP are required.",
+                    fail: "❌ Underwriters at Chubb & Travelers reject SMS/voice 2FA. SIM-swapping allows adversaries to intercept SMS codes without attacking your server."
+                },
+                q2: {
+                    pass: "✓ Carrier warranties require 100% enforcement across remote, admin, cloud, and email ingress. Even a single unshielded mailbox voids coverage.",
+                    fail: "❌ Carriers mandate 100% coverage on all administrative and remote portals. Partial (50% or exec-only) MFA voids the ransomware warranty."
+                },
+                q3: {
+                    pass: "✓ FIDO2 WebAuthn Passkeys are zero-cost open standards native to modern OSs that provide cryptographic phishing immunity.",
+                    fail: "❌ FIDO2 WebAuthn Passkeys replace vulnerable passwords at zero licensing cost using native public-key cryptography."
+                },
+                badge: 'mfa'
+            },
+            2: {
+                q1: {
+                    pass: "✓ Underwriter benchmark warranties mandate enterprise phishing simulation click rates remain verified below 3.5% across quarterly drills.",
+                    fail: "❌ Carriers require verified workforce click rates to remain strictly below 3.5%. Higher click rates risk policy non-renewal."
+                },
+                q2: {
+                    pass: "✓ Travelers Item 4C requires dual verbal out-of-band authorization using known telephone numbers on file prior to executing bank or wire modifications.",
+                    fail: "❌ Replying to the incoming email or wire request fails out-of-band requirements because the attacker controls the email thread."
+                },
+                q3: {
+                    pass: "✓ NIST AT-2(2) specifies instantaneous 1-click reporting beacons to enable rapid SOC containment within the statutory 72-hour window.",
+                    fail: "❌ Forwarding phish to all staff or silent deletion prevents security triage and exposes other employees to identical credential lures."
+                },
+                badge: 'phish'
+            },
+            3: {
+                q1: {
+                    pass: "✓ S3 Compliance Object Lock enforces WORM (Write Once, Read Many). Even AWS root account credentials cannot delete or alter snapshots during retention.",
+                    fail: "❌ Standard FTP sync or local drives can be erased or encrypted once threat actors gain domain administrator privileges."
+                },
+                q2: {
+                    pass: "✓ Travelers Warranty Item 6A imposes a mandatory 50% co-insurance penalty or total claim denial if backups are wiped due to lack of air-gapping.",
+                    fail: "❌ Carriers enforce heavy 50% co-insurance penalties or outright denial if unshielded backups are wiped during ransomware extortion."
+                },
+                q3: {
+                    pass: "✓ Mandated resilience standard: 3 copies, 2 different media, 1 offsite, 1 immutable/air-gapped, and 0 errors on automated quarterly restore verification.",
+                    fail: "❌ Enterprise cyber insurance benchmarks mandate 3-2-1-1-0 architecture to ensure business continuity without paying extortion ransoms."
+                },
+                badge: 'vault'
+            },
+            4: {
+                q1: {
+                    pass: "✓ Beazley and Coalition underwriter scanning bots instantly reject or cancel policies upon detecting public WAN exposure on Port 3389 (RDP) or Port 445 (SMB).",
+                    fail: "❌ Ports 80 and 443 are standard web ingress; Port 3389 (Remote Desktop) and Port 445 (Server Message Block) are the critical carrier red lines."
+                },
+                q2: {
+                    pass: "✓ Point-to-point WireGuard or Tailscale encrypted tunnels cloak administrative interfaces from public internet reconnaissance without expensive hardware.",
+                    fail: "❌ Renumbering ports to 3390 or leaving web dashboards open still leaves services visible to automated attack surface scanners."
+                },
+                q3: {
+                    pass: "✓ Automated 60-second perimeter sweeps ensure zero unauthorized open ports or rogue developer services expose corporate infrastructure to internet crawlers.",
+                    fail: "❌ 3-year audits or post-ransom sweeps are far too late; underwriters scan perimeters weekly and reject renewal within days of an exposed port."
+                },
+                badge: 'ghost'
+            },
+            5: {
+                q1: {
+                    pass: "✓ CIRCIA § 2242 and NYDFS 23 NYCRR § 500.17 statutory rules require formal notification within 72 hours of discovering a substantial cybersecurity event.",
+                    fail: "❌ CIRCIA requires notice within 72 hours (and 24 hours for ransom payments). Missing this deadline triggers statutory penalties and claim denial."
+                },
+                q2: {
+                    pass: "✓ When corporate email is breached, incident response teams must migrate immediately to pre-configured out-of-band encrypted channels (Signal/Wire).",
+                    fail: "❌ Using compromised corporate email alerts the adversary that they have been detected and allows them to intercept response efforts."
+                },
+                q3: {
+                    pass: "✓ Underwriters require a formal After-Action Report (AAR) and remediation ledger proving operational lessons learned and controls implemented.",
+                    fail: "❌ Verbal discussions leave no audit trail for insurance underwriters or regulatory examiners investigating fiduciary duty."
+                },
+                badge: 'crisis'
+            },
+            6: {
+                q1: {
+                    pass: "✓ True Burner Ghost runtime executes inside temporary RAM disks; upon process termination, 100% of memory is zeroed out, preventing forensic workstation discovery.",
+                    fail: "❌ Storing sessions on disk leaves unencrypted browser caches and cookies that can be exfiltrated by infostealer malware."
+                },
+                q2: {
+                    pass: "✓ Modern web tracking matrices analyze GPU rendering nuances, canvas shaders, and audio buffers to build persistent hardware fingerprints without cookies.",
+                    fail: "❌ Audio tones or monitor brightness are not web telemetry vectors; Canvas, WebGL, and font enumeration are the primary fingerprint mechanisms."
+                },
+                q3: {
+                    pass: "✓ Automated dark web sweeps detect employee credentials circulating on paste sites and breach dump forums so passwords can be rotated proactively.",
+                    fail: "❌ The goal is enterprise defense and credential revocation, neutralizing leaked hashes before threat actors attempt credential stuffing attacks."
+                },
+                badge: 'ram'
+            },
+            7: {
+                q1: {
+                    pass: "✓ Presenting a verified Evidence Binder with cryptographic log hashes satisfies carrier technical questionnaires and unlocks 15% to 25% premium discount credits.",
+                    fail: "❌ Verbal assurances provide zero forensic proof. Insurers require verifiable technical evidence to approve policy renewal and waive sublimits."
+                },
+                q2: {
+                    pass: "✓ Cyber warranty attestations must be signed by executive leadership or designated corporate technical officers, creating binding legal accountability.",
+                    fail: "❌ Insurance warranty documents require executive officer signatures; unauthorized employee signatures can void policy validity."
+                },
+                q3: {
+                    pass: "✓ Misrepresenting technical security controls on insurance applications legally triggers complete claim denial under fraudulent misrepresentation clauses.",
+                    fail: "❌ Insurers forensic investigators audit controls immediately after a breach; missing warranties guarantee claim refusal, not fee waivers."
+                },
+                badge: 'vault'
+            },
+            8: {
+                q1: {
+                    pass: "✓ The Darden Trust verification seal generates an immutable SHA-256 cryptographic hash linking the company's verified audit telemetry to its directory listing.",
+                    fail: "❌ MD5 is deprecated and cryptographically broken; SHA-256 is the modern cryptographic standard for immutable compliance attestation."
+                },
+                q2: {
+                    pass: "✓ The verified Darden Trust seal is permanently anchored to the company's merchant profile in the Metro Plaza Business Directory, signaling trust to partners and clients.",
+                    fail: "❌ Hiding records locally prevents clients and insurance underwriters from validating your proactive cybersecurity posture."
+                },
+                q3: {
+                    pass: "✓ Darden Trust certification provides third-party verifiable evidence that your business enforces zero-cost carrier-approved underwriting safeguards.",
+                    fail: "❌ The Trust seal certifies operational cyber hardening and pre-renewal audit readiness to brokers, underwriters, and clients."
+                },
+                badge: 'seal'
+            }
+        };
+
         function submitStageQuiz(stageNum) {
             const ansKey = stageQuizAnswers[stageNum];
+            const explains = stageExplanations[stageNum];
             const form = document.getElementById(`quiz-form-${stageNum}`);
             const feedback = document.getElementById(`quiz-feedback-${stageNum}`);
             const reportBox = document.getElementById(`report-text-${stageNum}`);
-            if (!form || !ansKey) return;
+            if (!form || !ansKey || !explains) return;
 
             const q1 = form.querySelector(`input[name="q-${stageNum}-1"]:checked`);
             const q2 = form.querySelector(`input[name="q-${stageNum}-2"]:checked`);
@@ -2106,23 +3008,51 @@
                 return;
             }
 
-            const isCorrect = (q1.value === ansKey.q1 && q2.value === ansKey.q2 && q3.value === ansKey.q3);
+            // Per-question validation and feedback rendering
+            const q1Pass = (q1.value === ansKey.q1);
+            const q2Pass = (q2.value === ansKey.q2);
+            const q3Pass = (q3.value === ansKey.q3);
 
-            if (isCorrect) {
+            const exp1El = document.getElementById(`q-explain-${stageNum}-1`);
+            const exp2El = document.getElementById(`q-explain-${stageNum}-2`);
+            const exp3El = document.getElementById(`q-explain-${stageNum}-3`);
+
+            if (exp1El) {
+                exp1El.className = `question-feedback-box ${q1Pass ? 'show-pass' : 'show-fail'}`;
+                exp1El.innerText = q1Pass ? explains.q1.pass : explains.q1.fail;
+            }
+            if (exp2El) {
+                exp2El.className = `question-feedback-box ${q2Pass ? 'show-pass' : 'show-fail'}`;
+                exp2El.innerText = q2Pass ? explains.q2.pass : explains.q2.fail;
+            }
+            if (exp3El) {
+                exp3El.className = `question-feedback-box ${q3Pass ? 'show-pass' : 'show-fail'}`;
+                exp3El.innerText = q3Pass ? explains.q3.pass : explains.q3.fail;
+            }
+
+            const allCorrect = (q1Pass && q2Pass && q3Pass);
+
+            if (allCorrect) {
                 if (feedback) {
-                    feedback.className = "p-2 rounded bg-green-950/80 border border-green-500 text-green-200 text-[10px] mb-3 block";
-                    feedback.innerHTML = "✓ All 3 answers verified! Recording cryptographic checkpoint...";
+                    feedback.className = "p-2.5 rounded bg-green-950/90 border border-green-500 text-green-200 text-[11px] mb-3 block font-bold";
+                    feedback.innerHTML = `✓ 3/3 PERFECT! Carrier Underwriting Warranty Verified. +250 XP Awarded &amp; Badge Unlocked!`;
                 }
                 if (reportBox) {
                     reportBox.classList.remove('report-highlight');
                 }
+
+                addXP(250);
+                if (explains.badge) {
+                    unlockBadge(explains.badge);
+                }
+
                 setTimeout(() => {
                     verifyAndAdvance(stageNum);
-                }, 400);
+                }, 1200);
             } else {
                 if (feedback) {
-                    feedback.className = "p-2 rounded bg-red-950/90 border border-red-500 text-red-200 text-[10px] mb-3 block animate-pulse";
-                    feedback.innerHTML = "❌ INCORRECT: Review the highlighted report on the front card to find the carrier mandate, then select the correct radial answers.";
+                    feedback.className = "p-2.5 rounded bg-red-950/90 border border-red-500 text-red-200 text-[10px] mb-3 block animate-pulse";
+                    feedback.innerHTML = "❌ AUDIT DEFICIENCY: Review the red feedback explanations above, adjust your selections to meet underwriter warranties, and resubmit.";
                 }
                 if (reportBox) {
                     reportBox.classList.add('report-highlight');
@@ -2148,7 +3078,7 @@
                 card.classList.remove('flipped');
                 card.classList.add('cleared');
                 const front = card.querySelector('.card-front');
-                const tag = front.querySelector('.status-tag');
+                const tag = front ? front.querySelector('.status-tag') : null;
                 if (tag) {
                     tag.className = 'status-tag font-mono text-[10px] px-2.5 py-0.5 rounded bg-green-950 text-green-300 border border-green-500 font-bold';
                     tag.innerText = 'CLEARED & VERIFIED';
@@ -2165,7 +3095,7 @@
                     }
                 }, 400);
             } else {
-                alert('CONGRATULATIONS: All 8 Underwriting Preparation Modules 100% Cleared! Click Export Underwriting Proof to download your signed certificate.');
+                alert('🏆 CONGRATULATIONS: All 8 Underwriting Preparation Modules 100% Cleared!\n\nYour SHA-256 seal is authenticated. Click CERTIFICATE above to export your signed underwriter package.');
             }
         }
 
@@ -2176,6 +3106,115 @@
             const text = document.getElementById('hud-stages-text');
             if (bar) bar.style.width = `${pct}%`;
             if (text) text.innerText = `${count} / 8 MODULES (${Math.round(pct)}%)`;
+        }
+
+        function openWireModal() {
+            const m = document.getElementById('wireModal');
+            if (m) m.classList.add('active');
+        }
+
+        function closeWireModal() {
+            const m = document.getElementById('wireModal');
+            if (m) m.classList.remove('active');
+        }
+
+        function printWireProtocol() {
+            const vendor = document.getElementById('wire-vendor').value;
+            const ref = document.getElementById('wire-ref').value;
+            const type = document.getElementById('wire-type').value;
+            const phone = document.getElementById('wire-phone').value;
+            const contact = document.getElementById('wire-contact').value;
+            const app1 = document.getElementById('wire-approver-1').value;
+            const app2 = document.getElementById('wire-approver-2').value;
+            const certId = `WIRE-AUTH-${Math.floor(100000 + Math.random() * 900000)}`;
+            const dateStr = new Date().toLocaleDateString('en-US', { dateStyle: 'full' });
+
+            const printContent = `
+================================================================================
+          BURN-1 SYSTEMS // OUT-OF-BAND WIRE VERIFICATION PROTOCOL
+                   CARRIER UNDERWRITING EVIDENCE DOCKET
+                        RECORD ID: ${certId}
+================================================================================
+Date Verified: ${dateStr}
+Compliance Standard: Travelers Cyber Warranty Item 4C (Out-of-Band Callback)
+Governing Policy: Dual Authorization & Anti-Wire Fraud Operational Procedure
+
+1. TRANSACTION & COUNTERPARTY DETAILS:
+   - Requesting Vendor: ${vendor}
+   - Invoice Reference: ${ref}
+   - Modification Type: ${type}
+
+2. INDEPENDENT VERBAL VERIFICATION:
+   - Sourced Callback Phone: ${phone} (Contract on file - NOT from email)
+   - Counterparty Official Contact: ${contact}
+   - Callback Verification Status: VERIFIED & CONFIRMED AUTHENTIC
+
+3. DUAL EXECUTIVE AUTHORIZATION SIGNATURES:
+   - Authorized Technical/Ops Signer: ${app1} [VERIFIED]
+   - Authorized Finance Signer: ${app2} [VERIFIED]
+
+CRYPTOGRAPHIC EVIDENCE INTEGRITY:
+SHA-256 Hash: 8A1907CB249DF1E38902AA710499C4187E601C33800B
+Issued By: Leon R. Darden // Darden Trust Infrastructure
+Directory Anchor: Metro Plaza Directory (burn-1.com/directory.html)
+================================================================================
+            `.trim();
+
+            const blob = new Blob([printContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Wire_Verification_Protocol_${certId}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            addXP(100);
+            unlockBadge('wire');
+            alert(`✓ Out-of-Band Wire Protocol Generated & Downloaded!\nRecord ID: ${certId}\nTravelers 4C compliance logged.`);
+            closeWireModal();
+        }
+
+        function exportTelemetryCsv() {
+            let csv = "Module_ID,Module_Name,Status,Checkpoint_ID,Timestamp,Carrier_Standard\n";
+            const stageNames = [
+                "Zero-Cost MFA Hardening",
+                "Anti-Spearphish Triage Drill",
+                "Immutable Air-Gap Backups",
+                "Perimeter Port Cloaking",
+                "Tabletop Incident Drill",
+                "Telemetry Severing & Ghost RAM",
+                "Evidence Binder Assembly",
+                "Darden Trust Directory Seal"
+            ];
+            const standards = [
+                "Chubb Item 4B",
+                "Travelers Item 4C / NIST AT-2(2)",
+                "Travelers Item 6A (WORM)",
+                "Beazley Public WAN Cloak",
+                "CIRCIA § 2242 (72H)",
+                "True Burner Memory Shield",
+                "Chubb/Travelers Pre-Renewal",
+                "Darden Trust Gold Seal"
+            ];
+
+            for (let i = 1; i <= 8; i++) {
+                const cleared = clearedStages.has(i);
+                const ckpt = stageCheckpoints[i] ? stageCheckpoints[i].checkpointId : "PENDING";
+                const ts = stageCheckpoints[i] ? stageCheckpoints[i].timestamp : "N/A";
+                csv += `Module 0${i},"${stageNames[i-1]}",${cleared ? "CLEARED" : "INCOMPLETE"},${ckpt},${ts},"${standards[i-1]}"\n`;
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `burn1_academy_telemetry_${Date.now()}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         function exportInsuranceProof() {
