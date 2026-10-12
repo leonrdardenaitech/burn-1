@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/silver_clock.js"></script>
 
     <script>
         tailwind.config = {
@@ -84,6 +85,125 @@
             transform: translateY(-4px);
         }
 
+        /* --- SILVER MIRROR CLOCK ANIMATION --- */
+        #clock-mirror-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+        html.day-mode #clock-mirror-bg {
+            display: flex !important;
+        }
+        .clock-scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+        .clock-assembly {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+        .spinning-dial {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: spin-dial 20s linear infinite;
+        }
+        @keyframes spin-dial {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .mirror-shard {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+            background: linear-gradient(135deg, #fdfdfd 0%, #ffffff 40%, #e4e4e4 50%, #ffffff 60%, #b0b0b0 100%);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), inset 0 0 12px rgba(255, 255, 255, 0.9), inset 0 0 2px #b0b0b0;
+            overflow: hidden;
+            opacity: 0;
+            animation: assemble-shard 15s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+        .mirror-shard::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent 40%, rgba(255, 255, 255, 0.9) 48%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.9) 52%, transparent 60%);
+            transform: rotate(45deg) translateX(-100%);
+            animation: sweep-light 6s infinite;
+            animation-delay: var(--glint-delay, 0s);
+        }
+        @keyframes sweep-light {
+            0%, 60% { transform: rotate(45deg) translateX(-150%); }
+            100% { transform: rotate(45deg) translateX(150%); }
+        }
+        @keyframes assemble-shard {
+            0% { transform: translate(var(--startX), var(--startY)) scale(var(--startScale)) rotate(var(--startRot)); opacity: 0; }
+            3% { opacity: 1; }
+            13.33%, 86.66% { transform: rotate(var(--finalAngle)) translateY(var(--finalRadius)) rotate(var(--finalSelfRot, 0deg)); opacity: 1; }
+            97% { opacity: 1; }
+            100% { transform: translate(var(--startX), var(--startY)) scale(var(--startScale)) rotate(var(--startRot)); opacity: 0; }
+        }
+        .stationary-hands {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+            opacity: 0;
+            animation: fade-in-hands 2s ease-in forwards;
+        }
+        @keyframes fade-in-hands { to { opacity: 1; } }
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            background: linear-gradient(to right, #b0b0b0, #fdfdfd, #b0b0b0);
+            border-radius: 4px;
+            box-shadow: inset 0 0 4px rgba(255,255,255,0.8);
+            border: 1px solid #d4d4d4;
+        }
+        .hour-hand { width: 8px; height: 120px; margin-left: -4px; animation: spin-ccw 14s linear infinite; }
+        .minute-hand { width: 6px; height: 180px; margin-left: -3px; animation: spin-cw 8s linear infinite; }
+        @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        .center-pin {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, #ffffff 0%, #b0b0b0 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,1);
+            border: 2px solid #e4e4e4;
+        }
+
         /* =========================================================
            SMOKE & MIRROR CORPORATE EDITION (DAY MODE)
            Adapted from silver_mirror_clock.html // Silver & Greyscale
@@ -97,8 +217,8 @@
         }
 
         html.day-mode body {
-            background-color: #ffffff !important;
-            background: radial-gradient(circle at center, #ffffff 0%, #f4f4f6 50%, #e2e8f0 100%) !important;
+            background-color: #f8fafc !important;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.85) 0%, rgba(241, 245, 249, 0.75) 60%, rgba(226, 232, 240, 0.7) 100%) !important;
             background-attachment: fixed !important;
             color: #09090b !important;
         }
@@ -109,7 +229,8 @@
         }
 
         html.day-mode header {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(10px) !important;
             border-bottom: 2px solid #d4d4d4 !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
         }
@@ -120,16 +241,17 @@
             text-shadow: none !important;
         }
 
-        /* Smoke & Mirror Section & Card Styling */
+        /* Smoke & Mirror Translucent Section & Card Styling */
         html.day-mode .cyber-card,
         html.day-mode .glass-panel {
-            background: linear-gradient(135deg, #ffffff 0%, #fafafa 45%, #f4f4f5 100%) !important;
+            background: rgba(255, 255, 255, 0.40) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
             border: 2px solid #d4d4d4 !important;
             border-radius: 1.5rem !important;
             box-shadow: 
-                0 10px 25px -5px rgba(0, 0, 0, 0.05),
-                inset 0 0 14px rgba(255, 255, 255, 0.9),
-                inset 0 0 2px #b0b0b0 !important;
+                0 10px 30px -5px rgba(0, 0, 0, 0.06),
+                inset 0 0 16px rgba(255, 255, 255, 0.8) !important;
             color: #09090b !important;
         }
 
@@ -137,9 +259,8 @@
         html.day-mode .glass-panel:hover {
             border-color: #f59e0b !important; /* Burn-1 orange accent on hover */
             box-shadow: 
-                0 15px 30px -5px rgba(245, 158, 11, 0.2),
-                inset 0 0 16px rgba(255, 255, 255, 0.9),
-                inset 0 0 2px #d4d4d4 !important;
+                0 15px 35px -5px rgba(245, 158, 11, 0.25),
+                inset 0 0 20px rgba(255, 255, 255, 0.9) !important;
             transform: translateY(-2px);
         }
 
@@ -162,7 +283,7 @@
 
         html.day-mode p, 
         html.day-mode label {
-            color: #334155 !important;
+            color: #1e293b !important;
             text-shadow: none !important;
         }
 
@@ -175,7 +296,8 @@
         }
 
         html.day-mode footer {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(8px) !important;
             border-top: 2px solid #d4d4d4 !important;
             color: #64748b !important;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
@@ -259,7 +381,8 @@
         </div>
 
         <!-- =========================================================
-             TIER 1 (SPOTLIGHT): AUTOMATED CYBER COMPLIANCE & UNDERWRITING AUDIT
+             TIER 1 (SPOTLIGHT): CONTINUOUS AUTONOMOUS PERIMETER POSTURE AUDITS & POSTURE PREP
+             Starting at $500 (Bundle or À La Carte)
              ========================================================= -->
         <div id="audit" class="p-8 md:p-10 rounded-3xl border-2 border-amber-500 bg-black/85 mb-14 shadow-[0_0_40px_rgba(245,158,11,0.35)] glass-panel relative overflow-hidden">
             <div class="absolute -top-12 -right-12 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -268,119 +391,323 @@
                 <div class="max-w-3xl">
                     <div class="flex flex-wrap items-center gap-2 mb-3">
                         <span class="px-3 py-1 rounded bg-amber-950 border border-amber-500 text-amber-300 font-mono text-[11px] font-bold uppercase">
-                            FLAGSHIP PRODUCT &bull; LEVEL 3 ENGINE
+                            CONTINUOUS AUTONOMOUS ENGINE &bull; STARTING AT $500
                         </span>
                         <span class="px-3 py-1 rounded bg-green-950 border border-green-500 text-green-300 font-mono text-[11px] font-bold uppercase">
-                            15% - 35% CARRIER PREMIUM DISCOUNT
+                            1-DAY TURNAROUND DELIVERY
+                        </span>
+                        <span class="px-2.5 py-1 rounded bg-purple-950 text-purple-300 font-mono text-[11px] font-bold uppercase">
+                            BUNDLE OR À LA CARTE
                         </span>
                     </div>
 
                     <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase mb-3">
-                        Automated Compliance &amp; Insurance Audit
+                        Continuous Autonomous Perimeter Posture Audits &amp; Posture Prep
                     </h2>
                     
                     <p class="text-sm font-mono text-slate-200 leading-relaxed mb-6">
-                        Complete, court-grade assessment powered by our resident Small Language Model engine. Probes perimeter attack surfaces, checks HTTP security headers, audits open ports (RDP/SMB), and compiles official <strong class="text-amber-400">Chubb &amp; Travelers Evidence Binders</strong> with NIST CSF &amp; HIPAA POA&amp;M remediation playbooks.
+                        Reconcile point-in-time surface telemetry into continuous underwriting protection. Receive autonomous external perimeter audits, secure zero-credential onboarding, 1-day turnaround delivery, access to our rich compliance library (NIST CSF 2.0, HIPAA § 164.312, NYDFS 23 NYCRR 500), official carrier underwriting playbooks (Chubb Schedule B &amp; Travelers Item 6A Evidence Binders), complimentary training resources, and comprehensive cyber insurance renewal prep.
                     </p>
 
-                    <!-- Features Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs text-slate-300 mb-6">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-check text-green-400"></i> Full External Surface &amp; Port Scan (Zero Credentials)
+                    <!-- Value Matrix Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-mono text-xs text-slate-300 mb-6">
+                        <div class="flex items-start gap-2 bg-black/50 p-2.5 rounded-xl border border-neutral-800">
+                            <i class="fa-solid fa-lock text-green-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">Secure Onboarding</strong>
+                                <span>Zero credentials needed. 100% external, non-invasive perimeter evaluation.</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-check text-green-400"></i> Chubb/Travelers Cyber Underwriting Binder
+                        <div class="flex items-start gap-2 bg-black/50 p-2.5 rounded-xl border border-neutral-800">
+                            <i class="fa-solid fa-bolt text-amber-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">1-Day Turnaround</strong>
+                                <span>Autonomous execution delivering completed executive binder in under 24 hours.</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-check text-green-400"></i> NIST CSF 2.0 &amp; HIPAA 164.312 POA&amp;M Playbook
+                        <div class="flex items-start gap-2 bg-black/50 p-2.5 rounded-xl border border-neutral-800">
+                            <i class="fa-solid fa-book-bookmark text-cyan-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">Rich Compliance Library</strong>
+                                <span>Pre-mapped statutory formulas for NIST CSF 2.0, HIPAA 164.312, and NYDFS 500.</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-check text-green-400"></i> Darden Trust Verified Badge on Metro Directory
+                        <div class="flex items-start gap-2 bg-black/50 p-2.5 rounded-xl border border-neutral-800">
+                            <i class="fa-solid fa-folder-closed text-purple-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">Underwriting Playbooks</strong>
+                                <span>Carrier-aligned Evidence Binders formatted for Chubb &amp; Travelers claims adjusters.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2 bg-black/50 p-2.5 rounded-xl border border-neutral-800">
+                            <i class="fa-solid fa-graduation-cap text-indigo-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">Complimentary Training Resources</strong>
+                                <span>Full access to the 8-Stage Cyber Academy curriculum and phishing triage drills.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2 bg-black/50 p-2.5 rounded-xl border border-neutral-800">
+                            <i class="fa-solid fa-percent text-emerald-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">Cyber Insurance Renewal Prep</strong>
+                                <span>Targeted control verification engineered to capture 15% - 35% premium credits.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Pricing & Action Card -->
                 <div class="w-full lg:w-80 p-6 rounded-2xl bg-black border-2 border-amber-500 flex flex-col items-center text-center shrink-0 shadow-2xl">
-                    <span class="text-xs font-mono text-slate-400 uppercase">Single Enterprise Domain</span>
+                    <span class="text-xs font-mono text-slate-400 uppercase">Bundle or À La Carte Scope</span>
                     <div class="my-3">
-                        <span class="text-4xl font-cyber font-extrabold text-amber-400">$499</span>
-                        <span class="text-xs font-mono text-slate-400 block line-through mt-0.5">$1,500 Full Manual Cost</span>
+                        <span class="text-4xl font-cyber font-extrabold text-amber-400">$500</span>
+                        <span class="text-xs font-mono text-slate-400 block line-through mt-0.5">$1,800 Retainer Equivalent</span>
                     </div>
-                    <span class="text-[11px] font-mono text-green-400 mb-4 block">Delivery: Instant Automated SLM Compile</span>
+                    <span class="text-[11px] font-mono text-green-400 mb-4 block">1-Day Turnaround &bull; Secure Intake</span>
                     
-                    <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.6)] mb-2 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> ORDER AUDIT ($499)
+                    <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.6)] mb-2.5 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> ORDER AUDIT &amp; PREP ($500)
                     </a>
                     
-                    <a href="mailto:leonrdarden@gmail.com?subject=Enterprise%20Audit%20Inquiry" class="w-full py-2.5 rounded-lg bg-purple-950 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all">
-                        MULTI-DOMAIN INQUIRY
+                    <a href="mailto:leonrdarden@gmail.com?subject=Posture%20Audit%20Bundle%20Intake" class="w-full py-2.5 rounded-xl bg-purple-950 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-layer-group text-amber-400"></i> BUNDLE / À LA CARTE INTAKE
                     </a>
                 </div>
             </div>
         </div>
 
         <!-- =========================================================
-             TIER 2: TRUE BURNER GHOST BROWSER & RAM ISOLATION ENCLAVE ($29/MO)
+             TIER 2: TRUE BURNER GHOST BROWSER ENCLAVE (EXPANDED COMMERCIAL BLOCK)
+             Includes Subscriptions, Architecture Modal, & Free 3-Min Trial Onboarding Form
              ========================================================= -->
-        <div id="ghost-browser" class="p-8 md:p-10 rounded-3xl border-2 border-cyan-500 bg-black/85 mb-14 shadow-[0_0_35px_rgba(6,182,212,0.3)] glass-panel relative overflow-hidden">
-            <div class="absolute -top-12 -right-12 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div id="ghost-browser" class="p-8 md:p-10 rounded-3xl border-2 border-cyan-500 bg-black/90 mb-14 shadow-[0_0_40px_rgba(6,182,212,0.35)] glass-panel relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
-                <div class="max-w-3xl">
-                    <div class="flex flex-wrap items-center gap-2 mb-3">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8 pb-6 border-b border-cyan-900/60">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
                         <span class="px-3 py-1 rounded bg-cyan-950 border border-cyan-400 text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider">
                             🛡️ GHOST ENCLAVE &bull; VOLATILE RAM ARCHITECTURE
                         </span>
                         <span class="px-3 py-1 rounded bg-purple-950 border border-purple-500 text-purple-300 font-mono text-[11px] font-bold uppercase">
-                            3-AI LUXURY THREAT COPILOT
+                            POWERED BY R.E.P.<span class="text-[9px] align-super">TM</span>
                         </span>
                         <span class="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> 24/7 ACTIVE RADAR
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> TIME-SENSITIVE SMOKE SCREEN
                         </span>
                     </div>
 
-                    <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase mb-3">
+                    <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase glow-cyan">
                         True Burner Ghost Browser &amp; RAM Enclave
                     </h2>
+                </div>
 
-                    <p class="text-sm font-mono text-slate-200 leading-relaxed mb-6">
-                        Military-grade browsing isolation engineered for executives and high-threat environments. Spawns ephemeral, headless Chromium sessions strictly in volatile system RAM with zero disk footprints, dynamic canvas fingerprint poisoning, and automated telemetry cloaking.
-                    </p>
+                <div class="flex items-center gap-3">
+                    <button type="button" onclick="openGhostArchModal()" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-400 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-file-contract text-cyan-400"></i> READ ARCHITECTURE WHITE PAPER &rarr;
+                    </button>
+                </div>
+            </div>
 
-                    <!-- Ghost Architecture 4-Pillar Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs text-slate-300 mb-6">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-microchip text-cyan-400"></i> Ephemeral In-Memory Execution (Zero SSD Residue)
+            <!-- Commercial Overview: Why Subscribe to Ghost Browser? -->
+            <div class="mb-8">
+                <h3 class="text-sm font-mono font-bold uppercase text-amber-400 tracking-wider mb-2">
+                    Why Subscribe to a True Burner Ghost Browser Session?
+                </h3>
+                <p class="text-xs sm:text-sm font-mono text-slate-200 leading-relaxed mb-6">
+                    Commercial browsers leave thousands of persistent tracking beacons, WebGL GPU hashes, and SQLite session dumps on your local physical drives. When you research competitors, audit vendors, or investigate dark web leaks, your real identity and IP subnet are harvested. <strong class="text-cyan-300">True Burner Ghost Browser</strong> allocates an isolated Chromium instance inside encrypted volatile RAM memory. Zero bytes touch your SSD. When finished, the memory space is shredded with random entropy. Zero footprint. Zero trace. Complete digital sovereignty.
+                </p>
+
+                <!-- 4 Core Pillars of Ghost Subscriptions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
+                        <div>
+                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Volatile RAM Core</h4>
+                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
+                                Sessions execute exclusively in volatile RAM. All cache, tokens, and DOM data vanish upon exit.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-ghost text-cyan-400"></i> Ghost Vacuum Trigger (1-Click Emergency RAM Purge)
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
+                        <div>
+                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
+                                <i class="fa-solid fa-mask"></i>
+                            </div>
+                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Canvas &amp; GPU Poisoning</h4>
+                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
+                                Dynamic entropy injections randomize hardware hashes, rendering tracking scrapers blind.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-mask text-cyan-400"></i> Decoy Layer &amp; Anti-Fingerprint Cloaking
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
+                        <div>
+                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
+                                <i class="fa-solid fa-network-wired"></i>
+                            </div>
+                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Ephemeral Tunnels</h4>
+                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
+                                Rotating ingress proxies shield corporate IP subnets from reverse OSINT scraping.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-robot text-cyan-400"></i> 3-AI Resident Triage (SLM + Local Guard + Luxury Reporter)
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
+                        <div>
+                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
+                                <i class="fa-solid fa-fire text-amber-400"></i>
+                            </div>
+                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Ghost Vacuum Purge</h4>
+                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
+                                Instant emergency kill-switch overwrites active memory buffers and severs sockets in 300ms.
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Pricing & Action Card -->
-                <div class="w-full lg:w-80 p-6 rounded-2xl bg-black border-2 border-cyan-400 flex flex-col items-center text-center shrink-0 shadow-2xl">
-                    <span class="text-xs font-mono text-slate-400 uppercase">Monthly Pro Subscription</span>
-                    <div class="my-3">
-                        <span class="text-4xl font-cyber font-extrabold text-cyan-400">$29</span>
-                        <span class="text-xs font-mono text-slate-400">/ month &bull; Cancel Anytime</span>
+            <!-- Two-Column Block: Free 3-Min Onboarding Form + Subscription Pricing -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Onboarding Intake Form for Free 3-Min Session (7 Cols) -->
+                <div class="lg:col-span-7 p-6 rounded-2xl bg-black/80 border-2 border-cyan-400/80 shadow-inner flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between pb-2 mb-3 border-b border-cyan-900/60">
+                            <span class="font-mono text-xs text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-stopwatch text-amber-400"></i> TEST DRIVE // FREE 3-MINUTE SAMPLE SESSION
+                            </span>
+                            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-600 font-mono text-[10px] font-bold">
+                                1 BURN / DAY
+                            </span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-neutral-900/90 border border-neutral-700 text-slate-300 font-mono text-[11px] mb-4 space-y-1">
+                            <p class="text-amber-400 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> DAILY LIMIT &bull; 24-HOUR RESET POLICY</p>
+                            <p>Free trial instances are limited to <strong class="text-white">one (1) 3-minute burn per day per company/IP</strong>. Volatile memory automatically executes a complete zero-wipe after 180 seconds.</p>
+                        </div>
+
+                        <form id="ghost-trial-form" onsubmit="startGhostTrial(event)" class="space-y-3 font-mono text-xs">
+                            <div>
+                                <label class="block text-slate-300 text-[11px] uppercase font-bold mb-1">Corporate Email or Domain Handle:</label>
+                                <input type="email" id="ghost-trial-email" required placeholder="name@company.com" class="w-full bg-black border border-neutral-700 rounded-xl px-3.5 py-2.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-slate-300 text-[11px] uppercase font-bold mb-1">Activation Redeem Code:</label>
+                                    <input type="text" id="ghost-trial-code" value="BURN1-FREE-TRIAL" placeholder="Enter redeem code" class="w-full bg-black border border-neutral-700 rounded-xl px-3.5 py-2.5 text-amber-400 font-bold text-xs focus:border-amber-400 focus:outline-none uppercase">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-300 text-[11px] uppercase font-bold mb-1">Session Scope Target:</label>
+                                    <select id="ghost-trial-scope" class="w-full bg-black border border-neutral-700 rounded-xl px-3 py-2.5 text-slate-200 text-xs focus:border-cyan-400 focus:outline-none">
+                                        <option value="recon">Perimeter Recon &bull; 3 Min</option>
+                                        <option value="osint">OSINT Breach Sweep &bull; 3 Min</option>
+                                        <option value="cloaked">Executive Cloaked Browsing &bull; 3 Min</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Live Trial Terminal Readout Area -->
+                            <div id="ghost-trial-console" class="hidden mt-3 p-3 rounded-xl bg-slate-950 border border-cyan-500/50 text-[11px] font-mono space-y-1">
+                                <div class="flex justify-between items-center pb-1 border-b border-neutral-800">
+                                    <span class="text-cyan-400 font-bold" id="trial-terminal-status">[●] PROVISIONING VOLATILE RAM...</span>
+                                    <span class="text-amber-400 font-bold px-2 py-0.5 rounded bg-black border border-amber-500" id="trial-timer-display">03:00</span>
+                                </div>
+                                <p class="text-slate-400" id="trial-log-1">&gt; Allocating 512MB RAM enclave container...</p>
+                                <p class="text-slate-400" id="trial-log-2">&gt; Randomizing Canvas / WebGL fingerprint entropy...</p>
+                                <p class="text-emerald-400" id="trial-log-3">&gt; Ghost socket active. Auto-vacuum engages in 180s.</p>
+                            </div>
+
+                            <button type="submit" id="ghost-trial-btn" class="w-full py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2 mt-2">
+                                <i class="fa-solid fa-play"></i> LAUNCH FREE 3-MINUTE GHOST SESSION
+                            </button>
+                        </form>
                     </div>
-                    <span class="text-[11px] font-mono text-emerald-400 mb-4 block">Includes Continuous Underwriting Radar</span>
+                </div>
 
-                    <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] mb-2 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> GET GHOST PRO ($29/MO)
-                    </a>
+                <!-- Monthly Pro Subscription Card (5 Cols) -->
+                <div class="lg:col-span-5 p-6 rounded-2xl bg-black border-2 border-cyan-400 flex flex-col justify-between items-center text-center shadow-2xl">
+                    <div>
+                        <span class="text-xs font-mono text-cyan-300 uppercase font-bold tracking-widest block mb-1">UNLIMITED SESSIONS // PRO TIER</span>
+                        <div class="my-4">
+                            <span class="text-5xl font-cyber font-extrabold text-white">$29</span>
+                            <span class="text-xs font-mono text-slate-400 block mt-1">/ month &bull; Cancel Anytime</span>
+                        </div>
+                        <ul class="text-left font-mono text-xs text-slate-300 space-y-2 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Unlimited Volatile RAM Sessions</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> No 3-Minute Time Limits</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> 1-Click Ghost Vacuum Emergency Kill</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Continuous Underwriting Threat Radar</li>
+                        </ul>
+                    </div>
 
-                    <a href="http://129.212.176.154/" target="_blank" class="w-full py-2.5 rounded-lg bg-cyan-950 border border-cyan-500 text-cyan-200 font-mono text-xs font-bold hover:bg-cyan-900 transition-all flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-terminal text-amber-400"></i> LIVE GHOST TERMINAL
-                    </a>
+                    <div class="w-full space-y-2">
+                        <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(6,182,212,0.7)] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt"></i> GET GHOST PRO ($29/MO)
+                        </a>
+                        <a href="mailto:leonrdarden@gmail.com?subject=Ghost%20Enterprise%20Seat%20Inquiry" class="w-full py-2.5 rounded-lg bg-cyan-950 border border-cyan-500 text-cyan-200 font-mono text-xs font-bold hover:bg-cyan-900 transition-all flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-building text-amber-400"></i> ENTERPRISE TEAM SEATS
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =========================================================
+             POP-UP MODAL: GHOST BROWSER ARCHITECTURE WHITE PAPER
+             ========================================================= -->
+        <div id="ghost-arch-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <div class="relative w-full max-w-3xl bg-black border-2 border-cyan-400 rounded-3xl p-6 sm:p-8 shadow-2xl text-left my-auto max-h-[90vh] overflow-y-auto">
+                <button type="button" onclick="closeGhostArchModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-600 text-neutral-300 flex items-center justify-center font-bold text-sm transition-all">
+                    ✕
+                </button>
+
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest">
+                        R.E.P.™ ENGINE // VOLATILE ISOLATION BLUEPRINT
+                    </span>
+                </div>
+                <h3 class="font-cyber text-2xl font-black text-white uppercase mb-4">
+                    True Burner Ghost Isolation Architecture
+                </h3>
+
+                <div class="font-mono text-xs text-slate-300 space-y-4 leading-relaxed mb-6">
+                    <p>
+                        The <strong class="text-cyan-300">True Burner Ghost Enclave</strong> is designed to solve a fundamental flaw in modern cybersecurity: <em>persistence on physical media</em>. Typical "incognito" browser modes merely suppress browsing history while persisting caches, temp files, DNS queries, and hardware GPU fingerprints on disk.
+                    </p>
+
+                    <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
+                        <h4 class="text-amber-400 font-bold uppercase text-[11px]">1. In-Memory Memory Partitioning</h4>
+                        <p class="text-slate-400">
+                            Each Ghost session allocates a virtual memory disk in volatile system RAM with no swapfile linkage. All socket descriptors, cookies, and rendered DOM elements execute strictly within this boundary.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
+                        <h4 class="text-amber-400 font-bold uppercase text-[11px]">2. Synthetic Noise &amp; Anti-Fingerprinting</h4>
+                        <p class="text-slate-400">
+                            The R.E.P.™ runtime intercepts HTML5 Canvas, WebGL shader compilation, and AudioContext queries, injecting pseudorandom entropy noise that generates an entirely different device fingerprint on every spin-up.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
+                        <h4 class="text-amber-400 font-bold uppercase text-[11px]">3. The Ghost Vacuum Purge Protocol</h4>
+                        <p class="text-slate-400">
+                            When the session expires or the user triggers the Ghost Vacuum, the operating system zero-fills the allocated RAM space, terminating parent/child processes in under 300 milliseconds. No forensic trace remains on the hardware.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-neutral-800 font-mono text-xs text-slate-500">
+                    <span>Burn-1 Systems // Architecture Paper v2.6</span>
+                    <button type="button" onclick="closeGhostArchModal()" class="px-4 py-2 rounded-lg bg-cyan-400 text-black font-cyber font-bold uppercase hover:bg-cyan-300 transition-all">
+                        CLOSE BLUEPRINT
+                    </button>
                 </div>
             </div>
         </div>
@@ -584,6 +911,100 @@
                 }
                 localStorage.setItem('burn1_theme', 'day');
             }
+        }
+
+        // Ghost Architecture White Paper Modal Controls
+        function openGhostArchModal() {
+            const modal = document.getElementById('ghost-arch-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeGhostArchModal() {
+            const modal = document.getElementById('ghost-arch-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close modal when clicking outside content
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('ghost-arch-modal');
+            if (e.target === modal) {
+                closeGhostArchModal();
+            }
+        });
+
+        // Ghost Trial 3-Minute Live Simulation Engine
+        let ghostTrialInterval = null;
+
+        function startGhostTrial(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('ghost-trial-email');
+            const codeInput = document.getElementById('ghost-trial-code');
+            const scopeInput = document.getElementById('ghost-trial-scope');
+            const consoleBox = document.getElementById('ghost-trial-console');
+            const timerDisplay = document.getElementById('trial-timer-display');
+            const statusDisplay = document.getElementById('trial-terminal-status');
+            const log1 = document.getElementById('trial-log-1');
+            const log2 = document.getElementById('trial-log-2');
+            const log3 = document.getElementById('trial-log-3');
+            const launchBtn = document.getElementById('ghost-trial-btn');
+
+            if (!emailInput || !emailInput.value) return;
+
+            const today = new Date().toDateString();
+            const lastBurnDate = localStorage.getItem('burn1_ghost_trial_burned');
+
+            if (lastBurnDate === today) {
+                alert("⚠️ DAILY BURN LIMIT ENFORCED: Your 1 free daily session for today has already expired. 24-hour reset policy in effect.\n\nSubscribe to Ghost Pro ($29/mo) for unlimited sessions without limits.");
+                return;
+            }
+
+            // Launch Active Session
+            consoleBox.classList.remove('hidden');
+            launchBtn.disabled = true;
+            launchBtn.classList.remove('bg-cyan-400', 'hover:bg-cyan-300');
+            launchBtn.classList.add('bg-neutral-800', 'text-slate-400', 'cursor-not-allowed');
+            launchBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ENCLAVE ACTIVE &bull; VOLATILE RAM ISOLATED';
+
+            let secondsRemaining = 180; // 3 minutes
+            statusDisplay.innerHTML = '<span class="text-emerald-400 font-bold">[●] VOLATILE RAM ACTIVE // ENCLAVE BOUND</span>';
+            log1.innerHTML = `&gt; [RAM 512MB]: Initialized ephemeral sandbox for ${emailInput.value} (${scopeInput.value.toUpperCase()})`;
+            log2.innerHTML = '&gt; [ENTROPY]: Canvas, WebGL & AudioContext noise randomized. SSD persistence disabled.';
+            log3.innerHTML = '&gt; [ENCRYPTED TUNNEL]: Session socket connected. Auto-vacuum engages in 180s.';
+
+            if (ghostTrialInterval) clearInterval(ghostTrialInterval);
+
+            ghostTrialInterval = setInterval(() => {
+                secondsRemaining--;
+
+                const mins = String(Math.floor(secondsRemaining / 60)).padStart(2, '0');
+                const secs = String(secondsRemaining % 60).padStart(2, '0');
+                timerDisplay.innerText = `${mins}:${secs}`;
+
+                if (secondsRemaining === 120) {
+                    log2.innerHTML = '&gt; [ENTROPY ROTATION]: Fingerprint hashes re-randomized at T-120s.';
+                } else if (secondsRemaining === 60) {
+                    log3.innerHTML = '<span class="text-amber-400">&gt; [WARNING]: 60s remaining before emergency memory vacuum purge.</span>';
+                } else if (secondsRemaining === 10) {
+                    timerDisplay.classList.add('animate-pulse', 'text-red-400', 'border-red-500');
+                    statusDisplay.innerHTML = '<span class="text-red-400 font-bold">[!] COMMENCING GHOST VACUUM PURGE...</span>';
+                } else if (secondsRemaining <= 0) {
+                    clearInterval(ghostTrialInterval);
+                    timerDisplay.innerText = '00:00';
+                    statusDisplay.innerHTML = '<span class="text-red-500 font-bold">[X] SESSION DESTROYED // RAM ZERO-FILLED</span>';
+                    log1.innerHTML = '&gt; [ZERO-FILL]: 512MB RAM overwritten with cryptographic entropy.';
+                    log2.innerHTML = '&gt; [DISCONNECT]: Sockets dropped. Local temp cookies destroyed. Zero disk trace.';
+                    log3.innerHTML = '<span class="text-red-400">&gt; 3-Minute trial elapsed. Daily limit reached. 24h reset active.</span>';
+
+                    localStorage.setItem('burn1_ghost_trial_burned', today);
+                    launchBtn.innerHTML = '<i class="fa-solid fa-ban text-red-500"></i> DAILY TRIAL BURN COMPLETE (1/1)';
+                }
+            }, 1000);
         }
 
         window.addEventListener('DOMContentLoaded', () => {

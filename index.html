@@ -25,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/silver_clock.js"></script>
 
     <script>
         tailwind.config = {
@@ -161,6 +162,7 @@
         /* =========================================================
            SMOKE & MIRROR CORPORATE EDITION (DAY MODE)
            Adapted from silver_mirror_clock.html // Silver & Greyscale
+           Transparent Panes & High-Contrast Highlight Typo
            ========================================================= */
         html.day-mode {
             --bg-color: #ffffff;
@@ -172,7 +174,7 @@
 
         html.day-mode body {
             background-color: #ffffff !important;
-            background: radial-gradient(circle at center, #ffffff 0%, #f4f4f6 50%, #e2e8f0 100%) !important;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.70) 0%, rgba(244, 244, 246, 0.85) 50%, rgba(226, 232, 240, 0.95) 100%) !important;
             background-attachment: fixed !important;
             color: #09090b !important;
         }
@@ -187,7 +189,8 @@
         }
 
         html.day-mode header {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(12px) !important;
             border-bottom: 2px solid #d4d4d4 !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
         }
@@ -198,15 +201,17 @@
             text-shadow: none !important;
         }
 
-        /* Smoke & Mirror Section & Card Styling */
+        /* 100% See-Through Transparent Panes in Day Mode - Mirror Clock Shows Through */
         html.day-mode .cyber-card,
         html.day-mode .glass-panel {
-            background: linear-gradient(135deg, #ffffff 0%, #fafafa 45%, #f4f4f5 100%) !important;
-            border: 2px solid #d4d4d4 !important;
+            background: rgba(255, 255, 255, 0.40) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            border: 2px solid rgba(212, 212, 212, 0.9) !important;
             border-radius: 1.5rem !important;
             box-shadow: 
                 0 10px 25px -5px rgba(0, 0, 0, 0.05),
-                inset 0 0 14px rgba(255, 255, 255, 0.9),
+                inset 0 0 14px rgba(255, 255, 255, 0.8),
                 inset 0 0 2px #b0b0b0 !important;
             color: #09090b !important;
         }
@@ -221,7 +226,7 @@
             transform: translateY(-2px);
         }
 
-        /* Highlighting: Dark black highlight box with light letters */
+        /* Highlighting: Stark dark/black highlight box with pure light letters */
         html.day-mode .highlight-badge,
         html.day-mode .status-tag,
         html.day-mode .treatment-pill.active {
@@ -241,12 +246,13 @@
 
         html.day-mode p, 
         html.day-mode label {
-            color: #334155 !important;
+            color: #1e293b !important;
             text-shadow: none !important;
         }
 
         html.day-mode .treatment-pill {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.50) !important;
+            backdrop-filter: blur(6px) !important;
             border: 1px solid #d4d4d4 !important;
             color: #09090b !important;
         }
@@ -265,7 +271,7 @@
         }
 
         html.day-mode footer {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-top: 2px solid #d4d4d4 !important;
             color: #64748b !important;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03) !important;
@@ -273,6 +279,300 @@
         html.day-mode footer span, 
         html.day-mode footer a {
             color: #09090b !important;
+        }
+
+        /* Day Mode High-Contrast Override for Ghost Browser Kinetic Ad */
+        html.day-mode #ghost-ad-casing {
+            background: #000000 !important;
+            border-color: #d4d4d4 !important;
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.4) !important;
+        }
+        html.day-mode #ghost-ad-casing h2,
+        html.day-mode #ghost-ad-casing h3 {
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+        }
+        html.day-mode #ghost-ad-casing p {
+            color: #e5e5e5 !important;
+        }
+        html.day-mode #ghost-ad-casing span {
+            color: #ffffff !important;
+        }
+
+        /* --- LED RADIAL STATUS INDICATORS --- */
+        .led-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .led-red {
+            background-color: #ef4444;
+            box-shadow: 0 0 10px #ef4444, 0 0 20px rgba(239, 68, 68, 0.6);
+        }
+        .led-yellow {
+            background-color: #f59e0b;
+            box-shadow: 0 0 12px #f59e0b, 0 0 25px rgba(245, 158, 11, 0.8);
+            animation: pulse-led-yellow 1s infinite alternate;
+        }
+        @keyframes pulse-led-yellow {
+            0% { transform: scale(0.9); opacity: 0.7; box-shadow: 0 0 6px #f59e0b; }
+            100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 18px #f59e0b, 0 0 30px rgba(245, 158, 11, 0.9); }
+        }
+        .led-green {
+            background-color: #10b981;
+            box-shadow: 0 0 12px #10b981, 0 0 24px rgba(16, 185, 129, 0.7);
+            animation: pulse-led-green 2.5s infinite alternate;
+        }
+        @keyframes pulse-led-green {
+            0% { box-shadow: 0 0 8px #10b981; }
+            100% { box-shadow: 0 0 18px #10b981, 0 0 30px rgba(16, 185, 129, 0.9); }
+        }
+
+        /* --- SILVER MIRROR CLOCK ANIMATION --- */
+        #clock-mirror-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+        html.day-mode #clock-mirror-bg {
+            display: flex !important;
+        }
+        .clock-scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+        .clock-assembly {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+        .spinning-dial {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: spin-dial 20s linear infinite;
+        }
+        @keyframes spin-dial {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .mirror-shard {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+            background: linear-gradient(135deg, #fdfdfd 0%, #ffffff 40%, #e4e4e4 50%, #ffffff 60%, #b0b0b0 100%);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08), inset 0 0 12px rgba(255, 255, 255, 0.9), inset 0 0 2px #b0b0b0;
+            overflow: hidden;
+            opacity: 0;
+            animation: assemble-shard 15s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+        .mirror-shard::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent 40%, rgba(255, 255, 255, 0.9) 48%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.9) 52%, transparent 60%);
+            transform: rotate(45deg) translateX(-100%);
+            animation: sweep-light 6s infinite;
+            animation-delay: var(--glint-delay, 0s);
+        }
+        @keyframes sweep-light {
+            0%, 60% { transform: rotate(45deg) translateX(-150%); }
+            100% { transform: rotate(45deg) translateX(150%); }
+        }
+        @keyframes assemble-shard {
+            0% { transform: translate(var(--startX), var(--startY)) scale(var(--startScale)) rotate(var(--startRot)); opacity: 0; }
+            3% { opacity: 1; }
+            13.33%, 86.66% { transform: rotate(var(--finalAngle)) translateY(var(--finalRadius)) rotate(var(--finalSelfRot, 0deg)); opacity: 1; }
+            97% { opacity: 1; }
+            100% { transform: translate(var(--startX), var(--startY)) scale(var(--startScale)) rotate(var(--startRot)); opacity: 0; }
+        }
+        .stationary-hands {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+            opacity: 0;
+            animation: fade-in-hands 2s ease-in forwards;
+        }
+        @keyframes fade-in-hands { to { opacity: 1; } }
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            background: linear-gradient(to right, #b0b0b0, #fdfdfd, #b0b0b0);
+            border-radius: 4px;
+            box-shadow: inset 0 0 4px rgba(255,255,255,0.8);
+            border: 1px solid #d4d4d4;
+        }
+        .hour-hand { width: 8px; height: 120px; margin-left: -4px; animation: spin-ccw 14s linear infinite; }
+        .minute-hand { width: 6px; height: 180px; margin-left: -3px; animation: spin-cw 8s linear infinite; }
+        @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        .center-pin {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, #ffffff 0%, #b0b0b0 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,1);
+            border: 2px solid #e4e4e4;
+        }
+
+        /* --- DIGITAL CIGARETTE WIDGET STYLES --- */
+        .widget-cig-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .cigarette-wrapper {
+            position: relative;
+            width: 240px;
+            height: 26px;
+            background: #1e2235;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.15);
+            overflow: hidden;
+            display: flex;
+        }
+        .cig-filter {
+            width: 60px;
+            height: 100%;
+            background: #e59866;
+            border-right: 2px solid #000;
+            flex-shrink: 0;
+        }
+        .cig-body {
+            flex-grow: 1;
+            height: 100%;
+            background: #fdfefe;
+            width: 100%;
+            transition: width 0.4s ease;
+            position: relative;
+        }
+        .cig-cherry {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 14px;
+            height: 100%;
+            background: linear-gradient(90deg, #ff3300, #ffb300);
+            box-shadow: 0 0 15px #ff3300;
+            opacity: 0.8;
+            display: none;
+        }
+        .cig-cherry.burning {
+            display: block;
+            animation: burnGlow 1s infinite alternate;
+        }
+        @keyframes burnGlow {
+            0% { opacity: 0.6; box-shadow: 0 0 5px #ff3300; }
+            100% { opacity: 1; box-shadow: 0 0 20px #ff6600, 0 0 30px #ff3300; }
+        }
+        .widget-cig-stats {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            padding: 0.85rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .widget-stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .widget-stat-val {
+            font-weight: bold;
+            color: #06b6d4;
+        }
+        .widget-bar-outer {
+            width: 100px;
+            height: 8px;
+            background: #1a1c29;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .widget-bar-inner {
+            height: 100%;
+            width: 100%;
+            background: #06b6d4;
+            transition: width 0.3s ease;
+        }
+        .widget-bar-inner.depleted {
+            background: #ec4899;
+        }
+        .widget-controls {
+            display: flex;
+            gap: 0.75rem;
+            width: 100%;
+        }
+        .widget-btn {
+            flex: 1;
+            padding: 0.65rem;
+            border-radius: 6px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+        }
+        .widget-btn-inhale {
+            background: linear-gradient(90deg, #ec4899, #f97316);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            border: none;
+        }
+        .widget-btn-inhale:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(236, 72, 153, 0.5);
+        }
+        .widget-btn-extinguish {
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+        }
+        .widget-btn-extinguish:hover {
+            background: #334155;
+            color: #fff;
         }
     </style>
 </head>
@@ -345,63 +645,85 @@
                 <!-- TOP STRATEGIC PILL BADGES -->
                 <div class="flex flex-wrap items-center justify-center gap-2 mb-6 text-center">
                     <span class="px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-400 text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.3)]">
-                        <i class="fa-solid fa-radar text-cyan-400"></i> ZERO-INTRUSION SURFACE RECONNAISSANCE
+                        <i class="fa-solid fa-radar text-cyan-400"></i> AUTOMATED MACHINE SCAN // 60-SEC CHECK
                     </span>
                     <span class="px-3 py-1 rounded-full bg-amber-950/90 border border-amber-500 text-amber-300 font-mono text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_10px_rgba(245,158,11,0.3)]">
-                        <i class="fa-solid fa-bolt text-amber-400"></i> PRE-RENEWAL UNDERWRITING READINESS INSPECTOR
+                        <i class="fa-solid fa-bolt text-amber-400"></i> ZERO INSTALLATION REQUIRED
                     </span>
                     <span class="px-3 py-1 rounded-full bg-purple-950/90 border border-purple-500 text-purple-300 font-mono text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-file-contract text-purple-400"></i> NIST CSF 2.0 &bull; CHUBB &amp; TRAVELERS PREP
+                        <i class="fa-solid fa-file-contract text-purple-400"></i> PERIMETER SURFACE INSPECTION
                     </span>
                 </div>
 
-                <!-- MAIN HEADLINE -->
-                <div class="max-w-4xl mx-auto text-center mb-8">
+                <!-- MAIN HEADLINE & PROMPT -->
+                <div class="max-w-4xl mx-auto text-center mb-6">
                     <h1 class="text-3xl sm:text-5xl md:text-6xl font-cyber font-extrabold text-white tracking-wider uppercase mb-3 leading-tight glow-title">
-                        Underwriting Readiness &amp; Surface Inspector
+                        Audit Your Business in 60 Seconds
                     </h1>
-                    <p class="text-sm sm:text-base md:text-lg font-mono text-slate-200 max-w-3xl mx-auto leading-relaxed">
-                        Deterministic perimeter reconnaissance across external attack surfaces, open port exposure, and carrier renewal readiness in seconds.
+                    <p class="text-base sm:text-xl font-mono text-amber-400 max-w-3xl mx-auto leading-relaxed font-bold glow-amber">
+                        Enter your business to get a luxury report.
+                    </p>
+                    <p class="text-xs sm:text-sm font-mono text-slate-300 max-w-2xl mx-auto mt-1">
+                        Instant perimeter surface check analyzing public transport encryption, edge headers, and vulnerability vectors.
                     </p>
                 </div>
 
-                <!-- 4 TREATMENT SELECTOR PILLS -->
-                <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-6">
-                    <!-- Pill 1: Surface Headers -->
-                    <button type="button" onclick="selectTreatment('surface')" id="pill-surface" class="treatment-pill active p-3 rounded-xl border border-purple-500/40 text-left transition-all">
+                <!-- EXACTLY 3 INSPECTION BUTTONS (MINI-SPA DROPPED) -->
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                    <!-- Button 1: Perimeter Surface Inspection -->
+                    <button type="button" onclick="selectTreatment('surface')" onmouseenter="previewTreatment('surface')" id="pill-surface" class="treatment-pill active p-3.5 rounded-2xl border border-purple-500/40 text-left transition-all group">
                         <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-shield-halved text-amber-400 text-sm"></i>
-                            <span class="font-cyber text-[11px] font-bold text-white uppercase">1. Surface</span>
+                            <i class="fa-solid fa-shield-halved text-amber-400 text-base group-hover:scale-110 transition-transform"></i>
+                            <span class="font-cyber text-xs font-bold text-white uppercase">1. Perimeter Surface</span>
                         </div>
-                        <p class="font-mono text-[10px] text-slate-300 leading-tight">Headers, HSTS, CSP &amp; Info Leaks</p>
+                        <p class="font-mono text-[11px] text-slate-300 leading-tight">Headers, HSTS, CSP &amp; Info Leaks</p>
                     </button>
 
-                    <!-- Pill 2: Breach Exposure -->
-                    <button type="button" onclick="selectTreatment('breach')" id="pill-breach" class="treatment-pill p-3 rounded-xl border border-purple-500/40 text-left transition-all">
+                    <!-- Button 2: Breach & Dark Web Exposure -->
+                    <button type="button" onclick="selectTreatment('breach')" onmouseenter="previewTreatment('breach')" id="pill-breach" class="treatment-pill p-3.5 rounded-2xl border border-purple-500/40 text-left transition-all group">
                         <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-user-secret text-red-400 text-sm"></i>
-                            <span class="font-cyber text-[11px] font-bold text-white uppercase">2. Breach</span>
+                            <i class="fa-solid fa-user-secret text-red-400 text-base group-hover:scale-110 transition-transform"></i>
+                            <span class="font-cyber text-xs font-bold text-white uppercase">2. Breach &amp; Dark Web</span>
                         </div>
-                        <p class="font-mono text-[10px] text-slate-300 leading-tight">OSINT, Credential &amp; Dark Web</p>
+                        <p class="font-mono text-[11px] text-slate-300 leading-tight">OSINT, Credential &amp; Password Dumps</p>
                     </button>
 
-                    <!-- Pill 3: Link & QR Inspector -->
-                    <button type="button" onclick="selectTreatment('link')" id="pill-link" class="treatment-pill p-3 rounded-xl border border-purple-500/40 text-left transition-all">
+                    <!-- Button 3: Link & Phish Trap Inspection -->
+                    <button type="button" onclick="selectTreatment('link')" onmouseenter="previewTreatment('link')" id="pill-link" class="treatment-pill p-3.5 rounded-2xl border border-purple-500/40 text-left transition-all group">
                         <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-qrcode text-cyan-400 text-sm"></i>
-                            <span class="font-cyber text-[11px] font-bold text-white uppercase">3. Link / QR</span>
+                            <i class="fa-solid fa-qrcode text-cyan-400 text-base group-hover:scale-110 transition-transform"></i>
+                            <span class="font-cyber text-xs font-bold text-white uppercase">3. Link &amp; Phish Trap</span>
                         </div>
-                        <p class="font-mono text-[10px] text-slate-300 leading-tight">Redirects, Phish &amp; Traps</p>
+                        <p class="font-mono text-[11px] text-slate-300 leading-tight">Redirects, Phish Traps &amp; Payloads</p>
                     </button>
+                </div>
 
-                    <!-- Pill 4: Perimeter Underwriting Ports -->
-                    <button type="button" onclick="selectTreatment('perimeter')" id="pill-perimeter" class="treatment-pill p-3 rounded-xl border border-purple-500/40 text-left transition-all">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-network-wired text-green-400 text-sm"></i>
-                            <span class="font-cyber text-[11px] font-bold text-white uppercase">4. Perimeter</span>
+                <!-- EXPANDABLE BREAKDOWN DRAWER (BURN-1 LANGUAGE: WHAT IS TESTED & THE PAIN POINT) -->
+                <div id="treatment-breakdown-drawer" class="max-w-4xl mx-auto mb-6 p-4 sm:p-5 rounded-2xl bg-black/75 border border-purple-500/50 shadow-inner transition-all">
+                    <div class="flex items-center justify-between pb-2 mb-3 border-b border-purple-900/60">
+                        <span class="font-mono text-[10px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5" id="drawer-active-title">
+                            <i class="fa-solid fa-shield-halved"></i> PERIMETER SURFACE INSPECTION BREAKDOWN
+                        </span>
+                        <span class="text-[10px] font-mono text-slate-400 uppercase">Hover or click buttons to explore</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-900/50">
+                            <span class="font-mono text-[10px] text-cyan-300 font-bold uppercase block mb-1">
+                                <i class="fa-solid fa-magnifying-glass"></i> WHAT IS TESTED
+                            </span>
+                            <p class="font-mono text-xs text-slate-200 leading-relaxed" id="drawer-tested-text">
+                                Cryptographic TLS 1.3 handshake negotiation (Port 443), transmission boundary enforcement (HSTS preload), frame-ancestor Clickjacking mitigations (CSP), and public EXIF metadata leakage.
+                            </p>
                         </div>
-                        <p class="font-mono text-[10px] text-slate-300 leading-tight">RDP, SMB &amp; Port Cloaking</p>
-                    </button>
+                        <div class="p-3 rounded-xl bg-red-950/30 border border-red-900/50">
+                            <span class="font-mono text-[10px] text-red-400 font-bold uppercase block mb-1">
+                                <i class="fa-solid fa-triangle-exclamation"></i> THE PAIN POINT
+                            </span>
+                            <p class="font-mono text-xs text-slate-200 leading-relaxed" id="drawer-pain-text">
+                                Unshielded web perimeters leak server blueprints to automated scrapers, triggering instant compliance red-flags before an underwriter or pentester even speaks with you.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- THE OMNI-BAR INPUT CONTAINER -->
@@ -414,11 +736,11 @@
                         </div>
 
                         <!-- Main Omni-Input -->
-                        <input type="text" id="omni-input" required placeholder="Enter domain (e.g. burn-1.com or company.com)" value="burn-1.com" class="flex-grow bg-transparent px-3 py-3.5 font-mono text-white text-sm sm:text-base focus:outline-none placeholder:text-slate-500">
+                        <input type="text" id="omni-input" required placeholder="Enter your business domain (e.g. burn-1.com or company.com)" value="burn-1.com" class="flex-grow bg-transparent px-3 py-3.5 font-mono text-white text-sm sm:text-base focus:outline-none placeholder:text-slate-500">
 
                         <!-- Scan Action Button -->
                         <button type="submit" id="omni-submit-btn" class="px-6 sm:px-8 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.6)] flex items-center justify-center gap-2 shrink-0">
-                            <i class="fa-solid fa-bolt"></i> RUN READINESS INSPECTION
+                            <i class="fa-solid fa-bolt"></i> RUN 60-SEC AUDIT
                         </button>
                     </form>
 
@@ -485,14 +807,16 @@
                         </p>
                     </div>
 
-                    <!-- Step 5 & 6: Self-Destruct Countdown & Sample Session Button -->
-                    <div id="ghost-step-destruct" class="transition-all duration-500 opacity-0 mt-5 flex flex-col items-center gap-3">
-                        <div class="font-mono text-xs sm:text-sm font-bold text-red-400 uppercase tracking-widest">
-                            ⚠️ THIS AD WILL SELF-DESTRUCT IN <span id="ghost-destruct-timer" class="font-cyber font-black text-white text-base sm:text-lg px-2.5 py-0.5 rounded bg-red-950 border border-red-500">5</span>
-                        </div>
-                        <a href="http://129.212.176.154/" target="_blank" class="px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(255,255,255,0.85)] border-2 border-neutral-300 flex items-center gap-2">
+                    <!-- Step 5: Sample Session Action Button -->
+                    <div id="ghost-step-btn-container" class="transition-all duration-700 opacity-0 mt-5">
+                        <a href="store.html#ghost-browser" class="px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(255,255,255,0.85)] border-2 border-neutral-300 flex items-center gap-2">
                             <span>CLICK HERE TO GET A SAMPLE SESSION</span> ⚡
                         </a>
+                    </div>
+
+                    <!-- Step 6: Self-Destruct Countdown Warning Box -->
+                    <div id="ghost-step-countdown-box" class="transition-all duration-500 opacity-0 mt-3 font-mono text-xs sm:text-sm font-bold text-red-400 uppercase tracking-widest">
+                        ⚠️ THIS AD WILL SELF-DESTRUCT IN <span id="ghost-destruct-timer" class="font-cyber font-black text-white text-base sm:text-lg px-2.5 py-0.5 rounded bg-red-950 border border-red-500">5</span>
                     </div>
                 </div>
 
@@ -505,7 +829,7 @@
         </section>
 
         <!-- =========================================================
-             SECTION 2: METRO PLAZA DIRECTORY (CRITICAL ATTACHMENT)
+             SECTION 2: PRIVACY FIRST BUSINESS DIRECTORY (CRITICAL ATTACHMENT)
              ========================================================= -->
         <section id="site-directory" class="mb-14">
             <div class="glass-panel p-8 md:p-12 rounded-3xl relative border-2 border-cyan-500/50 shadow-[0_0_30px_rgba(6,182,212,0.25)]">
@@ -515,13 +839,13 @@
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8 pb-6 border-b border-cyan-900/60">
                         <div>
                             <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-widest block mb-2 glow-cyan">
-                                🏢 STONECREST &amp; LITHONIA METRO PLAZA DIRECTORY
+                                🏢 PRIVACY FIRST BUSINESS DIRECTORY
                             </span>
                             <h2 class="text-2xl sm:text-4xl font-cyber font-extrabold text-white uppercase tracking-wider glow-title">
-                                Verified Local Businesses &amp; Kiosk Grid
+                                Show Off Your Anti-Phishing Certificate &amp; MFA2 Badge
                             </h2>
                             <p class="text-sm font-mono text-slate-200 mt-2 max-w-2xl leading-relaxed">
-                                Over 50+ local shops, dining, and professional service hubs listed on the autonomous Burn-1 infrastructure. Built by a neighbor, backed by zero-trust verified cards.
+                                Direct verification pipeline connecting the Burn-1 Academy to verified merchant profiles. Prove compliance, gain customer trust, and showcase verifiable perimeter defense credentials across 50+ local businesses.
                             </p>
                         </div>
                         
@@ -746,43 +1070,59 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
                     <div>
                         <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-widest block mb-1">
-                            📺 SYSTEM MEDIA BROADCAST
+                            📢 SYSTEM PROMOTIONS &bull; FREE READINESS
                         </span>
-                        <h2 class="font-cyber text-2xl md:text-3xl font-bold text-white uppercase">
-                            AI COMMERCIALS &amp; PROMOTIONAL ADS
+                        <h2 class="font-cyber text-2xl md:text-4xl font-extrabold text-white uppercase tracking-wider glow-title">
+                            ADS
                         </h2>
+                        <p class="text-xs sm:text-sm font-mono text-amber-300 mt-1">
+                            Cyber Insurance Renewal Prep &bull; Free Cybersecurity Readiness Training &bull; Gamified Anti-Phishing &bull; MFA2 Step-by-Step Guide
+                        </p>
                     </div>
-                    <span class="text-xs font-mono text-amber-400 bg-amber-950/60 px-3 py-1 rounded border border-amber-500/40">
-                        ⚡ 4K BURN-1 DEPLOYMENT BROADCAST
+                    <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded border border-cyan-500/40">
+                        🛡️ CLEAR THE BOSS &bull; GET YOUR BADGE
                     </span>
                 </div>
 
-                <!-- VIDEO EMBED GRID -->
+                <!-- HIGH-IMPACT ACADEMY AD CAMPAIGNS -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- VIDEO 1: KIOSK DEPLOYMENT -->
-                    <div class="rounded-xl overflow-hidden border-2 border-amber-500/60 bg-black/80 shadow-2xl">
-                        <div class="aspect-video w-full">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/98uhqKh8Cf0" title="Burn-1 System AI Commercial #2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="p-4 bg-amber-950/60 border-t border-amber-900/60 flex justify-between items-center">
-                            <span class="font-mono text-xs text-white font-bold">PROMO AD #1: KIOSK DEPLOYMENT</span>
-                            <a href="https://youtu.be/98uhqKh8Cf0" target="_blank" class="text-xs font-mono text-purple-400 hover:underline">
-                                YOUTUBE LINK <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    <!-- AD 1: BURN & GO // CYBER INSURANCE RENEWAL PREP -->
+                    <div class="rounded-2xl overflow-hidden border-2 border-amber-500/70 bg-black/85 shadow-2xl flex flex-col justify-between group hover:border-amber-400 transition-all">
+                        <a href="academy.html" class="block aspect-video w-full bg-neutral-900 relative overflow-hidden">
+                            <img src="assets/Saved_Frame_from_Animate_brutalist_202608071942.jpeg" alt="Burn and Go Readiness Prep" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="absolute bottom-3 left-4 right-4">
+                                <span class="px-2.5 py-0.5 rounded bg-amber-500 text-black font-cyber text-[10px] font-black uppercase">BURN &amp; GO</span>
+                                <h3 class="font-cyber text-base sm:text-lg font-bold text-white uppercase mt-1">Cyber Insurance Renewal Prep</h3>
+                            </div>
+                        </a>
+                        <div class="p-5 flex flex-col justify-between flex-grow">
+                            <p class="font-mono text-xs text-slate-300 mb-4 leading-relaxed">
+                                Free cybersecurity readiness training engineered to satisfy Chubb &amp; Travelers underwriting mandates before renewal quotes arrive. Clear the boss and get your certificate and badge.
+                            </p>
+                            <a href="academy.html" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase text-center tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)] flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-graduation-cap"></i> START READINESS PREP &rarr;
                             </a>
                         </div>
                     </div>
 
-                    <!-- VIDEO 2: GHOST VAULT COMMERCIAL -->
-                    <div class="rounded-xl overflow-hidden border-2 border-purple-600/60 bg-black/80 shadow-2xl flex flex-col justify-between">
-                        <div class="aspect-video w-full bg-black relative flex items-center justify-center overflow-hidden">
-                            <video controls class="w-full h-full object-cover" poster="assets/Saved_Frame_from_Animate_brutalist_202608071942.jpeg">
-                                <source src="assets/commercial_2.mp4" type="video/mp4">
-                                Your browser does not support video playback.
-                            </video>
-                        </div>
-                        <div class="p-4 bg-purple-950/60 border-t border-purple-900/60 flex justify-between items-center">
-                            <span class="font-mono text-xs text-white font-bold">PROMO AD #2: BURN-1 GHOST ENCLAVE</span>
-                            <span class="text-xs font-mono text-amber-400">LOCAL VAULT SYSTEM</span>
+                    <!-- AD 2: GAMIFIED ANTI-PHISHING TRAINING & MFA2 GUIDE -->
+                    <div class="rounded-2xl overflow-hidden border-2 border-purple-500/70 bg-black/85 shadow-2xl flex flex-col justify-between group hover:border-cyan-400 transition-all">
+                        <a href="academy.html" class="block aspect-video w-full bg-neutral-900 relative overflow-hidden">
+                            <img src="assets/Saved_Frame_from_Animate_brutalist_202608061504.jpeg" alt="Gamified Anti-Phishing Training" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="absolute bottom-3 left-4 right-4">
+                                <span class="px-2.5 py-0.5 rounded bg-cyan-400 text-black font-cyber text-[10px] font-black uppercase">MFA2 GUIDE</span>
+                                <h3 class="font-cyber text-base sm:text-lg font-bold text-white uppercase mt-1">Gamified Anti-Phishing Courses</h3>
+                            </div>
+                        </a>
+                        <div class="p-5 flex flex-col justify-between flex-grow">
+                            <p class="font-mono text-xs text-slate-300 mb-4 leading-relaxed">
+                                Interactive phishing simulation defenses and the step-by-step MFA2 authentication blueprint. Eliminate carrier warranty exclusions and claim your Gold Directory Seal.
+                            </p>
+                            <a href="academy.html" class="w-full py-3 rounded-xl bg-black border-2 border-cyan-400 hover:bg-cyan-950 text-cyan-200 font-cyber font-extrabold text-xs uppercase text-center tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                                <i class="fa-solid fa-shield-halved"></i> ENTER ACADEMY COURSES &rarr;
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -872,32 +1212,32 @@
              (Placed Directly Above Helpline)
              ========================================================= -->
         <section id="friedbrains-feature" class="mb-14">
-            <div class="bg-transparent backdrop-blur-sm p-8 md:p-10 rounded-3xl relative border-2 border-purple-500/60 shadow-[0_0_35px_rgba(147,51,234,0.25)]">
+            <div class="bg-transparent backdrop-blur-sm p-6 sm:p-10 rounded-3xl relative border-2 border-purple-500/60 shadow-[0_0_35px_rgba(147,51,234,0.25)]">
                 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
-                    <!-- Left: Editorial Content (6 Cols) -->
-                    <div class="lg:col-span-6">
+                    <!-- Left: Editorial Content (5 Cols) -->
+                    <div class="lg:col-span-5">
                         <div class="flex items-center gap-2 mb-3">
                             <span class="px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-400 text-cyan-300 font-mono text-[10px] font-bold uppercase tracking-wider">
-                                🧠 &#xA7FB;RIEDBRAINS™ WORLD // SPECIAL INVESTIGATIVE REPORT
+                                🧠 &#xA7FB;RIEDBRAINS™ WORLD // FEATURED ARTICLE
                             </span>
                             <span class="px-2.5 py-1 rounded bg-purple-950 text-purple-300 font-mono text-[10px] font-bold">
-                                ISSUE #04
+                                SPECIAL INVESTIGATION
                             </span>
                         </div>
                         
                         <h2 class="text-2xl sm:text-3xl font-cyber font-extrabold text-white uppercase tracking-wider mb-3 leading-tight glow-title">
-                            The Digital Pickpocket: How Modern Ad-Trackers Harvest Your Cognitive Bandwidth
+                            The Digital Cigarette: Variable Ratio Schedules &amp; The Hijacked Mind
                         </h2>
                         
-                        <p class="text-xs sm:text-sm font-mono text-slate-200 mb-4 leading-relaxed">
-                            Consumer mobile apps secretly execute over 1,200 background telemetry calls per day—cross-correlating device gyro movements, variable-ratio dopamine taps, and location beacons to auction your focus in real-time.
-                        </p>
+                        <blockquote class="p-3.5 rounded-xl bg-purple-950/30 border-l-4 border-amber-400 font-mono text-xs text-slate-200 mb-4 leading-relaxed italic">
+                            &ldquo;Infinite scroll is the endless match-strike. Every swipe down is a fresh inhalation of electronic soot, a frantic query to the server asking: 'Am I still relevant? Is there something new?'&rdquo;
+                        </blockquote>
                         
-                        <div class="p-3.5 rounded-xl bg-transparent border-l-4 border-amber-500 mb-4 font-mono text-xs text-slate-300 leading-relaxed border border-purple-900/40">
-                            <strong class="text-amber-400 font-cyber">THE HARD HAT PROTOCOL:</strong> Privacy is no longer passive paranoia. It is an active cognitive engineering protocol designed to sever telemetry cords and restore prefrontal sovereignty.
-                        </div>
+                        <p class="text-xs font-mono text-slate-300 mb-5 leading-relaxed">
+                            Advertising pushers use variable ratio reinforcement schedules—the exact psychological trick that keeps a gambler chained to a slot machine. They feed you a loop of red notification badges and frictionless feeds, turning your prefrontal executive control into a dopamine-seeking loop.
+                        </p>
 
                         <div class="flex flex-wrap gap-3 items-center">
                             <a href="friedbrains-world/index.html" class="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)] flex items-center gap-2">
@@ -909,54 +1249,81 @@
                         </div>
                     </div>
 
-                    <!-- Middle: Visual Badge / Art Card (3 Cols) -->
+                    <!-- Middle: Visual Art Card (Fig 01: The Spark) (3 Cols) -->
                     <div class="lg:col-span-3 flex justify-center">
-                        <div class="w-full max-w-xs p-5 rounded-2xl bg-black/60 border-2 border-purple-500/70 shadow-2xl text-center relative overflow-hidden group">
-                            <div class="absolute -top-10 -right-10 w-28 h-28 bg-cyan-500/20 rounded-full blur-2xl"></div>
-                            <img src="assets/digital_cigarette_hardhat.jpeg" alt="Hard Hat Protocol" class="w-28 h-28 mx-auto rounded-full object-cover border-2 border-cyan-400 mb-3 shadow-[0_0_20px_rgba(6,182,212,0.4)]">
-                            <h3 class="font-cyber text-base font-bold text-white uppercase mb-1">SOVEREIGN MIND</h3>
-                            <p class="font-mono text-[11px] text-slate-400 mb-3">Hard Hat Protocol &bull; Telemetry Severing</p>
-                            <span class="inline-block px-2.5 py-0.5 rounded bg-black/70 border border-amber-500/60 text-amber-300 font-mono text-[10px] font-bold">
-                                FREE PUBLIC INVESTIGATION
-                            </span>
+                        <div class="w-full max-w-xs p-4 rounded-2xl bg-black/75 border-2 border-amber-500/60 shadow-2xl text-center relative overflow-hidden group">
+                            <div class="aspect-square w-full rounded-xl overflow-hidden mb-3 border border-amber-500/40 relative">
+                                <img src="assets/digital_cigarette_spark.jpeg" alt="The Spark - Striking the match against infinite scroll" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute bottom-2 left-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-mono text-amber-300">
+                                    FIG 01: THE SPARK
+                                </div>
+                            </div>
+                            <h3 class="font-cyber text-sm font-bold text-white uppercase mb-1">ENDLESS MATCH-STRIKE</h3>
+                            <p class="font-mono text-[11px] text-slate-400 mb-2">Infinite Scroll &bull; Electronic Soot</p>
+                            <a href="friedbrains-world/index.html" class="inline-block text-[11px] font-mono text-cyan-400 hover:underline">
+                                Explore The Full Photo Essay &rarr;
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Right: Digital Cigarette Widget (3 Cols) -->
-                    <div class="lg:col-span-3 flex justify-center">
-                        <div class="w-full max-w-xs p-5 rounded-2xl bg-black border-2 border-[#d4d4d4] shadow-[0_0_25px_rgba(0,0,0,0.85)] text-center flex flex-col justify-between">
+                    <!-- Right: Digital Cigarette Interactive Widget (4 Cols) -->
+                    <div class="lg:col-span-4 flex justify-center">
+                        <div class="w-full max-w-sm p-5 rounded-2xl bg-black/90 border-2 border-[#d4d4d4] shadow-[0_0_30px_rgba(0,0,0,0.9)] text-center flex flex-col justify-between" id="cig-widget">
                             <div>
                                 <div class="flex justify-between items-center pb-2 mb-3 border-b border-neutral-700">
-                                    <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider">DIGITAL CIGARETTE</span>
-                                    <span id="detox-status-badge" class="text-[10px] font-mono text-green-400 px-1.5 py-0.5 rounded bg-green-950/80 border border-green-600">IDLE</span>
+                                    <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider">
+                                        <i class="fa-solid fa-smoking"></i> DIGITAL CIGARETTE WIDGET
+                                    </span>
+                                    <span id="cig-status-tag" class="text-[10px] font-mono text-green-400 px-2 py-0.5 rounded bg-green-950 border border-green-600">UNLIT</span>
                                 </div>
 
-                                <!-- Animated Cigarette Graphic -->
-                                <div class="py-3 flex items-center justify-center">
-                                    <div class="flex items-center shadow-lg">
-                                        <!-- Filter -->
-                                        <div class="w-7 h-4 bg-[#c89d7c] rounded-l-sm border border-neutral-700"></div>
-                                        <!-- Paper Barrel -->
-                                        <div class="w-20 h-4 bg-gradient-to-r from-neutral-200 to-white border-y border-neutral-400"></div>
-                                        <!-- Glowing Ember Tip -->
-                                        <div id="cig-ember" class="w-4 h-4 bg-gradient-to-r from-amber-500 to-red-500 rounded-r-sm shadow-[0_0_12px_rgba(245,158,11,0.9)] transition-all"></div>
+                                <!-- Cigarette Wrapper (Filter, Body, Glowing Cherry) -->
+                                <div class="py-2 flex items-center justify-center">
+                                    <div class="cigarette-wrapper shadow-lg">
+                                        <div class="cig-filter"></div>
+                                        <div class="cig-body" id="cig-body-element">
+                                            <div class="cig-cherry" id="cig-cherry-element"></div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="my-2">
-                                    <div id="detox-display" class="font-cyber font-black text-3xl text-amber-400 tracking-wider">01:00</div>
-                                    <div id="detox-status-text" class="text-[10px] font-mono text-slate-300 mt-1 uppercase">60-SEC VOLATILE DETOX</div>
+                                <!-- Telemetry Stats Block -->
+                                <div class="widget-cig-stats my-3 text-left">
+                                    <div class="widget-stat-row">
+                                        <span class="text-slate-300">Match Strikes (Swipes):</span>
+                                        <span class="widget-stat-val text-white" id="cig-swipes-num">0</span>
+                                    </div>
+                                    <div class="widget-stat-row">
+                                        <span class="text-slate-300">Electronic Soot Inhaled:</span>
+                                        <span class="widget-stat-val text-pink-400" id="cig-soot-num">0.0 mg</span>
+                                    </div>
+                                    <div class="widget-stat-row">
+                                        <span class="text-slate-300">Dopamine Saturation:</span>
+                                        <div class="widget-bar-outer">
+                                            <div class="widget-bar-inner" id="cig-dopamine-bar" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-stat-row">
+                                        <span class="text-slate-300">Prefrontal Gray Matter:</span>
+                                        <div class="widget-bar-outer">
+                                            <div class="widget-bar-inner" id="cig-prefrontal-bar" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="mt-3">
-                                <button type="button" onclick="toggleDigitalDetox()" id="detox-btn" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-                                    🚬 TAKE 60-SEC BREAK
+                            <!-- Interactive Buttons -->
+                            <div class="widget-controls mt-2">
+                                <button type="button" class="widget-btn widget-btn-inhale flex items-center justify-center gap-1.5" onclick="clickCigSwipe()">
+                                    <span>SWIPE (INHALE)</span> 💨
                                 </button>
-                                <a href="friedbrains-world/index.html" class="block text-center mt-2.5 text-[10px] font-mono text-cyan-400 hover:underline">
-                                    CLICK HERE FOR MORE &rarr;
-                                </a>
+                                <button type="button" class="widget-btn widget-btn-extinguish flex items-center justify-center gap-1.5" onclick="extinguishCig()">
+                                    <span>EXTINGUISH</span> ⏹️
+                                </button>
                             </div>
+                            <a href="friedbrains-world/index.html" class="block text-center mt-3 text-[10px] font-mono text-cyan-400 hover:underline">
+                                CLICK HERE FOR MORE... &rarr;
+                            </a>
                         </div>
                     </div>
 
@@ -1068,81 +1435,123 @@
     <!-- =========================================================
          POP-UP INSPECTOR RESULT MODAL
          ========================================================= -->
-    <div id="spa-result-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="relative w-full max-w-2xl bg-black border-2 border-amber-500 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(245,158,11,0.5)] max-h-[90vh] overflow-y-auto">
+    <!-- =========================================================
+         POP-UP LUXURY REPORT MODAL (WHITE EXECUTIVE REPORT)
+         Modeled after mini_spa_burn-1_com.html
+         ========================================================= -->
+    <div id="spa-result-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="relative w-full max-w-3xl bg-white text-slate-900 border-2 border-slate-300 rounded-3xl p-6 sm:p-8 shadow-2xl my-auto max-h-[92vh] overflow-y-auto">
             
             <!-- Close Modal Button -->
-            <button onclick="closeSpaModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white flex items-center justify-center font-bold">
+            <button onclick="closeSpaModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-600 hover:text-black flex items-center justify-center font-bold text-sm transition-all z-20">
                 ✕
             </button>
 
-            <!-- Scanning State View -->
-            <div id="spa-scanning-state" class="py-12 flex flex-col items-center justify-center text-center">
-                <div class="relative w-24 h-24 mb-6">
-                    <div class="w-full h-full rounded-full border-4 border-amber-500/20 border-t-amber-400 radar-spinner"></div>
-                    <div class="absolute inset-0 flex items-center justify-center text-amber-400 text-2xl">
+            <!-- 1. Scanning State View with LED Yellow -->
+            <div id="spa-scanning-state" class="py-10 flex flex-col items-center justify-center text-center">
+                <div class="flex items-center gap-2 mb-4 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+                    <span class="led-indicator led-yellow"></span>
+                    <span class="text-xs font-mono font-bold text-amber-600 uppercase tracking-wider">EVALUATING // MACHINE SCAN ENGAGED</span>
+                </div>
+                <div class="relative w-20 h-20 mb-4">
+                    <div class="w-full h-full rounded-full border-4 border-slate-200 border-t-amber-500 radar-spinner"></div>
+                    <div class="absolute inset-0 flex items-center justify-center text-amber-500 text-xl">
                         <i class="fa-solid fa-radar animate-pulse"></i>
                     </div>
                 </div>
-                <h3 class="font-cyber text-2xl font-bold text-white uppercase mb-2">Executing Surface Inspection...</h3>
-                <p id="spa-scan-status-text" class="font-mono text-xs text-amber-300">Resolving DNS A/AAAA records &amp; SSL cipher suites...</p>
-                <div class="w-full max-w-md bg-slate-900 h-2 rounded-full mt-6 overflow-hidden border border-slate-800">
-                    <div id="spa-scan-bar" class="bg-gradient-to-r from-purple-500 via-amber-400 to-cyan-400 h-full w-0 transition-all duration-300"></div>
+                <h3 class="font-cyber text-2xl font-black text-slate-900 uppercase mb-1">Surface Posture Assessment Engaged</h3>
+                <p class="font-mono text-xs text-slate-500 mb-4">Target Scope: <span id="loader-target-domain" class="font-bold text-slate-800">burn-1.com</span></p>
+
+                <!-- Live Terminal Console -->
+                <div class="w-full max-w-lg bg-slate-900 text-emerald-400 p-4 rounded-xl text-left font-mono text-xs space-y-1 shadow-inner h-28 overflow-hidden mb-4">
+                    <p id="spa-log-1" class="transition-opacity duration-300">[*] Opening cryptographic TLS handshake socket (Port 443)...</p>
+                    <p id="spa-log-2" class="transition-opacity duration-300">[*] Interrogating edge DNS boundary &amp; HTTP security headers...</p>
+                    <p id="spa-log-3" class="transition-opacity duration-300">[*] Auditing Strict-Transport-Security (HSTS) &amp; X-Frame protections...</p>
+                    <p id="spa-log-4" class="transition-opacity duration-300">[+] Reconciling vulnerability telemetry into executive posture matrix...</p>
                 </div>
+
+                <div class="w-full max-w-lg bg-slate-200 h-2.5 rounded-full overflow-hidden border border-slate-300">
+                    <div id="spa-scan-bar" class="bg-gradient-to-r from-amber-500 to-indigo-600 h-full w-0 transition-all duration-300"></div>
+                </div>
+                <span id="spa-scan-status-text" class="font-mono text-[11px] text-slate-500 mt-2 block">Resolving DNS A/AAAA records &amp; SSL cipher suites...</span>
             </div>
 
-            <!-- Result State View -->
-            <div id="spa-result-state" class="hidden">
-                <div class="flex items-center justify-between pb-4 mb-4 border-b border-purple-900/60">
+            <!-- 2. Result State View (Luxury Executive White Card) -->
+            <div id="spa-result-state" class="hidden text-left">
+                
+                <!-- Report Header -->
+                <div class="border-b-2 border-slate-200 pb-5 mb-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
-                        <span class="text-[10px] font-mono text-cyan-400 uppercase font-bold tracking-widest">SURFACE INSPECTION REPORT</span>
-                        <h3 id="spa-result-target" class="font-cyber text-xl sm:text-2xl font-bold text-white uppercase mt-1">burn-1.com</h3>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="led-indicator led-green"></span>
+                            <span class="text-[10px] font-mono uppercase tracking-widest font-black text-emerald-600">VERIFIED LIVE // MACHINE SCAN COMPLETE</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight uppercase" id="spa-result-target">burn-1.com</h2>
+                        <p class="text-slate-500 text-xs font-mono mt-0.5" id="spa-result-timestamp">Timestamp: 2026-10-12 00:00:00 EST</p>
                     </div>
-                    <div class="text-right">
-                        <span id="spa-grade-badge" class="px-3.5 py-1.5 rounded-lg bg-green-950 border-2 border-green-500 font-cyber font-black text-lg text-green-300">
-                            GRADE A
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Score & Carrier Discount Summary Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                    <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/40">
-                        <span class="font-mono text-[10px] text-purple-300 uppercase block">Surface Tension Index</span>
-                        <span id="spa-score-val" class="font-cyber text-2xl font-extrabold text-white">95 / 100</span>
-                        <span class="font-mono text-[10px] text-slate-400 block mt-0.5">Perimeter Cloaked &bull; Low Ingress Risk</span>
-                    </div>
-                    <div class="p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/40">
-                        <span class="font-mono text-[10px] text-amber-400 uppercase block">Carrier Discount Readiness</span>
-                        <span id="spa-discount-val" class="font-cyber text-2xl font-extrabold text-amber-300">Potential 25% - 35%</span>
-                        <span class="font-mono text-[10px] text-slate-400 block mt-0.5">Chubb &amp; Travelers Prep Aligned</span>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right">
+                            <span class="text-[10px] font-mono text-slate-500 uppercase block">Posture Grade</span>
+                            <span id="spa-grade-badge" class="px-3.5 py-1 rounded-xl bg-emerald-50 border-2 border-emerald-500 font-cyber font-black text-xl text-emerald-700 inline-block mt-0.5">
+                                GRADE A
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Findings Breakdown -->
-                <div class="space-y-2.5 mb-6 font-mono text-xs" id="spa-findings-list">
-                    <!-- Populated via JS -->
+                <!-- Scope & Assessment Parameters Table -->
+                <table class="w-full border-collapse mb-5 font-mono text-xs border border-slate-200">
+                    <tbody>
+                        <tr class="bg-slate-50">
+                            <td class="p-2.5 border border-slate-200 font-bold text-slate-700 w-1/4">Evaluation Scope</td>
+                            <td class="p-2.5 border border-slate-200 text-slate-800" id="spa-table-scope">External Perimeter &amp; Transport</td>
+                            <td class="p-2.5 border border-slate-200 font-bold text-slate-700 w-1/4">Surface Score</td>
+                            <td class="p-2.5 border border-slate-200 font-bold text-emerald-600" id="spa-score-val">95 / 100</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2.5 border border-slate-200 font-bold text-slate-700">Protocol Scope</td>
+                            <td class="p-2.5 border border-slate-200 text-slate-800">HTTPS (Port 443) / DNS / Headers</td>
+                            <td class="p-2.5 border border-slate-200 font-bold text-slate-700">Posture Rating</td>
+                            <td class="p-2.5 border border-slate-200 text-slate-800" id="spa-discount-val">Hardened / Low Risk</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Detailed Findings Telemetry List -->
+                <div class="mb-6">
+                    <h4 class="text-xs font-mono font-bold uppercase text-slate-500 tracking-wider mb-2.5">
+                        Detailed Finding Telemetry &amp; Technical Recommendations
+                    </h4>
+                    <div class="space-y-3" id="spa-findings-list">
+                        <!-- Populated via JS -->
+                    </div>
                 </div>
 
-                <!-- Action Pathways -->
-                <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/80 to-amber-950/80 border border-amber-500/50 mb-4">
-                    <span class="text-[10px] font-mono text-amber-300 uppercase font-bold tracking-wider block mb-1">REMEDIATION &amp; EVIDENCE PATHWAYS</span>
-                    <p class="text-xs font-mono text-slate-200 mb-4">
-                        Lock in underwriting readiness or build zero-cost proof for your insurance carrier:
+                <!-- Start Your Evidence Binder Recommendation Callout -->
+                <div class="p-5 rounded-2xl bg-slate-50 border-2 border-slate-300 mb-5">
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <i class="fa-solid fa-folder-closed text-amber-500 text-base"></i>
+                        <h4 class="font-cyber font-bold text-sm text-slate-900 uppercase">Start Your Evidence Binder</h4>
+                    </div>
+                    <p class="text-xs font-mono text-slate-600 mb-4 leading-relaxed">
+                        Reconcile this point-in-time surface telemetry into an official audit repository. Furnish continuous posture proof, underwriting questionnaires, and carrier discount credit playbooks.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <a href="store.html" class="flex-1 py-3 px-4 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase text-center tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-                            📄 ORDER AUDIT &amp; EVIDENCE BINDER ($499)
+                        <a href="store.html#audit" class="flex-1 py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase text-center tracking-wider transition-all shadow-md flex items-center justify-center gap-2">
+                            <span>START EVIDENCE BINDER ($499)</span> &rarr;
                         </a>
-                        <a href="academy.html" class="flex-1 py-3 px-4 rounded-lg bg-black border-2 border-cyan-400 hover:bg-cyan-950 text-cyan-200 font-cyber font-bold text-xs uppercase text-center tracking-wider transition-all">
-                            🛡️ FREE UNDERWRITING ACADEMY
+                        <a href="academy.html" class="flex-1 py-3 px-4 rounded-xl bg-white border-2 border-slate-800 hover:bg-slate-100 text-slate-900 font-cyber font-bold text-xs uppercase text-center tracking-wider transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-graduation-cap"></i> EXPLORE ACADEMY
                         </a>
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <button onclick="closeSpaModal()" class="text-xs font-mono text-slate-400 hover:text-white underline">
-                        Close Inspection Window
+                <div class="flex justify-between items-center text-xs font-mono text-slate-500 pt-2 border-t border-slate-200">
+                    <button onclick="window.print()" class="hover:text-black flex items-center gap-1.5">
+                        <i class="fa-solid fa-print"></i> Print Executive Report
+                    </button>
+                    <button onclick="closeSpaModal()" class="hover:text-black underline">
+                        Close Window
                     </button>
                 </div>
             </div>
@@ -1183,47 +1592,65 @@
 
         const treatmentConfigs = {
             surface: {
-                placeholder: 'Enter domain (e.g. burn-1.com or company.com)',
+                placeholder: 'Enter your business domain (e.g. burn-1.com or company.com)',
                 icon: 'fa-shield-halved',
+                title: 'PERIMETER SURFACE INSPECTION BREAKDOWN',
+                tested: 'Cryptographic TLS 1.3 handshake negotiation (Port 443), transmission boundary enforcement (HSTS preload), frame-ancestor Clickjacking mitigations (CSP), and public EXIF metadata leakage.',
+                pain: 'Unshielded web perimeters leak server blueprints to automated scrapers, triggering instant compliance red-flags before an underwriter or pentester even speaks with you.',
                 status: 'Inspecting HTTP headers (HSTS, CSP, X-Frame) & SSL/TLS certificate...'
             },
             breach: {
-                placeholder: 'Enter domain or email (e.g. admin@company.com or company.com)',
+                placeholder: 'Enter domain or business name (e.g. company.com)',
                 icon: 'fa-user-secret',
+                title: 'BREACH & DARK WEB EXPOSURE BREAKDOWN',
+                tested: 'Dark web corporate domain paste mentions, dumped employee hashes, leaked API tokens, and compromised secondary vendor credentials across OSINT aggregators.',
+                pain: 'Stolen credentials linger unnoticed on hacker forums for 200+ days. Adversaries use recycled passwords to bypass single-factor admin portals without tripping firewalls.',
                 status: 'Querying OSINT credential leaks & breach databases...'
             },
             link: {
-                placeholder: 'Enter link or QR target (e.g. https://... or card link)',
+                placeholder: 'Enter URL or QR target (e.g. https://... or card link)',
                 icon: 'fa-qrcode',
+                title: 'LINK & PHISH TRAP INSPECTION BREAKDOWN',
+                tested: 'Inbound/outbound URI redirection traps, homoglyph lookalike domains, deceptive QR code routing payloads, and weaponized attachment headers.',
+                pain: 'A single misdirected QR code or spear-phishing link delivers a session stealer straight past corporate antivirus, granting attackers immediate browser session hijacking.',
                 status: 'Unmasking redirect chains, phish traps & payload hashes...'
-            },
-            perimeter: {
-                placeholder: 'Enter target host or IP (e.g. burn-1.com or 129.212.176.154)',
-                icon: 'fa-network-wired',
-                status: 'Probing critical perimeter underwriting ports (3389, 445, 22)...'
             }
         };
 
         function selectTreatment(type) {
             currentTreatment = type;
-            ['surface', 'breach', 'link', 'perimeter'].forEach(t => {
+            ['surface', 'breach', 'link'].forEach(t => {
                 const el = document.getElementById(`pill-${t}`);
-                if (t === type) {
-                    el.classList.add('active');
-                } else {
-                    el.classList.remove('active');
+                if (el) {
+                    if (t === type) el.classList.add('active');
+                    else el.classList.remove('active');
                 }
             });
 
             const config = treatmentConfigs[type];
-            const input = document.getElementById('omni-input');
-            const icon = document.getElementById('omni-icon');
-            if (config && input) {
-                input.placeholder = config.placeholder;
-                if (icon) {
-                    icon.className = `fa-solid ${config.icon} text-lg`;
-                }
+            if (config) {
+                const input = document.getElementById('omni-input');
+                const icon = document.getElementById('omni-icon');
+                if (input) input.placeholder = config.placeholder;
+                if (icon) icon.className = `fa-solid ${config.icon} text-lg`;
+                updateTreatmentDrawer(config);
             }
+        }
+
+        function previewTreatment(type) {
+            const config = treatmentConfigs[type];
+            if (config) {
+                updateTreatmentDrawer(config);
+            }
+        }
+
+        function updateTreatmentDrawer(config) {
+            const titleEl = document.getElementById('drawer-active-title');
+            const testedEl = document.getElementById('drawer-tested-text');
+            const painEl = document.getElementById('drawer-pain-text');
+            if (titleEl) titleEl.innerHTML = `<i class="fa-solid ${config.icon}"></i> ${config.title}`;
+            if (testedEl) testedEl.innerText = config.tested;
+            if (painEl) painEl.innerText = config.pain;
         }
 
         function setOmniTarget(domain) {
@@ -1245,6 +1672,9 @@
             const resultState = document.getElementById('spa-result-state');
             const statusBar = document.getElementById('spa-scan-bar');
             const statusText = document.getElementById('spa-scan-status-text');
+            const loaderTarget = document.getElementById('loader-target-domain');
+
+            if (loaderTarget) loaderTarget.innerText = target;
 
             modal.classList.remove('hidden');
             scanningState.classList.remove('hidden');
@@ -1252,10 +1682,10 @@
             statusBar.style.width = '0%';
 
             const steps = [
-                { pct: '25%', text: 'Resolving DNS A/AAAA records & WHOIS ownership...' },
+                { pct: '25%', text: 'Resolving cryptographic TLS handshake socket (Port 443)...' },
                 { pct: '50%', text: treatmentConfigs[currentTreatment].status },
-                { pct: '75%', text: 'Probing perimeter attack surfaces & port cloaking status...' },
-                { pct: '95%', text: 'Compiling findings against NIST CSF & Chubb pre-renewal rules...' }
+                { pct: '75%', text: 'Probing perimeter attack surfaces & transport security headers...' },
+                { pct: '95%', text: 'Reconciling vulnerability telemetry into executive posture matrix...' }
             ];
 
             let stepIdx = 0;
@@ -1286,7 +1716,7 @@
                 clearInterval(progressTimer);
                 statusBar.style.width = '100%';
                 renderSpaResults(target, auditData);
-            }, 2000);
+            }, 2100);
         }
 
         function renderSpaResults(target, remoteData) {
@@ -1296,18 +1726,47 @@
             const gradeEl = document.getElementById('spa-grade-badge');
             const scoreEl = document.getElementById('spa-score-val');
             const discountEl = document.getElementById('spa-discount-val');
+            const timestampEl = document.getElementById('spa-result-timestamp');
             const findingsList = document.getElementById('spa-findings-list');
+
+            const now = new Date();
+            const dateStr = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+            if (timestampEl) timestampEl.innerText = `Timestamp: ${dateStr}`;
 
             targetEl.innerText = target;
 
             let grade = "GRADE A";
             let score = 95;
-            let discount = "Potential 25% - 35%";
+            let rating = "Hardened / Low Risk";
             let findings = [
-                { icon: 'fa-check text-green-400', title: 'SSL / TLS Security', desc: 'Valid Certificate, TLS 1.3 negotiated, 2048-bit RSA cipher suite.' },
-                { icon: 'fa-check text-green-400', title: 'Perimeter Ports Cloaked', desc: 'Critical ports RDP (3389) and SMB (445) are completely closed to external ingress.' },
-                { icon: 'fa-triangle-exclamation text-amber-400', title: 'Content Security Policy (CSP)', desc: 'CSP header missing or permissive. Recommended for zero-trust defense.' },
-                { icon: 'fa-check text-green-400', title: 'NIST CSF & Carrier Rating', desc: 'Compliant with NIST PR.AC-5 and Chubb carrier underwriting benchmarks.' }
+                {
+                    icon: 'fa-circle-check text-emerald-500',
+                    severity: 'LOW RISK',
+                    title: 'Cryptographic TLS 1.3 Cipher Negotiation',
+                    desc: 'End-to-end transport encryption enforces modern 256-bit AES-GCM forward secrecy ciphers without downgrade exposure.',
+                    remediation: 'Maintain active TLS 1.3 cipher suite and mandate automated Let\'s Encrypt 90-day certificate rotation.'
+                },
+                {
+                    icon: 'fa-circle-check text-emerald-500',
+                    severity: 'LOW RISK',
+                    title: 'Perimeter Boundary Isolation (Ports Cloaked)',
+                    desc: 'Critical enterprise ingress ports RDP (3389) and SMB (445) are completely cloaked from public WAN exposure.',
+                    remediation: 'Keep WAN firewall boundary strict. Route administrative ingress exclusively through WireGuard or Tailscale.'
+                },
+                {
+                    icon: 'fa-triangle-exclamation text-amber-500',
+                    severity: 'MEDIUM RISK',
+                    title: 'Strict-Transport-Security (HSTS) Policy Verification',
+                    desc: 'HSTS header recommended with max-age=31536000 and includeSubDomains to eliminate SSL stripping vulnerabilities.',
+                    remediation: 'Deploy header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload in production web routing.'
+                },
+                {
+                    icon: 'fa-shield-halved text-indigo-500',
+                    severity: 'LOW RISK',
+                    title: 'Content Security Policy (CSP) & Frame Ancestors',
+                    desc: 'Origin framing restrictions prevent malicious Clickjacking overlays from loading portal interfaces in rogue iframes.',
+                    remediation: 'Enforce frame-ancestors \'self\' directive within CSP response headers across edge CDN.'
+                }
             ];
 
             if (remoteData && remoteData.report) {
@@ -1315,47 +1774,72 @@
                 grade = `GRADE ${rep.letter_grade || 'A'}`;
                 score = rep.darden_trust_score || 95;
                 if (rep.carrier_matrix && rep.carrier_matrix.total_potential_discount) {
-                    discount = rep.carrier_matrix.total_potential_discount;
+                    rating = `Hardened / ${rep.carrier_matrix.total_potential_discount} Discount Ready`;
                 }
                 if (rep.telemetry) {
                     findings = [
                         {
-                            icon: rep.telemetry.ssl_valid ? 'fa-check text-green-400' : 'fa-xmark text-red-400',
-                            title: `SSL/TLS Security (${rep.telemetry.ssl_issuer || 'Verified'})`,
-                            desc: rep.telemetry.https_enforced ? 'HTTPS enforced, TLS 1.3 negotiated.' : 'Insecure plaintext protocol detected.'
+                            icon: rep.telemetry.ssl_valid ? 'fa-circle-check text-emerald-500' : 'fa-triangle-exclamation text-red-500',
+                            severity: rep.telemetry.ssl_valid ? 'LOW RISK' : 'HIGH RISK',
+                            title: `SSL / TLS Security (${rep.telemetry.ssl_issuer || 'Verified'})`,
+                            desc: rep.telemetry.https_enforced ? 'HTTPS enforced, TLS 1.3 negotiated without cipher downgrade risk.' : 'Plaintext HTTP accepted. Vulnerable to interception.',
+                            remediation: 'Mandate strict HTTPS 301 redirection at edge router.'
                         },
                         {
-                            icon: (!rep.telemetry.open_rdp_3389 && !rep.telemetry.open_smb_445) ? 'fa-check text-green-400' : 'fa-xmark text-red-400',
+                            icon: (!rep.telemetry.open_rdp_3389 && !rep.telemetry.open_smb_445) ? 'fa-circle-check text-emerald-500' : 'fa-triangle-exclamation text-red-500',
+                            severity: (!rep.telemetry.open_rdp_3389 && !rep.telemetry.open_smb_445) ? 'LOW RISK' : 'HIGH RISK',
                             title: 'Perimeter Ports (RDP/SMB)',
-                            desc: (!rep.telemetry.open_rdp_3389 && !rep.telemetry.open_smb_445) ? 'Critical ports 3389 and 445 are closed to external ingress.' : 'CRITICAL: Open perimeter ports detected!'
+                            desc: (!rep.telemetry.open_rdp_3389 && !rep.telemetry.open_smb_445) ? 'Critical ports 3389 and 445 are closed to external ingress.' : 'CRITICAL: Open perimeter ports detected!',
+                            remediation: 'Filter ports 3389 and 445 at edge firewall immediately.'
                         },
                         {
-                            icon: rep.telemetry.hsts_present ? 'fa-check text-green-400' : 'fa-triangle-exclamation text-amber-400',
+                            icon: rep.telemetry.hsts_present ? 'fa-circle-check text-emerald-500' : 'fa-triangle-exclamation text-amber-500',
+                            severity: rep.telemetry.hsts_present ? 'LOW RISK' : 'MEDIUM RISK',
                             title: 'Strict-Transport-Security (HSTS)',
-                            desc: rep.telemetry.hsts_present ? 'HSTS header active with max-age=31536000.' : 'HSTS missing: Vulnerable to SSL stripping.'
+                            desc: rep.telemetry.hsts_present ? 'HSTS header active with max-age=31536000.' : 'HSTS missing: Vulnerable to SSL stripping.',
+                            remediation: 'Deploy header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload.'
                         },
                         {
-                            icon: rep.telemetry.csp_present ? 'fa-check text-green-400' : 'fa-triangle-exclamation text-amber-400',
+                            icon: rep.telemetry.csp_present ? 'fa-circle-check text-emerald-500' : 'fa-shield-halved text-indigo-500',
+                            severity: rep.telemetry.csp_present ? 'LOW RISK' : 'LOW RISK',
                             title: 'Content Security Policy (CSP)',
-                            desc: rep.telemetry.csp_present ? 'CSP active for clickjack & XSS mitigation.' : 'CSP header not configured. Recommended for zero-trust posture.'
+                            desc: rep.telemetry.csp_present ? 'CSP active for Clickjacking & XSS mitigation.' : 'CSP header not configured. Recommended for zero-trust defense.',
+                            remediation: 'Add Content-Security-Policy: frame-ancestors \'self\'.'
                         }
                     ];
                 }
             }
 
             scoreEl.innerText = `${score} / 100`;
-            discountEl.innerText = discount;
+            discountEl.innerText = rating;
             gradeEl.innerText = grade;
 
-            findingsList.innerHTML = findings.map(f => `
-                <div class="p-3 rounded-lg bg-black/60 border border-slate-800 flex items-start gap-3">
-                    <i class="fa-solid ${f.icon} mt-0.5"></i>
-                    <div>
-                        <span class="text-white font-bold block">${f.title}</span>
-                        <span class="text-slate-400 block text-[11px]">${f.desc}</span>
+            findingsList.innerHTML = findings.map(f => {
+                let isHigh = f.severity.includes('HIGH') || f.severity.includes('CRITICAL');
+                let isMed = f.severity.includes('MEDIUM');
+                let badgeStyle = isHigh 
+                    ? 'bg-red-50 text-red-700 border-red-300' 
+                    : (isMed ? 'bg-amber-50 text-amber-700 border-amber-300' : 'bg-emerald-50 text-emerald-700 border-emerald-300');
+
+                return `
+                    <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm hover:border-slate-300 transition-all">
+                        <div class="flex justify-between items-start gap-2 mb-1.5">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid ${f.icon} text-sm"></i>
+                                <h5 class="font-bold text-slate-900 text-xs sm:text-sm uppercase">${f.title}</h5>
+                            </div>
+                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${badgeStyle} shrink-0">
+                                ${f.severity}
+                            </span>
+                        </div>
+                        <p class="text-slate-600 text-xs font-mono mb-3 leading-relaxed">${f.desc}</p>
+                        <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-[11px] font-mono text-slate-700 flex items-start gap-2">
+                            <span class="font-bold text-slate-900 shrink-0">REMEDIATION:</span>
+                            <span>${f.remediation}</span>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             scanningState.classList.add('hidden');
             resultState.classList.remove('hidden');
@@ -1548,121 +2032,209 @@
         // =========================================================
         // GHOST BROWSER KINETIC SELF-DESTRUCT AD SEQUENCER
         // =========================================================
+        let ghostLoopTimer = null;
         function runGhostAdLoop() {
+            if (ghostLoopTimer) clearTimeout(ghostLoopTimer);
+
             const brand = document.getElementById('ghost-step-brand');
             const product = document.getElementById('ghost-step-product');
             const sub = document.getElementById('ghost-step-sub');
             const slogan = document.getElementById('ghost-step-slogan');
-            const destruct = document.getElementById('ghost-step-destruct');
+            const btnContainer = document.getElementById('ghost-step-btn-container');
+            const countdownBox = document.getElementById('ghost-step-countdown-box');
             const timer = document.getElementById('ghost-destruct-timer');
             const casing = document.getElementById('ghost-ad-casing');
 
             if (!brand || !product) return;
 
-            // Reset initial state
+            // Step 1: Initial state - TRUE BURNER visible, reset others
             brand.style.opacity = '1';
+            product.style.transition = 'opacity 7s ease-in-out';
             product.style.opacity = '0';
-            sub.style.opacity = '0';
-            slogan.style.opacity = '0';
-            destruct.style.opacity = '0';
+            if (sub) { sub.style.transition = 'opacity 0.6s ease'; sub.style.opacity = '0'; }
+            if (slogan) { slogan.style.transition = 'opacity 0.8s ease'; slogan.style.opacity = '0'; }
+            if (btnContainer) { btnContainer.style.transition = 'opacity 0.8s ease'; btnContainer.style.opacity = '0'; }
+            if (countdownBox) { countdownBox.style.transition = 'opacity 0.5s ease'; countdownBox.style.opacity = '0'; }
             if (timer) timer.innerText = '5';
+            if (casing) casing.style.filter = 'none';
 
-            // Step 2: GHOST BROWSER fades in slowly, very slowly (after 1.8s)
+            // Step 2: GHOST BROWSER takes 7 seconds to finish fading in
             setTimeout(() => {
                 product.style.opacity = '1';
-            }, 1800);
+            }, 100);
 
-            // Step 3: Quick POWERED BY R.E.P.™ (after 3.8s)
+            // Step 3: Quick POWERED BY R.E.P.™ badge (fades in around 4s)
             setTimeout(() => {
-                sub.style.opacity = '1';
-            }, 3800);
+                if (sub) sub.style.opacity = '1';
+            }, 4000);
 
-            // Step 4: Slogans for disposable time-sensitive sessions (after 5s)
+            // Step 4 & 5: When GHOST BROWSER finishes 7s fade-in, slogans & button appear
             setTimeout(() => {
-                slogan.style.opacity = '1';
-            }, 5000);
+                if (slogan) slogan.style.opacity = '1';
+                if (btnContainer) btnContainer.style.opacity = '1';
 
-            // Step 5: Countdown begins (after 6.8s)
-            setTimeout(() => {
-                destruct.style.opacity = '1';
-                let count = 5;
-                const countdownInterval = setInterval(() => {
-                    count--;
-                    if (timer) timer.innerText = count > 0 ? count : '0';
-                    if (count <= 0) {
-                        clearInterval(countdownInterval);
-                        // Brief self-destruct glitch inversion
-                        setTimeout(() => {
+                // Countdown begins 15 seconds after the button fades in
+                setTimeout(() => {
+                    if (countdownBox) countdownBox.style.opacity = '1';
+                    let count = 5;
+                    if (timer) timer.innerText = '5';
+
+                    const countdownInterval = setInterval(() => {
+                        count--;
+                        if (timer) timer.innerText = count > 0 ? count : '0';
+                        if (count <= 0) {
+                            clearInterval(countdownInterval);
+
+                            // Rapid color invert flash 3 times back-to-back
                             if (casing) {
                                 casing.style.filter = 'invert(1)';
                                 setTimeout(() => {
                                     casing.style.filter = 'none';
-                                    setTimeout(runGhostAdLoop, 1200);
-                                }, 250);
+                                    setTimeout(() => {
+                                        casing.style.filter = 'invert(1)';
+                                        setTimeout(() => {
+                                            casing.style.filter = 'none';
+                                            setTimeout(() => {
+                                                casing.style.filter = 'invert(1)';
+                                                setTimeout(() => {
+                                                    casing.style.filter = 'none';
+
+                                                    // Hide countdown, button, and slogans but leave TRUE BURNER and GHOST BROWSER on
+                                                    if (countdownBox) countdownBox.style.opacity = '0';
+                                                    if (btnContainer) btnContainer.style.opacity = '0';
+                                                    if (slogan) slogan.style.opacity = '0';
+                                                    if (sub) sub.style.opacity = '0';
+
+                                                    // Delay 2 seconds with TRUE BURNER and GHOST BROWSER on at the same time
+                                                    setTimeout(() => {
+                                                        runGhostAdLoop();
+                                                    }, 2000);
+                                                }, 140);
+                                            }, 140);
+                                        }, 140);
+                                    }, 140);
+                                }, 140);
                             } else {
-                                setTimeout(runGhostAdLoop, 1200);
+                                setTimeout(runGhostAdLoop, 2000);
                             }
-                        }, 800);
-                    }
-                }, 1000);
-            }, 6800);
+                        }
+                    }, 1000);
+                }, 15000); // 15-second delay from button appearance!
+            }, 7000); // 7s fade-in duration
         }
 
         // =========================================================
-        // DIGITAL CIGARETTE DETOX WIDGET SIMULATOR
+        // DIGITAL CIGARETTE INTERACTIVE WIDGET LOGIC
         // =========================================================
-        let detoxInterval = null;
-        let detoxSecs = 60;
-        function toggleDigitalDetox() {
-            const btn = document.getElementById('detox-btn');
-            const display = document.getElementById('detox-display');
-            const statusText = document.getElementById('detox-status-text');
-            const statusBadge = document.getElementById('detox-status-badge');
-            const ember = document.getElementById('cig-ember');
+        let cigSwipes = 0;
+        let cigSoot = 0;
+        let cigDopamine = 0;
+        let cigGrayMatter = 100;
+        let isCigBurning = false;
 
-            if (detoxInterval) {
-                clearInterval(detoxInterval);
-                detoxInterval = null;
-                detoxSecs = 60;
-                if (display) display.innerText = '01:00';
-                if (btn) btn.innerText = '🚬 TAKE 60-SEC BREAK';
-                if (statusText) statusText.innerText = '60-SEC VOLATILE DETOX';
-                if (statusBadge) {
-                    statusBadge.innerText = 'IDLE';
-                    statusBadge.className = 'text-[10px] font-mono text-green-400 px-1.5 py-0.5 rounded bg-green-950/80 border border-green-600';
-                }
-                if (ember) ember.classList.remove('scale-125', 'animate-pulse');
+        function clickCigSwipe() {
+            if (cigGrayMatter <= 15) {
+                alert("CRITICAL WARNING: Cognitive atrophy detected. Put on your helmet. Extinguish the Digital Cigarette immediately!");
                 return;
             }
+            cigSwipes += 1;
+            cigSoot += 0.8;
+            cigDopamine = Math.min(100, cigDopamine + 15);
+            cigGrayMatter = Math.max(10, cigGrayMatter - 6);
 
-            if (ember) ember.classList.add('scale-125', 'animate-pulse');
-            if (btn) btn.innerText = '⏹️ CANCEL DETOX';
-            if (statusBadge) {
-                statusBadge.innerText = 'BURNING';
-                statusBadge.className = 'text-[10px] font-mono text-amber-400 px-1.5 py-0.5 rounded bg-amber-950/80 border border-amber-500 animate-pulse';
+            // Update DOM Elements
+            const swipesNum = document.getElementById('cig-swipes-num');
+            const sootNum = document.getElementById('cig-soot-num');
+            const dopBar = document.getElementById('cig-dopamine-bar');
+            const grayBar = document.getElementById('cig-prefrontal-bar');
+            const statusTag = document.getElementById('cig-status-tag');
+            const cherry = document.getElementById('cig-cherry-element');
+            const cigBody = document.getElementById('cig-body-element');
+
+            if (swipesNum) swipesNum.innerText = cigSwipes;
+            if (sootNum) sootNum.innerText = cigSoot.toFixed(1) + " mg";
+            if (statusTag) {
+                statusTag.innerText = 'INHALING';
+                statusTag.className = 'text-[10px] font-mono text-amber-400 px-2 py-0.5 rounded bg-amber-950 border border-amber-500 animate-pulse';
             }
 
-            detoxInterval = setInterval(() => {
-                detoxSecs--;
-                const m = Math.floor(detoxSecs / 60).toString().padStart(2, '0');
-                const s = (detoxSecs % 60).toString().padStart(2, '0');
-                if (display) display.innerText = `${m}:${s}`;
-                if (statusText) statusText.innerText = `SEVERING TELEMETRY... [ ${60 - detoxSecs} TRACKERS PURGED ]`;
+            if (dopBar) {
+                dopBar.style.width = cigDopamine + "%";
+                if (cigDopamine > 75) {
+                    dopBar.style.background = 'linear-gradient(90deg, #ec4899, #ef4444)';
+                }
+            }
 
-                if (detoxSecs <= 0) {
-                    clearInterval(detoxInterval);
-                    detoxInterval = null;
-                    detoxSecs = 60;
-                    if (display) display.innerText = '00:00';
-                    if (statusText) statusText.innerText = 'SOVEREIGNTY RESTORED (100% RECLAIMED)';
-                    if (btn) btn.innerText = '🚬 RESTART DETOX BREAK';
-                    if (statusBadge) {
-                        statusBadge.innerText = 'CLEARED';
-                        statusBadge.className = 'text-[10px] font-mono text-green-400 px-1.5 py-0.5 rounded bg-green-950/80 border border-green-500';
-                    }
-                    if (ember) ember.classList.remove('scale-125', 'animate-pulse');
+            if (grayBar) {
+                grayBar.style.width = cigGrayMatter + "%";
+                if (cigGrayMatter < 40) {
+                    grayBar.classList.add('depleted');
+                }
+            }
+
+            // Animate Cigarette Cherry Burn and Body Shrinkage
+            isCigBurning = true;
+            if (cherry) cherry.classList.add('burning');
+            if (cigBody) {
+                let newWidth = Math.max(40, 100 - (cigSwipes * 4));
+                cigBody.style.width = newWidth + "%";
+            }
+
+            // Dopamine decay loop simulation
+            if (window.dopamineDecayTimer) {
+                clearInterval(window.dopamineDecayTimer);
+            }
+            window.dopamineDecayTimer = setInterval(() => {
+                if (cigDopamine > 0) {
+                    cigDopamine = Math.max(0, cigDopamine - 3);
+                    const db = document.getElementById('cig-dopamine-bar');
+                    if (db) db.style.width = cigDopamine + "%";
+                } else {
+                    clearInterval(window.dopamineDecayTimer);
                 }
             }, 1000);
+        }
+
+        function extinguishCig() {
+            isCigBurning = false;
+            cigSwipes = 0;
+            cigSoot = 0;
+            cigDopamine = 0;
+            cigGrayMatter = 100;
+
+            // Reset DOM Elements
+            const swipesNum = document.getElementById('cig-swipes-num');
+            const sootNum = document.getElementById('cig-soot-num');
+            const dopBar = document.getElementById('cig-dopamine-bar');
+            const grayBar = document.getElementById('cig-prefrontal-bar');
+            const statusTag = document.getElementById('cig-status-tag');
+            const cherry = document.getElementById('cig-cherry-element');
+            const cigBody = document.getElementById('cig-body-element');
+
+            if (swipesNum) swipesNum.innerText = '0';
+            if (sootNum) sootNum.innerText = '0.0 mg';
+            if (statusTag) {
+                statusTag.innerText = 'EXTINGUISHED';
+                statusTag.className = 'text-[10px] font-mono text-green-400 px-2 py-0.5 rounded bg-green-950 border border-green-600';
+            }
+
+            if (dopBar) {
+                dopBar.style.width = "0%";
+                dopBar.style.background = '#06b6d4';
+            }
+
+            if (grayBar) {
+                grayBar.style.width = "100%";
+                grayBar.classList.remove('depleted');
+            }
+
+            if (cherry) cherry.classList.remove('burning');
+            if (cigBody) cigBody.style.width = "100%";
+
+            if (window.dopamineDecayTimer) {
+                clearInterval(window.dopamineDecayTimer);
+            }
+            alert("PAUSE RETRIEVED: Digital cigarette extinguished. Reclaiming prefrontal control.");
         }
 
         window.addEventListener('DOMContentLoaded', () => {
