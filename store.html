@@ -766,7 +766,88 @@
                 color: #ffffff !important;
             }
         }
-    </style>
+    
+        /* =========================================================
+           BURN-1 INTELLIGENT EVIDENCE BINDER // 9-PHASE POOL BALL STEPPER
+           ========================================================= */
+        .pool-ball {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+        }
+        .pool-ball.pending {
+            background: #18181b;
+            color: #71717a;
+            border: 2px solid #3f3f46;
+        }
+        .pool-ball.active {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000000;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 16px rgba(245, 158, 11, 0.7);
+            transform: scale(1.08);
+        }
+        .pool-ball.completed {
+            background: #10b981;
+            color: #000000;
+            border: 2px solid #a7f3d0;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+        }
+        html.day-mode .pool-ball.pending {
+            background: #e4e4e7;
+            color: #52525b;
+            border: 2px solid #d4d4d8;
+        }
+        html.day-mode .pool-ball.active {
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45);
+        }
+        html.day-mode .pool-ball.completed {
+            background: #059669;
+            color: #ffffff;
+            border: 2px solid #10b981;
+        }
+
+        .phase-accordion-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .phase-accordion-card.active-phase {
+            border-color: #f59e0b !important;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.25) !important;
+        }
+        .card-plain-stage {
+            border: 2px dashed #71717a !important;
+            background: rgba(24, 24, 27, 0.8) !important;
+        }
+        .card-certified-stage {
+            border: 2px solid #10b981 !important;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.12)) !important;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3) !important;
+        }
+        .binder-thumb-hover {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+            cursor: pointer;
+        }
+        .binder-thumb-hover:hover {
+            transform: scale(1.15) rotate(-1.5deg);
+            z-index: 40;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+        }
+        .radar-spinner-pulse {
+            animation: spin-cw 2.5s linear infinite;
+        }
+</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between relative antialiased selection:bg-purple-600 selection:text-white">
 
@@ -836,75 +917,49 @@
         </div>
 
         <!-- =========================================================
-             TIER 1 (SPOTLIGHT): CYBER INSURANCE READINESS AUDIT & EVIDENCE BINDERS
-             Clean 3-Tier Architecture ($499 Binder, $1,250-$3,500 Full Audit, $99-$199/mo Monitoring)
+             TIER 1 (SPOTLIGHT): BURN-1 INTELLIGENT EVIDENCE BINDER™
+             Autonomous Cyber Insurance Readiness, Broker-Approved Proof Packages & Stepper Wizard
              ========================================================= -->
-        <div id="audit" class="p-8 md:p-10 rounded-3xl border-2 border-amber-500 bg-black/85 mb-14 shadow-[0_0_40px_rgba(245,158,11,0.35)] glass-panel relative overflow-hidden">
+        <div id="audit" class="p-6 sm:p-10 rounded-3xl border-2 border-amber-500 bg-black/85 mb-14 shadow-[0_0_40px_rgba(245,158,11,0.35)] glass-panel relative overflow-hidden">
             <div class="absolute -top-12 -right-12 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <div class="mb-8">
-                <div class="flex flex-wrap items-center gap-2 mb-3">
-                    <span class="px-3 py-1 rounded bg-amber-950/80 border border-amber-500 text-amber-300 font-mono text-[11px] font-bold uppercase tracking-wider">
-                        SERVICE TRACK &bull; NOT A DOWNLOAD
-                    </span>
-                    <span class="px-3 py-1 rounded bg-green-950/80 border border-green-500 text-green-300 font-mono text-[11px] font-bold uppercase tracking-wider">
-                        FIXED PRICING &bull; WRITTEN SCOPE
-                    </span>
-                    <span class="px-2.5 py-1 rounded bg-purple-950/80 text-purple-300 font-mono text-[11px] font-bold uppercase">
-                        ZERO VENDOR SOFTWARE EXPENSES
-                    </span>
+            <!-- Header & Official Seal Banner -->
+            <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-amber-500/30 pb-6">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="px-3 py-1 rounded bg-amber-950/80 border border-amber-500 text-amber-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+                            SERVICE TRACK &bull; NOT A DOWNLOAD
+                        </span>
+                        <span class="px-3 py-1 rounded bg-green-950/80 border border-green-500 text-green-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+                            FIXED PRICING &bull; WRITTEN SCOPE
+                        </span>
+                        <span class="px-2.5 py-1 rounded bg-purple-950/80 text-purple-300 font-mono text-[11px] font-bold uppercase">
+                            OFFICIAL UNDERWRITING EVIDENCE
+                        </span>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase glow-title">
+                        Intelligent Evidence Binder&trade;
+                    </h2>
+                    <p class="text-xs sm:text-sm font-mono text-slate-200 mt-1 max-w-3xl leading-relaxed">
+                        Autonomous Cyber Insurance Readiness, Broker-Approved Proof Packages &bull; Verified by the Burn-1 Cyber Academy Seal.
+                    </p>
                 </div>
 
-                <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase mb-2">
-                    Cyber Insurance Readiness Audit &amp; Evidence Binders
-                </h2>
-                <p class="text-sm font-mono text-slate-200 leading-relaxed max-w-4xl">
-                    Run the free 60-second perimeter scan on the Hub, then turn the findings into verified proof your broker or carrier underwriter can use. Plain English, written scope, zero surprises.
-                </p>
-            </div>
-
-            <!-- 5-Step Process Bar -->
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-10 font-mono text-xs">
-                <div class="p-3.5 rounded-xl bg-black/60 border border-neutral-800 flex flex-col justify-between">
-                    <div>
-                        <span class="w-6 h-6 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-xs mb-2">1</span>
-                        <strong class="text-white block mb-1">Free 60s Scan</strong>
-                        <span class="text-slate-300 text-[11px]">Public surface scan of your domain from our Hub.</span>
-                    </div>
-                </div>
-                <div class="p-3.5 rounded-xl bg-black/60 border border-neutral-800 flex flex-col justify-between">
-                    <div>
-                        <span class="w-6 h-6 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-xs mb-2">2</span>
-                        <strong class="text-white block mb-1">Pick Package</strong>
-                        <span class="text-slate-300 text-[11px]">Short service agreement naming authorized perimeter.</span>
-                    </div>
-                </div>
-                <div class="p-3.5 rounded-xl bg-black/60 border border-neutral-800 flex flex-col justify-between">
-                    <div>
-                        <span class="w-6 h-6 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-xs mb-2">3</span>
-                        <strong class="text-white block mb-1">20-Min Checklist</strong>
-                        <span class="text-slate-300 text-[11px]">MFA, backups, ingress. Plain English, no tech jargon.</span>
-                    </div>
-                </div>
-                <div class="p-3.5 rounded-xl bg-black/60 border border-neutral-800 flex flex-col justify-between">
-                    <div>
-                        <span class="w-6 h-6 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-xs mb-2">4</span>
-                        <strong class="text-white block mb-1">Evidence Binder</strong>
-                        <span class="text-slate-300 text-[11px]">Color-coded gap report with fix list in 3-5 days.</span>
-                    </div>
-                </div>
-                <div class="p-3.5 rounded-xl bg-black/60 border border-neutral-800 flex flex-col justify-between">
-                    <div>
-                        <span class="w-6 h-6 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-xs mb-2">5</span>
-                        <strong class="text-white block mb-1">Proof Letter</strong>
-                        <span class="text-slate-300 text-[11px]">Re-scan after fixes + dated letter for your broker.</span>
+                <!-- Official Burn-1 Academy Seal Emblem -->
+                <div class="flex items-center gap-3 p-3 rounded-2xl bg-neutral-950/90 border border-amber-500/50 shadow-lg shrink-0">
+                    <img src="assets/Burn1logosilver.jpg" alt="Burn-1 Academy Seal" class="w-14 h-14 rounded-xl border border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.5)] object-cover">
+                    <div class="text-left font-mono">
+                        <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest block">OFFICIAL ATTESTATION SEAL</span>
+                        <span class="text-xs font-cyber font-bold text-white uppercase block">Burn-1 Cyber Academy</span>
+                        <span class="text-[10px] text-slate-400 block">NIST CSF 2.0 / NYDFS 500 Eligible</span>
                     </div>
                 </div>
             </div>
 
-            <!-- 3 Pricing Tier Cards Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Tier 1: Evidence Binder -->
+            <!-- 3 Core Commercial Pricing Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Tier 1: Intelligent Evidence Binder -->
                 <div class="p-6 rounded-2xl bg-black/70 border border-neutral-700 flex flex-col justify-between relative group hover:border-amber-400 transition-all">
                     <div>
                         <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-wider block mb-1">DIAGNOSTIC CORE</span>
@@ -917,37 +972,23 @@
                             Ideal for business owners preparing for questionnaire submissions who need clear, signed gap evidence.
                         </p>
                         <ul class="space-y-2 font-mono text-xs text-slate-200 mb-6">
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> External perimeter scan of your domain
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> Email spoofing check (SPF / DKIM / DMARC)
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> Insurer-style questionnaire scoring
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> Plain-English gap report (6-8 page PDF)
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> 30-minute walkthrough call
-                            </li>
-                            <li class="flex items-start gap-2 text-slate-500">
-                                <span>–</span> Hands-on remediation execution
-                            </li>
-                            <li class="flex items-start gap-2 text-slate-500">
-                                <span>–</span> Carrier attestation proof letter
-                            </li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> External perimeter scan of your domain</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Email spoofing check (SPF / DKIM / DMARC)</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Insurer-style questionnaire scoring</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Plain-English gap report (6-8 page PDF)</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> 30-minute walkthrough call</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Includes 1 free re-scan within 30 days</li>
+                            <li class="flex items-start gap-2 text-slate-500"><span>&ndash;</span> Hands-on remediation execution</li>
                         </ul>
                     </div>
                     <div>
-                        <a href="mailto:leonrdarden@gmail.com?subject=Evidence%20Binder%20%28%24499%29&body=Business%20and%20website%3A%0AStaff%20count%3A" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+                        <button type="button" onclick="jumpToWizardPhase(1, 'binder')" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(245,158,11,0.4)]">
                             <i class="fa-solid fa-folder-closed"></i> START EVIDENCE BINDER ($499)
-                        </a>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Tier 2: Most Popular - Insurance-Ready Audit -->
+                <!-- Tier 2: Insurance-Ready Audit -->
                 <div class="p-6 rounded-2xl bg-black/80 border-2 border-amber-400 flex flex-col justify-between relative shadow-[0_0_25px_rgba(245,158,11,0.25)]">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-amber-500 text-black font-cyber text-[10px] font-extrabold uppercase tracking-wider">
                         MOST POPULAR // COMPLETE REMEDIATION
@@ -963,30 +1004,18 @@
                             Full diagnostic plus hands-on configuration of all top controls with verified proof letter for your broker.
                         </p>
                         <ul class="space-y-2 font-mono text-xs text-slate-200 mb-6">
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> <strong class="text-white">Everything in Evidence Binder</strong>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> MFA, email protection &amp; backup setup
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> Patching and admin access cleanup
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> Re-scan after fixes (before/after score)
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> Dated proof letter for your broker / underwriter
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-amber-400">▸</span> Priority turnaround (1-3 business days)
-                            </li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> <strong class="text-white">Everything in Evidence Binder</strong></li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> MFA, email protection &amp; backup setup</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Patching and admin access cleanup</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Re-scan after fixes (before/after score)</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Dated proof letter for your broker / underwriter</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Priority turnaround (1-3 business days)</li>
                         </ul>
                     </div>
                     <div>
-                        <a href="mailto:leonrdarden@gmail.com?subject=Insurance-Ready%20Package&body=Business%20and%20website%3A%0AStaff%20count%3A%0AInsurer%20or%20broker%20%28optional%29%3A" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.6)]">
-                            <i class="fa-solid fa-shield-halved"></i> GET A FIXED QUOTE &rarr;
-                        </a>
+                        <button type="button" onclick="jumpToWizardPhase(1, 'insurance-ready')" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.6)]">
+                            <i class="fa-solid fa-shield-halved"></i> START FULL AUDIT ($1,250)
+                        </button>
                     </div>
                 </div>
 
@@ -1003,29 +1032,514 @@
                             Ongoing perimeter monitoring to prevent drift and ensure effortless annual policy renewals.
                         </p>
                         <ul class="space-y-2 font-mono text-xs text-slate-200 mb-6">
-                            <li class="flex items-start gap-2">
-                                <span class="text-cyan-400">▸</span> Monthly external re-scan
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-cyan-400">▸</span> Alerts for expired certs &amp; new open ports
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-cyan-400">▸</span> Pre-renewal re-check &amp; updated proof letter
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-cyan-400">▸</span> Direct email support on carrier questionnaires
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-cyan-400">▸</span> Metro Plaza Directory verified badge status
-                            </li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Monthly external re-scan</li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Alerts for expired certs &amp; new open ports</li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Pre-renewal re-check &amp; updated proof letter</li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Direct email support on carrier questionnaires</li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Metro Plaza Directory verified badge status</li>
                         </ul>
                     </div>
                     <div>
-                        <a href="mailto:leonrdarden@gmail.com?subject=Monitoring%20Plan%20Inquiry&body=Business%20and%20website%3A" class="w-full py-3 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-400 text-cyan-200 font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                        <button type="button" onclick="jumpToWizardPhase(1, 'monitoring')" class="w-full py-3 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-400 text-cyan-200 font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
                             <i class="fa-solid fa-arrows-rotate"></i> ADD MONITORING ($99/MO)
-                        </a>
+                        </button>
                     </div>
                 </div>
+            </div>
+
+            <!-- =========================================================
+                 THE 9-PHASE ACCORDION STEPPER ENGINE (POOL BALL NUMBERS 1-9)
+                 ========================================================= -->
+            <div id="wizard-container" class="p-6 sm:p-8 rounded-3xl bg-neutral-950/90 border-2 border-amber-500/70 shadow-2xl relative mb-4">
+                
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 mb-6 border-b border-neutral-800 gap-3">
+                    <div>
+                        <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block">PROGRESSIVE ONBOARDING PIPELINE</span>
+                        <h3 class="font-cyber text-lg sm:text-xl font-bold text-white uppercase">
+                            Evidence Binder 9-Phase Verification Engine
+                        </h3>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs font-mono">
+                        <span id="session-status-badge" class="px-2.5 py-1 rounded bg-neutral-900 border border-neutral-700 text-slate-400 text-[11px]">
+                            Session: Ready
+                        </span>
+                        <button type="button" onclick="resetStepperState()" class="px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-[10px] font-bold uppercase transition-all">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 9 Pool Balls Horizontal Tracker Bar -->
+                <div class="flex items-center justify-between gap-1 sm:gap-2 mb-8 overflow-x-auto pb-2 select-none" id="pool-ball-track">
+                    <div class="flex items-center gap-1 sm:gap-2 mx-auto">
+                        <button type="button" onclick="togglePhase(1)" id="ball-1" class="pool-ball active" title="Phase 1: Free 60-Sec Scan">1</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(2)" id="ball-2" class="pool-ball pending" title="Phase 2: Email & Sample Dossier">2</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(3)" id="ball-3" class="pool-ball pending" title="Phase 3: Industry Matrix">3</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(4)" id="ball-4" class="pool-ball pending" title="Phase 4: Dual-Path Fork">4</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(5)" id="ball-5" class="pool-ball pending" title="Phase 5: Document Gate & Checklist">5</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(6)" id="ball-6" class="pool-ball pending" title="Phase 6: Calculated PayPal Checkout">6</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(7)" id="ball-7" class="pool-ball pending" title="Phase 7: Directory Staging (Plain Card)">7</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(8)" id="ball-8" class="pool-ball pending" title="Phase 8: Binder Compilation">8</button>
+                        <span class="text-neutral-600 text-xs">&rsaquo;</span>
+                        <button type="button" onclick="togglePhase(9)" id="ball-9" class="pool-ball pending" title="Phase 9: Stamping the Seal">9</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 1: FREE 60-SEC SURFACE SCAN -->
+                <div id="phase-card-1" class="phase-accordion-card active-phase p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(1)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball active text-xs">1</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 1: Free 60-Second Perimeter Scan</h4>
+                                <p class="font-mono text-xs text-slate-400">Cryptographic TLS 1.3, HSTS header &amp; perimeter port cloaking check.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-1" class="text-amber-400 text-sm font-bold">&#9660;</span>
+                    </div>
+
+                    <div id="phase-body-1" class="mt-5 pt-4 border-t border-neutral-800 space-y-4">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input type="text" id="stepper-domain-input" placeholder="Enter company domain (e.g. burn-1.com or company.com)" class="flex-grow bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-white font-mono text-xs focus:border-amber-400 focus:outline-none">
+                            <button type="button" onclick="runPhase1Scan()" id="btn-run-scan" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)] shrink-0 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-radar"></i> RUN 60-SEC SCAN
+                            </button>
+                        </div>
+
+                        <!-- Scan Telemetry Console / Results Preview -->
+                        <div id="scan-terminal-preview" class="hidden p-4 rounded-xl bg-neutral-950 border border-neutral-700 font-mono text-xs space-y-2">
+                            <div class="flex justify-between items-center pb-2 border-b border-neutral-800">
+                                <span class="text-amber-400 font-bold" id="scan-progress-status">[&#9679;] INITIATING CRYPTOGRAPHIC HANDSHAKE...</span>
+                                <span class="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500 font-bold text-[11px]" id="scan-grade-display">GRADE A (92/100)</span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-300 pt-1">
+                                <div><span class="text-emerald-400 font-bold">&#10003;</span> TLS 1.3 Transport: Negotiated (Port 443)</div>
+                                <div><span class="text-emerald-400 font-bold">&#10003;</span> Strict-Transport-Security: Active</div>
+                                <div><span class="text-emerald-400 font-bold">&#10003;</span> Perimeter Ports (3389/445): Cloaked (Safe)</div>
+                                <div><span class="text-amber-400 font-bold">&#9888;</span> Content-Security-Policy: Policy Advisory</div>
+                            </div>
+                            <div class="pt-3 border-t border-neutral-800 flex justify-end">
+                                <button type="button" onclick="proceedToPhase(2)" class="px-5 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all">
+                                    UNLOCK PHASE 2: DISPATCH REPORT &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 2: EMAIL VERIFICATION & SAMPLE DOSSIER DELIVERY -->
+                <div id="phase-card-2" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(2)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-2">2</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 2: Email Verification &amp; Sample Dossier</h4>
+                                <p class="font-mono text-xs text-slate-400">Lock in your profile and receive the sample Evidence Dossier PDF.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-2" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-2" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-slate-300 text-[11px] font-mono uppercase font-bold mb-1">Corporate Officer Email:</label>
+                                <input type="email" id="stepper-email-input" placeholder="officer@company.com" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-2.5 text-white font-mono text-xs focus:border-amber-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 text-[11px] font-mono uppercase font-bold mb-1">Company / Legal Entity Name:</label>
+                                <input type="text" id="stepper-company-input" placeholder="Acme Logistics LLC" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-2.5 text-white font-mono text-xs focus:border-amber-400 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div id="phase-2-dispatch-msg" class="hidden p-3 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-300 font-mono text-xs">
+                            &#10003; <strong>Verification Profile Saved!</strong> Sample Evidence Dossier PDF dispatched to your inbox. Your progress is cached.
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-2">
+                            <span class="font-mono text-[11px] text-slate-400">No spam. Only formal gap analyses and underwriting attestations.</span>
+                            <button type="button" onclick="savePhase2Email()" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all">
+                                DISPATCH SAMPLE &amp; UNLOCK PHASE 3 &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 3: INDUSTRY PROFILE (9-CATEGORY SELECTOR) -->
+                <div id="phase-card-3" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(3)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-3">3</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 3: Industry Profile &amp; Regulatory Scope</h4>
+                                <p class="font-mono text-xs text-slate-400">Calibrate specific underwriting standards (NIST CSF 2.0, HIPAA, NYDFS 500, PCI).</p>
+                            </div>
+                        </div>
+                        <span id="chevron-3" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-3" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="healthcare" class="mt-1" onchange="selectIndustry('healthcare', 'HIPAA Security Rule')">
+                                <div><strong class="text-white text-xs block">Healthcare &amp; Dental</strong><span class="text-[10px] text-slate-400 font-mono">HIPAA &bull; ePHI Protection</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="legal" class="mt-1" onchange="selectIndustry('legal', 'NYDFS 23 NYCRR 500')">
+                                <div><strong class="text-white text-xs block">Legal &amp; Finance</strong><span class="text-[10px] text-slate-400 font-mono">NYDFS 500 &bull; Escrow Wire Security</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="retail" class="mt-1" onchange="selectIndustry('retail', 'PCI-DSS v4.0')">
+                                <div><strong class="text-white text-xs block">Retail &amp; E-Commerce</strong><span class="text-[10px] text-slate-400 font-mono">PCI-DSS &bull; Payment Isolation</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="hospitality" class="mt-1" onchange="selectIndustry('hospitality', 'POS Privacy & PCI')">
+                                <div><strong class="text-white text-xs block">Hospitality &amp; Dining</strong><span class="text-[10px] text-slate-400 font-mono">POS Terminal &bull; Menu Privacy</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="personal_care" class="mt-1" onchange="selectIndustry('personal_care', 'Zero-Party Client Privacy')">
+                                <div><strong class="text-white text-xs block">Barbers &amp; Personal Care</strong><span class="text-[10px] text-slate-400 font-mono">Zero-Party &bull; Customer Data Shield</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="auto" class="mt-1" onchange="selectIndustry('auto', 'Vendor Trade Boundary')">
+                                <div><strong class="text-white text-xs block">Automotive &amp; Repairs</strong><span class="text-[10px] text-slate-400 font-mono">Vendor Network Integrity</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="construction" class="mt-1" onchange="selectIndustry('construction', 'Remote Endpoint Defense')">
+                                <div><strong class="text-white text-xs block">Construction &amp; Trade</strong><span class="text-[10px] text-slate-400 font-mono">Remote Field Device Boundary</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="realestate" class="mt-1" onchange="selectIndustry('realestate', 'Wire Fraud & Email Defenses')">
+                                <div><strong class="text-white text-xs block">Real Estate &amp; Title</strong><span class="text-[10px] text-slate-400 font-mono">Wire Impersonation Defenses</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer hover:border-amber-400 transition-all">
+                                <input type="radio" name="stepper-industry" value="tech_msp" class="mt-1" onchange="selectIndustry('tech_msp', 'SOC 2 Type II Alignment')">
+                                <div><strong class="text-white text-xs block">Technology &amp; MSPs</strong><span class="text-[10px] text-slate-400 font-mono">SOC 2 Type II &bull; Reseller Ready</span></div>
+                            </label>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-neutral-950 border border-neutral-800 flex justify-between items-center text-xs font-mono">
+                            <span class="text-slate-300">Target Framework: <strong class="text-amber-400" id="selected-framework-name">NIST CSF 2.0 Baseline</strong></span>
+                            <button type="button" onclick="proceedToPhase(4)" class="px-5 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all">
+                                LOCK FRAMEWORK &amp; FORK PATH &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 4: DUAL-PATH FORK (DIY VS. TURNKEY) -->
+                <div id="phase-card-4" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(4)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-4">4</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 4: The Dual-Path Decision Fork</h4>
+                                <p class="font-mono text-xs text-slate-400">Choose free self-study training or turnkey automated evidence compilation.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-4" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-4" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Track A: Free DIY Academy -->
+                            <div class="p-5 rounded-2xl bg-neutral-950 border border-purple-500/50 flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-widest block mb-1">FREE SELF-STUDY TRACK</span>
+                                    <h5 class="font-cyber text-base font-bold text-white uppercase mb-2">Burn-1 Cyber Academy</h5>
+                                    <p class="font-mono text-xs text-slate-300 mb-4 leading-relaxed">
+                                        Free gamified training modules. Learn email spoofing defenses, MFA setup, and clear the simulation boss to earn your credential badge.
+                                    </p>
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <img src="assets/antiphishing_badge.jpg" alt="Anti Phishing Badge" class="w-10 h-10 rounded border border-purple-400 object-cover">
+                                        <img src="assets/multifactorbadge1.jpg" alt="MFA Badge" class="w-10 h-10 rounded border border-purple-400 object-cover">
+                                        <span class="text-[11px] font-mono text-slate-400">Earn verifiable credential badges</span>
+                                    </div>
+                                </div>
+                                <a href="academy.html" target="_blank" class="w-full py-2.5 rounded-lg bg-purple-950 border border-purple-500 hover:bg-purple-900 text-purple-200 font-mono text-xs font-bold uppercase text-center transition-all">
+                                    LAUNCH FREE ACADEMY &rarr;
+                                </a>
+                            </div>
+
+                            <!-- Track B: Automated Intelligent Evidence Binder -->
+                            <div class="p-5 rounded-2xl bg-gradient-to-br from-amber-950/40 to-black border-2 border-amber-400 flex flex-col justify-between shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+                                <div>
+                                    <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block mb-1">TURNKEY B2B REMEDIATION</span>
+                                    <h5 class="font-cyber text-base font-bold text-white uppercase mb-2">Intelligent Evidence Binder ($499)</h5>
+                                    <p class="font-mono text-xs text-slate-300 mb-4 leading-relaxed">
+                                        Official machine-compiled proof package with dated broker letter, NIST compliance scoring, and stamped Burn-1 Academy seal for your underwriter.
+                                    </p>
+                                    <span class="inline-block px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-mono text-[11px] font-bold border border-amber-500/40 mb-4">
+                                        Eligible for Carrier Policy Credits
+                                    </span>
+                                </div>
+                                <button type="button" onclick="proceedToPhase(5)" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+                                    PROCEED TO DOCUMENT GATE &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 5: DOCUMENT GATHERING & CHECKLIST (ANTI-FRAUD GATE) -->
+                <div id="phase-card-5" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(5)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-5">5</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 5: Document Gathering &amp; Pre-Audit Checklist</h4>
+                                <p class="font-mono text-xs text-slate-400">Mandatory corporate attestation. Verifies authority and filters unauthorized requests.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-5" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-5" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <div class="p-3.5 rounded-xl bg-red-950/40 border border-red-500/60 text-red-200 font-mono text-xs space-y-1">
+                            <p class="font-bold flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> CORPORATE QUALIFICATION GATE</p>
+                            <p class="text-[11px] text-slate-300">To prevent fraudulent chargebacks and stolen card attempts, legitimate corporate paperwork and attestations must be provided prior to checkout. Unverified claims cannot receive the Burn-1 Academy seal.</p>
+                        </div>
+
+                        <div class="space-y-3 font-mono text-xs">
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer">
+                                <input type="checkbox" id="check-mfa" class="mt-1" onchange="validatePaperworkGate()">
+                                <div><strong class="text-white block">Multi-Factor Authentication (MFA) Attestation</strong><span class="text-slate-400 text-[11px]">I confirm MFA is enforced (or in deployment) on all primary email &amp; administrator access portals.</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer">
+                                <input type="checkbox" id="check-backup" class="mt-1" onchange="validatePaperworkGate()">
+                                <div><strong class="text-white block">Backup Storage Isolation</strong><span class="text-slate-400 text-[11px]">I confirm critical business records utilize isolated cloud, immutable, or offline air-gapped backups.</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer">
+                                <input type="checkbox" id="check-authority" class="mt-1" onchange="validatePaperworkGate()">
+                                <div><strong class="text-white block">Corporate Authority &amp; Domain Ownership</strong><span class="text-slate-400 text-[11px]">I certify I am an authorized corporate officer or designated IT representative for the specified domain.</span></div>
+                            </label>
+                            <label class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 flex items-start gap-3 cursor-pointer">
+                                <input type="checkbox" id="check-renewal" class="mt-1" onchange="validatePaperworkGate()">
+                                <div><strong class="text-white block">Renewal Questionnaire Requirement</strong><span class="text-slate-400 text-[11px]">I confirm this evidence binder is being prepared for underwriter submission, internal audit, or directory proof.</span></div>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label class="block text-slate-300 text-[11px] font-mono uppercase font-bold mb-1">Documentation Notes / Policy ID Reference (Optional):</label>
+                            <textarea id="stepper-paperwork-notes" rows="2" placeholder="e.g. Travelers Policy #8942-01, Microsoft 365 MFA enforced, Veeam immutable cloud backup" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-2 text-white font-mono text-xs focus:border-amber-400 focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-2">
+                            <span id="gate-status-text" class="text-red-400 font-mono text-[11px]">Please check all 4 attestation boxes above to proceed.</span>
+                            <button type="button" id="btn-pass-gate" disabled onclick="passPaperworkGate()" class="px-6 py-2.5 rounded-xl bg-neutral-800 text-neutral-500 font-cyber font-bold text-xs uppercase cursor-not-allowed transition-all">
+                                VERIFY PAPERWORK &amp; PROCEED &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 6: CALCULATED PAYPAL CHECKOUT & ORDER KEY -->
+                <div id="phase-card-6" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(6)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-6">6</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 6: Calculated Checkout &amp; Order Session Key</h4>
+                                <p class="font-mono text-xs text-slate-400">Order Key generated. Cold-feet safe: resume anytime without re-entering data.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-6" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-6" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <div class="p-5 rounded-2xl bg-neutral-950 border border-amber-500/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-amber-400 font-mono text-xs font-bold">SESSION ORDER KEY:</span>
+                                    <code class="px-2 py-0.5 rounded bg-black border border-amber-500/60 text-amber-300 font-mono text-xs font-bold" id="display-order-key">B1-ORD-958405</code>
+                                </div>
+                                <h5 class="font-cyber text-base font-bold text-white" id="order-package-title">Intelligent Evidence Binder Package</h5>
+                                <p class="font-mono text-xs text-slate-400" id="order-target-summary">Target Domain: burn-1.com &bull; Framework: NIST CSF 2.0</p>
+                                
+                                <div class="mt-3 flex items-center gap-2">
+                                    <input type="checkbox" id="add-monitoring-toggle" onchange="updateCheckoutTotal()" class="rounded">
+                                    <label for="add-monitoring-toggle" class="text-xs font-mono text-cyan-300 cursor-pointer">Add Stay Covered Continuous Monthly Monitoring (+ $99/mo)</label>
+                                </div>
+                            </div>
+
+                            <div class="text-right shrink-0">
+                                <span class="text-[10px] font-mono text-slate-400 uppercase block">Total Due:</span>
+                                <span class="text-4xl font-cyber font-extrabold text-amber-400 block" id="checkout-total-price">$499.00</span>
+                                <span class="text-[10px] font-mono text-emerald-400 block">&#10003; Paperwork Verified</span>
+                            </div>
+                        </div>
+
+                        <!-- Abandonment Recovery Banner -->
+                        <div class="p-3 rounded-xl bg-neutral-900 border border-neutral-700 text-slate-300 font-mono text-[11px] flex justify-between items-center flex-wrap gap-2">
+                            <span>&#128190; <em>Got cold feet?</em> Your paperwork and domain telemetry are saved under your Order Key. You can leave and resume seamlessly.</span>
+                            <span class="text-amber-400 font-bold">Progress Saved Locally</span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-2">
+                            <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.6)] flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-paypal"></i> PAYPAL DIRECT CHECKOUT ($499)
+                            </a>
+                            <button type="button" onclick="confirmPaymentAndStage()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-neutral-900 border border-emerald-500 text-emerald-300 font-mono text-xs font-bold uppercase hover:bg-emerald-950 transition-all">
+                                &#10003; CONFIRM &amp; STAGE TO DIRECTORY &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 7: DIRECTORY STAGING (PLAIN UNVERIFIED CARD) -->
+                <div id="phase-card-7" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(7)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-7">7</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 7: Directory Staging (The Plain Unverified Card)</h4>
+                                <p class="font-mono text-xs text-slate-400">Initial card staged in pending queue without seal. Prevents unauthorized listings.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-7" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-7" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <div class="p-3.5 rounded-xl bg-neutral-900 border border-neutral-700 font-mono text-xs text-slate-300">
+                            <strong>Landlord Curation Protocol:</strong> Newly enrolled businesses enter the Metro Plaza Directory in a <em>Plain / Pending</em> state. The official Burn-1 Academy seal is only unlocked once Phase 8 compilation verifies compliance.
+                        </div>
+
+                        <!-- Plain Unverified Card Preview -->
+                        <div id="plain-card-preview" class="p-6 rounded-2xl card-plain-stage max-w-xl mx-auto space-y-3 font-mono">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h5 class="font-cyber text-lg font-bold text-white uppercase" id="plain-card-biz-name">Acme Logistics LLC</h5>
+                                    <p class="text-xs text-slate-400" id="plain-card-domain">https://acme.burn-1.com</p>
+                                </div>
+                                <span class="px-2.5 py-0.5 rounded bg-neutral-800 border border-neutral-600 text-neutral-400 text-[10px] font-bold uppercase">
+                                    STAGE: PENDING VERIFICATION
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-300">Category: <span class="text-amber-400 font-bold" id="plain-card-category">Logistics &amp; Trade</span></p>
+                            <div class="p-3 rounded-lg bg-black/60 border border-neutral-800 text-[11px] text-slate-400 flex items-center gap-2">
+                                <i class="fa-solid fa-hourglass-half text-amber-500"></i>
+                                <span>Awaiting Evidence Binder compilation &bull; Official Seal Not Yet Stamped</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-2">
+                            <button type="button" onclick="proceedToPhase(8)" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-cyber font-bold text-xs uppercase transition-all">
+                                COMPILE EVIDENCE BINDER &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 8: AUTOMATED EVIDENCE BINDER COMPILATION -->
+                <div id="phase-card-8" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-4 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(8)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-8">8</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 8: Automated Evidence Binder Compilation</h4>
+                                <p class="font-mono text-xs text-slate-400">Autonomous machine reconciliation of surface scan and client paperwork.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-8" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-8" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <!-- Machine Compilation Terminal Readout -->
+                        <div class="p-4 rounded-xl bg-slate-950 text-emerald-400 font-mono text-xs space-y-1.5 shadow-inner">
+                            <p>[*] Ingesting Phase 1 perimeter telemetry (TLS 1.3, HSTS, Port cloaking)...</p>
+                            <p>[*] Validating Phase 5 corporate paperwork attestations (MFA, Backup Isolation)...</p>
+                            <p>[*] Generating Cryptographic Certificate ID: <span class="text-amber-400 font-bold" id="compilation-cert-id">CERT-B1-958405</span>...</p>
+                            <p>[+] Compiling 8-Page Intelligent Evidence Binder PDF &bull; Completed in 1.4s.</p>
+                            <p>[+] Stamping Carrier Alignment Matrix (Chubb / Travelers renewal eligible).</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <a href="assets/Cyber_Insurance_Evidence_DARDEN-PROOF-958405.txt" target="_blank" class="p-4 rounded-xl bg-neutral-900 border border-neutral-700 hover:border-amber-400 flex items-center justify-between text-xs font-mono text-white transition-all">
+                                <span><i class="fa-solid fa-file-pdf text-red-500 mr-2 text-base"></i> Download Evidence Binder PDF</span>
+                                <span class="text-amber-400">&darr;</span>
+                            </a>
+                            <a href="assets/Cyber_Insurance_Evidence_PROOF_SAMPLE.txt" target="_blank" class="p-4 rounded-xl bg-neutral-900 border border-neutral-700 hover:border-cyan-400 flex items-center justify-between text-xs font-mono text-white transition-all">
+                                <span><i class="fa-solid fa-file-shield text-cyan-400 mr-2 text-base"></i> Download Broker Proof Letter</span>
+                                <span class="text-cyan-400">&darr;</span>
+                            </a>
+                        </div>
+
+                        <div class="flex justify-end pt-3">
+                            <button type="button" onclick="stampSealAndFinalize()" class="px-7 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-cyber font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(16,185,129,0.5)]">
+                                STAMP SEAL &amp; CERTIFY DIRECTORY CARD &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 9: STAMPING THE SEAL & LIVE DIRECTORY RECEIPT -->
+                <div id="phase-card-9" class="phase-accordion-card p-5 sm:p-6 rounded-2xl bg-black border border-neutral-800 mb-2 opacity-75">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="togglePhase(9)">
+                        <div class="flex items-center gap-3">
+                            <span class="pool-ball pending text-xs" id="ball-badge-9">9</span>
+                            <div>
+                                <h4 class="font-cyber text-sm sm:text-base font-bold text-white uppercase">Phase 9: The Seal as the Receipt (Directory Graduation)</h4>
+                                <p class="font-mono text-xs text-slate-400">The plain card transforms into the certified card with hover-enlarge binder.</p>
+                            </div>
+                        </div>
+                        <span id="chevron-9" class="text-neutral-500 text-sm font-bold">&#9658;</span>
+                    </div>
+
+                    <div id="phase-body-9" class="mt-5 pt-4 border-t border-neutral-800 space-y-4 hidden">
+                        <!-- Certified Graduated Card -->
+                        <div id="certified-card-display" class="p-6 rounded-2xl card-certified-stage max-w-xl mx-auto space-y-4 font-mono relative overflow-hidden">
+                            <div class="flex justify-between items-start gap-4">
+                                <div>
+                                    <h5 class="font-cyber text-xl font-black text-white uppercase" id="cert-card-biz-name">Acme Logistics LLC</h5>
+                                    <p class="text-xs text-cyan-300" id="cert-card-domain">https://acme.burn-1.com</p>
+                                    <span class="text-[11px] text-slate-400" id="cert-card-category">Logistics &bull; Metro Plaza Directory Listing</span>
+                                </div>
+                                <!-- Stamped Seal Image -->
+                                <div class="text-center shrink-0">
+                                    <img src="assets/Burn1logosilver.jpg" alt="Burn-1 Certified Seal" class="w-16 h-16 rounded-xl border-2 border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.7)] object-cover">
+                                    <span class="text-[9px] font-mono text-emerald-300 font-bold block mt-1">SEAL VERIFIED</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-black/80 border border-emerald-500/50">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block uppercase">Verification Status</span>
+                                    <span class="text-xs font-bold text-emerald-400">CERTIFIED UNDERWRITING EVIDENCE</span>
+                                </div>
+                                <span class="text-xs font-cyber font-bold text-amber-400" id="cert-final-id">CERT-B1-958405</span>
+                            </div>
+
+                            <!-- Interactive Hover-Enlarge Binder Thumbnail -->
+                            <div class="p-3 rounded-xl bg-black/90 border border-neutral-800 flex items-center justify-between gap-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="relative group">
+                                        <img src="assets/burn1logoBlkWhiteDocs.jpg" alt="Evidence Binder Thumbnail" class="w-12 h-16 rounded border border-amber-500/70 object-cover binder-thumb-hover shadow-md">
+                                        <span class="text-[9px] font-mono text-amber-300 block text-center mt-1">HOVER &uarr;</span>
+                                    </div>
+                                    <div>
+                                        <strong class="text-white text-xs block">Official Evidence Binder Dossier</strong>
+                                        <span class="text-[10px] text-slate-400 block">Hover to enlarge &bull; Click to view certified findings</span>
+                                    </div>
+                                </div>
+                                <a href="directory.html" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-cyber font-bold text-xs uppercase transition-all shrink-0">
+                                    VIEW DIRECTORY &rarr;
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-emerald-950/60 border border-emerald-500 text-center font-mono text-xs text-emerald-200">
+                            &#127881; <strong>Onboarding Complete!</strong> Your evidence package is active, broker letter is dispatched, and your directory badge is permanently certified.
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Honest Disclaimer -->
@@ -1035,376 +1549,134 @@
         </div>
 
         <!-- =========================================================
-             TIER 2: TRUE BURNER GHOST BROWSER ENCLAVE (EXPANDED COMMERCIAL BLOCK)
-             Includes Subscriptions, Architecture Modal, & Free 3-Min Trial Onboarding Form
+             TIER 2: STREAMLINED TRUE BURNER GHOST BROWSER ENCLAVE
+             High-Contrast 2-Color Pitch Black & White Aesthetic, Media Clips & Beta Waitlist
              ========================================================= -->
-        <div id="ghost-browser" class="p-8 md:p-10 rounded-3xl border-2 border-cyan-500 bg-black mb-14 shadow-[0_0_40px_rgba(6,182,212,0.35)] relative overflow-hidden">
+        <div id="ghost-browser" class="p-6 sm:p-10 rounded-3xl border-2 border-cyan-500 bg-black mb-14 shadow-[0_0_40px_rgba(6,182,212,0.35)] relative overflow-hidden">
             <!-- Background motion loop -->
             <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
                 <source src="assets/trueburner_title_bg.mp4" type="video/mp4">
             </video>
             <div class="absolute -top-12 -right-12 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0"></div>
 
+            <!-- Header: Mystery & Minimal High Contrast -->
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8 pb-6 border-b border-cyan-900/60 relative z-10">
                 <div>
                     <div class="flex flex-wrap items-center gap-2 mb-2">
-                        <span class="px-3 py-1 rounded bg-cyan-950 border border-cyan-400 text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider">
-                            🛡️ GHOST ENCLAVE &bull; VOLATILE RAM ARCHITECTURE
+                        <span class="px-3 py-1 rounded bg-black border border-cyan-400 text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+                            // COMING SOON &bull; PRIVATE BETA WAITLIST
                         </span>
-                        <span class="px-3 py-1 rounded bg-purple-950 border border-purple-500 text-purple-300 font-mono text-[11px] font-bold uppercase">
-                            POWERED BY R.E.P.<span class="text-[9px] align-super">TM</span>
-                        </span>
-                        <span class="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> TIME-SENSITIVE SMOKE SCREEN
+                        <span class="px-3 py-1 rounded bg-black border border-purple-500 text-purple-300 font-mono text-[11px] font-bold uppercase">
+                            TIME-SENSITIVE SMOKE SCREEN
                         </span>
                     </div>
 
                     <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase glow-cyan">
-                        True Burner Ghost Browser &amp; RAM Enclave
+                        True Burner Ghost Browser
                     </h2>
+                    <p class="font-mono text-xs sm:text-sm text-neutral-300 font-bold uppercase tracking-wider mt-1">
+                        Time-sensitive smoke screen sessions &bull; Nothing saved on your device &bull; Volatile RAM shred on exit
+                    </p>
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <button type="button" onclick="openGhostArchModal()" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-400 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-file-contract text-cyan-400"></i> READ ARCHITECTURE WHITE PAPER &rarr;
+                    <button type="button" onclick="openGhostArchModal()" class="px-4 py-2.5 rounded-xl bg-black border border-cyan-400 text-cyan-300 font-mono text-xs font-bold hover:bg-neutral-900 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-file-contract text-cyan-400"></i> ARCHITECTURE BLUEPRINT &rarr;
                     </button>
                 </div>
             </div>
 
-            <!-- Commercial Overview: Why Subscribe to Ghost Browser? -->
-            <div class="mb-8 relative z-10">
-                <h3 class="text-sm font-mono font-bold uppercase text-amber-400 tracking-wider mb-2">
-                    Why Subscribe to a True Burner Ghost Browser Session?
-                </h3>
-                <p class="text-xs sm:text-sm font-mono text-slate-200 leading-relaxed mb-6">
-                    Commercial browsers leave thousands of persistent tracking beacons, WebGL GPU hashes, and SQLite session dumps on your local physical drives. When you research competitors, audit vendors, or investigate dark web leaks, your real identity and IP subnet are harvested. <strong class="text-cyan-300">True Burner Ghost Browser</strong> allocates an isolated Chromium instance inside encrypted volatile RAM memory. Zero bytes touch your SSD. When finished, the memory space is shredded with random entropy. Zero footprint. Zero trace. Complete digital sovereignty.
-                </p>
-
-                <!-- 4 Core Pillars of Ghost Subscriptions -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
-                        <div>
-                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
-                                <i class="fa-solid fa-microchip"></i>
-                            </div>
-                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Volatile RAM Core</h4>
-                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
-                                Sessions execute exclusively in volatile RAM. All cache, tokens, and DOM data vanish upon exit.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
-                        <div>
-                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
-                                <i class="fa-solid fa-mask"></i>
-                            </div>
-                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Canvas &amp; GPU Poisoning</h4>
-                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
-                                Dynamic entropy injections randomize hardware hashes, rendering tracking scrapers blind.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
-                        <div>
-                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
-                                <i class="fa-solid fa-network-wired"></i>
-                            </div>
-                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Ephemeral Tunnels</h4>
-                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
-                                Rotating ingress proxies shield corporate IP subnets from reverse reconnaissance scraping.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex flex-col justify-between">
-                        <div>
-                            <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-300 mb-2.5">
-                                <i class="fa-solid fa-fire text-amber-400"></i>
-                            </div>
-                            <h4 class="font-cyber text-xs font-bold text-white uppercase mb-1">Ghost Vacuum Purge</h4>
-                            <p class="font-mono text-[11px] text-slate-300 leading-relaxed">
-                                Instant emergency kill-switch overwrites active memory buffers and severs sockets in 300ms.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- INTERACTIVE GHOST MULTIMEDIA COMMAND CENTER -->
-            <div class="mb-10 p-6 rounded-2xl bg-black/90 border border-cyan-500/50 relative z-10 shadow-2xl">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 mb-6 border-b border-neutral-800">
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-red-500 animate-ping"></span>
-                        <h4 class="font-cyber text-base font-bold text-white uppercase tracking-wider">
-                            True Burner Dynamic Media Suite // Interactive Telemetry
-                        </h4>
-                    </div>
-                    <span class="font-mono text-xs text-cyan-300 px-3 py-1 rounded bg-cyan-950 border border-cyan-500 font-bold uppercase">
-                        AUDIO &amp; VIDEO TEST BENCH
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                    <!-- Clip 1: Self-Destruct Sequence Video with Audio -->
-                    <div class="lg:col-span-7 p-5 rounded-xl bg-neutral-950 border border-neutral-800 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between pb-2 mb-3 border-b border-neutral-800">
-                                <span class="font-mono text-xs text-amber-400 font-bold uppercase flex items-center gap-2">
-                                    <i class="fa-solid fa-bomb text-red-500"></i> LIVE 15-SEC SELF-DESTRUCT WITH AUDIO
-                                </span>
-                                <span class="text-[10px] font-mono text-neutral-400">VOLATILE RAM PURGE</span>
-                            </div>
-                            <p class="font-mono text-xs text-slate-300 mb-3 leading-relaxed">
-                                See the True Burner shred sequence in real time. When your session timer hits zero or the Ghost Vacuum switch is engaged, volatile memory is overwritten with cryptographic noise and sockets are severed with full audio attestation.
-                            </p>
-                            <div class="rounded-xl overflow-hidden border border-red-500/60 shadow-[0_0_20px_rgba(239,68,68,0.3)] bg-black relative aspect-video flex items-center justify-center">
-                                <video id="selfdestruct-video-player" controls preload="metadata" class="w-full h-full object-cover">
-                                    <source src="assets/selfdestruct_countdown.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                        <div class="mt-3 flex items-center justify-between font-mono text-[11px] text-slate-400">
-                            <span><i class="fa-solid fa-volume-high text-cyan-400"></i> Audio Enabled</span>
-                            <span class="text-red-400 font-bold">15-SECOND HARD PURGE</span>
-                        </div>
-                    </div>
-
-                    <!-- Clip 2: Companion Mobile App Preview -->
-                    <div class="lg:col-span-5 p-5 rounded-xl bg-neutral-950 border border-neutral-800 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between pb-2 mb-3 border-b border-neutral-800">
-                                <span class="font-mono text-xs text-cyan-400 font-bold uppercase flex items-center gap-2">
-                                    <i class="fa-solid fa-mobile-screen text-amber-400"></i> MOBILE BURNER APP PREVIEW
-                                </span>
-                                <span class="text-[10px] font-mono text-emerald-400 font-bold">PRO COMPANION</span>
-                            </div>
-                            <p class="font-mono text-xs text-slate-300 mb-3 leading-relaxed">
-                                True Burner on iOS &amp; Android. Instant disposable browsing and single-use link verification right from your pocket.
-                            </p>
-                            <div class="rounded-xl overflow-hidden border border-cyan-500/60 shadow-[0_0_20px_rgba(6,182,212,0.3)] bg-black aspect-video flex items-center justify-center relative">
-                                <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                                    <source src="assets/trueburner_phone_app.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                        </div>
-                        <div class="mt-3 flex items-center justify-between font-mono text-[11px]">
-                            <span class="text-slate-400">Mobile Enclave Engine</span>
-                            <span class="text-cyan-300 font-bold">INCLUDED IN PRO ($29/MO)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Technical Animated Readout Banner -->
-                <div class="mt-6 pt-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-3">
-                        <img src="assets/animating_banner_text.gif" alt="Technical Telemetry Banner" class="h-10 rounded border border-cyan-500/50 shadow-md">
-                        <div>
-                            <span class="font-cyber text-xs text-white uppercase font-bold block">Autonomous Ephemeral Session Stream</span>
-                            <span class="font-mono text-[10px] text-slate-400">Dynamic DOM Sandboxing &bull; Zero Disk Artifacts Guaranteed</span>
-                        </div>
-                    </div>
-                    <a href="#ghost-trial-form" class="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-bold text-xs uppercase transition-all tracking-wider shrink-0 shadow-[0_0_15px_rgba(6,182,212,0.6)]">
-                        CLAIM 3-MIN TEST DRIVE &darr;
-                    </a>
-                </div>
-            </div>
-
-            <!-- Two-Column Block: Free 3-Min Onboarding Form + Subscription Pricing -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <!-- Streamlined 2-Column High-Impact Media Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10">
                 
-                <!-- Onboarding Intake Form for Free 3-Min Session (7 Cols) -->
-                <div class="lg:col-span-7 p-6 rounded-2xl bg-black/80 border-2 border-cyan-400/80 shadow-inner flex flex-col justify-between">
+                <!-- Left Column: Looping Countdown Clip & Beta Test Drive Intake (7 Cols) -->
+                <div class="lg:col-span-7 p-6 rounded-2xl bg-black border-2 border-cyan-400 flex flex-col justify-between shadow-2xl">
                     <div>
-                        <div class="flex items-center justify-between pb-2 mb-3 border-b border-cyan-900/60">
-                            <span class="font-mono text-xs text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-stopwatch text-amber-400"></i> TEST DRIVE // FREE 3-MINUTE SAMPLE SESSION
+                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+                            <span class="font-mono text-xs text-amber-400 font-bold uppercase flex items-center gap-2">
+                                <i class="fa-solid fa-bomb text-red-500"></i> 15-SECOND SELF-DESTRUCT RAM PURGE
                             </span>
-                            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-600 font-mono text-[10px] font-bold">
-                                1 BURN / DAY
+                            <span class="px-2 py-0.5 rounded bg-neutral-900 border border-neutral-700 text-[10px] font-mono text-cyan-300 font-bold uppercase">
+                                300MS ZERO-FILL
                             </span>
                         </div>
 
-                        <div class="p-3 rounded-xl bg-neutral-900/90 border border-neutral-700 text-slate-300 font-mono text-[11px] mb-4 space-y-1">
-                            <p class="text-amber-400 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> DAILY LIMIT &bull; 24-HOUR RESET POLICY</p>
-                            <p>Free trial instances are limited to <strong class="text-white">one (1) 3-minute burn per day per company/IP</strong>. Volatile memory automatically executes a complete zero-wipe after 180 seconds.</p>
+                        <!-- Countdown Sequence Video Player -->
+                        <div class="rounded-xl overflow-hidden border border-red-500/60 shadow-[0_0_25px_rgba(239,68,68,0.3)] bg-black relative aspect-video flex items-center justify-center mb-4">
+                            <video id="selfdestruct-video-player" controls loop preload="metadata" class="w-full h-full object-cover">
+                                <source src="assets/selfdestruct_countdown.mp4" type="video/mp4">
+                            </video>
                         </div>
 
-                        <form id="ghost-trial-form" onsubmit="startGhostTrial(event)" class="space-y-3 font-mono text-xs">
-                            <div>
-                                <label class="block text-slate-300 text-[11px] uppercase font-bold mb-1">Corporate Email or Domain Handle:</label>
-                                <input type="email" id="ghost-trial-email" required placeholder="name@company.com" class="w-full bg-black border border-neutral-700 rounded-xl px-3.5 py-2.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+                        <p class="font-mono text-xs text-neutral-300 leading-relaxed mb-4">
+                            When your session expires or the killswitch is tripped, volatile memory is overwritten with random entropy noise and sockets drop instantly. Zero disk footprint. Zero forensic trail.
+                        </p>
+
+                        <!-- Beta Waitlist & 3-Minute Session Signup Form -->
+                        <form id="ghost-trial-form" onsubmit="startGhostTrial(event)" class="space-y-3 font-mono text-xs pt-2 border-t border-neutral-800">
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <input type="email" id="ghost-trial-email" required placeholder="Enter officer email for private beta" class="flex-grow bg-black border border-neutral-700 rounded-xl px-4 py-3 text-white text-xs focus:border-cyan-400 focus:outline-none">
+                                <button type="submit" id="ghost-trial-btn" class="px-6 py-3 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,255,255,0.7)] shrink-0 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-play text-black"></i> REQUEST 3-MIN BETA SESSION
+                                </button>
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-slate-300 text-[11px] uppercase font-bold mb-1">Activation Redeem Code:</label>
-                                    <input type="text" id="ghost-trial-code" value="BURN1-FREE-TRIAL" placeholder="Enter redeem code" class="w-full bg-black border border-neutral-700 rounded-xl px-3.5 py-2.5 text-amber-400 font-bold text-xs focus:border-amber-400 focus:outline-none uppercase">
-                                </div>
-                                <div>
-                                    <label class="block text-slate-300 text-[11px] uppercase font-bold mb-1">Session Scope Target:</label>
-                                    <select id="ghost-trial-scope" class="w-full bg-black border border-neutral-700 rounded-xl px-3 py-2.5 text-slate-200 text-xs focus:border-cyan-400 focus:outline-none">
-                                        <option value="recon">Perimeter Recon &bull; 3 Min</option>
-                                        <option value="threat_sweep">Threat &amp; Breach Sweep &bull; 3 Min</option>
-                                        <option value="cloaked">Executive Cloaked Browsing &bull; 3 Min</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Live Trial Terminal Readout Area -->
-                            <div id="ghost-trial-console" class="hidden mt-3 p-3 rounded-xl bg-slate-950 border border-cyan-500/50 text-[11px] font-mono space-y-1">
+                            <!-- Live Trial Terminal Console -->
+                            <div id="ghost-trial-console" class="hidden p-3 rounded-xl bg-neutral-950 border border-cyan-500/50 text-[11px] font-mono space-y-1 mt-3">
                                 <div class="flex justify-between items-center pb-1 border-b border-neutral-800">
-                                    <span class="text-cyan-400 font-bold" id="trial-terminal-status">[●] PROVISIONING VOLATILE RAM...</span>
+                                    <span class="text-cyan-400 font-bold" id="trial-terminal-status">[&#9679;] PROVISIONING VOLATILE RAM...</span>
                                     <span class="text-amber-400 font-bold px-2 py-0.5 rounded bg-black border border-amber-500" id="trial-timer-display">03:00</span>
                                 </div>
-                                <p class="text-slate-400" id="trial-log-1">&gt; Allocating 512MB RAM enclave container...</p>
-                                <p class="text-slate-400" id="trial-log-2">&gt; Randomizing Canvas / WebGL fingerprint entropy...</p>
+                                <p class="text-neutral-400" id="trial-log-1">&gt; Allocating 512MB RAM enclave container...</p>
+                                <p class="text-neutral-400" id="trial-log-2">&gt; Randomizing Canvas / WebGL fingerprint entropy...</p>
                                 <p class="text-emerald-400" id="trial-log-3">&gt; Ghost socket active. Auto-vacuum engages in 180s.</p>
-                            </div>
-
-                            <button type="submit" id="ghost-trial-btn" class="w-full py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2 mt-2">
-                                <i class="fa-solid fa-play"></i> LAUNCH FREE 3-MINUTE GHOST SESSION
-                            </button>
-
-                            <!-- Cobp Metallic Swipe Button Alternative -->
-                            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-3 pt-1">
-                                <button type="button" onclick="triggerSwipeTrial(this)" class="container-btn-swipe" title="Swipe to confirm 3-minute volatile RAM launch">
-                                    <div class="content-swipe">
-                                        <div class="icon-lock">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                <g class="lock" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
-                                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-dasharray="80"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                        <div class="letters true">
-                                            <span style="--delay: 0">G</span>
-                                            <span style="--delay: 1">h</span>
-                                            <span style="--delay: 2">o</span>
-                                            <span style="--delay: 3">s</span>
-                                            <span style="--delay: 4">t</span>
-                                            <span style="--delay: 5">A</span>
-                                            <span style="--delay: 6">c</span>
-                                            <span style="--delay: 7">t</span>
-                                            <span style="--delay: 8">i</span>
-                                            <span style="--delay: 9">v</span>
-                                            <span style="--delay: 10">e</span>
-                                        </div>
-                                        <div class="letters false">
-                                            <span style="--delay: 1">S</span>
-                                            <span style="--delay: 2">w</span>
-                                            <span style="--delay: 3">i</span>
-                                            <span style="--delay: 4">p</span>
-                                            <span style="--delay: 5">e</span>
-                                            <span style="--delay: 6">t</span>
-                                            <span style="--delay: 7">o</span>
-                                            <span style="--delay: 8">l</span>
-                                            <span style="--delay: 9">a</span>
-                                            <span style="--delay: 10">u</span>
-                                            <span style="--delay: 11">n</span>
-                                            <span style="--delay: 12">c</span>
-                                            <span style="--delay: 13">h</span>
-                                        </div>
-                                        <div class="arrows-right">
-                                            <svg style="--delay: 0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
-                                            <svg style="--delay: 1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
-                                            <svg style="--delay: 2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
-                                            <svg style="--delay: 3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
-                                            <svg style="--delay: 4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"></path></svg>
-                                        </div>
-                                    </div>
-                                </button>
                             </div>
                         </form>
                     </div>
+
+                    <div class="pt-3 mt-4 border-t border-neutral-800 flex justify-between items-center font-mono text-[11px] text-neutral-400">
+                        <span><i class="fa-solid fa-lock text-cyan-400"></i> Ephemeral In-Memory Sandbox</span>
+                        <span class="text-amber-400 font-bold">LIMITED SEATS</span>
+                    </div>
                 </div>
 
-                <!-- Monthly Pro Subscription Card (5 Cols) -->
-                <div class="lg:col-span-5 p-6 rounded-2xl bg-black border-2 border-cyan-400 flex flex-col justify-between items-center text-center shadow-2xl">
+                <!-- Right Column: Mobile Burner App Video Preview & Pre-Order Reservation (5 Cols) -->
+                <div class="lg:col-span-5 p-6 rounded-2xl bg-black border-2 border-neutral-800 flex flex-col justify-between shadow-2xl">
                     <div>
-                        <span class="text-xs font-mono text-cyan-300 uppercase font-bold tracking-widest block mb-1">UNLIMITED SESSIONS // PRO TIER</span>
-                        <div class="my-4">
-                            <span class="text-5xl font-cyber font-extrabold text-white">$29</span>
-                            <span class="text-xs font-mono text-slate-400 block mt-1">/ month &bull; Cancel Anytime</span>
+                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
+                            <span class="font-mono text-xs text-cyan-300 font-bold uppercase flex items-center gap-2">
+                                <i class="fa-solid fa-mobile-screen text-cyan-400"></i> MOBILE BURNER APP PREVIEW
+                            </span>
+                            <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">IOS &amp; ANDROID</span>
                         </div>
-                        <ul class="text-left font-mono text-xs text-slate-300 space-y-2 mb-6">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Unlimited Volatile RAM Sessions</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> No 3-Minute Time Limits</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> 1-Click Ghost Vacuum Emergency Kill</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Continuous Underwriting Threat Radar</li>
-                        </ul>
+
+                        <!-- Mobile Phone App Video Preview -->
+                        <div class="rounded-xl overflow-hidden border border-cyan-500/60 shadow-[0_0_20px_rgba(6,182,212,0.3)] bg-black aspect-video flex items-center justify-center relative mb-4">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                <source src="assets/trueburner_phone_app.mp4" type="video/mp4">
+                            </video>
+                        </div>
+
+                        <p class="font-mono text-xs text-neutral-300 leading-relaxed mb-6">
+                            True Burner companion engine for mobile hardware. Disposable browsing and single-use link verification right from your pocket.
+                        </p>
                     </div>
 
-                    <div class="w-full space-y-2">
-                        <a href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N" target="_blank" class="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(6,182,212,0.7)] flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-bolt"></i> GET GHOST PRO ($29/MO)
+                    <div class="space-y-3">
+                        <a href="mailto:leonrdarden@gmail.com?subject=True%20Burner%20Pre-Order%20Reservation&body=Please%20reserve%20my%20seat%20for%20True%20Burner%20Pro%20(%2429%2Fmo)%3A%0ACompany%3A" class="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-ticket"></i> PLACE PRE-ORDER // RESERVE SEAT ($29/MO)
                         </a>
-                        <a href="mailto:leonrdarden@gmail.com?subject=Ghost%20Enterprise%20Seat%20Inquiry" class="w-full py-2.5 rounded-lg bg-cyan-950 border border-cyan-500 text-cyan-200 font-mono text-xs font-bold hover:bg-cyan-900 transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-solid fa-building text-amber-400"></i> ENTERPRISE TEAM SEATS
-                        </a>
+                        <button type="button" onclick="openGhostArchModal()" class="w-full py-2.5 rounded-lg bg-black border border-neutral-700 hover:border-neutral-500 text-neutral-300 font-mono text-xs font-bold transition-all">
+                            VIEW TECHNICAL WHITE PAPER &rarr;
+                        </button>
                     </div>
                 </div>
 
-            </div>
-        </div>
-
-        <!-- =========================================================
-             POP-UP MODAL: GHOST BROWSER ARCHITECTURE WHITE PAPER
-             ========================================================= -->
-        <div id="ghost-arch-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-            <div class="relative w-full max-w-3xl bg-black border-2 border-cyan-400 rounded-3xl p-6 sm:p-8 shadow-2xl text-left my-auto max-h-[90vh] overflow-y-auto">
-                <button type="button" onclick="closeGhostArchModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-600 text-neutral-300 flex items-center justify-center font-bold text-sm transition-all">
-                    ✕
-                </button>
-
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest">
-                        R.E.P.™ ENGINE // VOLATILE ISOLATION BLUEPRINT
-                    </span>
-                </div>
-                <h3 class="font-cyber text-2xl font-black text-white uppercase mb-4">
-                    True Burner Ghost Isolation Architecture
-                </h3>
-
-                <div class="font-mono text-xs text-slate-300 space-y-4 leading-relaxed mb-6">
-                    <p>
-                        The <strong class="text-cyan-300">True Burner Ghost Enclave</strong> is designed to solve a fundamental flaw in modern cybersecurity: <em>persistence on physical media</em>. Typical "incognito" browser modes merely suppress browsing history while persisting caches, temp files, DNS queries, and hardware GPU fingerprints on disk.
-                    </p>
-
-                    <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
-                        <h4 class="text-amber-400 font-bold uppercase text-[11px]">1. In-Memory Memory Partitioning</h4>
-                        <p class="text-slate-400">
-                            Each Ghost session allocates a virtual memory disk in volatile system RAM with no swapfile linkage. All socket descriptors, cookies, and rendered DOM elements execute strictly within this boundary.
-                        </p>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
-                        <h4 class="text-amber-400 font-bold uppercase text-[11px]">2. Synthetic Noise &amp; Anti-Fingerprinting</h4>
-                        <p class="text-slate-400">
-                            The R.E.P.™ runtime intercepts HTML5 Canvas, WebGL shader compilation, and AudioContext queries, injecting pseudorandom entropy noise that generates an entirely different device fingerprint on every spin-up.
-                        </p>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
-                        <h4 class="text-amber-400 font-bold uppercase text-[11px]">3. The Ghost Vacuum Purge Protocol</h4>
-                        <p class="text-slate-400">
-                            When the session expires or the user triggers the Ghost Vacuum, the operating system zero-fills the allocated RAM space, terminating parent/child processes in under 300 milliseconds. No forensic trace remains on the hardware.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center pt-4 border-t border-neutral-800 font-mono text-xs text-slate-500">
-                    <span>Burn-1 Systems // Architecture Paper v2.6</span>
-                    <button type="button" onclick="closeGhostArchModal()" class="px-4 py-2 rounded-lg bg-cyan-400 text-black font-cyber font-bold uppercase hover:bg-cyan-300 transition-all">
-                        CLOSE BLUEPRINT
-                    </button>
-                </div>
             </div>
         </div>
 
         <div class="marker-divider-amber"></div>
+
 
         <!-- =========================================================
              TIER 3: THE $39 BARN FIRE SALE CLEARANCE BUNDLE
@@ -1549,6 +1821,7 @@
                 <a href="index.html" class="hover:text-amber-400 transition-colors">Burn-1 Hub</a>
                 <a href="directory.html" class="hover:text-cyan-400 transition-colors font-bold text-cyan-300">Directory Matrix</a>
                 <a href="academy.html" class="hover:text-purple-400 transition-colors">Academy</a>
+                <a href="helpline/index.html" class="hover:text-amber-400 transition-colors">Helpline Support (Text HOME to 741741 &bull; 988 Lifeline)</a>
                 <a href="after-purchase.html" class="hover:text-amber-400 transition-colors">After Purchase</a>
                 <a href="mailto:leonrdarden@gmail.com" class="hover:text-amber-400 transition-colors">Contact Consulting</a>
             </div>
@@ -1715,7 +1988,288 @@
             document.getElementById('html-root').classList.add('day-mode');
             const versionTag = document.getElementById('version-tag');
             if (versionTag) versionTag.innerText = 'STORE BIZ';
+            initStepperFromStorage();
         });
+    
+        // =========================================================
+        // BURN-1 INTELLIGENT EVIDENCE BINDER // 9-PHASE ENGINE
+        // =========================================================
+        let currentStepperPhase = 1;
+        let auditProfile = {
+            domain: '',
+            email: '',
+            company: '',
+            industry: 'healthcare',
+            framework: 'HIPAA Security Rule',
+            path: 'binder',
+            mfaChecked: false,
+            backupChecked: false,
+            authorityChecked: false,
+            renewalChecked: false,
+            orderKey: 'B1-ORD-958405',
+            totalPrice: 499,
+            monitoring: false,
+            status: 'unverified',
+            certId: 'CERT-B1-958405'
+        };
+
+        function initStepperFromStorage() {
+            try {
+                const saved = localStorage.getItem('burn1_audit_profile');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    auditProfile = Object.assign(auditProfile, parsed);
+                    if (document.getElementById('stepper-domain-input') && auditProfile.domain) {
+                        document.getElementById('stepper-domain-input').value = auditProfile.domain;
+                    }
+                    if (document.getElementById('stepper-email-input') && auditProfile.email) {
+                        document.getElementById('stepper-email-input').value = auditProfile.email;
+                    }
+                    if (document.getElementById('stepper-company-input') && auditProfile.company) {
+                        document.getElementById('stepper-company-input').value = auditProfile.company;
+                    }
+                    const badge = document.getElementById('session-status-badge');
+                    if (badge && auditProfile.domain) {
+                        badge.innerText = `Session: ${auditProfile.domain}`;
+                        badge.classList.remove('text-slate-400');
+                        badge.classList.add('text-amber-400', 'border-amber-500');
+                    }
+                }
+            } catch(e) {}
+        }
+
+        function saveStepperStorage() {
+            try {
+                localStorage.setItem('burn1_audit_profile', JSON.stringify(auditProfile));
+            } catch(e) {}
+        }
+
+        function togglePhase(phaseNum) {
+            for (let i = 1; i <= 9; i++) {
+                const card = document.getElementById(`phase-card-${i}`);
+                const body = document.getElementById(`phase-body-${i}`);
+                const chev = document.getElementById(`chevron-${i}`);
+                if (!card || !body) continue;
+
+                if (i === phaseNum) {
+                    body.classList.remove('hidden');
+                    card.classList.add('active-phase');
+                    card.classList.remove('opacity-75');
+                    if (chev) chev.innerHTML = '&#9660;';
+                } else {
+                    body.classList.add('hidden');
+                    card.classList.remove('active-phase');
+                    if (chev) chev.innerHTML = '&#9658;';
+                }
+            }
+            currentStepperPhase = phaseNum;
+            updatePoolBallTrack();
+        }
+
+        function updatePoolBallTrack() {
+            for (let i = 1; i <= 9; i++) {
+                const ball = document.getElementById(`ball-${i}`);
+                if (!ball) continue;
+                ball.classList.remove('active', 'completed', 'pending');
+                if (i < currentStepperPhase) {
+                    ball.classList.add('completed');
+                } else if (i === currentStepperPhase) {
+                    ball.classList.add('active');
+                } else {
+                    ball.classList.add('pending');
+                }
+            }
+        }
+
+        function proceedToPhase(nextPhase) {
+            currentStepperPhase = nextPhase;
+            togglePhase(nextPhase);
+            saveStepperStorage();
+            const targetEl = document.getElementById(`phase-card-${nextPhase}`);
+            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function jumpToWizardPhase(phaseNum, pathType) {
+            auditProfile.path = pathType;
+            saveStepperStorage();
+            const wizard = document.getElementById('wizard-container');
+            if (wizard) {
+                wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                togglePhase(phaseNum);
+            }
+        }
+
+        function runPhase1Scan() {
+            const input = document.getElementById('stepper-domain-input');
+            const domain = (input && input.value.trim()) ? input.value.trim() : 'burn-1.com';
+            auditProfile.domain = domain;
+            saveStepperStorage();
+
+            const btn = document.getElementById('btn-run-scan');
+            const preview = document.getElementById('scan-terminal-preview');
+            const statusText = document.getElementById('scan-progress-status');
+
+            if (btn) btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> SCANNING...';
+            if (preview) preview.classList.remove('hidden');
+
+            const steps = [
+                'Resolving cryptographic TLS 1.3 handshake (Port 443)...',
+                'Interrogating perimeter DNS boundaries & HSTS headers...',
+                'Auditing WAN Port exposure (RDP 3389 / SMB 445)...',
+                'Reconciling posture telemetry into NIST CSF 2.0 matrix...'
+            ];
+
+            let step = 0;
+            const timer = setInterval(() => {
+                if (step < steps.length && statusText) {
+                    statusText.innerText = `[●] ${steps[step]}`;
+                    step++;
+                } else {
+                    clearInterval(timer);
+                    if (statusText) statusText.innerText = '[✓] SCAN COMPLETE // TELEMETRY VERIFIED';
+                    if (btn) btn.innerHTML = '<i class="fa-solid fa-check"></i> SCAN COMPLETE';
+                    const badge = document.getElementById('session-status-badge');
+                    if (badge) {
+                        badge.innerText = `Session: ${domain}`;
+                        badge.classList.add('text-amber-400', 'border-amber-500');
+                    }
+                }
+            }, 400);
+        }
+
+        function savePhase2Email() {
+            const emailInput = document.getElementById('stepper-email-input');
+            const companyInput = document.getElementById('stepper-company-input');
+            const email = emailInput ? emailInput.value.trim() : '';
+            const company = companyInput ? companyInput.value.trim() : '';
+
+            if (!email) {
+                alert('Please enter a valid corporate officer email address to dispatch the sample report.');
+                return;
+            }
+
+            auditProfile.email = email;
+            auditProfile.company = company || auditProfile.domain || 'Verified Enterprise';
+            saveStepperStorage();
+
+            const msg = document.getElementById('phase-2-dispatch-msg');
+            if (msg) msg.classList.remove('hidden');
+
+            setTimeout(() => {
+                proceedToPhase(3);
+            }, 800);
+        }
+
+        function selectIndustry(indKey, framework) {
+            auditProfile.industry = indKey;
+            auditProfile.framework = framework;
+            saveStepperStorage();
+            const fwLabel = document.getElementById('selected-framework-name');
+            if (fwLabel) fwLabel.innerText = framework;
+        }
+
+        function validatePaperworkGate() {
+            const mfa = document.getElementById('check-mfa')?.checked || false;
+            const backup = document.getElementById('check-backup')?.checked || false;
+            const auth = document.getElementById('check-authority')?.checked || false;
+            const ren = document.getElementById('check-renewal')?.checked || false;
+            const btn = document.getElementById('btn-pass-gate');
+            const status = document.getElementById('gate-status-text');
+
+            if (mfa && backup && auth && ren) {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.classList.remove('bg-neutral-800', 'text-neutral-500', 'cursor-not-allowed');
+                    btn.classList.add('bg-amber-500', 'hover:bg-amber-400', 'text-black', 'shadow-md');
+                }
+                if (status) {
+                    status.innerHTML = '<span class="text-emerald-400 font-bold">&#10003; Attestation Complete. Corporate gate unlocked.</span>';
+                }
+            } else {
+                if (btn) {
+                    btn.disabled = true;
+                    btn.classList.add('bg-neutral-800', 'text-neutral-500', 'cursor-not-allowed');
+                    btn.classList.remove('bg-amber-500', 'text-black');
+                }
+                if (status) {
+                    status.innerText = 'Please check all 4 attestation boxes above to proceed.';
+                }
+            }
+        }
+
+        function passPaperworkGate() {
+            auditProfile.mfaChecked = true;
+            auditProfile.backupChecked = true;
+            auditProfile.authorityChecked = true;
+            auditProfile.renewalChecked = true;
+            const notes = document.getElementById('stepper-paperwork-notes');
+            if (notes) auditProfile.paperworkNotes = notes.value;
+            saveStepperStorage();
+            proceedToPhase(6);
+            setupPhase6Display();
+        }
+
+        function setupPhase6Display() {
+            const randCode = 'B1-ORD-' + Math.floor(100000 + Math.random() * 900000);
+            if (!auditProfile.orderKey || auditProfile.orderKey === 'B1-ORD-958405') {
+                auditProfile.orderKey = randCode;
+            }
+            const orderEl = document.getElementById('display-order-key');
+            if (orderEl) orderEl.innerText = auditProfile.orderKey;
+
+            const sumEl = document.getElementById('order-target-summary');
+            if (sumEl) sumEl.innerText = `Target Domain: ${auditProfile.domain || 'burn-1.com'} • Framework: ${auditProfile.framework}`;
+            updateCheckoutTotal();
+        }
+
+        function updateCheckoutTotal() {
+            const monToggle = document.getElementById('add-monitoring-toggle');
+            let base = 499;
+            if (auditProfile.path === 'insurance-ready') base = 1250;
+            const isMon = monToggle ? monToggle.checked : false;
+            auditProfile.monitoring = isMon;
+            const finalPrice = isMon ? (base + 99) : base;
+            auditProfile.totalPrice = finalPrice;
+            const priceEl = document.getElementById('checkout-total-price');
+            if (priceEl) priceEl.innerText = `$${finalPrice}.00` + (isMon ? ' (+$99/mo)' : '');
+            saveStepperStorage();
+        }
+
+        function confirmPaymentAndStage() {
+            proceedToPhase(7);
+            const biz = auditProfile.company || auditProfile.domain || 'Acme Logistics LLC';
+            const dom = 'https://' + (auditProfile.domain || 'company.com');
+            const ind = auditProfile.framework;
+
+            const b1 = document.getElementById('plain-card-biz-name');
+            const d1 = document.getElementById('plain-card-domain');
+            const c1 = document.getElementById('plain-card-category');
+            if (b1) b1.innerText = biz;
+            if (d1) d1.innerText = dom;
+            if (c1) c1.innerText = ind;
+        }
+
+        function stampSealAndFinalize() {
+            proceedToPhase(9);
+            const biz = auditProfile.company || auditProfile.domain || 'Acme Logistics LLC';
+            const dom = 'https://' + (auditProfile.domain || 'company.com');
+            const ind = auditProfile.framework;
+
+            const b2 = document.getElementById('cert-card-biz-name');
+            const d2 = document.getElementById('cert-card-domain');
+            const c2 = document.getElementById('cert-card-category');
+            if (b2) b2.innerText = biz;
+            if (d2) d2.innerText = dom;
+            if (c2) c2.innerText = ind;
+        }
+
+        function resetStepperState() {
+            if (confirm('Reset your current onboarding session?')) {
+                localStorage.removeItem('burn1_audit_profile');
+                location.reload();
+            }
+        }
+
     </script>
 </body>
 </html>
