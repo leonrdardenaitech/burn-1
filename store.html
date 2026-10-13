@@ -1818,22 +1818,28 @@
                     </div>
                 </div>
 
-                <!-- Right: Countdown / Self-Destruct Clip -->
+                <!-- Right: Countdown / Self-Destruct Clip with Sound Toggle -->
                 <div class="flex flex-col items-center sm:items-end">
-                    <div class="w-full max-w-md rounded-2xl overflow-hidden border border-neutral-800 bg-black aspect-video relative flex items-center justify-center shadow-lg">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <div class="w-full max-w-md rounded-2xl overflow-hidden border border-neutral-800 bg-black aspect-video relative flex items-center justify-center shadow-lg group">
+                        <video id="ghost-countdown-video" autoplay loop muted playsinline class="w-full h-full object-cover">
                             <source src="assets/selfdestruct_countdown.mp4" type="video/mp4">
                         </video>
+                        <!-- Sound Toggle Overlay Button -->
+                        <button type="button" id="ghost-sound-toggle-btn" onclick="toggleGhostVideoAudio()" class="absolute bottom-3 right-3 z-20 px-3 py-1.5 rounded-lg bg-black/85 hover:bg-black text-white border border-neutral-600 font-mono text-xs flex items-center gap-2 backdrop-blur transition-all shadow-md">
+                            <i id="ghost-sound-icon" class="fa-solid fa-volume-xmark text-neutral-400"></i>
+                            <span id="ghost-sound-text" class="text-[11px] font-bold">UNMUTE</span>
+                        </button>
                     </div>
-                    <div class="mt-2 text-right font-mono text-[11px] text-neutral-500 uppercase tracking-wider">
-                        SESSION DESTROY COUNTER // RAM PURGE
+                    <div class="mt-2 text-right font-mono text-[11px] text-neutral-500 uppercase tracking-wider flex items-center justify-between w-full max-w-md">
+                        <span>SESSION DESTROY COUNTER // RAM PURGE</span>
+                        <span class="text-neutral-400">AUDIO READY</span>
                     </div>
                 </div>
             </div>
 
             <!-- BELOW: SIGN UP TO THE BETA -->
             <div class="pb-10 border-b border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <button type="button" onclick="openPreOrderModal('ghost_browser')" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,255,255,0.25)] flex items-center justify-center gap-2">
+                <button type="button" onclick="openGhostBetaModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,255,255,0.25)] flex items-center justify-center gap-2">
                     <i class="fa-solid fa-ghost"></i> SIGN UP TO THE BETA &rarr;
                 </button>
                 <div class="text-xs font-mono text-neutral-400">
@@ -1849,20 +1855,34 @@
                 </h3>
             </div>
 
-            <!-- Video Section (Smartphone Frame & Punchy Bullets) -->
+            <!-- Video Section (Landscape Terminal Frame & Punchy Bullets) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
-                <!-- Phone App Video Showcase (Throttled playback 0.75x) -->
-                <div class="flex justify-center">
-                    <div class="w-full max-w-xs rounded-3xl p-3 bg-neutral-950 border border-neutral-700 shadow-2xl relative">
-                        <!-- Top Notch -->
-                        <div class="w-16 h-1 bg-neutral-800 rounded-full mx-auto mb-2"></div>
-                        <div class="rounded-2xl overflow-hidden aspect-[9/16] bg-black border border-neutral-800 relative">
-                            <video id="trueburner-phone-video" autoplay loop muted playsinline class="w-full h-full object-cover">
+                <!-- Phone App Video Showcase in Landscape Window (Throttled playback 0.75x) -->
+                <div class="flex justify-center w-full">
+                    <div class="w-full max-w-xl rounded-3xl p-3 sm:p-4 bg-neutral-950 border border-neutral-700 shadow-2xl relative">
+                        <!-- Top Window Header Bar -->
+                        <div class="flex items-center justify-between px-2 mb-2 font-mono text-[10px] text-neutral-400">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-neutral-700"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-neutral-700"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-neutral-700"></span>
+                                <span class="ml-2 font-bold text-neutral-300 uppercase">TRUE BURNER // RUNTIME LANDSCAPE PREVIEW</span>
+                            </div>
+                            <span class="text-neutral-500 font-mono">0.75x SLOW-MO</span>
+                        </div>
+                        
+                        <!-- Landscape Video Viewport -->
+                        <div class="rounded-2xl overflow-hidden aspect-video bg-black border border-neutral-800 relative flex items-center justify-center">
+                            <video id="trueburner-phone-video" autoplay loop muted playsinline class="w-full h-full object-contain bg-black">
                                 <source src="assets/trueburner_phone_app.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <!-- Bottom Bar -->
-                        <div class="w-24 h-1 bg-neutral-800 rounded-full mx-auto mt-2"></div>
+                        
+                        <!-- Bottom Control Status Bar -->
+                        <div class="mt-2.5 px-2 flex items-center justify-between font-mono text-[10px] text-neutral-500">
+                            <span>HARDWARE BASEBAND DECOUPLED</span>
+                            <span>ENCRYPTED VOIP &bull; SMS OTP RELAY</span>
+                        </div>
                     </div>
                 </div>
 
@@ -2106,6 +2126,74 @@
             }
         }
 
+        // Ghost Countdown Video Audio Toggle
+        function toggleGhostVideoAudio() {
+            const vid = document.getElementById('ghost-countdown-video');
+            const icon = document.getElementById('ghost-sound-icon');
+            const text = document.getElementById('ghost-sound-text');
+            if (!vid) return;
+
+            if (vid.muted) {
+                vid.muted = false;
+                vid.volume = 1.0;
+                if (icon) icon.className = 'fa-solid fa-volume-high text-white';
+                if (text) text.innerText = 'MUTE';
+            } else {
+                vid.muted = true;
+                if (icon) icon.className = 'fa-solid fa-volume-xmark text-neutral-400';
+                if (text) text.innerText = 'UNMUTE';
+            }
+        }
+
+        // Ghost Browser Dedicated Beta Modal Controls
+        function openGhostBetaModal() {
+            const modal = document.getElementById('ghost-beta-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                const emailInput = document.getElementById('ghost-beta-email');
+                if (emailInput) setTimeout(() => emailInput.focus(), 150);
+            }
+        }
+
+        function closeGhostBetaModal() {
+            const modal = document.getElementById('ghost-beta-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function submitGhostBeta(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('ghost-beta-email');
+            const platformInput = document.getElementById('ghost-beta-platform');
+            const usecaseInput = document.getElementById('ghost-beta-usecase');
+            const msg = document.getElementById('ghost-beta-success-msg');
+
+            const email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+
+            try {
+                const testers = JSON.parse(localStorage.getItem('burn1_ghost_beta_testers') || '[]');
+                testers.push({
+                    email: email,
+                    platform: platformInput ? platformInput.value : 'desktop_windows',
+                    usecase: usecaseInput ? usecaseInput.value : 'volatile_browsing',
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('burn1_ghost_beta_testers', JSON.stringify(testers));
+            } catch (err) {}
+
+            if (msg) {
+                msg.classList.remove('hidden');
+                msg.innerHTML = `<div>&#10003; <strong>CLOSED BETA ENTRY STAMPED:</strong> Telemetry profile cached for <span class="text-white font-bold">${email}</span>.</div><div class="text-neutral-400 text-[11px] mt-1">Direct private RAM session token queued for dispatch.</div>`;
+            }
+            setTimeout(() => {
+                closeGhostBetaModal();
+            }, 2500);
+        }
+
         // Ghost Architecture White Paper Modal Controls
         function openGhostArchModal() {
             const modal = document.getElementById('ghost-arch-modal');
@@ -2191,6 +2279,10 @@
             const preModal = document.getElementById('true-burner-preorder-modal');
             if (e.target === preModal) {
                 closePreOrderModal();
+            }
+            const betaModal = document.getElementById('ghost-beta-modal');
+            if (e.target === betaModal) {
+                closeGhostBetaModal();
             }
         });
 
@@ -2648,9 +2740,10 @@
     </div>
 
     <!-- =========================================================
-         TRUE BURNER PRE-ORDER & NEWSLETTER INTAKE MODAL
+         TRUE BURNER PRE-ORDER & WISHLIST INTAKE MODAL
+         High Opacity / Dedicated Suite Allocation
          ========================================================= -->
-    <div id="true-burner-preorder-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div id="true-burner-preorder-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="max-w-lg w-full bg-black border border-neutral-700 rounded-3xl p-6 sm:p-8 shadow-2xl relative font-mono text-left max-h-[90vh] overflow-y-auto">
             <button type="button" onclick="closePreOrderModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white text-2xl font-bold">&times;</button>
             
@@ -2740,6 +2833,67 @@
             <div class="mt-5 pt-3 border-t border-neutral-800 text-[11px] text-neutral-500 flex items-center justify-between">
                 <span>Burn-1 Security Protocol &bull; Zero Third-Party Telemetry</span>
                 <span>Encrypted Intake</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         GHOST BROWSER CLOSED BETA INTAKE MODAL (DEDICATED)
+         High Opacity / Direct Browser Testing Registration
+         ========================================================= -->
+    <div id="ghost-beta-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="max-w-md w-full bg-black border border-neutral-700 rounded-3xl p-6 sm:p-8 shadow-2xl relative font-mono text-left max-h-[90vh] overflow-y-auto">
+            <button type="button" onclick="closeGhostBetaModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white text-2xl font-bold">&times;</button>
+            
+            <div class="mb-5 pb-4 border-b border-neutral-800">
+                <span class="text-[10px] text-neutral-400 font-bold uppercase tracking-widest block mb-1">// CLOSED BETA TESTING CADRE</span>
+                <h3 class="font-cyber text-2xl font-black text-white uppercase">
+                    Ghost Browser Beta
+                </h3>
+                <p class="text-xs text-neutral-400 mt-1 leading-relaxed">
+                    Test our volatile RAM browser sandbox &bull; 0 bytes disk writes &bull; Enclave tokens
+                </p>
+            </div>
+
+            <form onsubmit="submitGhostBeta(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Corporate Officer / Personal Email:</label>
+                    <input type="email" id="ghost-beta-email" required placeholder="tester@domain.com" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-white focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Primary Testing Platform:</label>
+                    <select id="ghost-beta-platform" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-white focus:outline-none">
+                        <option value="desktop_windows">Windows Hardened PC</option>
+                        <option value="desktop_mac">macOS (Apple Silicon / Intel)</option>
+                        <option value="linux">Linux Workstation / Qubes</option>
+                        <option value="ios">Apple iOS (iPhone / iPad)</option>
+                        <option value="android">Android Hardened Device</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Testing Objective / Use Case:</label>
+                    <select id="ghost-beta-usecase" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-white focus:outline-none">
+                        <option value="volatile_browsing">Ephemeral volatile browsing (zero disk writes)</option>
+                        <option value="threat_intel">Suspicious URL / untrusted payload isolation</option>
+                        <option value="fingerprint_spoofing">Anti-fingerprinting &amp; WebGL entropy verification</option>
+                        <option value="checkout_testing">Vendor checkout &amp; unverified form testing</option>
+                    </select>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-4 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,255,255,0.25)]">
+                        CONFIRM BETA ACCESS &rarr;
+                    </button>
+                </div>
+            </form>
+
+            <div id="ghost-beta-success-msg" class="hidden mt-4 p-4 rounded-xl bg-neutral-900 border border-neutral-600 text-white text-xs space-y-1"></div>
+
+            <div class="mt-5 pt-3 border-t border-neutral-800 text-[11px] text-neutral-500 flex items-center justify-between">
+                <span>Burn-1 Ephemeral RAM Sandbox</span>
+                <span>Private Testing Cadre</span>
             </div>
         </div>
     </div>

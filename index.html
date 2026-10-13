@@ -728,30 +728,30 @@
 
         /* STAR WARS 3D PERSPECTIVE BENEFIT CRAWL */
         .star-wars-stage {
-            perspective: 350px;
+            perspective: 480px;
             background: #000000 !important;
         }
         .star-wars-crawl-text {
             position: absolute;
             top: 100%;
-            width: 90%;
-            max-width: 680px;
+            width: 95%;
+            max-width: 840px;
             transform-origin: 50% 100%;
-            transform: rotateX(22deg);
-            animation: starWarsCrawlAnimation 28s linear infinite;
+            transform: rotateX(20deg);
+            animation: starWarsCrawlAnimation 30s linear infinite;
         }
         @keyframes starWarsCrawlAnimation {
             0% {
                 top: 100%;
-                transform: rotateX(22deg) translateY(0);
+                transform: rotateX(20deg) translateY(0);
                 opacity: 0.95;
             }
             85% {
                 opacity: 0.95;
             }
             100% {
-                top: -160%;
-                transform: rotateX(22deg) translateY(-100%);
+                top: -180%;
+                transform: rotateX(20deg) translateY(-100%);
                 opacity: 0;
             }
         }
@@ -1468,46 +1468,46 @@
                         </div>
                         
                         <!-- 3D Star Wars Crawl Stage -->
-                        <div class="star-wars-stage relative overflow-hidden rounded-xl bg-black border-2 border-neutral-800 h-[380px] sm:h-[440px] flex justify-center">
+                        <div class="star-wars-stage relative overflow-hidden rounded-xl bg-black border-2 border-neutral-800 h-[440px] sm:h-[520px] flex justify-center">
                             <!-- Top/Bottom Fade Mask -->
                             <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none z-10"></div>
                             
                             <!-- Moving Text Crawl -->
                             <div class="star-wars-crawl-text font-mono font-bold text-amber-300 text-center leading-loose select-none">
-                                <h3 class="font-cyber text-amber-400 font-extrabold text-2xl sm:text-3xl tracking-widest uppercase mb-4">
+                                <h3 class="font-cyber text-amber-400 font-extrabold text-3xl sm:text-5xl tracking-widest uppercase mb-4 glow-amber">
                                     EPISODE I: GHOST BROWSER
                                 </h3>
-                                <h4 class="font-mono text-white text-base sm:text-lg font-bold tracking-wider mb-6">
+                                <h4 class="font-mono text-white text-lg sm:text-2xl font-black tracking-wider mb-8">
                                     THE VOLATILE RAM ARCHITECTURE
                                 </h4>
-                                <div class="space-y-6 font-mono text-sm sm:text-base text-amber-200/90 max-w-2xl mx-auto leading-relaxed">
-                                    <p class="text-white text-sm sm:text-base">
+                                <div class="space-y-8 font-mono max-w-3xl mx-auto leading-relaxed">
+                                    <p class="text-white text-base sm:text-xl font-bold">
                                         It is a period of total surveillance. Big Tech data brokers and digital fingerprint scrapers track every click across the web.
                                     </p>
-                                    <p class="text-white text-sm sm:text-base">
+                                    <p class="text-white text-base sm:text-xl font-bold">
                                         A solitary engineer built a new protocol from the shadows: TRUE BURNER. An underground privacy engine engineered for the paranoid, the researcher, and the hardened operator.
                                     </p>
-                                    <p class="border-t border-amber-500/40 pt-4">
-                                        <span class="text-amber-400 font-black text-base sm:text-lg block mb-1">BENEFIT 01: ZERO DISK FOOTPRINT</span>
-                                        <span class="text-neutral-300 font-normal text-xs sm:text-sm block">Not a single cookie, cache block, or history entry touches your physical SSD or phone storage.</span>
+                                    <p class="border-t border-amber-500/50 pt-5">
+                                        <span class="text-amber-400 font-black text-lg sm:text-2xl block mb-2">BENEFIT 01: ZERO DISK FOOTPRINT</span>
+                                        <span class="text-neutral-200 font-medium text-sm sm:text-base block">Not a single cookie, cache block, or history entry touches your physical SSD or phone storage.</span>
                                     </p>
-                                    <p class="border-t border-amber-500/40 pt-4">
-                                        <span class="text-amber-400 font-black text-base sm:text-lg block mb-1">BENEFIT 02: VOLATILE RAM PURGE</span>
-                                        <span class="text-neutral-300 font-normal text-xs sm:text-sm block">Sessions execute in isolated ephemeral RAM enclaves. When the session terminates, memory drops to zero.</span>
+                                    <p class="border-t border-amber-500/50 pt-5">
+                                        <span class="text-amber-400 font-black text-lg sm:text-2xl block mb-2">BENEFIT 02: VOLATILE RAM PURGE</span>
+                                        <span class="text-neutral-200 font-medium text-sm sm:text-base block">Sessions execute in isolated ephemeral RAM enclaves. When the session terminates, memory drops to zero.</span>
                                     </p>
-                                    <p class="border-t border-amber-500/40 pt-4">
-                                        <span class="text-amber-400 font-black text-base sm:text-lg block mb-1">BENEFIT 03: HARDWARE FINGERPRINT SPOOFING</span>
-                                        <span class="text-neutral-300 font-normal text-xs sm:text-sm block">Canvas, WebGL, GPU, and audio context entropy randomized on every session instantiation.</span>
+                                    <p class="border-t border-amber-500/50 pt-5">
+                                        <span class="text-amber-400 font-black text-lg sm:text-2xl block mb-2">BENEFIT 03: HARDWARE FINGERPRINT SPOOFING</span>
+                                        <span class="text-neutral-200 font-medium text-sm sm:text-base block">Canvas, WebGL, GPU, and audio context entropy randomized on every session instantiation.</span>
                                     </p>
-                                    <p class="border-t border-amber-500/40 pt-4">
-                                        <span class="text-amber-400 font-black text-base sm:text-lg block mb-1">BENEFIT 04: SUSPICIOUS PAYLOAD CONTAINMENT</span>
-                                        <span class="text-neutral-300 font-normal text-xs sm:text-sm block">Open untrusted URLs and unverified vendor forms in a cloud vacuum, miles away from your personal computer.</span>
+                                    <p class="border-t border-amber-500/50 pt-5">
+                                        <span class="text-amber-400 font-black text-lg sm:text-2xl block mb-2">BENEFIT 04: SUSPICIOUS PAYLOAD CONTAINMENT</span>
+                                        <span class="text-neutral-200 font-medium text-sm sm:text-base block">Open untrusted URLs and unverified vendor forms in a cloud vacuum, miles away from your personal computer.</span>
                                     </p>
-                                    <p class="border-t border-amber-500/40 pt-4">
-                                        <span class="text-amber-400 font-black text-base sm:text-lg block mb-1">BENEFIT 05: 300MS EMERGENCY ZERO-FILL</span>
-                                        <span class="text-neutral-300 font-normal text-xs sm:text-sm block">Trip the killswitch or let the auto-timer expire. Volatile memory is overwritten with random entropy noise instantly.</span>
+                                    <p class="border-t border-amber-500/50 pt-5">
+                                        <span class="text-amber-400 font-black text-lg sm:text-2xl block mb-2">BENEFIT 05: 300MS EMERGENCY ZERO-FILL</span>
+                                        <span class="text-neutral-200 font-medium text-sm sm:text-base block">Trip the killswitch or let the auto-timer expire. Volatile memory is overwritten with random entropy noise instantly.</span>
                                     </p>
-                                    <p class="border-t border-amber-500/40 pt-4 text-white">
+                                    <p class="border-t border-amber-500/50 pt-6 text-white text-base sm:text-lg font-black tracking-widest uppercase">
                                         WITHOUT A TRACE &bull; POWERED BY R.E.P.&trade;
                                     </p>
                                 </div>
