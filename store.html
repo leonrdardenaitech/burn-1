@@ -1021,6 +1021,25 @@
             color: #581c87 !important;
             font-weight: 800 !important;
         }
+        /* True Burner Suite Underground Contrast Lock (Pitch Black across all modes) */
+        html.day-mode #true-burner-suite,
+        html.day-mode #ghost-arch-modal > div,
+        html.day-mode #true-burner-preorder-modal > div {
+            background-color: #000000 !important;
+            border-color: #06b6d4 !important;
+            color: #f1f5f9 !important;
+        }
+        html.day-mode #true-burner-suite h2,
+        html.day-mode #true-burner-suite h3,
+        html.day-mode #ghost-arch-modal h3,
+        html.day-mode #true-burner-preorder-modal h3 {
+            color: #ffffff !important;
+        }
+        html.day-mode #true-burner-suite .text-neutral-300,
+        html.day-mode #ghost-arch-modal .text-neutral-300,
+        html.day-mode #true-burner-preorder-modal .text-neutral-300 {
+            color: #cbd5e1 !important;
+        }
         /* Smooth Mobile Pool Ball Track */
         #pool-ball-track {
             -webkit-overflow-scrolling: touch;
@@ -1736,130 +1755,218 @@
         </div>
 
         <!-- =========================================================
-             TIER 2: STREAMLINED TRUE BURNER GHOST BROWSER ENCLAVE
-             High-Contrast 2-Color Pitch Black & White Aesthetic, Media Clips & Beta Waitlist
+             TIER 2: THE TRUE BURNER SUITE // DISPOSABLE PRIVACY PROTOCOL
+             The 50-Year-Old Hacker's Dream Product Line
+             Flagship Burner Phone App, Guerrilla Disposable Inboxes, Ghost Browser & Slow-Mo Preview
              ========================================================= -->
-        <div id="ghost-browser" class="p-6 sm:p-10 rounded-3xl border-2 border-cyan-500 bg-black mb-14 shadow-[0_0_40px_rgba(6,182,212,0.35)] relative overflow-hidden">
+        <div id="true-burner-suite" class="p-6 sm:p-10 rounded-3xl border-2 border-cyan-400 bg-black mb-14 shadow-[0_0_40px_rgba(6,182,212,0.35)] relative overflow-hidden">
+            <a id="ghost-browser"></a>
+            
             <!-- Background motion loop -->
-            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none z-0">
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none z-0">
                 <source src="assets/trueburner_title_bg.mp4" type="video/mp4">
             </video>
             <div class="absolute -top-12 -right-12 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0"></div>
 
-            <!-- Header: Mystery & Minimal High Contrast -->
+            <!-- Header: Raw Underground Manifesto & Concept Timestamp -->
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8 pb-6 border-b border-cyan-900/60 relative z-10">
                 <div>
                     <div class="flex flex-wrap items-center gap-2 mb-2">
                         <span class="px-3 py-1 rounded bg-black border border-cyan-400 text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider">
-                            // COMING SOON &bull; PRIVATE BETA WAITLIST
+                            // THE 50-YEAR-OLD HACKER'S DREAM LINEUP
+                        </span>
+                        <span class="px-3 py-1 rounded bg-black border border-amber-500 text-amber-300 font-mono text-[11px] font-bold uppercase">
+                            CONCEPT DBA EST. 2026 &bull; TIMESTAMPED
                         </span>
                         <span class="px-3 py-1 rounded bg-black border border-purple-500 text-purple-300 font-mono text-[11px] font-bold uppercase">
-                            TIME-SENSITIVE SMOKE SCREEN
+                            RAW PRIVACY PROTOCOL
                         </span>
                     </div>
 
-                    <h2 class="text-2xl sm:text-4xl font-cyber text-white font-extrabold uppercase glow-cyan">
-                        True Burner Ghost Browser
+                    <h2 class="text-3xl sm:text-5xl font-cyber text-white font-extrabold uppercase glow-cyan">
+                        The True Burner Suite
                     </h2>
-                    <p class="font-mono text-xs sm:text-sm text-neutral-300 font-bold uppercase tracking-wider mt-1">
-                        Time-sensitive smoke screen sessions &bull; Nothing saved on your device &bull; Volatile RAM shred on exit
+                    <p class="font-mono text-xs sm:text-sm text-neutral-300 font-bold uppercase tracking-wider mt-1 max-w-3xl leading-relaxed">
+                        Virtual hardware anonymity &bull; Single-use burner phone numbers &bull; Guerrilla disposable inboxes &bull; Zero forensic residue
                     </p>
                 </div>
 
-                <div class="flex items-center gap-3">
-                    <button type="button" onclick="openGhostArchModal()" class="px-4 py-2.5 rounded-xl bg-black border border-cyan-400 text-cyan-300 font-mono text-xs font-bold hover:bg-neutral-900 transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-file-contract text-cyan-400"></i> ARCHITECTURE BLUEPRINT &rarr;
+                <div class="flex items-center gap-3 shrink-0">
+                    <button type="button" onclick="openGhostArchModal()" class="px-4 py-2.5 rounded-xl bg-black border border-cyan-400 hover:border-cyan-300 text-cyan-300 font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
+                        <i class="fa-solid fa-file-contract text-cyan-400"></i> TECHNICAL BLUEPRINT &rarr;
                     </button>
                 </div>
             </div>
 
-            <!-- Streamlined 2-Column High-Impact Media Layout -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10">
+            <!-- Founder Voice Note / Vision Callout -->
+            <div class="relative z-10 p-4 sm:p-5 rounded-2xl bg-neutral-950 border border-neutral-800 mb-8 font-mono text-xs text-neutral-300 space-y-2">
+                <div class="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase">
+                    <i class="fa-solid fa-terminal"></i> FROM LEON // PRINCIPAL ARCHITECT &bull; 50-YEAR-OLD CYBERSECURITY NERD
+                </div>
+                <p class="leading-relaxed">
+                    "I am revamping this platform around one core obsession: bringing back the raw, unmonitored freedom of the classic burner phone. Plenty of people loved buying a blister-pack flip phone with zero ID, peeling the wrap, dialing, and dropping the battery when done. In a world of carrier tracking, IMEI surveillance, and intrusive verification codes, <strong class="text-white">True Burner</strong> is the digital resurrection of that ethos. Single-use phone numbers, disposable Guerrilla inboxes, and volatile cloud browsers. Built from the underground up."
+                </p>
+            </div>
+
+            <!-- 3-Product Disposable Lineup Grid (Cryptic Dossiers) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 relative z-10">
                 
-                <!-- Left Column: Looping Countdown Clip & Beta Test Drive Intake (7 Cols) -->
-                <div class="lg:col-span-7 p-6 rounded-2xl bg-black border-2 border-cyan-400 flex flex-col justify-between shadow-2xl">
+                <!-- Product 1: The Burner Phone App (Flagship Dream Product) -->
+                <div class="p-6 rounded-2xl bg-black border-2 border-cyan-400 flex flex-col justify-between shadow-[0_0_25px_rgba(6,182,212,0.2)] group hover:border-cyan-300 transition-all">
                     <div>
-                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
-                            <span class="font-mono text-xs text-amber-400 font-bold uppercase flex items-center gap-2">
-                                <i class="fa-solid fa-bomb text-red-500"></i> 15-SECOND SELF-DESTRUCT RAM PURGE
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/50">
+                                FLAGSHIP DREAM PRODUCT
                             </span>
-                            <span class="px-2 py-0.5 rounded bg-neutral-900 border border-neutral-700 text-[10px] font-mono text-cyan-300 font-bold uppercase">
-                                300MS ZERO-FILL
-                            </span>
+                            <span class="text-[10px] font-mono text-purple-400 font-bold uppercase">IN CODE</span>
                         </div>
-
-                        <!-- Countdown Sequence Video Player -->
-                        <div class="rounded-xl overflow-hidden border border-red-500/60 shadow-[0_0_25px_rgba(239,68,68,0.3)] bg-black relative aspect-video flex items-center justify-center mb-4">
-                            <video id="selfdestruct-video-player" controls loop preload="metadata" class="w-full h-full object-cover">
-                                <source src="assets/selfdestruct_countdown.mp4" type="video/mp4">
-                            </video>
-                        </div>
-
-                        <p class="font-mono text-xs text-neutral-300 leading-relaxed mb-4">
-                            When your session expires or the killswitch is tripped, volatile memory is overwritten with random entropy noise and sockets drop instantly. Zero disk footprint. Zero forensic trail.
+                        <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">
+                            True Burner Phone App
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-300 mb-4 leading-relaxed">
+                            Virtual disposable phone numbers on demand. Never surrender your personal carrier line to two-factor SMS gateways or untrusted marketplaces.
                         </p>
-
-                        <!-- Beta Waitlist & 3-Minute Session Signup Form -->
-                        <form id="ghost-trial-form" onsubmit="startGhostTrial(event)" class="space-y-3 font-mono text-xs pt-2 border-t border-neutral-800">
-                            <div class="flex flex-col sm:flex-row gap-3">
-                                <input type="email" id="ghost-trial-email" required placeholder="Enter officer email for private beta" class="flex-grow bg-black border border-neutral-700 rounded-xl px-4 py-3 text-white text-xs focus:border-cyan-400 focus:outline-none">
-                                <button type="submit" id="ghost-trial-btn" class="px-6 py-3 rounded-xl bg-white hover:bg-neutral-200 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,255,255,0.7)] shrink-0 flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-play text-black"></i> REQUEST 3-MIN BETA SESSION
-                                </button>
-                            </div>
-
-                            <!-- Live Trial Terminal Console -->
-                            <div id="ghost-trial-console" class="hidden p-3 rounded-xl bg-neutral-950 border border-cyan-500/50 text-[11px] font-mono space-y-1 mt-3">
-                                <div class="flex justify-between items-center pb-1 border-b border-neutral-800">
-                                    <span class="text-cyan-400 font-bold" id="trial-terminal-status">[&#9679;] PROVISIONING VOLATILE RAM...</span>
-                                    <span class="text-amber-400 font-bold px-2 py-0.5 rounded bg-black border border-amber-500" id="trial-timer-display">03:00</span>
-                                </div>
-                                <p class="text-neutral-400" id="trial-log-1">&gt; Allocating 512MB RAM enclave container...</p>
-                                <p class="text-neutral-400" id="trial-log-2">&gt; Randomizing Canvas / WebGL fingerprint entropy...</p>
-                                <p class="text-emerald-400" id="trial-log-3">&gt; Ghost socket active. Auto-vacuum engages in 180s.</p>
-                            </div>
-                        </form>
+                        <ul class="space-y-2 font-mono text-xs text-neutral-200 mb-6">
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Instant single-use numbers with area codes</li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Ephemeral SMS OTP relay &amp; code extractor</li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Burn-after-talking encrypted VoIP tunneling</li>
+                            <li class="flex items-start gap-2"><span class="text-cyan-400">&#9656;</span> Zero SIM card linkage &bull; Zero IMEI tracking</li>
+                        </ul>
                     </div>
-
-                    <div class="pt-3 mt-4 border-t border-neutral-800 flex justify-between items-center font-mono text-[11px] text-neutral-400">
-                        <span><i class="fa-solid fa-lock text-cyan-400"></i> Ephemeral In-Memory Sandbox</span>
-                        <span class="text-amber-400 font-bold">LIMITED SEATS</span>
+                    <div>
+                        <button type="button" onclick="openPreOrderModal('sponsor')" class="w-full py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-mobile-screen"></i> PRE-ORDER PHONE APP &rarr;
+                        </button>
                     </div>
                 </div>
 
-                <!-- Right Column: Mobile Burner App Video Preview & Pre-Order Reservation (5 Cols) -->
-                <div class="lg:col-span-5 p-6 rounded-2xl bg-black border-2 border-neutral-800 flex flex-col justify-between shadow-2xl">
+                <!-- Product 2: Disposable Inboxes (Guerrilla Mail Protocol) -->
+                <div class="p-6 rounded-2xl bg-black border border-neutral-700 flex flex-col justify-between hover:border-amber-400 transition-all shadow-xl">
                     <div>
-                        <div class="flex items-center justify-between pb-3 mb-4 border-b border-neutral-800">
-                            <span class="font-mono text-xs text-cyan-300 font-bold uppercase flex items-center gap-2">
-                                <i class="fa-solid fa-mobile-screen text-cyan-400"></i> MOBILE BURNER APP PREVIEW
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-950/80 border border-amber-500/50">
+                                VOLATILE INBOX ENGINE
                             </span>
-                            <span class="text-[10px] font-mono text-purple-400 uppercase font-bold">IOS &amp; ANDROID</span>
+                            <span class="text-[10px] font-mono text-neutral-400 font-bold uppercase">10-MIN PURGE</span>
                         </div>
-
-                        <!-- Mobile Phone App Video Preview -->
-                        <div class="rounded-xl overflow-hidden border border-cyan-500/60 shadow-[0_0_20px_rgba(6,182,212,0.3)] bg-black aspect-video flex items-center justify-center relative mb-4">
-                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                                <source src="assets/trueburner_phone_app.mp4" type="video/mp4">
-                            </video>
-                        </div>
-
-                        <p class="font-mono text-xs text-neutral-300 leading-relaxed mb-6">
-                            True Burner companion engine for mobile hardware. Disposable browsing and single-use link verification right from your pocket.
+                        <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">
+                            Guerrilla Burner Inboxes
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-300 mb-4 leading-relaxed">
+                            Untrusted vendor checkouts, forum registrations, and throwaway downloads don't deserve your real email. Instant disposable cryptographic inboxes.
                         </p>
+                        <ul class="space-y-2 font-mono text-xs text-neutral-200 mb-6">
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> 10-minute temporary cryptographic inboxes</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Automatic incoming payload incineration</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Blocks tracking pixels &amp; marketing spam</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-400">&#9656;</span> Zero persistent database footprint</li>
+                        </ul>
                     </div>
+                    <div>
+                        <button type="button" onclick="openPreOrderModal('newsletter')" class="w-full py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-200 border border-neutral-700 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-envelope"></i> JOIN DROP NOTIFICATIONS &rarr;
+                        </button>
+                    </div>
+                </div>
 
-                    <div class="space-y-3">
-                        <a href="mailto:leonrdarden@gmail.com?subject=True%20Burner%20Pre-Order%20Reservation&body=Please%20reserve%20my%20seat%20for%20True%20Burner%20Pro%20(%2429%2Fmo)%3A%0ACompany%3A" class="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-ticket"></i> PLACE PRE-ORDER // RESERVE SEAT ($29/MO)
-                        </a>
-                        <button type="button" onclick="openGhostArchModal()" class="w-full py-2.5 rounded-lg bg-black border border-neutral-700 hover:border-neutral-500 text-neutral-300 font-mono text-xs font-bold transition-all">
-                            VIEW TECHNICAL WHITE PAPER &rarr;
+                <!-- Product 3: Ghost Browser (Ephemeral RAM Sandbox) -->
+                <div class="p-6 rounded-2xl bg-black border border-neutral-700 flex flex-col justify-between hover:border-purple-400 transition-all shadow-xl">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-950/80 border border-purple-500/50">
+                                RAM ISOLATION SANDBOX
+                            </span>
+                            <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase">CLOSED BETA</span>
+                        </div>
+                        <h3 class="font-cyber text-lg font-bold text-white uppercase mb-2">
+                            Ghost Browser Sessions
+                        </h3>
+                        <p class="text-xs font-mono text-neutral-300 mb-4 leading-relaxed">
+                            Isolated cloud browser instances hosted exclusively in volatile server RAM. Zero disk writes. Total session shred on tab disconnect.
+                        </p>
+                        <ul class="space-y-2 font-mono text-xs text-neutral-200 mb-6">
+                            <li class="flex items-start gap-2"><span class="text-purple-400">&#9656;</span> 0 bytes written to hard drive, SSD, or phone</li>
+                            <li class="flex items-start gap-2"><span class="text-purple-400">&#9656;</span> Canvas &amp; GPU fingerprint entropy spoofing</li>
+                            <li class="flex items-start gap-2"><span class="text-purple-400">&#9656;</span> 15-minute auto-countdown shred timer</li>
+                            <li class="flex items-start gap-2"><span class="text-purple-400">&#9656;</span> 300ms emergency zero-fill killswitch</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <button type="button" onclick="openPreOrderModal('sponsor')" class="w-full py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-purple-300 border border-purple-500 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-ghost"></i> REQUEST BETA ACCESS &rarr;
                         </button>
                     </div>
                 </div>
 
             </div>
+
+            <!-- Slow-Motion Phone App Video Showcase & Pre-Order Action Bar -->
+            <div class="p-6 sm:p-8 rounded-2xl bg-neutral-950 border-2 border-neutral-800 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center gap-8">
+                    
+                    <!-- Left: Slowed Down Video Player in Smartphone Frame -->
+                    <div class="w-full lg:w-1/2 flex flex-col items-center">
+                        <div class="flex items-center justify-between w-full max-w-sm mb-2 font-mono text-[11px] text-neutral-400">
+                            <span class="flex items-center gap-2 text-cyan-300 font-bold">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                                RUNTIME PROTOTYPE [SLOW-MO]
+                            </span>
+                            <span class="text-neutral-500">PLAYBACK: 0.75x</span>
+                        </div>
+                        
+                        <!-- High-Tech Mobile Casing -->
+                        <div class="w-full max-w-sm rounded-3xl p-3 bg-black border-2 border-cyan-400/80 shadow-[0_0_35px_rgba(6,182,212,0.3)] relative">
+                            <!-- Top Speaker Notch -->
+                            <div class="w-20 h-1.5 bg-neutral-800 rounded-full mx-auto mb-2.5"></div>
+                            
+                            <div class="rounded-2xl overflow-hidden aspect-[9/16] sm:aspect-video bg-black relative flex items-center justify-center border border-neutral-800">
+                                <video id="trueburner-phone-video" autoplay loop muted playsinline class="w-full h-full object-cover">
+                                    <source src="assets/trueburner_phone_app.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            
+                            <!-- Bottom Gesture Bar -->
+                            <div class="w-28 h-1 bg-neutral-700 rounded-full mx-auto mt-2.5"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Pre-Order & Newsletter Conversion Terminal -->
+                    <div class="w-full lg:w-1/2 flex flex-col justify-between space-y-6 text-left font-mono">
+                        <div>
+                            <span class="text-[10px] text-cyan-400 uppercase font-bold tracking-widest block mb-1">
+                                // BECOME A TRUE BURNER SPONSOR
+                            </span>
+                            <h3 class="font-cyber text-2xl sm:text-3xl font-black text-white uppercase mb-3">
+                                Reserve Your Pro Suite Seat
+                            </h3>
+                            <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-4">
+                                The True Burner Suite is built independently. By placing your pre-order or backing as a founding sponsor, you unlock early TestFlight/APK builds, lifetime grandfathered rates, and a direct feedback channel with Leon.
+                            </p>
+                            <p class="text-xs text-neutral-400 leading-relaxed">
+                                Not ready for a paid sponsor seat? Join our free Underground Newsletter to receive public release notifications and PGP-signed build hashes the minute each tool drops.
+                            </p>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="space-y-3 pt-2">
+                            <button type="button" onclick="openPreOrderModal('sponsor')" class="w-full py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(6,182,212,0.6)] flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-ticket text-black"></i> PLACE YOUR PRE-ORDER // BE A SPONSOR &rarr;
+                            </button>
+                            <button type="button" onclick="openPreOrderModal('newsletter')" class="w-full py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-200 border border-neutral-700 font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane text-cyan-400"></i> SIGN UP TO NEWSLETTER (PUBLIC DROP NOTICES)
+                            </button>
+                        </div>
+
+                        <!-- Trust Seal -->
+                        <div class="pt-3 border-t border-neutral-800 flex items-center justify-between text-[11px] text-neutral-400">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-lock text-cyan-400"></i> Zero Tracking &bull; Direct Developer Channel</span>
+                            <span class="text-amber-400 font-bold">LIMITED ALPHA SEATS</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
         <div class="marker-divider-amber"></div>
@@ -2084,11 +2191,118 @@
             }
         }
 
+        // True Burner Pre-Order & Newsletter Modal Controls
+        function openPreOrderModal(tab) {
+            const modal = document.getElementById('true-burner-preorder-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                switchPreOrderTab(tab || 'sponsor');
+            }
+        }
+
+        function closePreOrderModal() {
+            const modal = document.getElementById('true-burner-preorder-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function switchPreOrderTab(tab) {
+            const tabSponsor = document.getElementById('tab-sponsor');
+            const tabNewsletter = document.getElementById('tab-newsletter');
+            const panelSponsor = document.getElementById('panel-sponsor');
+            const panelNewsletter = document.getElementById('panel-newsletter');
+
+            if (tab === 'sponsor') {
+                if (tabSponsor) {
+                    tabSponsor.className = "flex-1 py-2.5 font-cyber text-xs uppercase tracking-wider font-black text-black bg-cyan-400 rounded-lg transition-all shadow-[0_0_15px_rgba(6,182,212,0.4)]";
+                }
+                if (tabNewsletter) {
+                    tabNewsletter.className = "flex-1 py-2.5 font-mono text-xs uppercase tracking-wider font-bold text-neutral-400 hover:text-white bg-transparent rounded-lg transition-all";
+                }
+                if (panelSponsor) panelSponsor.classList.remove('hidden');
+                if (panelNewsletter) panelNewsletter.classList.add('hidden');
+            } else {
+                if (tabSponsor) {
+                    tabSponsor.className = "flex-1 py-2.5 font-mono text-xs uppercase tracking-wider font-bold text-neutral-400 hover:text-white bg-transparent rounded-lg transition-all";
+                }
+                if (tabNewsletter) {
+                    tabNewsletter.className = "flex-1 py-2.5 font-cyber text-xs uppercase tracking-wider font-black text-black bg-amber-400 rounded-lg transition-all shadow-[0_0_15px_rgba(245,158,11,0.4)]";
+                }
+                if (panelSponsor) panelSponsor.classList.add('hidden');
+                if (panelNewsletter) panelNewsletter.classList.remove('hidden');
+            }
+        }
+
+        function submitPreOrder(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('preorder-email');
+            const tierInput = document.getElementById('preorder-tier');
+            const osInput = document.getElementById('preorder-os');
+            const notesInput = document.getElementById('preorder-notes');
+            const msg = document.getElementById('preorder-success-msg');
+
+            const email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+
+            try {
+                const sponsors = JSON.parse(localStorage.getItem('burn1_trueburner_sponsors') || '[]');
+                sponsors.push({
+                    email: email,
+                    tier: tierInput ? tierInput.value : 'founding_sponsor',
+                    os: osInput ? osInput.value : 'ios',
+                    notes: notesInput ? notesInput.value : '',
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('burn1_trueburner_sponsors', JSON.stringify(sponsors));
+            } catch (err) {}
+
+            if (msg) {
+                msg.classList.remove('hidden');
+                msg.innerHTML = `<strong>&#10003; PRE-ORDER QUEUED:</strong> Dispatch stamped for <span class="text-white">${email}</span>. Direct alpha build link will be delivered as build completes.`;
+            }
+            setTimeout(() => {
+                closePreOrderModal();
+            }, 2500);
+        }
+
+        function submitNewsletter(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const msg = document.getElementById('newsletter-success-msg');
+
+            const email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+
+            try {
+                const news = JSON.parse(localStorage.getItem('burn1_trueburner_newsletter') || '[]');
+                news.push({
+                    email: email,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('burn1_trueburner_newsletter', JSON.stringify(news));
+            } catch (err) {}
+
+            if (msg) {
+                msg.classList.remove('hidden');
+                msg.innerHTML = `<strong>&#10003; DISPATCH SUBSCRIBED:</strong> <span class="text-white">${email}</span> added to encrypted drop registry. Zero spam policy strictly enforced.`;
+            }
+            setTimeout(() => {
+                closePreOrderModal();
+            }, 2500);
+        }
+
         // Close modal when clicking outside content
         window.addEventListener('click', (e) => {
-            const modal = document.getElementById('ghost-arch-modal');
-            if (e.target === modal) {
+            const archModal = document.getElementById('ghost-arch-modal');
+            if (e.target === archModal) {
                 closeGhostArchModal();
+            }
+            const preModal = document.getElementById('true-burner-preorder-modal');
+            if (e.target === preModal) {
+                closePreOrderModal();
             }
         });
 
@@ -2194,6 +2408,11 @@
                 if (themeIcon) themeIcon.className = "fa-solid fa-moon text-purple-600";
                 if (themeText) themeText.innerText = "NIGHT";
                 if (versionTag) versionTag.innerText = "STORE BIZ";
+            }
+            // Slow down True Burner Phone App prototype preview
+            const phoneVid = document.getElementById('trueburner-phone-video');
+            if (phoneVid) {
+                phoneVid.playbackRate = 0.75;
             }
             initStepperFromStorage();
         });
@@ -2478,5 +2697,162 @@
         }
 
     </script>
+
+    <!-- =========================================================
+         GHOST ARCHITECTURE & TRUE BURNER BLUEPRINT MODAL
+         ========================================================= -->
+    <div id="ghost-arch-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="max-w-2xl w-full bg-black border-2 border-cyan-400 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(6,182,212,0.4)] relative font-mono text-left max-h-[90vh] overflow-y-auto">
+            <button type="button" onclick="closeGhostArchModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white text-2xl font-bold">&times;</button>
+            
+            <div class="mb-6 pb-4 border-b border-cyan-900/60">
+                <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-widest block mb-1">// TECHNICAL SPECIFICATION // RFC-2026-TB</span>
+                <h3 class="font-cyber text-2xl sm:text-3xl font-black text-white uppercase glow-cyan">
+                    True Burner Technical Blueprint
+                </h3>
+                <p class="text-xs text-neutral-300 mt-1">
+                    Zero Forensic Residue &bull; Volatile Memory Isolation &bull; Hardware Decoupling Protocol
+                </p>
+            </div>
+
+            <div class="space-y-6 text-xs text-neutral-300 leading-relaxed">
+                <!-- Pillar 1 -->
+                <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
+                    <div class="text-cyan-400 font-bold uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-mobile-screen"></i> 01. True Burner Phone App Subsystem
+                    </div>
+                    <p>
+                        Decouples telephony authentication from physical baseband hardware. Incoming SMS OTP verifications are captured via encrypted WebSocket relays, extracted instantly by an in-memory parsing pipeline, and dispatched to your screen without exposing your cellular IMEI, IMSI, or personal carrier account. Number identities can be incinerated with a single tap, severing all reverse-lookup attribution trees.
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
+                    <div class="text-amber-400 font-bold uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> 02. Guerrilla Throwaway Inboxes
+                    </div>
+                    <p>
+                        Volatile mail routing that provisions single-use addresses lasting exactly 10 minutes (extendable per session). Inbound emails are rendered in an isolated sandbox, tracking pixels are blocked and stripped, and raw attachments are detonated in quarantined memory. When the countdown completes, the entire MX record assignment and all associated payloads are zero-filled from RAM.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="p-4 rounded-xl bg-neutral-950 border border-neutral-800 space-y-2">
+                    <div class="text-purple-400 font-bold uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-ghost"></i> 03. Ghost Browser Ephemeral RAM Sandbox
+                    </div>
+                    <p>
+                        Instances execute in ephemeral cloud micro-VM containers running purely out of RAM disks (tmpfs). Zero bytes are ever committed to SSDs or NVMe arrays. Browser canvas fingerprints, WebGL shader hashes, and audio entropy are randomized on every tab spin-up. Upon disconnection or timer expiry, a 300ms cryptographic zero-fill wipes the memory enclave clean.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-black border border-cyan-500/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <div class="text-white font-bold uppercase">Ready to test or back the build?</div>
+                        <div class="text-neutral-400 text-[11px]">Join founding sponsors or register for public drop updates.</div>
+                    </div>
+                    <button type="button" onclick="closeGhostArchModal(); openPreOrderModal('sponsor');" class="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-bold text-xs uppercase transition-all shadow-[0_0_15px_rgba(6,182,212,0.4)] whitespace-nowrap">
+                        BE A SPONSOR &rarr;
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         TRUE BURNER PRE-ORDER & NEWSLETTER INTAKE MODAL
+         ========================================================= -->
+    <div id="true-burner-preorder-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="max-w-lg w-full bg-black border-2 border-cyan-400 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(6,182,212,0.4)] relative font-mono text-left max-h-[90vh] overflow-y-auto">
+            <button type="button" onclick="closePreOrderModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white text-2xl font-bold">&times;</button>
+            
+            <div class="mb-5 pb-4 border-b border-neutral-800">
+                <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-widest block mb-1">// TRUE BURNER ALPHA INTAKE</span>
+                <h3 class="font-cyber text-2xl font-black text-white uppercase glow-cyan">
+                    True Burner Dispatch
+                </h3>
+                <p class="text-xs text-neutral-300 mt-1">
+                    Direct developer channel with Leon &bull; Timestamped concept DBA Est. 2026
+                </p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="flex items-center gap-2 p-1.5 rounded-xl bg-neutral-950 border border-neutral-800 mb-6">
+                <button type="button" id="tab-sponsor" onclick="switchPreOrderTab('sponsor')" class="flex-1 py-2.5 font-cyber text-xs uppercase tracking-wider font-black text-black bg-cyan-400 rounded-lg transition-all shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+                    <i class="fa-solid fa-ticket"></i> Founding Sponsor ($)
+                </button>
+                <button type="button" id="tab-newsletter" onclick="switchPreOrderTab('newsletter')" class="flex-1 py-2.5 font-mono text-xs uppercase tracking-wider font-bold text-neutral-400 hover:text-white bg-transparent rounded-lg transition-all">
+                    <i class="fa-solid fa-paper-plane"></i> Public Drop Newsletter
+                </button>
+            </div>
+
+            <!-- Panel 1: Sponsor Pre-Order -->
+            <div id="panel-sponsor" class="space-y-4">
+                <p class="text-xs text-neutral-300 leading-relaxed">
+                    Sponsors receive closed Alpha builds, private TestFlight/APK access, grandfathered lifetime pricing, and direct roadmap input.
+                </p>
+
+                <form onsubmit="submitPreOrder(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Your Officer / Personal Email:</label>
+                        <input type="email" id="preorder-email" required placeholder="you@domain.com" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Select Backer Tier:</label>
+                        <select id="preorder-tier" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+                            <option value="burner_app_alpha">True Burner Phone App Alpha Backer - $19 Flat</option>
+                            <option value="founding_sponsor" selected>Founding Sponsor (All 3 Products) - $49 Flat Lifetime</option>
+                            <option value="pro_lifetime">True Burner Pro Enterprise / Team Enclave - $99 Lifetime</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Primary Mobile / Desktop Platform:</label>
+                        <select id="preorder-os" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+                            <option value="ios">Apple iOS (TestFlight Private Build)</option>
+                            <option value="android">Android (Signed Standalone APK)</option>
+                            <option value="desktop_mac">macOS (Hardened DMG)</option>
+                            <option value="desktop_win">Windows (Sandboxed MSI)</option>
+                            <option value="linux">Linux (AppImage / Flatpak)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Custom Notes / Most Wanted Feature:</label>
+                        <input type="text" id="preorder-notes" placeholder="e.g. Single-use OTP scraper, SMS area code preference, etc." class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.5)]">
+                        CONFIRM SPONSOR PRE-ORDER &rarr;
+                    </button>
+                </form>
+
+                <div id="preorder-success-msg" class="hidden p-4 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-300 text-xs"></div>
+            </div>
+
+            <!-- Panel 2: Newsletter -->
+            <div id="panel-newsletter" class="hidden space-y-4">
+                <p class="text-xs text-neutral-300 leading-relaxed">
+                    Zero spam, zero ad trackers. Receive instant PGP-signed alerts when the True Burner Phone App, Guerrilla Inboxes, or Ghost Browser are opened to the general public.
+                </p>
+
+                <form onsubmit="submitNewsletter(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] uppercase font-bold text-neutral-300 mb-1">Email For Drop Alerts:</label>
+                        <input type="email" id="newsletter-email" required placeholder="dropalerts@domain.com" class="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-4 py-2.5 text-white text-xs focus:border-amber-400 focus:outline-none">
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-cyber font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(245,158,11,0.5)]">
+                        JOIN FREE DROP DISPATCH &rarr;
+                    </button>
+                </form>
+
+                <div id="newsletter-success-msg" class="hidden p-4 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-300 text-xs"></div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-neutral-800 text-[11px] text-neutral-400 flex items-center justify-between">
+                <span><i class="fa-solid fa-shield-halved text-cyan-400"></i> No Third-Party Telemetry</span>
+                <span class="text-neutral-500">Encrypted Queue</span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
