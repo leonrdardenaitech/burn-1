@@ -465,8 +465,7 @@
         /* TRUE SEE-THROUGH GLASS PANELS (MIRROR CLOCK SHARDS SHINE THROUGH) */
         html.day-mode .cyber-card,
         html.day-mode .glass-panel,
-        html.day-mode #audit,
-        html.day-mode #ghost-browser {
+        html.day-mode #audit {
             background: rgba(255, 255, 255, 0.20) !important;
             backdrop-filter: blur(4px) !important;
             -webkit-backdrop-filter: blur(4px) !important;
@@ -482,37 +481,37 @@
             transition: all 0.35s ease !important;
         }
 
-        /* HOVER GROWTH: Large Sections and Cards Smoothly Scale on Hover */
-        html.day-mode .cyber-card:hover,
-        html.day-mode .glass-panel:hover,
-        html.day-mode #audit:hover,
-        html.day-mode #ghost-browser:hover {
-            background: rgba(255, 255, 255, 0.32) !important;
-            transform: translateY(-3px) !important;
-            box-shadow: 
-                0 16px 36px rgba(0, 0, 0, 0.08),
-                inset 0 2px 4px rgba(255, 255, 255, 0.95) !important;
-            border-color: #ffffff !important;
+        /* HOVER GROWTH: Large Sections and Cards Smoothly Scale on Hover (Desktop Fine Pointer Only) */
+        @media (hover: hover) and (pointer: fine) {
+            html.day-mode .cyber-card:hover,
+            html.day-mode .glass-panel:hover,
+            html.day-mode #audit:hover {
+                background: rgba(255, 255, 255, 0.32) !important;
+                transform: translateY(-3px) !important;
+                box-shadow: 
+                    0 16px 36px rgba(0, 0, 0, 0.08),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.95) !important;
+                border-color: #ffffff !important;
+            }
         }
 
         /* TRANSLUCENT INNER BOXES & WELLS (NO MUDDY OPAQUE GREY) */
-        html.day-mode .bg-black,
-        html.day-mode .bg-black\/50,
-        html.day-mode .bg-black\/60,
-        html.day-mode .bg-black\/70,
-        html.day-mode .bg-black\/80,
-        html.day-mode .bg-black\/85,
-        html.day-mode .bg-black\/90,
-        html.day-mode .bg-neutral-800,
-        html.day-mode .bg-neutral-900,
-        html.day-mode .bg-neutral-900\/90,
-        html.day-mode .bg-neutral-950,
-        html.day-mode .bg-slate-950,
-        html.day-mode .bg-amber-950,
-        html.day-mode .bg-cyan-950,
-        html.day-mode .bg-purple-950,
-        html.day-mode .bg-purple-950\/80,
-        html.day-mode #ghost-trial-console {
+        html.day-mode .bg-black:not(#ghost-browser *),
+        html.day-mode .bg-black\/50:not(#ghost-browser *),
+        html.day-mode .bg-black\/60:not(#ghost-browser *),
+        html.day-mode .bg-black\/70:not(#ghost-browser *),
+        html.day-mode .bg-black\/80:not(#ghost-browser *),
+        html.day-mode .bg-black\/85:not(#ghost-browser *),
+        html.day-mode .bg-black\/90:not(#ghost-browser *),
+        html.day-mode .bg-neutral-800:not(#ghost-browser *),
+        html.day-mode .bg-neutral-900:not(#ghost-browser *),
+        html.day-mode .bg-neutral-900\/90:not(#ghost-browser *),
+        html.day-mode .bg-neutral-950:not(#ghost-browser *),
+        html.day-mode .bg-slate-950:not(#ghost-browser *),
+        html.day-mode .bg-amber-950:not(#ghost-browser *),
+        html.day-mode .bg-cyan-950:not(#ghost-browser *),
+        html.day-mode .bg-purple-950:not(#ghost-browser *),
+        html.day-mode .bg-purple-950\/80:not(#ghost-browser *) {
             background: rgba(255, 255, 255, 0.28) !important;
             backdrop-filter: blur(4px) !important;
             -webkit-backdrop-filter: blur(4px) !important;
@@ -681,6 +680,91 @@
         html.day-mode footer span, 
         html.day-mode footer a {
             color: #09090b !important;
+        }
+
+        /* =========================================================
+           MOBILE OPTIMIZATIONS (GLITCH PREVENTION & TOUCH STABILITY)
+           ========================================================= */
+        @media (max-width: 768px) {
+            html.day-mode body {
+                background: #f1f5f9 !important;
+                background-attachment: scroll !important;
+            }
+
+            html.day-mode #clock-mirror-bg {
+                display: none !important;
+            }
+
+            html.day-mode .cyber-card,
+            html.day-mode .glass-panel,
+            html.day-mode #audit {
+                background: #ffffff !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border: 1.5px solid #e2e8f0 !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+                transform: none !important;
+            }
+
+            html.day-mode .cyber-card:hover,
+            html.day-mode .glass-panel:hover,
+            html.day-mode #audit:hover {
+                transform: none !important;
+                background: #ffffff !important;
+            }
+
+            html.day-mode .bg-black:not(#ghost-browser *),
+            html.day-mode .bg-black\/50:not(#ghost-browser *),
+            html.day-mode .bg-black\/60:not(#ghost-browser *),
+            html.day-mode .bg-black\/70:not(#ghost-browser *),
+            html.day-mode .bg-black\/80:not(#ghost-browser *),
+            html.day-mode .bg-black\/85:not(#ghost-browser *),
+            html.day-mode .bg-black\/90:not(#ghost-browser *),
+            html.day-mode .bg-neutral-800:not(#ghost-browser *),
+            html.day-mode .bg-neutral-900:not(#ghost-browser *),
+            html.day-mode .bg-neutral-900\/90:not(#ghost-browser *),
+            html.day-mode .bg-neutral-950:not(#ghost-browser *),
+            html.day-mode .bg-slate-950:not(#ghost-browser *),
+            html.day-mode .bg-amber-950:not(#ghost-browser *),
+            html.day-mode .bg-cyan-950:not(#ghost-browser *),
+            html.day-mode .bg-purple-950:not(#ghost-browser *),
+            html.day-mode .bg-purple-950\/80:not(#ghost-browser *) {
+                background: #f8fafc !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border: 1px solid #cbd5e1 !important;
+                color: #0f172a !important;
+            }
+
+            /* TRUE BURNER ON MOBILE: Strict Pitch Black & Pure White Text */
+            html.day-mode #ghost-browser {
+                background-color: #000000 !important;
+                background: #000000 !important;
+                border: 2px solid #38bdf8 !important;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.9) !important;
+                transform: none !important;
+            }
+            html.day-mode #ghost-browser:hover {
+                background: #000000 !important;
+                transform: none !important;
+            }
+            html.day-mode #ghost-browser .bg-black,
+            html.day-mode #ghost-browser .bg-black\/70,
+            html.day-mode #ghost-browser .bg-black\/80,
+            html.day-mode #ghost-browser #ghost-trial-console {
+                background: #0a0a0c !important;
+                border: 1px solid #334155 !important;
+                color: #ffffff !important;
+            }
+            html.day-mode #ghost-browser h2,
+            html.day-mode #ghost-browser h3,
+            html.day-mode #ghost-browser h4,
+            html.day-mode #ghost-browser p,
+            html.day-mode #ghost-browser span:not(.container-btn-swipe span),
+            html.day-mode #ghost-browser label,
+            html.day-mode #ghost-browser li {
+                color: #ffffff !important;
+            }
         }
     </style>
 </head>

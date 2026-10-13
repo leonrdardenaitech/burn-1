@@ -700,15 +700,17 @@
             transition: all 0.35s ease !important;
         }
 
-        /* HOVER GROWTH: Cards Grow on Mouse Hover */
-        html.day-mode .card-front:hover,
-        html.day-mode .glass-panel:hover {
-            background: rgba(255, 255, 255, 0.32) !important;
-            transform: translateY(-3px) !important;
-            box-shadow: 
-                0 16px 36px rgba(0, 0, 0, 0.08),
-                inset 0 2px 4px rgba(255, 255, 255, 0.95) !important;
-            border-color: #ffffff !important;
+        /* HOVER GROWTH: Cards Grow on Mouse Hover (Desktop Fine Pointer Only) */
+        @media (hover: hover) and (pointer: fine) {
+            html.day-mode .card-front:hover,
+            html.day-mode .glass-panel:hover {
+                background: rgba(255, 255, 255, 0.32) !important;
+                transform: translateY(-3px) !important;
+                box-shadow: 
+                    0 16px 36px rgba(0, 0, 0, 0.08),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.95) !important;
+                border-color: #ffffff !important;
+            }
         }
 
         /* TRANSLUCENT INNER BOXES & PANES (NO OPAQUE DARK GREY) */
@@ -948,6 +950,82 @@
         html.day-mode footer .footer-card:hover {
             background: #ffffff !important;
             border-color: #94a3b8 !important;
+        }
+
+        /* =========================================================
+           MOBILE OPTIMIZATIONS (GLITCH PREVENTION & TOUCH STABILITY)
+           ========================================================= */
+        @media (max-width: 768px) {
+            html.day-mode body {
+                background: #f1f5f9 !important;
+                background-attachment: scroll !important;
+            }
+
+            html.day-mode #clock-mirror-bg {
+                display: none !important;
+            }
+
+            /* Solid, crisp white cards to completely eliminate backface bleed & blur glitches */
+            html.day-mode .glass-panel,
+            html.day-mode .card-front,
+            html.day-mode .card-back {
+                background: #ffffff !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border: 1.5px solid #e2e8f0 !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+                transform: none !important;
+            }
+
+            html.day-mode .card-front:hover,
+            html.day-mode .glass-panel:hover {
+                transform: none !important;
+                background: #ffffff !important;
+            }
+
+            /* Clean high-contrast inner content wells on mobile */
+            html.day-mode .report-box,
+            html.day-mode .video-placeholder,
+            html.day-mode .quiz-box,
+            html.day-mode .bg-black,
+            html.day-mode .bg-black\/50,
+            html.day-mode .bg-black\/60,
+            html.day-mode .bg-black\/70,
+            html.day-mode .bg-black\/80,
+            html.day-mode .bg-black\/85,
+            html.day-mode .bg-black\/90,
+            html.day-mode .bg-slate-900,
+            html.day-mode .bg-slate-900\/90,
+            html.day-mode .bg-slate-800,
+            html.day-mode .bg-neutral-800,
+            html.day-mode .bg-neutral-900,
+            html.day-mode .bg-neutral-900\/90,
+            html.day-mode .bg-neutral-950,
+            html.day-mode .bg-cyan-950,
+            html.day-mode .bg-purple-950,
+            html.day-mode .bg-purple-950\/80,
+            html.day-mode .bg-purple-950\/90,
+            html.day-mode #codex-content-box {
+                background: #f8fafc !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border: 1px solid #cbd5e1 !important;
+                color: #0f172a !important;
+            }
+
+            html.day-mode .sector-tab-btn,
+            html.day-mode .codex-tab-btn {
+                background: #f1f5f9 !important;
+                border-color: #cbd5e1 !important;
+                color: #0f172a !important;
+            }
+
+            html.day-mode .sector-tab-btn.active,
+            html.day-mode .codex-tab-btn.active {
+                background: #f59e0b !important;
+                color: #000000 !important;
+                font-weight: 800 !important;
+            }
         }
     </style>
 </head>
