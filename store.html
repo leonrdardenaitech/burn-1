@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="day-mode scroll-smooth" id="html-root">
 <head>
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('burn1_theme');
+                var m = new URLSearchParams(window.location.search).get('mode');
+                if (m === 'night' || saved === 'night') {
+                    document.documentElement.classList.remove('day-mode');
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('day-mode');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BURN-1 STORE | Automated Compliance Audits &amp; Digital Front</title>
@@ -847,6 +862,173 @@
         .radar-spinner-pulse {
             animation: spin-cw 2.5s linear infinite;
         }
+
+        /* =========================================================
+           ONBOARDING STEPPER WIZARD DAY-MODE & CONTRAST FIXES
+           Eliminates text bleeding, white-on-white inputs, and neon glow blur
+           ========================================================= */
+        html.day-mode #wizard-container {
+            background: #ffffff !important;
+            border: 2px solid #f59e0b !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+            color: #0f172a !important;
+        }
+        html.day-mode #wizard-container h3,
+        html.day-mode #wizard-container h4,
+        html.day-mode #wizard-container h5 {
+            color: #0f172a !important;
+            font-weight: 800 !important;
+            text-shadow: none !important;
+        }
+        html.day-mode #wizard-container p {
+            color: #334155 !important;
+            font-weight: 500 !important;
+            text-shadow: none !important;
+        }
+        html.day-mode #wizard-container span:not(.pool-ball):not(.highlight-badge) {
+            text-shadow: none !important;
+        }
+        html.day-mode #wizard-container .phase-accordion-card {
+            background: #f8fafc !important;
+            border: 1.5px solid #e2e8f0 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+        }
+        html.day-mode #wizard-container .phase-accordion-card.active-phase {
+            background: #ffffff !important;
+            border: 2px solid #f59e0b !important;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.15) !important;
+        }
+        html.day-mode #wizard-container input[type="text"],
+        html.day-mode #wizard-container input[type="email"],
+        html.day-mode #wizard-container textarea {
+            background: #ffffff !important;
+            border: 1.5px solid #cbd5e1 !important;
+            color: #0f172a !important;
+            font-weight: 600 !important;
+        }
+        html.day-mode #wizard-container input::placeholder,
+        html.day-mode #wizard-container textarea::placeholder {
+            color: #94a3b8 !important;
+        }
+        html.day-mode #wizard-container input:focus,
+        html.day-mode #wizard-container textarea:focus {
+            border-color: #f59e0b !important;
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2) !important;
+        }
+        html.day-mode #wizard-container label {
+            background: #ffffff !important;
+            border: 1.5px solid #e2e8f0 !important;
+            color: #0f172a !important;
+        }
+        html.day-mode #wizard-container label strong {
+            color: #0f172a !important;
+        }
+        html.day-mode #wizard-container label span {
+            color: #64748b !important;
+        }
+        html.day-mode #wizard-container #session-status-badge {
+            background: #f1f5f9 !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #475569 !important;
+        }
+        /* Code Terminals Stay Dark to Prevent Neon Bleed */
+        html.day-mode #wizard-container #scan-terminal-preview,
+        html.day-mode #wizard-container .bg-slate-950,
+        html.day-mode #wizard-container .bg-neutral-950 {
+            background: #09090b !important;
+            border: 1.5px solid #334155 !important;
+        }
+        html.day-mode #wizard-container #scan-terminal-preview p,
+        html.day-mode #wizard-container .bg-slate-950 p {
+            color: #34d399 !important;
+            text-shadow: none !important;
+        }
+        html.day-mode #wizard-container #scan-terminal-preview span,
+        html.day-mode #wizard-container .bg-slate-950 span {
+            text-shadow: none !important;
+        }
+        /* Paperwork Qualification Gate */
+        html.day-mode #wizard-container .bg-red-950\/40 {
+            background: #fef2f2 !important;
+            border: 1.5px solid #f87171 !important;
+            color: #991b1b !important;
+        }
+        html.day-mode #wizard-container .bg-red-950\/40 p {
+            color: #991b1b !important;
+        }
+        /* Plain and Certified Staged Cards */
+        html.day-mode #wizard-container .card-plain-stage {
+            background: #ffffff !important;
+            border: 2px dashed #94a3b8 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+        }
+        html.day-mode #wizard-container .card-plain-stage h5 {
+            color: #0f172a !important;
+        }
+        html.day-mode #wizard-container .card-plain-stage p,
+        html.day-mode #wizard-container .card-plain-stage span {
+            color: #475569 !important;
+        }
+        html.day-mode #wizard-container .card-plain-stage .bg-black\/60 {
+            background: #f1f5f9 !important;
+            border: 1px solid #e2e8f0 !important;
+            color: #334155 !important;
+        }
+        html.day-mode #wizard-container .card-certified-stage {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%) !important;
+            border: 2px solid #10b981 !important;
+            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.15) !important;
+        }
+        html.day-mode #wizard-container .card-certified-stage h5 {
+            color: #065f46 !important;
+        }
+        html.day-mode #wizard-container .card-certified-stage p,
+        html.day-mode #wizard-container .card-certified-stage span {
+            color: #1e293b !important;
+        }
+        html.day-mode #wizard-container .card-certified-stage .bg-black\/80,
+        html.day-mode #wizard-container .card-certified-stage .bg-black\/90 {
+            background: #ffffff !important;
+            border: 1.5px solid #bbf7d0 !important;
+        }
+        /* Phase 6 Checkout Order Key */
+        html.day-mode #wizard-container #display-order-key {
+            background: #f8fafc !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #b45309 !important;
+        }
+        /* Universal Text Glow Halo Suppression across Store */
+        html.day-mode .glow-title,
+        html.day-mode .glow-amber,
+        html.day-mode .glow-cyan,
+        html.day-mode .glow-purple {
+            text-shadow: none !important;
+            -webkit-text-stroke: 0 !important;
+        }
+        /* Theme Toggle Button in Store Day Mode */
+        html.day-mode #themeToggleBtn {
+            background: #ffffff !important;
+            border: 1.5px solid #9333ea !important;
+            color: #581c87 !important;
+            box-shadow: 0 2px 8px rgba(147, 51, 234, 0.25) !important;
+        }
+        html.day-mode #themeToggleBtn:hover {
+            background: #fdf4ff !important;
+            border-color: #7e22ce !important;
+        }
+        html.day-mode #themeToggleBtn span {
+            color: #581c87 !important;
+            font-weight: 800 !important;
+        }
+        /* Smooth Mobile Pool Ball Track */
+        #pool-ball-track {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        #pool-ball-track::-webkit-scrollbar {
+            display: none;
+        }
 </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between relative antialiased selection:bg-purple-600 selection:text-white">
@@ -892,6 +1074,11 @@
                 <span id="songText" class="hidden sm:inline">MUSIC</span>
             </button>
 
+            <!-- DAY / NIGHT MODE THEME TOGGLE BUTTON -->
+            <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(147,51,234,0.3)]">
+                <i id="themeIcon" class="fa-solid fa-moon text-purple-600"></i>
+                <span id="themeText" class="text-xs font-mono font-bold">NIGHT</span>
+            </button>
         </div>
     </header>
 
@@ -1070,8 +1257,8 @@
                 </div>
 
                 <!-- 9 Pool Balls Horizontal Tracker Bar -->
-                <div class="flex items-center justify-between gap-1 sm:gap-2 mb-8 overflow-x-auto pb-2 select-none" id="pool-ball-track">
-                    <div class="flex items-center gap-1 sm:gap-2 mx-auto">
+                <div class="flex items-center sm:justify-center gap-1 sm:gap-2 mb-8 overflow-x-auto pb-2 select-none" id="pool-ball-track">
+                    <div class="flex items-center gap-1 sm:gap-2 min-w-max px-2 sm:mx-auto">
                         <button type="button" onclick="togglePhase(1)" id="ball-1" class="pool-ball active" title="Phase 1: Free 60-Sec Scan">1</button>
                         <span class="text-neutral-600 text-xs">&rsaquo;</span>
                         <button type="button" onclick="togglePhase(2)" id="ball-2" class="pool-ball pending" title="Phase 2: Email & Sample Dossier">2</button>
@@ -1862,11 +2049,13 @@
 
             if (htmlRoot.classList.contains('day-mode')) {
                 htmlRoot.classList.remove('day-mode');
+                htmlRoot.classList.add('dark');
                 if (themeIcon) themeIcon.className = "fa-solid fa-sun text-amber-400";
                 if (themeText) themeText.innerText = "DAY";
                 if (versionTag) versionTag.innerText = "STORE";
                 localStorage.setItem('burn1_theme', 'night');
             } else {
+                htmlRoot.classList.remove('dark');
                 htmlRoot.classList.add('day-mode');
                 if (themeIcon) themeIcon.className = "fa-solid fa-moon text-purple-600";
                 if (themeText) themeText.innerText = "NIGHT";
@@ -1985,9 +2174,27 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('html-root').classList.add('day-mode');
+            const savedTheme = localStorage.getItem('burn1_theme');
+            const urlParams = new URLSearchParams(window.location.search);
+            const modeParam = urlParams.get('mode');
+            const htmlRoot = document.getElementById('html-root');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
             const versionTag = document.getElementById('version-tag');
-            if (versionTag) versionTag.innerText = 'STORE BIZ';
+
+            if (modeParam === 'night' || savedTheme === 'night') {
+                htmlRoot.classList.remove('day-mode');
+                htmlRoot.classList.add('dark');
+                if (themeIcon) themeIcon.className = "fa-solid fa-sun text-amber-400";
+                if (themeText) themeText.innerText = "DAY";
+                if (versionTag) versionTag.innerText = "STORE";
+            } else {
+                htmlRoot.classList.remove('dark');
+                htmlRoot.classList.add('day-mode');
+                if (themeIcon) themeIcon.className = "fa-solid fa-moon text-purple-600";
+                if (themeText) themeText.innerText = "NIGHT";
+                if (versionTag) versionTag.innerText = "STORE BIZ";
+            }
             initStepperFromStorage();
         });
     

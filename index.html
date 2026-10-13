@@ -3,16 +3,25 @@
 <head>
     <script>
         (function() {
-            var host = window.location.hostname.toLowerCase();
-            if (host.endsWith('burn-1.com') && host !== 'burn-1.com' && host !== 'www.burn-1.com') {
-                var parts = host.split('.');
-                if (parts.length >= 3) {
-                    var sub = parts[0];
-                    if (sub && sub !== 'www') {
-                        window.location.replace('/cards/' + encodeURIComponent(sub) + '.html');
+            try {
+                var host = window.location.hostname.toLowerCase();
+                if (host.endsWith('burn-1.com') && host !== 'burn-1.com' && host !== 'www.burn-1.com') {
+                    var parts = host.split('.');
+                    if (parts.length >= 3) {
+                        var sub = parts[0];
+                        if (sub && sub !== 'www') {
+                            window.location.replace('/cards/' + encodeURIComponent(sub) + '.html');
+                            return;
+                        }
                     }
                 }
-            }
+                var saved = localStorage.getItem('burn1_theme');
+                var m = new URLSearchParams(window.location.search).get('mode');
+                if (m === 'day' || saved === 'day') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('day-mode');
+                }
+            } catch (e) {}
         })();
     </script>
     <meta charset="UTF-8">
@@ -513,7 +522,11 @@
         html.day-mode h3, 
         html.day-mode h4,
         html.day-mode h5,
-        html.day-mode h6 {
+        html.day-mode h6,
+        html.day-mode .glow-title,
+        html.day-mode .glow-amber,
+        html.day-mode .glow-cyan,
+        html.day-mode .glow-purple {
             color: #000000 !important;
             font-weight: 800 !important;
             text-shadow: none !important;
@@ -548,6 +561,43 @@
         html.day-mode .text-amber-300,
         html.day-mode .text-amber-400 {
             color: #111827 !important;
+        }
+
+        /* CRISP INPUTS AND THEME TOGGLE BUTTON IN DAY MODE */
+        html.day-mode input,
+        html.day-mode textarea,
+        html.day-mode select {
+            color: #0f172a !important;
+        }
+        html.day-mode input::placeholder,
+        html.day-mode textarea::placeholder {
+            color: #64748b !important;
+        }
+        html.day-mode #omni-input {
+            color: #0f172a !important;
+        }
+        html.day-mode #omni-input::placeholder {
+            color: #64748b !important;
+        }
+        html.day-mode #themeToggleBtn {
+            background: #ffffff !important;
+            border: 1.5px solid #9333ea !important;
+            color: #581c87 !important;
+            box-shadow: 0 2px 8px rgba(147, 51, 234, 0.25) !important;
+        }
+        html.day-mode #themeToggleBtn:hover {
+            background: #fdf4ff !important;
+            border-color: #7e22ce !important;
+        }
+        html.day-mode #themeToggleBtn span {
+            color: #581c87 !important;
+            font-weight: 800 !important;
+        }
+        html.day-mode #songToggleBtn {
+            background: #ffffff !important;
+            border: 1.5px solid #cbd5e1 !important;
+            color: #0f172a !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
         }
 
         /* SCULPTED METALLIC PILL BUTTONS (UIVERSE AESTHETIC) */
@@ -983,6 +1033,14 @@
                 color: #0f172a !important;
             }
 
+            html.day-mode .glow-title,
+            html.day-mode .glow-amber,
+            html.day-mode .glow-cyan,
+            html.day-mode .glow-purple {
+                text-shadow: none !important;
+                -webkit-text-stroke: 0 !important;
+            }
+
             /* TRUE BURNER KINETIC AD ON MOBILE: Solid Pitch Black */
             html.day-mode #ghost-ad-casing {
                 background-color: #000000 !important;
@@ -1064,7 +1122,7 @@
             <!-- DAY / NIGHT MODE THEME TOGGLE BUTTON -->
             <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3 py-1.5 rounded-lg bg-purple-950/80 border border-purple-500 text-purple-200 font-mono text-xs font-bold hover:bg-purple-900 transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(147,51,234,0.3)]">
                 <i id="themeIcon" class="fa-solid fa-sun text-amber-400"></i>
-                <span id="themeText" class="hidden sm:inline">DAY</span>
+                <span id="themeText" class="text-xs font-mono font-bold">DAY</span>
             </button>
         </div>
     </header>
@@ -2505,11 +2563,13 @@
 
             if (htmlRoot.classList.contains('day-mode')) {
                 htmlRoot.classList.remove('day-mode');
+                htmlRoot.classList.add('dark');
                 if (themeIcon) themeIcon.className = "fa-solid fa-sun text-amber-400";
                 if (themeText) themeText.innerText = "DAY";
                 if (versionTag) versionTag.innerText = "HUB";
                 safeLS.set('burn1_theme', 'night');
             } else {
+                htmlRoot.classList.remove('dark');
                 htmlRoot.classList.add('day-mode');
                 if (themeIcon) themeIcon.className = "fa-solid fa-moon text-purple-600";
                 if (themeText) themeText.innerText = "NIGHT";
@@ -2641,7 +2701,9 @@
             const modeParam = urlParams.get('mode');
             
             if (modeParam === 'day' || savedTheme === 'day') {
-                document.getElementById('html-root').classList.add('day-mode');
+                const htmlRoot = document.getElementById('html-root');
+                htmlRoot.classList.remove('dark');
+                htmlRoot.classList.add('day-mode');
                 const themeIcon = document.getElementById('themeIcon');
                 const themeText = document.getElementById('themeText');
                 const versionTag = document.getElementById('version-tag');
