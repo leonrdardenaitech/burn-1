@@ -315,13 +315,13 @@
                                     PENDING REVIEW
                                 </span>
                             </div>
-                            <h3 class="text-sm font-bold text-white mb-1">Anergi Explainer Video</h3>
+                            <h3 class="text-sm font-bold text-white mb-1">Anergi Handshake Video</h3>
                             <p class="text-xs text-slate-400 font-mono line-clamp-2">
-                                Core S.P.A. posture assessment video preview with interactive Y/N approval toggles.
+                                Executive Handshake &amp; S.P.A. posture assessment video preview with interactive Y/N approval toggles.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
-                            <span class="text-slate-400">File: .mp4 (3.8MB)</span>
+                            <span class="text-slate-400">File: .mp4 (31.4MB)</span>
                             <a href="#video-room" class="text-cyan-400 hover:text-cyan-300 font-bold">Review &rarr;</a>
                         </div>
                     </div>
@@ -409,20 +409,20 @@
                                 </span>
                             </div>
                             <h2 class="text-xl sm:text-2xl font-heading font-black text-white">
-                                ANERGI S.P.A. &amp; BURN-1 PRODUCTION VIDEO PREVIEW
+                                ANERGI HANDSHAKE &amp; S.P.A. PRODUCTION VIDEO PREVIEW
                             </h2>
                             <p class="text-xs text-slate-400 font-mono mt-1">
-                                Screen the proposed media below. Ron can toggle between the Anergi S.P.A. explainer and Burn-1 Local AI guides, then record an official [Approve Y] or [Revision N] vote.
+                                Screen the proposed partner media below. Ron can toggle between the executive Anergi Handshake master and S.P.A. explainer, then record an official [Approve Y] or [Revision N] vote.
                             </p>
                         </div>
 
                         <!-- Video Feed Switcher Buttons -->
                         <div class="flex items-center flex-wrap gap-2 text-xs font-mono">
-                            <button type="button" onclick="switchVideoSource('spa')" id="vid-btn-spa" class="px-3 py-2 rounded-xl bg-anergi-orange text-black font-bold border border-anergi-orange transition-all">
-                                Anergi S.P.A. Explainer
+                            <button type="button" onclick="switchVideoSource('handshake')" id="vid-btn-handshake" class="px-3 py-2 rounded-xl bg-anergi-orange text-black font-bold border border-anergi-orange transition-all">
+                                Anergi Handshake Master
                             </button>
-                            <button type="button" onclick="switchVideoSource('localai')" id="vid-btn-localai" class="px-3 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-700 transition-all">
-                                Burn-1 Local AI Vault
+                            <button type="button" onclick="switchVideoSource('spa')" id="vid-btn-spa" class="px-3 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-700 transition-all">
+                                Anergi S.P.A. Explainer
                             </button>
                             <button type="button" onclick="switchVideoSource('phone')" id="vid-btn-phone" class="px-3 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-700 transition-all">
                                 True Burner App Clip
@@ -436,12 +436,12 @@
                         <div class="lg:col-span-8 bg-black rounded-2xl overflow-hidden border border-slate-800 shadow-[0_0_40px_rgba(0,0,0,0.8)] relative group">
                             <div class="aspect-video w-full bg-slate-950 relative flex items-center justify-center">
                                 <video id="main-vault-video" class="w-full h-full object-contain" controls preload="metadata" poster="assets/multifactorbadge1.jpg">
-                                    <source id="video-source-elem" src="assets/Why_You_Need_A_Security_Posture_Assessment.mp4" type="video/mp4">
+                                    <source id="video-source-elem" src="assets/Anergi_Handshake.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="p-3 bg-slate-950/90 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                                <span id="current-vid-title"><i class="fa-solid fa-film text-cyan-400 mr-2"></i>Anergi: Why You Need A Security Posture Assessment</span>
+                                <span id="current-vid-title"><i class="fa-solid fa-film text-cyan-400 mr-2"></i>Anergi Handshake // Executive Partnership &amp; Platform Architecture</span>
                                 <span class="text-slate-500">1080p // H.264 Audio/Video Master</span>
                             </div>
                         </div>
@@ -1098,8 +1098,8 @@
                                     <td class="py-3.5 px-4 text-[10px] text-slate-500 truncate max-w-[140px]" id="ledger-nda-hash">SHA256: 91b0...</td>
                                 </tr>
                                 <tr class="hover:bg-slate-900/40">
-                                    <td class="py-3.5 px-4 font-bold text-white">S.P.A. Explainer Video</td>
-                                    <td class="py-3.5 px-4 text-slate-400">Media Production</td>
+                                    <td class="py-3.5 px-4 font-bold text-white">Anergi Handshake Video</td>
+                                    <td class="py-3.5 px-4 text-slate-400">Executive Production</td>
                                     <td class="py-3.5 px-4">
                                         <span id="ledger-video-status" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-500/40">IN REVIEW</span>
                                     </td>
@@ -1307,13 +1307,13 @@
 
         // 2. Video Feed Switcher & Review Voting
         const videoFeeds = {
+            handshake: {
+                src: 'assets/Anergi_Handshake.mp4',
+                title: 'Anergi Handshake // Executive Partnership & Platform Architecture'
+            },
             spa: {
                 src: 'assets/Why_You_Need_A_Security_Posture_Assessment.mp4',
                 title: 'Anergi: Why You Need A Security Posture Assessment (S.P.A.)'
-            },
-            localai: {
-                src: 'assets/Burn-1_Local_AI_Vault_Deployment_Guide.mp4',
-                title: 'Burn-1 Systems: Local AI Vault Deployment Guide'
             },
             phone: {
                 src: 'assets/trueburner_phone_app.mp4',
@@ -1332,7 +1332,7 @@
             titleElem.innerHTML = `<i class="fa-solid fa-film text-cyan-400 mr-2"></i>${config.title}`;
 
             // Update active button styles
-            ['spa', 'localai', 'phone'].forEach(k => {
+            ['handshake', 'spa', 'phone'].forEach(k => {
                 const btn = document.getElementById(`vid-btn-${k}`);
                 if (k === key) {
                     btn.className = 'px-3 py-2 rounded-xl bg-anergi-orange text-black font-bold border border-anergi-orange transition-all';
