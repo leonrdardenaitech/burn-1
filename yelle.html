@@ -345,14 +345,36 @@
                                     UNSIGNED (RON)
                                 </span>
                             </div>
-                            <h3 class="text-sm font-bold text-white mb-1">Mutual NDA (2-Year)</h3>
+                            <h3 class="text-sm font-bold text-white mb-1">Mutual NDA &amp; Patent Protection</h3>
                             <p class="text-xs text-slate-400 font-mono line-clamp-2">
-                                Pre-signed by Leon R. Darden. Protects True Burner, SLM binders &amp; Anergi S.P.A. trade secrets.
+                                Pre-signed by Leon R. Darden. Protects R.E.P. Patent Application (filed Sept 24), UI/UX tools, and Anergi S.P.A. trade secrets.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
                             <span class="text-slate-400">Leon: Pre-Signed &#10003;</span>
-                            <a href="#legal-desk" class="text-anergi-orange hover:text-amber-300 font-bold">Sign Desk &rarr;</a>
+                            <a href="#legal-desk" onclick="switchLegalTab('nda')" class="text-anergi-orange hover:text-amber-300 font-bold">Sign Desk &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Drop Card 2B: Anergi Original Draft NDA (Unsigned) -->
+                    <div class="glass-panel rounded-2xl p-5 border border-red-500/30 flex flex-col justify-between hover:border-red-500/60 transition-all">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="w-8 h-8 rounded-lg bg-red-950/70 border border-red-500/30 flex items-center justify-center text-red-400 text-sm">
+                                    <i class="fa-solid fa-file-circle-xmark"></i>
+                                </span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-red-950/90 text-red-300 border border-red-500/50 font-bold uppercase flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> UNSIGNED BY ANERGI
+                                </span>
+                            </div>
+                            <h3 class="text-sm font-bold text-white mb-1">Anergi Contractor NDA (Original)</h3>
+                            <p class="text-xs text-slate-400 font-mono line-clamp-2">
+                                Received via Google Docs. Status: NOT signed by Ronyelle (blank signature line, unfilled brackets [EFFECTIVE DATE], [ANERGI ADDRESS]).
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+                            <span class="text-red-400 font-semibold">Blank Signature Line</span>
+                            <a href="#legal-desk" onclick="switchLegalTab('anergi-nda')" class="text-red-400 hover:text-red-300 font-bold">Inspect &rarr;</a>
                         </div>
                     </div>
 
@@ -574,13 +596,17 @@
                             </p>
                         </div>
 
-                        <!-- Tab switcher between MOU and NDA -->
+                        <!-- Tab switcher between MOU, Mutual NDA, and Anergi Draft -->
                         <div class="flex items-center gap-2 p-1 bg-slate-900 rounded-2xl border border-slate-800 font-mono text-xs">
-                            <button type="button" onclick="switchLegalTab('mou')" id="tab-btn-mou" class="px-4 py-2 rounded-xl bg-anergi-orange text-black font-bold transition-all">
+                            <button type="button" onclick="switchLegalTab('mou')" id="tab-btn-mou" class="px-3.5 py-2 rounded-xl bg-anergi-orange text-black font-bold transition-all">
                                 01. Partnership MOU
                             </button>
-                            <button type="button" onclick="switchLegalTab('nda')" id="tab-btn-nda" class="px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all">
-                                02. Mutual NDA (2-Yr)
+                            <button type="button" onclick="switchLegalTab('nda')" id="tab-btn-nda" class="px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition-all">
+                                02. Mutual NDA &amp; Patent (Leon)
+                            </button>
+                            <button type="button" onclick="switchLegalTab('anergi-nda')" id="tab-btn-anergi-nda" class="px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                                <span>03. Anergi Draft (Unsigned)</span>
                             </button>
                         </div>
                     </div>
@@ -722,49 +748,65 @@
                          ===================================================== -->
                     <div id="tab-content-nda" class="hidden space-y-6">
                         <!-- NDA Text Reader Frame -->
-                        <div class="bg-[#080d1a] rounded-2xl p-6 sm:p-8 border border-slate-800 max-h-[480px] overflow-y-auto space-y-5 text-xs text-slate-300 font-mono leading-relaxed">
+                        <div class="bg-[#080d1a] rounded-2xl p-6 sm:p-8 border border-slate-800 max-h-[520px] overflow-y-auto space-y-5 text-xs text-slate-300 font-mono leading-relaxed">
                             <div class="border-b border-slate-800 pb-4 text-center">
-                                <span class="text-cyan-400 text-[10px] tracking-widest font-bold uppercase">// PROPRIETARY IP PROTECTION INSTRUMENT</span>
+                                <span class="text-cyan-400 text-[10px] tracking-widest font-bold uppercase">// PROPRIETARY IP &amp; PATENT PROTECTION INSTRUMENT</span>
                                 <h3 class="text-lg font-heading font-black text-white tracking-wide uppercase mt-1">
-                                    BILATERAL MUTUAL NON-DISCLOSURE &amp; CONFIDENTIALITY AGREEMENT
+                                    MUTUAL NON-DISCLOSURE AND PROPRIETARY RIGHTS AGREEMENT
                                 </h3>
                                 <p class="text-slate-400 text-[11px] mt-1">
-                                    Term: Two (2) Years // Protection of Algorithmic, Posture &amp; Client Telemetry Assets
+                                    Jurisdiction: State of Texas // Protecting R.E.P. Patent (Filed Sept 24), UI/UX Tools &amp; Anergi Operations
                                 </p>
                             </div>
 
                             <div>
-                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">1. PREAMBLE &amp; RECITALS</h4>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">1. PARTIES &amp; PERMITTED PURPOSE</h4>
                                 <p class="mt-1">
-                                    This Mutual Non-Disclosure Agreement (&ldquo;NDA&rdquo;) is entered into by and between <strong>Burn-1 Systems</strong> (including Darden Trust infrastructure) and <strong>Anergi Cyber Operations</strong>. Both parties desire to explore collaborative opportunities in cybersecurity posture assessments, autonomous underwriting evidence generation, and private data management while safeguarding all proprietary trade secrets.
+                                    This Mutual Non-Disclosure Agreement (&ldquo;Agreement&rdquo;) is entered into by and between <strong>Anergi LLC</strong>, a Texas limited liability company (&ldquo;Anergi&rdquo;), and <strong>Leon R. Darden</strong>, an individual and inventor (&ldquo;Darden&rdquo; / Burn-1 Systems &amp; Darden Trust Infrastructure). The Parties enter into this Agreement to evaluate, collaborate, and execute on UI/UX digital tools, site maintenance, weekly media/articles, and specifically the technical enhancement, non-provisional patent conversion, and prosecution of Darden&rsquo;s proprietary invention entitled <strong>&ldquo;R.E.P.&rdquo; (patent application filed September 24th, 2026)</strong> (the &ldquo;Permitted Purpose&rdquo;).
                                 </p>
                             </div>
 
                             <div>
-                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">2. DEFINITION OF CONFIDENTIAL INFORMATION</h4>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">2. DEFINITION OF CONFIDENTIAL INFORMATION (MUTUAL)</h4>
                                 <p class="mt-1">
-                                    &ldquo;Confidential Information&rdquo; encompasses all technical specifications, code repositories, architecture diagrams, volatile memory shredding algorithms, carrier evidence binder formatting, S.P.A. assessment methodologies, lead database records, and customer communications shared between parties.
+                                    &ldquo;Confidential Information&rdquo; means any non-public proprietary information disclosed by one Party (&ldquo;Disclosing Party&rdquo;) to the other (&ldquo;Receiving Party&rdquo;). 
+                                    <strong>As to Darden:</strong> Confidential Information includes the <strong>R.E.P.</strong> patent specifications, claim drafts, formulas, hardware/software diagrams, UI/UX architecture, digital tools, and video production frameworks.
+                                    <strong>As to Anergi:</strong> Confidential Information includes Anergi S.P.A. methodology, cybersecurity assessment workflows, client engagement telemetry, lead records, and business strategies.
                                 </p>
                             </div>
 
                             <div>
-                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">3. DUTY OF CARE &amp; NON-CIRCUMVENTION</h4>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">3. EXPLICIT CARVE-OUT OF PRE-EXISTING IP (BACKGROUND ASSETS)</h4>
                                 <p class="mt-1">
-                                    Neither party shall disclose, reproduce, or reverse-engineer any confidential proprietary materials without prior written consent. Neither party shall solicit or circumvent the other party&rsquo;s direct proprietary clients, institutional relationships, or commercial carrier accounts.
+                                    Anergi acknowledges that Darden is the sole inventor and owner of the <strong>R.E.P. invention and patent filings</strong>, as well as all pre-existing UI frameworks, digital tools, and software codebases (&ldquo;Darden Background IP&rdquo;). <strong>Nothing in this Agreement or the Parties&rsquo; collaboration transfers, assigns, or licenses any ownership rights in Darden Background IP or R.E.P. to Anergi or its clients.</strong> Any assignment or licensing must be made by a separate, express written instrument signed by Darden.
                                 </p>
                             </div>
 
                             <div>
-                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">4. EXCLUSIONS &amp; PRE-EXISTING IP CARVE-OUTS</h4>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">4. NON-DISCLOSURE, STANDARD OF CARE &amp; AI USAGE</h4>
                                 <p class="mt-1">
-                                    Nothing in this Agreement grants either party ownership over pre-existing intellectual property. Burn-1 retains sole ownership of True Burner, Ghost Browser, and Evidence Binder assets. Anergi retains sole ownership of S.P.A. methodology and proprietary assessment engines.
+                                    Each Party agrees to hold the other&rsquo;s Confidential Information in strict confidence with at least reasonable care, and use it solely for the Permitted Purpose. Modern development tools and enterprise AI services may be utilized provided that no unfiled patent claims, proprietary source code, or confidential client credentials are submitted to public consumer AI models for model training or public retention.
                                 </p>
                             </div>
 
                             <div>
-                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">5. TERM &amp; SURVIVABILITY</h4>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">5. NON-CIRCUMVENTION</h4>
                                 <p class="mt-1">
-                                    This Agreement shall remain in full force and effect for two (2) years from execution. Trade secret obligations survive termination perpetually under applicable state and federal Uniform Trade Secrets laws.
+                                    Neither Party shall use the other Party&rsquo;s Confidential Information, client introductions, or proprietary project leads to bypass or circumvent the other Party, nor directly solicit introduced institutional clients or commercial partners without prior written consent.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">6. TERM, RETURN &amp; SURVIVABILITY</h4>
+                                <p class="mt-1">
+                                    This Agreement covers disclosures for two (2) years. General confidentiality survives for three (3) years post-termination. Trade secrets and technical disclosures concerning R.E.P. prior to formal public patent grant shall remain protected perpetually under the Texas Uniform Trade Secrets Act (TUTSA) and federal DTSA. Routine electronic backups are exempt from immediate destruction, remaining bound by ongoing confidentiality.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-cyan-400">7. GOVERNING LAW &amp; STATUTORY IMMUNITY</h4>
+                                <p class="mt-1">
+                                    Governed by the laws of the <strong>State of Texas</strong>. Notice of immunity under 18 U.S.C. &sect; 1833(b) (Defend Trade Secrets Act) is hereby acknowledged by both Parties.
                                 </p>
                             </div>
                         </div>
@@ -784,7 +826,7 @@
                                 </div>
                                 <div class="mt-3 space-y-1 text-xs font-mono text-slate-300">
                                     <div><strong>Name:</strong> Leon R. Darden</div>
-                                    <div><strong>Title:</strong> Principal Architect, Burn-1 Systems</div>
+                                    <div><strong>Title:</strong> Inventor &amp; Principal Architect, Burn-1 Systems</div>
                                     <div><strong>Date:</strong> October 13, 2026 18:00:00 EDT</div>
                                     <div class="text-[10px] text-slate-500 truncate">SHA-256: 91b0f44e198ca83d7392a857e4912cc9318b76a</div>
                                 </div>
@@ -832,8 +874,214 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+
+                    <!-- =====================================================
+                         TAB C: ANERGI ORIGINAL CONTRACTOR NDA (UNSIGNED DRAFT)
+                         ===================================================== -->
+                    <div id="tab-content-anergi-nda" class="hidden space-y-6">
+                        <!-- Red Verification Status Alert -->
+                        <div class="p-4 sm:p-5 rounded-2xl bg-red-950/80 border-2 border-red-500/60 shadow-[0_0_30px_rgba(239,68,68,0.25)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-red-900/60 border border-red-500/60 flex items-center justify-center text-red-300 text-lg shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-red-900 text-red-100 border border-red-500 font-bold uppercase">
+                                            STATUS: UNSIGNED BY ANERGI
+                                        </span>
+                                        <span class="text-[10px] font-mono text-slate-400">Source: Google Docs (Oct 13, 2026)</span>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-white mt-1">Anergi LLC Contractor NDA &mdash; Unexecuted Template</h4>
+                                    <p class="text-xs text-red-200/90 font-mono mt-0.5 leading-relaxed">
+                                        Ronyelle Stallworth / Anergi LLC did <strong>NOT</strong> sign this agreement. Signature line, date, title, and all bracketed company/contractor variables (<span class="text-white underline">[EFFECTIVE DATE]</span>, <span class="text-white underline">[ANERGI ADDRESS]</span>, <span class="text-white underline">[CONTRACTOR LEGAL NAME]</span>, <span class="text-white underline">[COUNTY]</span>) remain blank.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 flex items-center gap-2">
+                                <a href="file:///C:/Users/Leonr/Downloads/Anergi_Original_Contractor_NDA_Unsigned.pdf" download class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-red-300 border border-red-500/50 text-xs font-mono font-bold transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                    <span>Download Original PDF</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Document Reader Frame -->
+                        <div class="bg-[#080d1a] rounded-2xl p-6 sm:p-8 border border-slate-800 max-h-[520px] overflow-y-auto space-y-5 text-xs text-slate-300 font-mono leading-relaxed">
+                            <div class="border-b border-slate-800 pb-4 text-center">
+                                <span class="text-red-400 text-[10px] tracking-widest font-bold uppercase">// ORIGINAL UNILATERAL TEMPLATE &bull; NOT SIGNED</span>
+                                <h3 class="text-lg font-heading font-black text-white tracking-wide uppercase mt-1">
+                                    ANERGI LLC &mdash; NON-DISCLOSURE AGREEMENT (CONTRACTOR)
+                                </h3>
+                                <p class="text-amber-400 text-[11px] mt-1 italic">
+                                    DRAFT for review by a licensed Texas attorney. This is a template, not legal advice. Prepared Oct 13, 2026 &bull; Governing law: Texas
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">PARTIES AND EFFECTIVE DATE</h4>
+                                <p class="mt-1">
+                                    This Non-Disclosure Agreement (&ldquo;Agreement&rdquo;) is entered into as of <span class="px-1.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-500/40 font-bold">[EFFECTIVE DATE]</span> (the &ldquo;Effective Date&rdquo;) between:
+                                </p>
+                                <ul class="list-disc list-inside mt-1 space-y-1 pl-2">
+                                    <li><strong>Anergi LLC</strong>, a Texas limited liability company with its principal place of business at <span class="px-1.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-500/40 font-bold">[ANERGI ADDRESS]</span> (&ldquo;Anergi&rdquo; or the &ldquo;Disclosing Party&rdquo;); and</li>
+                                    <li><span class="px-1.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-500/40 font-bold">[CONTRACTOR LEGAL NAME]</span>, located at <span class="px-1.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-500/40 font-bold">[CONTRACTOR ADDRESS]</span> (the &ldquo;Contractor&rdquo; or the &ldquo;Receiving Party&rdquo;).</li>
+                                </ul>
+                                <p class="mt-1">
+                                    Anergi and the Contractor are each a &ldquo;Party&rdquo; and together the &ldquo;Parties.&rdquo; Anergi may share confidential information with the Contractor so the Contractor can perform work for Anergi and its clients. This Agreement sets the rules for protecting that information.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">1. PURPOSE</h4>
+                                <p class="mt-1">
+                                    The Contractor will be given access to confidential and proprietary information belonging to Anergi and to Anergi's clients. The Contractor agrees to protect that information and to use it only to perform authorized work for Anergi.
+                                </p>
+                                <p class="italic text-slate-400 text-[11px] mt-1 bg-slate-900/60 p-2 rounded border-l-2 border-slate-600">
+                                    Plain meaning: before you see anything sensitive, you promise to keep it private and use it only for the job.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">2. WHAT COUNTS AS CONFIDENTIAL INFORMATION</h4>
+                                <p class="mt-1">
+                                    &ldquo;Confidential Information&rdquo; means any non-public information that Anergi or its clients disclose to the Contractor, or that the Contractor accesses, creates, or learns during the engagement, in any form (written, oral, electronic, or visual), including but not limited to:
+                                </p>
+                                <ul class="list-disc list-inside mt-1 space-y-1 pl-2">
+                                    <li>Business plans, strategies, pricing, methods, and proprietary processes, including agentic AI workflow designs;</li>
+                                    <li>Intellectual property, product concepts, inventions, source code, scripts, system designs, and technology roadmaps;</li>
+                                    <li>Client information, client environments, lead lists, prospect records, marketing plans, and business processes;</li>
+                                    <li>Credentials, security configurations, vulnerabilities, security findings, assessment results, and internal documentation; and</li>
+                                    <li>Trade secrets of Anergi or its clients.</li>
+                                </ul>
+                                <p class="mt-1">Information is Confidential Information whether or not it is marked &ldquo;confidential.&rdquo;</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">3. WHAT IS NOT CONFIDENTIAL</h4>
+                                <p class="mt-1">
+                                    Confidential Information does not include information that the Contractor can show, with written records: is or becomes publicly available through no fault or act of the Contractor; was lawfully known to the Contractor before Anergi disclosed it; is independently developed by the Contractor without using any Confidential Information; or is lawfully received from a third party who had the right to disclose it without a duty of confidentiality.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">4. THE CONTRACTOR'S OBLIGATIONS</h4>
+                                <p class="mt-1">
+                                    The Contractor agrees to: use Confidential Information only to perform authorized work for Anergi; keep Confidential Information strictly confidential and protect it with at least the same care used for the Contractor's own confidential information, and no less than reasonable care; not disclose, publish, copy, reverse engineer, sell, or commercially exploit Confidential Information without Anergi's prior written permission; not disclose Confidential Information to any third party, including subcontractors or AI tools, without Anergi's prior written approval and an equivalent written confidentiality obligation; and promptly notify Anergi of any actual or suspected loss, theft, or unauthorized use or disclosure of Confidential Information.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">5. REQUIRED HANDLING AND SECURITY</h4>
+                                <p class="mt-1">
+                                    While handling Confidential Information, the Contractor will: use only individual, named accounts under least-privilege access, with no shared credentials; enable multi-factor authentication on all Anergi and client systems; use only devices and systems approved in writing by Anergi, kept patched and encrypted; not store or transmit Confidential Information through personal email, personal cloud storage, or unapproved AI services; and follow any additional security requirements in the Independent Contractor Services Agreement and the applicable Statement of Work.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">6. DISCLOSURE REQUIRED BY LAW</h4>
+                                <p class="mt-1">
+                                    If the Contractor is legally compelled (for example, by subpoena or court order) to disclose Confidential Information, the Contractor will, to the extent legally permitted, promptly notify Anergi in writing before disclosing, cooperate with Anergi's efforts to limit or protect the disclosure, and disclose only the portion legally required.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">7. RETURN OR DESTRUCTION</h4>
+                                <p class="mt-1">
+                                    On Anergi's request, or when the engagement ends, the Contractor will promptly return or securely destroy all Confidential Information and all copies, in any form, and will certify in writing that this has been done. Secure deletion will follow recognized media sanitization practice (for example, NIST SP 800-88). The Contractor's confidentiality obligations continue after return or destruction as stated in Section 8.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">8. HOW LONG THESE OBLIGATIONS LAST</h4>
+                                <ul class="list-disc list-inside mt-1 space-y-1 pl-2">
+                                    <li>General Confidential Information: protected during the engagement and for <span class="px-1.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-500/40 font-bold">[3]</span> years after it ends.</li>
+                                    <li>Trade secrets: protected for as long as the information remains a trade secret under applicable law.</li>
+                                    <li>Client data and personal information: protected indefinitely, or until returned or destroyed and certified under Section 7.</li>
+                                </ul>
+                                <p class="italic text-slate-400 text-[11px] mt-1 bg-slate-900/60 p-2 rounded border-l-2 border-slate-600">
+                                    Plain meaning: ordinary business information is protected for a set number of years; trade secrets and client or personal data are protected for longer.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">9. PROTECTED RIGHTS (LAWFUL REPORTING)</h4>
+                                <p class="mt-1">
+                                    Nothing in this Agreement limits or prevents the Contractor from communicating with, filing a charge or complaint with, or participating in an investigation by any federal, state, or local government agency or regulator; making disclosures protected under whistleblower laws; or receiving a whistleblower award.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">10. FEDERAL TRADE SECRET IMMUNITY NOTICE (18 U.S.C. SECTION 1833(b))</h4>
+                                <p class="mt-1">
+                                    Notice of immunity under the Defend Trade Secrets Act is acknowledged in full pursuant to federal statute.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">11. NO LICENSE; NO OBLIGATION; NO PARTNERSHIP</h4>
+                                <p class="mt-1">
+                                    Disclosing Confidential Information does not grant the Contractor any license or ownership right in that information, except the limited right to use it for authorized Anergi work.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">12. REMEDIES</h4>
+                                <p class="mt-1">
+                                    The Contractor agrees that breach may cause irreparable harm for which money damages alone would not be adequate. Anergi is entitled to seek injunctive relief under the Texas Uniform Trade Secrets Act (TUTSA) and federal DTSA.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">13. GOVERNING LAW AND VENUE</h4>
+                                <p class="mt-1">
+                                    Governed by the laws of the State of Texas. Exclusive jurisdiction and venue in <span class="px-1.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-500/40 font-bold">[COUNTY]</span> County, Texas.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400">14. GENERAL TERMS</h4>
+                                <p class="mt-1">
+                                    Entire agreement (confidentiality), amendments in writing, assignment restrictions, severability, no waiver, electronic signatures and counterparts valid under ESIGN and Texas UETA.
+                                </p>
+                            </div>
+
+                            <!-- Execution Audit Section -->
+                            <div class="pt-4 border-t border-slate-800">
+                                <h4 class="text-white font-bold uppercase text-[11px] text-red-400 mb-2">15. SIGNATURE BLOCK &mdash; EXECUTION VERIFICATION AUDIT</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="p-4 rounded-xl bg-slate-950 border border-red-500/40 space-y-2">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-bold text-white text-xs">ANERGI LLC</span>
+                                            <span class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-300 font-bold border border-red-500/40 uppercase">&#10007; NOT SIGNED</span>
+                                        </div>
+                                        <div class="border-b border-dashed border-red-500/40 py-2 text-red-400 text-xs italic">
+                                            Signature: ______________________________ [BLANK]
+                                        </div>
+                                        <div class="text-[11px] text-slate-400 space-y-0.5">
+                                            <div>Printed name: <span class="text-white font-bold">Ronyelle Stallworth</span></div>
+                                            <div>Title: <span class="text-red-400 font-bold">[Title, e.g., Founder] (UNFILLED)</span></div>
+                                            <div>Date: <span class="text-red-400 font-bold">______________ (BLANK)</span></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-4 rounded-xl bg-slate-950 border border-red-500/40 space-y-2">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-bold text-white text-xs">CONTRACTOR</span>
+                                            <span class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-300 font-bold border border-red-500/40 uppercase">&#10007; NOT SIGNED</span>
+                                        </div>
+                                        <div class="border-b border-dashed border-red-500/40 py-2 text-red-400 text-xs italic">
+                                            Signature: ______________________________ [BLANK]
+                                        </div>
+                                        <div class="text-[11px] text-slate-400 space-y-0.5">
+                                            <div>Printed name: <span class="text-red-400 font-bold">[CONTRACTOR LEGAL NAME] (UNFILLED)</span></div>
+                                            <div>Date: <span class="text-red-400 font-bold">______________ (BLANK)</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
             <!-- =========================================================
@@ -1286,41 +1534,114 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-800/60 text-slate-300">
-                                <tr class="hover:bg-slate-900/40">
-                                    <td class="py-3.5 px-4 font-bold text-white">Partnership MOU</td>
-                                    <td class="py-3.5 px-4 text-slate-400">Strategic Alignment</td>
-                                    <td class="py-3.5 px-4">
-                                        <span id="ledger-mou-status" class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-300 border border-red-500/40">PENDING RON</span>
+                                <!-- Row 1: Mutual NDA (Leon Pre-Signed & Sealed) -->
+                                <tr class="hover:bg-slate-900/40 bg-emerald-950/10">
+                                    <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                        <div>
+                                            <span>Mutual NDA &amp; Patent Protection</span>
+                                            <span class="text-[10px] text-slate-400 block font-normal">Protects R.E.P. Patent (Filed Sept 24) &amp; UI Tools</span>
+                                        </div>
                                     </td>
-                                    <td class="py-3.5 px-4 text-emerald-400">&#10003; Pre-Signed</td>
-                                    <td class="py-3.5 px-4" id="ledger-mou-ron">Unsigned</td>
-                                    <td class="py-3.5 px-4 text-[10px] text-slate-500 truncate max-w-[140px]" id="ledger-mou-hash">SHA256: 7f8a...</td>
-                                </tr>
-                                <tr class="hover:bg-slate-900/40">
-                                    <td class="py-3.5 px-4 font-bold text-white">Mutual NDA (2-Yr)</td>
-                                    <td class="py-3.5 px-4 text-slate-400">IP Protection</td>
+                                    <td class="py-3.5 px-4 text-slate-300">Bilateral IP &amp; Patent Defense</td>
                                     <td class="py-3.5 px-4">
-                                        <span id="ledger-nda-status" class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-300 border border-red-500/40">PENDING RON</span>
+                                        <span id="ledger-nda-status" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-500/40 font-bold uppercase">
+                                            SIGNED BY LEON // PENDING RON
+                                        </span>
                                     </td>
-                                    <td class="py-3.5 px-4 text-emerald-400">&#10003; Pre-Signed</td>
-                                    <td class="py-3.5 px-4" id="ledger-nda-ron">Unsigned</td>
-                                    <td class="py-3.5 px-4 text-[10px] text-slate-500 truncate max-w-[140px]" id="ledger-nda-hash">SHA256: 91b0...</td>
+                                    <td class="py-3.5 px-4">
+                                        <div class="text-emerald-400 font-bold flex items-center gap-1.5">
+                                            <i class="fa-solid fa-file-circle-check text-emerald-400"></i>
+                                            <span>&#10003; SIGNED &amp; SEALED</span>
+                                        </div>
+                                        <div class="text-[10px] text-slate-400 mt-0.5">Oct 13, 2026 &bull; Verified</div>
+                                    </td>
+                                    <td class="py-3.5 px-4" id="ledger-nda-ron">
+                                        <span class="text-red-400 font-semibold flex items-center gap-1">
+                                            <i class="fa-solid fa-clock text-[10px]"></i> Unsigned (Pending)
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-[10px] text-cyan-300 font-mono truncate max-w-[140px]" id="ledger-nda-hash" title="SHA256: 91b0f44e198ca83d7392a857e4912cc9318b76a">
+                                        SHA256: 91b0f44e...
+                                    </td>
                                 </tr>
+
+                                <!-- Row 2: Anergi Original Draft NDA (Unsigned by Anergi) -->
+                                <tr class="hover:bg-slate-900/40 bg-red-950/10">
+                                    <td class="py-3.5 px-4 font-bold text-slate-300 flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                        <div>
+                                            <span>Anergi Draft NDA (Original)</span>
+                                            <span class="text-[10px] text-slate-500 block font-normal">Google Docs Unilateral Template</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-slate-400">Unilateral Contractor Draft</td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-300 border border-red-500/40 font-bold uppercase">
+                                            UNSIGNED TEMPLATE
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="text-slate-400 text-[11px]">Countered &bull; Replaced</span>
+                                    </td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="text-red-400 font-semibold">&#10007; Blank / Unsigned</span>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-[10px] text-slate-500 italic">
+                                        Unexecuted Draft
+                                    </td>
+                                </tr>
+
+                                <!-- Row 3: Partnership MOU -->
+                                <tr class="hover:bg-slate-900/40">
+                                    <td class="py-3.5 px-4 font-bold text-white flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                                        <div>
+                                            <span>Partnership MOU</span>
+                                            <span class="text-[10px] text-slate-400 block font-normal">Site Revamp &amp; Technical Advisory</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-slate-300">Strategic Alignment</td>
+                                    <td class="py-3.5 px-4">
+                                        <span id="ledger-mou-status" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-500/40 font-bold uppercase">
+                                            SIGNED BY LEON // PENDING RON
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4">
+                                        <div class="text-emerald-400 font-bold flex items-center gap-1.5">
+                                            <i class="fa-solid fa-file-circle-check text-emerald-400"></i>
+                                            <span>&#10003; SIGNED &amp; SEALED</span>
+                                        </div>
+                                        <div class="text-[10px] text-slate-400 mt-0.5">Oct 13, 2026 &bull; Verified</div>
+                                    </td>
+                                    <td class="py-3.5 px-4" id="ledger-mou-ron">
+                                        <span class="text-red-400 font-semibold flex items-center gap-1">
+                                            <i class="fa-solid fa-clock text-[10px]"></i> Unsigned (Pending)
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-[10px] text-cyan-300 font-mono truncate max-w-[140px]" id="ledger-mou-hash" title="SHA256: 7f8a32b14c99e82a01d5ef264a938c92a149fbc0">
+                                        SHA256: 7f8a32b1...
+                                    </td>
+                                </tr>
+
+                                <!-- Row 4: Handshake Video -->
                                 <tr class="hover:bg-slate-900/40">
                                     <td class="py-3.5 px-4 font-bold text-white">Anergi Handshake Video</td>
                                     <td class="py-3.5 px-4 text-slate-400">Executive Production</td>
                                     <td class="py-3.5 px-4">
-                                        <span id="ledger-video-status" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-500/40">IN REVIEW</span>
+                                        <span id="ledger-video-status" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-500/40 uppercase font-bold">IN REVIEW</span>
                                     </td>
                                     <td class="py-3.5 px-4 text-emerald-400">&#10003; Submitted</td>
                                     <td class="py-3.5 px-4" id="ledger-video-ron">Pending Vote</td>
                                     <td class="py-3.5 px-4 text-[10px] text-slate-500 truncate max-w-[140px]">SHA256: 4e99...</td>
                                 </tr>
+
+                                <!-- Row 5: Wednesday Articles -->
                                 <tr class="hover:bg-slate-900/40">
                                     <td class="py-3.5 px-4 font-bold text-white">Wednesday Article 1 &amp; 2</td>
                                     <td class="py-3.5 px-4 text-slate-400">Thought Leadership</td>
                                     <td class="py-3.5 px-4">
-                                        <span id="ledger-news-status" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-500/40">IN QUEUE</span>
+                                        <span id="ledger-news-status" class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-300 border border-amber-500/40 uppercase font-bold">IN QUEUE</span>
                                     </td>
                                     <td class="py-3.5 px-4 text-emerald-400">&#10003; Drafted</td>
                                     <td class="py-3.5 px-4" id="ledger-news-ron">Pending Approval</td>
@@ -1696,19 +2017,28 @@
         function switchLegalTab(tab) {
             const mouContent = document.getElementById('tab-content-mou');
             const ndaContent = document.getElementById('tab-content-nda');
+            const anergiNdaContent = document.getElementById('tab-content-anergi-nda');
             const btnMou = document.getElementById('tab-btn-mou');
             const btnNda = document.getElementById('tab-btn-nda');
+            const btnAnergiNda = document.getElementById('tab-btn-anergi-nda');
+
+            mouContent.classList.add('hidden');
+            ndaContent.classList.add('hidden');
+            if (anergiNdaContent) anergiNdaContent.classList.add('hidden');
+
+            btnMou.className = 'px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition-all';
+            btnNda.className = 'px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition-all';
+            if (btnAnergiNda) btnAnergiNda.className = 'px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center gap-1.5';
 
             if (tab === 'mou') {
                 mouContent.classList.remove('hidden');
-                ndaContent.classList.add('hidden');
-                btnMou.className = 'px-4 py-2 rounded-xl bg-anergi-orange text-black font-bold transition-all';
-                btnNda.className = 'px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all';
-            } else {
-                mouContent.classList.add('hidden');
+                btnMou.className = 'px-3.5 py-2 rounded-xl bg-anergi-orange text-black font-bold transition-all';
+            } else if (tab === 'nda') {
                 ndaContent.classList.remove('hidden');
-                btnMou.className = 'px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all';
-                btnNda.className = 'px-4 py-2 rounded-xl bg-cyan-500 text-black font-bold transition-all';
+                btnNda.className = 'px-3.5 py-2 rounded-xl bg-cyan-500 text-black font-bold transition-all';
+            } else if (tab === 'anergi-nda') {
+                if (anergiNdaContent) anergiNdaContent.classList.remove('hidden');
+                if (btnAnergiNda) btnAnergiNda.className = 'px-3.5 py-2 rounded-xl bg-red-600 text-white font-bold transition-all shadow-[0_0_15px_rgba(239,68,68,0.5)] flex items-center gap-1.5';
             }
         }
 
@@ -1781,10 +2111,12 @@
                 manifestBadge.textContent = 'EXECUTED';
             }
             if (ledgerStatus) {
-                ledgerStatus.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-500/40';
-                ledgerStatus.textContent = 'EXECUTED';
+                ledgerStatus.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-500/40 font-bold uppercase';
+                ledgerStatus.textContent = 'DUAL-SIGNED & RATIFIED';
             }
-            if (ledgerRon) ledgerRon.textContent = 'Signed by ' + state.name;
+            if (ledgerRon) {
+                ledgerRon.innerHTML = '<span class="text-emerald-400 font-bold flex items-center gap-1">&#10003; Signed by ' + state.name + '</span><span class="text-[10px] text-slate-400 block">' + state.date + '</span>';
+            }
             if (ledgerHash) ledgerHash.textContent = 'SHA256: ' + state.hash.substring(0, 10) + '...';
         }
 
