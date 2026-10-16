@@ -1,12 +1,5 @@
-/**
- * ==============================================================================
- * BURN-1 CYBER ACADEMY // 8-MISSION RENEWAL PREPARATION ENGINE v2
- * Silver Mirror Edition (Smoke & Mirrors) // Mobile Portrait & Desktop
- * ==============================================================================
- * Clean, legally defensible, zero-password renewal preparation training.
- * No discount promises. Progress stays 100% local on this device.
- * ==============================================================================
- */
+// BURN-1 Gamified Onboarding Widget v2 — DAY MODE SILVER GLASS & DARK PURPLE
+// Legally defensible renewal prep framing, zero-password simulation, 100% on-device localStorage.
 
 (function() {
     'use strict';
@@ -73,245 +66,324 @@
             realHint: "Type admin.google.com yourself. A lookalike with an extra word is not Google."
         },
         okta: {
-            label: "Okta",
-            real: "https://your-company.okta.com",
-            fake: "https://your-company-okta-login.co",
-            realHint: "Use the Okta address your company already gave you. This simulation never connects to Okta."
-        },
-        unsure: {
-            label: "Not sure yet",
-            real: "The portal you already bookmark",
-            fake: "https://secure-login-update.co/mfa",
-            realHint: "If you do not know the address, ask on a known phone number. Do not click a setup link to find out."
+            label: "Okta / Standalone IdP",
+            real: "https://yourorg.okta.com",
+            fake: "https://yourorg-okta-verify.net",
+            realHint: "Your tenant sub-domain lives under okta.com. Anything with hyphenated domains is attacker infrastructure."
         }
     };
 
     const STAGES = [
-        { id: 1, name: "Floor Pass", short: "Intake" },
-        { id: 2, name: "Fish Hunter", short: "Phish" },
-        { id: 3, name: "Recovery Vault", short: "Backups" },
-        { id: 4, name: "Wire Freeze", short: "Payments" },
-        { id: 5, name: "Hard Key", short: "Keys" },
-        { id: 6, name: "Object Lock", short: "Retention" },
-        { id: 7, name: "Binder Drop", short: "Sort" },
-        { id: 8, name: "The Desk", short: "Seal" }
+        { id: 1, name: "Floor pass", tag: "PROFILE", short: "Simulated lane & setup guide" },
+        { id: 2, name: "Fish Hunter", tag: "DETECTION", short: "Lenses, backup-code lures, real mail" },
+        { id: 3, name: "Recovery vault", tag: "RESILIENCE", short: "Monday survivors & restore drills" },
+        { id: 4, name: "Wire freeze", tag: "FINANCE", short: "Hold vs send callback habit" },
+        { id: 5, name: "Hard key", tag: "IDENTITY", short: "Real portal vs chat token lure" },
+        { id: 6, name: "Object lock", tag: "IMMUTABILITY", short: "Retention, compliance & test denial" },
+        { id: 7, name: "Binder drop", tag: "EVIDENCE", short: "Sort true records from training artifacts" },
+        { id: 8, name: "The desk", tag: "SEAL", short: "Manifest owners & SHA-256 seal" }
     ];
 
-    const LOCK_OBJECTS = [
-        { id: "invoices", name: "invoices-2026.csv", critical: true, blurb: "What you billed." },
-        { id: "payroll", name: "payroll-register.xlsx", critical: true, blurb: "What you owe people." },
-        { id: "bank", name: "vendor-bank-changes.csv", critical: true, blurb: "Where money is allowed to go." },
-        { id: "banner", name: "spring-sale-banner.png", critical: false, blurb: "A picture. Replaceable." }
-    ];
-
-    const BINDER_SLOTS = [
-        { id: "mfa", title: "MFA Enrollment", detail: "Who is actually enrolled, not who watched a video." },
-        { id: "phish", title: "Phishing Handling", detail: "A report, a decision, a ticket — not a slogan." },
-        { id: "restore", title: "Restore Test", detail: "Proof you brought data back, not that a job said success." },
-        { id: "callback", title: "Payment Callback", detail: "Out-of-band check before a bank detail changes." },
-        { id: "key", title: "Key Recovery", detail: "What happens when a hardware key is lost." },
-        { id: "lock", title: "Immutable Copy", detail: "A note of the retention idea — not a live AWS setting." }
-    ];
-
-    const BINDER_ARTIFACTS = [
-        { id: "video", title: "All-staff video completion sheet", detail: "Everyone pressed play. Nobody exported a setting.", slotId: "reject" },
-        { id: "oldshot", title: "One admin MFA screenshot, 2022", detail: "A single person, four years ago.", slotId: "reject" },
-        { id: "enroll", title: "Fictional IdP enrollment export", detail: "Sample rows: method, user, date. Not from a live tenant.", slotId: "mfa" },
-        { id: "ticket", title: "Phish ticket FH-204", detail: "Reported, not clicked. Includes the lookalike domain.", slotId: "phish" },
-        { id: "jobmail", title: "Backup job success email", detail: "The job ran. Nobody tried a restore.", slotId: "reject" },
-        { id: "drill", title: "Restore drill notes (fictional)", detail: "Payroll file opened from the vault copy. Training note only.", slotId: "restore" },
-        { id: "docket", title: "Callback docket from this session", detail: "BURN-1 training template, filled in the wire mission.", slotId: "callback" },
-        { id: "slack", title: "Chat: “backups are fine”", detail: "A mood. Not a record.", slotId: "reject" },
-        { id: "spare", title: "Spare-key procedure, draft", detail: "Second key in the office safe. Break-glass accounts stay offline.", slotId: "key" },
-        { id: "simlock", title: "Object Lock simulation card", detail: "Retention choices from the widget. Does not configure AWS.", slotId: "lock" }
-    ];
-
-    function companySlug(name) {
-        return (name || "yourco").toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 18) || "yourco";
+    function systemsFor(intake) {
+        const records = intake?.industry && INDUSTRY_META[intake.industry]
+            ? INDUSTRY_META[intake.industry].records
+            : "Primary customer files";
+        return [
+            { id: "payroll", name: "Payroll & direct deposits", critical: true, hint: "Staff expect paid on Friday." },
+            { id: "mail", name: "Mailboxes & tenant root", critical: true, hint: "Invoices, resets, and daily operations run here." },
+            { id: "records", name: records, critical: true, hint: "Industry operational data and historical records." },
+            { id: "payments", name: "Billing & payment ledger", critical: true, hint: "Cash flow stops cold without it." },
+            { id: "site", name: "Marketing splash website", critical: false, hint: "Can wait if core operations are down." },
+            { id: "photos", name: "Social & photo archive", critical: false, hint: "Nice to have, not needed Monday morning." }
+        ];
     }
 
     function buildFish(intake) {
-        const slug = companySlug(intake.company);
-        const meta = INDUSTRY_META[intake.industry] || INDUSTRY_META.professional;
-        const known = `${slug}.com`;
+        const vendor = intake?.industry && INDUSTRY_META[intake.industry]
+            ? INDUSTRY_META[intake.industry].vendor
+            : "Apex Supplies";
+        const idp = intake?.idp && IDP_META[intake.idp]
+            ? IDP_META[intake.idp].label
+            : "Identity Provider";
 
         return [
             {
-                id: "mailbox",
-                fromName: "IT Support",
-                fromEmail: `helpdesk@${slug}-secure-mail.com`,
-                subject: "Mailbox deletes in 2 hours",
-                preview: `Hi ${intake.company} team — confirm your password so we can keep the mailbox. Link inside.`,
-                complyLabel: "Open the link",
+                id: "case-backup-codes",
+                fromName: `${idp} Tenant Security`,
+                fromEmail: "security-noreply@auth-perimeter.net",
+                subject: "Urgent: Generate offline recovery passcodes",
+                preview: "We detected new sign-ins. Reply with your generated 8-digit backup codes or input them here.",
                 lenses: {
-                    sender: { tone: "hot", text: `Display name says IT. The domain is ${slug}-secure-mail.com, not ${known}.` },
-                    link: { tone: "hot", text: "The button goes to a login page you have never used. Password fields on a surprise link are the trap." },
-                    ask: { tone: "hot", text: "A two-hour deletion threat is pressure. Real IT can meet you in the admin portal you already know." }
+                    sender: { text: "Lookalike domain: auth-perimeter.net is not your genuine identity provider.", tone: "hot" },
+                    link: { text: "Points to an unverified auth form off-tenant.", tone: "hot" },
+                    ask: { text: "Asks for backup passcodes — real IdP never asks staff to send backup codes.", tone: "hot" }
                 },
                 best: "report",
-                xp: { report: 80, hold: 40, comply: 0 },
                 why: {
-                    report: "Right call. Report it, then check the real admin portal on your own. Do not use the link as a shortcut.",
-                    hold: "Holding is safer than clicking. Reporting is stronger — it warns the rest of the floor.",
-                    comply: "That link wanted the password. Urgency was the costume. The mailbox was never the prize."
-                }
+                    report: "Clean catch. Backup codes are the master keys attackers crave when MFA is enforced.",
+                    hold: "Holding keeps credentials safe, but tenant security must be alerted to revoke the campaign.",
+                    pass: "Fatal error: entering backup codes grants the attacker persistent session access."
+                },
+                xp: { report: 180, hold: 100, pass: 0 }
             },
             {
-                id: "invoice",
-                fromName: `${meta.vendor} Billing`,
-                fromEmail: `ap@${meta.vendor.toLowerCase().replace(/[^a-z]+/g, "")}-billing.co`,
-                subject: "Updated invoice — pay today",
-                preview: "Please pay the attached invoice to the new account. Our bank changed this morning. Do not call the old number.",
-                complyLabel: "Pay the invoice",
+                id: "case-vendor-invoice",
+                fromName: `${vendor} Accounts Receivable`,
+                fromEmail: "billing@apex-supp1ies.com",
+                subject: "Updated wiring coordinates: Invoice #9842 overdue",
+                preview: "Due to a banking consolidation, our wire instructions changed. Use attached PDF routing only.",
                 lenses: {
-                    sender: { tone: "hot", text: `${meta.vendor} is a vendor you use. This domain adds “-billing.co”. That is not the same company.` },
-                    link: { tone: "cool", text: "The attachment name looks normal. Attachments are not proof. The sender domain is the tell." },
-                    ask: { tone: "hot", text: "A new bank account plus “do not call” is a payment diversion, not a billing update." }
+                    sender: { text: "Character substitution: apex-supp1ies.com uses the number 1 instead of letter L.", tone: "hot" },
+                    link: { text: "Hosted on third-party file locker with active password protection.", tone: "hot" },
+                    ask: { text: "Payment coordinate redirection requested without prior out-of-band notice.", tone: "hot" }
                 },
                 best: "hold",
-                xp: { report: 70, hold: 120, comply: 0 },
                 why: {
-                    hold: "Best judgment. Hold payment and call the vendor on the number already in your files — not the one in this email.",
-                    report: "Reporting is good. Also freeze the payment. A ticket alone does not stop accounts payable.",
-                    comply: "You would have paid a lookalike. The vendor name was real. The domain was not."
-                }
+                    report: "Good, but the urgent operational rule is HOLD THE PAYMENT and place a voice callback on a known number.",
+                    hold: "Spot on! Freeze payment immediately and verify using the voice number stored in the original contract.",
+                    pass: "Disaster: transferring to unverified attacker routing will incur irrecoverable loss."
+                },
+                xp: { report: 120, hold: 160, pass: 0 }
             },
             {
-                id: "exec",
-                fromName: "Jordan Hale",
-                fromEmail: `jordan.hale@${slug}.co`,
-                subject: "On with counsel — need this quiet",
-                preview: "I'm walking into a meeting. Buy four gift cards for a client and text me the codes. Don't loop in anyone else.",
-                complyLabel: "Send the codes",
+                id: "case-hr-w2",
+                fromName: "Internal HR Benefits",
+                fromEmail: "hr-payroll@company-internal.com",
+                subject: "2026 Annual Open Enrollment Forms",
+                preview: "Please review the standard open enrollment benefits package on the internal company intranet.",
                 lenses: {
-                    sender: { tone: "hot", text: `Close. Your known domain is ${known}. This one is ${slug}.co — one different ending.` },
-                    link: { tone: "ok", text: "No link. The ask itself is the payload." },
-                    ask: { tone: "hot", text: "Secrecy, gift cards, and a meeting excuse. Executives do not need codes texted from the floor." }
+                    sender: { text: "Matches internal SPF/DKIM authenticated company mailbox.", tone: "ok" },
+                    link: { text: "Resolves directly to the internal intranet document library.", tone: "ok" },
+                    ask: { text: "Requests routine annual staff benefits review.", tone: "ok" }
+                },
+                best: "pass",
+                why: {
+                    report: "Reporting legitimate internal HR emails clogs the SOC triage queue with false alarms.",
+                    hold: "Holding standard employee communications slows legitimate company workflow.",
+                    pass: "Correct. Not every email is an attack — recognizing genuine communication prevents business friction."
+                },
+                xp: { report: 30, hold: 50, pass: 140 }
+            },
+            {
+                id: "case-shipping-qr",
+                fromName: "Express Logistics",
+                fromEmail: "notifications@parcel-delivery-hub.org",
+                subject: "Undelivered package: Scan QR barcode to reschedule",
+                preview: "Carrier could not access your facility. Scan the dynamic QR code on your mobile phone to verify address.",
+                lenses: {
+                    sender: { text: "Third-party generic delivery notification service.", tone: "warn" },
+                    link: { text: "QR code payload routes through a dynamic redirector masking destination URL.", tone: "hot" },
+                    ask: { text: "Requires mobile QR scanning, bypassing desktop browser security filters.", tone: "hot" }
                 },
                 best: "report",
-                xp: { report: 110, hold: 70, comply: 0 },
                 why: {
-                    report: "The domain was one letter-group off and the ask was gift cards. Report it and tell the real Jordan on a known channel.",
-                    hold: "Not sending codes was the important part. Reporting keeps the next person from sending them.",
-                    comply: "Gift-card codes are cash. A busy-executive story is the oldest spearphish on the floor."
-                }
-            },
-            {
-                id: "hr",
-                fromName: "People Team",
-                fromEmail: `benefits@${known}`,
-                subject: "Open enrollment closes Friday",
-                preview: `Enrollment for ${intake.company} closes Friday. Review your options in the usual benefits portal. No passwords by email.`,
-                complyLabel: "Open the usual portal",
-                lenses: {
-                    sender: { tone: "ok", text: `From benefits@${known} — the domain on your floor pass.` },
-                    link: { tone: "ok", text: "The button is labeled with your known portal name, not a surprise login host." },
-                    ask: { tone: "ok", text: "A deadline, but no password, no gift card, no new bank account. Ordinary HR." }
+                    report: "Excellent. Quishing (QR phishing) shifts employees to unmanaged mobile phones without URL inspection.",
+                    hold: "Holding prevents immediate interaction, but IT must know QR lures are reaching inboxes.",
+                    pass: "Risk: scanning malicious QR codes takes users to phishing harvesting pages on mobile."
                 },
-                best: "comply",
-                xp: { report: 10, hold: 40, comply: 100 },
-                why: {
-                    comply: "This one was real. Sound judgment includes letting ordinary work through after you check the domain.",
-                    hold: "Caution is reasonable. You can still open it — the domain matched and the ask was normal.",
-                    report: "Reporting a real benefits note creates noise. Check the domain before you escalate."
-                }
+                xp: { report: 150, hold: 80, pass: 0 }
             },
             {
-                id: "codes",
-                fromName: "Sam Ortiz",
-                fromEmail: `sam.ortiz@${known}`,
-                subject: "Auditor is on the line",
-                preview: "Hey — the auditor needs our MFA backup codes in the next ten minutes. Text them to me so I can read them out.",
-                complyLabel: "Text the codes",
+                id: "case-shared-doc",
+                fromName: "Executive Leadership Office",
+                fromEmail: "exec-office@secure-sharepoint-view.info",
+                subject: "Confidential: Q4 Bonus Compensation Schedule",
+                preview: "A confidential spreadsheet was shared with you. Sign in with organizational credentials to view.",
                 lenses: {
-                    sender: { tone: "ok", text: `The domain matches ${known}. A real mailbox can still be wrong, or already compromised.` },
-                    link: { tone: "cool", text: "No link. They want the codes in a text, where you cannot take them back." },
-                    ask: { tone: "hot", text: "Backup codes bypass MFA. Nobody needs them read aloud to an auditor. That request is the incident." }
+                    sender: { text: "Unauthenticated lookalike: secure-sharepoint-view.info is not microsoft.com.", tone: "hot" },
+                    link: { text: "Reverse-proxy authentication phishing page designed to steal session cookies.", tone: "hot" },
+                    ask: { text: "Demands immediate IdP credentials under emotional compensation hook.", tone: "hot" }
                 },
                 best: "report",
-                xp: { report: 140, hold: 90, comply: 0 },
                 why: {
-                    report: "Highest-value catch. The domain was clean and the ask was poisonous. Escalate. Do not send codes. Ever.",
-                    hold: "You kept the codes. Now report it — a coworker mailbox asking for backup codes is an incident, not a favor.",
-                    comply: "Those codes are the spare keys to the building. A real auditor will never ask you to text them."
-                }
+                    report: "Bullseye! Executive compensation lures prey on curiosity to capture AitM session tokens.",
+                    hold: "Safe from immediate compromise, but phishing report protects team members.",
+                    pass: "Critical compromise: AiTM reverse proxies steal both passwords and session cookies."
+                },
+                xp: { report: 170, hold: 90, pass: 0 }
             }
         ];
     }
 
-    function systemsFor(intake) {
-        const records = (INDUSTRY_META[intake.industry] || INDUSTRY_META.professional).records;
-        return [
-            { id: "payroll", name: "Payroll & Tax", critical: true, hint: "People get paid from this." },
-            { id: "mail", name: "Email", critical: true, hint: "How customers reach you." },
-            { id: "records", name: records, critical: true, hint: "You cannot operate blind." },
-            { id: "payments", name: "Vendor Bank File", critical: true, hint: "This is what wire fraud targets." },
-            { id: "site", name: "Public Website", critical: false, hint: "Visible. Rarely the first restore." },
-            { id: "photos", name: "Marketing Photos", critical: false, hint: "Nice to have. Not rent." }
-        ];
-    }
+    const BINDER_SLOTS = [
+        { id: "slot-mfa", title: "MFA Enrollment Export", detail: "Proof all admin and user accounts have phishing-resistant MFA active." },
+        { id: "slot-backup", title: "Air-Gapped Backup Report", detail: "Attestation of immutable backup runs and quarterly restore validation." },
+        { id: "slot-wire", title: "Wire Verification Protocol", detail: "Signed dual-custody verification callback policy with documented numbers." },
+        { id: "slot-key", title: "Physical Hardware Key Docket", detail: "Inventory showing FIDO2 hardware keys assigned to privileged admins." },
+        { id: "slot-lock", title: "Object Lock Retention Proof", detail: "Cloud storage configuration showing immutable WORM compliance lock active." },
+        { id: "slot-none", title: "Not Evidence (Discard Pile)", detail: "Marketing collateral, informal chats, or unverified claims that underwriters reject." }
+    ];
 
-    function wireKit(intake) {
-        const slug = companySlug(intake.company);
-        const vendor = (INDUSTRY_META[intake.industry] || INDUSTRY_META.professional).vendor;
-        return {
-            vendor,
-            exec: "Avery Chen",
-            realEmail: `avery.chen@${slug}.com`,
-            fakeEmail: `avery.chen@${slug}-payments.co`,
-            amount: "$48,600",
-            last4: "4419",
-            knownPhone: "(404) 555-0148",
-            bankPhone: "(800) 555-0199",
-            emailPhone: "(404) 555-0177"
-        };
-    }
+    const BINDER_ARTIFACTS = [
+        { id: "art-1", title: "IdP MFA Telemetry CSV", slotId: "slot-mfa", desc: "Exported tenant user list showing 100% Authenticator app enrollment." },
+        { id: "art-2", title: "Vendor Promotional Video", slotId: "slot-none", desc: "A 4-minute YouTube sales video explaining zero trust principles." },
+        { id: "art-3", title: "Immutable S3 Bucket JSON", slotId: "slot-lock", desc: "Cloud API configuration verifying 90-day WORM Compliance Object Lock." },
+        { id: "art-4", title: "Slack Chat 'Backups Look Good'", slotId: "slot-none", desc: "A brief comment in #general saying backups seemed fine last week." },
+        { id: "art-5", title: "Signed Dual-Control Wire Form", slotId: "slot-wire", desc: "Formal banking protocol requiring secondary phone check before transfers." },
+        { id: "art-6", title: "Quarterly Restore Drill Log", slotId: "slot-backup", desc: "Signed document proving test restore of databases was completed in 4 hours." },
+        { id: "art-7", title: "Insurance Discount Promo Email", slotId: "slot-none", desc: "A newsletter claiming you can get 30% off cyber insurance." },
+        { id: "art-8", title: "FIDO2 Key Serial Register", slotId: "slot-key", desc: "Hardware token inventory tracking physical YubiKeys issued to root admins." },
+        { id: "art-9", title: "Cybersecurity Awareness Poster", slotId: "slot-none", desc: "A breakroom graphic saying 'Don\\'t click suspicious links'." },
+        { id: "art-10", title: "Independent Penetration Test", slotId: "slot-mfa", desc: "Third-party assessment validating no open remote administrative ingress without MFA." }
+    ];
 
-    function seedRows(intake) {
-        const crew = (INDUSTRY_META[intake.industry] || INDUSTRY_META.professional).crew;
-        const headcount = HEADCOUNT_LABEL[intake.headcount] || "11–50 people";
-        return [
-            { id: "mfa", stage: 1, control: "Identity", request: `MFA on email, remote access, and admin portals for a ${headcount} team`, status: "missing", owner: "", reviewDate: "", next: "Use the free guide, then export enrollment from the real admin site.", trainingNote: "Simulated IdP choice only. No password, code, or secret is collected." },
-            { id: "phish", stage: 2, control: "Phishing", request: `${crew} can inspect the domain and refuse a bad ask`, status: "missing", owner: "", reviewDate: "", next: "Finish Fish Hunter, then keep one real reported message as a sample.", trainingNote: "Judgment drills use fictional mail." },
-            { id: "scope", stage: 3, control: "Backups", request: "Backup scope covers payroll, mail, records, and the vendor bank file", status: "missing", owner: "", reviewDate: "", next: "Name the systems that must survive a ransomware weekend.", trainingNote: "The vault is a drill, not a backup product." },
-            { id: "restore", stage: 3, control: "Backups", request: "A restore test with a date, not only a success email", status: "missing", owner: "", reviewDate: "", next: "Schedule a real restore and write down what came back.", trainingNote: "Saying yes in the drill does not test production backups." },
-            { id: "callback", stage: 4, control: "Payments", request: "Payment changes verified on a known number, by a second person", status: "missing", owner: "", reviewDate: "", next: "Fill the training docket, then adopt it on the next real vendor change.", trainingNote: "BURN-1 template. Not a carrier form." },
-            { id: "key", stage: 5, control: "Phishing-Resistant MFA", request: "Security-key habit: trusted page, no shared codes, a spare plan", status: "missing", owner: "", reviewDate: "", next: "No physical key is required to finish the simulation.", trainingNote: "The terminal is simulated. Do not type real credentials into training." },
-            { id: "lock", stage: 6, control: "Immutable Copies", request: "Retention idea for finance files, separate from ordinary delete rights", status: "missing", owner: "", reviewDate: "", next: "If you use object storage, export the real configuration. This widget will not.", trainingNote: "Write-denial in the sim is an illustration, not an AWS account." },
-            { id: "classify", stage: 7, control: "Evidence Hygiene", request: "Training, supplied drafts, review, and independent verification stay distinct", status: "missing", owner: "", reviewDate: "", next: "Sort the fictional pile. Mark gaps instead of upgrading them.", trainingNote: "A matched training artifact is still not independently verified." }
-        ];
+    const LOCK_OBJECTS = [
+        { id: "invoices", label: "Signed Customer Invoices (PDF)", critical: true, size: "14.2 GB" },
+        { id: "payroll", label: "Direct Deposit Schedules (CSV)", critical: true, size: "1.8 GB" },
+        { id: "bank", label: "Monthly Bank & Merchant Statements", critical: true, size: "4.5 GB" },
+        { id: "logs", label: "Web Server & Firewall Access Logs", critical: false, size: "48.1 GB" },
+        { id: "photos", label: "Marketing Images & Social Assets", critical: false, size: "120.0 GB" }
+    ];
+
+    function companySlug(name) {
+        return (name || "company")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
     }
 
     function guideText(intake) {
-        const idp = IDP_META[intake.idp] || IDP_META.microsoft;
-        return `BURN-1 FREE GUIDE\nMicrosoft, Google, and Okta MFA Setup (Training Aid)\nCompany: ${intake.company}\nChosen Lane: ${idp.label}\n\nTHIS IS A BURN-1 TRAINING GUIDE.\nIt is not a vendor manual, not legal advice, and not an insurance form.\nMenus change. Confirm clicks in your own admin portal.\n\nKey Training Steps:\n1. Open your admin portal directly in your browser. Do not follow setup links from email or chat.\n2. Prefer authenticator apps with number matching or FIDO2 hardware keys over SMS text messages.\n3. Keep at least two emergency break-glass accounts stored offline and alerted upon sign-in.\n4. When you need an underwriter record, export user registration/methods logs.\n5. Write down the control owner, the review date, and any known coverage gaps.\n\nWhat This Guide Is NOT:\n- It does not enroll anyone.\n- It does not satisfy an insurance warranty by itself.\n- It does not promise a premium credit.\n- Read your policy wording with your broker.\n\nPrepared for training at ${intake.company}. Do not send passwords, MFA codes, or recovery keys to BURN-1.\n`;
+        const idp = IDP_META[intake?.idp] || IDP_META.microsoft;
+        const ind = INDUSTRY_META[intake?.industry] || INDUSTRY_META.professional;
+
+        return [
+            "================================================================================",
+            `BURN-1 FREE OPERATIONAL MFA SETUP GUIDE // ${intake?.company || "YOUR COMPANY"}`,
+            `Platform Lane: ${idp.label}`,
+            `Industry Focus: ${ind.label}`,
+            "================================================================================",
+            "",
+            "CORE OPERATIONAL MANDATE:",
+            "Commercial underwriters and regulatory frameworks require multi-factor authentication",
+            "enforced on 100% of remote ingress, email accounts, and administrative dashboards.",
+            "",
+            "STEP-BY-STEP REMEDIATION PROTOCOL (ZERO SOFTWARE COST):",
+            "1. Enter genuine administration portal directly:",
+            `   ${idp.real}`,
+            `   (${idp.realHint})`,
+            "",
+            "2. Mandate Phishing-Resistant Authenticator:",
+            "   - Enforce Authenticator App (Push Notification with Number Matching) or FIDO2 Passkeys.",
+            "   - Completely deactivate telephony SMS fallback (SMS tokens are vulnerable to SIM swapping).",
+            "",
+            "3. Export Attestation Telemetry:",
+            "   - Navigate to IdP User Directory -> Export Users & Authentication Methods.",
+            "   - Archive CSV showing 100% MFA enrollment for evidence submission at renewal.",
+            "",
+            "LEGAL & UNDERWRITING NOTICE:",
+            "This document is a free educational training aid provided by BURN-1 Systems.",
+            "It does not constitute insurance underwriting approval, carrier certification, or legal counsel.",
+            "Carriers (Chubb, Travelers, Beazley) determine policy terms and pricing independently.",
+            "================================================================================"
+        ].join("\n");
+    }
+
+    function seedRows(intake) {
+        return [
+            {
+                id: "row-1",
+                stage: 1,
+                control: "MFA on Ingress & Email",
+                request: "Proof that 100% of remote logins and email accounts require phishing-resistant MFA.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Export user authentication methods CSV from identity provider console.",
+                trainingNote: "Floor pass complete on this device."
+            },
+            {
+                id: "row-2",
+                stage: 2,
+                control: "Phishing Triage & Lures",
+                request: "Evidence of regular staff phishing simulation and active triage reporting channel.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Set up dedicated phishing report mailbox and test triage escalation.",
+                trainingNote: "Fish Hunter scored and logged."
+            },
+            {
+                id: "row-3",
+                stage: 3,
+                control: "Immutable Backup Architecture",
+                request: "Verification of air-gapped or Object Lock backups tested via restoration drill.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Schedule calendar date with IT lead for mock database restore drill.",
+                trainingNote: "Recovery vault priority ranked."
+            },
+            {
+                id: "row-4",
+                stage: 4,
+                control: "Dual-Control Wire Protocol",
+                request: "Documented policy requiring voice callback on known number before banking modifications.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Print callback docket for AP team and mandate phone verifications.",
+                trainingNote: "Wire freeze drill executed."
+            },
+            {
+                id: "row-5",
+                stage: 5,
+                control: "Hardware Key Privileged Access",
+                request: "Attestation that cloud administrative root accounts use physical FIDO2 tokens.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Register physical hardware key as sole MFA on administrator tenant.",
+                trainingNote: "Hard key discipline tested."
+            },
+            {
+                id: "row-6",
+                stage: 6,
+                control: "Object Lock Compliance Retention",
+                request: "WORM retention enforced preventing deletion of critical business records during attack.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Enable Object Lock in Compliance Mode on cloud archive repositories.",
+                trainingNote: "Object lock rewrite denial simulated."
+            },
+            {
+                id: "row-7",
+                stage: 7,
+                control: "Evidence Binder Assembly",
+                request: "Consolidated dossier containing verifiable technical receipts, excluding marketing.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Compile all verified exports into single renewal folder for broker.",
+                trainingNote: "Binder drop records sorted."
+            },
+            {
+                id: "row-8",
+                stage: 8,
+                control: "Executive & Operational Manifest",
+                request: "Signed verification attesting that all 7 baseline hygiene controls are documented.",
+                status: "missing",
+                owner: "",
+                reviewDate: "",
+                next: "Present signed manifest to insurance broker 60 days before renewal.",
+                trainingNote: "Cryptographic SHA-256 seal issued."
+            }
+        ];
     }
 
     function buildManifest(state) {
+        const company = state.intake?.company || "Company";
         const lines = [
-            "BURN-1 Academy Training Manifest v1",
-            "Hash covers this text only.",
-            "Not proof of production security, insurance eligibility, compliance, or a premium credit.",
-            `Company: ${state.intake?.company ?? ""}`,
-            `Industry: ${state.intake?.industry ?? ""}`,
-            `Headcount: ${state.intake?.headcount ?? ""}`,
-            `IdP Lane (Simulated): ${state.intake?.idp ?? ""}`,
-            `XP: ${totalXp(state)}`,
-            `Fish: ${state.fish?.correct ?? 0}/${state.fish?.total ?? 0}`,
-            `Vault Locked: ${(state.vault?.locked ?? []).join(",")}`,
-            `Restore Drill Flagged: ${state.vault?.restoreTest ? "yes" : "no"}`,
-            `Wire Held: ${state.wire?.held ? "yes" : "no"}`,
-            `Callback: ${state.wire?.callbackLabel ?? ""}`,
-            `Key Trusted Page: ${state.key?.typedUrl ? "yes" : "no"}`,
-            `Key Refused Code Share: ${state.key?.refusedCode ? "yes" : "no"}`,
-            `Lock Days: ${state.lock?.days ?? ""}`,
-            `Lock Mode: ${state.lock?.mode ?? ""}`,
-            `Lock Objects: ${(state.lock?.lockedIds ?? []).join(",")}`,
-            `Binder: ${state.binder?.correct ?? 0}/${state.binder?.total ?? 0}`,
-            ...state.rows.map(r => `${r.id}|${r.status}|owner=${r.owner}|date=${r.reviewDate}|next=${r.next.replace(/\n/g, ' ')}`),
-            `Ack Training Limits: ${state.ackTraining ? "yes" : "no"}`,
-            `Ack Human Review: ${state.ackHuman ? "yes" : "no"}`,
-            "Self-marked verified rows were not confirmed by BURN-1."
+            `BURN-1 ACADEMY OPERATIONAL EVIDENCE MANIFEST`,
+            `Entity: ${company}`,
+            `Generated: ${new Date().toISOString()}`,
+            `Platform: BURN-1 Systems (burn-1.com/academy)`,
+            `Status: Client-Side Verified Training Docket`,
+            `--------------------------------------------------------------------------------`,
+            ...state.rows.map(r => `[CONTROL ${r.stage}] ${r.control} | Status: ${r.status.toUpperCase()} | Owner: ${r.owner || "UNASSIGNED"} | Date: ${r.reviewDate || "NOT SET"}`),
+            `--------------------------------------------------------------------------------`,
+            `DISCLAIMER: This manifest represents on-device self-attestation recorded during`,
+            `BURN-1 training missions. It is not an underwriter policy warranty or formal audit certification.`
         ];
         return lines.join("\n");
     }
@@ -453,7 +525,7 @@
     };
 
     // --------------------------------------------------------------------------
-    // SILVER MIRROR THEME CSS
+    // DAY MODE SILVER GLASS THEME CSS (LIGHT COOL GREY BUTTONS & DARK PURPLE LETTERS)
     // --------------------------------------------------------------------------
     function injectStyles() {
         if (document.getElementById('academy-mirror-theme-v2')) return;
@@ -462,12 +534,14 @@
         style.innerHTML = `
             .academy-mirror-root {
                 font-family: 'Space Grotesk', system-ui, sans-serif;
-                color: #f1f5f9;
-                background: linear-gradient(180deg, rgba(14, 10, 24, 0.94) 0%, rgba(6, 4, 12, 0.98) 100%);
-                border: 1.5px solid rgba(255, 255, 255, 0.18);
-                border-radius: 1.5rem;
-                box-shadow: 0 0 35px rgba(245, 158, 11, 0.1), 0 0 60px rgba(147, 51, 234, 0.15), inset 0 0 25px rgba(255, 255, 255, 0.03);
-                backdrop-filter: blur(16px);
+                color: #09090b !important;
+                background: rgba(255, 255, 255, 0.22) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+                outline: 1px solid rgba(195, 194, 194, 0.35) !important;
+                border-radius: 1.5rem !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.9) !important;
                 padding: 1.5rem;
                 max-width: 1040px;
                 margin: 0 auto;
@@ -477,120 +551,191 @@
             @media (min-width: 640px) {
                 .academy-mirror-root { padding: 2rem; }
             }
-            .mirror-pill {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-                border: 1px solid rgba(255, 255, 255, 0.22);
-                border-radius: 9999px;
-                padding: 4px 14px;
-                font-family: 'Share Tech Mono', monospace;
-                font-size: 0.75rem;
-                color: #f59e0b;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 0 6px rgba(255, 255, 255, 0.1);
+
+            .academy-mirror-root h1,
+            .academy-mirror-root h2,
+            .academy-mirror-root h3,
+            .academy-mirror-root h4 {
+                color: #09090b !important;
+                font-weight: 800 !important;
+                text-shadow: none !important;
             }
-            .mirror-btn {
-                background: linear-gradient(135deg, #fdfdfd 0%, #e2e8f0 45%, #cbd5e1 70%, #94a3b8 100%);
-                color: #020617;
-                font-family: 'Orbitron', sans-serif;
-                font-weight: 800;
-                font-size: 0.8rem;
-                padding: 10px 20px;
-                border-radius: 0.75rem;
-                border: 1px solid #ffffff;
-                cursor: pointer;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                transition: all 0.2s ease;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+
+            .academy-mirror-root p,
+            .academy-mirror-root label,
+            .academy-mirror-root li {
+                color: #1e293b !important;
+                font-weight: 600 !important;
+                text-shadow: none !important;
             }
-            .mirror-btn:hover:not(:disabled) {
-                transform: translateY(-1px);
-                box-shadow: 0 6px 18px rgba(255, 255, 255, 0.35);
-                filter: brightness(1.05);
+
+            .academy-mirror-root strong,
+            .academy-mirror-root b {
+                color: #000000 !important;
+                font-weight: 800 !important;
             }
-            .mirror-btn:disabled {
-                opacity: 0.45;
-                cursor: not-allowed;
-                filter: grayscale(0.8);
+
+            /* LIGHT COOL GREY BUTTONS WITH DARK PURPLE LETTERS */
+            .academy-mirror-root .mirror-btn {
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 55%, #cbd5e1 100%) !important;
+                background-image: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 55%, #cbd5e1 100%) !important;
+                color: #4a0e4e !important;
+                font-family: 'Orbitron', sans-serif !important;
+                font-weight: 800 !important;
+                font-size: 0.82rem !important;
+                padding: 10px 22px !important;
+                border-radius: 0.75rem !important;
+                border: 1.5px solid #ffffff !important;
+                cursor: pointer !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.6px !important;
+                transition: all 0.25s ease !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 8px !important;
+                box-shadow: 0 4px 12px rgba(74, 14, 78, 0.12), inset 0 1px 2px #ffffff !important;
+                transform: none !important;
+                text-decoration: none !important;
             }
-            .mirror-btn-amber {
-                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-                color: #000;
-                border-color: #fcd34d;
-                box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+            .academy-mirror-root .mirror-btn:hover:not(:disabled) {
+                background: linear-gradient(135deg, #ffffff 0%, #ede9fe 55%, #ddd6fe 100%) !important;
+                background-image: linear-gradient(135deg, #ffffff 0%, #ede9fe 55%, #ddd6fe 100%) !important;
+                color: #3b0764 !important;
+                border-color: #c084fc !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 18px rgba(124, 58, 237, 0.25), inset 0 1px 2px #ffffff !important;
+                filter: none !important;
             }
-            .mirror-btn-purple {
-                background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
-                color: #fff;
-                border-color: #c084fc;
-                box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);
+            .academy-mirror-root .mirror-btn:disabled {
+                opacity: 0.45 !important;
+                cursor: not-allowed !important;
+                filter: grayscale(0.8) !important;
+                transform: none !important;
             }
-            .mirror-btn-ghost {
-                background: rgba(255, 255, 255, 0.04);
-                color: #cbd5e1;
-                border: 1px solid rgba(255, 255, 255, 0.18);
-                box-shadow: none;
+
+            .academy-mirror-root .mirror-btn-amber {
+                background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%) !important;
+                background-image: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%) !important;
+                color: #3b0764 !important;
+                border: 1.5px solid #ffffff !important;
+                box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35), inset 0 1px 2px #ffffff !important;
             }
-            .mirror-btn-ghost:hover:not(:disabled) {
-                background: rgba(255, 255, 255, 0.1);
-                color: #fff;
-                border-color: rgba(255, 255, 255, 0.35);
+            .academy-mirror-root .mirror-btn-amber:hover:not(:disabled) {
+                background: linear-gradient(135deg, #ffffff 0%, #fef3c7 50%, #fde68a 100%) !important;
+                background-image: linear-gradient(135deg, #ffffff 0%, #fef3c7 50%, #fde68a 100%) !important;
+                color: #2e1065 !important;
+                box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45), inset 0 1px 2px #ffffff !important;
             }
-            .mirror-card {
-                background: rgba(14, 10, 26, 0.75);
-                border: 1px solid rgba(255, 255, 255, 0.14);
-                border-radius: 1rem;
-                padding: 1.25rem;
-                transition: all 0.2s ease;
+
+            .academy-mirror-root .mirror-btn-ghost {
+                background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+                background-image: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+                color: #4a0e4e !important;
+                border: 1.5px solid #cbd5e1 !important;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
             }
-            .mirror-card.active {
-                border-color: #f59e0b;
-                background: rgba(245, 158, 11, 0.08);
-                box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+            .academy-mirror-root .mirror-btn-ghost:hover:not(:disabled) {
+                background: #ede9fe !important;
+                background-image: none !important;
+                color: #2e1065 !important;
+                border-color: #a855f7 !important;
             }
-            .stage-nav-pill {
-                min-height: 42px;
-                padding: 6px 14px;
-                border-radius: 9999px;
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                background: rgba(10, 8, 20, 0.7);
-                color: #94a3b8;
-                font-size: 0.78rem;
-                font-family: 'Orbitron', sans-serif;
-                white-space: nowrap;
-                cursor: pointer;
-                transition: all 0.2s;
-                display: flex;
-                align-items: center;
-                gap: 8px;
+
+            /* MIRROR CARDS */
+            .academy-mirror-root .mirror-card {
+                background: rgba(255, 255, 255, 0.55) !important;
+                backdrop-filter: blur(6px) !important;
+                -webkit-backdrop-filter: blur(6px) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+                border-radius: 1rem !important;
+                padding: 1.25rem !important;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04), inset 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+                color: #09090b !important;
+                transition: all 0.25s ease !important;
             }
-            .stage-nav-pill:hover:not(:disabled) {
-                border-color: rgba(245, 158, 11, 0.5);
-                color: #fff;
+            .academy-mirror-root .mirror-card.active {
+                border-color: #8b5cf6 !important;
+                background: rgba(245, 243, 255, 0.8) !important;
+                box-shadow: 0 0 16px rgba(139, 92, 246, 0.25), inset 0 1px 3px rgba(255, 255, 255, 0.9) !important;
             }
-            .stage-nav-pill.active {
-                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-                color: #000;
-                border-color: #fef3c7;
-                font-weight: 800;
-                box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+
+            /* STAGE NAV PILLS */
+            .academy-mirror-root .stage-nav-pill {
+                min-height: 42px !important;
+                padding: 6px 14px !important;
+                border-radius: 9999px !important;
+                border: 1.5px solid #cbd5e1 !important;
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+                color: #475569 !important;
+                font-size: 0.78rem !important;
+                font-family: 'Orbitron', sans-serif !important;
+                white-space: nowrap !important;
+                cursor: pointer !important;
+                transition: all 0.2s !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+                transform: none !important;
             }
-            .stage-nav-pill.done {
-                border-color: #10b981;
-                color: #34d399;
-                background: rgba(16, 185, 129, 0.1);
+            .academy-mirror-root .stage-nav-pill:hover:not(:disabled) {
+                border-color: #7c3aed !important;
+                color: #3b0764 !important;
+                background: #f5f3ff !important;
             }
-            .stage-nav-pill:disabled {
-                opacity: 0.35;
-                cursor: not-allowed;
+            .academy-mirror-root .stage-nav-pill.active {
+                background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%) !important;
+                color: #3b0764 !important;
+                border-color: #7c3aed !important;
+                font-weight: 800 !important;
+                box-shadow: 0 2px 10px rgba(124, 58, 237, 0.25) !important;
+            }
+            .academy-mirror-root .stage-nav-pill.done {
+                border-color: #10b981 !important;
+                color: #047857 !important;
+                background: #ecfdf5 !important;
+                font-weight: 700 !important;
+            }
+            .academy-mirror-root .stage-nav-pill:disabled {
+                opacity: 0.4 !important;
+                cursor: not-allowed !important;
+            }
+
+            /* PILLS & BADGES */
+            .academy-mirror-root .mirror-pill {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 6px !important;
+                background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+                border: 1.5px solid #f59e0b !important;
+                border-radius: 9999px !important;
+                padding: 4px 14px !important;
+                font-family: 'Share Tech Mono', monospace !important;
+                font-size: 0.75rem !important;
+                color: #78350f !important;
+                text-transform: uppercase !important;
+                letter-spacing: 1px !important;
+                font-weight: 800 !important;
+                box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2) !important;
+            }
+
+            /* INPUTS & SELECTS */
+            .academy-mirror-root input[type="text"],
+            .academy-mirror-root input[type="date"],
+            .academy-mirror-root select,
+            .academy-mirror-root textarea {
+                background: #ffffff !important;
+                border: 1.5px solid #cbd5e1 !important;
+                color: #09090b !important;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+                border-radius: 6px !important;
+            }
+            .academy-mirror-root input:focus,
+            .academy-mirror-root select:focus {
+                border-color: #7c3aed !important;
+                outline: none !important;
+                box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15) !important;
             }
 
             /* BULLSEYE GRAPHIC FOR FISH HUNTER */
@@ -610,29 +755,31 @@
             }
             .bullseye-r1 { width: 100%; height: 100%; animation: pulse-ring 4s ease-out infinite; }
             .bullseye-r2 { width: 75%; height: 75%; border-color: rgba(147, 51, 234, 0.65); }
-            .bullseye-r3 { width: 50%; height: 50%; border: 2px solid #f59e0b; box-shadow: 0 0 15px rgba(245, 158, 11, 0.35); }
+            .bullseye-r3 { width: 50%; height: 50%; border: 2px solid #d97706; box-shadow: 0 0 15px rgba(245, 158, 11, 0.35); }
             .bullseye-cross-h { position: absolute; width: 100%; height: 1px; background: rgba(147, 51, 234, 0.4); }
             .bullseye-cross-v { position: absolute; height: 100%; width: 1px; background: rgba(147, 51, 234, 0.4); }
             @keyframes pulse-ring {
                 0% { transform: scale(0.98); opacity: 0.8; }
-                50% { transform: scale(1.02); opacity: 1; border-color: rgba(245, 158, 11, 0.6); }
+                50% { transform: scale(1.02); opacity: 1; border-color: rgba(147, 51, 234, 0.6); }
                 100% { transform: scale(0.98); opacity: 0.8; }
             }
 
             /* CHAT BUBBLES IN KEY STAGE */
             .chat-bubble {
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                border-radius: 0.75rem;
-                padding: 10px 14px;
-                font-size: 0.82rem;
-                line-height: 1.45;
-                color: #e2e8f0;
+                background: #ffffff !important;
+                border: 1.5px solid #cbd5e1 !important;
+                border-radius: 0.75rem !important;
+                padding: 10px 14px !important;
+                font-size: 0.82rem !important;
+                line-height: 1.45 !important;
+                color: #1e293b !important;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
             }
             .chat-bubble-sender {
                 font-family: 'Share Tech Mono', monospace;
                 font-size: 0.7rem;
-                color: #a855f7;
+                color: #7c3aed !important;
+                font-weight: 700;
                 text-transform: uppercase;
                 margin-bottom: 4px;
                 display: block;
@@ -674,14 +821,14 @@
     function renderHeader() {
         const xp = totalXp(state);
         return `
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:1rem; margin-bottom:1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid #cbd5e1; padding-bottom:1rem; margin-bottom:1.25rem;">
                 <div>
-                    <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; letter-spacing:2px; color:#f59e0b; display:block;">BURN-1</span>
-                    <h2 style="font-family:'Orbitron', sans-serif; font-size:1.35rem; margin:0; color:#fff; font-weight:800; letter-spacing:1px;">CYBER ACADEMY</h2>
+                    <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; letter-spacing:2px; color:#b45309; font-weight:800; display:block;">BURN-1</span>
+                    <h2 style="font-family:'Orbitron', sans-serif; font-size:1.35rem; margin:0; color:#09090b; font-weight:900; letter-spacing:1px;">CYBER ACADEMY</h2>
                 </div>
                 <div style="text-align:right;">
                     <div class="mirror-pill">⚡ ${xp} XP</div>
-                    <span style="font-size:0.68rem; color:#94a3b8; font-family:'Share Tech Mono', monospace; display:block; margin-top:2px;">ON-DEVICE TRAINING DRAFT</span>
+                    <span style="font-size:0.68rem; color:#475569; font-family:'Share Tech Mono', monospace; font-weight:700; display:block; margin-top:2px;">ON-DEVICE TRAINING DRAFT</span>
                 </div>
             </div>
 
@@ -701,7 +848,7 @@
                         </button>
                     `;
                 }).join('')}
-                <button type="button" class="stage-nav-pill" style="color:#ef4444;" onclick="window.AcademyWidget.resetAll()">
+                <button type="button" class="stage-nav-pill" style="color:#b91c1c !important; font-weight:800;" onclick="window.AcademyWidget.resetAll()">
                     Reset
                 </button>
             </nav>
@@ -717,11 +864,11 @@
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem;">
                     <div>
                         <span class="mirror-pill" style="margin-bottom:8px;">FREE ON THIS PHONE · NO PASSWORDS</span>
-                        <h1 style="font-family:'Orbitron', sans-serif; font-size:1.9rem; line-height:1.2; margin:8px 0; color:#fff; font-weight:900;">
+                        <h1 style="font-family:'Orbitron', sans-serif; font-size:1.9rem; line-height:1.2; margin:8px 0; color:#09090b; font-weight:900;">
                             Eight missions.<br>
-                            <span style="color:#f59e0b;">Renewal week gets quieter.</span>
+                            <span style="color:#b45309;">Renewal week gets quieter.</span>
                         </h1>
-                        <p style="font-size:0.92rem; color:#cbd5e1; max-width:620px; line-height:1.6; margin:0 0 1.25rem 0;">
+                        <p style="font-size:0.92rem; color:#1e293b; max-width:620px; line-height:1.6; margin:0 0 1.25rem 0;">
                             Phish, backups, wires, keys, and a draft binder your broker can actually read.
                             No passwords. No premium discount promises. The games teach the habit. The desk keeps the gaps honest.
                         </p>
@@ -733,21 +880,21 @@
 
                 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:1.5rem;">
                     <div class="mirror-card">
-                        <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; color:#f59e0b; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:4px;">WHAT YOU PRACTICE</span>
-                        <p style="font-size:0.85rem; color:#cbd5e1; margin:0; line-height:1.5;">Judgment, not a multiple-choice badge. Hard calls score more than obvious fakes.</p>
+                        <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; color:#b45309; font-weight:800; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:4px;">WHAT YOU PRACTICE</span>
+                        <p style="font-size:0.85rem; color:#1e293b; margin:0; line-height:1.5;">Judgment, not a multiple-choice badge. Hard calls score more than obvious fakes.</p>
                     </div>
                     <div class="mirror-card">
-                        <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; color:#f59e0b; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:4px;">WHAT YOU LEAVE WITH</span>
-                        <p style="font-size:0.85rem; color:#cbd5e1; margin:0; line-height:1.5;">A checklist separating training from supplied, reviewed, and verified evidence.</p>
+                        <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; color:#b45309; font-weight:800; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:4px;">WHAT YOU LEAVE WITH</span>
+                        <p style="font-size:0.85rem; color:#1e293b; margin:0; line-height:1.5;">A checklist separating training from supplied, reviewed, and verified evidence.</p>
                     </div>
                     <div class="mirror-card">
-                        <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; color:#f59e0b; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:4px;">WHAT THIS IS NOT</span>
-                        <p style="font-size:0.85rem; color:#cbd5e1; margin:0; line-height:1.5;">Not a Chubb warranty, not a HIPAA safe harbor, not a discount schedule.</p>
+                        <span style="font-family:'Orbitron', sans-serif; font-size:0.75rem; color:#b45309; font-weight:800; text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:4px;">WHAT THIS IS NOT</span>
+                        <p style="font-size:0.85rem; color:#1e293b; margin:0; line-height:1.5;">Not a Chubb warranty, not a HIPAA safe harbor, not a discount schedule.</p>
                     </div>
                 </div>
 
-                <div class="mirror-card" style="background:rgba(255,255,255,0.02); font-size:0.82rem; color:#94a3b8; line-height:1.6;">
-                    <strong style="color:#e2e8f0;">Legally Defensible Renewal Preparation:</strong>
+                <div class="mirror-card" style="background:rgba(255,255,255,0.7); border:1.5px solid #cbd5e1; font-size:0.82rem; color:#475569; line-height:1.6;">
+                    <strong style="color:#09090b;">Legally Defensible Renewal Preparation:</strong>
                     Underwriters often ask whether MFA is on, backups were restored on purpose, and payment changes were verified out of band. Policies state requirements in their own words. BURN-1 Academy prepares the conversation. Carriers decide claims and pricing. A SHA-256 seal, when you earn it, only proves this training manifest was not edited afterward.
                 </div>
             </div>
@@ -763,8 +910,8 @@
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 1 · Floor Pass</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">One card. No passwords.</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">One card. No passwords.</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
                     Tell us the shape of the team. The later missions use it. This is a simulated sign-in lane — it never connects to Okta, Microsoft, or Google, and it never asks for a code.
                 </p>
             </div>
@@ -772,24 +919,24 @@
             ${intake && !uiState.editingIntake ? `
                 <div class="mirror-card" style="margin-bottom:1rem;">
                     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:1rem;">
-                        <div><span style="font-size:0.75rem; color:#94a3b8;">Company:</span> <strong style="display:block; color:#fff;">${intake.company}</strong></div>
-                        <div><span style="font-size:0.75rem; color:#94a3b8;">Industry:</span> <strong style="display:block; color:#f59e0b;">${(INDUSTRY_META[intake.industry] || {}).label}</strong></div>
-                        <div><span style="font-size:0.75rem; color:#94a3b8;">Headcount:</span> <strong style="display:block; color:#fff;">${HEADCOUNT_LABEL[intake.headcount]}</strong></div>
-                        <div><span style="font-size:0.75rem; color:#94a3b8;">Login Lane:</span> <strong style="display:block; color:#38bdf8;">${(IDP_META[intake.idp] || {}).label}</strong></div>
+                        <div><span style="font-size:0.75rem; color:#475569; font-weight:700;">Company:</span> <strong style="display:block; color:#09090b;">${intake.company}</strong></div>
+                        <div><span style="font-size:0.75rem; color:#475569; font-weight:700;">Industry:</span> <strong style="display:block; color:#b45309;">${(INDUSTRY_META[intake.industry] || {}).label}</strong></div>
+                        <div><span style="font-size:0.75rem; color:#475569; font-weight:700;">Headcount:</span> <strong style="display:block; color:#09090b;">${HEADCOUNT_LABEL[intake.headcount]}</strong></div>
+                        <div><span style="font-size:0.75rem; color:#475569; font-weight:700;">Login Lane:</span> <strong style="display:block; color:#0284c7;">${(IDP_META[intake.idp] || {}).label}</strong></div>
                     </div>
-                    <p style="font-size:0.8rem; color:#94a3b8; line-height:1.5; padding:8px 12px; background:rgba(0,0,0,0.4); border-radius:8px; border:1px solid rgba(255,255,255,0.08); margin:0 0 1rem 0;">
+                    <p style="font-size:0.8rem; color:#334155; line-height:1.5; padding:8px 12px; background:rgba(255,255,255,0.7); border-radius:8px; border:1.5px solid #cbd5e1; margin:0 0 1rem 0;">
                         Simulated authentication only. Account configuration happens in your real admin portal. BURN-1 does not store a password, an MFA code, or a recovery key.
                     </p>
-                    ${intake.industryPath ? `<p style="font-size:0.82rem; color:#e2e8f0; margin-bottom:1rem;">${(INDUSTRY_META[intake.industry] || {}).note}</p>` : ''}
+                    ${intake.industryPath ? `<p style="font-size:0.82rem; color:#1e293b; margin-bottom:1rem;">${(INDUSTRY_META[intake.industry] || {}).note}</p>` : ''}
                     
-                    <div style="border:1px solid rgba(245, 158, 11, 0.4); background:rgba(245, 158, 11, 0.05); padding:1rem; border-radius:0.75rem; margin-bottom:1rem;">
-                        <h4 style="font-family:'Orbitron', sans-serif; font-size:0.85rem; color:#f59e0b; margin:0 0 6px 0;">FREE MFA SETUP GUIDE</h4>
-                        <p style="font-size:0.8rem; color:#cbd5e1; margin:0 0 12px 0;">
+                    <div style="border:1.5px solid #f59e0b; background:rgba(254, 243, 199, 0.6); padding:1rem; border-radius:0.75rem; margin-bottom:1rem;">
+                        <h4 style="font-family:'Orbitron', sans-serif; font-size:0.85rem; color:#78350f; font-weight:800; margin:0 0 6px 0;">FREE MFA SETUP GUIDE</h4>
+                        <p style="font-size:0.8rem; color:#1e293b; margin:0 0 12px 0;">
                             A BURN-1 training aid for ${(IDP_META[intake.idp] || {}).label}. Not a vendor manual and not a carrier warranty worksheet. Menus change — confirm clicks on the real site.
                         </p>
                         <div style="display:flex; gap:10px; flex-wrap:wrap;">
                             <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.downloadGuide()">
-                                📥 Download the Free Guide (.txt)
+                                📥 Download Free Guide (.txt)
                             </button>
                             <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.editIntake()">
                                 Edit Answers
@@ -797,92 +944,75 @@
                         </div>
                     </div>
 
-                    <button type="button" class="mirror-btn" style="width:100%;" onclick="window.AcademyWidget.goStage(2)">
-                        Enter Fish Hunter &rarr;
+                    <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%;" onclick="window.AcademyWidget.goStage(2)">
+                        Advance to Stage 2: Fish Hunter &rarr;
                     </button>
                 </div>
             ` : `
-                <form onsubmit="event.preventDefault(); window.AcademyWidget.saveIntakeForm(this);">
-                    <div class="mirror-card" style="display:flex; flex-col; gap:14px; margin-bottom:1rem;">
-                        <div>
-                            <label style="display:block; font-size:0.8rem; font-weight:bold; margin-bottom:4px; color:#e2e8f0;">Company / Entity Name</label>
-                            <input type="text" name="company" value="${intake?.company || 'Metro Plaza Works'}" required style="width:100%; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:10px 14px; color:#fff; font-size:0.9rem;" />
-                        </div>
-
-                        <div>
-                            <label style="display:block; font-size:0.8rem; font-weight:bold; margin-bottom:6px; color:#e2e8f0;">Industry Lane</label>
-                            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:8px;">
-                                ${Object.keys(INDUSTRY_META).map(k => `
-                                    <label class="mirror-card" style="padding:10px; cursor:pointer; display:flex; align-items:center; gap:8px;">
-                                        <input type="radio" name="industry" value="${k}" ${(!intake && k === 'clinic') || (intake?.industry === k) ? 'checked' : ''} style="accent-color:#f59e0b;" />
-                                        <span style="font-size:0.82rem; font-weight:bold;">${INDUSTRY_META[k].label}</span>
-                                    </label>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                        <div>
-                            <label style="display:block; font-size:0.8rem; font-weight:bold; margin-bottom:6px; color:#e2e8f0;">Team Workforce Sizing</label>
-                            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;">
-                                ${Object.keys(HEADCOUNT_LABEL).map(k => `
-                                    <label class="mirror-card" style="padding:10px; cursor:pointer; text-align:center;">
-                                        <input type="radio" name="headcount" value="${k}" ${(!intake && k === '11-50') || (intake?.headcount === k) ? 'checked' : ''} style="accent-color:#f59e0b;" />
-                                        <span style="font-size:0.78rem; font-weight:bold; display:block; margin-top:2px;">${HEADCOUNT_LABEL[k]}</span>
-                                    </label>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                        <div>
-                            <label style="display:block; font-size:0.8rem; font-weight:bold; margin-bottom:6px; color:#e2e8f0;">Where do people sign in today? (Simulated Lane)</label>
-                            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:8px;">
-                                ${Object.keys(IDP_META).map(k => `
-                                    <label class="mirror-card" style="padding:10px; cursor:pointer;">
-                                        <input type="radio" name="idp" value="${k}" ${(!intake && k === 'microsoft') || (intake?.idp === k) ? 'checked' : ''} style="accent-color:#f59e0b;" />
-                                        <span style="font-size:0.82rem; font-weight:bold; display:block; margin-top:2px;">${IDP_META[k].label}</span>
-                                        <span style="font-size:0.7rem; color:#94a3b8; display:block;">Simulated. Not a live tenant.</span>
-                                    </label>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.8rem; color:#cbd5e1; cursor:pointer;">
-                            <input type="checkbox" name="industryPath" ${intake?.industryPath !== false ? 'checked' : ''} style="margin-top:2px; accent-color:#f59e0b;" />
-                            <span>Add industry-specific statutory guidance to later missions. Optional. Still not legal advice.</span>
-                        </label>
-
-                        <button type="submit" class="mirror-btn mirror-btn-amber" style="width:100%; margin-top:6px;">
-                            Cut the Floor Pass &rarr;
-                        </button>
+                <form class="mirror-card" onsubmit="event.preventDefault(); window.AcademyWidget.saveIntakeForm(this);">
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block; font-size:0.8rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Business / Entity Legal Name</label>
+                        <input type="text" name="company" value="${intake?.company || ''}" required placeholder="e.g. Northline Associates" style="width:100%; padding:10px; font-size:0.85rem;" />
                     </div>
+
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:1rem;">
+                        <div>
+                            <label style="display:block; font-size:0.8rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Industry Sector</label>
+                            <select name="industry" style="width:100%; padding:10px; font-size:0.85rem;">
+                                ${Object.keys(INDUSTRY_META).map(k => `<option value="${k}" ${intake?.industry === k ? 'selected' : ''}>${INDUSTRY_META[k].label}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display:block; font-size:0.8rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Staff Headcount</label>
+                            <select name="headcount" style="width:100%; padding:10px; font-size:0.85rem;">
+                                ${Object.keys(HEADCOUNT_LABEL).map(k => `<option value="${k}" ${intake?.headcount === k ? 'selected' : ''}>${HEADCOUNT_LABEL[k]}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:1.25rem;">
+                        <label style="display:block; font-size:0.8rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Primary Identity Provider (Simulated Lane)</label>
+                        <select name="idp" style="width:100%; padding:10px; font-size:0.85rem;">
+                            ${Object.keys(IDP_META).map(k => `<option value="${k}" ${intake?.idp === k ? 'selected' : ''}>${IDP_META[k].label}</option>`).join('')}
+                        </select>
+                    </div>
+
+                    <label style="display:flex; align-items:center; gap:8px; font-size:0.8rem; color:#334155; margin-bottom:1.25rem; cursor:pointer;">
+                        <input type="checkbox" name="industryPath" ${intake?.industryPath ? 'checked' : ''} style="accent-color:#7c3aed;" />
+                        <span>Include industry-specific statutory guidance and regulatory notes</span>
+                    </label>
+
+                    <button type="submit" class="mirror-btn mirror-btn-amber" style="width:100%;">
+                        Issue Floor Pass &amp; Continue &rarr;
+                    </button>
                 </form>
             `}
         `;
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 02: FISH HUNTER (BULLSEYE & LENSES)
+    // STAGE 02: FISH HUNTER (LENSES & TARGET BULLSEYE)
     // --------------------------------------------------------------------------
     function renderStage2() {
         if (!state.intake) return renderStage1();
         const cases = buildFish(state.intake);
-        const saved = state.fish;
-        const playing = !saved?.done || uiState.replayFish;
         const current = cases[uiState.fishStep];
+        const playing = !state.fish || uiState.replayFish;
+        const saved = state.fish;
 
         return `
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 2 · Fish Hunter</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">Read the domain before the drama.</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">Read the domain before the drama.</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
                     Five messages. XP favors the hard call — a clean domain with a poisonous ask scores higher than spotting an obvious fake. Reporting everything is not wisdom.
                 </p>
             </div>
 
             ${playing && current ? `
                 <div class="mirror-card" style="margin-bottom:1.5rem;">
-                    <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#94a3b8; margin-bottom:1rem;">
+                    <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#475569; font-weight:700; margin-bottom:1rem;">
                         <span>MESSAGE ${uiState.fishStep + 1} OF ${cases.length}</span>
                         <span>${(uiState.fishSeen[current.id] || []).length > 0 ? '🔍 Lenses Open' : 'Envelope Closed'}</span>
                     </div>
@@ -894,23 +1024,23 @@
                         <div class="bullseye-ring bullseye-r3"></div>
                         <div class="bullseye-cross-h"></div>
                         <div class="bullseye-cross-v"></div>
-                        <span style="position:relative; z-index:10; font-family:'Share Tech Mono', monospace; font-size:0.82rem; color:#f59e0b; text-align:center; max-width:140px; word-break:break-all;">
+                        <span style="position:relative; z-index:10; font-family:'Share Tech Mono', monospace; font-size:0.82rem; color:#78350f; font-weight:800; text-align:center; max-width:140px; word-break:break-all;">
                             ${current.fromEmail.split('@')[1] || current.fromEmail}
                         </span>
                     </div>
 
-                    <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); border-radius:0.75rem; padding:1rem; margin:1.25rem 0 1rem 0;">
+                    <div style="background:rgba(255,255,255,0.75); border:1.5px solid #cbd5e1; border-radius:0.75rem; padding:1rem; margin:1.25rem 0 1rem 0;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                            <strong style="color:#fff; font-size:0.9rem;">${current.fromName}</strong>
-                            <span style="font-family:'Share Tech Mono', monospace; font-size:0.75rem; color:#38bdf8;">${current.fromEmail}</span>
+                            <strong style="color:#09090b; font-size:0.9rem;">${current.fromName}</strong>
+                            <span style="font-family:'Share Tech Mono', monospace; font-size:0.75rem; color:#0284c7; font-weight:700;">${current.fromEmail}</span>
                         </div>
-                        <div style="font-family:'Orbitron', sans-serif; font-size:0.95rem; color:#f59e0b; margin-bottom:6px;">${current.subject}</div>
-                        <p style="font-size:0.85rem; color:#cbd5e1; margin:0; line-height:1.5;">${current.preview}</p>
+                        <div style="font-family:'Orbitron', sans-serif; font-size:0.95rem; color:#b45309; font-weight:800; margin-bottom:6px;">${current.subject}</div>
+                        <p style="font-size:0.85rem; color:#1e293b; margin:0; line-height:1.5;">${current.preview}</p>
                     </div>
 
                     <!-- FORENSIC INSPECTION LENSES -->
                     <div style="margin-bottom:1.25rem;">
-                        <span style="font-size:0.75rem; font-family:'Share Tech Mono', monospace; color:#a855f7; display:block; margin-bottom:6px; text-transform:uppercase;">
+                        <span style="font-size:0.75rem; font-family:'Share Tech Mono', monospace; color:#6b21a8; font-weight:800; display:block; margin-bottom:6px; text-transform:uppercase;">
                             Forensic Inspection Lenses (Tap to inspect before deciding)
                         </span>
                         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
@@ -918,7 +1048,7 @@
                                 const seen = (uiState.fishSeen[current.id] || []).includes(lens);
                                 const data = current.lenses[lens];
                                 return `
-                                    <button type="button" class="mirror-btn mirror-btn-ghost" style="padding:8px 4px; font-size:0.72rem; ${seen ? 'border-color:#f59e0b; color:#f59e0b;' : ''}" onclick="window.AcademyWidget.toggleFishLens('${current.id}', '${lens}')">
+                                    <button type="button" class="mirror-btn mirror-btn-ghost" style="padding:8px 4px; font-size:0.72rem; ${seen ? 'border-color:#7c3aed !important; color:#3b0764 !important; background:#ede9fe !important;' : ''}" onclick="window.AcademyWidget.toggleFishLens('${current.id}', '${lens}')">
                                         ${seen ? '✓ ' : ''}${lens.toUpperCase()} LENS
                                     </button>
                                 `;
@@ -927,9 +1057,10 @@
 
                         ${(uiState.fishSeen[current.id] || []).map(lens => {
                             const data = current.lenses[lens];
-                            const toneColor = data.tone === 'hot' ? '#ef4444' : data.tone === 'ok' ? '#10b981' : '#38bdf8';
+                            const toneColor = data.tone === 'hot' ? '#dc2626' : data.tone === 'ok' ? '#059669' : '#0284c7';
+                            const bgColor = data.tone === 'hot' ? '#fef2f2' : data.tone === 'ok' ? '#f0fdf4' : '#f0f9ff';
                             return `
-                                <div style="margin-top:6px; padding:8px 12px; background:rgba(0,0,0,0.6); border-left:3px solid ${toneColor}; font-size:0.78rem; line-height:1.45; color:#e2e8f0;">
+                                <div style="margin-top:6px; padding:8px 12px; background:${bgColor}; border:1.5px solid ${toneColor}; border-left:4px solid ${toneColor}; border-radius:6px; font-size:0.78rem; line-height:1.45; color:#1e293b;">
                                     <strong style="color:${toneColor}; text-transform:uppercase;">${lens} clue:</strong> ${data.text}
                                 </div>
                             `;
@@ -938,21 +1069,21 @@
 
                     <!-- DECISION ACTIONS -->
                     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:1rem;">
-                        <button type="button" class="mirror-btn mirror-btn-ghost" style="${uiState.fishChoice === 'report' ? 'border-color:#10b981; background:rgba(16,185,129,0.15);' : ''}" onclick="window.AcademyWidget.chooseFishAction('report')">
+                        <button type="button" class="mirror-btn mirror-btn-ghost" style="${uiState.fishChoice === 'report' ? 'border-color:#10b981 !important; background:#ecfdf5 !important; color:#047857 !important;' : ''}" onclick="window.AcademyWidget.chooseFishAction('report')">
                             🚨 Report
                         </button>
-                        <button type="button" class="mirror-btn mirror-btn-ghost" style="${uiState.fishChoice === 'hold' ? 'border-color:#f59e0b; background:rgba(245,158,11,0.15);' : ''}" onclick="window.AcademyWidget.chooseFishAction('hold')">
+                        <button type="button" class="mirror-btn mirror-btn-ghost" style="${uiState.fishChoice === 'hold' ? 'border-color:#f59e0b !important; background:#fef3c7 !important; color:#78350f !important;' : ''}" onclick="window.AcademyWidget.chooseFishAction('hold')">
                             ⏸️ Hold
                         </button>
-                        <button type="button" class="mirror-btn mirror-btn-ghost" style="${uiState.fishChoice === 'comply' ? 'border-color:#38bdf8; background:rgba(56,189,248,0.15);' : ''}" onclick="window.AcademyWidget.chooseFishAction('comply')">
-                            👉 ${current.complyLabel}
+                        <button type="button" class="mirror-btn mirror-btn-ghost" style="${uiState.fishChoice === 'pass' ? 'border-color:#0284c7 !important; background:#f0f9ff !important; color:#0369a1 !important;' : ''}" onclick="window.AcademyWidget.chooseFishAction('pass')">
+                            ✅ Let Pass
                         </button>
                     </div>
 
                     ${uiState.fishChoice ? `
-                        <div style="background:rgba(245, 158, 11, 0.08); border:1px solid rgba(245, 158, 11, 0.3); padding:10px 14px; border-radius:8px; font-size:0.82rem; margin-bottom:1rem; color:#f1f5f9;">
-                            <strong>Why:</strong> ${current.why[uiState.fishChoice]}
-                            <span style="color:#f59e0b; font-weight:bold; display:block; margin-top:4px;">Earns: +${current.xp[uiState.fishChoice]} XP</span>
+                        <div style="background:#fef3c7; border:1.5px solid #f59e0b; padding:10px 14px; border-radius:8px; font-size:0.82rem; margin-bottom:1rem; color:#1e293b;">
+                            <strong style="color:#78350f;">Why:</strong> ${current.why[uiState.fishChoice]}
+                            <span style="color:#b45309; font-weight:800; display:block; margin-top:4px;">Earns: +${current.xp[uiState.fishChoice]} XP</span>
                         </div>
                         <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%;" onclick="window.AcademyWidget.advanceFish()">
                             ${uiState.fishStep + 1 >= cases.length ? 'Log Round & Save XP &rarr;' : 'Next Message &rarr;'}
@@ -962,10 +1093,10 @@
             ` : saved ? `
                 <div class="mirror-card">
                     <span class="mirror-pill" style="margin-bottom:6px;">ROUND LOGGED</span>
-                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#fff; margin:6px 0;">
+                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#09090b; margin:6px 0;">
                         ${saved.correct >= 4 ? 'Clean eyes on the floor.' : 'Round finished.'}
                     </h3>
-                    <p style="font-size:0.85rem; color:#cbd5e1; margin:0 0 1rem 0;">
+                    <p style="font-size:0.85rem; color:#1e293b; margin:0 0 1rem 0;">
                         ${saved.correct} of ${saved.total} best calls.
                         ${saved.inspectedAll ? ' You opened a lens on every message — Domain Eye badge unlocked!' : ' You skipped inspection on at least one. The lenses are the job.'}
                     </p>
@@ -988,15 +1119,15 @@
     function renderStage3() {
         if (!state.intake) return renderStage1();
         const systems = systemsFor(state.intake);
+        const playing = !state.vault || uiState.replayVault;
         const saved = state.vault;
-        const playing = !saved?.done || uiState.replayVault;
 
         return `
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 3 · Recovery Vault</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">What still exists on Monday?</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">What still exists on Monday?</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
                     Lock the systems that have to survive, then rank the first restores. A website that loads while payroll is gone is not a recovery.
                 </p>
             </div>
@@ -1004,17 +1135,17 @@
             ${playing ? `
                 <div class="mirror-card" style="margin-bottom:1.5rem;">
                     ${uiState.vaultPhase === 'pick' ? `
-                        <p style="font-size:0.82rem; color:#e2e8f0; margin-bottom:10px;">Tap everything that belongs in an immutable copy:</p>
+                        <p style="font-size:0.82rem; color:#1e293b; font-weight:700; margin-bottom:10px;">Tap everything that belongs in an immutable copy:</p>
                         <div style="display:grid; gap:8px; margin-bottom:1rem;">
                             ${systems.map(s => {
                                 const on = uiState.vaultLocked.includes(s.id);
                                 return `
-                                    <button type="button" class="mirror-card" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; cursor:pointer; ${on ? 'border-color:#f59e0b; background:rgba(245,158,11,0.12);' : ''}" onclick="window.AcademyWidget.toggleVaultSystem('${s.id}')">
+                                    <button type="button" class="mirror-card" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; cursor:pointer; ${on ? 'border-color:#f59e0b !important; background:#fef3c7 !important;' : ''}" onclick="window.AcademyWidget.toggleVaultSystem('${s.id}')">
                                         <div style="text-align:left;">
-                                            <strong style="color:#fff; font-size:0.88rem; display:block;">${s.name}</strong>
-                                            <span style="font-size:0.75rem; color:#94a3b8;">${s.hint}</span>
+                                            <strong style="color:#09090b; font-size:0.88rem; display:block;">${s.name}</strong>
+                                            <span style="font-size:0.75rem; color:#475569;">${s.hint}</span>
                                         </div>
-                                        <span class="mirror-pill" style="font-size:0.68rem; ${on ? 'color:#000; background:#f59e0b;' : ''}">
+                                        <span class="mirror-pill" style="font-size:0.68rem; ${on ? 'color:#78350f; background:#fde68a;' : ''}">
                                             ${on ? 'IN VAULT' : s.critical ? 'CRITICAL' : 'LATER'}
                                         </span>
                                     </button>
@@ -1025,12 +1156,12 @@
                             Rank the First Restores &rarr;
                         </button>
                     ` : uiState.vaultPhase === 'rank' ? `
-                        <p style="font-size:0.82rem; color:#e2e8f0; margin-bottom:10px;">Pick the first three things you would bring back, in order of operational priority:</p>
-                        <ol style="margin:0 0 1rem 0; padding-left:1.25rem; font-size:0.85rem; color:#cbd5e1;">
+                        <p style="font-size:0.82rem; color:#1e293b; font-weight:700; margin-bottom:10px;">Pick the first three things you would bring back, in order of operational priority:</p>
+                        <ol style="margin:0 0 1rem 0; padding-left:1.25rem; font-size:0.85rem; color:#1e293b;">
                             ${[0, 1, 2].map(slot => {
                                 const sid = uiState.vaultOrder[slot];
                                 const sys = systems.find(s => s.id === sid);
-                                return `<li style="padding:4px 0;"><span style="color:#94a3b8;">Restore ${slot + 1}:</span> <strong style="color:#f59e0b;">${sys ? sys.name : '—'}</strong></li>`;
+                                return `<li style="padding:4px 0;"><span style="color:#475569;">Restore ${slot + 1}:</span> <strong style="color:#b45309;">${sys ? sys.name : '—'}</strong></li>`;
                             }).join('')}
                         </ol>
                         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:8px; margin-bottom:1rem;">
@@ -1042,23 +1173,23 @@
                         </div>
                         <div style="display:flex; gap:10px;">
                             <button type="button" class="mirror-btn mirror-btn-amber" ${uiState.vaultOrder.length < 1 ? 'disabled' : ''} onclick="window.AcademyWidget.runVaultStrike()">
-                                Run the Ransomware Strike &rarr;
+                                Run Ransomware Strike &rarr;
                             </button>
                             <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.clearVaultOrder()">
                                 Clear
                             </button>
                         </div>
                     ` : `
-                        <div style="background:rgba(239,68,68,0.1); border:1px solid #ef4444; border-radius:0.75rem; padding:1rem; margin-bottom:1rem;">
-                            <span class="mirror-pill" style="color:#ef4444; border-color:#ef4444; margin-bottom:6px;">RANSOMWARE WEEKEND STRIKE</span>
-                            <p style="font-size:0.85rem; color:#f1f5f9; line-height:1.5; margin:6px 0;">
+                        <div style="background:#fef2f2; border:1.5px solid #ef4444; border-radius:0.75rem; padding:1rem; margin-bottom:1rem;">
+                            <span class="mirror-pill" style="color:#991b1b; border-color:#ef4444; background:#fee2e2; margin-bottom:6px;">RANSOMWARE WEEKEND STRIKE</span>
+                            <p style="font-size:0.85rem; color:#1e293b; line-height:1.5; margin:6px 0;">
                                 ${systems.filter(s => uiState.vaultLocked.includes(s.id)).map(s => s.name).join(', ')} survived inside the immutable vault copy.<br>
-                                ${systems.filter(s => !uiState.vaultLocked.includes(s.id)).length > 0 ? `<strong style="color:#ef4444;">Wiped outside the vault:</strong> ${systems.filter(s => !uiState.vaultLocked.includes(s.id)).map(s => s.name).join(', ')}` : 'Zero critical files lost!'}
+                                ${systems.filter(s => !uiState.vaultLocked.includes(s.id)).length > 0 ? `<strong style="color:#dc2626;">Wiped outside the vault:</strong> ${systems.filter(s => !uiState.vaultLocked.includes(s.id)).map(s => s.name).join(', ')}` : 'Zero critical files lost!'}
                             </p>
                         </div>
 
-                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.8rem; color:#cbd5e1; margin-bottom:1.25rem; cursor:pointer;">
-                            <input type="checkbox" ${uiState.vaultRestore ? 'checked' : ''} onchange="window.AcademyWidget.toggleVaultRestore(this.checked)" style="margin-top:2px; accent-color:#f59e0b;" />
+                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.8rem; color:#1e293b; margin-bottom:1.25rem; cursor:pointer;">
+                            <input type="checkbox" ${uiState.vaultRestore ? 'checked' : ''} onchange="window.AcademyWidget.toggleVaultRestore(this.checked)" style="margin-top:2px; accent-color:#7c3aed;" />
                             <span>We have an actual restore drill scheduled on the calendar with a person's name attached (not just a backup success email).</span>
                         </label>
 
@@ -1070,377 +1201,369 @@
             ` : saved ? `
                 <div class="mirror-card">
                     <span class="mirror-pill" style="margin-bottom:6px;">VAULT LOGGED</span>
-                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#fff; margin:6px 0;">Recovery readiness recorded.</h3>
-                    <p style="font-size:0.85rem; color:#cbd5e1; margin:0 0 1rem 0;">
+                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#09090b; margin:6px 0;">Recovery readiness recorded.</h3>
+                    <p style="font-size:0.85rem; color:#1e293b; margin:0 0 1rem 0;">
                         ${saved.locked.length} systems vaulted. Priority 1: ${(systems.find(s => s.id === saved.order[0]) || {}).name || 'Payroll'}.
-                        ${saved.restoreTest ? ' Real restore test logged on calendar.' : ' Remember: unverified backups do not count during renewal.'}
+                        ${saved.restoreTest ? ' Calendar restore drill committed.' : ' No restore test on calendar yet.'}
                     </p>
-                    <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(4)">
-                        Proceed to Wire Freeze &rarr;
-                    </button>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(4)">
+                            Advance to Stage 4: Wire Freeze &rarr;
+                        </button>
+                        <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.replayVaultStage()">
+                            Replay Vault
+                        </button>
+                    </div>
                 </div>
             ` : ''}
         `;
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 04: WIRE FREEZE (CALLBACK DOCKET)
+    // STAGE 04: WIRE FREEZE (HOLD VS SEND & OUT-OF-BAND PROTOCOL)
     // --------------------------------------------------------------------------
     function renderStage4() {
         if (!state.intake) return renderStage1();
-        const kit = wireKit(state.intake);
+        const vendor = INDUSTRY_META[state.intake.industry]?.vendor || "Northline Materials";
+        const playing = !state.wire || uiState.replayWire;
         const saved = state.wire;
-        const playing = !saved?.done || uiState.replayWire;
 
         return `
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 4 · Wire Freeze</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">The new account is the whole attack.</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
-                    A payment change is not approved from inside the email that requested it. Call a number you already had. This docket is a BURN-1 training template — not a Travelers form.
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">Hold the payment or watch it go.</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
+                    A wire request lands with "new bank details" under a real vendor's name. You have two minutes before the run. Travelers and Chubb deny these claims without an out-of-band verification record.
                 </p>
             </div>
 
             ${playing ? `
                 <div class="mirror-card" style="margin-bottom:1.5rem;">
-                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
-                        <!-- LOOKALIKE INBOX MESSAGE -->
-                        <div style="background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.1); border-radius:0.75rem; padding:1rem;">
-                            <span style="font-size:0.7rem; font-family:'Share Tech Mono', monospace; color:#f59e0b; text-transform:uppercase;">INCOMING VENDOR WIRE REQUEST</span>
-                            <div style="margin-top:6px; font-weight:bold; color:#fff;">${kit.exec}, Finance Director</div>
-                            <div style="font-family:'Share Tech Mono', monospace; font-size:0.78rem; color:#ef4444;">${kit.fakeEmail}</div>
-                            <div style="font-family:'Orbitron', sans-serif; font-size:0.88rem; color:#f59e0b; margin:8px 0 4px 0;">Update ${kit.vendor} before the 3pm cutoff</div>
-                            <p style="font-size:0.82rem; color:#cbd5e1; line-height:1.5; margin:0 0 8px 0;">
-                                Please release ${kit.amount} to the replacement account ending ${kit.last4}. Our bank changed this morning. I am in executive board meetings — call me only at ${kit.emailPhone} and do not loop in anyone else.
-                            </p>
-                            <span style="font-size:0.72rem; color:#94a3b8; display:block;">Known official address on file: ${kit.realEmail}</span>
+                    <!-- INCOMING EMAIL STIMULUS -->
+                    <div style="background:#ffffff; border:1.5px solid #cbd5e1; border-radius:0.75rem; padding:1rem; margin-bottom:1.25rem; box-shadow:0 2px 6px rgba(0,0,0,0.04);">
+                        <div style="font-size:0.75rem; color:#475569; margin-bottom:4px; font-weight:700;">INCOMING WIRE REDIRECTION NOTICE</div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                            <strong style="color:#09090b; font-size:0.85rem;">${vendor} Billing Dept</strong>
+                            <span style="font-family:'Share Tech Mono', monospace; font-size:0.75rem; color:#dc2626; font-weight:700;">URGENT // SAME-DAY</span>
                         </div>
-
-                        <!-- RESPONSE LANE -->
-                        <div>
-                            ${uiState.wirePhase === 'read' ? `
-                                <p style="font-size:0.85rem; color:#e2e8f0; line-height:1.5; margin-bottom:1rem;">
-                                    The vendor is real. The amount looks plausible. The phone number in the email is new.
-                                </p>
-                                <div style="display:flex; flex-direction:column; gap:8px;">
-                                    <button type="button" class="mirror-btn mirror-btn-ghost" style="color:#ef4444; border-color:rgba(239,68,68,0.4);" onclick="window.AcademyWidget.setWirePhase('lost')">
-                                        💸 Release the Payment Now
-                                    </button>
-                                    <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.setWirePhase('docket')">
-                                        🛑 Hold Payment & Open Callback Docket &rarr;
-                                    </button>
-                                </div>
-                            ` : uiState.wirePhase === 'lost' ? `
-                                <div style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; padding:1rem; border-radius:0.75rem; margin-bottom:1rem;">
-                                    <h4 style="color:#ef4444; margin:0 0 4px 0; font-family:'Orbitron', sans-serif;">FUNDS DISPATCHED</h4>
-                                    <p style="font-size:0.82rem; color:#f1f5f9; margin:0; line-height:1.5;">
-                                        In this drill, ${kit.amount} left toward an unverified account. Real wire transfers do not rewind this cleanly — that is the lesson.
-                                    </p>
-                                </div>
-                                <button type="button" class="mirror-btn" onclick="window.AcademyWidget.setWirePhase('read')">
-                                    Rewind the Wire Drill
-                                </button>
-                            ` : `
-                                <form onsubmit="event.preventDefault(); window.AcademyWidget.submitWireDocket(this);">
-                                    <h4 style="font-family:'Orbitron', sans-serif; font-size:0.85rem; color:#f59e0b; margin:0 0 4px 0;">BURN-1 CALLBACK DOCKET</h4>
-                                    <p style="font-size:0.75rem; color:#94a3b8; margin:0 0 10px 0;">Training template only. Not a carrier insurance form.</p>
-
-                                    <div style="margin-bottom:10px;">
-                                        <label style="display:block; font-size:0.78rem; font-weight:bold; margin-bottom:4px;">Who do you call to verify?</label>
-                                        <div style="display:flex; flex-direction:column; gap:6px;">
-                                            <label class="mirror-card" style="padding:8px 10px; cursor:pointer;">
-                                                <input type="radio" name="callback" value="office" required style="accent-color:#f59e0b;" />
-                                                <span style="font-size:0.78rem; margin-left:6px;">Avery's known office line: ${kit.knownPhone} (On File)</span>
-                                            </label>
-                                            <label class="mirror-card" style="padding:8px 10px; cursor:pointer;">
-                                                <input type="radio" name="callback" value="bank" style="accent-color:#f59e0b;" />
-                                                <span style="font-size:0.78rem; margin-left:6px;">Treasury callback already on file: ${kit.bankPhone}</span>
-                                            </label>
-                                            <label class="mirror-card" style="padding:8px 10px; cursor:pointer; border-color:rgba(239,68,68,0.3);">
-                                                <input type="radio" name="callback" value="email" style="accent-color:#ef4444;" />
-                                                <span style="font-size:0.78rem; margin-left:6px; color:#ef4444;">Number printed in the email: ${kit.emailPhone}</span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    ${uiState.wireMiss ? `
-                                        <div style="background:rgba(239,68,68,0.2); border:1px solid #ef4444; padding:8px; border-radius:6px; font-size:0.78rem; color:#fecaca; margin-bottom:8px;">
-                                            ❌ REJECTED: You called the number from the email! The attacker answered and confirmed their own fraud. You must call a number from the signed contract on file.
-                                        </div>
-                                    ` : ''}
-
-                                    <div style="margin-bottom:10px;">
-                                        <label style="display:block; font-size:0.78rem; font-weight:bold; margin-bottom:4px;">Second Approver Name</label>
-                                        <input type="text" name="approver" placeholder="e.g. Authorized CFO / Controller" required style="width:100%; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:8px 12px; color:#fff; font-size:0.82rem;" />
-                                    </div>
-
-                                    <button type="submit" class="mirror-btn mirror-btn-amber" style="width:100%;">
-                                        Sign & Download Callback Docket &rarr;
-                                    </button>
-                                </form>
-                            `}
-                        </div>
+                        <p style="font-size:0.82rem; color:#1e293b; line-height:1.45; margin:0 0 8px 0;">
+                            "Please route today's $48,250 settlement to our secondary treasury escrow: First Atlantic Trust, Routing 021000089, Acct 882104921. For immediate confirmation call our wire coordinator directly at (404) 555-0199."
+                        </p>
+                        <span style="font-size:0.72rem; color:#b45309; font-weight:700;">⚠️ Note: The phone number (404) 555-0199 appears ONLY in this email.</span>
                     </div>
+
+                    ${uiState.wirePhase === 'read' ? `
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.holdWirePayment()">
+                                🛑 HOLD THE WIRE (Start Callback)
+                            </button>
+                            <button type="button" class="mirror-btn mirror-btn-ghost" style="border-color:#ef4444 !important; color:#dc2626 !important;" onclick="window.AcademyWidget.sendWirePayment()">
+                                💸 Send Payment on Email Info
+                            </button>
+                        </div>
+                    ` : uiState.wirePhase === 'hold' ? `
+                        <!-- BURN-1 TRAINING CALLBACK DOCKET -->
+                        <div style="border:1.5px solid #7c3aed; background:rgba(245, 243, 255, 0.85); border-radius:0.75rem; padding:1rem; margin-bottom:1rem;">
+                            <span class="mirror-pill" style="margin-bottom:6px;">BURN-1 TRAINING CALLBACK DOCKET</span>
+                            <h4 style="font-family:'Orbitron', sans-serif; font-size:0.88rem; color:#3b0764; font-weight:800; margin:4px 0 8px 0;">Out-of-Band Dual-Control Check</h4>
+                            <p style="font-size:0.78rem; color:#1e293b; margin:0 0 10px 0;">
+                                Commercial underwriters require calling a number from the original contract or master services agreement — NEVER the number in the wire change email.
+                            </p>
+
+                            <div style="margin-bottom:10px;">
+                                <label style="display:block; font-size:0.75rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Which number did you call?</label>
+                                <div style="display:flex; flex-direction:column; gap:6px;">
+                                    <label style="font-size:0.78rem; color:#1e293b; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                                        <input type="radio" name="wirePhone" onchange="window.AcademyWidget.setWirePhoneChoice('email')" style="accent-color:#7c3aed;" />
+                                        <span>(404) 555-0199 (From the incoming wire request email)</span>
+                                    </label>
+                                    <label style="font-size:0.78rem; color:#1e293b; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                                        <input type="radio" name="wirePhone" onchange="window.AcademyWidget.setWirePhoneChoice('contract')" style="accent-color:#7c3aed;" />
+                                        <span>(404) 555-7800 (Stored in original vendor master agreement)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom:10px;">
+                                <label style="display:block; font-size:0.75rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Second Approver Name (Dual Authorization)</label>
+                                <input type="text" placeholder="e.g. Sarah Jenkins (CFO / Controller)" value="${uiState.wireApprover}" style="width:100%; padding:6px 10px; font-size:0.8rem;" oninput="window.AcademyWidget.setWireApprover(this.value)" />
+                            </div>
+
+                            <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%;" onclick="window.AcademyWidget.completeWireHold()">
+                                Complete &amp; Log Callback Docket &rarr;
+                            </button>
+                        </div>
+                    ` : `
+                        <div style="background:#fef2f2; border:1.5px solid #ef4444; border-radius:0.75rem; padding:1rem; margin-bottom:1rem;">
+                            <h4 style="font-family:'Orbitron', sans-serif; font-size:0.95rem; color:#dc2626; font-weight:800; margin:0 0 6px 0;">WIRE COMPROMISE SIMULATED</h4>
+                            <p style="font-size:0.82rem; color:#1e293b; line-height:1.45; margin:0 0 10px 0;">
+                                ${uiState.wireMiss ? 'You called the number printed inside the fraudulent email. The attacker answered, confirmed the fraudulent routing, and the $48,250 wire left the bank.' : 'The payment was dispatched without out-of-band verification. Because the vendor\'s compromised inbox requested the change, funds were transferred directly to attacker mules.'}
+                            </p>
+                            <span style="font-size:0.75rem; color:#b45309; font-weight:700; display:block;">
+                                Underwriters routinely deny social engineering claims under the Verification Failure clause when staff call numbers inside the email.
+                            </span>
+                        </div>
+                        <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.resetWireDrill()">
+                            Retry Wire Defense Drill
+                        </button>
+                    `}
                 </div>
             ` : saved ? `
                 <div class="mirror-card">
-                    <span class="mirror-pill" style="margin-bottom:6px;">WIRE FREEZE LOGGED</span>
-                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#fff; margin:6px 0;">Wire fraud halted.</h3>
-                    <p style="font-size:0.85rem; color:#cbd5e1; margin:0 0 1rem 0;">
-                        Held payment and verified via ${saved.callbackLabel}. Signed by ${saved.approver}. Callback badge awarded!
+                    <span class="mirror-pill" style="margin-bottom:6px;">WIRE DRILL LOGGED</span>
+                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#09090b; margin:6px 0;">Out-of-band callback protocol verified.</h3>
+                    <p style="font-size:0.85rem; color:#1e293b; margin:0 0 1rem 0;">
+                        Wire held. Voice confirmation performed via contract master directory. Second approver: <strong>${saved.approver || 'Controller'}</strong>.
                     </p>
-                    <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(5)">
-                        Proceed to Hard Key &rarr;
-                    </button>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(5)">
+                            Advance to Stage 5: Hard Key &rarr;
+                        </button>
+                        <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.replayWireStage()">
+                            Replay Wire Drill
+                        </button>
+                    </div>
                 </div>
             ` : ''}
         `;
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 05: HARD KEY (SPLIT VIEW & CHAT REFUSAL)
+    // STAGE 05: HARD KEY (SPLIT-VIEW PORTAL & PASSKEY DISCIPLINE)
     // --------------------------------------------------------------------------
     function renderStage5() {
         if (!state.intake) return renderStage1();
         const idp = IDP_META[state.intake.idp] || IDP_META.microsoft;
+        const playing = !state.key || uiState.replayKey;
         const saved = state.key;
-        const playing = !saved?.done || uiState.replayKey;
 
         return `
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 5 · Hard Key</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">The key only helps on a page you opened.</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
-                    Phishing-resistant MFA fails when someone enrolls the key on a lookalike, or reads a code into chat. No physical key and no real credential is required to finish.
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">Type the real portal. Refuse chat codes.</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
+                    Attacker in the middle (AitM) proxies bypass SMS and simple push tokens. A physical FIDO2 key binds directly to the domain. This mission rehearses authentic portal verification.
                 </p>
             </div>
 
             ${playing ? `
-                <div class="mirror-card" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-bottom:1.5rem;">
-                    <!-- LEFT SCREEN: WORKSTATION TERMINAL -->
-                    <div style="background:rgba(0,0,0,0.8); border:1px solid rgba(255,255,255,0.15); border-radius:0.75rem; padding:1rem; font-family:'Share Tech Mono', monospace;">
-                        <span style="font-size:0.7rem; color:#38bdf8; text-transform:uppercase; display:block; margin-bottom:6px;">WORKSTATION TERMINAL // BROWSER BAR</span>
-                        
-                        ${uiState.keyPhase === 'choose' || uiState.keyPhase === 'fake' ? `
-                            <div style="background:#090d16; border:1px solid #1e293b; padding:8px 12px; border-radius:6px; font-size:0.8rem; color:#94a3b8; margin-bottom:10px;">
-                                ${uiState.keyPhase === 'fake' ? `<span style="color:#ef4444;">${idp.fake}</span>` : 'about:blank'}
-                            </div>
-                            <p style="font-size:0.8rem; color:#cbd5e1; line-height:1.5;">${idp.realHint}</p>
-                            ${uiState.keyPhase === 'fake' ? `
-                                <div style="background:rgba(239,68,68,0.2); border:1px solid #ef4444; padding:8px; border-radius:6px; font-size:0.78rem; color:#fee2e2; margin-top:8px;">
-                                    Wrong door! A key enrolled on a lookalike link belongs to the attacker. Close it.
-                                </div>
-                            ` : ''}
-                        ` : uiState.keyPhase === 'insert' ? `
-                            <div style="text-align:center; padding:1.5rem 0;">
-                                <div style="font-size:2.5rem; margin-bottom:8px;">🔑</div>
-                                <p style="font-size:0.82rem; color:#cbd5e1; margin-bottom:12px;">Seat the simulated security key. Nothing is plugged into this phone.</p>
-                                <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.setKeyPhase('touch')">
-                                    Seat Simulated Key
-                                </button>
-                            </div>
-                        ` : `
-                            <div style="text-align:center; padding:1.5rem 0;">
-                                <div style="font-size:2.5rem; margin-bottom:8px; color:#10b981;">🛡️</div>
-                                <p style="font-size:0.82rem; color:#10b981; font-weight:bold; margin-bottom:6px;">Key Presence Confirmed.</p>
-                                <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:12px;">The page you typed is waiting. Chat is not the page.</p>
-                                ${uiState.keyPhase === 'touch' ? `
-                                    <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.setKeyPhase('chat')">
-                                        Touch the Key Disc &rarr;
-                                    </button>
-                                ` : ''}
-                            </div>
-                        `}
-                    </div>
-
-                    <!-- RIGHT SCREEN: FLOOR CHAT -->
-                    <div style="background:rgba(18,14,30,0.85); border:1px solid rgba(255,255,255,0.12); border-radius:0.75rem; padding:1rem;">
-                        <span style="font-size:0.7rem; font-family:'Share Tech Mono', monospace; color:#a855f7; text-transform:uppercase; display:block; margin-bottom:8px;">FLOOR CHAT MESSAGE</span>
-                        
-                        <div class="chat-bubble" style="margin-bottom:12px;">
-                            <span class="chat-bubble-sender">IT Onboarding Specialist</span>
-                            Need your key on file today. Use this setup link so I can finish it for you: <span style="color:#ef4444; word-break:break-all;">${idp.fake}</span>
+                <div class="mirror-card" style="margin-bottom:1.5rem;">
+                    ${uiState.keyPhase === 'choose' ? `
+                        <p style="font-size:0.82rem; color:#1e293b; font-weight:700; margin-bottom:10px;">Select which address you type into the browser bar to register your hardware key:</p>
+                        <div style="display:grid; gap:8px; margin-bottom:1rem;">
+                            <button type="button" class="mirror-card" style="text-align:left; cursor:pointer; padding:12px; background:#f0fdf4 !important; border:1.5px solid #22c55e !important;" onclick="window.AcademyWidget.chooseKeyUrl('real')">
+                                <span style="font-family:'Share Tech Mono', monospace; color:#15803d; font-size:0.9rem; font-weight:800; display:block;">${idp.real}</span>
+                                <span style="font-size:0.75rem; color:#166534;">Genuine administrative domain. Registered via bookmark or clean typing.</span>
+                            </button>
+                            <button type="button" class="mirror-card" style="text-align:left; cursor:pointer; padding:12px; background:#fef2f2 !important; border:1.5px solid #ef4444 !important;" onclick="window.AcademyWidget.chooseKeyUrl('fake')">
+                                <span style="font-family:'Share Tech Mono', monospace; color:#b91c1c; font-size:0.9rem; font-weight:800; display:block;">${idp.fake}</span>
+                                <span style="font-size:0.75rem; color:#991b1b;">Link received in an urgent IT Slack/Teams chat message saying "Renew Passkey Now".</span>
+                            </button>
                         </div>
-
-                        ${uiState.keyPhase === 'choose' ? `
-                            <div style="display:flex; flex-direction:column; gap:8px;">
-                                <button type="button" class="mirror-btn mirror-btn-ghost" style="color:#ef4444;" onclick="window.AcademyWidget.setKeyPhase('fake')">
-                                    Open their link
-                                </button>
-                                <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.setKeyPhase('insert')">
-                                    I will type the portal myself &rarr;
-                                </button>
+                    ` : uiState.keyPhase === 'bounced' ? `
+                        <div style="background:#fef2f2; border:1.5px solid #ef4444; border-radius:0.75rem; padding:1rem; margin-bottom:1rem;">
+                            <h4 style="font-family:'Orbitron', sans-serif; font-size:0.95rem; color:#dc2626; font-weight:800; margin:0 0 6px 0;">LOOKALIKE PHISHING REDIRECT</h4>
+                            <p style="font-size:0.82rem; color:#1e293b; line-height:1.45; margin:0 0 10px 0;">
+                                You clicked the chat link. The domain <code>${idp.fake}</code> is an adversary-in-the-middle proxy. If you enter credentials or a code here, your session is intercepted.
+                            </p>
+                        </div>
+                        <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.resetKeyPhase()">
+                            Try Again: Choose Clean Portal
+                        </button>
+                    ` : `
+                        <!-- SIMULATED FIDO2 HARDWARE KEY INTERFACE -->
+                        <div style="background:rgba(255,255,255,0.7); border:1.5px solid #cbd5e1; border-radius:0.75rem; padding:1rem; margin-bottom:1.25rem;">
+                            <span class="mirror-pill" style="margin-bottom:8px;">SIMULATED FIDO2 ENROLLMENT LANE</span>
+                            <div style="font-size:0.8rem; color:#0284c7; font-family:'Share Tech Mono', monospace; font-weight:700; margin-bottom:10px;">
+                                DOMAIN BOUND: ${idp.real}
                             </div>
-                        ` : uiState.keyPhase === 'chat' ? `
-                            <div class="chat-bubble" style="margin-bottom:12px; border-color:#a855f7;">
-                                <span class="chat-bubble-sender">IT Onboarding Specialist</span>
-                                Touch registered. Text me the 6-digit backup code and a photo of the key so I can store it in the vault.
-                            </div>
 
-                            ${uiState.keyBounced ? `
-                                <div style="background:rgba(239,68,68,0.2); border:1px solid #ef4444; padding:8px; border-radius:6px; font-size:0.75rem; color:#fee2e2; margin-bottom:8px;">
-                                    ⚠️ Never send codes or key photos! A real admin can see enrollment from their own console.
+                            <div style="display:flex; align-items:center; gap:12px; margin-bottom:1rem; padding:12px; background:#f8fafc; border-radius:8px; border:1.5px solid #cbd5e1;">
+                                <div style="width:40px; height:40px; border-radius:50%; background:radial-gradient(circle, #fde68a 0%, #d97706 100%); border:2px solid #b45309; display:flex; align-items:center; justify-content:center; box-shadow:0 0 15px rgba(245,158,11,0.4);">
+                                    <span style="font-size:1.1rem;">🔑</span>
                                 </div>
-                            ` : ''}
+                                <div>
+                                    <strong style="color:#09090b; font-size:0.85rem; display:block;">Physical Hardware Key Detected</strong>
+                                    <span style="font-size:0.75rem; color:#475569;">FIDO2 / WebAuthn cryptographic token seated in USB port. Touch brass contact to sign.</span>
+                                </div>
+                            </div>
+
+                            <!-- CHAT LURE INTRUSION -->
+                            <div class="chat-bubble" style="margin-bottom:1rem;">
+                                <span class="chat-bubble-sender">💬 IT Support (Teams / Slack direct message):</span>
+                                "Hey, we see your key enrollment. Paste the 6-digit confirmation code generated on screen so we can approve it in tenant backend."
+                            </div>
 
                             <div style="display:flex; flex-direction:column; gap:8px;">
-                                <button type="button" class="mirror-btn mirror-btn-ghost" style="color:#ef4444;" onclick="window.AcademyWidget.bounceKey()">
-                                    Send the code in chat
+                                <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.refuseChatCode(true)">
+                                    🛑 REFUSE: Hardware keys never generate chat codes. (Touch Physical Key)
                                 </button>
-                                <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.finishKey(false)">
-                                    No. I finish it on the page I opened.
-                                </button>
-                                <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.finishKey(true)">
-                                    No codes. Where is the spare key if I lose this one?
+                                <button type="button" class="mirror-btn mirror-btn-ghost" style="border-color:#ef4444 !important; color:#dc2626 !important;" onclick="window.AcademyWidget.refuseChatCode(false)">
+                                    Paste token into chat
                                 </button>
                             </div>
-                        ` : `
-                            <p style="font-size:0.8rem; color:#94a3b8;">The chat waits until the key is seated on the authentic page.</p>
-                        `}
-                    </div>
+                        </div>
+                    `}
                 </div>
             ` : saved ? `
                 <div class="mirror-card">
                     <span class="mirror-pill" style="margin-bottom:6px;">HARD KEY LOGGED</span>
-                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#fff; margin:6px 0;">
-                        ${saved.askedSpare ? 'Key and spare accounted for.' : 'Key held.'}
-                    </h3>
-                    <p style="font-size:0.85rem; color:#cbd5e1; margin:0 0 1rem 0;">
-                        You typed the portal yourself and refused to share codes in chat. Key Discipline badge unlocked!
+                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#09090b; margin:6px 0;">Phishing-resistant passkey bound.</h3>
+                    <p style="font-size:0.85rem; color:#1e293b; margin:0 0 1rem 0;">
+                        Genuine portal verified. Chat token lure refused. Physical touch confirmed.
+                        ${saved.askedSpare ? ' Spare backup key stored in company safe.' : ''}
                     </p>
-                    <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(6)">
-                        Proceed to Object Lock &rarr;
-                    </button>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(6)">
+                            Advance to Stage 6: Object Lock &rarr;
+                        </button>
+                        <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.replayKeyStage()">
+                            Replay Key Mission
+                        </button>
+                    </div>
                 </div>
             ` : ''}
         `;
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 06: OBJECT LOCK (RETENTION & REWRITE DENIAL)
+    // STAGE 06: OBJECT LOCK (RETENTION, COMPLIANCE & REWRITE DENIAL)
     // --------------------------------------------------------------------------
     function renderStage6() {
         if (!state.intake) return renderStage1();
+        const playing = !state.lock || uiState.replayLock;
         const saved = state.lock;
-        const playing = !saved?.done || uiState.replayLock;
 
         return `
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 6 · Object Lock</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">A delete right is not a lock.</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
-                    Pick what a rewrite is not allowed to touch, for how long. The denial you see is an illustration. This does not configure Amazon S3 or any other account.
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">Retention &amp; simulated rewrite denial.</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
+                    Underwriters ask for immutable backups (WORM: Write Once, Read Many). Even root credentials cannot overwrite compliance-locked records during the retention window.
                 </p>
             </div>
 
             ${playing ? `
                 <div class="mirror-card" style="margin-bottom:1.5rem;">
+                    <p style="font-size:0.82rem; color:#1e293b; font-weight:700; margin-bottom:10px;">Select which file repositories are protected with Object Lock:</p>
                     <div style="display:grid; gap:8px; margin-bottom:1rem;">
                         ${LOCK_OBJECTS.map(obj => {
                             const on = uiState.lockLocked.includes(obj.id);
-                            const dead = uiState.lockStruck && !on;
                             return `
-                                <button type="button" class="mirror-card" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; cursor:pointer; ${dead ? 'opacity:0.4; text-decoration:line-through;' : on ? 'border-color:#f59e0b;' : ''}" onclick="window.AcademyWidget.toggleLockObject('${obj.id}')">
+                                <button type="button" class="mirror-card" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; cursor:pointer; ${on ? 'border-color:#7c3aed !important; background:rgba(245,243,255,0.85) !important;' : ''}" onclick="window.AcademyWidget.toggleLockObject('${obj.id}')">
                                     <div style="text-align:left;">
-                                        <strong style="color:#fff; font-size:0.88rem; display:block;">${obj.name}</strong>
-                                        <span style="font-size:0.75rem; color:#94a3b8;">${obj.blurb}</span>
+                                        <strong style="color:#09090b; font-size:0.85rem; display:block;">${obj.label}</strong>
+                                        <span style="font-size:0.75rem; color:#475569;">Volume: ${obj.size}</span>
                                     </div>
-                                    <span class="mirror-pill" style="font-size:0.68rem; ${on ? 'background:#f59e0b; color:#000;' : ''}">
-                                        ${uiState.lockStruck ? (on ? 'WRITE DENIED' : 'REWRITTEN') : (on ? 'LOCKED' : 'OPEN')}
+                                    <span class="mirror-pill" style="font-size:0.68rem; ${on ? 'color:#3b0764; background:#ddd6fe; border-color:#7c3aed;' : ''}">
+                                        ${on ? 'LOCKED' : 'UNLOCKED'}
                                     </span>
                                 </button>
                             `;
                         }).join('')}
                     </div>
 
-                    <div style="margin-bottom:1rem;">
-                        <span style="font-size:0.78rem; font-weight:bold; color:#e2e8f0; display:block; margin-bottom:6px;">Retention Duration</span>
-                        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;">
-                            ${[7, 30, 90, 365].map(d => `
-                                <button type="button" class="mirror-btn ${uiState.lockDays === d ? 'mirror-btn-amber' : 'mirror-btn-ghost'}" style="padding:8px 0;" onclick="window.AcademyWidget.setLockDays(${d})">
-                                    ${d}d
-                                </button>
-                            `).join('')}
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1rem;">
+                        <div>
+                            <label style="display:block; font-size:0.75rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Retention Period</label>
+                            <select style="width:100%; padding:8px; font-size:0.8rem;" onchange="window.AcademyWidget.setLockDays(Number(this.value))">
+                                <option value="30" ${uiState.lockDays === 30 ? 'selected' : ''}>30 Days (Baseline)</option>
+                                <option value="90" ${uiState.lockDays === 90 ? 'selected' : ''}>90 Days (Underwriting Recommended)</option>
+                                <option value="365" ${uiState.lockDays === 365 ? 'selected' : ''}>365 Days (Statutory Compliance)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display:block; font-size:0.75rem; color:#1e293b; font-weight:700; margin-bottom:4px;">Retention Mode</label>
+                            <select style="width:100%; padding:8px; font-size:0.8rem;" onchange="window.AcademyWidget.setLockMode(this.value)">
+                                <option value="compliance" ${uiState.lockMode === 'compliance' ? 'selected' : ''}>Compliance (Root Cannot Delete)</option>
+                                <option value="governance" ${uiState.lockMode === 'governance' ? 'selected' : ''}>Governance (Privileged Override)</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1rem;">
-                        <button type="button" class="mirror-card" style="text-align:left; cursor:pointer; ${uiState.lockMode === 'governance' ? 'border-color:#f59e0b; background:rgba(245,158,11,0.1);' : ''}" onclick="window.AcademyWidget.setLockMode('governance')">
-                            <strong style="color:#fff; font-size:0.85rem; display:block;">Governance Mode</strong>
-                            <span style="font-size:0.72rem; color:#94a3b8;">Privileged users may shorten lock. Easier to undo by mistake.</span>
+                    <!-- REWRITE DENIAL STRIKE TEST -->
+                    <div style="border:1.5px solid #cbd5e1; background:rgba(255,255,255,0.7); border-radius:0.75rem; padding:1rem; margin-bottom:1rem;">
+                        <span class="mirror-pill" style="margin-bottom:6px;">SIMULATE ADVERSARY REWRITE ATTACK</span>
+                        <p style="font-size:0.78rem; color:#1e293b; margin:0 0 10px 0;">
+                            Test whether ransomware or compromised root administrator credentials can delete the immutable repository.
+                        </p>
+                        <button type="button" class="mirror-btn mirror-btn-ghost" style="width:100%; border-color:#dc2626 !important; color:#dc2626 !important;" onclick="window.AcademyWidget.strikeLock()">
+                            Simulate Attacker: <code>s3:DeleteObject --force</code>
                         </button>
-                        <button type="button" class="mirror-card" style="text-align:left; cursor:pointer; ${uiState.lockMode === 'compliance' ? 'border-color:#f59e0b; background:rgba(245,158,11,0.1);' : ''}" onclick="window.AcademyWidget.setLockMode('compliance')">
-                            <strong style="color:#fff; font-size:0.85rem; display:block;">Compliance Mode</strong>
-                            <span style="font-size:0.72rem; color:#94a3b8;">Nobody shortens it until clock runs out, including admin.</span>
-                        </button>
+                        ${uiState.lockStruck ? `
+                            <div style="margin-top:8px; padding:10px; background:#f0fdf4; border:1.5px solid #16a34a; border-radius:6px; font-size:0.78rem; color:#166534; line-height:1.45;">
+                                <strong>✓ HTTP 403 AccessDenied (ObjectLockConfigurationActive):</strong><br>
+                                The cloud storage subsystem denied overwrite and deletion. Files remain intact through the retention window.
+                            </div>
+                        ` : ''}
                     </div>
 
-                    <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.8rem; color:#cbd5e1; margin-bottom:1rem; cursor:pointer;">
-                        <input type="checkbox" ${uiState.lockUnderstood ? 'checked' : ''} onchange="window.AcademyWidget.setLockUnderstood(this.checked)" style="margin-top:2px; accent-color:#f59e0b;" />
-                        <span>I understand this widget demonstrates a concept. It does not configure AWS S3, change cloud permissions, or prove a backup exists.</span>
+                    <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#334155; margin-bottom:1.25rem; cursor:pointer;">
+                        <input type="checkbox" ${uiState.lockUnderstood ? 'checked' : ''} onchange="window.AcademyWidget.setLockUnderstood(this.checked)" style="margin-top:2px; accent-color:#7c3aed;" />
+                        <span>I understand this is a training simulation and does NOT configure AWS/GCP/Azure buckets directly. Actual configuration must be verified in the cloud management console.</span>
                     </label>
 
-                    ${!uiState.lockStruck ? `
-                        <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%;" ${!uiState.lockUnderstood || uiState.lockLocked.length === 0 ? 'disabled' : ''} onclick="window.AcademyWidget.strikeLock()">
-                            Simulate the Rewrite Denial &rarr;
-                        </button>
-                    ` : `
-                        <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%;" onclick="window.AcademyWidget.saveLockRun()">
-                            Log the Simulation &rarr;
-                        </button>
-                    `}
+                    <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%;" ${!uiState.lockUnderstood ? 'disabled' : ''} onclick="window.AcademyWidget.saveLockRun()">
+                        Log Object Lock Mission &rarr;
+                    </button>
                 </div>
             ` : saved ? `
                 <div class="mirror-card">
-                    <span class="mirror-pill" style="margin-bottom:6px;">OBJECT LOCK LOGGED</span>
-                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#fff; margin:6px 0;">Retention principles recorded.</h3>
-                    <p style="font-size:0.85rem; color:#cbd5e1; margin:0 0 1rem 0;">
-                        ${saved.days} days · ${saved.mode} · ${saved.lockedIds.join(', ')}. Locksmith badge awarded!
+                    <span class="mirror-pill" style="margin-bottom:6px;">LOCK LOGGED</span>
+                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#09090b; margin:6px 0;">Immutability policy documented.</h3>
+                    <p style="font-size:0.85rem; color:#1e293b; margin:0 0 1rem 0;">
+                        ${saved.lockedIds.length} repositories locked in ${saved.mode.toUpperCase()} mode for ${saved.days} days. Rewrite denial verified.
                     </p>
-                    <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(7)">
-                        Proceed to Binder Drop &rarr;
-                    </button>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(7)">
+                            Advance to Stage 7: Binder Drop &rarr;
+                        </button>
+                        <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.replayLockStage()">
+                            Replay Lock
+                        </button>
+                    </div>
                 </div>
             ` : ''}
         `;
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 07: BINDER DROP (EVIDENCE SORTING)
+    // STAGE 07: BINDER DROP (ARTIFACT SORTING VS JUNK REJECTION)
     // --------------------------------------------------------------------------
     function renderStage7() {
         if (!state.intake) return renderStage1();
+        const playing = !state.binder || uiState.replayBinder;
         const saved = state.binder;
-        const playing = !saved?.done || uiState.replayBinder;
-        const remaining = BINDER_ARTIFACTS.filter(item => !uiState.binderPlaced[item.id]);
+        const placedCount = Object.keys(uiState.binderPlaced).length;
+        const remaining = BINDER_ARTIFACTS.filter(a => !uiState.binderPlaced[a.id]);
 
         return `
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 7 · Binder Drop</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">A video is not a control.</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">A training video is not evidence.</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
                     Match each fictional record to the request it actually answers — or throw it out. Training completion, a supplied draft, a review, and an independent check are not the same sentence.
                 </p>
             </div>
 
             ${playing ? `
                 <div class="mirror-card" style="margin-bottom:1.5rem;">
-                    <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:8px;">
+                    <p style="font-size:0.8rem; color:#475569; font-weight:700; margin-bottom:8px;">
                         Tap a record below, then tap the corresponding request slot or "Not Evidence" reject pile:
                     </p>
 
                     <!-- REMAINING ARTIFACTS PILE -->
                     <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:1rem;">
                         ${remaining.map(item => `
-                            <button type="button" class="mirror-btn mirror-btn-ghost" style="padding:6px 12px; font-size:0.75rem; ${uiState.binderSelected === item.id ? 'border-color:#f59e0b; background:rgba(245,158,11,0.2);' : ''}" onclick="window.AcademyWidget.selectBinderItem('${item.id}')">
+                            <button type="button" class="mirror-btn mirror-btn-ghost" style="padding:6px 12px; font-size:0.75rem; ${uiState.binderSelected === item.id ? 'border-color:#7c3aed !important; background:#ede9fe !important; color:#3b0764 !important;' : ''}" onclick="window.AcademyWidget.selectBinderItem('${item.id}')">
                                 ${item.title}
                             </button>
                         `).join('')}
-                        ${remaining.length === 0 ? '<span style="font-size:0.8rem; color:#10b981;">✓ All records sorted into slots!</span>' : ''}
+                        ${remaining.length === 0 ? '<span style="font-size:0.8rem; color:#059669; font-weight:800;">✓ All records sorted into slots!</span>' : ''}
                     </div>
 
                     <!-- SLOTS -->
@@ -1449,91 +1572,96 @@
                             const filled = BINDER_ARTIFACTS.filter(item => uiState.binderPlaced[item.id] === slot.id);
                             return `
                                 <button type="button" class="mirror-card" style="text-align:left; cursor:pointer; padding:10px;" onclick="window.AcademyWidget.assignBinderSlot('${slot.id}')">
-                                    <strong style="color:#fff; font-size:0.85rem; display:block;">${slot.title}</strong>
-                                    <span style="font-size:0.72rem; color:#94a3b8; display:block; margin-bottom:4px;">${slot.detail}</span>
-                                    ${filled.map(f => `<span style="display:inline-block; font-size:0.72rem; color:#f59e0b; background:rgba(245,158,11,0.1); padding:2px 6px; border-radius:4px; margin-top:2px;">${f.title}</span>`).join('')}
+                                    <strong style="color:#09090b; font-size:0.85rem; display:block;">${slot.title}</strong>
+                                    <span style="font-size:0.72rem; color:#475569; display:block; margin-bottom:4px;">${slot.detail}</span>
+                                    ${filled.map(f => `<span style="display:inline-block; font-size:0.72rem; color:#78350f; background:#fef3c7; border:1px solid #f59e0b; padding:2px 6px; border-radius:4px; margin-top:2px;">${f.title}</span>`).join('')}
                                 </button>
                             `;
                         }).join('')}
-                        <button type="button" class="mirror-card" style="text-align:left; cursor:pointer; padding:10px; border-color:rgba(239,68,68,0.4);" onclick="window.AcademyWidget.assignBinderSlot('reject')">
-                            <strong style="color:#ef4444; font-size:0.85rem; display:block;">🗑️ Not Evidence Pile</strong>
-                            <span style="font-size:0.72rem; color:#94a3b8; display:block; margin-bottom:4px;">Training trivia, old screenshots, moods, job success emails.</span>
-                            ${BINDER_ARTIFACTS.filter(item => uiState.binderPlaced[item.id] === 'reject').map(f => `<span style="display:inline-block; font-size:0.72rem; color:#ef4444; background:rgba(239,68,68,0.1); padding:2px 6px; border-radius:4px; margin-top:2px;">${f.title}</span>`).join('')}
-                        </button>
                     </div>
 
-                    <div style="display:flex; gap:10px;">
-                        <button type="button" class="mirror-btn mirror-btn-amber" ${remaining.length > 0 ? 'disabled' : ''} onclick="window.AcademyWidget.logBinderSort()">
-                            Log the Sort &rarr;
+                    ${placedCount >= BINDER_ARTIFACTS.length ? `
+                        <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%;" onclick="window.AcademyWidget.logBinderSort()">
+                            Review Binder Accuracy &rarr;
                         </button>
-                        <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.clearBinderPiles()">
-                            Clear Piles
-                        </button>
-                    </div>
+                    ` : `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:0.75rem; color:#475569; font-weight:700;">Sorted: ${placedCount} of ${BINDER_ARTIFACTS.length} records</span>
+                            <button type="button" class="mirror-btn mirror-btn-ghost" style="padding:4px 10px; font-size:0.72rem;" onclick="window.AcademyWidget.resetBinderPlacements()">
+                                Reset Placements
+                            </button>
+                        </div>
+                    `}
                 </div>
             ` : saved ? `
                 <div class="mirror-card">
                     <span class="mirror-pill" style="margin-bottom:6px;">BINDER SORT LOGGED</span>
-                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#fff; margin:6px 0;">Piles separated.</h3>
-                    <p style="font-size:0.85rem; color:#cbd5e1; margin:0 0 1rem 0;">
-                        ${saved.correct} of ${saved.total} accurately classified. You did not promote a training video or casual Slack chat into audited evidence. Binder Clerk badge awarded!
+                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.2rem; color:#09090b; margin:6px 0;">Evidence classification complete.</h3>
+                    <p style="font-size:0.85rem; color:#1e293b; margin:0 0 1rem 0;">
+                        ${saved.correct} of ${saved.total} records classified accurately into broker-ready slots or discarded as non-evidence.
                     </p>
-                    <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(8)">
-                        Proceed to The Desk (Final Seal) &rarr;
-                    </button>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button type="button" class="mirror-btn mirror-btn-amber" onclick="window.AcademyWidget.goStage(8)">
+                            Advance to Stage 8: The Desk &rarr;
+                        </button>
+                        <button type="button" class="mirror-btn mirror-btn-ghost" onclick="window.AcademyWidget.replayBinderStage()">
+                            Replay Binder Drop
+                        </button>
+                    </div>
                 </div>
             ` : ''}
         `;
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 08: THE DESK (EVIDENCE MANIFEST & LOCAL SHA-256 SEAL)
+    // STAGE 08: THE DESK (EVIDENCE MANIFEST, OWNERS & SHA-256 SEAL)
     // --------------------------------------------------------------------------
     function renderStage8() {
         if (!state.intake) return renderStage1();
+        const company = state.intake.company || "Company";
         const xp = totalXp(state);
         const earned = badges(state);
-        const missions = state.intake && state.fish?.done && state.vault?.done && state.wire?.done && state.key?.done && state.lock?.done && state.binder?.done;
-        const ownersNamed = state.rows.every(r => r.owner && r.owner.trim().length > 1);
-        const canSeal = Boolean(missions && ownersNamed && state.ackTraining && state.ackHuman && !state.seal);
-        const company = state.intake?.company || 'Your Company';
+        const missions = [state.fish, state.vault, state.wire, state.key, state.lock, state.binder].every(Boolean);
+        const ownersNamed = state.rows.every(r => (r.owner || "").trim().length > 0);
+        const canSeal = missions && state.ackTraining && state.ackHuman && ownersNamed;
 
         return `
             ${renderHeader()}
             <div style="margin-bottom:1rem;">
                 <span class="mirror-pill" style="margin-bottom:6px;">Stage 8 · The Desk</span>
-                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#fff;">Training on one side. Evidence on the other.</h3>
-                <p style="font-size:0.85rem; color:#94a3b8; margin:0 0 1rem 0;">
-                    The checklist is the product. A seal records this manifest on this device after you confirm, out loud in the two boxes, what it is not.
+                <h3 style="font-family:'Orbitron', sans-serif; font-size:1.3rem; margin:6px 0; color:#09090b;">Owners, dates, and plain speech.</h3>
+                <p style="font-size:0.85rem; color:#475569; margin:0 0 1rem 0;">
+                    Assign a human owner to each baseline operational control. The SHA-256 seal proves this training manifest was not edited after issuance. It does not certify that the controls exist in production.
                 </p>
             </div>
 
             <div class="mirror-card" style="margin-bottom:1.5rem;">
-                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:1.25rem; text-align:center;">
-                    <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px;">
-                        <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">TOTAL XP</span>
-                        <strong style="display:block; font-family:'Orbitron', sans-serif; font-size:1.3rem; color:#f59e0b;">${xp}</strong>
+                <!-- STATS STRIP -->
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:1.25rem; text-align:center;">
+                    <div style="background:rgba(255,255,255,0.7); border:1.5px solid #cbd5e1; padding:10px; border-radius:8px;">
+                        <span style="font-size:0.7rem; color:#475569; font-weight:700; text-transform:uppercase;">TOTAL XP</span>
+                        <strong style="display:block; font-family:'Orbitron', sans-serif; font-size:1.3rem; color:#b45309;">${xp}</strong>
                     </div>
-                    <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px;">
-                        <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">MISSIONS</span>
-                        <strong style="display:block; font-family:'Orbitron', sans-serif; font-size:1.1rem; color:#fff;">${missions ? '8 OF 8' : 'STILL OPEN'}</strong>
+                    <div style="background:rgba(255,255,255,0.7); border:1.5px solid #cbd5e1; padding:10px; border-radius:8px;">
+                        <span style="font-size:0.7rem; color:#475569; font-weight:700; text-transform:uppercase;">MISSIONS</span>
+                        <strong style="display:block; font-family:'Orbitron', sans-serif; font-size:1.1rem; color:#09090b;">${missions ? '8 OF 8' : 'STILL OPEN'}</strong>
                     </div>
-                    <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px;">
-                        <span style="font-size:0.7rem; color:#94a3b8; text-transform:uppercase;">BADGES</span>
-                        <strong style="display:block; font-family:'Orbitron', sans-serif; font-size:1.3rem; color:#a855f7;">${earned.length}</strong>
+                    <div style="background:rgba(255,255,255,0.7); border:1.5px solid #cbd5e1; padding:10px; border-radius:8px;">
+                        <span style="font-size:0.7rem; color:#475569; font-weight:700; text-transform:uppercase;">BADGES</span>
+                        <strong style="display:block; font-family:'Orbitron', sans-serif; font-size:1.3rem; color:#6b21a8;">${earned.length}</strong>
                     </div>
                 </div>
 
                 <!-- BADGES SHOWCASE -->
                 ${earned.length ? `
                     <div style="margin-bottom:1.25rem;">
-                        <span style="font-size:0.75rem; font-family:'Share Tech Mono', monospace; color:#f59e0b; display:block; margin-bottom:6px; text-transform:uppercase;">
+                        <span style="font-size:0.75rem; font-family:'Share Tech Mono', monospace; color:#b45309; font-weight:800; display:block; margin-bottom:6px; text-transform:uppercase;">
                             EARNED CREDENTIAL BADGES
                         </span>
                         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:6px;">
                             ${earned.map(b => `
-                                <div style="padding:6px 10px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.3); border-radius:6px; font-size:0.75rem;">
-                                    <strong style="color:#f59e0b;">${b.name}:</strong> <span style="color:#cbd5e1;">${b.detail}</span>
+                                <div style="padding:6px 10px; background:#fef3c7; border:1.5px solid #f59e0b; border-radius:6px; font-size:0.75rem;">
+                                    <strong style="color:#78350f;">${b.name}:</strong> <span style="color:#1e293b;">${b.detail}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -1542,15 +1670,15 @@
 
                 <!-- EVIDENCE MANIFEST TABLE -->
                 <div style="margin-bottom:1.25rem;">
-                    <span style="font-size:0.75rem; font-family:'Share Tech Mono', monospace; color:#38bdf8; display:block; margin-bottom:6px; text-transform:uppercase;">
+                    <span style="font-size:0.75rem; font-family:'Share Tech Mono', monospace; color:#0284c7; font-weight:800; display:block; margin-bottom:6px; text-transform:uppercase;">
                         OPERATIONAL EVIDENCE MANIFEST (ASSIGN OWNERS)
                     </span>
                     <div style="display:flex; flex-direction:column; gap:8px;">
                         ${state.rows.map(row => `
-                            <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px;">
+                            <div style="background:rgba(255,255,255,0.75); border:1.5px solid #cbd5e1; border-radius:8px; padding:10px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                                    <strong style="color:#fff; font-size:0.82rem;">Stage ${row.stage} · ${row.control}</strong>
-                                    <select style="background:#090d16; border:1px solid rgba(255,255,255,0.2); color:#f59e0b; font-size:0.75rem; border-radius:4px; padding:2px 6px;" onchange="window.AcademyWidget.updateRowStatus('${row.id}', this.value)">
+                                    <strong style="color:#09090b; font-size:0.82rem;">Stage ${row.stage} · ${row.control}</strong>
+                                    <select style="background:#ffffff; border:1.5px solid #cbd5e1; color:#3b0764; font-weight:700; font-size:0.75rem; border-radius:4px; padding:2px 6px;" onchange="window.AcademyWidget.updateRowStatus('${row.id}', this.value)">
                                         <option value="missing" ${row.status === 'missing' ? 'selected' : ''}>Missing</option>
                                         <option value="training" ${row.status === 'training' ? 'selected' : ''}>Training Done</option>
                                         <option value="supplied" ${row.status === 'supplied' ? 'selected' : ''}>Draft Supplied</option>
@@ -1558,10 +1686,10 @@
                                         <option value="verified" ${row.status === 'verified' ? 'selected' : ''}>Independently Verified</option>
                                     </select>
                                 </div>
-                                <p style="font-size:0.78rem; color:#cbd5e1; margin:0 0 6px 0;">${row.request}</p>
+                                <p style="font-size:0.78rem; color:#1e293b; margin:0 0 6px 0;">${row.request}</p>
                                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-                                    <input type="text" placeholder="Owner (name, not shared inbox)" value="${row.owner}" style="background:#000; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:0.75rem; padding:4px 8px; border-radius:4px;" onchange="window.AcademyWidget.updateRowOwner('${row.id}', this.value)" />
-                                    <input type="date" value="${row.reviewDate}" style="background:#000; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:0.75rem; padding:4px 8px; border-radius:4px;" onchange="window.AcademyWidget.updateRowDate('${row.id}', this.value)" />
+                                    <input type="text" placeholder="Owner (name, not shared inbox)" value="${row.owner}" style="background:#ffffff; border:1.5px solid #cbd5e1; color:#09090b; font-size:0.75rem; padding:4px 8px; border-radius:4px;" onchange="window.AcademyWidget.updateRowOwner('${row.id}', this.value)" />
+                                    <input type="date" value="${row.reviewDate}" style="background:#ffffff; border:1.5px solid #cbd5e1; color:#09090b; font-size:0.75rem; padding:4px 8px; border-radius:4px;" onchange="window.AcademyWidget.updateRowDate('${row.id}', this.value)" />
                                 </div>
                             </div>
                         `).join('')}
@@ -1569,32 +1697,32 @@
                 </div>
 
                 <!-- LEGAL ACKNOWLEDGMENT CHECKBOXES -->
-                <div style="background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px; margin-bottom:1.25rem;">
-                    <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#cbd5e1; margin-bottom:8px; cursor:pointer;">
-                        <input type="checkbox" ${state.ackTraining ? 'checked' : ''} onchange="window.AcademyWidget.setAck('ackTraining', this.checked)" style="margin-top:2px; accent-color:#f59e0b;" />
+                <div style="background:rgba(255,255,255,0.7); border:1.5px solid #cbd5e1; border-radius:8px; padding:12px; margin-bottom:1.25rem;">
+                    <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#1e293b; margin-bottom:8px; cursor:pointer;">
+                        <input type="checkbox" ${state.ackTraining ? 'checked' : ''} onchange="window.AcademyWidget.setAck('ackTraining', this.checked)" style="margin-top:2px; accent-color:#7c3aed;" />
                         <span>This seal is a BURN-1 training record. It is not an insurance determination, a compliance certification, or proof that a control works in production.</span>
                     </label>
-                    <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#cbd5e1; cursor:pointer;">
-                        <input type="checkbox" ${state.ackHuman ? 'checked' : ''} onchange="window.AcademyWidget.setAck('ackHuman', this.checked)" style="margin-top:2px; accent-color:#f59e0b;" />
+                    <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#1e293b; cursor:pointer;">
+                        <input type="checkbox" ${state.ackHuman ? 'checked' : ''} onchange="window.AcademyWidget.setAck('ackHuman', this.checked)" style="margin-top:2px; accent-color:#7c3aed;" />
                         <span>A human reviews this before anyone treats it as evidence for a carrier, an auditor, or the Metro Plaza Directory. The directory is not updated from this page.</span>
                     </label>
                 </div>
 
-                ${!ownersNamed ? `<p style="font-size:0.78rem; color:#f59e0b; margin-bottom:8px;">⚠️ Name an owner on every row above before sealing.</p>` : ''}
+                ${!ownersNamed ? `<p style="font-size:0.78rem; color:#b45309; font-weight:800; margin-bottom:8px;">⚠️ Name an owner on every row above before sealing.</p>` : ''}
 
                 <button type="button" class="mirror-btn mirror-btn-amber" style="width:100%; margin-bottom:1rem;" ${!canSeal ? 'disabled' : ''} onclick="window.AcademyWidget.commitManifestSeal()">
-                    ${state.seal ? '✓ Training Seal Minted on this Device' : 'Seal this Training Record & Mint Hash'}
+                    ${state.seal ? '✓ BURN-1 Academy Seal Minted on this Device' : 'Seal this Training Record & Mint Hash'}
                 </button>
 
                 <!-- SEAL DISPLAY IF GENERATED -->
                 ${state.seal ? `
-                    <div style="background:rgba(245,158,11,0.08); border:1px solid #f59e0b; border-radius:8px; padding:1rem; margin-bottom:1.25rem;">
-                        <span class="mirror-pill" style="margin-bottom:6px;">SHA-256 SEAL ISSUED FOR ${company}</span>
-                        <div style="font-family:'Share Tech Mono', monospace; font-size:0.75rem; color:#f59e0b; word-break:break-all; margin:6px 0;">
+                    <div style="background:#fef3c7; border:2px solid #f59e0b; border-radius:8px; padding:1rem; margin-bottom:1.25rem;">
+                        <span class="mirror-pill" style="margin-bottom:6px;">BURN-1 ACADEMY SEAL ISSUED FOR ${company}</span>
+                        <div style="font-family:'Share Tech Mono', monospace; font-size:0.75rem; color:#78350f; font-weight:800; word-break:break-all; margin:6px 0;">
                             [SHA-256 HASH]: ${state.seal.hash}
                         </div>
-                        <span style="font-size:0.72rem; color:#94a3b8; display:block;">Sealed: ${state.seal.at} · Not Published to Directory</span>
-                        <p style="font-size:0.78rem; color:#cbd5e1; line-height:1.45; margin:8px 0 0 0;">
+                        <span style="font-size:0.72rem; color:#475569; font-weight:700; display:block;">Sealed: ${state.seal.at} · Client-Side Verified</span>
+                        <p style="font-size:0.78rem; color:#1e293b; line-height:1.45; margin:8px 0 0 0;">
                             Re-verify by hashing the manifest with any SHA-256 tool. A match proves this record was not edited. It does not prove the security controls exist in production.
                         </p>
                     </div>
@@ -1610,9 +1738,9 @@
                 </div>
 
                 <!-- EVIDENCE WORKSPACE & SURFACE AUDIT ASK-BUTTONS -->
-                <div style="border-top:1px solid rgba(255,255,255,0.12); padding-top:1.25rem;">
-                    <h4 style="font-family:'Orbitron', sans-serif; font-size:0.95rem; color:#fff; margin:0 0 6px 0;">Evidence Workspace & Surface Inspection</h4>
-                    <p style="font-size:0.8rem; color:#cbd5e1; line-height:1.5; margin:0 0 10px 0;">
+                <div style="border-top:1.5px solid #cbd5e1; padding-top:1.25rem;">
+                    <h4 style="font-family:'Orbitron', sans-serif; font-size:0.95rem; color:#09090b; font-weight:800; margin:0 0 6px 0;">Evidence Workspace & Surface Inspection</h4>
+                    <p style="font-size:0.8rem; color:#1e293b; line-height:1.5; margin:0 0 10px 0;">
                         The missions stay free. This device already holds the draft. A workspace is the paid layer: shared owners, review history, and a brief you can hand a broker at renewal. It still is not a warranty, and it does not set your premium.
                     </p>
                     <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
@@ -1623,7 +1751,7 @@
                             🔍 Ask About a Surface Audit
                         </a>
                     </div>
-                    <span style="font-size:0.72rem; color:#94a3b8; display:block;">
+                    <span style="font-size:0.72rem; color:#475569; display:block;">
                         The public store lists a paid surface audit as a human look at the public perimeter. It does not promise a discount. Underwriters ask about MFA, tested backups, and out-of-band payment checks in their own words — read your policy with your broker.
                     </span>
                 </div>
@@ -1856,67 +1984,93 @@
             this.render();
         },
 
-        // Stage 4 Actions
-        setWirePhase: function(p) {
-            uiState.wirePhase = p;
+        replayVaultStage: function() {
+            uiState.replayVault = true;
+            uiState.vaultPhase = 'pick';
+            uiState.vaultLocked = [];
+            uiState.vaultOrder = [];
+            uiState.vaultRestore = false;
             this.render();
         },
 
-        submitWireDocket: function(form) {
-            const formData = new FormData(form);
-            const cb = formData.get('callback');
-            const approver = (formData.get('approver') || '').toString().trim();
-            const kit = wireKit(state.intake);
+        // Stage 4 Actions
+        holdWirePayment: function() {
+            uiState.wirePhase = 'hold';
+            this.render();
+        },
 
-            if (cb === 'email') {
+        sendWirePayment: function() {
+            uiState.wirePhase = 'sent';
+            uiState.wireMiss = false;
+            this.render();
+        },
+
+        setWirePhoneChoice: function(choice) {
+            uiState.wireCallback = choice;
+        },
+
+        setWireApprover: function(name) {
+            uiState.wireApprover = name;
+        },
+
+        completeWireHold: function() {
+            if (uiState.wireCallback === 'email') {
+                uiState.wirePhase = 'sent';
                 uiState.wireMiss = true;
                 this.render();
                 return;
             }
 
-            uiState.wireMiss = false;
-            const label = cb === 'office' ? `Known office ${kit.knownPhone}` : `Bank callback ${kit.bankPhone}`;
-            const xp = approver.length > 1 ? 150 : 80;
-
+            const approver = uiState.wireApprover.trim() || "Controller";
             state.wire = {
                 done: true,
-                xp,
+                xp: 150,
                 held: true,
                 usedEmailPhone: false,
-                approver,
-                callbackLabel: label
+                approver
             };
-
-            const docketDoc = `BURN-1 TRAINING DOCKET // OUT-OF-BAND PAYMENT CHANGE
-RECORD ID: WIRE-${Math.floor(100000 + Math.random() * 900000)}
-Company: ${state.intake.company}
-Vendor: ${kit.vendor}
-Amount: ${kit.amount}
-Callback Line: ${label}
-Authorized Signer: ${approver}
-Date: ${new Date().toISOString()}
-
-NOTICE: This is a BURN-1 training template. It is not an official carrier form.
-Do not submit this docket as an underwriter certificate.
-`;
-            downloadFile(`BURN-1-wire-docket-${companySlug(state.intake.company)}.txt`, docketDoc);
             uiState.replayWire = false;
             persistState();
             this.render();
         },
 
+        resetWireDrill: function() {
+            uiState.wirePhase = 'read';
+            uiState.wireCallback = null;
+            uiState.wireApprover = '';
+            uiState.wireMiss = false;
+            this.render();
+        },
+
+        replayWireStage: function() {
+            uiState.replayWire = true;
+            this.resetWireDrill();
+        },
+
         // Stage 5 Actions
-        setKeyPhase: function(p) {
-            uiState.keyPhase = p;
+        chooseKeyUrl: function(type) {
+            if (type === 'fake') {
+                uiState.keyPhase = 'bounced';
+            } else {
+                uiState.keyPhase = 'enrolled';
+            }
             this.render();
         },
 
-        bounceKey: function() {
-            uiState.keyBounced = true;
+        resetKeyPhase: function() {
+            uiState.keyPhase = 'choose';
             this.render();
         },
 
-        finishKey: function(askedSpare) {
+        refuseChatCode: function(refused) {
+            if (!refused) {
+                alert("Security Violation: You pasted the verification code into chat. The simulated attacker hijacked your session.");
+                uiState.keyPhase = 'choose';
+                this.render();
+                return;
+            }
+
+            const askedSpare = confirm("Would you also like to register a spare backup security key in the office fireproof safe?");
             const xp = askedSpare ? 160 : 120;
             state.key = {
                 done: true,
@@ -1927,6 +2081,12 @@ Do not submit this docket as an underwriter certificate.
             };
             uiState.replayKey = false;
             persistState();
+            this.render();
+        },
+
+        replayKeyStage: function() {
+            uiState.replayKey = true;
+            uiState.keyPhase = 'choose';
             this.render();
         },
 
@@ -1979,6 +2139,13 @@ Do not submit this docket as an underwriter certificate.
             this.render();
         },
 
+        replayLockStage: function() {
+            uiState.replayLock = true;
+            uiState.lockStruck = false;
+            uiState.lockUnderstood = false;
+            this.render();
+        },
+
         // Stage 7 Actions
         selectBinderItem: function(id) {
             uiState.binderSelected = id;
@@ -1992,10 +2159,15 @@ Do not submit this docket as an underwriter certificate.
             this.render();
         },
 
-        clearBinderPiles: function() {
+        resetBinderPlacements: function() {
             uiState.binderPlaced = {};
             uiState.binderSelected = null;
             this.render();
+        },
+
+        replayBinderStage: function() {
+            uiState.replayBinder = true;
+            this.resetBinderPlacements();
         },
 
         logBinderSort: function() {

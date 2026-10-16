@@ -884,7 +884,7 @@
         }
 
         /* SCULPTED METALLIC PILL BUTTONS (UIVERSE AESTHETIC) */
-        html.day-mode button:not(#themeToggleBtn):not(#songToggleBtn):not(.container-btn-swipe),
+        html.day-mode button:not(#themeToggleBtn):not(#songToggleBtn):not(.container-btn-swipe):not(.mirror-btn):not(.stage-nav-pill):not(.mirror-btn-ghost):not(.mirror-btn-amber),
         html.day-mode a.bg-amber-500,
         html.day-mode a.bg-cyan-400,
         html.day-mode a.bg-purple-950,
@@ -900,7 +900,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
 
-        html.day-mode button:not(#themeToggleBtn):not(#songToggleBtn):not(.container-btn-swipe):hover,
+        html.day-mode button:not(#themeToggleBtn):not(#songToggleBtn):not(.container-btn-swipe):not(.mirror-btn):not(.stage-nav-pill):not(.mirror-btn-ghost):not(.mirror-btn-amber):hover,
         html.day-mode a.bg-amber-500:hover,
         html.day-mode a.bg-cyan-400:hover,
         html.day-mode a.bg-purple-950:hover,
@@ -911,6 +911,186 @@
                 0 10px 22px rgba(0, 0, 0, 0.16),
                 inset 0 2px 6px #ffffff !important;
             color: #000000 !important;
+        }
+
+        /* =========================================================
+           GAMIFIED ACADEMY ENGINE // DAY MODE (SILVER GLASS & COOL GREY / PURPLE BUTTONS)
+           ========================================================= */
+        html.day-mode .academy-mirror-root,
+        .academy-mirror-root {
+            background: rgba(255, 255, 255, 0.22) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+            outline: 1px solid rgba(195, 194, 194, 0.35) !important;
+            border-radius: 1.5rem !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.9) !important;
+            color: #09090b !important;
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            padding: 1.5rem;
+            max-width: 1040px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .academy-mirror-root h1,
+        .academy-mirror-root h2,
+        .academy-mirror-root h3,
+        .academy-mirror-root h4 {
+            color: #09090b !important;
+            font-weight: 800 !important;
+            text-shadow: none !important;
+        }
+
+        .academy-mirror-root p,
+        .academy-mirror-root label,
+        .academy-mirror-root li {
+            color: #1e293b !important;
+            font-weight: 600 !important;
+            text-shadow: none !important;
+        }
+
+        .academy-mirror-root strong,
+        .academy-mirror-root b {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+
+        /* LIGHT COOL GREY BUTTONS WITH DARK PURPLE LETTERS */
+        html.day-mode .academy-mirror-root .mirror-btn,
+        .academy-mirror-root .mirror-btn {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 55%, #cbd5e1 100%) !important;
+            background-image: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 55%, #cbd5e1 100%) !important;
+            color: #4a0e4e !important;
+            font-family: 'Orbitron', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: 0.82rem !important;
+            padding: 10px 22px !important;
+            border-radius: 0.75rem !important;
+            border: 1.5px solid #ffffff !important;
+            cursor: pointer !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.6px !important;
+            transition: all 0.25s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            box-shadow: 0 4px 12px rgba(74, 14, 78, 0.12), inset 0 1px 2px #ffffff !important;
+            transform: none !important;
+            text-decoration: none !important;
+        }
+
+        html.day-mode .academy-mirror-root .mirror-btn:hover:not(:disabled),
+        .academy-mirror-root .mirror-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ffffff 0%, #ede9fe 55%, #ddd6fe 100%) !important;
+            background-image: linear-gradient(135deg, #ffffff 0%, #ede9fe 55%, #ddd6fe 100%) !important;
+            color: #3b0764 !important;
+            border-color: #c084fc !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.25), inset 0 1px 2px #ffffff !important;
+            filter: none !important;
+        }
+
+        html.day-mode .academy-mirror-root .mirror-btn-amber,
+        .academy-mirror-root .mirror-btn-amber {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%) !important;
+            background-image: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%) !important;
+            color: #3b0764 !important;
+            border: 1.5px solid #ffffff !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35), inset 0 1px 2px #ffffff !important;
+        }
+
+        html.day-mode .academy-mirror-root .mirror-btn-amber:hover:not(:disabled),
+        .academy-mirror-root .mirror-btn-amber:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ffffff 0%, #fef3c7 50%, #fde68a 100%) !important;
+            background-image: linear-gradient(135deg, #ffffff 0%, #fef3c7 50%, #fde68a 100%) !important;
+            color: #2e1065 !important;
+            box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45), inset 0 1px 2px #ffffff !important;
+        }
+
+        html.day-mode .academy-mirror-root .mirror-btn-ghost,
+        .academy-mirror-root .mirror-btn-ghost {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+            background-image: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+            color: #4a0e4e !important;
+            border: 1.5px solid #cbd5e1 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        html.day-mode .academy-mirror-root .mirror-btn-ghost:hover:not(:disabled),
+        .academy-mirror-root .mirror-btn-ghost:hover:not(:disabled) {
+            background: #ede9fe !important;
+            background-image: none !important;
+            color: #2e1065 !important;
+            border-color: #a855f7 !important;
+        }
+
+        /* MIRROR CARDS */
+        html.day-mode .academy-mirror-root .mirror-card,
+        .academy-mirror-root .mirror-card {
+            background: rgba(255, 255, 255, 0.45) !important;
+            backdrop-filter: blur(6px) !important;
+            -webkit-backdrop-filter: blur(6px) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+            border-radius: 1rem !important;
+            padding: 1.25rem !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04), inset 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+            color: #09090b !important;
+            transition: all 0.25s ease !important;
+        }
+
+        html.day-mode .academy-mirror-root .mirror-card.active,
+        .academy-mirror-root .mirror-card.active {
+            border-color: #8b5cf6 !important;
+            background: rgba(245, 243, 255, 0.8) !important;
+            box-shadow: 0 0 16px rgba(139, 92, 246, 0.25), inset 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+        }
+
+        /* STAGE NAV PILLS */
+        html.day-mode .academy-mirror-root .stage-nav-pill,
+        .academy-mirror-root .stage-nav-pill {
+            min-height: 42px !important;
+            padding: 6px 14px !important;
+            border-radius: 9999px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+            color: #475569 !important;
+            font-size: 0.78rem !important;
+            font-family: 'Orbitron', sans-serif !important;
+            white-space: nowrap !important;
+            cursor: pointer !important;
+            transition: all 0.2s !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+            transform: none !important;
+        }
+
+        html.day-mode .academy-mirror-root .stage-nav-pill:hover:not(:disabled),
+        .academy-mirror-root .stage-nav-pill:hover:not(:disabled) {
+            border-color: #7c3aed !important;
+            color: #3b0764 !important;
+            background: #f5f3ff !important;
+        }
+
+        html.day-mode .academy-mirror-root .stage-nav-pill.active,
+        .academy-mirror-root .stage-nav-pill.active {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%) !important;
+            color: #3b0764 !important;
+            border-color: #7c3aed !important;
+            font-weight: 800 !important;
+            box-shadow: 0 2px 10px rgba(124, 58, 237, 0.25) !important;
+        }
+
+        html.day-mode .academy-mirror-root .stage-nav-pill.done,
+        .academy-mirror-root .stage-nav-pill.done {
+            border-color: #10b981 !important;
+            color: #047857 !important;
+            background: #ecfdf5 !important;
+            font-weight: 700 !important;
         }
 
         html.day-mode button:active,
@@ -1486,14 +1666,14 @@
                             <div class="flex items-center gap-3 mb-2.5 pb-2 border-b border-neutral-800">
                                 <img src="assets/burn1logoBlkWhiteDocs.jpg" alt="Evidence Dossier" class="w-10 h-10 rounded border border-purple-400 object-cover">
                                 <div>
-                                    <div class="font-cyber text-white font-bold text-[11px] uppercase">EVIDENCE BINDER PROOF</div>
-                                    <div class="text-[9px] text-amber-400">DARDEN-PROOF-958405</div>
+                                    <div class="font-cyber text-white font-bold text-[11px] uppercase">BURN-1 ACADEMY SEAL PROOF</div>
+                                    <div class="text-[9px] text-amber-400">BURN1-SEAL-958405</div>
                                 </div>
                             </div>
                             <p class="text-[10px] text-slate-300 mb-2 leading-relaxed">
                                 Verified cryptographic attestation package ready for underwriter submission.
                             </p>
-                            <a href="assets/Cyber_Insurance_Evidence_DARDEN-PROOF-958405.txt" download class="w-full py-2 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-400 text-purple-200 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all">
+                            <a href="assets/Cyber_Insurance_Evidence_BURN1-SEAL-958405.txt" download class="w-full py-2 rounded-lg bg-purple-950 hover:bg-purple-900 border border-purple-400 text-purple-200 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all">
                                 <i class="fa-solid fa-file-arrow-down text-amber-400"></i> DOWNLOAD EVIDENCE TXT
                             </a>
                         </div>
