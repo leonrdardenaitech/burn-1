@@ -138,6 +138,10 @@
       "destination": "/yelle.html"
     },
     {
+      "source": "/yella",
+      "destination": "/yelle.html"
+    },
+    {
       "source": "/helpline",
       "destination": "/helpline/index.html"
     },
@@ -233,6 +237,16 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "yelle.burn-1.com" }],
+      "destination": "/yelle.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "yella.burn-1.com" }],
+      "destination": "/yelle.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "yella.burn-1.com" }],
       "destination": "/yelle.html"
     },
     {

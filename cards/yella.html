@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YELLE VAULT // Wednesday Drop-Off & Ratification Hub</title>
+    <meta name="description" content="Yelle Vault: Wednesday Drop-Off, Bilateral MOU & Mutual NDA Ratification, Executive Video Preview, Locker Room Board, and Threat Intel.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700;800;900&family=Permanent+Marker&family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Space+Grotesk:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bark-deep: #160f0b;
+            --bark-wood: #2c1a12;
+            --bark-border: #442a1c;
+            --forest-moss: #0d1b11;
+            --forest-mid: #1d331d;
+            --tan-kraft: #f5ddb7;
+            --tan-card: #eed8b6;
+            --tan-border: #181818;
+            --text-dark: #181818;
+            --sky-blue: #38bdf8;
+            --purple-cyber: #a855f7;
+            --leaf-1: #7B9B3A;
+            --leaf-2: #556729;
+            --leaf-3: #3C4819;
+        }
+
+        body {
+            background-color: var(--bark-deep);
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* Earthy atmospheric background: sky zenith glow down to deep rich soil */
+            background-image: 
+                radial-gradient(ellipse 90% 40% at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 70%),
+                radial-gradient(circle at 15% 30%, rgba(123, 155, 58, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 65%, rgba(44, 26, 18, 0.5) 0%, transparent 60%),
+                linear-gradient(180deg, #13171f 0%, var(--forest-moss) 40%, var(--bark-deep) 100%);
+            background-attachment: fixed;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+        .marker { font-family: 'Permanent Marker', cursive; }
+        .vault-font { font-family: 'Cinzel', serif; }
+
+        /* Chunky Brutalist Tan Card */
+        .brutalist-card {
+            background: var(--tan-kraft);
+            color: var(--text-dark);
+            border: 3px solid #181818;
+            border-radius: 12px;
+            box-shadow: 6px 6px 0px #181818;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .brutalist-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 9px 9px 0px #181818;
+        }
+
+        /* Dark Brutalist Panel */
+        .brutalist-dark {
+            background: #11161d;
+            border: 3px solid #2d3748;
+            border-radius: 14px;
+            box-shadow: 6px 6px 0px #090c10;
+        }
+
+        /* Tree Trunk Vertical Borders */
+        .tree-trunk-left {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 14px;
+            background: repeating-linear-gradient(
+                180deg,
+                #3d2314 0px,
+                #27160d 40px,
+                #4e2e1a 80px,
+                #27160d 120px
+            );
+            border-right: 2px solid #5d3822;
+            z-index: 40;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.6);
+        }
+
+        .tree-trunk-right {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 14px;
+            background: repeating-linear-gradient(
+                180deg,
+                #3d2314 0px,
+                #27160d 40px,
+                #4e2e1a 80px,
+                #27160d 120px
+            );
+            border-left: 2px solid #5d3822;
+            z-index: 40;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.6);
+        }
+
+        /* Base Soil & Grass Footer Border */
+        .grass-footer {
+            background: linear-gradient(180deg, transparent 0%, #172712 35%, #1f140e 100%);
+            border-top: 4px solid #3c5421;
+        }
+
+        /* ==========================================================================
+           JACK-IN-THE-BOX BUTTON MECHANIC (USER SUPPLIED + CUSTOM ENHANCEMENTS)
+           ========================================================================== */
+        button.jitb-btn, a.jitb-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 35px;
+            background: #f5ddb7;
+            font-size: 16px;
+            font-weight: 900;
+            color: #181818;
+            border: 2px solid #181818;
+            border-radius: 8px;
+            box-shadow: 3px 3px 0px #181818, inset 2px 2px 8px #ffffffb0;
+            transition: all .3s ease-in-out;
+            cursor: pointer;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        button.jitb-btn:hover, a.jitb-btn:hover {
+            padding: 13px 25px;
+            border-radius: 8px 8px 24px 24px;
+            box-shadow: 5px 5px 0px #181818;
+            transform: translateY(-2px);
+        }
+
+        /* 5 Foliage Icons */
+        .icon-1, .icon-2, .icon-3, .icon-4, .icon-5 {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 0px;
+            height: auto;
+            transition: all .5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .icon-1 { z-index: 10; }
+        .icon-2 { z-index: 9; }
+        .icon-3 { z-index: 9; }
+        .icon-4 { z-index: 8; }
+        .icon-5 { z-index: 8; }
+
+        button.jitb-btn:hover .icon-1, a.jitb-btn:hover .icon-1 {
+            top: -240%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 48px;
+            height: auto;
+            animation: inIcon1 1s ease .45s forwards;
+        }
+
+        @keyframes inIcon1 {
+            0% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+            25% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(5deg); }
+            50% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(1deg); }
+            65% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(3deg); }
+            100% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+        }
+
+        button.jitb-btn:hover .icon-2, a.jitb-btn:hover .icon-2 {
+            position: absolute;
+            top: -190%;
+            left: 90%;
+            transform: translate(-50%, 0);
+            width: 68px;
+            height: auto;
+            animation: inIcon2 1s ease .45s forwards;
+        }
+
+        @keyframes inIcon2 {
+            0% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+            35% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(10deg); }
+            50% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(4deg); }
+            80% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(5deg); }
+            100% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+        }
+
+        button.jitb-btn:hover .icon-3, a.jitb-btn:hover .icon-3 {
+            position: absolute;
+            top: -130%;
+            left: 15%;
+            transform: translate(-50%, 0);
+            width: 55px;
+            height: auto;
+            animation: inIcon3 1s ease .45s forwards;
+        }
+
+        @keyframes inIcon3 {
+            0% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+            35% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(-2deg); }
+            100% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+        }
+
+        button.jitb-btn:hover .icon-4, a.jitb-btn:hover .icon-4 {
+            position: absolute;
+            top: -280%;
+            left: 10%;
+            transform: translate(-50%, 0);
+            width: 75px;
+            height: auto;
+            animation: inIcon4 1s ease .45s forwards;
+        }
+
+        @keyframes inIcon4 {
+            0% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+            40% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(-3deg); }
+            100% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+        }
+
+        button.jitb-btn:hover .icon-5, a.jitb-btn:hover .icon-5 {
+            position: absolute;
+            top: -320%;
+            left: 92%;
+            transform: translate(-50%, 0);
+            width: 75px;
+            height: auto;
+            animation: inIcon5 1s ease .45s forwards;
+        }
+
+        @keyframes inIcon5 {
+            0% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+            35% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(-3deg); }
+            100% { transform-origin: 0 100%; transform: translate(-50%, 0) rotate(0deg); }
+        }
+
+        /* Flying Bug / Firefly Orbiting Effect */
+        .flying-bug {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease-in-out;
+            z-index: 20;
+        }
+
+        button.jitb-btn:hover .flying-bug, a.jitb-btn:hover .flying-bug {
+            width: 22px;
+            height: 22px;
+            opacity: 1;
+            animation: bugOrbit 2.4s infinite ease-in-out 0.25s;
+        }
+
+        @keyframes bugOrbit {
+            0% { transform: translate(-60px, -70px) rotate(0deg) scale(0.9); }
+            25% { transform: translate(45px, -110px) rotate(40deg) scale(1.1); }
+            50% { transform: translate(65px, -50px) rotate(-20deg) scale(0.85); }
+            75% { transform: translate(-35px, -100px) rotate(30deg) scale(1.05); }
+            100% { transform: translate(-60px, -70px) rotate(0deg) scale(0.9); }
+        }
+
+        .fil-leaf-1 { fill: #7B9B3A; }
+        .fil-leaf-2 { fill: #556729; fill-rule: nonzero; }
+        .fil-leaf-3 { fill: #556729; }
+        .fil-leaf-4 { fill: #3C4819; }
+        .fil-leaf-5 { fill: #3C4819; }
+
+        /* ==========================================================================
+           PURPLE & BLUE CYBER BADGE POPUP (JACK-IN-THE-BOX VARIANT)
+           ========================================================================== */
+        .btn-cyber-badge {
+            position: relative;
+            background: #181818;
+            color: #f5ddb7;
+            border: 2px solid #a855f7;
+            padding: 13px 30px;
+            font-size: 16px;
+            font-weight: 900;
+            border-radius: 8px;
+            box-shadow: 4px 4px 0px #a855f7;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-cyber-badge:hover {
+            background: #23122c;
+            border-color: #38bdf8;
+            box-shadow: 6px 6px 0px #38bdf8;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .cyber-badge-pop {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, 0) scale(0);
+            opacity: 0;
+            width: 220px;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 30;
+        }
+
+        .btn-cyber-badge:hover .cyber-badge-pop {
+            top: -210%;
+            transform: translate(-50%, 0) scale(1);
+            opacity: 1;
+        }
+
+        /* ==========================================================================
+           LOCKER ROOM CORKBOARD & STICKY NOTES
+           ========================================================================== */
+        .locker-board {
+            background: #231812;
+            background-image: 
+                radial-gradient(#3a271d 15%, transparent 16%),
+                linear-gradient(135deg, #1b120c 0%, #2a1c14 100%);
+            background-size: 16px 16px, auto;
+            border: 4px solid #4a3020;
+            border-radius: 16px;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.8), 8px 8px 0px #110b07;
+            position: relative;
+        }
+
+        .sticky-note {
+            box-shadow: 5px 8px 15px rgba(0,0,0,0.45);
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .sticky-note:hover {
+            transform: scale(1.04) rotate(0deg) !important;
+            box-shadow: 8px 14px 25px rgba(0,0,0,0.6);
+            z-index: 25;
+        }
+
+        .push-pin {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .pin-red { background: radial-gradient(circle at 30% 30%, #ef4444, #991b1b); }
+        .pin-blue { background: radial-gradient(circle at 30% 30%, #38bdf8, #0369a1); }
+        .pin-gold { background: radial-gradient(circle at 30% 30%, #fbbf24, #b45309); }
+        .pin-green { background: radial-gradient(circle at 30% 30%, #4ade80, #15803d); }
+
+        /* Rotating Vault Wheel Lock */
+        .vault-wheel {
+            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .vault-wheel:hover {
+            transform: rotate(180deg);
+        }
+
+        /* Red & Green Brutalist Grade Badges */
+        .grade-badge-a {
+            display: inline-block;
+            background: #15803d;
+            color: #ffffff;
+            border: 2px solid #14532d;
+            font-size: 28px;
+            font-weight: 900;
+            padding: 2px 14px;
+            border-radius: 6px;
+            transform: rotate(-6deg);
+            box-shadow: 3px 3px 0px #052e16;
+        }
+
+        .grade-badge-d {
+            display: inline-block;
+            background: #b91c1c;
+            color: #ffffff;
+            border: 2px solid #7f1d1d;
+            font-size: 28px;
+            font-weight: 900;
+            padding: 2px 14px;
+            border-radius: 6px;
+            transform: rotate(5deg);
+            box-shadow: 3px 3px 0px #450a0a;
+        }
+
+        .grade-badge-b {
+            display: inline-block;
+            background: #0284c7;
+            color: #ffffff;
+            border: 2px solid #0369a1;
+            font-size: 28px;
+            font-weight: 900;
+            padding: 2px 14px;
+            border-radius: 6px;
+            transform: rotate(-3deg);
+            box-shadow: 3px 3px 0px #082f49;
+        }
+
+        /* Verified Ratified Stamp */
+        .ratified-stamp {
+            border: 3px dashed #166534;
+            color: #14532d;
+            background: rgba(34, 197, 94, 0.12);
+            padding: 8px 18px;
+            display: inline-block;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transform: rotate(-2deg);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+        }
+    </style>
+</head>
+<body class="selection:bg-amber-800 selection:text-amber-100 pb-20">
+
+    <!-- Fixed Vertical Tree Trunk Rails (Left & Right) -->
+    <div class="tree-trunk-left hidden md:block"></div>
+    <div class="tree-trunk-right hidden md:block"></div>
+
+    <!-- Top Navigation & Vault Identity Bar -->
+    <header class="border-b-4 border-[#181818] bg-[#160f0b]/95 backdrop-blur-md sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-[#f5ddb7] border-2 border-[#181818] flex items-center justify-center text-[#181818] font-black text-xl shadow-[2px_2px_0px_#181818]">
+                    Y
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="vault-font text-lg font-black tracking-wider text-[#f5ddb7]">YELLE VAULT</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/50">
+                            SEALED &amp; ACTIVE
+                        </span>
+                    </div>
+                    <p class="text-[11px] font-mono text-stone-400">Wednesday Drop-Off &amp; Strategic Ratification Hub</p>
+                </div>
+            </div>
+
+            <!-- Quick Jump Anchor Badges -->
+            <nav class="flex items-center gap-2 text-xs font-mono font-bold">
+                <a href="#ratified-agreements" class="px-3 py-1.5 rounded-lg bg-[#241a14] hover:bg-[#34241b] text-[#f5ddb7] border border-[#442a1c] transition-all">
+                    01. Ratified Legal
+                </a>
+                <a href="#locker-room" class="px-3 py-1.5 rounded-lg bg-[#241a14] hover:bg-[#34241b] text-[#f5ddb7] border border-[#442a1c] transition-all">
+                    02. Locker Board
+                </a>
+                <a href="#video-studio" class="px-3 py-1.5 rounded-lg bg-[#241a14] hover:bg-[#34241b] text-[#f5ddb7] border border-[#442a1c] transition-all">
+                    03. Video Room
+                </a>
+                <a href="#editorial-structure" class="px-3 py-1.5 rounded-lg bg-[#241a14] hover:bg-[#34241b] text-[#f5ddb7] border border-[#442a1c] transition-all">
+                    04. Wednesday Articles
+                </a>
+                <a href="#threat-feed" class="px-3 py-1.5 rounded-lg bg-[#241a14] hover:bg-[#34241b] text-[#f5ddb7] border border-[#442a1c] transition-all">
+                    05. Breach Feed
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 space-y-16">
+
+        <!-- ====================================================================
+             HERO: THE BRUTALIST VAULT WHEEL & WEDNESDAY DROP-OFF MANIFEST
+             ==================================================================== -->
+        <section class="brutalist-card p-6 sm:p-10 relative overflow-hidden">
+            <!-- Sky Blue & Amber Organic Ambient Background Layer -->
+            <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-sky-400/10 blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-emerald-600/10 blur-3xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                
+                <!-- Left 8 Columns: Brutalist Narrative & Stamped Directives -->
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#181818] text-[#f5ddb7] text-xs font-mono font-bold rounded uppercase">
+                        <i class="fa-solid fa-shield-halved text-emerald-400"></i> Wednesday Drop-Off Protocol // Drop #04
+                    </div>
+                    
+                    <h1 class="heading text-3xl sm:text-5xl font-black text-[#181818] uppercase tracking-tight leading-none">
+                        BILATERAL RATIFICATION &amp; PRODUCTION STUDIO
+                    </h1>
+                    
+                    <p class="text-stone-800 text-sm sm:text-base font-semibold leading-relaxed">
+                        Dedicated drop portal for <strong class="text-black font-black">Leon R. Darden (BURN-1)</strong> and <strong class="text-black font-black">Ronyelle (Founder, Anergi)</strong>. All legal agreements are permanently countersigned and ratified on October 15, 2026. Zero passkey friction. Transparent weekly accountability, direct video previews, and Wednesday article blueprints.
+                    </p>
+
+                    <!-- Ratified Quick Proof Badges -->
+                    <div class="pt-2 flex flex-wrap items-center gap-3">
+                        <div class="ratified-stamp">
+                            <i class="fa-solid fa-stamp mr-1"></i> MOU &amp; NDA RATIFIED // OCT 15, 2026
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3 py-2 bg-stone-900 text-stone-200 border-2 border-black rounded-lg text-xs font-mono font-bold shadow-[2px_2px_0px_#181818]">
+                            <i class="fa-solid fa-link text-sky-400"></i> SHA256: 91b0f44e... sealed
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right 4 Columns: Heavy Tactile Vault Wheel Graphic -->
+                <div class="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-[#2c1a12] border-4 border-[#181818] rounded-2xl shadow-[6px_6px_0px_#181818] text-center text-[#f5ddb7]">
+                    <div class="relative group cursor-pointer mb-4">
+                        <!-- SVG Wheel Lock (Interactive 360 Spin on Hover) -->
+                        <svg class="vault-wheel w-36 h-36 drop-shadow-[0_10px_10px_rgba(0,0,0,0.6)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Outer Rim -->
+                            <circle cx="50" cy="50" r="44" stroke="#f5ddb7" stroke-width="6" fill="#1b120c" />
+                            <circle cx="50" cy="50" r="36" stroke="#442a1c" stroke-width="2" />
+                            <!-- Wheel Spokes -->
+                            <line x1="50" y1="6" x2="50" y2="94" stroke="#f5ddb7" stroke-width="5" stroke-linecap="round" />
+                            <line x1="6" y1="50" x2="94" y2="50" stroke="#f5ddb7" stroke-width="5" stroke-linecap="round" />
+                            <line x1="19" y1="19" x2="81" y2="81" stroke="#f5ddb7" stroke-width="4" stroke-linecap="round" />
+                            <line x1="19" y1="81" x2="81" y2="19" stroke="#f5ddb7" stroke-width="4" stroke-linecap="round" />
+                            <!-- Center Hub -->
+                            <circle cx="50" cy="50" r="16" fill="#f5ddb7" stroke="#181818" stroke-width="3" />
+                            <circle cx="50" cy="50" r="6" fill="#181818" />
+                            <!-- Heavy Spoke Handles -->
+                            <circle cx="50" cy="6" r="4" fill="#a855f7" />
+                            <circle cx="50" cy="94" r="4" fill="#a855f7" />
+                            <circle cx="6" cy="50" r="4" fill="#38bdf8" />
+                            <circle cx="94" cy="50" r="4" fill="#38bdf8" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 rounded-full">
+                            <span class="text-[10px] font-mono font-black text-white uppercase tracking-widest bg-black px-2 py-1 rounded">TURN LOCK</span>
+                        </div>
+                    </div>
+                    
+                    <span class="vault-font text-sm font-black tracking-widest text-amber-200 uppercase">HEAVY LOCK 05</span>
+                    <span class="text-[11px] font-mono text-stone-400 mt-1">Wheel Lock Status: <strong class="text-emerald-400">DISENGAGED // UNLOCKED</strong></span>
+                    
+                    <div class="mt-4 pt-4 border-t border-[#442a1c] w-full flex justify-around text-xs font-mono font-bold">
+                        <div>
+                            <div class="text-stone-400 text-[10px]">DROP CYCLE</div>
+                            <div class="text-white">WEDNESDAY</div>
+                        </div>
+                        <div>
+                            <div class="text-stone-400 text-[10px]">NEXT LAUNCH</div>
+                            <div class="text-sky-300">FRIDAY</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             SECTION 01: RATIFIED LEGAL & MUTUAL RATIFICATION STATUS
+             (No Passkeys Needed // Immutable Stamped Status)
+             ==================================================================== -->
+        <section id="ratified-agreements" class="scroll-mt-24 space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-800 pb-3">
+                <div>
+                    <span class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-widest">// LEGAL RATIFICATION ENGINE</span>
+                    <h2 class="heading text-2xl sm:text-3xl font-black text-white uppercase">BILATERAL MOU &amp; MUTUAL NDA (SEALED)</h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded bg-emerald-950 text-emerald-300 text-xs font-mono font-bold border border-emerald-500/40">
+                        <i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> RATIFIED OCT 15, 2026
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- CARD 1: BILATERAL MOU -->
+                <div class="brutalist-card p-6 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 bg-[#181818] text-[#f5ddb7] rounded text-xs font-mono font-black uppercase">
+                                DOC A // BILATERAL MOU
+                            </span>
+                            <span class="ratified-stamp text-[10px] py-0.5 px-2">
+                                SIGNED &amp; SEALED
+                            </span>
+                        </div>
+                        
+                        <h3 class="heading text-xl font-black text-[#181818] uppercase">
+                            Strategic Partnership &amp; Advisory Accord
+                        </h3>
+                        
+                        <p class="text-stone-800 text-xs font-medium leading-relaxed">
+                            Bilateral alliance between BURN-1 (Leon R. Darden) and Anergi (Ronyelle). Confirms non-intrusive automated telemetry and posture scans on Burn-1 side, funneling Tier-3 Penetration Testing and active Incident Response directly to Anergi.
+                        </p>
+
+                        <!-- Signatory Verification Block -->
+                        <div class="bg-[#181818] text-[#f5ddb7] p-3 rounded-lg font-mono text-xs space-y-2 border border-black">
+                            <div class="flex justify-between border-b border-stone-700 pb-1">
+                                <span class="text-stone-400">Leon R. Darden (BURN-1):</span>
+                                <span class="text-emerald-400 font-bold">✓ RATIFIED (Oct 13)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-stone-700 pb-1">
+                                <span class="text-stone-400">Ronyelle (Founder, Anergi):</span>
+                                <span class="text-emerald-400 font-bold">✓ COUNTERSIGNED (Oct 15)</span>
+                            </div>
+                            <div class="flex justify-between pt-0.5 text-[11px]">
+                                <span class="text-stone-500">Digest:</span>
+                                <span class="text-sky-300">SHA256: 7f8a32b1...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jack-in-the-Box Popup Button for MOU Verification -->
+                    <div class="pt-4 flex items-center justify-between gap-4">
+                        <!-- Custom Cyber Jack-in-the-Box Badge Button -->
+                        <button type="button" class="btn-cyber-badge flex-1">
+                            <i class="fa-solid fa-stamp mr-1"></i> Verify MOU Seal
+                            <!-- Pop Up Badge Banner in Purple & Blue Silhouette -->
+                            <div class="cyber-badge-pop bg-[#181818] border-2 border-purple-500 p-4 rounded-xl shadow-[0_15px_30px_rgba(168,85,247,0.4)] text-left">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-sky-400 flex items-center justify-center text-white text-xs">
+                                        <i class="fa-solid fa-award"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-[11px] font-black text-white">MOU RATIFIED</div>
+                                        <div class="text-[9px] font-mono text-stone-400">OCT 15, 2026</div>
+                                    </div>
+                                </div>
+                                <p class="text-[10px] text-stone-300 leading-tight">
+                                    Verified bilateral signatory status recorded. Zero unilateral clauses.
+                                </p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 2: MUTUAL NDA & PATENT DEFENSE -->
+                <div class="brutalist-card p-6 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 bg-[#181818] text-[#f5ddb7] rounded text-xs font-mono font-black uppercase">
+                                DOC B // MUTUAL NDA
+                            </span>
+                            <span class="ratified-stamp text-[10px] py-0.5 px-2">
+                                BILATERAL DEFENSE
+                            </span>
+                        </div>
+                        
+                        <h3 class="heading text-xl font-black text-[#181818] uppercase">
+                            Mutual NDA &amp; R.E.P. Patent Protection
+                        </h3>
+                        
+                        <p class="text-stone-800 text-xs font-medium leading-relaxed">
+                            Bilateral trade-secret and intellectual property covenant. Specifically guards U.S. Patent Application <strong>64/160,289 (R.E.P. Protocol)</strong>, sandbox telemetry, disposable command frameworks, and all Anergi proprietary testing suites.
+                        </p>
+
+                        <!-- Signatory Verification Block -->
+                        <div class="bg-[#181818] text-[#f5ddb7] p-3 rounded-lg font-mono text-xs space-y-2 border border-black">
+                            <div class="flex justify-between border-b border-stone-700 pb-1">
+                                <span class="text-stone-400">Leon R. Darden (BURN-1):</span>
+                                <span class="text-emerald-400 font-bold">✓ RATIFIED (Oct 13)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-stone-700 pb-1">
+                                <span class="text-stone-400">Ronyelle (Founder, Anergi):</span>
+                                <span class="text-emerald-400 font-bold">✓ COUNTERSIGNED (Oct 15)</span>
+                            </div>
+                            <div class="flex justify-between pt-0.5 text-[11px]">
+                                <span class="text-stone-500">Digest:</span>
+                                <span class="text-sky-300">SHA256: 91b0f44e...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jack-in-the-Box Popup Button for NDA Verification -->
+                    <div class="pt-4 flex items-center justify-between gap-4">
+                        <button type="button" class="btn-cyber-badge flex-1">
+                            <i class="fa-solid fa-lock mr-1"></i> Verify Patent Seal
+                            <!-- Pop Up Badge Banner in Purple & Blue Silhouette -->
+                            <div class="cyber-badge-pop bg-[#181818] border-2 border-sky-400 p-4 rounded-xl shadow-[0_15px_30px_rgba(56,189,248,0.4)] text-left">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-400 to-purple-600 flex items-center justify-center text-white text-xs">
+                                        <i class="fa-solid fa-certificate"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-[11px] font-black text-white">PATENT PROTECTED</div>
+                                        <div class="text-[9px] font-mono text-stone-400">APP #64/160,289</div>
+                                    </div>
+                                </div>
+                                <p class="text-[10px] text-stone-300 leading-tight">
+                                    Full reciprocal IP defense active. Signed &amp; ratified bilateral agreement.
+                                </p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             SECTION 02: LOCKER ROOM REVIEW BOARD & STICKY NOTES
+             (Week 1 Grade A, Week 2 Video Grade D, Week 2 Article Grade B,
+              $0 Services Rendered, Next Week Mandate & Friday Launch Target)
+             ==================================================================== -->
+        <section id="locker-room" class="scroll-mt-24 space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-800 pb-3">
+                <div>
+                    <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest">// ACCOUNTABILITY &amp; PERFORMANCE ENGINE</span>
+                    <h2 class="heading text-2xl sm:text-3xl font-black text-white uppercase">LOCKER ROOM REVIEW BOARD</h2>
+                </div>
+                <div class="text-xs font-mono text-stone-400">
+                    Tactical Sticky Notes // Direct First-Person Critiques
+                </div>
+            </div>
+
+            <!-- Authentic Tactile Cork / Blackboard Locker Room Board -->
+            <div class="locker-board p-6 sm:p-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- STICKY NOTE 1: WEEK 1 VIDEO (GRADE A) -->
+                    <div class="sticky-note bg-[#fef08a] text-[#181818] p-5 rounded-lg border-2 border-[#ca8a04] rotate-[-2deg] flex flex-col justify-between h-80">
+                        <div class="push-pin pin-gold"></div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-start pt-2">
+                                <span class="text-[10px] font-mono font-black uppercase text-amber-900 tracking-wider">WEEK 01 VIDEO</span>
+                                <div class="grade-badge-a">A</div>
+                            </div>
+                            <h4 class="marker text-lg leading-tight text-stone-900">Anergi Handshake Master</h4>
+                            <p class="text-xs font-semibold leading-relaxed text-stone-800 pt-1">
+                                Executive polish was locked in. Hook grabbed attention in first 8 seconds. Clean narrative pacing between Leon and Ron. This is our gold standard baseline.
+                            </p>
+                        </div>
+                        <div class="border-t-2 border-dashed border-amber-600/40 pt-2 text-[10px] font-mono font-bold text-amber-950 flex justify-between">
+                            <span>RUNTIME: 1:12</span>
+                            <span class="text-emerald-700 font-black">✓ APPROVED</span>
+                        </div>
+                    </div>
+
+                    <!-- STICKY NOTE 2: WEEK 2 VIDEO (GRADE D - CRITIQUE FIRST-PERSON) -->
+                    <div class="sticky-note bg-[#fecdd3] text-[#181818] p-5 rounded-lg border-2 border-[#e11d48] rotate-[3deg] flex flex-col justify-between h-80">
+                        <div class="push-pin pin-red"></div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-start pt-2">
+                                <span class="text-[10px] font-mono font-black uppercase text-red-950 tracking-wider">WEEK 02 VIDEO</span>
+                                <div class="grade-badge-d">D</div>
+                            </div>
+                            <h4 class="marker text-lg leading-tight text-red-950">S.P.A. Posture Preview</h4>
+                            <p class="text-xs font-bold leading-relaxed text-stone-900 pt-1">
+                                <strong class="text-red-700">First-Person Critique:</strong> Unacceptable drop in polish. We need the YouTube channel properly configured immediately. The vertical phone ratio is broken, and audio leveling is jagged. Reshoot &amp; re-edit required before public launch.
+                            </p>
+                        </div>
+                        <div class="border-t-2 border-dashed border-red-500/40 pt-2 text-[10px] font-mono font-bold text-red-950 flex justify-between">
+                            <span>FIX: YOUTUBE + RATIO</span>
+                            <span class="text-red-700 font-black">✗ REJECTED</span>
+                        </div>
+                    </div>
+
+                    <!-- STICKY NOTE 3: WEEK 2 ARTICLE (GRADE B) -->
+                    <div class="sticky-note bg-[#bae6fd] text-[#181818] p-5 rounded-lg border-2 border-[#0284c7] rotate-[-1.5deg] flex flex-col justify-between h-80">
+                        <div class="push-pin pin-blue"></div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-start pt-2">
+                                <span class="text-[10px] font-mono font-black uppercase text-sky-950 tracking-wider">WEEK 02 ARTICLE</span>
+                                <div class="grade-badge-b">B</div>
+                            </div>
+                            <h4 class="marker text-lg leading-tight text-sky-950">Wednesday Drop #02</h4>
+                            <p class="text-xs font-semibold leading-relaxed text-stone-900 pt-1">
+                                Strong core thesis on invisible perimeter bleed and underwriter evidence. Needs less technical jargon and tighter CFO cost-avoidance framing so C-suite buyers get it immediately.
+                            </p>
+                        </div>
+                        <div class="border-t-2 border-dashed border-sky-600/40 pt-2 text-[10px] font-mono font-bold text-sky-950 flex justify-between">
+                            <span>REVISION: IN PROGRESS</span>
+                            <span class="text-sky-800 font-black">GRADE: B</span>
+                        </div>
+                    </div>
+
+                    <!-- STICKY NOTE 4: MANDATE & FINANCIAL ACCOUNTABILITY -->
+                    <div class="sticky-note bg-[#bbf7d0] text-[#181818] p-5 rounded-lg border-2 border-[#16a34a] rotate-[1.5deg] flex flex-col justify-between h-80">
+                        <div class="push-pin pin-green"></div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-start pt-2">
+                                <span class="text-[10px] font-mono font-black uppercase text-emerald-950 tracking-wider">LEDGER &amp; MANDATE</span>
+                                <span class="px-2 py-0.5 rounded bg-black text-[#bbf7d0] text-xs font-mono font-black">$0 RENDERED</span>
+                            </div>
+                            <h4 class="marker text-lg leading-tight text-emerald-950">Next Week Standard</h4>
+                            <p class="text-xs font-bold leading-relaxed text-stone-900 pt-1">
+                                Services Rendered To Date: <strong>$0.00</strong>. Next week expectation: <strong class="text-emerald-800">A-Grade Video &amp; A-Grade Articles</strong>. Curate all materials with direct partner input. Target: <strong class="text-black">Anergi Handshake Part 2 launch this Friday!</strong>
+                            </p>
+                        </div>
+                        <div class="border-t-2 border-dashed border-emerald-600/40 pt-2 text-[10px] font-mono font-bold text-emerald-950 flex justify-between">
+                            <span>TARGET: FRIDAY</span>
+                            <span class="text-emerald-800 font-black">A-GRADE REQ</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             SECTION 03: EXECUTIVE VIDEO STUDIO & PLAYER ROOM
+             (Anergi Handshake Master, SPA Preview, Phone Vertical Fix)
+             ==================================================================== -->
+        <section id="video-studio" class="scroll-mt-24 space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-800 pb-3">
+                <div>
+                    <span class="text-xs font-mono text-sky-400 font-bold uppercase tracking-widest">// MULTI-FEED PRODUCTION ROOM</span>
+                    <h2 class="heading text-2xl sm:text-3xl font-black text-white uppercase">VIDEO REVIEW &amp; EDITORIAL PLAYLIST</h2>
+                </div>
+                
+                <!-- Video Switcher Buttons -->
+                <div class="flex flex-wrap items-center gap-2 font-mono text-xs font-bold">
+                    <button type="button" onclick="switchVideo('handshake')" id="btn-feed-handshake" class="px-3 py-1.5 rounded-lg bg-[#f5ddb7] text-[#181818] border-2 border-[#181818] shadow-[2px_2px_0px_#181818] transition-all">
+                        01. Handshake (Grade A)
+                    </button>
+                    <button type="button" onclick="switchVideo('spa')" id="btn-feed-spa" class="px-3 py-1.5 rounded-lg bg-[#241a14] text-stone-300 hover:text-white border border-[#442a1c] transition-all">
+                        02. SPA Preview (Grade D)
+                    </button>
+                    <button type="button" onclick="switchVideo('phone')" id="btn-feed-phone" class="px-3 py-1.5 rounded-lg bg-[#241a14] text-stone-300 hover:text-white border border-[#442a1c] transition-all">
+                        03. Phone Fix Feed
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video Player Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left 8 Columns: Master Video Screen -->
+                <div class="lg:col-span-8 brutalist-dark p-4 relative overflow-hidden">
+                    <div class="aspect-video w-full bg-black rounded-lg border-2 border-stone-800 relative flex items-center justify-center overflow-hidden">
+                        <video id="vault-video-elem" class="w-full h-full object-contain" controls preload="metadata" poster="assets/multifactorbadge1.jpg">
+                            <source id="vault-video-source" src="assets/Anergi_Handshake.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+
+                    <!-- Video Vitals Status Bar -->
+                    <div class="mt-4 flex flex-wrap items-center justify-between text-xs font-mono text-stone-400 border-t border-stone-800 pt-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span id="video-title-display" class="font-bold text-white uppercase">Anergi Handshake Master (Week 1)</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span>Status: <strong id="video-grade-display" class="text-emerald-400">GRADE A (APPROVED)</strong></span>
+                            <span>Resolution: <strong>1080p Master</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right 4 Columns: First-Person Feedback & Drop Memo -->
+                <div class="lg:col-span-4 brutalist-card p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-mono font-black uppercase bg-black text-[#f5ddb7] px-2 py-0.5 rounded">
+                            PRODUCER LOG
+                        </span>
+                        <span class="text-xs font-mono font-bold text-stone-600">DIRECTOR NOTES</span>
+                    </div>
+
+                    <h3 class="heading text-xl font-black text-[#181818] uppercase">
+                        Editorial Directives
+                    </h3>
+
+                    <div id="video-notes-content" class="text-xs text-stone-800 space-y-3 font-medium">
+                        <p>
+                            • <strong>Week 1 Handshake:</strong> High-energy dialogue, authentic delivery. Keep this visual pacing for Handshake Part 2.
+                        </p>
+                        <p>
+                            • <strong>Friday Target:</strong> Anergi Handshake Part 2 shoot scheduled. Incorporate joint pentesting referral model and universal assessment portal.
+                        </p>
+                    </div>
+
+                    <!-- Quick Drop Note Input -->
+                    <div class="pt-2 space-y-2 border-t-2 border-[#181818]">
+                        <label class="block text-xs font-mono font-black uppercase text-[#181818]">Drop A Quick Memo For Next Cut:</label>
+                        <textarea id="memo-input" rows="3" placeholder="Enter edit note, YouTube setup reminder, or audio timestamps..." class="w-full bg-[#181818] text-[#f5ddb7] border-2 border-black rounded-lg p-2.5 text-xs font-mono placeholder-stone-500 focus:outline-none"></textarea>
+                        
+                        <button type="button" onclick="submitMemo()" class="w-full py-2 bg-[#181818] hover:bg-stone-900 text-[#f5ddb7] border border-black rounded-lg text-xs font-mono font-black uppercase transition-all shadow-[2px_2px_0px_#ffffff]">
+                            <i class="fa-solid fa-paper-plane mr-1 text-sky-400"></i> Log Review Memo
+                        </button>
+                        <div id="memo-feedback" class="hidden text-[11px] font-mono text-emerald-800 font-bold">
+                            ✓ Note logged to Wednesday production manifest.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             SECTION 04: PROPOSED WEDNESDAY ARTICLE STRUCTURE
+             (Thought Leadership Blueprint // 4-Act Delivery Framework)
+             ==================================================================== -->
+        <section id="editorial-structure" class="scroll-mt-24 space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-800 pb-3">
+                <div>
+                    <span class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-widest">// THOUGHT LEADERSHIP BLUEPRINT</span>
+                    <h2 class="heading text-2xl sm:text-3xl font-black text-white uppercase">WEDNESDAY ARTICLE STRUCTURE</h2>
+                </div>
+                <div class="text-xs font-mono text-stone-400">
+                    4-Act Architectural Framework for Executive Drops
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- ACT I -->
+                <div class="brutalist-card p-6 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-8 h-8 rounded bg-[#181818] text-[#f5ddb7] flex items-center justify-center font-mono font-black text-sm">
+                            01
+                        </div>
+                        <h3 class="heading text-lg font-black text-[#181818] uppercase">
+                            Act I: The Invisible Perimeter Bleed
+                        </h3>
+                        <p class="text-xs font-medium text-stone-800 leading-relaxed">
+                            Expose why annual compliance checkmarks are pure theater. Highlight perimeter drift: expiring TLS certs, accidental open cloud buckets, and orphaned DNS subdomains that hackers weaponize.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t-2 border-[#181818] text-[10px] font-mono font-bold text-stone-700">
+                        AUDIENCE HOOK (0 - 150 WORDS)
+                    </div>
+                </div>
+
+                <!-- ACT II -->
+                <div class="brutalist-card p-6 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-8 h-8 rounded bg-[#181818] text-[#f5ddb7] flex items-center justify-center font-mono font-black text-sm">
+                            02
+                        </div>
+                        <h3 class="heading text-lg font-black text-[#181818] uppercase">
+                            Act II: Real-World Incident Case Study
+                        </h3>
+                        <p class="text-xs font-medium text-stone-800 leading-relaxed">
+                            Tie recent headline breaches (healthcare credential dumps, Snowflake API leakages) directly to dollar liabilities, uninsurable downtime, and denied insurance claims.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t-2 border-[#181818] text-[10px] font-mono font-bold text-stone-700">
+                        CFO RISK CONNECTION (150 - 350 WORDS)
+                    </div>
+                </div>
+
+                <!-- ACT III -->
+                <div class="brutalist-card p-6 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-8 h-8 rounded bg-[#181818] text-[#f5ddb7] flex items-center justify-center font-mono font-black text-sm">
+                            03
+                        </div>
+                        <h3 class="heading text-lg font-black text-[#181818] uppercase">
+                            Act III: Automated Posture vs. Intrusive Scans
+                        </h3>
+                        <p class="text-xs font-medium text-stone-800 leading-relaxed">
+                            Detail the BURN-1 non-agentic outside-in advantage: zero installation footprint, zero cloud churn, complete passive telemetry that maps your exact external footprint in minutes.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t-2 border-[#181818] text-[10px] font-mono font-bold text-stone-700">
+                        TECHNICAL DEFENSE (350 - 550 WORDS)
+                    </div>
+                </div>
+
+                <!-- ACT IV -->
+                <div class="brutalist-card p-6 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-8 h-8 rounded bg-[#181818] text-[#f5ddb7] flex items-center justify-center font-mono font-black text-sm">
+                            04
+                        </div>
+                        <h3 class="heading text-lg font-black text-[#181818] uppercase">
+                            Act IV: The Verification Seal &amp; Underwriter Binder
+                        </h3>
+                        <p class="text-xs font-medium text-stone-800 leading-relaxed">
+                            The call to action: Underwriter-proof Evidence Binders, SHA-256 sealed proof for carrier renewal discounts, and immediate Tier-3 Anergi escalation if active threats are detected.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t-2 border-[#181818] text-[10px] font-mono font-bold text-stone-700">
+                        EXECUTIVE CLOSE (550 - 700 WORDS)
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             SECTION 05: LIVE BREACH TELEMETRY & THREAT NEWS FEED
+             (Real-world perimeter vulnerabilities & quarterly briefing)
+             ==================================================================== -->
+        <section id="threat-feed" class="scroll-mt-24 space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-800 pb-3">
+                <div>
+                    <span class="text-xs font-mono text-red-400 font-bold uppercase tracking-widest">// GLOBAL INCIDENT RADAR</span>
+                    <h2 class="heading text-2xl sm:text-3xl font-black text-white uppercase">LATEST BREACHES &amp; NEWS FEED</h2>
+                </div>
+                <div class="text-xs font-mono text-stone-400">
+                    Real-Time Threat Telemetry &amp; Quarterly Briefing
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- NEWS ITEM 1 -->
+                <div class="brutalist-card p-6 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded bg-red-900 text-red-100 text-[10px] font-mono font-bold uppercase">
+                                CRITICAL EXPOSURE
+                            </span>
+                            <span class="text-[10px] font-mono text-stone-600">OCT 16, 2026</span>
+                        </div>
+                        <h3 class="heading text-base font-black text-[#181818] uppercase">
+                            Public Bucket Credentials In Javascript Source
+                        </h3>
+                        <p class="text-xs font-medium text-stone-800 leading-relaxed">
+                            Over 140 healthcare and fintech web portals caught leaking un-scoped S3 read/write keys in client-side bundle source code. Remediation requires immediate credential rotation and posture auditing.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-[#181818] text-[11px] font-mono text-stone-900 font-bold">
+                        BURN-1 POSTURE CHECK: <strong class="text-emerald-800">DETECTED AT PERIMETER</strong>
+                    </div>
+                </div>
+
+                <!-- NEWS ITEM 2 -->
+                <div class="brutalist-card p-6 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded bg-amber-900 text-amber-100 text-[10px] font-mono font-bold uppercase">
+                                UNDERWRITER ALERT
+                            </span>
+                            <span class="text-[10px] font-mono text-stone-600">OCT 15, 2026</span>
+                        </div>
+                        <h3 class="heading text-base font-black text-[#181818] uppercase">
+                            Carriers Denying Claims For Expired Perimeter TLS
+                        </h3>
+                        <p class="text-xs font-medium text-stone-800 leading-relaxed">
+                            Major cyber-insurance underwriters now enforce strict 30-day proof-of-hygiene clauses. Missing DMARC or SSL certificate lapses during breach discovery nullify payout policies.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-[#181818] text-[11px] font-mono text-stone-900 font-bold">
+                        BURN-1 SOLUTION: <strong class="text-emerald-800">$250 DATED BROKER BINDER</strong>
+                    </div>
+                </div>
+
+                <!-- NEWS ITEM 3: QUARTERLY EXECUTIVE REPORT -->
+                <div class="brutalist-card p-6 flex flex-col justify-between space-y-4 bg-gradient-to-br from-[#f5ddb7] to-[#eed8b6]">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded bg-stone-900 text-stone-100 text-[10px] font-mono font-bold uppercase">
+                                QUARTERLY BRIEFING
+                            </span>
+                            <span class="text-[10px] font-mono text-stone-600">Q4 2026 ROADMAP</span>
+                        </div>
+                        <h3 class="heading text-base font-black text-[#181818] uppercase">
+                            BURN-1 // ANERGI Q4 VELOCITY REPORT
+                        </h3>
+                        <p class="text-xs font-medium text-stone-800 leading-relaxed">
+                            • Universal Assessment ($500 APEA) launched.<br>
+                            • Mender runtime accelerator in test flight.<br>
+                            • Anergi Pentest Escalation pipeline activated.<br>
+                            • Bilateral MOU &amp; Patent covenant ratified Oct 15.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-[#181818] text-[11px] font-mono text-stone-900 font-bold flex justify-between">
+                        <span>BILATERAL STATUS:</span>
+                        <span class="text-emerald-800">100% OPERATIONAL</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             SECTION 06: JACK-IN-THE-BOX SHOWCASE & TACTILE BOTANICAL DEMO
+             (User-Specified Plant Button with 5 SVGs + Orbiting Firefly Bug)
+             ==================================================================== -->
+        <section class="brutalist-card p-6 sm:p-10 space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#181818] pb-3">
+                <div>
+                    <span class="text-xs font-mono font-black uppercase text-[#181818]">// INTERACTIVE MECHANIC SHOWCASE</span>
+                    <h2 class="heading text-2xl sm:text-3xl font-black text-[#181818] uppercase">THE JACK-IN-THE-BOX BUTTON SYSTEM</h2>
+                </div>
+                <div class="text-xs font-mono text-stone-700 font-bold">
+                    Hover Trigger // Organic Stems, Multi-Layer Leaves &amp; Orbiting Firefly
+                </div>
+            </div>
+
+            <p class="text-xs sm:text-sm font-semibold text-stone-800 leading-relaxed max-w-3xl">
+                Hover over the interactive botanical button below to test the tactile 5-layer leaf bloom animation with rotational timing keyframes, accompanied by the organic orbiting firefly bug. Reconstructed natively for the Yelle Vault design language.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-8 pt-8 pb-4">
+                
+                <!-- THE ORIGINAL PLANT-BASED JACK-IN-THE-BOX BUTTON (WITH USER'S 5 SVGS + ORBITING FIREFLY BUG) -->
+                <button type="button" class="jitb-btn">
+                    <span>Plant Based</span>
+                    
+                    <!-- Orbiting Firefly Bug SVG -->
+                    <div class="flying-bug">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-[0_0_8px_rgba(250,204,21,0.9)]">
+                            <ellipse cx="12" cy="12" rx="4" ry="6" fill="#facc15" />
+                            <path d="M9 10C6 7 5 11 8 13Z" fill="#38bdf8" opacity="0.85" />
+                            <path d="M15 10C18 7 19 11 16 13Z" fill="#38bdf8" opacity="0.85" />
+                            <circle cx="10" cy="8" r="1" fill="#000" />
+                            <circle cx="14" cy="8" r="1" fill="#000" />
+                            <line x1="10" y1="6" x2="8" y2="3" stroke="#facc15" stroke-width="1.5" stroke-linecap="round" />
+                            <line x1="14" y1="6" x2="16" y2="3" stroke="#facc15" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+
+                    <!-- Icon 1: User SVG Path -->
+                    <div class="icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 208.52 511.88"><g><path class="fil-leaf-1" d="M121.86 141.25c16.73,2.91 65.77,9.16 77.74,-14.94 14.49,-29.19 12.6,-56.91 -15.12,-69.09 -11.3,-4.96 -22.28,-7.7 -32.28,-9.66 -24.58,24.72 -41.22,75.51 -43.83,83.82 4.31,3.56 8.81,6.86 13.49,9.87zm-17.26 41.05c2.87,7.92 8.26,29.59 7.63,79.7 -0.16,12.74 -0.48,25.41 -0.81,38.43 -1.4,55.59 -2.96,117.52 7.12,210.69l-7.09 0.75c-10.12,-93.56 -8.56,-155.77 -7.15,-211.61 0.33,-13.06 0.65,-25.77 0.81,-38.35 0.53,-42.42 -3.06,-63.29 -5.69,-72.77 -7.55,8.48 -18.48,15.07 -34.33,16.54 -26.77,2.47 -43.19,-16.99 -52.84,-36.58 16.49,-8.49 65.65,-32.22 98.27,-31.47 1.86,1.42 3.76,2.8 5.69,4.13 -0.15,5.56 -1.43,24.61 -11.62,40.53zm-41.18 -148.65c-0.32,0.84 1.68,9.87 -6.19,10.71 -7.87,0.84 -3.26,-5.14 -6.82,-7.98 -3.57,-2.84 -9.97,-14.59 1.99,-15.96 11.97,-1.37 11.02,13.23 11.02,13.23zm124.63 55.54c0,0 -3.89,14.8 -10.18,18.69 -6.3,3.88 -22.78,7.24 -28.87,0.11 -6.09,-7.14 -1.57,-31.71 17.64,-30.45 19.21,1.26 22.68,8.4 21.42,11.65zm-101.53 67.51c0,0 5.88,5.56 5.46,9.87 -0.42,4.3 -5.78,19.21 -14.07,20.05 -8.29,0.84 -24.15,-6.82 -21.84,-17.53 2.31,-10.71 10.5,-11.34 12.6,-10.6 2.1,0.74 3.36,2.1 17.85,-1.78zm61.49 -109.94c-12.74,-2.33 -23.63,-3.69 -31.15,-7.4 0,0 -2.41,15.22 -4.51,19.74 -2.1,4.51 -6.3,17.32 -14.8,21.1 -8.5,3.78 -9.87,-28.14 4.62,-45.15 0,0 -10.13,-4.4 -22.34,-9.92 -11.47,31.21 -7.3,64.58 -7.28,64.68l-0.48 0.06c9.73,14.77 20.76,28.04 33.37,39.01 3.68,-11.43 19.48,-57.46 42.58,-82.12zm-71.44 -23.1c-16.59,-7.55 -35.59,-16.58 -38.25,-19.47 -1.97,-2.14 -4.87,-3.72 -7.63,-4.2 9.11,27.4 20.23,54.59 34.36,78.62 1.13,1.92 2.28,3.82 3.45,5.7 -0.66,-11.21 -0.85,-36.56 8.07,-60.65zm-49.59 -23.57c-2.34,0.66 -4.05,2.62 -4.09,6.41 -0.1,9.45 -9.03,35.38 -9.03,35.38 0,0 33.07,14.91 22.99,23.1 -10.08,8.19 -25.41,-8.5 -26.35,-9.34 0,0 -5.94,16.24 -8.44,35.85 11.53,-1.14 38.81,-2.11 72.53,8.35 -4.45,-6.19 -8.65,-12.68 -12.61,-19.42 -14.44,-24.56 -25.77,-52.36 -35.01,-80.32zm-25.33 95.01c-0.61,6.01 -0.86,12.26 -0.49,18.39 0,0 56.17,-9.87 57.33,8.71 1.15,18.58 -58.48,9.45 -58.48,9.45 0,0 2.71,16.68 10.73,34.23 16.07,-8.25 62.14,-30.45 95.29,-31.76l-1.75 -1.5 0.01 -0.03c-9.54,-8.13 -18.2,-17.54 -26.08,-27.89l-0.01 0.04c-36.16,-12.16 -65.36,-10.82 -76.53,-9.63z"/></g></svg>
+                    </div>
+
+                    <!-- Icon 2: User SVG Path -->
+                    <div class="icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 420.62 554.38"><g><path class="fil-leaf-2" d="M1.57 554.38c-0.01,-0.44 -2.46,-153.75 -1.23,-217.01 0.74,-38.16 6.99,-96.57 32.48,-148.36 17.72,-36 44.66,-68.8 85.37,-89.54l32.28 -4.39c21.9,-6.8 39.46,-7.7 45.04,-7.81 4.32,4.98 10.37,12.18 17.72,21.54 -0.39,10.62 -6.13,113.86 -82.32,208.5 -31.36,-18.46 -51.28,-57.42 -51.28,-57.42 52.13,-30.97 58.88,-51.52 69.61,-68.07 10.73,-16.56 2.45,-44.16 -11.65,-26.06 -14.11,18.09 -65.01,68.07 -65.01,68.07 -12.27,-87.7 33.12,-110.39 33.12,-110.39l0.34 -0.64c-27.64,18.92 -47.12,44.59 -60.77,72.35 -24.37,49.53 -30.35,105.69 -31.07,142.44 -1.22,63.07 1.22,216.14 1.23,216.58l-13.85 0.22zm216.49 -439.34c17.47,22.75 40.96,56.05 66.08,99.4 0.27,13.62 0.62,100.64 -33.48,153.85 -24.85,-9.4 -40.14,-15.03 -40.14,-15.03 12.57,-11.04 46.61,-87.09 23.3,-91.68 -23.3,-4.6 -47.99,84.63 -47.99,84.63 -21.55,-10.35 -42.58,-21.94 -50.33,-26.28 68.93,-86.04 80.61,-179.05 82.56,-204.89zm71.3 108.53c28.78,50.84 59.27,114.6 85.02,190.51 -4.31,0.96 -8.4,-1.03 -8.4,-1.03 -42.77,-17.04 -82,-32.13 -110.36,-42.88 29.72,-47.26 33.46,-119.21 33.74,-146.6zm106.95 70.68c0,0 -16.4,-14.1 -20.54,-22.84 -4.14,-8.74 -15.18,-3.68 -13.95,4.29 1.23,7.97 11.5,45.69 12.27,51.21 0.77,5.52 20.08,6.13 21,-1.99 0.92,-8.13 2.76,-23.61 1.23,-30.66zm-88.46 28.98c0,0 -8.43,4.29 -7.51,15.49 0.92,11.19 10.89,28.36 18.09,30.66 7.21,2.3 18.7,-25.14 -10.58,-46.15zm-109.42 -240.52c15.35,-63.34 56.21,-82.7 93.65,-82.7 38.33,0 65.31,22.23 65.31,22.23 0,0 -11.65,13.03 -33.42,13.95 -21.77,0.92 -28.52,11.65 -28.98,16.41 -0.46,4.75 1.53,16.25 32.35,18.24 30.82,1.99 55.19,-25.14 55.19,-25.14 16.95,23.84 26.52,45.94 31.83,64.51 -16.87,6.83 -73.84,22.75 -197.04,-4.57 -8.01,-10.2 -14.48,-17.86 -18.9,-22.93zm217.3 32.51c7.8,30.68 3.91,50.53 3.91,50.53 -55.65,4.45 -56.73,-5.98 -77.73,-6.59 -21,-0.61 -22.69,28.06 14.41,34.19 37.1,6.13 63.01,-1.99 63.01,-1.99 -1.13,20.07 -2.53,38.3 -4.11,54.87 -17.3,-0.51 -66.77,-6.48 -137.23,-52.73l-0.13 0.2c-21.09,-34.73 -40.52,-62.06 -55.57,-81.67 118.17,25.28 175.11,10.36 193.44,3.2zm-1.01 136.18c-10.45,105.02 -28.21,141.06 -31.88,153.37 -0.95,3.17 -2.29,5.35 -3.82,6.82 -27.16,-79.89 -59.57,-146.38 -89.72,-198.56l-0.02 -0.57 -0.3 0.01c-1.8,-3.11 -3.59,-6.18 -5.38,-9.19 66.28,41.51 113.43,47.51 131.12,48.12z"/></g></svg>
+                    </div>
+
+                    <!-- Icon 3: User SVG Path -->
+                    <div class="icon-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 313.64 405.79"><g><path class="fil-leaf-3" d="M268.76 135.61c0,0 -22.17,11.9 -50.23,28.92 -21.12,-5.52 -82.36,-27.74 -81.95,-100.04l-0.14 -0.02c3.32,-12.49 5.48,-21.39 6.11,-24.05 10.61,-20.2 38.05,-50.12 105.57,-37.36 98.73,18.65 57.69,95.74 53.71,98.23 -3.98,2.49 -21.39,6.71 -72.86,-30.59 0,0 -18.15,-14.17 -21.88,12.68 -3.73,26.86 48.99,48.99 61.68,52.23zm-6.57 270.17c-0.06,-0.43 -20.14,-148.39 -56.4,-233.41 -9.42,5.88 -19.19,12.19 -28.79,18.69 0,0 -17.41,-10.44 -27.6,-29.59 -10.2,-19.15 -5.22,-21.76 -13.43,-22.26 -8.21,-0.5 -5.1,34.69 19.52,64.78 0,0 -13.7,11.34 -26.34,23.33 -5.68,-9.69 -18.35,-34.11 -23.43,-66.68l-0.05 -0.01c0.31,-0.8 0.62,-1.59 0.93,-2.38 10.57,-26.8 19.85,-57.53 26.36,-81.01 6.01,61.39 57.45,83.42 80.65,90.27 37.09,86.22 59.66,236.37 59.72,236.8l-11.15 1.45zm-136.16 -175.46c-7.88,7.66 -14.84,15.23 -17.05,19.93 0,0 -7.21,-23.75 -14.42,-18.65 -7.21,5.1 2.11,32.08 2.11,36.8 0,0 -17.66,31.83 -20.89,34.57 -0.83,0.7 -1.66,1.24 -2.49,1.6 -0.23,-13.47 2.61,-34.23 7.4,-57.21 5.42,-26.02 13.33,-54.79 22.1,-79.02 5.96,30.61 18.04,53.25 23.24,61.99zm-56.93 74.37c-0.87,-0.37 -1.72,-1.02 -2.52,-1.97 -2.74,-3.23 -15.17,-25.61 -15.17,-25.61 0,0 6.22,-19.03 15.17,-32.95 8.95,-13.93 -5.84,-15.67 -10.82,-7.21 -4.97,8.46 -12.56,24.74 -12.56,24.74 0,0 -6.31,-12.32 -13.32,-27.52 29.11,-16 53.59,-43.62 66.24,-59.59 -7.75,22.68 -14.67,48.42 -19.56,71.93 -4.83,23.18 -7.69,44.25 -7.46,58.19zm-40.98 -74.37c-7.17,-15.81 -14.58,-33.78 -16.38,-44.11 0,0 40.04,-13.68 46.01,-27.11 5.97,-13.43 -12.68,-19.4 -51.23,4.48 0,0 -7.71,-17.19 -6.37,-43.78 66.5,2.13 113.04,-29.91 128.31,-42.15 -6.46,23.16 -15.53,53 -25.8,79.07 -0.57,1.44 -1.13,2.91 -1.7,4.39 -5.54,7.86 -35.3,48.46 -72.84,69.21zm-27.68 -114.74c0.71,-8.36 2.33,-17.55 5.34,-27.35 0,0 47.75,5.84 50.36,-10.57 2.61,-16.41 -41.28,-5.84 -41.28,-5.84 0,0 25.99,-35.56 60.3,-33.82 28.82,1.46 52.37,13.88 59.18,17.82 -1.11,4.27 -2.41,9.2 -3.89,14.62 -5.75,5.22 -54.72,47.49 -130.01,45.14z"/></g></svg>
+                    </div>
+
+                    <!-- Icon 4: User SVG Path -->
+                    <div class="icon-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 359.65 724.72"><g><path class="fil-leaf-4" d="M251.9 132.52c5.01,7.69 14.83,26.38 10.9,50 12.23,19.64 25.84,44.23 37.91,76.21 15.43,40.91 28.34,93.9 32.59,164.05 8.43,139.15 26.3,300.52 26.36,300.99l-8.9 0.95c-0.05,-0.47 -17.95,-162.05 -26.39,-301.41 -4.19,-69.11 -16.87,-121.23 -32.03,-161.42 -10.46,-27.74 -22.12,-49.81 -32.97,-67.87 -11.69,25.15 -46.54,32.88 -60.3,31.22 0,0 7.39,-21.36 26.38,-35.61 18.99,-14.24 -34.02,-32.18 -48.79,33.5 0,0 -17.36,-0.38 -44.69,-16.34 11.21,-15.23 54.9,-71.68 91.8,-79.27 13.37,2.8 23.04,4.3 28.14,5zm-123.8 71.95c-11.63,-7.19 -24.9,-17.14 -39.29,-30.93 0,0 33.76,-24 51.43,-32.18 3.94,-1.82 6.23,-3.74 7.22,-5.53 0.4,-0.74 0.59,-1.45 0.57,-2.14 -0.14,-5.14 -11.54,-8.37 -24.93,-3.67 -19.52,6.86 -41.67,17.93 -50.64,27.17 0,0 -14.95,-14.16 -27.28,-30.46 13.73,-5.9 46.68,-16.9 105.36,-19.32 1.37,0.46 2.74,0.91 4.09,1.36 23.42,7.71 43.79,13.08 60.01,16.77 -36.68,13.59 -76.29,64.98 -86.55,78.94zm-85.63 -81.43c-0.55,-0.76 -1.08,-1.53 -1.61,-2.3 -3.4,-4.95 -6.39,-9.96 -8.49,-14.72 0,0 8.59,-1.25 17.61,-3.44 10.4,-2.52 21.36,-6.28 20.37,-10.8 -0.81,-3.7 -4.42,-6.8 -10.79,-8.26 -8.15,-1.86 -20.83,-1.06 -38,4.57 0,0 -20.04,-38.77 -21.36,-44.84 -0.46,-2.1 -0.09,-3.88 0.82,-5.27 21.98,13.27 43.46,24.73 64.03,34.61 26.53,12.75 51.57,22.88 74.23,30.91 -53.49,3.36 -83.97,13.91 -96.81,19.53zm-37.55 -87.92c1.59,-0.53 3.43,-0.65 5.29,-0.31 5.8,1.06 22.42,11.6 51.17,8.44 0,0 5.79,9.17 11.47,13.81 1.59,1.3 3.18,2.25 4.62,2.54 5.68,1.14 7.25,-7.71 1.67,-15.07 -0.9,-1.18 -1.98,-2.33 -3.26,-3.39 0,0 2.1,-0.44 5.61,-1.29 3.8,-0.92 9.25,-2.33 15.46,-4.19 14.66,33.07 29.11,52.04 37.62,61.42 -20.84,-7.6 -43.57,-16.96 -67.53,-28.47 -19.97,-9.59 -40.81,-20.68 -62.13,-33.48zm96.34 -0.79c8.37,-2.65 17.67,-6.03 26.06,-10.07 0,0 7.91,43.25 34.29,54.07 0,0 0.41,0.11 1.05,0.18 3.11,0.38 11.59,0.1 4.32,-16.31l-0.1 -0.23c-8.97,-20.04 -20.57,-40.88 -21.36,-45.89 0,0 15.49,-6.72 36.74,-11.5l1.33 -0.3c2.14,70.96 19.13,103.97 27.19,115.76 -15.3,-3.61 -33.91,-8.65 -55,-15.61 -1.04,-0.34 -2.1,-0.69 -3.15,-1.05l0.05 -0.46 -6.39 -1.7 -1.85 -0.64c-3.65,-3.1 -23.05,-20.99 -43.18,-66.26zm86.77 -30.97c8.74,-1.72 18.24,-3.02 27.9,-3.37 0,0 -7.65,53.01 14.24,63.3 0,0 17.41,7.91 6.33,-60.93 0,0 48,6.33 46.95,59.34 -0.91,45.76 -25.8,62.44 -32.59,66.14 -5.12,-0.73 -13.59,-2.1 -24.84,-4.43l-0.01 -0.77 -7.74 -0.89 -0.69 -0.15c-4.02,-4.5 -27.19,-33.99 -29.55,-118.24z"/></g></svg>
+                    </div>
+
+                    <!-- Icon 5: User SVG Path -->
+                    <div class="icon-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 513.57 1042.57"><g><path class="fil-leaf-5" d="M207.74 252.52c0,0 -3.36,127.53 94.31,130.89 0,0 36.92,0.67 66.79,-32.89 0,0 -39.94,-10.4 -50.01,-47.99 -10.07,-37.59 63.1,-27.52 82.23,3.36 0,0 17.47,-34.44 35.17,-77.24 -60.5,-36.51 -169.57,-35.65 -182.77,-35.4 -16.15,16.52 -28.62,31.28 -37.69,42.91l-0 -0c-3.79,4.86 -6.98,9.18 -9.61,12.86l0.02 -0.03c-0.48,0.66 -0.93,1.31 -1.37,1.93l-0.05 0.08 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.7 1 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07 -0.05 0.07c1.63,-0.35 3.25,-0.73 4.87,-1.16zm202.05 -202.04c0,0 -10.74,-24.5 15.1,-37.92 25.84,-13.42 40.95,2.68 38.93,7.72 -2.01,5.03 -36.92,38.6 -54.03,30.21zm41.95 28.86c0,0 3.69,-24.84 23.16,-20.14 19.47,4.7 -2.35,24.16 -6.71,25.51 -4.36,1.34 -17.79,3.36 -16.45,-5.37zm-13.33 143.98c6.34,-15.57 12.61,-32.08 18.03,-48.32 0,0 -14.77,-5.71 -43.63,-9.06 -28.86,-3.36 -48.67,-8.06 -47.99,-20.47 0.67,-12.42 19.47,-12.42 31.21,-12.08 11.75,0.34 44.3,9.4 65.45,21.48 0,0 6.06,-15.02 14,-34.26 -13.59,-6.7 -55.53,-24.2 -111.04,-17.16 -44.54,28.56 -79.28,58.2 -105.29,84.07 26.84,-0.04 122.78,2.26 179.27,35.82zm39.24 -107.98c11.26,-27.2 25.32,-60.47 31.48,-72.24 2.59,-4.94 4.04,-8.91 4.44,-12.19l-0.07 0.03c-7.86,2.78 -15.55,5.64 -23.08,8.58l-0.06 0.03c-43.75,17.09 -81.99,36.73 -115.12,57.12 50.7,-3.62 88.86,12.06 102.42,18.68zm-266.36 117.31l-0 0 0.19 -0.24c1.61,-2.06 3.33,-4.22 5.15,-6.47l0.6 -0.74c1.8,-2.22 3.71,-4.51 5.72,-6.89l0.53 -0.62c0.65,-0.77 1.31,-1.54 1.99,-2.33l0.45 -0.53c0.8,-0.93 1.62,-1.87 2.44,-2.82l-0.47 -0.16c26.43,-78.83 20.84,-169.24 18.14,-197.94 -29.06,6.17 -63.45,14.58 -92.65,24.81 0,0 -10.74,27.18 -8.73,47.66 2.01,20.47 10.4,39.6 17.79,47.99 7.38,8.39 -4.03,19.8 -14.1,11.08 -10.07,-8.73 -33.9,-27.86 -31.88,-85.58 0,0 -51.69,29.87 -54.37,96.99 -2.41,60.36 60.31,104.42 124.22,99.27 -29.57,40.64 -52.99,92.96 -71.11,145.44 -34.37,99.52 -49.74,199.84 -51.89,221.41 -1.69,16.94 -9.22,61.56 -18.01,108.82 -8.48,45.59 -18.12,93.5 -24.81,121.32 -13.86,57.6 -20.46,188.53 -20.47,188.9l11.37 0.54c0.02,-0.37 6.56,-130.3 20.16,-186.81 6.77,-28.15 16.45,-76.26 24.95,-121.9 8.84,-47.51 16.42,-92.5 18.15,-109.76 2.13,-21.29 17.32,-120.37 51.32,-218.82 17.84,-51.67 40.86,-103.1 69.86,-142.81 3.19,-7.16 11.12,-24.22 15.49,-29.83zm25.46 -30.01c1.38,-1.51 2.8,-3.04 4.25,-4.58l0.29 -0.31c0.84,-0.89 1.69,-1.8 2.55,-2.7l0.67 -0.7c2.7,-2.84 5.52,-5.73 8.45,-8.67l0.65 -0.65c0.97,-0.98 1.96,-1.96 2.96,-2.95l0.38 -0.38c3.13,-3.09 6.39,-6.23 9.77,-9.41l0.58 -0.54c4.62,-4.35 9.48,-8.77 14.57,-13.25l0.68 -0.6c3.78,-3.32 7.7,-6.68 11.74,-10.06l0.29 -0.24c5.54,-4.63 11.33,-9.29 17.36,-13.99l0.57 -0.44c6.07,-4.71 12.39,-9.44 18.97,-14.18l0.24 -0.17c4.93,-3.55 10.01,-7.1 15.23,-10.64l0.24 -0.16c4.13,-2.8 8.36,-5.6 12.68,-8.38 1.65,-4.78 23.49,-68.56 28.59,-99.33 -14.9,-0.31 -31.83,-0.37 -51.18,-0.15 0,0 -12.75,35.24 -9.73,54.03 3.02,18.79 9.73,34.9 -0.34,37.25 -10.07,2.35 -31.21,-20.47 -17.79,-89.27 0,0 -24.82,3.76 -57.81,10.6 2.58,27.06 8.08,112.25 -14.87,189.88zm130.78 -107.89l1.53 -0.95 0.35 -0.22c7.57,-4.71 15.41,-9.39 23.53,-14l0.16 -0.09c6.06,-3.44 12.27,-6.86 18.63,-10.22l0.29 -0.16c8.49,-4.49 17.26,-8.91 26.3,-13.23l0.6 -0.29c6.76,-3.22 13.68,-6.39 20.75,-9.5l0.12 -0.05c2.34,-1.03 4.7,-2.05 7.07,-3.06l0.5 -0.21c7,-2.98 14.15,-5.89 21.45,-8.74l1.17 -0.46c2.38,-0.92 4.78,-1.84 7.19,-2.75l0.09 -0.03c5.13,-1.93 10.34,-3.82 15.61,-5.68l0.07 -0.03c-2.61,-6.39 -11.96,-9.39 -26.62,-13.87 -18.07,-5.52 -44.02,-9.54 -92.15,-10.8 -4.31,26.52 -20.49,76.07 -26.62,94.33z"/></g></svg>
+                    </div>
+                </button>
+
+                <!-- CYBER-SHIELD JACK-IN-THE-BOX VARIANT (PURPLE & BLUE SILHOUETTE BADGES) -->
+                <button type="button" class="btn-cyber-badge">
+                    <i class="fa-solid fa-gem text-purple-400 mr-1"></i> Executive Seal
+                    <div class="cyber-badge-pop bg-[#181818] border-2 border-purple-500 p-4 rounded-xl shadow-[0_15px_30px_rgba(168,85,247,0.4)] text-left">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-sky-400 flex items-center justify-center text-white text-xs">
+                                <i class="fa-solid fa-shield"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-black text-white">UNDERWRITER BADGE</div>
+                                <div class="text-[9px] font-mono text-stone-400">BURN-1 ARCHITECTURE</div>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-stone-300 leading-tight">
+                            Cryptographic proof stamp generated on outside-in non-agentic posture verification.
+                        </p>
+                    </div>
+                </button>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Base Soil & Earth Grass Strip Footer Border -->
+    <footer class="grass-footer mt-20 pt-12 pb-16 px-4 text-center text-stone-400 font-mono text-xs">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <div class="flex justify-center items-center gap-3">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span class="font-bold text-white uppercase tracking-wider">YELLE VAULT // IMMUTABLE AUDIT RECORD</span>
+            </div>
+            <p class="text-[11px] text-stone-500">
+                U.S. Patent Application 64/160,289 (R.E.P. Protocol) • Bilateral MOU Countersigned Oct 15, 2026 • Host: burn-1.com/yelle
+            </p>
+            <div class="text-[10px] text-stone-600">
+                Zero Cloud Bloat • Non-Intrusive Telemetry • Executive Underwriting Defense
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Feed Switcher Script & Quick Memo Handler -->
+    <script>
+        const videoManifest = {
+            handshake: {
+                title: "Anergi Handshake Master (Week 1)",
+                src: "assets/Anergi_Handshake.mp4",
+                grade: "GRADE A (APPROVED)",
+                gradeColor: "text-emerald-400",
+                notes: "<p>• <strong>Week 1 Handshake:</strong> High-energy dialogue, authentic delivery. Keep this visual pacing for Handshake Part 2.</p><p>• <strong>Friday Target:</strong> Anergi Handshake Part 2 shoot scheduled. Incorporate joint pentesting referral model and universal assessment portal.</p>"
+            },
+            spa: {
+                title: "S.P.A. Security Posture Preview (Week 2)",
+                src: "assets/Why_You_Need_A_Security_Posture_Assessment.mp4",
+                grade: "GRADE D (NEEDS RESHOOT)",
+                gradeColor: "text-red-400",
+                notes: "<p>• <strong class='text-red-600'>Critical Flaws:</strong> Broken phone screen aspect ratio, jagged audio levels, and missing official YouTube channel infrastructure.</p><p>• <strong>Fix:</strong> Re-record screen capture at native 1080p 16:9 or clean 9:16 vertical with blurred backdrop, level audio to -14 LUFS.</p>"
+            },
+            phone: {
+                title: "Phone App Recording (Vertical Ratio Bug)",
+                src: "assets/trueburner_phone_app.mp4",
+                grade: "GRADE C (REQUIRES RE-RENDER)",
+                gradeColor: "text-amber-400",
+                notes: "<p>• <strong>Phone Recording:</strong> Core functionality demonstrated, but vertical framing causes black pillar-boxes on desktop.</p><p>• <strong>Fix:</strong> Place inside iPhone frame mockup or overlay over dark titanium obsidian background.</p>"
+            }
+        };
+
+        function switchVideo(key) {
+            const config = videoManifest[key];
+            if (!config) return;
+
+            const videoElem = document.getElementById('vault-video-elem');
+            const sourceElem = document.getElementById('vault-video-source');
+            const titleElem = document.getElementById('video-title-display');
+            const gradeElem = document.getElementById('video-grade-display');
+            const notesElem = document.getElementById('video-notes-content');
+
+            // Update UI elements
+            sourceElem.src = config.src;
+            videoElem.src = config.src;
+            videoElem.load();
+            titleElem.textContent = config.title;
+            gradeElem.textContent = config.grade;
+            gradeElem.className = config.gradeColor;
+            notesElem.innerHTML = config.notes;
+
+            // Update Button States
+            ['handshake', 'spa', 'phone'].forEach(k => {
+                const btn = document.getElementById(`btn-feed-${k}`);
+                if (k === key) {
+                    btn.className = "px-3 py-1.5 rounded-lg bg-[#f5ddb7] text-[#181818] border-2 border-[#181818] shadow-[2px_2px_0px_#181818] transition-all font-black";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded-lg bg-[#241a14] text-stone-300 hover:text-white border border-[#442a1c] transition-all";
+                }
+            });
+        }
+
+        function submitMemo() {
+            const input = document.getElementById('memo-input');
+            const feedback = document.getElementById('memo-feedback');
+            if (input.value.trim() === '') return;
+            feedback.classList.remove('hidden');
+            setTimeout(() => {
+                input.value = '';
+            }, 800);
+        }
+    </script>
+</body>
+</html>
