@@ -1,0 +1,487 @@
+<!-- Copied from The_Penthouse/Project/True_Burner_Product_Line.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUE BURNER // IN-HOUSE PRODUCT SUITE MATRIX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #000000;
+            --surface-dark: #0a0a0a;
+            --surface-card: #121212;
+            --border-faint: #262626;
+            --border-light: #404040;
+            --text-bright: #ffffff;
+            --text-silver: #d4d4d4;
+            --text-muted: #8a8a8a;
+            --text-ghost: #525252;
+            --accent-tag: #e5e5e5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-silver);
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            line-height: 1.6;
+            padding: 40px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        header {
+            border-bottom: 2px solid var(--text-bright);
+            padding-bottom: 32px;
+            margin-bottom: 48px;
+        }
+
+        .header-meta {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-ghost);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 54px);
+            font-weight: 700;
+            color: var(--text-bright);
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+
+        .manifesto {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 820px;
+            border-left: 2px solid var(--border-light);
+            padding-left: 16px;
+            margin-top: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 28px;
+            margin-bottom: 64px;
+        }
+
+        .card {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-faint);
+            border-radius: 4px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--text-bright);
+            transform: translateY(-2px);
+        }
+
+        .card-number {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--text-ghost);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+        }
+
+        .card-engine {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: inline-block;
+            background: var(--surface-dark);
+            padding: 3px 8px;
+            border: 1px solid var(--border-faint);
+        }
+
+        .spec-block {
+            margin-bottom: 16px;
+        }
+
+        .spec-label {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-ghost);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .spec-content {
+            font-size: 13px;
+            color: var(--text-silver);
+            line-height: 1.5;
+        }
+
+        .pricing-box {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px dotted var(--border-light);
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .price-label {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .price-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-bright);
+            letter-spacing: -0.02em;
+        }
+
+        .bridge-section {
+            background-color: var(--surface-dark);
+            border: 2px solid var(--border-light);
+            border-radius: 4px;
+            padding: 36px;
+            margin-top: 48px;
+        }
+
+        .bridge-header {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-faint);
+            padding-bottom: 12px;
+        }
+
+        .bridge-text {
+            font-size: 14px;
+            color: var(--text-silver);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .comparison-table th, .comparison-table td {
+            text-align: left;
+            padding: 12px 14px;
+            border: 1px solid var(--border-faint);
+        }
+
+        .comparison-table th {
+            background-color: #1a1a1a;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+        }
+
+        .comparison-table td {
+            background-color: var(--surface-card);
+            color: var(--text-silver);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-faint);
+            font-size: 11px;
+            color: var(--text-ghost);
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-meta mono">// BURN-1 SYSTEMS IN-HOUSE CATALOG // PROPRIETARY // U.S. PAT. PEND. 64/160,289</div>
+        <h1>TRUE BURNER PRODUCT LINE</h1>
+        <div class="manifesto">
+            The Ephemeral Workplace Suite powered by Ricochet Ephemeral Protocol™ (R.E.P.). Hard-capped timed sessions, zero disk writes, volatile RAM staging, and automated breach containment. Engineered for high-stakes corporate confidentiality with strict clinical defensibility.
+        </div>
+    </header>
+
+    <div class="grid">
+
+        <!-- ITEM 01 -->
+        <article class="card">
+            <div>
+                <div class="card-number mono">[ ITEM 01 // COMMS ]</div>
+                <h2 class="card-title">True Burner Phone App</h2>
+                <span class="card-engine mono">BASEBAND-DECOUPLED VOIP &amp; OTP RELAY</span>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Pain Point</span>
+                    <p class="spec-content">Standard burner numbers leave call logs, SMS records, and OTP metadata permanently cached on phone storage and telecom carrier switches, creating legal discovery risks and SIM-swap vulnerabilities.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Solution</span>
+                    <p class="spec-content">Baseband-decoupled VoIP routing with in-memory OTP extraction. Verification codes are displayed on-screen and extracted while the raw SMS payload undergoes a sub-100ms volatile zero-fill. Numbers auto-incinerate after 5 minutes.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Target Audience</span>
+                    <p class="spec-content">C-Suite Executives, M&amp;A Teams, Traveling Engineers, and Private Investigators needing disposable verification windows.</p>
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <span class="price-label mono">Est. Pricing</span>
+                <span class="price-value mono">$29 / mo (Unlimited Sprints)</span>
+            </div>
+        </article>
+
+        <!-- ITEM 02 -->
+        <article class="card">
+            <div>
+                <div class="card-number mono">[ ITEM 02 // STORAGE ]</div>
+                <h2 class="card-title">Cloaked Vault &amp; Remote Locker</h2>
+                <span class="card-engine mono">VOLATILE TMPFS RAM DUMMY REPLICA</span>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Pain Point</span>
+                    <p class="spec-content">Cloud storage (Google Drive, OneDrive) syncs files directly to local device drives, caching forensic thumbnails and persistent remnants even after logging out. Leaving an open device off-site exposes core IP.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Solution</span>
+                    <p class="spec-content">Operators never touch the Real Vault on mobile devices. Files mount inside an isolated RAM enclave (Server A.2 Sandbox) with 0 bytes written to local SSD/flash. Edits are approved and synced upstream before the local dummy dissolves in 300ms.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Target Audience</span>
+                    <p class="spec-content">Clinical Trial Leads, Defense Contractors, M&amp;A Legal Advisors, and Executive Film Directors reviewing unreleased cuts.</p>
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <span class="price-label mono">Est. Pricing</span>
+                <span class="price-value mono">$149 / mo (Lead-Gen Product)</span>
+            </div>
+        </article>
+
+        <!-- ITEM 03 -->
+        <article class="card">
+            <div>
+                <div class="card-number mono">[ ITEM 03 // MESSAGING ]</div>
+                <h2 class="card-title">Dissolving Mail</h2>
+                <span class="card-engine mono">ZERO-KNOWLEDGE EPHEMERAL CONDUIT</span>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Pain Point</span>
+                    <p class="spec-content">Traditional email (SMTP) permanently deposits copies of sensitive proposals and disclosures onto external third-party mail servers where they can be forwarded, archived, or subpoenaed indefinitely.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Solution</span>
+                    <p class="spec-content">Outbound mail wrapped in an encrypted RAM container. The recipient receives a secure link that renders inside a zero-trace browser sandbox with screen-capture shielding. Upon window close or countdown expiry, cryptographic keys are zero-filled.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Target Audience</span>
+                    <p class="spec-content">Corporate General Counsels, Whistleblower Hotlines, Venture Capital Term-Sheet Negotiators.</p>
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <span class="price-label mono">Est. Pricing</span>
+                <span class="price-value mono">$49 / mo or $2 / Dissolving Drop</span>
+            </div>
+        </article>
+
+        <!-- ITEM 04 -->
+        <article class="card">
+            <div>
+                <div class="card-number mono">[ ITEM 04 // TRANSPORT ]</div>
+                <h2 class="card-title">Ghost VPN &amp; Ephemeral Browser</h2>
+                <span class="card-engine mono">RAM TUNNEL &amp; ENTROPY SPOOFING</span>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Pain Point</span>
+                    <p class="spec-content">Commercial VPNs maintain static IP assignment tables, connection state logs, and allow browser canvas/WebGL fingerprinting that profiles corporate hardware regardless of encrypted transit.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Solution</span>
+                    <p class="spec-content">Volatile RAM WireGuard tunnel running inside temporary micro-VMs. Dynamically randomizes device canvas, WebGL shader hashes, and AudioContext entropy on every spin-up. Session end fires a 300ms zero-fill wipe of routing tables.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Target Audience</span>
+                    <p class="spec-content">Traveling Executives crossing international borders, Cybersecurity Researchers, High-Wealth Family Offices.</p>
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <span class="price-label mono">Est. Pricing</span>
+                <span class="price-value mono">$19 / mo (Enterprise Seat)</span>
+            </div>
+        </article>
+
+        <!-- ITEM 05 -->
+        <article class="card">
+            <div>
+                <div class="card-number mono">[ ITEM 05 // DIAGNOSTICS ]</div>
+                <h2 class="card-title">Automated Posture Exposure Assessment</h2>
+                <span class="card-engine mono">LUXURY OUTSIDE-IN AUDIT &amp; EVIDENCE BINDER</span>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Pain Point</span>
+                    <p class="spec-content">Consultants charge $3,500+ and take 3 weeks to review cyber insurance renewal paperwork. SMBs face 50-page technical questionnaires they cannot answer, risking policy denial or premium surcharges.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Solution</span>
+                    <p class="spec-content">Non-invasive, outside-in telemetry benchmarking 100+ perimeter exposure vectors concurrently. Generates an 8-page Boardroom Evidence Binder mapped to NIST CSF 2.0 / NYDFS 500 with a SHA-256 seal verified on the Metro Plaza Directory.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Target Audience</span>
+                    <p class="spec-content">Commercial Merchants, Regional Banks, Healthcare Clinics, and Firms facing Cyber Renewal Deadlines.</p>
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <span class="price-label mono">Est. Pricing</span>
+                <span class="price-value mono">$499 One-Time // $1,000 Guwop / Yr</span>
+            </div>
+        </article>
+
+        <!-- ITEM 06 -->
+        <article class="card">
+            <div>
+                <div class="card-number mono">[ ITEM 06 // ENTERPRISE CORE ]</div>
+                <h2 class="card-title">Ricochet Ephemeral Protocol™ (R.E.P.)</h2>
+                <span class="card-engine mono">ENTERPRISE eBPF CLOAKING &amp; ZERO OPEN INBOUND PORTS</span>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Pain Point</span>
+                    <p class="spec-content">Adversary breakout time averages under 29 minutes, while defender dwell time averages 14 days. Legacy firewalls and SIEMs drown analysts in 99%+ false-positive alert fatigue while leaving core ports exposed to scanners.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Solution</span>
+                    <p class="spec-content">Asymmetric dual-path edge filter cloaks production servers (Server B) with 0 public inbound ports. Scanners are routed into a Modular Decoy Mesh (Server A &amp; A.2 Sandbox). Decoy touch fires the Ghost Vacuum—compressing JIT tokens to 0s and blackholing adversary IPs via kernel eBPF.</p>
+                </div>
+
+                <div class="spec-block">
+                    <span class="spec-label mono">Target Audience</span>
+                    <p class="spec-content">Enterprise Infrastructure, Critical Datacenters, Government Contractors, Pentesting Firms (as remediation shield).</p>
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <span class="price-label mono">Est. Pricing</span>
+                <span class="price-value mono">$1,250 Appliance + $199/mo/node</span>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- THE BIG PICTURE & THE BRIDGE -->
+    <section class="bridge-section">
+        <h3 class="bridge-header mono">// THE BIG PICTURE: THE BRIDGE BETWEEN KAEL'S VISION &amp; CURRENT REALITY</h3>
+        <p class="bridge-text">
+            Kael drafted the R.E.P. architecture assuming a blank-slate enterprise deployment: dedicated hardware USB drives, bare-metal eBPF XDP boundary filters, and complex Docker Compose multi-containers. In reality, BURN-1 already operates an established, active production stack. The bridge is not rebuilding from scratch; it is **layering Kael's advanced security primitives directly over our existing infrastructure**.
+        </p>
+
+        <table class="comparison-table mono">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>What We Currently Have (Live Stack)</th>
+                    <th>What Kael Conceptualized (Grand Blueprint)</th>
+                    <th>The Bridge (Immediate Practical Upgrade)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Compute &amp; Server</strong></td>
+                    <td>DigitalOcean Droplet (<code>129.212.176.154</code>), Ubuntu 22.04 LTS, <code>burn1-core.service</code></td>
+                    <td>Bare-metal edge gateway with bootable USB/NVMe appliance drive</td>
+                    <td>Deploy <code>rep_xdp_filter.o</code> directly onto the existing droplet's <code>eth0</code> interface via systemd.</td>
+                </tr>
+                <tr>
+                    <td><strong>Intelligence / SLM</strong></td>
+                    <td>Resident Dual-SLM: Bee (<code>qwen2.5:0.5b</code>) and Lumbo (<code>gemma2:2b</code>) via Ollama</td>
+                    <td>Sterile Corridor Model Context Protocol (MCP) Triage Bridge</td>
+                    <td>Wrap Lumbo inside a read-only FastMCP server to enrich scans with Shodan/Censys without DB write access.</td>
+                </tr>
+                <tr>
+                    <td><strong>Verification &amp; Seals</strong></td>
+                    <td>SHA-256 seal proof engine anchored into the Metro Plaza Directory</td>
+                    <td>8-Page Machine-Compiled Evidence Binder PDF (1.4s generation)</td>
+                    <td>Connect the directory verification hash to an automated, downloadable luxury executive PDF report.</td>
+                </tr>
+                <tr>
+                    <td><strong>Frontend / Marketing</strong></td>
+                    <td>Vercel Production Domain (<code>burn-1.com</code>), Day Mode Silver Glass Academy</td>
+                    <td>Star Trek Vitals HUD (Obsidian Purple, Electric Fuchsia, Neon Pink)</td>
+                    <td>Create wildcard subdomain <code>tools.burn-1.com</code> featuring free micro-scans and luxury dark telemetry.</td>
+                </tr>
+                <tr>
+                    <td><strong>Commercial Model</strong></td>
+                    <td>Scattered legacy PayPal links and static forms</td>
+                    <td>x402 Micro-settlements &amp; Multi-Tier Pentest Launchpad</td>
+                    <td>Adopt the Two-Drop Model: $499 One-Time Audit or $1,000 Guwop / Yr, funneled to Anergi for heavy pentests.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer class="mono">
+        <span>Burn-1 Systems // Metro Plaza Infrastructure</span>
+        <span>Confidential // In-House Strategic Record</span>
+        <span>US Prov. App. 64/160,289</span>
+    </footer>
+
+</body>
+</html>
