@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURN-1 SYSTEMS // Automated Posture Exposure Architecture (APEA)</title>
+    <meta name="description" content="BURN-1 Systems: High-concurrency outside-in posture telemetry. Dedicated dual-lens reporting for IT Operations and Financial Risk Executives.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-titanium: #07090e;
+            --surface-slate: #0e121a;
+            --surface-card: #131824;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.22);
+            --text-pure: #ffffff;
+            --text-steel: #cbd5e1;
+            --text-dim: #64748b;
+            --mint-telemetry: #10b981;
+            --royal-indigo: #6366f1;
+            --amber-alert: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg-titanium);
+            color: var(--text-steel);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
+            background-size: 40px 40px, 40px 40px, auto, auto;
+            min-height: 100vh;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+        .syne { font-family: 'Syne', sans-serif; }
+
+        .titanium-card {
+            background: linear-gradient(180deg, rgba(19, 24, 36, 0.9) 0%, rgba(14, 18, 26, 0.95) 100%);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .titanium-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Perspective Toggle Tabs */
+        .lens-tab-active {
+            background: #ffffff !important;
+            color: #07090e !important;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+            font-weight: 800;
+        }
+
+        .lens-tab-inactive {
+            background: transparent;
+            color: #94a3b8;
+        }
+
+        .lens-tab-inactive:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-12">
+
+    <!-- TOP ARCHITECTURAL HIGHWAY NAV -->
+    <nav class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 mb-14 pb-5 border-b border-white/10 font-mono text-xs">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-indigo-950/80 border border-indigo-500/40 flex items-center justify-center text-indigo-400 font-black">
+                B1
+            </div>
+            <div>
+                <span class="font-bold text-white tracking-widest uppercase block">BURN-1 SYSTEMS</span>
+                <span class="text-[10px] text-slate-400">burn-1systems.burn-1.com &bull; RFC-2026-APEA</span>
+            </div>
+        </div>
+
+        <!-- System Highway Links -->
+        <div class="flex items-center flex-wrap gap-2 sm:gap-3">
+            <a href="tools.html" class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-all font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-screwdriver-wrench text-indigo-400 text-[10px]"></i>
+                <span>Tools Workbench</span>
+            </a>
+            <a href="mender.html" class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-all font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-bolt text-pink-400 text-[10px]"></i>
+                <span>Mender Accelerator</span>
+            </a>
+            <a href="academy.html" class="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-all font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-graduation-cap text-emerald-400 text-[10px]"></i>
+                <span>Academy</span>
+            </a>
+            <a href="yelle.html" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-indigo-600/20">
+                <i class="fa-solid fa-vault text-[10px]"></i>
+                <span>Anergi Vault</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- MASTER HERO -->
+    <header class="max-w-7xl mx-auto mb-16">
+        <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-mono font-semibold uppercase tracking-wider mb-4">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Automated Posture Exposure Architecture (APEA)</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-black heading text-white tracking-tight uppercase leading-tight mb-4">
+                PERIMETER INTELLIGENCE FOR IT PRECISION &amp; BOARDROOM CLARITY.
+            </h1>
+            <p class="text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
+                No false continuous-monitoring claims. No 24/7 staffing bluffs. We benchmark 100+ public attack vectors asynchronously in seconds, delivering actionable deliverables tailored specifically for your <strong>Technical Engineering Lead</strong> and your <strong>Chief Financial Officer</strong>.
+            </p>
+        </div>
+    </header>
+
+    <!-- =========================================================
+         SECTION 01: THE DUAL PERSPECTIVE VIEWING DECK
+         ========================================================= -->
+    <section class="max-w-7xl mx-auto mb-20">
+        
+        <!-- Toggle Control Bar -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-widest text-indigo-400 font-bold block mb-1">
+                    // REPORTING LENS SELECTOR
+                </span>
+                <h2 class="text-xl sm:text-2xl font-bold heading text-white uppercase">
+                    SELECT AUDIT PERSPECTIVE
+                </h2>
+            </div>
+
+            <!-- Interactive Tab Switcher -->
+            <div class="bg-slate-900 p-1.5 rounded-2xl border border-white/10 flex items-center font-mono text-xs">
+                <button type="button" id="tab-it" onclick="switchPerspective('it')" class="lens-tab-active px-5 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span>IT &amp; Technical Operations</span>
+                </button>
+                <button type="button" id="tab-cfo" onclick="switchPerspective('cfo')" class="lens-tab-inactive px-5 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>CFO &amp; Financial Risk Desk</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- PERSPECTIVE A: IT & TECHNICAL OPERATIONS LENS -->
+        <div id="view-it" class="space-y-6">
+            <div class="titanium-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5 font-mono text-xs">
+                    <span class="text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Operational Remediation Blueprint</span>
+                    </span>
+                    <span class="text-slate-400">TARGET: Webmasters &bull; Sysadmins &bull; DevOps</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+                    <div class="bg-black/40 rounded-2xl p-5 border border-white/5 space-y-2">
+                        <span class="text-indigo-400 font-bold uppercase block text-sm">01. Mail Authentication</span>
+                        <p class="text-slate-400 font-sans text-xs">
+                            Audit of SPF records, DKIM selectors, and DMARC enforcement. Identifies missing <code>p=reject</code> rules that permit domain spoofing and CEO fraud.
+                        </p>
+                        <div class="text-[11px] text-slate-300 pt-2 font-mono">
+                            Fix Target: <code>TXT _dmarc.domain "v=DMARC1; p=reject;"</code>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/40 rounded-2xl p-5 border border-white/5 space-y-2">
+                        <span class="text-indigo-400 font-bold uppercase block text-sm">02. Cryptographic Perimeter</span>
+                        <p class="text-slate-400 font-sans text-xs">
+                            TLS 1.3 handshake verification, HSTS preloading compliance, and deprecation checks for weak 3DES, RC4, or TLS 1.0 ciphers.
+                        </p>
+                        <div class="text-[11px] text-slate-300 pt-2 font-mono">
+                            Fix Target: <code>Strict-Transport-Security: max-age=31536000</code>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/40 rounded-2xl p-5 border border-white/5 space-y-2">
+                        <span class="text-indigo-400 font-bold uppercase block text-sm">03. Storage &amp; Clickjacking</span>
+                        <p class="text-slate-400 font-sans text-xs">
+                            Content-Security-Policy (CSP) headers, X-Frame-Options denial, and CNAME audits for dangling Amazon S3 or Azure Blob buckets.
+                        </p>
+                        <div class="text-[11px] text-slate-300 pt-2 font-mono">
+                            Fix Target: <code>Content-Security-Policy: frame-ancestors 'none'</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PERSPECTIVE B: CFO & FINANCIAL RISK LENS (Initially Hidden) -->
+        <div id="view-cfo" class="space-y-6 hidden">
+            <div class="titanium-card rounded-3xl p-6 sm:p-8 border-indigo-500/30">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5 font-mono text-xs">
+                    <span class="text-indigo-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Boardroom &amp; Insurance Defense Docket</span>
+                    </span>
+                    <span class="text-slate-400">TARGET: CFO &bull; General Counsel &bull; Insurance Broker</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+                    <div class="bg-black/40 rounded-2xl p-5 border border-white/5 space-y-2">
+                        <span class="text-emerald-400 font-bold uppercase block text-sm">01. Audit Fee Elimination</span>
+                        <p class="text-slate-400 font-sans text-xs">
+                            Traditional cybersecurity consultants bill 15–30 hours at $175/hr ($3,500 total) to manually verify perimeter baselines. APEA delivers identical verified telemetry for $500.
+                        </p>
+                        <div class="text-[11px] text-emerald-400 pt-2 font-mono font-bold">
+                            Net Savings: $3,000+ per assessment
+                        </div>
+                    </div>
+
+                    <div class="bg-black/40 rounded-2xl p-5 border border-white/5 space-y-2">
+                        <span class="text-emerald-400 font-bold uppercase block text-sm">02. Renewal Readiness</span>
+                        <p class="text-slate-400 font-sans text-xs">
+                            Underwriters automatically surcharge or decline policies with open mail spoofing or outdated TLS. The APEA dossier answers the carrier questionnaire automatically.
+                        </p>
+                        <div class="text-[11px] text-indigo-400 pt-2 font-mono font-bold">
+                            Direct Alignment: Chubb, Travelers, Beazley
+                        </div>
+                    </div>
+
+                    <div class="bg-black/40 rounded-2xl p-5 border border-white/5 space-y-2">
+                        <span class="text-emerald-400 font-bold uppercase block text-sm">03. Boardroom Scorecard</span>
+                        <p class="text-slate-400 font-sans text-xs">
+                            Synthesizes dense technical jargon into an Executive Posture Score (0–100) mapped directly against NIST CSF 2.0 and NYDFS § 500 regulatory standards.
+                        </p>
+                        <div class="text-[11px] text-slate-300 pt-2 font-mono">
+                            Deliverable: Machine-Signed 8-Page PDF
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+         SECTION 02: THE 3-TIER COMMERCIAL DELIVERABLE MENU
+         ========================================================= -->
+    <section class="max-w-7xl mx-auto mb-20">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-xs font-mono font-bold uppercase tracking-widest text-indigo-400 block mb-2">
+                // TRANSPARENT DELIVERABLE PRICING
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black heading text-white uppercase">
+                THE COMMERCIAL MENU
+            </h2>
+            <p class="text-sm text-slate-400 font-medium mt-2">
+                Predictable one-time pricing. No monthly recurring card bloat. Purchase deliverables on-demand.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+            
+            <!-- TIER 01: APEA UNIVERSAL ASSESSMENT -->
+            <div class="titanium-card rounded-3xl p-7 flex flex-col justify-between border-slate-800">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-white/10 text-white font-bold uppercase text-[10px]">
+                            CORE EVALUATION
+                        </span>
+                        <span class="text-2xl font-black text-white">$500</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading text-white mb-2 uppercase">
+                        Universal APEA Audit
+                    </h3>
+                    <p class="text-slate-400 font-sans mb-6 text-xs leading-relaxed">
+                        Comprehensive outside-in exposure assessment benchmarking 100+ perimeter vectors concurrently.
+                    </p>
+                    <ul class="space-y-2.5 text-slate-300 font-sans text-xs mb-8">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Full Exposure Matrix (DNS, TLS, Headers)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Dual IT &amp; Finance Reporting Sections</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Executive Posture Score (0–100)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Prioritized IT Task Action Checklist</span>
+                        </li>
+                    </ul>
+                </div>
+                <a href="https://www.paypal.com/ncp/payment/5R9U23V7S2J8S" target="_blank" class="block text-center py-3.5 rounded-xl bg-white text-slate-950 font-bold uppercase tracking-wider text-xs hover:bg-slate-200 transition-all">
+                    Order Universal Audit ($500)
+                </a>
+            </div>
+
+            <!-- TIER 02: BOARDROOM EVIDENCE BINDER -->
+            <div class="titanium-card rounded-3xl p-7 flex flex-col justify-between border-indigo-500/50 bg-gradient-to-b from-indigo-950/20 to-slate-900/50 relative overflow-hidden">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-bold uppercase text-[10px]">
+                            UNDERWRITER DOSSIER
+                        </span>
+                        <span class="text-2xl font-black text-indigo-300">$250</span>
+                    </div>
+                    <h3 class="text-xl font-bold heading text-white mb-2 uppercase">
+                        Evidence Binder Dossier
+                    </h3>
+                    <p class="text-slate-400 font-sans mb-6 text-xs leading-relaxed">
+                        Machine-compiled 8-page PDF evidence binder formatted for direct cyber insurance broker submission.
+                    </p>
+                    <ul class="space-y-2.5 text-slate-300 font-sans text-xs mb-8">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>8-Page Machine-Compiled PDF Binder</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>Statutory NIST CSF 2.0 / NYDFS Mapping</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>Cryptographic SHA-256 Verification Seal</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-indigo-400"></i>
+                            <span>Metro Plaza Directory Active Record</span>
+                        </li>
+                    </ul>
+                </div>
+                <a href="https://www.paypal.com/ncp/payment/5R9U23V7S2J8S" target="_blank" class="block text-center py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold uppercase tracking-wider text-xs transition-all shadow-lg shadow-indigo-600/30">
+                    Add Evidence Binder ($250)
+                </a>
+            </div>
+
+            <!-- TIER 03: SCHEDULED AUDIT RE-CHECKS -->
+            <div class="titanium-card rounded-3xl p-7 flex flex-col justify-between border-slate-800">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-white/10 text-white font-bold uppercase text-[10px]">
+                            MILESTONE VERIFICATION
+                        </span>
+                        <span class="text-2xl font-black text-white">$250 <span class="text-xs text-slate-500 font-normal">/ run</span></span>
+                    </div>
+                    <h3 class="text-xl font-bold heading text-white mb-2 uppercase">
+                        Scheduled Re-Audit
+                    </h3>
+                    <p class="text-slate-400 font-sans mb-6 text-xs leading-relaxed">
+                        Targeted re-scan scheduled after IT remediation to confirm fix implementation before renewal sign-off.
+                    </p>
+                    <ul class="space-y-2.5 text-slate-300 font-sans text-xs mb-8">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Post-Remediation Gap Re-Check</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Differential Posture Comparison Report</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Updated SHA-256 Directory Standing</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-400"></i>
+                            <span>Zero Churn (Book only when needed)</span>
+                        </li>
+                    </ul>
+                </div>
+                <a href="https://www.paypal.com/ncp/payment/5R9U23V7S2J8S" target="_blank" class="block text-center py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider text-xs transition-all border border-white/10">
+                    Book Re-Audit ($250)
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 03: THE ANERGI INCIDENT RESPONSE & PENTEST FUNNEL
+         ========================================================= -->
+    <section class="max-w-7xl mx-auto mb-20">
+        <div class="bg-gradient-to-r from-amber-950/30 via-slate-900 to-slate-900 border border-amber-500/40 rounded-3xl p-8 flex flex-col lg:flex-row items-center justify-between gap-6 font-mono text-xs">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl shrink-0 mt-1">
+                    <i class="fa-solid fa-shield-virus"></i>
+                </div>
+                <div>
+                    <span class="text-amber-400 font-bold uppercase tracking-wider block text-xs mb-1">
+                        // TIER-3 OPERATIONAL ESCALATION DESK
+                    </span>
+                    <h3 class="text-xl font-bold heading text-white uppercase mb-2">
+                        Need Hands-On Penetration Testing or Active Incident Response?
+                    </h3>
+                    <p class="text-slate-300 font-sans text-xs max-w-3xl leading-relaxed">
+                        BURN-1 Systems provides automated outside-in reconnaissance. If your assessment discovers open RDP ports, credential leakage, or exploitable zero-day vectors, destructive attacks cannot be resolved via web scripts. We funnel qualified engagements directly to our accredited operational partner: <strong>Anergi Cyber Operations</strong> for Tier-3 red teaming, code remediation, and rapid incident response.
+                    </p>
+                </div>
+            </div>
+            <a href="yelle.html#partner-ingest" class="px-6 py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold uppercase tracking-wider text-xs whitespace-nowrap transition-all shadow-lg shadow-amber-500/20 shrink-0">
+                Engage Anergi Ops &rarr;
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-500">
+        <div>
+            <span>&copy; 2026 BURN-1 SYSTEMS // METRO PLAZA DIRECTORY INFRASTRUCTURE</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span>U.S. PROV. APP. NO. 64/160,289</span>
+            <span>&bull;</span>
+            <a href="tools.html" class="hover:text-white underline">Tools</a>
+            <span>&bull;</span>
+            <a href="mender.html" class="hover:text-white underline">Mender</a>
+            <span>&bull;</span>
+            <a href="academy.html" class="hover:text-white underline">Academy</a>
+            <span>&bull;</span>
+            <a href="yelle.html" class="hover:text-white underline">Anergi Vault</a>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE PERSPECTIVE CONTROLLER -->
+    <script>
+        function switchPerspective(type) {
+            const tabIt = document.getElementById('tab-it');
+            const tabCfo = document.getElementById('tab-cfo');
+            const viewIt = document.getElementById('view-it');
+            const viewCfo = document.getElementById('view-cfo');
+
+            if (type === 'it') {
+                tabIt.className = 'lens-tab-active px-5 py-2.5 rounded-xl transition-all flex items-center gap-2';
+                tabCfo.className = 'lens-tab-inactive px-5 py-2.5 rounded-xl transition-all flex items-center gap-2';
+                viewIt.classList.remove('hidden');
+                viewCfo.classList.add('hidden');
+            } else {
+                tabCfo.className = 'lens-tab-active px-5 py-2.5 rounded-xl transition-all flex items-center gap-2';
+                tabIt.className = 'lens-tab-inactive px-5 py-2.5 rounded-xl transition-all flex items-center gap-2';
+                viewCfo.classList.remove('hidden');
+                viewIt.classList.add('hidden');
+            }
+        }
+    </script>
+
+</body>
+</html>

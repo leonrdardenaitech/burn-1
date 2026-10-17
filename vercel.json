@@ -118,6 +118,22 @@
       "destination": "/after-purchase.html"
     },
     {
+      "source": "/burn-1systems",
+      "destination": "/burn-1systems.html"
+    },
+    {
+      "source": "/tools",
+      "destination": "/tools.html"
+    },
+    {
+      "source": "/mender",
+      "destination": "/mender.html"
+    },
+    {
+      "source": "/true-burner",
+      "destination": "/true-burner-line.html"
+    },
+    {
       "source": "/helpline",
       "destination": "/helpline/index.html"
     },
@@ -184,6 +200,26 @@
       "source": "/cards/jasonkuts",
       "has": [{ "type": "host", "value": "jasonkuts.burn-1.com" }],
       "destination": "/cards/jasonkuts.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "burn-1systems.burn-1.com" }],
+      "destination": "/burn-1systems.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "burn-1systems.burn-1.com" }],
+      "destination": "/burn-1systems.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "tools.burn-1.com" }],
+      "destination": "/tools.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "tools.burn-1.com" }],
+      "destination": "/tools.html"
     },
     {
       "source": "/",
