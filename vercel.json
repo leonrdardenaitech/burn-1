@@ -134,6 +134,10 @@
       "destination": "/true-burner-line.html"
     },
     {
+      "source": "/yelle",
+      "destination": "/yelle.html"
+    },
+    {
       "source": "/helpline",
       "destination": "/helpline/index.html"
     },
@@ -220,6 +224,16 @@
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "tools.burn-1.com" }],
       "destination": "/tools.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "yelle.burn-1.com" }],
+      "destination": "/yelle.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "yelle.burn-1.com" }],
+      "destination": "/yelle.html"
     },
     {
       "source": "/",
