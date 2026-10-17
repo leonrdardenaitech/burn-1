@@ -191,63 +191,58 @@
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "www.burn-1.com" }],
-      "destination": "/index.html"
+      "has": [{ "type": "host", "value": "^yelle\\.burn-1\\.com$" }],
+      "destination": "/yelle.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "^yelle\\.burn-1\\.com$" }],
+      "destination": "/yelle.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "burn-1.com" }],
-      "destination": "/index.html"
+      "has": [{ "type": "host", "value": "^yella\\.burn-1\\.com$" }],
+      "destination": "/yelle.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "^yella\\.burn-1\\.com$" }],
+      "destination": "/yelle.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "jasonkuts.burn-1.com" }],
+      "has": [{ "type": "host", "value": "^burn-1systems\\.burn-1\\.com$" }],
+      "destination": "/burn-1systems.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "^burn-1systems\\.burn-1\\.com$" }],
+      "destination": "/burn-1systems.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "^tools\\.burn-1\\.com$" }],
+      "destination": "/tools.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "^tools\\.burn-1\\.com$" }],
+      "destination": "/tools.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "^jasonkuts\\.burn-1\\.com$" }],
       "destination": "/cards/jasonkuts.html"
     },
     {
       "source": "/cards/jasonkuts",
-      "has": [{ "type": "host", "value": "jasonkuts.burn-1.com" }],
+      "has": [{ "type": "host", "value": "^jasonkuts\\.burn-1\\.com$" }],
       "destination": "/cards/jasonkuts.html"
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "burn-1systems.burn-1.com" }],
-      "destination": "/burn-1systems.html"
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "burn-1systems.burn-1.com" }],
-      "destination": "/burn-1systems.html"
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "tools.burn-1.com" }],
-      "destination": "/tools.html"
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "tools.burn-1.com" }],
-      "destination": "/tools.html"
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "yelle.burn-1.com" }],
-      "destination": "/yelle.html"
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "yelle.burn-1.com" }],
-      "destination": "/yelle.html"
-    },
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "yella.burn-1.com" }],
-      "destination": "/yelle.html"
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "yella.burn-1.com" }],
-      "destination": "/yelle.html"
+      "has": [{ "type": "host", "value": "^(www\\.)?burn-1\\.com$" }],
+      "destination": "/index.html"
     },
     {
       "source": "/",
