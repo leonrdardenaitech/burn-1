@@ -1,0 +1,315 @@
+<!-- Copied from The_Penthouse/Project/Mender_Runtime_Accelerator.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENDER // Legacy-to-Modern Runtime &amp; Browser Accelerator</title>
+    <meta name="description" content="Mender: The lightweight runtime bridge engineered to accelerate legacy browsers, strip modern web bloat, and retrieve trapped data from older hardware.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0c0a14;
+            --surface-card: #151221;
+            --surface-hover: #1e1930;
+            --border-faint: rgba(255, 255, 255, 0.1);
+            --border-glow: rgba(168, 85, 247, 0.35);
+            --accent-purple: #a855f7;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-image: 
+                radial-gradient(at 15% 15%, rgba(168, 85, 247, 0.12) 0px, transparent 55%),
+                radial-gradient(at 85% 85%, rgba(236, 72, 153, 0.1) 0px, transparent 55%),
+                radial-gradient(at 50% 50%, rgba(6, 182, 212, 0.05) 0px, transparent 70%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+        .cyber { font-family: 'Orbitron', monospace; }
+
+        .glass-panel {
+            background: rgba(21, 18, 33, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glow);
+        }
+
+        @keyframes neural-pulse {
+            0% { transform: scale(0.98); opacity: 0.7; }
+            50% { transform: scale(1.02); opacity: 1; filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4)); }
+            100% { transform: scale(0.98); opacity: 0.7; }
+        }
+
+        .dream-pulse {
+            animation: neural-pulse 3s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-12">
+
+    <nav class="max-w-6xl mx-auto flex items-center justify-between gap-4 mb-12 pb-4 border-b border-white/10 font-mono text-xs">
+        <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-purple-500 animate-ping"></span>
+            <span class="font-bold text-white tracking-widest uppercase">// MENDER RUNTIME // BURN-1 LABS</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="tools.html" class="hover:text-purple-300 transition-all">&larr; Back to Workbench</a>
+            <a href="true-burner-line.html" class="hover:text-purple-300 transition-all">True Burner Suite</a>
+            <span class="px-2.5 py-1 rounded bg-purple-950/80 border border-purple-500/40 text-purple-300 font-bold">
+                v2.4 EPHEMERAL
+            </span>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono font-bold uppercase tracking-widest mb-4">
+            <i class="fa-solid fa-wrench"></i>
+            <span>Legacy-to-Modern Runtime Bridge</span>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-black heading tracking-tight uppercase leading-none mb-4">
+            YOUR HARDWARE ISN'T OBSOLETE.<br>
+            <span class="gradient-text">MODERN WEB BLOAT IS.</span>
+        </h1>
+        <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
+            Mender is a lightweight client-side accelerator designed to let legacy laptops, older PCs, and outdated browsers run modern cloud software smoothly—while recovering trapped data without buying a new machine.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button type="button" onclick="launchDreamScan()" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold uppercase tracking-wider text-sm shadow-lg hover:shadow-purple-500/30 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Test Hardware Bottleneck Free</span>
+            </button>
+            <a href="#architecture" class="px-6 py-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-white/10 font-bold uppercase tracking-wider text-sm transition-all">
+                How Mender Works
+            </a>
+        </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto mb-20">
+        <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-purple-500/30 relative overflow-hidden">
+            
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10 font-mono text-xs">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                    <span class="text-slate-400 uppercase tracking-wider">HARDWARE STRAIN BENCHMARK</span>
+                </div>
+                <span class="text-purple-400 font-bold">CLIENT-SIDE &bull; 0 BYTES TRANSMITTED</span>
+            </div>
+
+            <div id="scan-viewport" class="text-center py-8">
+                <div id="scan-idle">
+                    <div class="w-20 h-20 mx-auto rounded-3xl bg-purple-950/60 border border-purple-500/40 flex items-center justify-center text-purple-400 text-3xl mb-4 shadow-inner">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-xl font-bold heading text-white uppercase mb-2">
+                        Benchmark This Machine's Throttle Index
+                    </h3>
+                    <p class="text-xs text-slate-400 font-mono max-w-md mx-auto mb-6">
+                        Tests browser heap saturation, DOM rendering frame drops, and legacy hardware concurrency in milliseconds.
+                    </p>
+                    <button type="button" onclick="launchDreamScan()" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold font-mono text-xs uppercase tracking-wider transition-all">
+                        Initiate Hardware Scan &rarr;
+                    </button>
+                </div>
+
+                <div id="scan-loading" class="hidden">
+                    <div class="w-24 h-24 mx-auto rounded-full border-4 border-purple-500/20 border-t-purple-500 animate-spin flex items-center justify-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-purple-950/80 dream-pulse flex items-center justify-center text-purple-300 text-xl">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                    </div>
+                    <h3 id="dream-stage-text" class="text-lg font-bold font-mono text-purple-300 uppercase tracking-widest mb-2">
+                        Calibrating Core Thread Latency...
+                    </h3>
+                    <p class="text-xs text-slate-400 font-mono">
+                        Executing multi-threaded DOM pressure cycles...
+                    </p>
+                </div>
+
+                <div id="scan-results" class="hidden text-left font-mono text-xs">
+                    <div class="bg-purple-950/40 border border-purple-500/50 rounded-2xl p-6 mb-6">
+                        <div class="flex items-center justify-between mb-3 pb-3 border-b border-purple-500/20">
+                            <span class="text-pink-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span>Point of Interest Detected</span>
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded bg-pink-950/80 text-pink-300 border border-pink-500/40 font-bold">
+                                HARDWARE STRAIN: 68%
+                            </span>
+                        </div>
+                        <h4 class="text-lg font-bold text-white font-sans mb-2">
+                            Legacy Browser Engine Stifled by Un-Optimized Script Bloat
+                        </h4>
+                        <p class="text-slate-300 text-xs font-sans leading-relaxed mb-4">
+                            Your device’s physical CPU is structurally sound, but modern web applications are forcing 45MB+ of bloated third-party tracking scripts and heavy JavaScript polyfills into memory. This produces frame drops, high fan speeds, and sluggish responsiveness.
+                        </p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                            <div class="bg-[#0e0b17] p-2.5 rounded-xl border border-white/5">
+                                <span class="text-[10px] text-slate-500 block">CORES DETECTED</span>
+                                <span id="res-cores" class="text-sm font-bold text-white">4 Cores</span>
+                            </div>
+                            <div class="bg-[#0e0b17] p-2.5 rounded-xl border border-white/5">
+                                <span class="text-[10px] text-slate-500 block">EST. MEMORY HEAP</span>
+                                <span class="text-sm font-bold text-purple-300">~128 MB</span>
+                            </div>
+                            <div class="bg-[#0e0b17] p-2.5 rounded-xl border border-white/5">
+                                <span class="text-[10px] text-slate-500 block">FRAME STUTTER</span>
+                                <span class="text-sm font-bold text-pink-400">38% Drops</span>
+                            </div>
+                            <div class="bg-[#0e0b17] p-2.5 rounded-xl border border-white/5">
+                                <span class="text-[10px] text-slate-500 block">MENDER BOOST</span>
+                                <span class="text-sm font-bold text-emerald-400">+2.8x Speed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-purple-900/60 to-slate-900 p-6 rounded-2xl border border-purple-400/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <span class="text-[10px] text-emerald-400 uppercase font-bold tracking-widest block mb-1">
+                                // SOLUTION READY FOR DISPATCH
+                            </span>
+                            <strong class="text-white font-sans text-base block">Deploy Mender Lightweight Accelerator</strong>
+                            <span class="text-slate-300 font-sans text-xs">
+                                Strips web bloat, bypasses browser slowdowns, and unlocks your machine's true speed.
+                            </span>
+                        </div>
+                        <button type="button" onclick="alert('Mender Early Preview Access reserved. Local runtime container staged.')" class="px-6 py-3 rounded-xl bg-purple-500 hover:bg-purple-400 text-white font-bold uppercase tracking-wider text-xs whitespace-nowrap shadow-lg">
+                            Run Mender Free &rarr;
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="max-w-5xl mx-auto mb-20 space-y-6">
+        <div class="text-center mb-10">
+            <span class="text-xs font-mono font-bold uppercase tracking-widest text-purple-400 block mb-1">
+                // ARCHITECTURAL CAPABILITIES
+            </span>
+            <h2 class="text-3xl font-black heading text-white uppercase">
+                HOW MENDER BRIDGES THE HARDWARE GAP
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+            
+            <div class="glass-panel rounded-2xl p-6 border border-purple-500/20 flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-400 text-base mb-4">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white font-sans mb-2">01. Web Bloat Stripper</h3>
+                    <p class="text-slate-400 font-sans leading-relaxed">
+                        Intercepts bloated client-side JavaScript, polyfills, and redundant tracking scripts before execution—giving older browsers instant 60fps rendering speed on modern web applications.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 text-purple-300 font-bold">
+                    Eliminates up to 65% memory bloat
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-6 border border-purple-500/20 flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-xl bg-pink-950/80 border border-pink-500/40 flex items-center justify-center text-pink-400 text-base mb-4">
+                        <i class="fa-solid fa-box-archive"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white font-sans mb-2">02. Legacy Data Extractor</h3>
+                    <p class="text-slate-400 font-sans leading-relaxed">
+                        Safely reads, extracts, and converts trapped data from deprecated formats, old bookmarks, and legacy software setups—transforming obsolete information into modern JSON/CSV cloud assets.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 text-pink-300 font-bold">
+                    Zero data loss conversion
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-6 border border-purple-500/20 flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-base mb-4">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white font-sans mb-2">03. Volatile RAM Quarantine</h3>
+                    <p class="text-slate-400 font-sans leading-relaxed">
+                        Executes heavy or unfamiliar legacy tools inside a transient memory sandbox. Zero bytes are written to permanent disk storage, keeping the host system completely clean.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 text-cyan-300 font-bold">
+                    Powered by R.E.P. tmpfs enclaves
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="max-w-6xl mx-auto mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-500">
+        <div>
+            <span>&copy; 2026 BURN-1 SYSTEMS // MENDER LABS</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="tools.html" class="hover:text-purple-400 underline">Posture Workbench</a>
+            <span>&bull;</span>
+            <a href="true-burner-line.html" class="hover:text-purple-400 underline">True Burner Suite</a>
+            <span>&bull;</span>
+            <a href="yelle.html" class="hover:text-purple-400 underline">Yelle Vault</a>
+        </div>
+    </footer>
+
+    <script>
+        function launchDreamScan() {
+            document.getElementById('scan-idle').classList.add('hidden');
+            document.getElementById('scan-results').classList.add('hidden');
+            document.getElementById('scan-loading').classList.remove('hidden');
+
+            const stages = [
+                "Calibrating Core Thread Latency...",
+                "Benchmarking DOM Heavy Framework Load...",
+                "Measuring Volatile Memory Saturation...",
+                "Isolating Hardware Rendering Bottlenecks...",
+                "Compiling Mender Optimization Profile..."
+            ];
+
+            let stageIdx = 0;
+            const textEl = document.getElementById('dream-stage-text');
+
+            const interval = setInterval(() => {
+                stageIdx++;
+                if (stageIdx < stages.length) {
+                    textEl.textContent = stages[stageIdx];
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('scan-loading').classList.add('hidden');
+                    document.getElementById('scan-results').classList.remove('hidden');
+                    
+                    if (navigator.hardwareConcurrency) {
+                        document.getElementById('res-cores').textContent = `${navigator.hardwareConcurrency} Cores`;
+                    }
+                }
+            }, 700);
+        }
+    </script>
+
+</body>
+</html>
