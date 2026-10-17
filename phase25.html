@@ -29,6 +29,12 @@
       --border-orange: rgba(255, 102, 0, 0.5);
     }
 
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
     body {
       background-color: var(--bg-carbon);
       color: #f3f4f6;
@@ -47,10 +53,19 @@
     .heading { font-family: 'Space Grotesk', sans-serif; }
     .mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Rotating Text Ring from User Logo */
+    /* Prevent iOS auto-zoom on form inputs by ensuring font-size is at least 16px on mobile */
+    @media (max-width: 768px) {
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+    }
+
+    /* Rotating Text Ring from User Logo with rock-solid SVG transform anchoring across all mobile browsers */
     .text-ring {
       animation: spinTarget 22s linear infinite;
-      transform-origin: 200px 200px;
+      transform-origin: center;
+      transform-box: fill-box;
+      -webkit-transform-origin: center;
     }
 
     @keyframes spinTarget {
@@ -68,82 +83,135 @@
     }
 
     /* ==========================================================================
-       UIVERSE.IO ACCORDION CARD (by joe-watson-sbf) - ADAPTED TO BLACK & ORANGE
+       UIVERSE.IO ACCORDION CARD (by joe-watson-sbf) - RESPONSIVE MOBILE + DESKTOP
        ========================================================================== */
-    .accordion-card {
-      width: 100%;
-      height: 250px;
-      border-radius: 8px;
-      background: #141414;
-      display: flex;
-      gap: 6px;
-      padding: 0.5em;
-      border: 1px solid rgba(255, 102, 0, 0.35);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    /* Desktop (> 640px) */
+    @media (min-width: 641px) {
+      .accordion-card {
+        width: 100%;
+        height: 250px;
+        border-radius: 8px;
+        background: #141414;
+        display: flex;
+        gap: 6px;
+        padding: 0.5em;
+        border: 1px solid rgba(255, 102, 0, 0.35);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      }
+
+      .accordion-card .pillar-panel {
+        height: 100%;
+        flex: 1;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        background: #111111;
+        border: 1px solid #ff6600;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 12px;
+      }
+
+      .accordion-card .pillar-panel:hover {
+        flex: 5;
+        background: linear-gradient(180deg, #22140c 0%, #120b06 100%);
+        border-color: #ff8533;
+        box-shadow: 0 0 25px rgba(255, 102, 0, 0.4);
+      }
+
+      .accordion-card .pillar-panel span.pillar-label {
+        min-width: 14em;
+        padding: 0.5em;
+        text-align: center;
+        transform: rotate(-90deg);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        text-transform: uppercase;
+        color: #ff6600;
+        letter-spacing: 0.15em;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 900;
+        font-size: 15px;
+        white-space: nowrap;
+      }
+
+      .accordion-card .pillar-panel:hover span.pillar-label {
+        transform: rotate(0);
+        color: #ffffff;
+        font-size: 18px;
+        border-bottom: 2px solid #ff6600;
+        padding-bottom: 6px;
+        margin-bottom: 8px;
+      }
+
+      .pillar-desc {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.4s ease 0.15s;
+        text-align: center;
+        color: #d1d5db;
+        font-size: 12px;
+        line-height: 1.5;
+        padding: 0 12px;
+      }
+
+      .accordion-card .pillar-panel:hover .pillar-desc {
+        display: block;
+        opacity: 1;
+      }
     }
 
-    .accordion-card .pillar-panel {
-      height: 100%;
-      flex: 1;
-      overflow: hidden;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      background: #111111;
-      border: 1px solid #ff6600;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 12px;
-    }
+    /* Mobile (<= 640px): Stacked Tactical Pillar Cards - Fully readable without hover issues */
+    @media (max-width: 640px) {
+      .accordion-card {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: transparent;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+      }
 
-    .accordion-card .pillar-panel:hover {
-      flex: 5;
-      background: linear-gradient(180deg, #22140c 0%, #120b06 100%);
-      border-color: #ff8533;
-      box-shadow: 0 0 25px rgba(255, 102, 0, 0.4);
-    }
+      .accordion-card .pillar-panel {
+        width: 100%;
+        background: #141414;
+        border: 1px solid rgba(255, 102, 0, 0.5);
+        border-radius: 8px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      }
 
-    .accordion-card .pillar-panel span.pillar-label {
-      min-width: 14em;
-      padding: 0.5em;
-      text-align: center;
-      transform: rotate(-90deg);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      text-transform: uppercase;
-      color: #ff6600;
-      letter-spacing: 0.15em;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 900;
-      font-size: 15px;
-      white-space: nowrap;
-    }
+      .accordion-card .pillar-panel span.pillar-label {
+        transform: none !important;
+        min-width: auto !important;
+        text-align: left !important;
+        color: #ff6600;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 900;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 6px;
+        display: inline-block;
+      }
 
-    .accordion-card .pillar-panel:hover span.pillar-label {
-      transform: rotate(0);
-      color: #ffffff;
-      font-size: 18px;
-      border-bottom: 2px solid #ff6600;
-      padding-bottom: 6px;
-      margin-bottom: 8px;
-    }
-
-    .pillar-desc {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.4s ease 0.15s;
-      text-align: center;
-      color: #d1d5db;
-      font-size: 12px;
-      line-height: 1.5;
-      padding: 0 12px;
-    }
-
-    .accordion-card .pillar-panel:hover .pillar-desc {
-      display: block;
-      opacity: 1;
+      .pillar-desc {
+        display: block !important;
+        opacity: 1 !important;
+        text-align: left;
+        color: #d1d5db;
+        font-size: 12px;
+        line-height: 1.5;
+        padding: 0;
+      }
     }
 
     /* Orange Neon Button */
@@ -178,20 +246,20 @@
     }
   </style>
 </head>
-<body class="selection:bg-orange-600 selection:text-white">
+<body class="selection:bg-orange-600 selection:text-white pb-20 md:pb-0">
 
   <!-- ==========================================================================
-       TOP ANNOUNCEMENT BAR & GRIDIRON TICKER
+       TOP ANNOUNCEMENT BAR & GRIDIRON TICKER (OPTIMIZED FOR MOBILE)
        ========================================================================== -->
-  <div class="bg-black border-b border-orange-500/30 px-4 py-2 text-xs font-mono font-bold text-stone-300">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-[#ff6600] animate-ping"></span>
+  <div class="bg-black border-b border-orange-500/30 px-3 py-1.5 text-[11px] sm:text-xs font-mono font-bold text-stone-300">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2 text-center sm:text-left">
+      <div class="flex items-center gap-2 justify-center">
+        <span class="w-2 h-2 rounded-full bg-[#ff6600] animate-ping shrink-0"></span>
         <span class="text-white font-black uppercase tracking-wider">PHASE25 TRAINING</span>
-        <span class="text-stone-500">//</span>
-        <span class="text-orange-400">NOW ACCEPTING NEW STUDENT-ATHLETE EVALUATIONS</span>
+        <span class="text-stone-500 hidden sm:inline">//</span>
+        <span class="text-orange-400">ACCEPTING EVALUATIONS</span>
       </div>
-      <div class="flex items-center gap-4 text-[11px] text-stone-400">
+      <div class="hidden sm:flex items-center gap-4 text-[11px] text-stone-400">
         <span><i class="fa-solid fa-bullseye text-orange-500 mr-1"></i> HIGH-IQ FOOTBALL LAB</span>
         <span><i class="fa-solid fa-location-dot text-orange-500 mr-1"></i> METRO ATLANTA, GA</span>
       </div>
@@ -199,21 +267,21 @@
   </div>
 
   <!-- ==========================================================================
-       PRIMARY NAVIGATION HEADER
+       PRIMARY NAVIGATION HEADER WITH MOBILE MENU
        ========================================================================== -->
-  <header class="sticky top-0 z-50 bg-[#0d0d0d]/95 backdrop-blur-md border-b border-stone-800 px-4 py-3.5">
+  <header class="sticky top-0 z-50 bg-[#0d0d0d]/95 backdrop-blur-md border-b border-stone-800 px-3 sm:px-4 py-2.5 sm:py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
       <!-- Brand Logo + Name -->
-      <a href="#hero" class="flex items-center gap-3 group text-decoration-none">
-        <div class="w-10 h-10 rounded-full border-2 border-[#ff6600] bg-black flex items-center justify-center text-[#ff6600] shadow-[0_0_12px_rgba(255,102,0,0.5)] group-hover:scale-105 transition-transform">
-          <i class="fa-solid fa-crosshairs text-lg"></i>
+      <a href="#hero" class="flex items-center gap-2 sm:gap-3 group text-decoration-none">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-[#ff6600] bg-black flex items-center justify-center text-[#ff6600] shadow-[0_0_12px_rgba(255,102,0,0.5)] group-hover:scale-105 transition-transform shrink-0">
+          <i class="fa-solid fa-crosshairs text-sm sm:text-lg"></i>
         </div>
         <div>
-          <span class="heading text-xl font-black tracking-tight text-white uppercase group-hover:text-orange-400 transition-colors">
+          <span class="heading text-lg sm:text-xl font-black tracking-tight text-white uppercase group-hover:text-orange-400 transition-colors">
             PHASE<span class="text-[#ff6600]">25</span>
           </span>
-          <span class="block text-[10px] font-mono tracking-widest text-stone-400 uppercase -mt-1">
+          <span class="block text-[8px] sm:text-[10px] font-mono tracking-widest text-stone-400 uppercase -mt-1">
             TRAINING &bull; LEADERSHIP LAB
           </span>
         </div>
@@ -227,32 +295,60 @@
         <a href="#trainer-card" class="hover:text-orange-400 transition-colors">Trainer &amp; Location</a>
       </nav>
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="#intake-form" class="btn-orange-glow px-4 py-2 rounded-lg text-xs flex items-center gap-2">
-          <span>Apply For Intake</span>
-          <i class="fa-solid fa-arrow-right"></i>
+      <!-- Action Button + Mobile Hamburger -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="#intake-form" class="btn-orange-glow px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs flex items-center gap-1.5">
+          <span>Apply</span>
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
         </a>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="md:hidden w-8 h-8 rounded-lg bg-stone-900 border border-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-sm transition-colors">
+          <i id="menuIcon" class="fa-solid fa-bars"></i>
+        </button>
       </div>
+
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-stone-800 mt-2.5 pt-2.5 pb-2 space-y-1.5 font-mono text-xs font-bold uppercase tracking-wider">
+      <a href="#manifesto" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg bg-stone-900/70 text-stone-300 hover:text-orange-400 hover:bg-stone-800 transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-file-lines text-orange-500 w-4"></i> The Manifesto
+      </a>
+      <a href="#pillars" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg bg-stone-900/70 text-stone-300 hover:text-orange-400 hover:bg-stone-800 transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-cubes text-orange-500 w-4"></i> 3 Pillars (Prep &bull; Purpose &bull; Process)
+      </a>
+      <a href="#phases" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg bg-stone-900/70 text-stone-300 hover:text-orange-400 hover:bg-stone-800 transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-shield-halved text-orange-500 w-4"></i> 4 Progression Phases
+      </a>
+      <a href="#intake-form" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg bg-orange-950/50 border border-orange-500/50 text-orange-300 hover:bg-orange-900/50 transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-user-plus text-orange-400 w-4"></i> Athlete Intake Form
+      </a>
+      <a href="#trainer-card" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg bg-stone-900/70 text-stone-300 hover:text-orange-400 hover:bg-stone-800 transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-location-dot text-orange-500 w-4"></i> Trainer Profile &amp; Map
+      </a>
+      <a href="tel:4045550125" class="block px-3 py-2 rounded-lg bg-stone-900/70 text-stone-300 hover:text-orange-400 hover:bg-stone-800 transition-colors flex items-center gap-2">
+        <i class="fa-solid fa-phone text-orange-500 w-4"></i> Call Coach: (404) 555-0125
+      </a>
     </div>
   </header>
 
   <!-- ==========================================================================
        HERO SECTION: 2-COLUMN GRID (LOGO + MANIFESTO ON LEFT // INTAKE FORM ON RIGHT)
        ========================================================================== -->
-  <main id="hero" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+  <main id="hero" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-12 sm:pb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
       
       <!-- ====================================================================
            LEFT COLUMN (7 COLS): LOGO CONTAINER + CORE MANIFESTO + ACCORDION CARD
            ==================================================================== -->
-      <div class="lg:col-span-7 space-y-8">
+      <div class="lg:col-span-7 space-y-6 sm:space-y-8">
         
         <!-- Logo & Header Group -->
-        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 pt-2">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 pt-1 sm:pt-2">
           
-          <!-- USER'S EXACT ROTATING TEXT RING LOGO (SCALED & STYLED IN ATHLETIC BLACK & ORANGE) -->
-          <div class="logo-container shrink-0 w-44 h-44 sm:w-52 sm:h-52 relative">
+          <!-- USER'S EXACT ROTATING TEXT RING LOGO (ROBUST SVG ROTATION & RESPONSIVE SCALING) -->
+          <div class="logo-container shrink-0 w-36 h-36 sm:w-52 sm:h-52 relative">
             <svg viewBox="0 0 400 400" width="100%" height="100%" class="pulse-target drop-shadow-[0_0_20px_rgba(255,102,0,0.35)]">
               <!-- INVISIBLE CIRCULAR PATH FOR THE TEXT -->
               <path id="text-arc" fill="transparent" 
@@ -260,12 +356,15 @@
                        a 150,150 0 1,1 300,0 
                        a 150,150 0 1,1 -300,0" />
 
-              <!-- TEXT WRAPPING THE PATH (Athletic Orange) -->
-              <text class="text-ring" font-size="34" font-weight="900" fill="#ff6600" letter-spacing="6">
-                <textPath href="#text-arc" startOffset="50%" text-anchor="middle">
-                  PHASE25 TRAINING • PHASE25 TRAINING •
-                </textPath>
-              </text>
+              <!-- TEXT WRAPPING THE PATH (Athletic Orange) WITH NATIVE SVG ROTATION FOR FLAWLESS MOBILE SUPPORT -->
+              <g>
+                <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="22s" repeatCount="indefinite"/>
+                <text font-size="34" font-weight="900" fill="#ff6600" letter-spacing="6">
+                  <textPath href="#text-arc" startOffset="50%" text-anchor="middle">
+                    PHASE25 TRAINING • PHASE25 TRAINING •
+                  </textPath>
+                </text>
+              </g>
 
               <!-- CENTER BULLSEYE TARGET -->
               <!-- Outer Target Ring -->
@@ -286,12 +385,12 @@
           </div>
 
           <!-- Hero Identity -->
-          <div class="space-y-3 text-center sm:text-left">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-950/80 border border-orange-500/50 text-orange-400 font-mono text-xs font-bold uppercase tracking-wider">
+          <div class="space-y-2.5 sm:space-y-3 text-center sm:text-left">
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-950/80 border border-orange-500/50 text-orange-400 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <i class="fa-solid fa-crosshairs text-orange-500"></i> Elite Football &amp; Character Lab
             </div>
             
-            <h1 class="heading text-4xl sm:text-5xl font-black text-white uppercase tracking-tight leading-none">
+            <h1 class="heading text-3xl sm:text-5xl font-black text-white uppercase tracking-tight leading-none">
               DOMINATE<br>
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6600] to-orange-400">
                 EVERY PHASE.
@@ -301,11 +400,18 @@
             <p class="font-mono text-xs sm:text-sm text-stone-400 uppercase tracking-widest font-bold">
               PREPARATION &bull; PURPOSE &bull; PROCESS
             </p>
+
+            <!-- Quick Mobile CTA to Intake Form -->
+            <div class="sm:hidden pt-2 flex flex-col gap-2">
+              <a href="#intake-form" class="btn-orange-glow py-2.5 px-4 rounded-lg text-xs font-black text-center flex items-center justify-center gap-2">
+                <i class="fa-solid fa-bolt"></i> Jump to Athlete Intake Form
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- THE COMPLETE USER MANIFESTO (STRUCTURED & HIGH-CONTRAST) -->
-        <div id="manifesto" class="space-y-4 text-stone-300 text-sm sm:text-base leading-relaxed border-l-4 border-[#ff6600] pl-4 sm:pl-6 bg-[#111111]/60 py-4 rounded-r-xl">
+        <div id="manifesto" class="space-y-3.5 sm:space-y-4 text-stone-300 text-xs sm:text-base leading-relaxed border-l-4 border-[#ff6600] pl-3.5 sm:pl-6 bg-[#111111]/80 py-3.5 sm:py-4 rounded-r-xl">
           <p class="font-semibold text-white">
             Here at <strong class="text-[#ff6600] font-black">Phase25 Training</strong>, we are not just developing athletes of the future &mdash; <strong class="text-white underline decoration-[#ff6600] decoration-2 underline-offset-4">we are shaping young men of the future.</strong>
           </p>
@@ -389,19 +495,19 @@
            ==================================================================== -->
       <div id="intake-form" class="lg:col-span-5 scroll-mt-24">
         
-        <div class="carbon-card p-6 sm:p-8 relative border-2 border-orange-500/50 shadow-[0_0_40px_rgba(255,102,0,0.25)]">
+        <div class="carbon-card p-4 sm:p-8 relative border-2 border-orange-500/50 shadow-[0_0_40px_rgba(255,102,0,0.25)] overflow-hidden">
           
-          <!-- Tactical Reticle Corner Accents -->
-          <div class="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[#ff6600]"></div>
-          <div class="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[#ff6600]"></div>
-          <div class="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[#ff6600]"></div>
-          <div class="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[#ff6600]"></div>
+          <!-- Tactical Reticle Corner Accents (Inside bounds to eliminate horizontal mobile overflow) -->
+          <div class="absolute top-0 left-0 w-3 h-3 sm:w-4 sm:h-4 border-t-2 border-l-2 border-[#ff6600]"></div>
+          <div class="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 border-t-2 border-r-2 border-[#ff6600]"></div>
+          <div class="absolute bottom-0 left-0 w-3 h-3 sm:w-4 sm:h-4 border-b-2 border-l-2 border-[#ff6600]"></div>
+          <div class="absolute bottom-0 right-0 w-3 h-3 sm:w-4 sm:h-4 border-b-2 border-r-2 border-[#ff6600]"></div>
 
-          <div class="mb-6 space-y-1">
+          <div class="mb-5 sm:mb-6 space-y-1">
             <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-orange-600 text-white text-[10px] font-mono font-black uppercase">
               <i class="fa-solid fa-user-plus"></i> NEW ATHLETE INTAKE
             </div>
-            <h2 class="heading text-2xl font-black text-white uppercase tracking-tight">
+            <h2 class="heading text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
               ENROLL IN PHASE 25
             </h2>
             <p class="text-xs text-stone-400">
@@ -410,14 +516,14 @@
           </div>
 
           <!-- The Intake Form -->
-          <form id="athleteIntakeForm" onsubmit="handleIntakeSubmit(event)" class="space-y-4">
+          <form id="athleteIntakeForm" onsubmit="handleIntakeSubmit(event)" class="space-y-3.5 sm:space-y-4">
             
             <!-- Parent / Guardian Name -->
             <div>
               <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
                 Parent / Guardian Name <span class="text-orange-500">*</span>
               </label>
-              <input type="text" id="parentName" required placeholder="e.g. Marcus Davis" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+              <input type="text" id="parentName" required placeholder="e.g. Marcus Davis" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-base sm:text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
             </div>
 
             <!-- Email & Phone Grid -->
@@ -426,13 +532,13 @@
                 <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
                   Contact Email <span class="text-orange-500">*</span>
                 </label>
-                <input type="email" id="parentEmail" required placeholder="name@email.com" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+                <input type="email" id="parentEmail" required placeholder="name@email.com" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-base sm:text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
               </div>
               <div>
                 <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
                   Phone Number <span class="text-orange-500">*</span>
                 </label>
-                <input type="tel" id="parentPhone" required placeholder="(404) 000-0000" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+                <input type="tel" id="parentPhone" required placeholder="(404) 000-0000" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-base sm:text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
               </div>
             </div>
 
@@ -441,7 +547,7 @@
               <label class="block text-xs font-mono font-black uppercase text-orange-300 mb-1">
                 <i class="fa-solid fa-star text-orange-400 mr-1"></i> Name of Future Leader (Athlete Name) <span class="text-orange-500">*</span>
               </label>
-              <input type="text" id="athleteName" required placeholder="e.g. Jordan Davis" class="w-full bg-[#121212] border border-orange-500/60 rounded-lg p-2.5 text-xs text-white font-bold placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+              <input type="text" id="athleteName" required placeholder="e.g. Jordan Davis" class="w-full bg-[#121212] border border-orange-500/60 rounded-lg p-2.5 text-base sm:text-xs text-white font-bold placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
             </div>
 
             <!-- Age / Grade & Position Grid -->
@@ -450,7 +556,7 @@
                 <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
                   Age / School Grade <span class="text-orange-500">*</span>
                 </label>
-                <select id="athleteGrade" required class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white focus:border-[#ff6600] focus:outline-none transition-colors">
+                <select id="athleteGrade" required class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-base sm:text-xs text-white focus:border-[#ff6600] focus:outline-none transition-colors">
                   <option value="" disabled selected>Select Grade Level</option>
                   <option value="elementary">Elementary (8-10 yrs)</option>
                   <option value="middle-6-7">Middle School (6th - 7th)</option>
@@ -465,7 +571,7 @@
                 <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
                   Primary Position <span class="text-orange-500">*</span>
                 </label>
-                <select id="athletePosition" required class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white focus:border-[#ff6600] focus:outline-none transition-colors">
+                <select id="athletePosition" required class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-base sm:text-xs text-white focus:border-[#ff6600] focus:outline-none transition-colors">
                   <option value="" disabled selected>Select Position</option>
                   <option value="QB">Quarterback (QB)</option>
                   <option value="WR">Wide Receiver (WR)</option>
@@ -487,7 +593,7 @@
               </label>
               
               <div class="relative">
-                <select id="focusPriority" required class="w-full bg-[#181818] border-2 border-orange-500/70 rounded-lg p-3 text-xs text-white font-bold focus:border-[#ff6600] focus:outline-none transition-colors appearance-none pr-8">
+                <select id="focusPriority" required class="w-full bg-[#181818] border-2 border-orange-500/70 rounded-lg p-2.5 sm:p-3 text-base sm:text-xs text-white font-bold focus:border-[#ff6600] focus:outline-none transition-colors appearance-none pr-8">
                   <option value="discipline" selected>🎯 Discipline &bull; Structure, Punctuality &amp; Urgency</option>
                   <option value="leadership">👑 Leadership &bull; Voice, Accountability &amp; Setting Standard</option>
                   <option value="academics">📚 Academics &bull; Classroom GPA, Study IQ &amp; Character</option>
@@ -505,12 +611,12 @@
               <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
                 Goals / Areas Coach Should Know:
               </label>
-              <textarea id="athleteGoals" rows="2" placeholder="e.g. Route tree separation, speed combine 40yd, building vocal leadership..." class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors"></textarea>
+              <textarea id="athleteGoals" rows="2" placeholder="e.g. Route tree separation, speed combine 40yd, building vocal leadership..." class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-base sm:text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors"></textarea>
             </div>
 
             <!-- Submit CTA -->
-            <button type="submit" class="w-full btn-orange-glow py-3.5 rounded-lg text-sm font-black flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_25px_rgba(255,102,0,0.6)]">
-              <i class="fa-solid fa-bullseye text-white"></i>
+            <button type="submit" class="w-full btn-orange-glow py-3.5 px-3 rounded-lg text-xs sm:text-sm font-black flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_25px_rgba(255,102,0,0.6)]">
+              <i class="fa-solid fa-bullseye text-white shrink-0"></i>
               <span>LOCK IN SPOT // DOMINATE PHASE 25</span>
             </button>
 
@@ -700,12 +806,12 @@
 
         </div>
 
-        <!-- Quick Call to Action -->
-        <div class="pt-6 mt-6 border-t border-stone-800 flex flex-wrap items-center justify-between gap-3 relative z-10">
-          <a href="tel:4045550125" class="btn-orange-glow px-4 py-2.5 rounded-lg text-xs font-black flex items-center gap-2">
+        <!-- Quick Call to Action (Full width stacked on mobile, row on tablet/desktop) -->
+        <div class="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-stone-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3 relative z-10">
+          <a href="tel:4045550125" class="w-full sm:w-auto btn-orange-glow px-4 py-2.5 rounded-lg text-xs font-black flex items-center justify-center gap-2 text-center">
             <i class="fa-solid fa-phone"></i> Call Trainer
           </a>
-          <a href="#intake-form" class="px-4 py-2.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 text-xs font-mono font-bold transition-all">
+          <a href="#intake-form" class="w-full sm:w-auto text-center px-4 py-2.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 text-xs font-mono font-bold transition-all">
             Schedule Evaluation &rarr;
           </a>
         </div>
@@ -713,7 +819,7 @@
       </div>
 
       <!-- Google Maps Embed Card (Right 6 Cols) -->
-      <div class="lg:col-span-6 carbon-card p-6 flex flex-col justify-between border-2 border-stone-800">
+      <div class="lg:col-span-6 carbon-card p-4 sm:p-6 flex flex-col justify-between border-2 border-stone-800">
         <div class="space-y-2 mb-4">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-mono font-black text-orange-400 uppercase tracking-widest">
@@ -723,7 +829,7 @@
               OPEN FOR TRAINING
             </span>
           </div>
-          <h3 class="heading text-xl font-black text-white uppercase">
+          <h3 class="heading text-lg sm:text-xl font-black text-white uppercase">
             FACILITY MAP &amp; DIRECTIONS
           </h3>
           <p class="text-xs text-stone-400 font-mono">
@@ -732,7 +838,7 @@
         </div>
 
         <!-- Google Map Iframe Container (Responsive Dark Overlay) -->
-        <div class="w-full h-72 sm:h-80 rounded-xl overflow-hidden border border-stone-700 relative bg-black shadow-inner">
+        <div class="w-full h-64 sm:h-80 rounded-xl overflow-hidden border border-stone-700 relative bg-black shadow-inner">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106198.81846937517!2d-84.34685362544265!3d33.72288079089851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f5a6b0c2a26569%3A0xb36ef554a9d7d3c0!2sAtlanta%2C%20GA!5e0!3m2!1sen!2sus!4v1714000000000!5m2!1sen!2sus" 
             width="100%" 
@@ -744,7 +850,7 @@
           </iframe>
           
           <!-- Tactical Target Pin Overlay -->
-          <div class="absolute top-4 left-4 pointer-events-none bg-black/85 backdrop-blur-md p-2.5 rounded-lg border border-orange-500 text-[11px] font-mono">
+          <div class="absolute top-3 left-3 sm:top-4 sm:left-4 pointer-events-none bg-black/85 backdrop-blur-md p-2 sm:p-2.5 rounded-lg border border-orange-500 text-[10px] sm:text-[11px] font-mono">
             <div class="text-orange-400 font-bold flex items-center gap-1.5">
               <i class="fa-solid fa-crosshairs animate-spin text-xs"></i>
               <span>GRIDIRON RETICLE: ACTIVE</span>
@@ -753,7 +859,7 @@
           </div>
         </div>
 
-        <div class="mt-4 flex items-center justify-between text-xs font-mono text-stone-400">
+        <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono text-stone-400">
           <span>Lat/Lon: 33.7490° N, 84.3880° W</span>
           <a href="https://maps.google.com/?q=Atlanta+GA" target="_blank" rel="noopener" class="text-orange-400 hover:text-orange-300 font-bold">
             Open In Google Maps &rarr;
@@ -768,8 +874,8 @@
   <!-- ==========================================================================
        FOOTER (BLACK & HIGH-VOLTAGE ORANGE WITH FULL MANIFESTO SUMMARY)
        ========================================================================== -->
-  <footer class="bg-black border-t-2 border-[#ff6600] pt-12 pb-16 px-4">
-    <div class="max-w-7xl mx-auto space-y-8 text-center">
+  <footer class="bg-black border-t-2 border-[#ff6600] pt-10 sm:pt-12 pb-16 px-4">
+    <div class="max-w-7xl mx-auto space-y-6 sm:space-y-8 text-center">
       
       <!-- Logo + Motto -->
       <div class="space-y-3">
@@ -777,18 +883,18 @@
           <div class="w-8 h-8 rounded-full border-2 border-[#ff6600] bg-black flex items-center justify-center text-[#ff6600]">
             <i class="fa-solid fa-crosshairs text-sm"></i>
           </div>
-          <span class="heading text-2xl font-black text-white uppercase tracking-tight">
+          <span class="heading text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
             PHASE<span class="text-[#ff6600]">25</span> TRAINING
           </span>
         </div>
         
-        <p class="font-mono text-sm sm:text-base text-stone-300 uppercase tracking-widest font-black max-w-2xl mx-auto">
+        <p class="font-mono text-xs sm:text-base text-stone-300 uppercase tracking-widest font-black max-w-2xl mx-auto px-2">
           "Preparation. Purpose. Process. Every action counts. Every rep matters. Dominate every phase."
         </p>
       </div>
 
       <!-- Quick Links -->
-      <div class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs uppercase font-bold text-stone-400">
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 font-mono text-xs uppercase font-bold text-stone-400">
         <a href="#hero" class="hover:text-orange-400 transition-colors">Home</a>
         <a href="#manifesto" class="hover:text-orange-400 transition-colors">Manifesto</a>
         <a href="#pillars" class="hover:text-orange-400 transition-colors">3 Pillars</a>
@@ -807,9 +913,43 @@
   </footer>
 
   <!-- ==========================================================================
-       FORM SUBMISSION SCRIPT
+       MOBILE STICKY BOTTOM ACTION BAR (PHONES ONLY)
+       ========================================================================== -->
+  <aside class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0d0d0d]/95 backdrop-blur-md border-t border-orange-500/40 px-3 py-2 shadow-[0_-5px_20px_rgba(0,0,0,0.8)]">
+    <div class="max-w-md mx-auto grid grid-cols-3 gap-2 text-center font-mono">
+      <a href="tel:4045550125" class="flex flex-col items-center justify-center p-1.5 rounded-lg bg-stone-900 border border-stone-700 text-stone-200 active:bg-stone-800 transition-colors">
+        <i class="fa-solid fa-phone text-orange-400 text-sm mb-0.5"></i>
+        <span class="text-[10px] font-bold uppercase">Call Coach</span>
+      </a>
+      <a href="#intake-form" class="flex flex-col items-center justify-center p-1.5 rounded-lg btn-orange-glow text-white">
+        <i class="fa-solid fa-bolt text-sm mb-0.5"></i>
+        <span class="text-[10px] font-black uppercase tracking-wider">Intake Form</span>
+      </a>
+      <a href="#trainer-card" class="flex flex-col items-center justify-center p-1.5 rounded-lg bg-stone-900 border border-stone-700 text-stone-200 active:bg-stone-800 transition-colors">
+        <i class="fa-solid fa-map-location-dot text-orange-400 text-sm mb-0.5"></i>
+        <span class="text-[10px] font-bold uppercase">Location</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       FORM SUBMISSION & MOBILE MENU SCRIPT
        ========================================================================== -->
   <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const icon = document.getElementById('menuIcon');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        menu.classList.add('hidden');
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    }
+
     function handleIntakeSubmit(e) {
       e.preventDefault();
       const parentName = document.getElementById('parentName').value;
