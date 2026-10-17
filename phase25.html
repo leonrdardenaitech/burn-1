@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase25 Training // Preparation. Purpose. Process. Dominate Every Phase.</title>
+  <meta name="description" content="Phase25 Training: Developing athletes and shaping young men of the future. High-IQ football intelligence, physical development, and unwavering discipline.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-carbon: #0a0a0a;
+      --bg-dark-card: #121212;
+      --bg-card-hover: #181818;
+      --orange-voltage: #ff5500;
+      --orange-bright: #ff6600;
+      --orange-glow: rgba(255, 102, 0, 0.45);
+      --border-carbon: rgba(255, 255, 255, 0.1);
+      --border-orange: rgba(255, 102, 0, 0.5);
+    }
+
+    body {
+      background-color: var(--bg-carbon);
+      color: #f3f4f6;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 102, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 60%, rgba(255, 85, 0, 0.06) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: auto, auto, 48px 48px, 48px 48px;
+    }
+
+    .heading { font-family: 'Space Grotesk', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Rotating Text Ring from User Logo */
+    .text-ring {
+      animation: spinTarget 22s linear infinite;
+      transform-origin: 200px 200px;
+    }
+
+    @keyframes spinTarget {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Pulse Target Reticle */
+    .pulse-target {
+      animation: pulseTargetGlow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseTargetGlow {
+      0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4)); opacity: 0.9; }
+      50% { filter: drop-shadow(0 0 16px rgba(255, 102, 0, 0.9)); opacity: 1; }
+    }
+
+    /* ==========================================================================
+       UIVERSE.IO ACCORDION CARD (by joe-watson-sbf) - ADAPTED TO BLACK & ORANGE
+       ========================================================================== */
+    .accordion-card {
+      width: 100%;
+      height: 250px;
+      border-radius: 8px;
+      background: #141414;
+      display: flex;
+      gap: 6px;
+      padding: 0.5em;
+      border: 1px solid rgba(255, 102, 0, 0.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .accordion-card .pillar-panel {
+      height: 100%;
+      flex: 1;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #111111;
+      border: 1px solid #ff6600;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 12px;
+    }
+
+    .accordion-card .pillar-panel:hover {
+      flex: 5;
+      background: linear-gradient(180deg, #22140c 0%, #120b06 100%);
+      border-color: #ff8533;
+      box-shadow: 0 0 25px rgba(255, 102, 0, 0.4);
+    }
+
+    .accordion-card .pillar-panel span.pillar-label {
+      min-width: 14em;
+      padding: 0.5em;
+      text-align: center;
+      transform: rotate(-90deg);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      text-transform: uppercase;
+      color: #ff6600;
+      letter-spacing: 0.15em;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .accordion-card .pillar-panel:hover span.pillar-label {
+      transform: rotate(0);
+      color: #ffffff;
+      font-size: 18px;
+      border-bottom: 2px solid #ff6600;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .pillar-desc {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease 0.15s;
+      text-align: center;
+      color: #d1d5db;
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 0 12px;
+    }
+
+    .accordion-card .pillar-panel:hover .pillar-desc {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Orange Neon Button */
+    .btn-orange-glow {
+      background: linear-gradient(135deg, #ff6600 0%, #e04b00 100%);
+      color: #ffffff;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid #ff8533;
+      box-shadow: 0 4px 20px rgba(255, 102, 0, 0.45);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-orange-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 102, 0, 0.7);
+      background: linear-gradient(135deg, #ff771a 0%, #ff5500 100%);
+    }
+
+    /* Carbon Tactical Box */
+    .carbon-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      transition: border-color 0.3s ease;
+    }
+
+    .carbon-card:hover {
+      border-color: rgba(255, 102, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="selection:bg-orange-600 selection:text-white">
+
+  <!-- ==========================================================================
+       TOP ANNOUNCEMENT BAR & GRIDIRON TICKER
+       ========================================================================== -->
+  <div class="bg-black border-b border-orange-500/30 px-4 py-2 text-xs font-mono font-bold text-stone-300">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#ff6600] animate-ping"></span>
+        <span class="text-white font-black uppercase tracking-wider">PHASE25 TRAINING</span>
+        <span class="text-stone-500">//</span>
+        <span class="text-orange-400">NOW ACCEPTING NEW STUDENT-ATHLETE EVALUATIONS</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] text-stone-400">
+        <span><i class="fa-solid fa-bullseye text-orange-500 mr-1"></i> HIGH-IQ FOOTBALL LAB</span>
+        <span><i class="fa-solid fa-location-dot text-orange-500 mr-1"></i> METRO ATLANTA, GA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PRIMARY NAVIGATION HEADER
+       ========================================================================== -->
+  <header class="sticky top-0 z-50 bg-[#0d0d0d]/95 backdrop-blur-md border-b border-stone-800 px-4 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Logo + Name -->
+      <a href="#hero" class="flex items-center gap-3 group text-decoration-none">
+        <div class="w-10 h-10 rounded-full border-2 border-[#ff6600] bg-black flex items-center justify-center text-[#ff6600] shadow-[0_0_12px_rgba(255,102,0,0.5)] group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-crosshairs text-lg"></i>
+        </div>
+        <div>
+          <span class="heading text-xl font-black tracking-tight text-white uppercase group-hover:text-orange-400 transition-colors">
+            PHASE<span class="text-[#ff6600]">25</span>
+          </span>
+          <span class="block text-[10px] font-mono tracking-widest text-stone-400 uppercase -mt-1">
+            TRAINING &bull; LEADERSHIP LAB
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 font-mono text-xs font-bold uppercase tracking-wider text-stone-300">
+        <a href="#manifesto" class="hover:text-orange-400 transition-colors">The Manifesto</a>
+        <a href="#pillars" class="hover:text-orange-400 transition-colors">3 Pillars</a>
+        <a href="#phases" class="hover:text-orange-400 transition-colors">Phases</a>
+        <a href="#trainer-card" class="hover:text-orange-400 transition-colors">Trainer &amp; Location</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="#intake-form" class="btn-orange-glow px-4 py-2 rounded-lg text-xs flex items-center gap-2">
+          <span>Apply For Intake</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION: 2-COLUMN GRID (LOGO + MANIFESTO ON LEFT // INTAKE FORM ON RIGHT)
+       ========================================================================== -->
+  <main id="hero" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      
+      <!-- ====================================================================
+           LEFT COLUMN (7 COLS): LOGO CONTAINER + CORE MANIFESTO + ACCORDION CARD
+           ==================================================================== -->
+      <div class="lg:col-span-7 space-y-8">
+        
+        <!-- Logo & Header Group -->
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 pt-2">
+          
+          <!-- USER'S EXACT ROTATING TEXT RING LOGO (SCALED & STYLED IN ATHLETIC BLACK & ORANGE) -->
+          <div class="logo-container shrink-0 w-44 h-44 sm:w-52 sm:h-52 relative">
+            <svg viewBox="0 0 400 400" width="100%" height="100%" class="pulse-target drop-shadow-[0_0_20px_rgba(255,102,0,0.35)]">
+              <!-- INVISIBLE CIRCULAR PATH FOR THE TEXT -->
+              <path id="text-arc" fill="transparent" 
+                    d="M 50, 200 
+                       a 150,150 0 1,1 300,0 
+                       a 150,150 0 1,1 -300,0" />
+
+              <!-- TEXT WRAPPING THE PATH (Athletic Orange) -->
+              <text class="text-ring" font-size="34" font-weight="900" fill="#ff6600" letter-spacing="6">
+                <textPath href="#text-arc" startOffset="50%" text-anchor="middle">
+                  PHASE25 TRAINING • PHASE25 TRAINING •
+                </textPath>
+              </text>
+
+              <!-- CENTER BULLSEYE TARGET -->
+              <!-- Outer Target Ring -->
+              <circle cx="200" cy="200" r="62" fill="none" stroke="#ffffff" stroke-width="7"/>
+              <!-- Inner Target Ring -->
+              <circle cx="200" cy="200" r="36" fill="none" stroke="#ffffff" stroke-width="7"/>
+              <!-- Center Bullseye Dot -->
+              <circle cx="200" cy="200" r="16" fill="#ff5500"/>
+
+              <!-- ANGLED ARROW (Rotated -45 degrees to point Upper Right) -->
+              <g transform="rotate(-45 200 200)">
+                <!-- Arrow Shaft -->
+                <line x1="85" y1="200" x2="235" y2="200" stroke="#ff5500" stroke-width="12" stroke-linecap="round"/>
+                <!-- Arrow Head -->
+                <polygon points="255,200 220,183 220,217" fill="#ff5500" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Hero Identity -->
+          <div class="space-y-3 text-center sm:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-950/80 border border-orange-500/50 text-orange-400 font-mono text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-crosshairs text-orange-500"></i> Elite Football &amp; Character Lab
+            </div>
+            
+            <h1 class="heading text-4xl sm:text-5xl font-black text-white uppercase tracking-tight leading-none">
+              DOMINATE<br>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6600] to-orange-400">
+                EVERY PHASE.
+              </span>
+            </h1>
+
+            <p class="font-mono text-xs sm:text-sm text-stone-400 uppercase tracking-widest font-bold">
+              PREPARATION &bull; PURPOSE &bull; PROCESS
+            </p>
+          </div>
+        </div>
+
+        <!-- THE COMPLETE USER MANIFESTO (STRUCTURED & HIGH-CONTRAST) -->
+        <div id="manifesto" class="space-y-4 text-stone-300 text-sm sm:text-base leading-relaxed border-l-4 border-[#ff6600] pl-4 sm:pl-6 bg-[#111111]/60 py-4 rounded-r-xl">
+          <p class="font-semibold text-white">
+            Here at <strong class="text-[#ff6600] font-black">Phase25 Training</strong>, we are not just developing athletes of the future &mdash; <strong class="text-white underline decoration-[#ff6600] decoration-2 underline-offset-4">we are shaping young men of the future.</strong>
+          </p>
+          
+          <p>
+            Every action has a purpose. Every rep is done with urgency and intent. We build disciplined, high-IQ athletes and leaders who embrace the grind, respect the process, and execute with precision.
+          </p>
+
+          <p class="text-stone-300">
+            Our mission is to create competitors who are <span class="text-white font-bold">physically prepared, mentally sharp, and built for impact</span> &mdash; on the field, in the classroom, and in life.
+          </p>
+
+          <p>
+            We develop athletes who embrace the grind, respect the details, and refuse to break. Through structured phases of physical development, mental toughness, and football intelligence, we forge complete players &mdash; <strong class="text-orange-300 font-black">athletes who don't hope to make plays; they create them.</strong>
+          </p>
+
+          <div class="pt-2 flex items-center gap-2 font-mono text-xs text-orange-400 font-bold uppercase">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Every action counts. Every rep matters. Dominate every phase.</span>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             THE USER'S UIVERSE.IO HOVER ACCORDION COMPONENT
+             (PREPARATION // PURPOSE // PROCESS)
+             ==================================================================== -->
+        <div id="pillars" class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-orange-400 uppercase tracking-widest">
+              // THE 3 PILLARS (HOVER TO EXPAND)
+            </span>
+            <span class="text-[11px] font-mono text-stone-500">INTERACTIVE DRILL-DOWN</span>
+          </div>
+
+          <div class="accordion-card">
+            
+            <!-- PANEL 1: PREPARATION -->
+            <div class="pillar-panel">
+              <span class="pillar-label">Preparation</span>
+              <div class="pillar-desc">
+                <div class="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center mx-auto mb-2 text-xs font-black">
+                  <i class="fa-solid fa-dumbbell"></i>
+                </div>
+                <strong class="text-white block mb-1 uppercase font-bold text-xs">Physical Development</strong>
+                Urgent reps, explosive deceleration, hip fluidity, combine speed mechanics, and position-specific fundamentals.
+              </div>
+            </div>
+
+            <!-- PANEL 2: PURPOSE -->
+            <div class="pillar-panel">
+              <span class="pillar-label">Purpose</span>
+              <div class="pillar-desc">
+                <div class="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center mx-auto mb-2 text-xs font-black">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <strong class="text-white block mb-1 uppercase font-bold text-xs">Intent &amp; Classroom IQ</strong>
+                Character, academic pride, vocal leadership, and life impact. Shaping young men who lead by example on and off the turf.
+              </div>
+            </div>
+
+            <!-- PANEL 3: PROCESS -->
+            <div class="pillar-panel">
+              <span class="pillar-label">Process</span>
+              <div class="pillar-desc">
+                <div class="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center mx-auto mb-2 text-xs font-black">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+                <strong class="text-white block mb-1 uppercase font-bold text-xs">Football Intelligence</strong>
+                Film breakdown, pre-snap recognition, coverage leverage, and 4th-quarter mental toughness that never breaks under pressure.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ====================================================================
+           RIGHT COLUMN (5 COLS): STATIC ATHLETE INTAKE & SIGN-UP FORM
+           ==================================================================== -->
+      <div id="intake-form" class="lg:col-span-5 scroll-mt-24">
+        
+        <div class="carbon-card p-6 sm:p-8 relative border-2 border-orange-500/50 shadow-[0_0_40px_rgba(255,102,0,0.25)]">
+          
+          <!-- Tactical Reticle Corner Accents -->
+          <div class="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[#ff6600]"></div>
+          <div class="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[#ff6600]"></div>
+          <div class="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[#ff6600]"></div>
+          <div class="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[#ff6600]"></div>
+
+          <div class="mb-6 space-y-1">
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-orange-600 text-white text-[10px] font-mono font-black uppercase">
+              <i class="fa-solid fa-user-plus"></i> NEW ATHLETE INTAKE
+            </div>
+            <h2 class="heading text-2xl font-black text-white uppercase tracking-tight">
+              ENROLL IN PHASE 25
+            </h2>
+            <p class="text-xs text-stone-400">
+              Submit your evaluation request. The coaching staff reviews every application for commitment, discipline, and work ethic.
+            </p>
+          </div>
+
+          <!-- The Intake Form -->
+          <form id="athleteIntakeForm" onsubmit="handleIntakeSubmit(event)" class="space-y-4">
+            
+            <!-- Parent / Guardian Name -->
+            <div>
+              <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
+                Parent / Guardian Name <span class="text-orange-500">*</span>
+              </label>
+              <input type="text" id="parentName" required placeholder="e.g. Marcus Davis" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+            </div>
+
+            <!-- Email & Phone Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
+                  Contact Email <span class="text-orange-500">*</span>
+                </label>
+                <input type="email" id="parentEmail" required placeholder="name@email.com" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+              </div>
+              <div>
+                <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
+                  Phone Number <span class="text-orange-500">*</span>
+                </label>
+                <input type="tel" id="parentPhone" required placeholder="(404) 000-0000" class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+              </div>
+            </div>
+
+            <!-- NAME OF FUTURE LEADER (AS REQUESTED) -->
+            <div class="p-3 rounded-lg bg-orange-950/30 border border-orange-500/40">
+              <label class="block text-xs font-mono font-black uppercase text-orange-300 mb-1">
+                <i class="fa-solid fa-star text-orange-400 mr-1"></i> Name of Future Leader (Athlete Name) <span class="text-orange-500">*</span>
+              </label>
+              <input type="text" id="athleteName" required placeholder="e.g. Jordan Davis" class="w-full bg-[#121212] border border-orange-500/60 rounded-lg p-2.5 text-xs text-white font-bold placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors">
+            </div>
+
+            <!-- Age / Grade & Position Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
+                  Age / School Grade <span class="text-orange-500">*</span>
+                </label>
+                <select id="athleteGrade" required class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white focus:border-[#ff6600] focus:outline-none transition-colors">
+                  <option value="" disabled selected>Select Grade Level</option>
+                  <option value="elementary">Elementary (8-10 yrs)</option>
+                  <option value="middle-6-7">Middle School (6th - 7th)</option>
+                  <option value="middle-8">Rising 8th Grade</option>
+                  <option value="hs-fresh-soph">High School (Freshman / JV)</option>
+                  <option value="hs-varsity">High School Varsity (Junior / Senior)</option>
+                  <option value="college-prep">College Prep / Combine Prospect</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
+                  Primary Position <span class="text-orange-500">*</span>
+                </label>
+                <select id="athletePosition" required class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white focus:border-[#ff6600] focus:outline-none transition-colors">
+                  <option value="" disabled selected>Select Position</option>
+                  <option value="QB">Quarterback (QB)</option>
+                  <option value="WR">Wide Receiver (WR)</option>
+                  <option value="RB">Running Back (RB)</option>
+                  <option value="DB">Defensive Back (CB / Safety)</option>
+                  <option value="LB">Linebacker (LB)</option>
+                  <option value="TE">Tight End / Hybrid (TE)</option>
+                  <option value="OL-DL">Offensive / Defensive Line (Trench Lab)</option>
+                  <option value="multi">All-Around Athlete (Skill)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- RADIAL / DROPDOWN FOR AREAS OF FOCUS (AS REQUESTED: LEADERSHIP, ACADEMICS, DISCIPLINE, TOUGHNESS) -->
+            <div>
+              <label class="block text-xs font-mono font-black uppercase text-stone-200 mb-1.5 flex items-center justify-between">
+                <span>Priority Area of Focus:</span>
+                <span class="text-[10px] text-orange-400 font-bold">RADIAL DROPDOWN</span>
+              </label>
+              
+              <div class="relative">
+                <select id="focusPriority" required class="w-full bg-[#181818] border-2 border-orange-500/70 rounded-lg p-3 text-xs text-white font-bold focus:border-[#ff6600] focus:outline-none transition-colors appearance-none pr-8">
+                  <option value="discipline" selected>🎯 Discipline &bull; Structure, Punctuality &amp; Urgency</option>
+                  <option value="leadership">👑 Leadership &bull; Voice, Accountability &amp; Setting Standard</option>
+                  <option value="academics">📚 Academics &bull; Classroom GPA, Study IQ &amp; Character</option>
+                  <option value="toughness">⚡ Toughness &bull; Mental Resilience, 4th-Quarter Grit &amp; Drive</option>
+                  <option value="all-phases">🔥 Complete Package &bull; All 4 Phase25 Disciplines</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-orange-400">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Training Intent / Notes -->
+            <div>
+              <label class="block text-xs font-mono font-bold uppercase text-stone-300 mb-1">
+                Goals / Areas Coach Should Know:
+              </label>
+              <textarea id="athleteGoals" rows="2" placeholder="e.g. Route tree separation, speed combine 40yd, building vocal leadership..." class="w-full bg-[#181818] border border-stone-700 rounded-lg p-2.5 text-xs text-white placeholder-stone-600 focus:border-[#ff6600] focus:outline-none transition-colors"></textarea>
+            </div>
+
+            <!-- Submit CTA -->
+            <button type="submit" class="w-full btn-orange-glow py-3.5 rounded-lg text-sm font-black flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_25px_rgba(255,102,0,0.6)]">
+              <i class="fa-solid fa-bullseye text-white"></i>
+              <span>LOCK IN SPOT // DOMINATE PHASE 25</span>
+            </button>
+
+            <!-- Success Confirmation Box -->
+            <div id="formSuccessAlert" class="hidden p-4 rounded-lg bg-orange-950/80 border border-orange-500 text-xs text-orange-200 font-mono space-y-1">
+              <div class="font-black text-white flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-circle-check text-green-400"></i>
+                <span>EVALUATION INTAKE CONFIRMED</span>
+              </div>
+              <p>
+                Athlete profile logged to the Phase25 Training roster. Coach will contact the parent/guardian directly via phone/email within 24 hours.
+              </p>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ==========================================================================
+       THE 4 TRAINING PHASES (STRUCTURED ATHLETIC PROGRESSION)
+       ========================================================================== -->
+  <section id="phases" class="py-14 bg-[#0e0e0e] border-y border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-2">
+        <span class="text-xs font-mono font-bold text-orange-400 uppercase tracking-widest">
+          // STRUCTURED DEVELOPMENTAL PHASES
+        </span>
+        <h2 class="heading text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
+          BUILT FOR IMPACT: THE 4 PROGRESSION PHASES
+        </h2>
+        <p class="text-sm text-stone-400">
+          Athletes don't hope to make plays &mdash; they create them through deliberate, progressive mastery.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- PHASE 01 -->
+        <div class="carbon-card p-6 border-t-4 border-t-[#ff6600] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-2xl font-black text-orange-400">PHASE 01</span>
+            <i class="fa-solid fa-bullseye text-stone-600"></i>
+          </div>
+          <h3 class="heading text-lg font-black text-white uppercase">Biomechanics &amp; Foundation</h3>
+          <p class="text-xs text-stone-400 leading-relaxed">
+            Eliminate wasted movement. Stance, rapid deceleration, hip sink, explosive plant-and-drive mechanics, and center-of-gravity control.
+          </p>
+          <div class="pt-2 border-t border-stone-800 text-[10px] font-mono text-orange-300 font-bold uppercase">
+            &bull; FOOTWORK ZERO-LATENCY
+          </div>
+        </div>
+
+        <!-- PHASE 02 -->
+        <div class="carbon-card p-6 border-t-4 border-t-[#ff6600] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-2xl font-black text-orange-400">PHASE 02</span>
+            <i class="fa-solid fa-gauge-high text-stone-600"></i>
+          </div>
+          <h3 class="heading text-lg font-black text-white uppercase">Urgency &amp; High-Speed Reps</h3>
+          <p class="text-xs text-stone-400 leading-relaxed">
+            Train at game speed before game day. Execute route stems, coverage transitions, and reactionary tackling angles with suddenness and intent.
+          </p>
+          <div class="pt-2 border-t border-stone-800 text-[10px] font-mono text-orange-300 font-bold uppercase">
+            &bull; HIGH-VELOCITY EXECUTION
+          </div>
+        </div>
+
+        <!-- PHASE 03 -->
+        <div class="carbon-card p-6 border-t-4 border-t-[#ff6600] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-2xl font-black text-orange-400">PHASE 03</span>
+            <i class="fa-solid fa-brain text-stone-600"></i>
+          </div>
+          <h3 class="heading text-lg font-black text-white uppercase">Football IQ &amp; Film Study</h3>
+          <p class="text-xs text-stone-400 leading-relaxed">
+            Know what the opponent does before the ball is snapped. Coverage rotation recognition, leverage manipulation, and situational clock awareness.
+          </p>
+          <div class="pt-2 border-t border-stone-800 text-[10px] font-mono text-orange-300 font-bold uppercase">
+            &bull; PRE-SNAP MASTERY
+          </div>
+        </div>
+
+        <!-- PHASE 04 -->
+        <div class="carbon-card p-6 border-t-4 border-t-[#ff6600] space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-2xl font-black text-orange-400">PHASE 04</span>
+            <i class="fa-solid fa-crown text-stone-600"></i>
+          </div>
+          <h3 class="heading text-lg font-black text-white uppercase">Leadership &amp; Life Impact</h3>
+          <p class="text-xs text-stone-400 leading-relaxed">
+            Character under pressure. Maintaining GPA standards, respecting parents, coaches, and teachers, and holding teammates accountable to excellence.
+          </p>
+          <div class="pt-2 border-t border-stone-800 text-[10px] font-mono text-orange-300 font-bold uppercase">
+            &bull; SHAPING YOUNG MEN
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       PERSONAL TRAINER BUSINESS CARD & GOOGLE MAPS SECTION (AS REQUESTED)
+       ========================================================================== -->
+  <section id="trainer-card" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      
+      <!-- Trainer Profile Card (Left 6 Cols) -->
+      <div class="lg:col-span-6 carbon-card p-6 sm:p-8 flex flex-col justify-between border-2 border-orange-500/40 relative overflow-hidden">
+        
+        <!-- Subtle Bullseye Watermark in Card Background -->
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 opacity-5 pointer-events-none">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#ff6600" stroke-width="4">
+            <circle cx="50" cy="50" r="45"/>
+            <circle cx="50" cy="50" r="30"/>
+            <circle cx="50" cy="50" r="15"/>
+          </svg>
+        </div>
+
+        <div class="space-y-6 relative z-10">
+          
+          <div class="flex items-center justify-between border-b border-stone-800 pb-4">
+            <div>
+              <span class="text-[10px] font-mono font-black text-[#ff6600] uppercase tracking-widest">
+                OFFICIAL TRAINER PROFILE
+              </span>
+              <h3 class="heading text-2xl font-black text-white uppercase">
+                PHASE25 TRAINING FACILITY
+              </h3>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-[#ff6600] text-black font-black flex items-center justify-center text-xl shadow-[0_0_15px_rgba(255,102,0,0.5)]">
+              P25
+            </div>
+          </div>
+
+          <!-- Business Contact Rows -->
+          <div class="space-y-4 text-xs font-mono">
+            
+            <!-- Address Row -->
+            <div class="flex items-start gap-3.5 p-3 rounded-lg bg-[#181818] border border-stone-800">
+              <div class="w-8 h-8 rounded-lg bg-orange-600/20 text-[#ff6600] flex items-center justify-center shrink-0 text-sm">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <span class="text-stone-400 block text-[10px] uppercase font-bold">Facility Location</span>
+                <span class="text-white font-bold text-sm">Phase25 Performance Lab &bull; Metro Field Turf</span>
+                <span class="text-stone-400 block text-[11px]">Atlanta / Stonecrest Athletic Training Grounds, GA</span>
+              </div>
+            </div>
+
+            <!-- Phone Row -->
+            <div class="flex items-start gap-3.5 p-3 rounded-lg bg-[#181818] border border-stone-800">
+              <div class="w-8 h-8 rounded-lg bg-orange-600/20 text-[#ff6600] flex items-center justify-center shrink-0 text-sm">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <span class="text-stone-400 block text-[10px] uppercase font-bold">Direct Coach Line / SMS</span>
+                <a href="tel:4045550125" class="text-white hover:text-[#ff6600] font-black text-sm transition-colors">
+                  (404) 555-P25T &bull; (404) 555-0125
+                </a>
+                <span class="text-stone-400 block text-[11px]">Direct evaluations, schedule questions, 1-on-1 bookings</span>
+              </div>
+            </div>
+
+            <!-- Email & Operating Hours -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 rounded-lg bg-[#181818] border border-stone-800">
+                <span class="text-stone-400 block text-[10px] uppercase font-bold">Email Inquiries</span>
+                <span class="text-white font-bold text-[11px]">coach@phase25training.com</span>
+              </div>
+              <div class="p-3 rounded-lg bg-[#181818] border border-stone-800">
+                <span class="text-stone-400 block text-[10px] uppercase font-bold">Session Hours</span>
+                <span class="text-white font-bold text-[11px]">Mon-Fri 4PM-8PM | Sat 8AM-1PM</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Quick Call to Action -->
+        <div class="pt-6 mt-6 border-t border-stone-800 flex flex-wrap items-center justify-between gap-3 relative z-10">
+          <a href="tel:4045550125" class="btn-orange-glow px-4 py-2.5 rounded-lg text-xs font-black flex items-center gap-2">
+            <i class="fa-solid fa-phone"></i> Call Trainer
+          </a>
+          <a href="#intake-form" class="px-4 py-2.5 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 text-xs font-mono font-bold transition-all">
+            Schedule Evaluation &rarr;
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Google Maps Embed Card (Right 6 Cols) -->
+      <div class="lg:col-span-6 carbon-card p-6 flex flex-col justify-between border-2 border-stone-800">
+        <div class="space-y-2 mb-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-mono font-black text-orange-400 uppercase tracking-widest">
+              // ATHLETIC FIELD RADAR
+            </span>
+            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/40 text-[10px] font-mono font-bold">
+              OPEN FOR TRAINING
+            </span>
+          </div>
+          <h3 class="heading text-xl font-black text-white uppercase">
+            FACILITY MAP &amp; DIRECTIONS
+          </h3>
+          <p class="text-xs text-stone-400 font-mono">
+            Interactive coordinates &bull; Outdoor turf combine drills + Indoor strength lab
+          </p>
+        </div>
+
+        <!-- Google Map Iframe Container (Responsive Dark Overlay) -->
+        <div class="w-full h-72 sm:h-80 rounded-xl overflow-hidden border border-stone-700 relative bg-black shadow-inner">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106198.81846937517!2d-84.34685362544265!3d33.72288079089851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f5a6b0c2a26569%3A0xb36ef554a9d7d3c0!2sAtlanta%2C%20GA!5e0!3m2!1sen!2sus!4v1714000000000!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0; filter: invert(90%) hue-rotate(180deg) contrast(110%);" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          
+          <!-- Tactical Target Pin Overlay -->
+          <div class="absolute top-4 left-4 pointer-events-none bg-black/85 backdrop-blur-md p-2.5 rounded-lg border border-orange-500 text-[11px] font-mono">
+            <div class="text-orange-400 font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-crosshairs animate-spin text-xs"></i>
+              <span>GRIDIRON RETICLE: ACTIVE</span>
+            </div>
+            <div class="text-stone-300">Phase25 Training Grounds</div>
+          </div>
+        </div>
+
+        <div class="mt-4 flex items-center justify-between text-xs font-mono text-stone-400">
+          <span>Lat/Lon: 33.7490° N, 84.3880° W</span>
+          <a href="https://maps.google.com/?q=Atlanta+GA" target="_blank" rel="noopener" class="text-orange-400 hover:text-orange-300 font-bold">
+            Open In Google Maps &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================================
+       FOOTER (BLACK & HIGH-VOLTAGE ORANGE WITH FULL MANIFESTO SUMMARY)
+       ========================================================================== -->
+  <footer class="bg-black border-t-2 border-[#ff6600] pt-12 pb-16 px-4">
+    <div class="max-w-7xl mx-auto space-y-8 text-center">
+      
+      <!-- Logo + Motto -->
+      <div class="space-y-3">
+        <div class="inline-flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full border-2 border-[#ff6600] bg-black flex items-center justify-center text-[#ff6600]">
+            <i class="fa-solid fa-crosshairs text-sm"></i>
+          </div>
+          <span class="heading text-2xl font-black text-white uppercase tracking-tight">
+            PHASE<span class="text-[#ff6600]">25</span> TRAINING
+          </span>
+        </div>
+        
+        <p class="font-mono text-sm sm:text-base text-stone-300 uppercase tracking-widest font-black max-w-2xl mx-auto">
+          "Preparation. Purpose. Process. Every action counts. Every rep matters. Dominate every phase."
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs uppercase font-bold text-stone-400">
+        <a href="#hero" class="hover:text-orange-400 transition-colors">Home</a>
+        <a href="#manifesto" class="hover:text-orange-400 transition-colors">Manifesto</a>
+        <a href="#pillars" class="hover:text-orange-400 transition-colors">3 Pillars</a>
+        <a href="#phases" class="hover:text-orange-400 transition-colors">Progression Phases</a>
+        <a href="#intake-form" class="hover:text-orange-400 transition-colors">Intake Form</a>
+        <a href="#trainer-card" class="hover:text-orange-400 transition-colors">Location</a>
+      </div>
+
+      <!-- Copyright & Mission -->
+      <div class="border-t border-stone-800 pt-6 text-xs font-mono text-stone-500 space-y-1">
+        <p>&copy; 2026 Phase25 Training. All Rights Reserved. Built for student-athletes and future leaders.</p>
+        <p class="text-[11px] text-stone-600">On the field &bull; In the classroom &bull; In life.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       FORM SUBMISSION SCRIPT
+       ========================================================================== -->
+  <script>
+    function handleIntakeSubmit(e) {
+      e.preventDefault();
+      const parentName = document.getElementById('parentName').value;
+      const athleteName = document.getElementById('athleteName').value;
+      const athletePosition = document.getElementById('athletePosition').value;
+      const focus = document.getElementById('focusPriority').value;
+      
+      const alertBox = document.getElementById('formSuccessAlert');
+      alertBox.classList.remove('hidden');
+      alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Reset form fields after 2 seconds
+      setTimeout(() => {
+        document.getElementById('athleteIntakeForm').reset();
+      }, 2500);
+    }
+  </script>
+
+</body>
+</html>

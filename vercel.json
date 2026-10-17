@@ -142,6 +142,10 @@
       "destination": "/yelle.html"
     },
     {
+      "source": "/phase25",
+      "destination": "/phase25.html"
+    },
+    {
       "source": "/helpline",
       "destination": "/helpline/index.html"
     },
@@ -208,6 +212,16 @@
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "^yella\\.burn-1\\.com$" }],
       "destination": "/yelle.html"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "^phase25\\.burn-1\\.com$" }],
+      "destination": "/phase25.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "^phase25\\.burn-1\\.com$" }],
+      "destination": "/phase25.html"
     },
     {
       "source": "/",
