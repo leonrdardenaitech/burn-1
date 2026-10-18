@@ -24,6 +24,85 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "^yelle\\.burn-1\\.com$"
+        }
+      ],
+      "destination": "/yelle",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "^yella\\.burn-1\\.com$"
+        }
+      ],
+      "destination": "/yelle",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "^phase25\\.burn-1\\.com$"
+        }
+      ],
+      "destination": "/phase25",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "^tools\\.burn-1\\.com$"
+        }
+      ],
+      "destination": "/tools",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "^burn-1systems\\.burn-1\\.com$"
+        }
+      ],
+      "destination": "/burn-1systems",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "^(?!(www|burn-1systems|tools|yelle|yella|phase25)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+        }
+      ],
+      "destination": "/cards/:subdomain",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!cards|assets|images|_next|favicon\\.ico).+)",
+      "has": [
+        {
+          "type": "host",
+          "value": "^(?!(www|burn-1systems|tools|yelle|yella|phase25)\\.)[a-zA-Z0-9-]+\\.burn-1\\.com$"
+        }
+      ],
+      "destination": "https://www.burn-1.com/:path",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/wordpuzzle",

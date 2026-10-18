@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Canonical Sitemap for Burn-1 Platform
+Sitemap: https://www.burn-1.com/sitemap.xml
