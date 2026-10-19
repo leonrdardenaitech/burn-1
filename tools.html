@@ -138,6 +138,47 @@
             border: 1px solid rgba(203, 213, 225, 0.2);
             position: relative;
         }
+
+        .silkscreen-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            color: rgba(226, 232, 240, 0.82);
+            text-transform: uppercase;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
+        }
+
+        .pcb-standoff {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #030705 0%, #030705 38%, #d97706 42%, #fbbf24 58%, #92400e 72%, #064e3b 100%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.85), inset 0 1px 2px rgba(255,255,255,0.6);
+            border: 1px dashed rgba(251, 191, 36, 0.6);
+        }
+
+        .smd-capacitor {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 48%, #334155 85%, #0f172a 100%);
+            border: 1.5px solid #cbd5e1;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.85), inset 0 1px 2px #ffffff;
+            position: relative;
+        }
+        .smd-capacitor::after {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #1e293b 0%, #1e293b 32%, transparent 33%);
+        }
+
+        .finned-heatsink {
+            background: repeating-linear-gradient(90deg, #cbd5e1 0px, #f8fafc 2px, #475569 3px, #0f172a 6px, #334155 8px);
+            border: 1.5px solid #94a3b8;
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
         .machine-border::before {
             content: '';
             position: absolute;
@@ -231,16 +272,33 @@
         <section id="omni-scan" class="hardware-viewport-wrap">
             <div id="hardware-stage" class="hardware-chassis-stage camera-overhead rounded-3xl p-6 sm:p-10 relative overflow-hidden">
                 
+                <!-- BACKGROUND SVG MOTHERBOARD COPPER TRACES -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-70" viewBox="0 0 1200 760" preserveAspectRatio="none">
+                    <g stroke="#22c55e" stroke-opacity="0.22" stroke-width="2" fill="none">
+                        <polyline points="40,120 180,120 240,180 240,520 310,590"/>
+                        <polyline points="60,140 170,140 220,190 220,540 295,615"/>
+                        <polyline points="420,90 420,280 510,370 760,370"/>
+                        <polyline points="680,260 880,260 950,330 1140,330"/>
+                    </g>
+                    <g stroke="#f97316" stroke-opacity="0.5" stroke-width="2.5" fill="none">
+                        <polyline points="720,220 620,220 570,270 460,270"/>
+                        <polyline points="780,340 780,430 710,490 580,490"/>
+                    </g>
+                </svg>
+
                 <!-- STAGE TOP BAR: CAMERA ANGLE SELECTORS & MACHINE VITALS -->
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10 font-mono text-xs">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse"></span>
-                            <span class="text-orange-400 font-bold uppercase tracking-wider">// HARDWARE CHASSIS TELEMETRY</span>
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10 font-mono text-xs">
+                    <div class="flex items-center gap-3">
+                        <div class="pcb-standoff"></div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse"></span>
+                                <span class="text-orange-400 font-bold uppercase tracking-wider">// HARDWARE CHASSIS TELEMETRY</span>
+                            </div>
+                            <h2 class="text-xl sm:text-2xl font-black heading text-white uppercase">
+                                OUTSIDE-IN PERIMETER PROBE
+                            </h2>
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-black heading text-white uppercase">
-                            OUTSIDE-IN PERIMETER PROBE
-                        </h2>
                     </div>
 
                     <!-- Multi-Angle Camera Switchers -->
