@@ -435,9 +435,99 @@
             transform: rotate(-2deg);
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
         }
+
+        /* Shake animation for invalid passkey */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Brutalist Vault Lock Modal */
+        .vault-lock-modal {
+            background: rgba(22, 15, 11, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 3px solid #5d3822;
+            box-shadow: 0 0 50px rgba(0,0,0,0.85), 8px 8px 0px #0d0806;
+        }
     </style>
 </head>
 <body class="selection:bg-amber-800 selection:text-amber-100 pb-20">
+
+    <!-- ===================================================================
+         AUTHENTICATION GATE // FULL-SCREEN SECURITY LOCK OVERLAY
+         =================================================================== -->
+    <div id="lock-screen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0a0705]/95 backdrop-blur-2xl transition-all duration-500">
+        <div class="relative w-full max-w-lg p-8 sm:p-10 rounded-2xl vault-lock-modal text-left">
+            <!-- Decorative corner brackets -->
+            <div class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#f5ddb7]"></div>
+            <div class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#f5ddb7]"></div>
+            <div class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-amber-600"></div>
+            <div class="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-amber-600"></div>
+
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-xl bg-[#f5ddb7] border-2 border-[#181818] flex items-center justify-center text-[#181818] text-2xl shadow-[2px_2px_0px_#181818]">
+                    <i class="fa-solid fa-vault"></i>
+                </div>
+                <div>
+                    <span class="text-[11px] font-mono tracking-widest text-[#f5ddb7] uppercase font-bold">// THE YELLE VAULT // CONFIDENTIAL DROP DESK</span>
+                    <h1 class="text-xl sm:text-2xl font-black heading tracking-wide text-white uppercase">ANERGI GOVERNANCE PORTAL</h1>
+                </div>
+            </div>
+
+            <p class="text-xs font-mono text-stone-300 leading-relaxed mb-6">
+                Restricted client delivery drop for <strong class="text-[#f5ddb7]">Ronyelle (Founder, Anergi)</strong> &amp; <strong class="text-[#f5ddb7]">Leon R. Darden (BURN-1)</strong>. All legal agreements, production video previews, and weekly intelligence packages require authorized passkey execution.
+            </p>
+
+            <form id="vault-auth-form" onsubmit="handleVaultAuth(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-300 mb-1">Executive Sign-in / Identity:</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user-shield absolute left-3.5 top-3.5 text-stone-400 text-xs"></i>
+                        <input type="text" id="vault-user" value="Ronyelle // Founder, Anergi" class="w-full bg-[#18100b] border border-[#442a1c] rounded-xl pl-10 pr-4 py-2.5 text-xs font-mono text-stone-200 focus:border-[#f5ddb7] focus:outline-none" readonly>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-300">Vault Security Passkey:</label>
+                        <span class="text-[10px] font-mono text-amber-400">// Wire SMS Credential</span>
+                    </div>
+                    <div class="relative">
+                        <i class="fa-solid fa-key absolute left-3.5 top-3.5 text-stone-400 text-xs"></i>
+                        <input type="password" id="vault-passkey" required placeholder="Enter Donnaoct3..." autocomplete="current-password" class="w-full bg-[#18100b] border border-[#442a1c] rounded-xl pl-10 pr-10 py-3 text-sm font-mono text-white placeholder-stone-500 focus:border-[#f5ddb7] focus:outline-none">
+                        <button type="button" onclick="togglePassVisibility()" class="absolute right-3.5 top-3 text-stone-400 hover:text-white text-xs">
+                            <i id="pass-eye-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="auth-error-msg" class="hidden p-3 rounded-xl bg-red-950/80 border border-red-500/60 text-red-200 text-xs font-mono flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                    <span>Access Denied: Invalid Passkey. Verified credential required.</span>
+                </div>
+
+                <div id="auth-success-msg" class="hidden p-3 rounded-xl bg-emerald-950/80 border border-emerald-500/60 text-emerald-200 text-xs font-mono flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                    <span>Passkey Accepted. Unlocking executive enclave...</span>
+                </div>
+
+                <button type="submit" id="auth-submit-btn" class="w-full py-3.5 rounded-xl bg-[#f5ddb7] hover:bg-[#ffeacc] text-[#181818] font-black text-xs uppercase tracking-wider transition-all duration-200 border-2 border-[#181818] shadow-[3px_3px_0px_#181818] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-unlock-keyhole"></i>
+                    <span>UNLOCK YELLE VAULT &rarr;</span>
+                </button>
+            </form>
+
+            <div class="mt-6 pt-5 border-t border-[#3a2518] flex items-center justify-between text-[11px] font-mono text-stone-400">
+                <span>ARCHITECT: Leon R. Darden</span>
+                <span class="text-amber-400">BURN-1 &lt;&mdash;&gt; ANERGI</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Fixed Vertical Tree Trunk Rails (Left & Right) -->
     <div class="tree-trunk-left hidden md:block"></div>
@@ -478,6 +568,10 @@
                 <a href="#threat-feed" class="px-3 py-1.5 rounded-lg bg-[#241a14] hover:bg-[#34241b] text-[#f5ddb7] border border-[#442a1c] transition-all">
                     05. Breach Feed
                 </a>
+                <button onclick="lockVault()" title="Lock Vault & Clear Session" class="px-3 py-1.5 rounded-lg bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-500/50 transition-all flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-lock text-[10px]"></i>
+                    <span>Lock Vault</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -506,7 +600,7 @@
                     </h1>
                     
                     <p class="text-stone-800 text-sm sm:text-base font-semibold leading-relaxed">
-                        Dedicated drop portal for <strong class="text-black font-black">Leon R. Darden (BURN-1)</strong> and <strong class="text-black font-black">Ronyelle (Founder, Anergi)</strong>. All legal agreements are permanently countersigned and ratified on October 15, 2026. Zero passkey friction. Transparent weekly accountability, direct video previews, and Wednesday article blueprints.
+                        Dedicated drop portal for <strong class="text-black font-black">Leon R. Darden (BURN-1)</strong> and <strong class="text-black font-black">Ronyelle (Founder, Anergi)</strong>. All legal agreements are permanently countersigned and ratified on October 15, 2026. Confidential executive enclave protected by verified passkey. Transparent weekly accountability, direct video previews, and Wednesday article blueprints.
                     </p>
 
                     <!-- Ratified Quick Proof Badges -->
@@ -1250,6 +1344,84 @@
             setTimeout(() => {
                 input.value = '';
             }, 800);
+        }
+
+        // ===================================================================
+        // AUTHENTICATION ENGINE // PASSKEY GATE (Donnaoct3)
+        // ===================================================================
+        const VAULT_PASSKEY_VALID = "Donnaoct3";
+
+        function checkAuthenticationState() {
+            const authStatus = sessionStorage.getItem('yelle_vault_auth');
+            const lockScreen = document.getElementById('lock-screen');
+            if (!lockScreen) return;
+            if (authStatus === 'unlocked') {
+                lockScreen.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => lockScreen.classList.add('hidden'), 500);
+                document.body.classList.remove('overflow-hidden');
+            } else {
+                lockScreen.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+                document.body.classList.add('overflow-hidden');
+            }
+        }
+
+        function handleVaultAuth(e) {
+            e.preventDefault();
+            const passInput = document.getElementById('vault-passkey');
+            const entered = (passInput.value || '').trim();
+            const errDiv = document.getElementById('auth-error-msg');
+            const succDiv = document.getElementById('auth-success-msg');
+            const formBox = document.getElementById('lock-screen').querySelector('.vault-lock-modal');
+
+            if (entered === VAULT_PASSKEY_VALID || entered.toLowerCase() === VAULT_PASSKEY_VALID.toLowerCase()) {
+                errDiv.classList.add('hidden');
+                succDiv.classList.remove('hidden');
+                sessionStorage.setItem('yelle_vault_auth', 'unlocked');
+                setTimeout(() => {
+                    checkAuthenticationState();
+                }, 500);
+            } else {
+                errDiv.classList.remove('hidden');
+                if (formBox) {
+                    formBox.classList.remove('animate-shake');
+                    void formBox.offsetWidth; // trigger reflow
+                    formBox.classList.add('animate-shake');
+                }
+                passInput.focus();
+                passInput.select();
+            }
+        }
+
+        function togglePassVisibility() {
+            const passInput = document.getElementById('vault-passkey');
+            const icon = document.getElementById('pass-eye-icon');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function lockVault() {
+            sessionStorage.removeItem('yelle_vault_auth');
+            const errDiv = document.getElementById('auth-error-msg');
+            const succDiv = document.getElementById('auth-success-msg');
+            const passInput = document.getElementById('vault-passkey');
+            if (errDiv) errDiv.classList.add('hidden');
+            if (succDiv) succDiv.classList.add('hidden');
+            if (passInput) passInput.value = '';
+            checkAuthenticationState();
+        }
+
+        // Initialize authentication state immediately & on load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkAuthenticationState);
+        } else {
+            checkAuthenticationState();
         }
     </script>
 </body>
