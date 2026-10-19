@@ -1,1417 +1,1564 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MENDER // Self-Uninstalling Ephemeral Runtime &amp; Ghost Browser</title>
-    <meta name="description" content="Mender: Powered by R.E.P.™ (U.S. Pat. Pend. 64/160,289). The self-dissolving ephemeral browser accelerator that extinguishes web bloat, runs in RAM, and completely vanishes upon exit.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MENDER // Self-Uninstalling Ephemeral Runtime &amp; Disintegrating Hardware Stage</title>
+  <meta name="description" content="Mender: Powered by R.E.P.™ (U.S. Pat. Pend. 64/160,289). Self-dissolving ephemeral browser accelerator that runs in RAM, extinguishes web bloat, and completely vanishes upon exit.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        :root {
-            /* Burn-1 Signature Palette: Mirror Silver + Mauve-Grey + Burnt Molten Amber */
-            --mirror-bg: #07100b;
-            --mirror-silver: #cbd5e1;
-            --mauve-grey: #b49aa7;
-            --mauve-dark: #221a22;
-            --flame-amber: #ffb020;
-            --flame-orange: #f97316;
-            --coolant-hue: 198; /* 198 = Cryogenic Cyan, shifts toward 16 = Boiling Orange Plasma */
-            --burn-level: 0.32;
-            --shake-amp: 0px;
-            --panel-glass: rgba(18, 25, 22, 0.88);
-            --border-mirror: rgba(203, 213, 225, 0.25);
-        }
+  <style>
+    :root {
+      /* Driven dynamically by the Thermal Disintegration Engine */
+      --burn-level: 0.28;
+      --char-amount: 0.15;
+      --ember-glow: 0.35;
+      --coolant-hue: 198; /* 198 = Electric Cyan, shifts toward 16 = Boiling Orange Plasma */
+      --shake-amp: 0px;
+      --pcb-trace-glow: rgba(249, 115, 22, 0.25);
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
 
-        body {
-            background-color: var(--mirror-bg);
-            color: #f1f5f9;
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(180, 154, 167, 0.12) 0px, transparent 55%),
-                radial-gradient(at 90% 15%, rgba(249, 115, 22, 0.14) 0px, transparent 50%),
-                radial-gradient(at 50% 90%, rgba(6, 182, 212, 0.09) 0px, transparent 65%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #07120c;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      overflow-x: hidden;
+    }
 
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        .heading { font-family: 'Space Grotesk', sans-serif; }
-        .cyber { font-family: 'Orbitron', monospace; }
-        .silkscreen { font-family: 'Share Tech Mono', monospace; }
+    .font-silkscreen {
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0.12em;
+    }
 
-        /* Glass Panels */
-        .glass-panel {
-            background: var(--panel-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1.5px solid var(--border-mirror);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
-        }
+    .font-hud {
+      font-family: 'Orbitron', sans-serif;
+    }
 
-        /* ==========================================================================
-           AUTHENTIC PCB MOTHERBOARD STAGE (FROM HARDWARE UI KIT)
-           ========================================================================== */
-        .pcb-motherboard-stage {
-            position: relative;
-            background-color: #0b1f15;
-            background-image:
-                /* Dynamic overheated hot-spot under the CPU socket */
-                radial-gradient(circle at 65% 38%, rgba(251, 146, 60, calc(var(--burn-level) * 0.45)) 0%, rgba(220, 38, 38, calc(var(--burn-level) * 0.22)) 30%, transparent 60%),
-                /* Ambient cool/boiling glow under the glass coolant tube */
-                radial-gradient(circle at 52% 65%, hsla(var(--coolant-hue), 95%, 55%, 0.25) 0%, transparent 48%),
-                /* Fine 45-degree PCB copper trace grid */
-                repeating-linear-gradient(45deg, rgba(34, 197, 94, 0.05) 0px, rgba(34, 197, 94, 0.05) 1px, transparent 1px, transparent 14px),
-                repeating-linear-gradient(-45deg, rgba(34, 197, 94, 0.035) 0px, rgba(34, 197, 94, 0.035) 1px, transparent 1px, transparent 14px),
-                /* Solder-mask depth gradient */
-                linear-gradient(160deg, #122d1f 0%, #091911 50%, #050e09 100%);
-            box-shadow:
-                inset 0 0 90px rgba(0, 0, 0, 0.95),
-                0 30px 70px rgba(0, 0, 0, 0.95);
-            border: 4px solid #334155;
-            border-radius: 24px;
-        }
+    /* INDUSTRIAL DARK GREEN SOLDER-MASK MOTHERBOARD PCB SURFACE */
+    .pcb-motherboard-stage {
+      position: relative;
+      background-color: #0b1f15;
+      background-image:
+        radial-gradient(circle at 62% 38%, rgba(251, 146, 60, calc(var(--burn-level) * 0.42)) 0%, rgba(220, 38, 38, calc(var(--burn-level) * 0.2)) 28%, transparent 58%),
+        radial-gradient(circle at 52% 62%, hsla(var(--coolant-hue), 95%, 55%, 0.24) 0%, transparent 45%),
+        repeating-linear-gradient(45deg, rgba(34, 197, 94, 0.045) 0px, rgba(34, 197, 94, 0.045) 1px, transparent 1px, transparent 14px),
+        repeating-linear-gradient(-45deg, rgba(34, 197, 94, 0.035) 0px, rgba(34, 197, 94, 0.035) 1px, transparent 1px, transparent 14px),
+        linear-gradient(160deg, #122d1f 0%, #091911 48%, #050e09 100%);
+      box-shadow:
+        inset 0 0 90px rgba(0, 0, 0, 0.95),
+        0 30px 70px rgba(0, 0, 0, 0.95);
+      border: 6px solid #334155;
+      border-radius: 20px;
+    }
 
-        .silkscreen-tag {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.16em;
-            color: rgba(226, 232, 240, 0.82);
-            text-transform: uppercase;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
-        }
+    .silkscreen-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: rgba(226, 232, 240, 0.82);
+      text-transform: uppercase;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
+    }
 
-        .pcb-standoff {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #030705 0%, #030705 38%, #d97706 42%, #fbbf24 58%, #92400e 72%, #064e3b 100%);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.85), inset 0 1px 2px rgba(255,255,255,0.6);
-            border: 1px dashed rgba(251, 191, 36, 0.6);
-        }
+    .pcb-standoff {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #030705 0%, #030705 38%, #d97706 42%, #fbbf24 58%, #92400e 72%, #064e3b 100%);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.85), inset 0 1px 2px rgba(255,255,255,0.6);
+      border: 1px dashed rgba(251, 191, 36, 0.6);
+    }
 
-        .smd-capacitor {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 48%, #334155 85%, #0f172a 100%);
-            border: 1.5px solid #cbd5e1;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.85), inset 0 1px 2px #ffffff;
-            position: relative;
-        }
-        .smd-capacitor::after {
-            content: "";
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            background: linear-gradient(90deg, #1e293b 0%, #1e293b 32%, transparent 33%);
-        }
+    .smd-capacitor {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 48%, #334155 85%, #0f172a 100%);
+      border: 1.5px solid #cbd5e1;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.85), inset 0 1px 2px #ffffff;
+      position: relative;
+    }
+    .smd-capacitor::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #1e293b 0%, #1e293b 32%, transparent 33%);
+    }
 
-        .hardware-module {
-            position: relative;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease, box-shadow 0.25s ease;
-            will-change: transform, filter;
-        }
+    .hardware-module {
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease, box-shadow 0.25s ease;
+      will-change: transform, filter;
+    }
 
-        .hardware-module.heat-reactive {
-            box-shadow:
-                0 18px 36px rgba(0, 0, 0, 0.9),
-                0 0 calc(var(--burn-level) * 38px) rgba(249, 115, 22, calc(var(--burn-level) * 0.65)),
-                inset 0 0 calc(var(--burn-level) * 28px) rgba(239, 68, 68, calc(var(--burn-level) * 0.55));
-        }
+    .hardware-module.heat-reactive {
+      box-shadow:
+        0 18px 36px rgba(0, 0, 0, 0.9),
+        0 0 calc(var(--burn-level) * 38px) rgba(249, 115, 22, calc(var(--burn-level) * 0.65)),
+        inset 0 0 calc(var(--burn-level) * 28px) rgba(239, 68, 68, calc(var(--burn-level) * 0.55));
+    }
 
-        .char-overlay {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            border-radius: inherit;
-            opacity: var(--burn-level);
-            background:
-                radial-gradient(circle at 20% 80%, rgba(255, 115, 0, 0.55) 0%, transparent 35%),
-                radial-gradient(circle at 85% 22%, rgba(239, 68, 68, 0.6) 0%, transparent 38%),
-                radial-gradient(circle at 50% 50%, transparent 40%, rgba(10, 5, 2, 0.88) 100%);
-            mix-blend-mode: screen;
-            z-index: 15;
-        }
+    .char-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      opacity: var(--burn-level);
+      background:
+        radial-gradient(circle at 20% 80%, rgba(255, 115, 0, 0.55) 0%, transparent 35%),
+        radial-gradient(circle at 85% 22%, rgba(239, 68, 68, 0.6) 0%, transparent 38%),
+        radial-gradient(circle at 50% 50%, transparent 40%, rgba(10, 5, 2, 0.88) 100%);
+      mix-blend-mode: screen;
+      z-index: 15;
+    }
 
-        @keyframes highHeatJitter {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(calc(var(--shake-amp) * -1), var(--shake-amp)); }
-            50% { transform: translate(var(--shake-amp), calc(var(--shake-amp) * -1)); }
-            75% { transform: translate(calc(var(--shake-amp) * -0.5), calc(var(--shake-amp) * -0.5)); }
-        }
-        .thermal-jitter {
-            animation: highHeatJitter 0.14s infinite;
-        }
+    .hardware-module.is-disintegrated {
+      filter: url(#svgCharDisintegrate) grayscale(0.55) contrast(1.45) brightness(0.65);
+      transform: scale(0.96) rotate(-0.8deg);
+    }
 
-        /* CPU Socket */
-        .cpu-socket-housing {
-            position: relative;
-            padding: 16px;
-            border-radius: 16px;
-            background:
-                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.75) 0%, transparent 45%),
-                repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 2px, transparent 2px, transparent 5px),
-                linear-gradient(145deg, #e2e8f0 0%, #94a3b8 26%, #475569 54%, #cbd5e1 78%, #334155 100%);
-            box-shadow:
-                0 26px 50px rgba(0, 0, 0, 0.92),
-                0 0 calc(20px + var(--burn-level) * 45px) rgba(249, 115, 22, calc(0.35 + var(--burn-level) * 0.65)),
-                inset 0 2px 3px rgba(255, 255, 255, 0.95),
-                inset 0 -4px 8px rgba(15, 23, 42, 0.9);
-            border: 2px solid #cbd5e1;
-        }
+    @keyframes highHeatJitter {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(calc(var(--shake-amp) * -1), var(--shake-amp)); }
+      50% { transform: translate(var(--shake-amp), calc(var(--shake-amp) * -1)); }
+      75% { transform: translate(calc(var(--shake-amp) * -0.5), calc(var(--shake-amp) * -0.5)); }
+    }
+    .thermal-jitter {
+      animation: highHeatJitter 0.14s infinite;
+    }
 
-        .cpu-pin-cavity {
-            position: relative;
-            padding: 16px;
-            border-radius: 10px;
-            background-color: #1c0d04;
-            background-image:
-                radial-gradient(circle at 50% 50%, rgba(255, 237, 213, calc(0.55 + var(--burn-level) * 0.45)) 0%, rgba(249, 115, 22, 0.85) 38%, rgba(154, 52, 18, 0.95) 74%, #270e03 100%),
-                radial-gradient(circle, #fde047 1.1px, transparent 1.8px);
-            background-size: 100% 100%, 6px 6px;
-            box-shadow:
-                inset 0 8px 22px rgba(0, 0, 0, 0.95),
-                inset 0 0 35px rgba(251, 146, 60, 0.85),
-                0 1px 2px rgba(255, 255, 255, 0.7);
-            border: 2px solid #7c2d12;
-            overflow: hidden;
-        }
+    /* CPU SOCKET */
+    .cpu-socket-housing {
+      position: relative;
+      padding: 16px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.75) 0%, transparent 45%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 2px, transparent 2px, transparent 5px),
+        linear-gradient(145deg, #e2e8f0 0%, #94a3b8 26%, #475569 54%, #cbd5e1 78%, #334155 100%);
+      box-shadow:
+        0 26px 50px rgba(0, 0, 0, 0.92),
+        0 0 calc(20px + var(--burn-level) * 45px) rgba(249, 115, 22, calc(0.35 + var(--burn-level) * 0.65)),
+        inset 0 2px 3px rgba(255, 255, 255, 0.95),
+        inset 0 -4px 8px rgba(15, 23, 42, 0.9);
+      border: 2px solid #cbd5e1;
+    }
 
-        @keyframes moltenPinPulse {
-            0%, 100% { filter: brightness(1) saturate(1.1); }
-            50% { filter: brightness(1.35) saturate(1.45); }
-        }
-        .cpu-pin-cavity::before {
-            content: "";
-            position: absolute;
-            inset: -20%;
-            background:
-                radial-gradient(circle at 35% 40%, rgba(254, 240, 138, 0.65) 0%, transparent 40%),
-                radial-gradient(circle at 70% 65%, rgba(239, 68, 68, 0.75) 0%, transparent 45%),
-                conic-gradient(from 0deg at 50% 50%, rgba(249, 115, 22, 0.2), rgba(254, 215, 170, 0.65), rgba(220, 38, 38, 0.5), rgba(249, 115, 22, 0.2));
-            mix-blend-mode: color-dodge;
-            animation: moltenPinPulse calc(3.2s - var(--burn-level) * 2.4s) ease-in-out infinite;
-            pointer-events: none;
-        }
+    .cpu-pin-cavity {
+      position: relative;
+      padding: 16px;
+      border-radius: 10px;
+      background-color: #1c0d04;
+      background-image:
+        radial-gradient(circle at 50% 50%, rgba(255, 237, 213, calc(0.55 + var(--burn-level) * 0.45)) 0%, rgba(249, 115, 22, 0.85) 38%, rgba(154, 52, 18, 0.95) 74%, #270e03 100%),
+        radial-gradient(circle, #fde047 1.1px, transparent 1.8px);
+      background-size: 100% 100%, 6px 6px;
+      box-shadow:
+        inset 0 8px 22px rgba(0, 0, 0, 0.95),
+        inset 0 0 35px rgba(251, 146, 60, 0.85),
+        0 1px 2px rgba(255, 255, 255, 0.7);
+      border: 2px solid #7c2d12;
+      overflow: hidden;
+    }
 
-        .cpu-die-btn {
-            position: relative;
-            z-index: 5;
-            background:
-                radial-gradient(ellipse 85% 50% at 50% 18%, rgba(255, 255, 255, 0.25) 0%, transparent 65%),
-                linear-gradient(165deg, rgba(30, 41, 59, 0.92) 0%, rgba(9, 13, 22, 0.96) 60%, rgba(28, 12, 5, 0.95) 100%);
-            border: 1.5px solid rgba(251, 146, 60, 0.75);
-            border-radius: 8px;
-            box-shadow:
-                0 8px 18px rgba(0, 0, 0, 0.9),
-                0 0 18px rgba(249, 115, 22, calc(0.35 + var(--burn-level) * 0.65)),
-                inset 0 1px 2px rgba(255, 255, 255, 0.45);
-            transition: all 0.14s ease;
-        }
-        .cpu-die-btn:hover {
-            transform: translateY(-1.5px);
-            border-color: #fde047;
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.95), 0 0 28px rgba(251, 146, 60, 0.95);
-        }
+    @keyframes moltenPinPulse {
+      0%, 100% { filter: brightness(1) saturate(1.1); }
+      50% { filter: brightness(1.35) saturate(1.45); }
+    }
+    .cpu-pin-cavity::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 35% 40%, rgba(254, 240, 138, 0.65) 0%, transparent 40%),
+        radial-gradient(circle at 70% 65%, rgba(239, 68, 68, 0.75) 0%, transparent 45%),
+        conic-gradient(from 0deg at 50% 50%, rgba(249, 115, 22, 0.2), rgba(254, 215, 170, 0.65), rgba(220, 38, 38, 0.5), rgba(249, 115, 22, 0.2));
+      mix-blend-mode: color-dodge;
+      animation: moltenPinPulse calc(3.2s - var(--burn-level) * 2.4s) ease-in-out infinite;
+      pointer-events: none;
+    }
 
-        /* Glass Coolant Tube */
-        .coolant-tube-assembly {
-            position: relative;
-            height: 62px;
-            border-radius: 999px;
-            background:
-                linear-gradient(180deg,
-                    rgba(255, 255, 255, 0.55) 0%,
-                    rgba(255, 255, 255, 0.12) 16%,
-                    rgba(15, 23, 42, 0.45) 45%,
-                    rgba(2, 6, 23, 0.85) 82%,
-                    rgba(148, 163, 184, 0.38) 100%);
-            border: 2px solid rgba(203, 213, 225, 0.65);
-            box-shadow:
-                0 18px 34px rgba(0, 0, 0, 0.92),
-                0 0 32px hsla(var(--coolant-hue), 95%, 55%, 0.55),
-                inset 0 4px 10px rgba(255, 255, 255, 0.45),
-                inset 0 -6px 14px rgba(0, 0, 0, 0.9);
-            overflow: hidden;
-            cursor: pointer;
-        }
+    .cpu-die-btn {
+      position: relative;
+      z-index: 5;
+      background:
+        radial-gradient(ellipse 85% 50% at 50% 18%, rgba(255, 255, 255, 0.25) 0%, transparent 65%),
+        linear-gradient(165deg, rgba(30, 41, 59, 0.92) 0%, rgba(9, 13, 22, 0.96) 60%, rgba(28, 12, 5, 0.95) 100%);
+      border: 1.5px solid rgba(251, 146, 60, 0.75);
+      border-radius: 8px;
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(249, 115, 22, calc(0.35 + var(--burn-level) * 0.65)),
+        inset 0 1px 2px rgba(255, 255, 255, 0.45);
+      transition: all 0.14s ease;
+    }
+    .cpu-die-btn:hover {
+      transform: translateY(-1.5px);
+      border-color: #fde047;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.95), 0 0 28px rgba(251, 146, 60, 0.95);
+    }
+    .cpu-die-btn:active {
+      transform: translateY(2px) scale(0.985);
+    }
 
-        .tube-metal-clamp {
-            position: absolute;
-            top: -4px;
-            bottom: -4px;
-            width: 18px;
-            border-radius: 4px;
-            background: linear-gradient(180deg, #f8fafc 0%, #94a3b8 30%, #1e293b 55%, #cbd5e1 80%, #334155 100%);
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.9), inset 0 1px 2px #fff;
-            z-index: 20;
-            pointer-events: none;
-        }
+    /* COOLANT TUBE */
+    .coolant-tube-assembly {
+      position: relative;
+      height: 62px;
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg,
+          rgba(255, 255, 255, 0.55) 0%,
+          rgba(255, 255, 255, 0.12) 16%,
+          rgba(15, 23, 42, 0.45) 45%,
+          rgba(2, 6, 23, 0.85) 82%,
+          rgba(148, 163, 184, 0.38) 100%);
+      border: 2px solid rgba(203, 213, 225, 0.65);
+      box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.92),
+        0 0 32px hsla(var(--coolant-hue), 95%, 55%, 0.55),
+        inset 0 4px 10px rgba(255, 255, 255, 0.45),
+        inset 0 -6px 14px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+      cursor: pointer;
+    }
 
-        /* Heatsinks & Slots */
-        .finned-heatsink {
-            background: repeating-linear-gradient(90deg, #cbd5e1 0px, #f8fafc 2px, #475569 3px, #0f172a 6px, #334155 8px);
-            border: 1.5px solid #94a3b8;
-            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.8);
-        }
+    .tube-metal-clamp {
+      position: absolute;
+      top: -4px;
+      bottom: -4px;
+      width: 18px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #f8fafc 0%, #94a3b8 30%, #1e293b 55%, #cbd5e1 80%, #334155 100%);
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.9), inset 0 1px 2px #fff;
+      z-index: 20;
+      pointer-events: none;
+    }
 
-        .ram-slot-module {
-            position: relative;
-            background: linear-gradient(180deg, #1e293b 0%, #090d16 50%, #1e293b 100%);
-            border: 1.5px solid #64748b;
-            border-radius: 8px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.9), inset 0 2px 5px rgba(0, 0, 0, 0.95);
-        }
+    /* HEATSINKS & SLOTS */
+    .finned-heatsink {
+      background: repeating-linear-gradient(90deg, #cbd5e1 0px, #f8fafc 2px, #475569 3px, #0f172a 6px, #334155 8px);
+      border: 1.5px solid #94a3b8;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    }
 
-        .gold-contact-pins {
-            height: 8px;
-            background: repeating-linear-gradient(90deg, #fbbf24 0px, #f59e0b 3px, #090d16 3px, #090d16 6px);
-        }
+    .ram-slot-module {
+      position: relative;
+      background: linear-gradient(180deg, #1e293b 0%, #090d16 50%, #1e293b 100%);
+      border: 1.5px solid #64748b;
+      border-radius: 8px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.9), inset 0 2px 5px rgba(0, 0, 0, 0.95);
+      transition: all 0.2s ease;
+    }
 
-        /* Rotary Turbine Fan Dials */
-        .turbine-housing {
-            position: relative;
-            width: 104px;
-            height: 104px;
-            border-radius: 50%;
-            padding: 8px;
-            background: conic-gradient(from 45deg, #f1f5f9, #64748b, #1e293b, #cbd5e1, #334155, #f8fafc, #475569, #f1f5f9);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.92), inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 0 calc(var(--burn-level) * 24px) rgba(249, 115, 22, calc(var(--burn-level) * 0.6));
-            border: 1.5px solid #e2e8f0;
-            cursor: grab;
-        }
-        .turbine-cavity {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 85%);
-            box-shadow: inset 0 6px 14px rgba(0, 0, 0, 0.98);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
+    .gold-contact-pins {
+      height: 8px;
+      background: repeating-linear-gradient(90deg, #fbbf24 0px, #f59e0b 3px, #090d16 3px, #090d16 6px);
+    }
 
-        /* Tactile Glowing Buttons */
-        .flame-pill-btn {
-            background: linear-gradient(135deg, #f97316 0%, #ffb020 100%);
-            color: #0b0d13 !important;
-            font-weight: 900;
-            box-shadow: 0 0 25px rgba(249, 115, 22, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-            transition: all 0.25s ease;
-        }
-        .flame-pill-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 35px rgba(249, 115, 22, 0.8), inset 0 2px 6px #ffffff;
-        }
+    /* ROTARY TURBINES */
+    .turbine-housing {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      padding: 8px;
+      background: conic-gradient(from 45deg, #f1f5f9, #64748b, #1e293b, #cbd5e1, #334155, #f8fafc, #475569, #f1f5f9);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.92), inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 0 calc(var(--burn-level) * 24px) rgba(249, 115, 22, calc(var(--burn-level) * 0.6));
+      border: 1.5px solid #e2e8f0;
+      cursor: grab;
+    }
+    .turbine-housing:active {
+      cursor: grabbing;
+    }
+    .turbine-cavity {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 85%);
+      box-shadow: inset 0 6px 14px rgba(0, 0, 0, 0.98);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
 
-        .cyan-pill-btn {
-            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            color: #0b0d13 !important;
-            font-weight: 900;
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-            transition: all 0.25s ease;
-        }
-        .cyan-pill-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 35px rgba(6, 182, 212, 0.8), inset 0 2px 6px #ffffff;
-        }
-
-        /* Dual Video Cinema Viewports */
-        .cinema-viewport {
-            border: 2px solid rgba(249, 115, 22, 0.4);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
-            position: relative;
-            overflow: hidden;
-            background: #000;
-        }
-        .cinema-viewport-mender {
-            border: 2px solid rgba(6, 182, 212, 0.6);
-            box-shadow: 0 0 35px rgba(6, 182, 212, 0.35);
-        }
-    </style>
+    /* DUAL VIDEO CINEMA VIEWPORTS */
+    .cinema-viewport {
+      border: 2px solid rgba(249, 115, 22, 0.45);
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+    .cinema-viewport-mender {
+      border: 2px solid rgba(6, 182, 212, 0.7);
+      box-shadow: 0 0 35px rgba(6, 182, 212, 0.35);
+    }
+  </style>
 </head>
-<body class="p-3 sm:p-6 lg:p-10 relative selection:bg-orange-500 selection:text-black">
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-orange-500 selection:text-black">
 
-    <!-- FULLSCREEN LIVE PARTICLE CANVAS (EMBERS, SPARKS & CRUMBLING ASH) -->
-    <canvas id="thermalParticleCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-30"></canvas>
+  <!-- SHARED SVG FILTERS FOR SCORCHED EROSION -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <filter id="svgCharDisintegrate" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.065" numOctaves="3" seed="14" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <linearGradient id="steelBladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f8fafc"/>
+        <stop offset="45%" stop-color="#94a3b8"/>
+        <stop offset="100%" stop-color="#1e293b"/>
+      </linearGradient>
+      <radialGradient id="overheatCoreGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fef08a"/>
+        <stop offset="45%" stop-color="#f97316"/>
+        <stop offset="100%" stop-color="#7c2d12" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+  </svg>
 
-    <!-- SVG GRADIENTS & FILTERS FOR INDUSTRIAL HARDWARE -->
-    <svg width="0" height="0" class="absolute pointer-events-none">
-        <defs>
-            <linearGradient id="steelBladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#f8fafc"/>
-                <stop offset="45%" stop-color="#94a3b8"/>
-                <stop offset="100%" stop-color="#1e293b"/>
-            </linearGradient>
-            <radialGradient id="overheatCoreGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#fef08a"/>
-                <stop offset="45%" stop-color="#f97316"/>
-                <stop offset="100%" stop-color="#7c2d12" stop-opacity="0"/>
-            </radialGradient>
-        </defs>
-    </svg>
+  <!-- FULLSCREEN CANVAS PARTICLE OVERLAY -->
+  <canvas id="thermalParticleCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-30"></canvas>
 
-    <!-- MASTER TOP NAVIGATION -->
-    <nav class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10 font-mono text-xs relative z-40">
-        <div class="flex items-center gap-3">
-            <span class="w-3 h-3 rounded-full bg-cyan-400 animate-ping"></span>
-            <span class="font-bold text-white tracking-widest uppercase">// MENDER &bull; GHOST ACCELERATOR</span>
-            <span class="hidden sm:inline-block px-2.5 py-0.5 rounded bg-amber-950/80 border border-amber-500/40 text-amber-300 font-bold text-[10px]">
-                POWERED BY R.E.P.™ (U.S. PAT. PEND. 64/160,289)
-            </span>
-        </div>
-        <div class="flex items-center gap-2 sm:gap-4">
-            <a href="index.html" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-all font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-house text-[10px]"></i>
-                <span>Home</span>
-            </a>
-            <a href="tools.html" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-emerald-400 border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-gift text-[10px]"></i>
-                <span>Free Tools Funnel</span>
-            </a>
-            <a href="clinic.html" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-cyan-400 border border-cyan-500/30 transition-all font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-heart-pulse text-[10px]"></i>
-                <span>Cyber Clinic</span>
-            </a>
-            <a href="#purchase" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold transition-all shadow-[0_0_15px_rgba(249,115,22,0.5)] flex items-center gap-1.5">
-                <i class="fa-solid fa-bolt text-[10px]"></i>
-                <span>Get Mender ($75)</span>
-            </a>
-        </div>
-    </nav>
+  <!-- TOP THERMAL DISINTEGRATION COUNTDOWN HUD & MASTER CONTROLS -->
+  <header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-black/90 border-b border-orange-500/40 px-4 py-3 shadow-[0_10px_35px_rgba(0,0,0,0.9)]">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
 
-    <!-- HERO HEADER: THE CLOCK RESTING ON BROKEN MIRROR -->
-    <header class="max-w-6xl mx-auto text-center mb-12 relative z-20">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2a2028]/80 border border-amber-500/40 text-amber-300 text-xs font-mono font-bold uppercase tracking-widest mb-4 shadow-md">
-            <i class="fa-solid fa-fire text-orange-500"></i>
-            <span>We Burn Through Time // Self-Uninstalling Ephemeral Ghost Tech</span>
+      <!-- Left: Brand, Navigation & Countdown Timer -->
+      <div class="flex items-center gap-3.5">
+        <div id="hudAlertBeacon" class="w-11 h-11 rounded-xl bg-gradient-to-br from-orange-500 via-red-600 to-amber-900 p-[2px] shadow-[0_0_20px_rgba(249,115,22,0.7)]">
+          <div class="w-full h-full bg-zinc-950 rounded-[10px] flex flex-col items-center justify-center">
+            <span class="text-[9px] text-orange-400 font-bold tracking-tighter leading-none">TEMP</span>
+            <span id="hudTempReadout" class="font-hud text-xs font-extrabold text-white">84°C</span>
+          </div>
         </div>
 
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black heading tracking-tight uppercase leading-none mb-5">
-            YOUR HARDWARE ISN'T OBSOLETE.<br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-[#b49aa7] to-amber-400">
-                MODERN WEB BLOAT IS.
-            </span>
-        </h1>
-
-        <p class="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto font-normal leading-relaxed mb-6">
-            Mender is the world's first <strong>self-dissolving ephemeral accelerator</strong> and <strong>True Burner Ghost Browser</strong>. It executes entirely in RAM, extinguishes background surveillance bloat, unlocks modern cloud speeds on older machines, and <strong>completely vanishes upon exit</strong>.
-        </p>
-
-        <div class="flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
-            <span class="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-slate-300">
-                <i class="fa-solid fa-microchip text-orange-400 mr-1.5"></i> ZERO DISK INSTALLATION
-            </span>
-            <span class="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-slate-300">
-                <i class="fa-solid fa-trash-can text-red-400 mr-1.5"></i> 300ms SELF-UNINSTALL ([TISSUE])
-            </span>
-            <span class="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-slate-300">
-                <i class="fa-solid fa-shield-halved text-cyan-400 mr-1.5"></i> GHOST VACUUM TRIPWIRE
-            </span>
-        </div>
-    </header>
-
-    <!-- =========================================================
-         SECTION 01: DUAL CINEMATIC HYPERFRAME VIEWPORT
-         SHOWING MENDER WORKING SIDE-BY-SIDE WITH BLOAT OVERLOAD
-         ========================================================= -->
-    <section class="max-w-7xl mx-auto mb-16 relative z-20">
-        <div class="glass-panel rounded-3xl p-6 sm:p-8 border-2 border-amber-500/40 relative overflow-hidden">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10 font-mono text-xs">
-                <div>
-                    <span class="text-orange-400 uppercase tracking-widest font-bold block mb-1">
-                        // DUAL HYPERFRAME CINEMA &bull; LIVE CONTRAST
-                    </span>
-                    <h2 class="text-xl sm:text-2xl font-black heading text-white uppercase">
-                        WATCH MENDER FOAM EXTINGUISH THE FIRE &amp; DISSOLVE
-                    </h2>
-                </div>
-                <div class="flex items-center gap-3">
-                    <span class="px-3 py-1 rounded-xl bg-orange-950/80 border border-orange-500/40 text-orange-300 font-bold">
-                        SCREEN 1: BLOAT
-                    </span>
-                    <span class="px-3 py-1 rounded-xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 font-bold">
-                        SCREEN 2: MENDER ACTION
-                    </span>
-                </div>
-            </div>
-
-            <!-- Two Videos Side-by-Side: No Clipping, Full Visibility -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-                
-                <!-- CLIP 1: MOTHERBOARD OVERHEATING & SMOKING (WEB BLOAT IN ACTION) -->
-                <div class="cinema-viewport rounded-2xl flex flex-col justify-between">
-                    <div class="p-3 bg-black/80 border-b border-orange-500/30 flex items-center justify-between font-mono text-xs">
-                        <span class="text-orange-400 font-bold flex items-center gap-2">
-                            <i class="fa-solid fa-triangle-exclamation animate-pulse"></i>
-                            STAGE 01: UNCHECKED WEB BLOAT
-                        </span>
-                        <span class="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-600 text-[10px] font-bold">
-                            BOILING 88°C // 100% CPU
-                        </span>
-                    </div>
-
-                    <div class="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
-                        <video id="vid-bloat" autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="assets/mender_overheating.mp4" type="video/mp4">
-                        </video>
-                        <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded bg-black/70 font-mono text-[10px] text-orange-300 border border-orange-500/30">
-                            Unoptimized polyfills &amp; trackers frying silicon
-                        </div>
-                    </div>
-
-                    <div class="p-4 bg-orange-950/20 border-t border-orange-500/20 text-xs font-mono text-slate-300">
-                        Modern websites push 50MB JavaScript bundles and background cryptominers directly into physical RAM, choking older hardware.
-                    </div>
-                </div>
-
-                <!-- CLIP 2: MENDER FOAM EXTINGUISHING FIRE & SHAPING MENDER -->
-                <div class="cinema-viewport cinema-viewport-mender rounded-2xl flex flex-col justify-between">
-                    <div class="p-3 bg-black/80 border-b border-cyan-500/30 flex items-center justify-between font-mono text-xs">
-                        <span class="text-cyan-400 font-bold flex items-center gap-2">
-                            <i class="fa-solid fa-bolt text-cyan-300"></i>
-                            STAGE 02: MENDER FOAM IN ACTION
-                        </span>
-                        <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500 text-[10px] font-bold">
-                            CRYOGENIC 24°C // 8% LOAD
-                        </span>
-                    </div>
-
-                    <div class="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
-                        <video id="vid-mender" autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="assets/mender_extinguishing.mp4" type="video/mp4">
-                        </video>
-                        <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded bg-black/70 font-mono text-[10px] text-cyan-300 border border-cyan-500/30">
-                            Mender foam cools hardware, forms name &amp; dissolves
-                        </div>
-                    </div>
-
-                    <div class="p-4 bg-cyan-950/20 border-t border-cyan-500/20 text-xs font-mono text-slate-300">
-                        Mender extinguishes runtime listeners, purges bloat into volatile memory, and completely vanishes via <code class="text-cyan-300">[TISSUE]</code> upon exit leaving 0 bytes on disk.
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Interactive Trigger -->
-            <div class="mt-6 flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 font-mono text-xs">
-                <span class="text-slate-400">
-                    <i class="fa-solid fa-circle-check text-cyan-400 mr-1.5"></i>
-                    Notice: Both stages run natively with zero drivers installed on the client machine.
-                </span>
-                <button type="button" onclick="triggerMenderFoamExtinguish()" class="cyan-pill-btn px-5 py-2.5 rounded-xl uppercase tracking-wider text-xs flex items-center gap-2">
-                    <i class="fa-solid fa-spray-can-sparkles"></i>
-                    <span>Simulate Foam Extinguish &amp; RAM Wipe</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================================
-         SECTION 02: THE FULL MOTHERBOARD PCB HARDWARE STAGE
-         AUTHENTIC HARDWARE UI KIT ENGINE WITH REAL SILICON COMPONENTS
-         ========================================================= -->
-    <section class="max-w-7xl mx-auto mb-16 relative z-20">
-        
-        <!-- HARDWARE CHASSIS HEADER & THERMAL SCRUBBER -->
-        <div class="sticky top-0 z-40 backdrop-blur-xl bg-black/90 border-2 border-orange-500/40 rounded-2xl p-4 mb-6 shadow-2xl flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 via-red-600 to-amber-900 p-[2px]">
-                    <div class="w-full h-full bg-zinc-950 rounded-[10px] flex flex-col items-center justify-center">
-                        <span class="text-[8px] text-orange-400 font-bold">TEMP</span>
-                        <span id="hudTempReadout" class="font-hud text-xs font-extrabold text-white">84°C</span>
-                    </div>
-                </div>
-                <div>
-                    <span class="text-orange-400 font-bold block uppercase tracking-wider">// HARDWARE THERMAL RUNAWAY</span>
-                    <span class="text-slate-300 text-[11px]">Integrity: <strong id="integrityPercentText" class="text-emerald-400">78%</strong> &bull; Core: <strong id="countdownTimerText" class="text-orange-400">00:46.8</strong></span>
-                </div>
-            </div>
-
-            <!-- Scrubber Slider -->
-            <div class="flex-1 min-w-[200px] max-w-md flex flex-col gap-1">
-                <div class="flex items-center justify-between text-[10px] silkscreen">
-                    <span class="text-cyan-300">100% CRYOGENIC</span>
-                    <span class="text-orange-400 font-bold">DRAG TO SCRUB SILICON LOAD</span>
-                    <span class="text-red-400">0% MELTDOWN</span>
-                </div>
-                <div class="relative h-3 w-full rounded-full bg-zinc-900 border border-slate-600 overflow-hidden">
-                    <div id="hudIntegrityBar" class="h-full rounded-full transition-all duration-100"
-                         style="width: 78%; background: linear-gradient(90deg, #ef4444 0%, #f97316 45%, #22c55e 100%);"></div>
-                    <input id="manualIntegrityScrubber" type="range" min="0" max="100" value="78"
-                           oninput="onScrubberInput(this.value)"
-                           class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"/>
-                </div>
-            </div>
-
-            <!-- Action Trigger -->
-            <button type="button" onclick="triggerMenderFoamExtinguish()" class="cyan-pill-btn px-4 py-2 rounded-xl text-xs uppercase font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-arrows-rotate"></i>
-                <span>FLUSH WITH MENDER</span>
-            </button>
-        </div>
-
-        <!-- MOTHERBOARD PCB STAGE CONTAINER -->
-        <div id="motherboardStage" class="pcb-motherboard-stage p-4 sm:p-8 relative overflow-hidden">
-            
-            <!-- BACKGROUND SVG MOTHERBOARD COPPER TRACES, VIAS & LIQUID PIPING -->
-            <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-80" viewBox="0 0 1200 760" preserveAspectRatio="none">
-                <!-- Etched PCB Copper Bus Lines -->
-                <g stroke="#22c55e" stroke-opacity="0.22" stroke-width="2" fill="none">
-                    <polyline points="40,120 180,120 240,180 240,520 310,590"/>
-                    <polyline points="60,140 170,140 220,190 220,540 295,615"/>
-                    <polyline points="420,90 420,280 510,370 760,370"/>
-                    <polyline points="435,90 435,270 520,355 760,355"/>
-                    <polyline points="680,260 880,260 950,330 1140,330"/>
-                    <polyline points="540,680 680,680 740,620 980,620"/>
-                </g>
-
-                <!-- Glowing Overheated Molten Traces Radiating from CPU Socket -->
-                <g id="svgMoltenTraces" stroke="#f97316" stroke-opacity="0.65" stroke-width="2.5" fill="none">
-                    <polyline points="720,220 620,220 570,270 460,270"/>
-                    <polyline points="780,340 780,430 710,490 580,490"/>
-                    <polyline points="890,240 960,240 1010,290 1080,290"/>
-                    <polyline points="740,140 740,85 830,85"/>
-                </g>
-
-                <!-- Transparent Liquid Coolant Tube Routing -->
-                <path d="M 290,515 C 365,525 390,460 440,335 C 490,210 535,105 630,98 L 760,98"
-                      fill="none" stroke="rgba(15, 23, 42, 0.9)" stroke-width="28" stroke-linecap="round"/>
-                <path id="svgCoolantPipeOuter" d="M 290,515 C 365,525 390,460 440,335 C 490,210 535,105 630,98 L 760,98"
-                      fill="none" stroke="hsla(var(--coolant-hue), 95%, 58%, 0.55)" stroke-width="20" stroke-linecap="round"/>
-                <path d="M 290,515 C 365,525 390,460 440,335 C 490,210 535,105 630,98 L 760,98"
-                      fill="none" stroke="rgba(255, 255, 255, 0.55)" stroke-width="4" stroke-dasharray="14 22" stroke-linecap="round"/>
-            </svg>
-
-            <!-- Top Aluminum I/O Shield & VRM Finned Heatsink Bar -->
-            <div class="relative z-10 mb-6 flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-emerald-500/20 font-mono text-xs">
-                <div class="flex items-center gap-3">
-                    <div class="pcb-standoff"></div>
-                    <div class="px-3 py-1.5 rounded bg-gradient-to-b from-slate-200 via-slate-400 to-slate-700 text-slate-950 silkscreen text-xs font-bold shadow-md border border-white">
-                        REAR_IO // MENDER-01
-                    </div>
-                    <span class="silkscreen-tag hidden md:inline">EPHEMERAL RUNTIME SILICON EDITION</span>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <span class="silkscreen-tag">VRM_SINK // THRM-01</span>
-                    <div class="finned-heatsink h-9 w-44 sm:w-60 rounded-md flex items-center justify-between px-3">
-                        <span class="px-2 py-0.5 rounded bg-black/80 text-[10px] silkscreen text-orange-300 border border-orange-400/40">
-                            HEATPIPE: <span id="vrmTempText">91°C</span>
-                        </span>
-                        <div class="w-3 h-3 rounded-full bg-amber-400 animate-ping"></div>
-                    </div>
-                    <div class="pcb-standoff"></div>
-                </div>
-            </div>
-
-            <!-- MAIN 12-COLUMN HARDWARE COMPONENT GRID -->
-            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
-
-                <!-- ============================================================
-                     LEFT SECTOR (5 Cols): CMOS, RAM BANKS & SOUTHBRIDGE HEATSINK
-                     ============================================================ -->
-                <div class="lg:col-span-5 flex flex-col justify-between gap-6">
-
-                    <!-- Top-Left: CMOS Battery Button + PCI-E & RAM Bank Toggles -->
-                    <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/55 border border-emerald-500/30 p-5 backdrop-blur-sm" id="moduleRamBanks">
-                        <div class="char-overlay"></div>
-
-                        <div class="flex items-center justify-between mb-4 font-mono text-xs">
-                            <div>
-                                <span class="silkscreen-tag block text-emerald-300">PCI_EXP // 01 &bull; DIMM_BANK A1/B1</span>
-                                <h3 class="cyber text-sm font-bold text-white tracking-wider">
-                                    MEMORY &amp; BUS LATCH BANKS
-                                </h3>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 text-[10px] font-bold border border-cyan-500/40">
-                                DDR5 ECC
-                            </span>
-                        </div>
-
-                        <div class="grid grid-cols-12 gap-4 items-center">
-                            <!-- CMOS CR2032 Lithium Coin-Cell Battery Button -->
-                            <div class="col-span-4 flex flex-col items-center gap-2">
-                                <button type="button" onclick="dischargeCmosSurge()" class="group relative w-20 h-20 rounded-full p-1.5 bg-gradient-to-br from-slate-700 via-zinc-900 to-black border-2 border-slate-500 shadow-xl active:scale-95 transition"
-                                        title="Click to Discharge CMOS Surge Capacitor">
-                                    <div class="w-full h-full rounded-full bg-gradient-to-tr from-slate-400 via-slate-100 to-white flex flex-col items-center justify-center shadow-inner border border-white">
-                                        <span class="text-[9px] font-bold text-slate-700 tracking-tighter">CR2032</span>
-                                        <span class="text-xs font-extrabold text-slate-900">+ 3V +</span>
-                                        <span id="cmosChargeText" class="text-[9px] font-mono font-bold text-orange-700">SURGE RDY</span>
-                                    </div>
-                                    <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-6 h-2.5 rounded-sm bg-slate-300 border border-slate-600"></div>
-                                </button>
-                                <span class="silkscreen-tag text-[10px] text-center">BIOS_BAT // CLR</span>
-                            </div>
-
-                            <!-- 3 Interactive RAM & PCI-E Stick Toggles with Gold Pins -->
-                            <div class="col-span-8 flex flex-col gap-2.5">
-                                <div class="ram-slot-module w-full p-2.5 text-left border-orange-400/70">
-                                    <div class="flex items-center justify-between">
-                                        <span class="silkscreen text-xs font-bold text-amber-300">DIMM_A1 // 64GB RAM</span>
-                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/30 text-orange-200 border border-orange-400/50">
-                                            VOLATILE TMPFS
-                                        </span>
-                                    </div>
-                                    <div class="gold-contact-pins mt-2 rounded-sm opacity-90"></div>
-                                </div>
-
-                                <div class="ram-slot-module w-full p-2.5 text-left">
-                                    <div class="flex items-center justify-between">
-                                        <span class="silkscreen text-xs font-bold text-cyan-300">DIMM_B1 // 64GB RAM</span>
-                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/25 text-cyan-200 border border-cyan-400/40">
-                                            GHOST RUNTIME
-                                        </span>
-                                    </div>
-                                    <div class="gold-contact-pins mt-2 rounded-sm opacity-90"></div>
-                                </div>
-
-                                <div class="ram-slot-module w-full p-2.5 text-left">
-                                    <div class="flex items-center justify-between">
-                                        <span class="silkscreen text-xs font-bold text-slate-200">PCI_EXP // x16 GEN5</span>
-                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/25 text-emerald-200 border border-emerald-400/40">
-                                            ISOLATED BUS
-                                        </span>
-                                    </div>
-                                    <div class="gold-contact-pins mt-2 rounded-sm opacity-90"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- VRM Chokes & Solid Capacitors -->
-                        <div class="mt-4 pt-3 border-t border-emerald-500/20 flex items-center justify-between">
-                            <span class="silkscreen-tag text-[10px]">PHASE_CHOKES // 8x R22 SOLID STATE</span>
-                            <div class="flex items-center gap-2">
-                                <div class="smd-capacitor"></div>
-                                <div class="smd-capacitor"></div>
-                                <div class="smd-capacitor"></div>
-                                <div class="smd-capacitor"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom-Left: Southbridge Heatsink Block with Yellow Industrial Stripe -->
-                    <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/60 border border-emerald-500/30 p-5" id="moduleChipsetSink">
-                        <div class="char-overlay"></div>
-
-                        <div class="flex items-center justify-between mb-3 font-mono text-xs">
-                            <span class="silkscreen-tag text-amber-300">MBD_STATUS // CHIPSET BRIDGE</span>
-                            <span class="text-[11px] silkscreen text-emerald-300">BRIDGE LINK: ARMED</span>
-                        </div>
-
-                        <div class="finned-heatsink rounded-xl p-3 relative">
-                            <div class="rounded-lg bg-gradient-to-br from-slate-200 via-slate-300 to-slate-500 p-4 border border-white shadow-xl relative overflow-hidden">
-                                <div class="absolute top-0 bottom-0 left-6 w-2.5 bg-amber-400 -skew-x-12 shadow-[0_0_10px_#f59e0b]"></div>
-
-                                <div class="pl-8 flex items-center justify-between gap-3">
-                                    <div>
-                                        <div class="text-[10px] silkscreen text-slate-700 font-bold">PCH_THERMAL_ARMOR</div>
-                                        <div class="cyber text-sm font-black text-slate-900 tracking-wide">
-                                            COOLANT MANIFOLD INLET
-                                        </div>
-                                    </div>
-
-                                    <button type="button" onclick="purgeManifoldVent()" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-amber-300 silkscreen text-xs font-bold border border-amber-400/50 shadow active:scale-95 transition">
-                                        VENT STEAM (-15% HEAT)
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- ============================================================
-                     RIGHT SECTOR (7 Cols): CPU SOCKET, ROTARY FANS & COOLANT TUBE
-                     ============================================================ -->
-                <div class="lg:col-span-7 flex flex-col justify-between gap-6">
-
-                    <!-- TOP RIGHT ROW: CPU SOCKET & DUAL ROTARY TURBINES -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-
-                        <!-- HERO COMPONENT: GLOWING ORANGE CPU SOCKET (7 Cols) -->
-                        <div class="md:col-span-7 hardware-module heat-reactive thermal-jitter rounded-2xl p-1" id="moduleCpuSocket">
-                            <div class="flex items-center justify-between mb-2 px-1 font-mono text-xs">
-                                <span class="silkscreen-tag text-orange-300 font-bold">SOCKET_ACTION // LGA-4096</span>
-                                <span class="px-2 py-0.5 rounded bg-orange-950 text-orange-300 text-[10px] font-bold border border-orange-500/40">
-                                    MOLTEN PINS
-                                </span>
-                            </div>
-
-                            <div class="cpu-socket-housing">
-                                <div class="char-overlay"></div>
-
-                                <div class="flex items-center justify-between mb-2 px-1">
-                                    <span class="w-3 h-3 rounded-full bg-slate-700 border border-white shadow-inner"></span>
-                                    <span class="silkscreen text-[10px] font-bold text-slate-900 tracking-widest">
-                                        RETENTION: 480N // VOLTAGE 1.48V
-                                    </span>
-                                    <span class="w-3 h-3 rounded-full bg-slate-700 border border-white shadow-inner"></span>
-                                </div>
-
-                                <div class="cpu-pin-cavity flex flex-col gap-3">
-                                    <!-- Primary High-Voltage Button: RUN MENDER IN RAM -->
-                                    <button type="button" onclick="triggerMenderFoamExtinguish()" class="cpu-die-btn w-full py-3.5 px-5 flex items-center justify-between group">
-                                        <div class="text-left">
-                                            <span class="block text-[10px] silkscreen text-orange-300 tracking-widest">
-                                                RAM INGESTION
-                                            </span>
-                                            <span class="cyber text-xl sm:text-2xl font-black tracking-widest bg-gradient-to-r from-white via-amber-200 to-orange-400 bg-clip-text text-transparent">
-                                                EXECUTE MENDER
-                                            </span>
-                                        </div>
-                                        <div class="w-9 h-9 rounded-lg bg-orange-500/25 border border-orange-400 flex items-center justify-center group-hover:scale-110 transition">
-                                            <i class="fa-solid fa-bolt text-amber-300 text-lg"></i>
-                                        </div>
-                                    </button>
-
-                                    <!-- Secondary Button: [TISSUE] PURGE & DISSOLVE -->
-                                    <button type="button" onclick="triggerMenderFoamExtinguish()" class="cpu-die-btn w-full py-2.5 px-5 flex items-center justify-between group">
-                                        <span class="cyber text-sm sm:text-base font-bold tracking-widest text-slate-200 group-hover:text-cyan-300 transition">
-                                            [TISSUE] PURGE &amp; DISSOLVE
-                                        </span>
-                                        <span class="silkscreen text-[11px] text-cyan-300/90 group-hover:text-white">
-                                            [300ms ZERO-FILL]
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <div class="mt-2.5 flex items-center justify-between px-1 font-mono text-xs">
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-3 h-3 rounded-full bg-slate-700 border border-white shadow-inner"></span>
-                                        <span class="silkscreen text-[10px] font-bold text-slate-900">
-                                            PINS: ACTIVE EPHEMERAL
-                                        </span>
-                                    </div>
-                                    <span class="text-[10px] silkscreen text-slate-900 font-bold">LATCH: LOCKED</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- DUAL MICRO-TURBINE ROTARY FANS (5 Cols) -->
-                        <div class="md:col-span-5 hardware-module heat-reactive rounded-2xl bg-emerald-950/55 border border-emerald-500/30 p-4 flex flex-col justify-between" id="moduleDualFans">
-                            <div class="char-overlay"></div>
-
-                            <div class="flex items-center justify-between mb-2 font-mono text-xs">
-                                <span class="silkscreen-tag text-cyan-300">FAN_SPD // 01 &amp; 02</span>
-                                <span class="text-[10px] silkscreen text-cyan-400">PWM ACTIVE</span>
-                            </div>
-
-                            <p class="text-[11px] text-slate-300 mb-3 font-sans">
-                                Click or drag turbines to boost RPM and fight web bloat runaway:
-                            </p>
-
-                            <!-- Two Metallic Turbine Fan Dials side by side -->
-                            <div class="flex items-center justify-around gap-3 my-1">
-                                <!-- Fan 1 -->
-                                <div class="flex flex-col items-center gap-1.5">
-                                    <div id="turbineDial1" class="turbine-housing" onclick="boostTurbines()" title="Click to Boost Fan RPM">
-                                        <div class="turbine-cavity">
-                                            <svg id="fanRotorSvg1" viewBox="0 0 100 100" class="w-full h-full">
-                                                <circle cx="50" cy="50" r="44" fill="url(#overheatCoreGrad)" opacity="0.45"/>
-                                                <g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1">
-                                                    <path d="M50,50 L42,10 L58,8 Z"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(40 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(80 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(120 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(160 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(200 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(240 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(280 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(320 50 50)"/>
-                                                </g>
-                                                <circle cx="50" cy="50" r="15" fill="url(#steelBladeGrad)" stroke="#e2e8f0" stroke-width="1.5"/>
-                                                <circle cx="50" cy="50" r="5" fill="#0f172a"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <span class="silkscreen-tag text-[10px]">FAN_01</span>
-                                    <span id="fan1RpmText" class="mono text-xs font-bold text-cyan-300">4,200 RPM</span>
-                                </div>
-
-                                <!-- Fan 2 -->
-                                <div class="flex flex-col items-center gap-1.5">
-                                    <div id="turbineDial2" class="turbine-housing" onclick="boostTurbines()" title="Click to Boost Fan RPM">
-                                        <div class="turbine-cavity">
-                                            <svg id="fanRotorSvg2" viewBox="0 0 100 100" class="w-full h-full">
-                                                <circle cx="50" cy="50" r="44" fill="url(#overheatCoreGrad)" opacity="0.45"/>
-                                                <g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1">
-                                                    <path d="M50,50 L42,10 L58,8 Z"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(40 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(80 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(120 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(160 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(200 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(240 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(280 50 50)"/>
-                                                    <path d="M50,50 L42,10 L58,8 Z" transform="rotate(320 50 50)"/>
-                                                </g>
-                                                <circle cx="50" cy="50" r="15" fill="url(#steelBladeGrad)" stroke="#e2e8f0" stroke-width="1.5"/>
-                                                <circle cx="50" cy="50" r="5" fill="#0f172a"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <span class="silkscreen-tag text-[10px]">FAN_02</span>
-                                    <span id="fan2RpmText" class="mono text-xs font-bold text-cyan-300">3,850 RPM</span>
-                                </div>
-                            </div>
-
-                            <button type="button" onclick="boostTurbines()" class="mt-2 w-full py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/50 silkscreen text-xs text-cyan-200 transition">
-                                ENGAGE 100% TURBINE OVERDRIVE
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <!-- BOILING GLASS LIQUID-COOLANT TUBE PROGRESS BAR -->
-                    <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/60 border border-emerald-500/35 p-5" id="moduleCoolantBar">
-                        <div class="char-overlay"></div>
-
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 font-mono text-xs">
-                            <div>
-                                <span class="silkscreen-tag text-cyan-300 block">SYS_LOAD // P-BAR 02 &bull; BOROSILICATE LOOP</span>
-                                <h3 class="cyber text-sm sm:text-base font-bold text-white">
-                                    LIQUID COOLANT PLASMA CONDUIT
-                                </h3>
-                            </div>
-                            <span id="coolantStateBadge" class="px-2.5 py-0.5 rounded silkscreen text-xs bg-cyan-500/25 text-cyan-200 border border-cyan-400/40">
-                                FLOW: 76% // LAMINAR
-                            </span>
-                        </div>
-
-                        <!-- Glass Tube with Chrome Clamps & Live Canvas Micro-Bubbles -->
-                        <div class="relative px-2 py-1">
-                            <div id="coolantTubeInteractive" class="coolant-tube-assembly">
-                                <div class="tube-metal-clamp" style="left: 16%;"></div>
-                                <div class="tube-metal-clamp" style="left: 58%;"></div>
-                                <div class="tube-metal-clamp" style="left: 84%;"></div>
-                                <canvas id="coolantTubeCanvas" class="w-full h-full block"></canvas>
-                            </div>
-
-                            <div class="mt-2 px-4 flex items-center justify-between silkscreen text-[10px] text-slate-400">
-                                <span>0% INLET</span>
-                                <span>|</span>
-                                <span>25%</span>
-                                <span>|</span>
-                                <span>50% NOMINAL</span>
-                                <span>|</span>
-                                <span>75% BOIL</span>
-                                <span>|</span>
-                                <span>100% PLASMA</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 24-PIN BRAIDED POWER BUS HEADER -->
-                    <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/60 border border-emerald-500/35 p-5" id="modulePowerBus">
-                        <div class="char-overlay"></div>
-
-                        <div class="flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-                            <div>
-                                <span class="silkscreen-tag text-amber-300 block">POWER_BUS // 04 &bull; 24-PIN ATX RAIL</span>
-                                <h3 class="cyber text-sm font-bold text-white">
-                                    HIGH-AMPERAGE WIRE HARNESS &amp; RAIL BREAKERS
-                                </h3>
-                            </div>
-
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="px-3 py-1 rounded bg-zinc-900 border border-amber-400 text-amber-300 silkscreen text-xs font-bold">
-                                    +12V_RAIL [ACTIVE]
-                                </span>
-                                <span class="px-3 py-1 rounded bg-zinc-900 border border-cyan-400 text-cyan-300 silkscreen text-xs font-bold">
-                                    +5V_AUX [ARMED]
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 pt-3 border-t border-emerald-500/20 flex flex-wrap items-center justify-between gap-3">
-                            <div class="flex items-center gap-1.5 bg-zinc-950 p-1.5 rounded border border-slate-600">
-                                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-zinc-800 border border-slate-600"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-orange-500/90 border border-orange-200 animate-pulse"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-zinc-800 border border-slate-600"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-cyan-500/80 border border-cyan-200"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-red-500/90 border border-red-200"></span>
-                                <span class="w-2.5 h-4 rounded-xs bg-zinc-800 border border-slate-600"></span>
-                            </div>
-
-                            <div id="telemetryLogText" class="silkscreen text-xs text-amber-300 font-bold">
-                                STATUS: RAM INGESTION READY &bull; CLICK "FLUSH WITH MENDER" TO RECOVER
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================================
-         SECTION 03: TECHNICAL ARCHITECTURE & R.E.P. SPECIFICATION
-         ========================================================= -->
-    <section class="max-w-7xl mx-auto mb-16 relative z-20">
-        <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-white/15">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-xs font-mono font-bold uppercase tracking-widest text-orange-400 block mb-2">
-                    // UNDER THE HOOD: THE GHOST RUNTIME
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-black heading text-white uppercase">
-                    HOW MENDER DISSOLVES WITHOUT A TRACE
-                </h2>
-                <p class="text-sm text-slate-300 font-sans mt-2">
-                    Traditional software installs deep DLLs, registries, and background updaters. Mender takes the opposite approach: zero disk writes, pure RAM isolation, and an automatic self-purge.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono text-xs">
-                
-                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
-                    <div>
-                        <span class="text-orange-400 font-bold block mb-1">01. RAM ENCLAVE</span>
-                        <h4 class="text-base font-bold text-white font-sans mb-2">tmpfs Isolation</h4>
-                        <p class="text-slate-300 font-sans leading-relaxed text-xs">
-                            Mender provisions a volatile memory segment directly in RAM. Zero disk writes, zero registry entries, and zero persistent installation hooks.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-white/10 text-slate-400 text-[10px]">
-                        Forensics: 0 bytes on SSD
-                    </div>
-                </div>
-
-                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
-                    <div>
-                        <span class="text-cyan-400 font-bold block mb-1">02. GHOST VACUUM</span>
-                        <h4 class="text-base font-bold text-white font-sans mb-2">Tripwire Destruction</h4>
-                        <p class="text-slate-300 font-sans leading-relaxed text-xs">
-                            If third-party spyware or unauthorized debuggers attempt to hook the session, Mender collapses the runtime instantly to 0 seconds TTL.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-white/10 text-slate-400 text-[10px]">
-                        Anti-Forensics: Instant Scram
-                    </div>
-                </div>
-
-                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
-                    <div>
-                        <span class="text-fuchsia-400 font-bold block mb-1">03. [TISSUE] KILLSWITCH</span>
-                        <h4 class="text-base font-bold text-white font-sans mb-2">300ms Memory Shredder</h4>
-                        <p class="text-slate-300 font-sans leading-relaxed text-xs">
-                            Upon exit or timeout, low-level <code class="text-pink-300">memset_s(0x00)</code> zero-fills all allocated pointers in 300 milliseconds flat.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-white/10 text-slate-400 text-[10px]">
-                        Purge: 300ms Clean Zero
-                    </div>
-                </div>
-
-                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
-                    <div>
-                        <span class="text-emerald-400 font-bold block mb-1">04. TRUE BURNER GHOST</span>
-                        <h4 class="text-base font-bold text-white font-sans mb-2">Disposable Browser</h4>
-                        <p class="text-slate-300 font-sans leading-relaxed text-xs">
-                            Every browsing session is born sterile and unlinked. No cross-session tracking cookies, no fingerprint retention, zero canvas surveillance.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-white/10 text-slate-400 text-[10px]">
-                        Identity: Burn-on-Close
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================================
-         SECTION 04: COMMERCIAL SUITE & PRODUCT ACCESS ($75)
-         ========================================================= -->
-    <section id="purchase" class="max-w-5xl mx-auto mb-16 relative z-20">
-        <div class="glass-panel rounded-3xl p-8 sm:p-12 border-2 border-orange-500/50 shadow-2xl relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
-                <div class="max-w-xl">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 rounded-full bg-orange-950/80 text-orange-300 border border-orange-500/40 font-mono text-xs font-bold uppercase">
-                            FLAGSHIP DESKTOP RUNTIME // LIFETIME LICENSE
-                        </span>
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-black heading text-white uppercase mb-4 leading-tight">
-                        GET MENDER &bull; $75 FLAT
-                    </h2>
-                    <p class="text-slate-300 text-sm font-sans leading-relaxed mb-6">
-                        No recurring SaaS fees. No telemetry backdoors. Your single license includes the Mender Runtime executable, True Burner Ghost Browser, and lifetime updates.
-                    </p>
-
-                    <ul class="space-y-2.5 font-mono text-xs text-slate-200">
-                        <li class="flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-400"></i>
-                            <span>Instant Standalone Binary (Windows x64 &bull; MacOS Apple Silicon &bull; Linux)</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-400"></i>
-                            <span>True Burner Ghost Browser integrated with 1-click [TISSUE] wipe</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-400"></i>
-                            <span>Lifetime access to upcoming modules: <strong>The Cloak Vault</strong> &amp; <strong>Disposable Mail</strong></span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Checkout Card -->
-                <div class="w-full sm:w-80 p-6 rounded-2xl bg-black/80 border border-orange-500/40 text-center flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-mono text-slate-400 uppercase">One-Time Payment</span>
-                        <div class="text-4xl font-black font-mono text-white my-2">$75</div>
-                        <span class="text-[11px] font-mono text-emerald-400 font-bold block mb-6">
-                            &bull; 100% Zero-Risk 30-Day Guarantee
-                        </span>
-                    </div>
-
-                    <div class="space-y-3 font-mono text-xs">
-                        <!-- Direct Checkout Triggers -->
-                        <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="flame-pill-btn block w-full py-3.5 rounded-xl uppercase tracking-wider text-xs font-bold text-center">
-                            <i class="fa-solid fa-bolt mr-1"></i> Buy on Gumroad ($75)
-                        </a>
-                        <a href="https://www.paypal.com" target="_blank" rel="noopener noreferrer" class="block w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold border border-white/20 text-center transition-all">
-                            <i class="fa-brands fa-paypal text-cyan-400 mr-1"></i> Pay via PayPal
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MASTER FOOTER -->
-    <footer class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-400 relative z-20">
         <div>
-            <span>&copy; 2026 BURN-1 SYSTEMS // MENDER EPHEMERAL ACCELERATOR</span>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded bg-red-500/25 text-red-300 border border-red-500/50 animate-pulse">
+              MENDER // EPHEMERAL ACCELERATOR
+            </span>
+            <span id="hudSystemStatus" class="font-silkscreen text-xs text-amber-300 hidden sm:inline">
+              [WEB BLOAT DISINTEGRATION ACTIVE]
+            </span>
+          </div>
+          <div class="flex items-baseline gap-3 mt-0.5">
+            <h1 class="font-hud text-sm sm:text-base font-extrabold tracking-wider text-white">
+              MELTDOWN IN: <span id="countdownTimerText" class="text-orange-400">00:46.8</span>
+            </h1>
+            <span class="text-xs text-slate-400">
+              Integrity: <strong id="integrityPercentText" class="text-emerald-400">78%</strong>
+            </span>
+          </div>
         </div>
-        <div class="flex flex-wrap items-center justify-center gap-4 text-slate-400">
-            <span>U.S. PAT. PEND. 64/160,289</span>
-            <span>&bull;</span>
-            <a href="index.html" class="hover:text-white underline">Home</a>
-            <span>&bull;</span>
-            <a href="tools.html" class="hover:text-emerald-400 underline">Free Tools Funnel</a>
-            <span>&bull;</span>
-            <a href="clinic.html" class="hover:text-cyan-400 underline">Cyber Clinic</a>
+      </div>
+
+      <!-- Navigation Links Across Ecosystem -->
+      <div class="hidden lg:flex items-center gap-3 font-silkscreen text-xs">
+        <a href="index.html" class="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-slate-300 transition">
+          Home
+        </a>
+        <a href="tools.html" class="px-2.5 py-1 rounded-lg bg-emerald-950 hover:bg-emerald-900 text-emerald-300 border border-emerald-500/40 transition">
+          Free Tools Funnel
+        </a>
+        <a href="clinic.html" class="px-2.5 py-1 rounded-lg bg-cyan-950 hover:bg-cyan-900 text-cyan-300 border border-cyan-500/40 transition">
+          Cyber Clinic
+        </a>
+      </div>
+
+      <!-- Center: Thermal Scrubber -->
+      <div class="flex-1 min-w-[200px] max-w-xs flex flex-col gap-1">
+        <div class="flex items-center justify-between text-[10px] font-silkscreen">
+          <span class="text-cyan-300">100% STABLE</span>
+          <span class="text-orange-400">SCRUB HEAT</span>
+          <span class="text-red-400">0% MELTDOWN</span>
         </div>
-    </footer>
+        <div class="relative h-3 w-full rounded-full bg-zinc-900 border border-slate-600 p-0.5 overflow-hidden">
+          <div id="hudIntegrityBar" class="h-full rounded-full transition-all duration-100"
+               style="width: 78%; background: linear-gradient(90deg, #ef4444 0%, #f97316 45%, #22c55e 100%);"></div>
+          <input id="manualIntegrityScrubber" type="range" min="0" max="100" value="78"
+                 aria-label="Thermal Integrity Scrubber"
+                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"/>
+        </div>
+      </div>
 
-    <!-- =========================================================
-         THERMAL DISINTEGRATION ENGINE, BUBBLE CANVAS & PARTICLE PHYSICS
-         ========================================================= -->
-    <script>
-        // Central Hardware Thermal State
-        const state = {
-            integrity: 78,
-            coolantFill: 0.76,
-            fan1Rpm: 4200,
-            fan2Rpm: 3850,
-            fanAngle: 0,
-            isMeltdown: false
-        };
+      <!-- Right: Speed Pills, Flush Coolant with Mender & CSS Modal -->
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="flex items-center bg-zinc-900/95 p-1 rounded-xl border border-white/15 text-xs">
+          <button data-burn-mode="slow" class="burn-mode-btn px-2.5 py-1 rounded-lg font-medium bg-amber-500/30 text-amber-200 border border-amber-400/50 transition">
+            Slow Burn
+          </button>
+          <button data-burn-mode="rapid" class="burn-mode-btn px-2.5 py-1 rounded-lg font-medium text-slate-300 hover:text-white transition">
+            Rapid Fire
+          </button>
+          <button data-burn-mode="pause" class="burn-mode-btn px-2.5 py-1 rounded-lg font-medium text-slate-300 hover:text-white transition">
+            Hold
+          </button>
+        </div>
 
-        // DOM Elements
-        const countdownTimerText = document.getElementById('countdownTimerText');
-        const integrityPercentText = document.getElementById('integrityPercentText');
-        const hudIntegrityBar = document.getElementById('hudIntegrityBar');
-        const manualIntegrityScrubber = document.getElementById('manualIntegrityScrubber');
-        const hudTempReadout = document.getElementById('hudTempReadout');
-        const vrmTempText = document.getElementById('vrmTempText');
-        const telemetryLogText = document.getElementById('telemetryLogText');
-        const hardwareModules = document.querySelectorAll('.hardware-module');
+        <button id="flushCoolantBtn" onclick="triggerMenderFoamExtinguish()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-hud text-xs font-extrabold tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.65)] active:scale-95 transition">
+          <i class="fa-solid fa-spray-can-sparkles"></i>
+          <span>FLUSH WITH MENDER</span>
+        </button>
 
-        // ========================================================================
-        // 1. FULLSCREEN CANVAS PARTICLE ENGINE (Embers, Sparks & Silicon Ash)
-        // ========================================================================
-        const pCanvas = document.getElementById('thermalParticleCanvas');
-        const pCtx = pCanvas.getContext('2d');
-        let particles = [];
+        <button id="openCodeModalBtn" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-slate-500/60 text-xs font-semibold text-slate-100 transition">
+          <i class="fa-solid fa-code text-orange-400"></i>
+          <span class="hidden sm:inline">Get Hardware CSS</span>
+        </button>
+      </div>
 
-        function resizeParticleCanvas() {
-            pCanvas.width = window.innerWidth;
-            pCanvas.height = window.innerHeight;
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       SECTION 01: DUAL CINEMA HYPERFRAME VIEWPORTS
+       SHOWING MENDER WORKING SIDE-BY-SIDE WITH BLOAT MELTDOWN
+       ========================================================================== -->
+  <section class="max-w-7xl w-full mx-auto px-3 sm:px-6 pt-6 pb-2">
+    <div class="bg-black/75 rounded-2xl p-5 border border-white/10 shadow-2xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10 font-silkscreen text-xs">
+        <div>
+          <span class="text-orange-400 font-bold block">// DUAL CINEMATIC VIEWPORT &bull; SIDE-BY-SIDE COMPARISON</span>
+          <h2 class="font-hud text-lg sm:text-xl font-bold text-white uppercase">
+            STAGE 1: HARDWARE MELTDOWN &harr; STAGE 2: MENDER FOAM RESTORATION
+          </h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="px-2.5 py-1 rounded bg-orange-950 text-orange-300 border border-orange-500/40 text-[10px] font-bold">
+            STAGE 1: 88°C OVERLOAD
+          </span>
+          <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold">
+            STAGE 2: 24°C CRYOGENIC
+          </span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- CLIP 1: MELTDOWN -->
+        <div class="cinema-viewport rounded-xl flex flex-col justify-between">
+          <div class="p-2.5 bg-black/90 border-b border-orange-500/30 flex items-center justify-between text-xs font-silkscreen">
+            <span class="text-orange-400 font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-fire animate-pulse"></i>
+              STAGE 01: UNCHECKED WEB BLOAT
+            </span>
+            <span class="text-red-400 font-bold text-[10px]">100% CPU STRAIN</span>
+          </div>
+          <div class="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
+            <video id="vid-bloat" autoplay loop muted playsinline class="w-full h-full object-cover">
+              <source src="assets/mender_overheating.mp4" type="video/mp4">
+            </video>
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/80 font-silkscreen text-[9px] text-orange-300 border border-orange-500/30">
+              Motherboard smoking under 50MB telemetry &amp; JS polyfills
+            </div>
+          </div>
+        </div>
+
+        <!-- CLIP 2: MENDER WORKING -->
+        <div class="cinema-viewport cinema-viewport-mender rounded-xl flex flex-col justify-between">
+          <div class="p-2.5 bg-black/90 border-b border-cyan-500/30 flex items-center justify-between text-xs font-silkscreen">
+            <span class="text-cyan-400 font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-bolt text-cyan-300"></i>
+              STAGE 02: MENDER IN ACTION (EXTINGUISHING &amp; DISSOLVING)
+            </span>
+            <span class="text-cyan-300 font-bold text-[10px]">8% RAM LOAD</span>
+          </div>
+          <div class="relative aspect-video w-full bg-black overflow-hidden flex items-center justify-center">
+            <video id="vid-mender" autoplay loop muted playsinline class="w-full h-full object-cover">
+              <source src="assets/mender_extinguishing.mp4" type="video/mp4">
+            </video>
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/80 font-silkscreen text-[9px] text-cyan-300 border border-cyan-500/30">
+              Mender foam extinguishes fire, shapes name, dissolves via [TISSUE]
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 02: THE COMPLETE MOTHERBOARD PCB STAGE
+       100% FAITHFUL COMPONENT SUITE FROM THE HARDWARE UI KIT
+       ========================================================================== -->
+  <main class="relative z-10 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 flex-1 flex flex-col justify-center">
+
+    <div id="motherboardStage" class="pcb-motherboard-stage p-5 sm:p-8 relative overflow-hidden">
+
+      <!-- BACKGROUND SVG MOTHERBOARD COPPER TRACES, VIAS & LIQUID PIPING -->
+      <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-85" viewBox="0 0 1200 760" preserveAspectRatio="none">
+        <!-- Etched PCB Copper Bus Lines -->
+        <g stroke="#22c55e" stroke-opacity="0.22" stroke-width="2" fill="none">
+          <polyline points="40,120 180,120 240,180 240,520 310,590"/>
+          <polyline points="60,140 170,140 220,190 220,540 295,615"/>
+          <polyline points="420,90 420,280 510,370 760,370"/>
+          <polyline points="435,90 435,270 520,355 760,355"/>
+          <polyline points="680,260 880,260 950,330 1140,330"/>
+          <polyline points="540,680 680,680 740,620 980,620"/>
+        </g>
+
+        <!-- Glowing Overheated Molten Traces radiating from CPU Socket -->
+        <g id="svgMoltenTraces" stroke="#f97316" stroke-opacity="0.65" stroke-width="2.5" fill="none">
+          <polyline points="720,220 620,220 570,270 460,270"/>
+          <polyline points="780,340 780,430 710,490 580,490"/>
+          <polyline points="890,240 960,240 1010,290 1080,290"/>
+          <polyline points="740,140 740,85 830,85"/>
+        </g>
+
+        <!-- Curved Transparent Liquid Coolant Tube Routing -->
+        <path d="M 290,515 C 365,525 390,460 440,335 C 490,210 535,105 630,98 L 760,98"
+              fill="none" stroke="rgba(15, 23, 42, 0.9)" stroke-width="28" stroke-linecap="round"/>
+        <path id="svgCoolantPipeOuter" d="M 290,515 C 365,525 390,460 440,335 C 490,210 535,105 630,98 L 760,98"
+              fill="none" stroke="hsla(var(--coolant-hue), 95%, 58%, 0.55)" stroke-width="20" stroke-linecap="round"/>
+        <path d="M 290,515 C 365,525 390,460 440,335 C 490,210 535,105 630,98 L 760,98"
+              fill="none" stroke="rgba(255, 255, 255, 0.55)" stroke-width="4" stroke-dasharray="14 22" stroke-linecap="round"/>
+      </svg>
+
+      <!-- Top Aluminum I/O Shield & VRM Finned Heatsink Bar -->
+      <div class="relative z-10 mb-6 flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-emerald-500/20">
+        <div class="flex items-center gap-3">
+          <div class="pcb-standoff" title="PCB Ground Standoff"></div>
+          <div class="px-3 py-1.5 rounded bg-gradient-to-b from-slate-200 via-slate-400 to-slate-700 text-slate-950 font-silkscreen text-xs font-bold shadow-md border border-white">
+            REAR_IO // MENDER-01
+          </div>
+          <span class="silkscreen-tag hidden md:inline">REV 4.02 // POWERED BY R.E.P.™ (U.S. PAT. PEND. 64/160,289)</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="silkscreen-tag">VRM_SINK // THRM-01</span>
+          <div class="finned-heatsink h-9 w-44 sm:w-60 rounded-md flex items-center justify-between px-3">
+            <span class="px-2 py-0.5 rounded bg-black/80 text-[10px] font-silkscreen text-orange-300 border border-orange-400/40">
+              HEATPIPE: <span id="vrmTempText">91°C</span>
+            </span>
+            <div class="w-3 h-3 rounded-full bg-amber-400 animate-ping"></div>
+          </div>
+          <div class="pcb-standoff"></div>
+        </div>
+      </div>
+
+      <!-- MAIN 12-COLUMN HARDWARE COMPONENT GRID -->
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
+
+        <!-- LEFT SECTOR (5 Cols): CMOS, RAM BANKS & SOUTHBRIDGE HEATSINK -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-6">
+
+          <!-- Top-Left: CMOS Battery Button + PCI-E & RAM Bank Toggles -->
+          <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/55 border border-emerald-500/30 p-5 backdrop-blur-sm" id="moduleRamBanks">
+            <div class="char-overlay"></div>
+
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <span class="silkscreen-tag block text-emerald-300">PCI_EXP // 01 &bull; DIMM_BANK A1/B1</span>
+                <h2 class="font-hud text-sm font-bold text-white tracking-wider">
+                  MEMORY &amp; BUS LATCH BANKS
+                </h2>
+              </div>
+              <button data-code-target="ram-slot" class="px-2.5 py-1 rounded bg-orange-500/25 hover:bg-orange-500/45 border border-orange-400/50 text-[11px] font-silkscreen text-orange-200 transition">
+                Inspect CSS
+              </button>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4 items-center">
+              <!-- CMOS CR2032 Lithium Coin-Cell Battery Button -->
+              <div class="col-span-4 flex flex-col items-center gap-2">
+                <button id="cmosBatteryBtn" class="group relative w-20 h-20 rounded-full p-1.5 bg-gradient-to-br from-slate-700 via-zinc-900 to-black border-2 border-slate-500 shadow-xl active:scale-95 transition"
+                        title="Click to Discharge CMOS Surge Capacitor">
+                  <div class="w-full h-full rounded-full bg-gradient-to-tr from-slate-400 via-slate-100 to-white flex flex-col items-center justify-center shadow-inner border border-white">
+                    <span class="text-[9px] font-bold text-slate-700 tracking-tighter">CR2032</span>
+                    <span class="text-xs font-extrabold text-slate-900">+ 3V +</span>
+                    <span id="cmosChargeText" class="text-[9px] font-mono font-bold text-orange-700">SURGE RDY</span>
+                  </div>
+                  <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-6 h-2.5 rounded-sm bg-slate-300 border border-slate-600"></div>
+                </button>
+                <span class="silkscreen-tag text-[10px] text-center">BIOS_BAT // CLR</span>
+              </div>
+
+              <!-- 4 Interactive PCI-E & DDR-RAM Stick Toggles with Gold Pins -->
+              <div class="col-span-8 flex flex-col gap-2.5">
+                <button data-slot-id="1" class="ram-slot-btn ram-slot-module w-full p-2.5 text-left group relative overflow-hidden border-orange-400/70">
+                  <div class="flex items-center justify-between">
+                    <span class="font-silkscreen text-xs font-bold text-amber-300">DIMM_A1 // 64GB ECC</span>
+                    <span class="slot-status-badge px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/30 text-orange-200 border border-orange-400/50">
+                      VOLATILE TMPFS
+                    </span>
+                  </div>
+                  <div class="gold-contact-pins mt-2 rounded-sm opacity-90"></div>
+                </button>
+
+                <button data-slot-id="2" class="ram-slot-btn ram-slot-module w-full p-2.5 text-left group relative overflow-hidden">
+                  <div class="flex items-center justify-between">
+                    <span class="font-silkscreen text-xs font-bold text-cyan-300">DIMM_B1 // 64GB ECC</span>
+                    <span class="slot-status-badge px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/25 text-cyan-200 border border-cyan-400/40">
+                      GHOST RUNTIME
+                    </span>
+                  </div>
+                  <div class="gold-contact-pins mt-2 rounded-sm opacity-90"></div>
+                </button>
+
+                <button data-slot-id="3" class="ram-slot-btn ram-slot-module w-full p-2.5 text-left group relative overflow-hidden">
+                  <div class="flex items-center justify-between">
+                    <span class="font-silkscreen text-xs font-bold text-slate-200">PCI_EXP // x16 GEN5</span>
+                    <span class="slot-status-badge px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/25 text-emerald-200 border border-emerald-400/40">
+                      ISOLATED BUS
+                    </span>
+                  </div>
+                  <div class="gold-contact-pins mt-2 rounded-sm opacity-90"></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Row of VRM Chokes & Solid Capacitors -->
+            <div class="mt-4 pt-3 border-t border-emerald-500/20 flex items-center justify-between">
+              <span class="silkscreen-tag text-[10px]">PHASE_CHOKES // 8x R22 SOLID STATE</span>
+              <div class="flex items-center gap-2">
+                <div class="smd-capacitor"></div>
+                <div class="smd-capacitor"></div>
+                <div class="smd-capacitor"></div>
+                <div class="smd-capacitor"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom-Left: Southbridge Heatsink Block with Yellow Stripe & Steam Vent -->
+          <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/60 border border-emerald-500/30 p-5" id="moduleChipsetSink">
+            <div class="char-overlay"></div>
+
+            <div class="flex items-center justify-between mb-3">
+              <span class="silkscreen-tag text-amber-300">MBD_STATUS // CHIPSET BRIDGE</span>
+              <span id="chipsetHealthBadge" class="text-[11px] font-silkscreen text-emerald-300">BRIDGE LINK: ARMED</span>
+            </div>
+
+            <div class="finned-heatsink rounded-xl p-3 relative">
+              <div class="rounded-lg bg-gradient-to-br from-slate-200 via-slate-300 to-slate-500 p-4 border border-white shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 bottom-0 left-6 w-2.5 bg-amber-400 -skew-x-12 shadow-[0_0_10px_#f59e0b]"></div>
+
+                <div class="pl-8 flex items-center justify-between gap-3">
+                  <div>
+                    <div class="text-[10px] font-silkscreen text-slate-700 font-bold">PCH_THERMAL_ARMOR</div>
+                    <div class="font-hud text-sm font-black text-slate-900 tracking-wide">
+                      COOLANT MANIFOLD INLET
+                    </div>
+                  </div>
+
+                  <button id="purgeManifoldBtn" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-amber-300 font-silkscreen text-xs font-bold border border-amber-400/50 shadow active:scale-95 transition">
+                    VENT STEAM (-15% HEAT)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT SECTOR (7 Cols): CPU SOCKET, ROTARY FANS & COOLANT TUBE -->
+        <div class="lg:col-span-7 flex flex-col justify-between gap-6">
+
+          <!-- TOP RIGHT ROW: CPU Socket Primary Action + Dual Micro-Turbine Fans -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+
+            <!-- HERO COMPONENT: GLOWING ORANGE CPU SOCKET (7 cols) -->
+            <div class="md:col-span-7 hardware-module heat-reactive thermal-jitter rounded-2xl p-1" id="moduleCpuSocket">
+              <div class="flex items-center justify-between mb-2 px-1">
+                <span class="silkscreen-tag text-orange-300 font-bold">SOCKET_ACTION // LGA-4096</span>
+                <button data-code-target="cpu-socket" class="px-2.5 py-0.5 rounded bg-orange-500/30 hover:bg-orange-500/50 border border-orange-400/60 text-[11px] font-silkscreen text-white transition">
+                  Get Socket CSS
+                </button>
+              </div>
+
+              <!-- Die-Cast Metal Socket Retention Frame -->
+              <div class="cpu-socket-housing">
+                <div class="char-overlay"></div>
+
+                <!-- Corner Hex Torx Bolts -->
+                <div class="flex items-center justify-between mb-2 px-1">
+                  <span class="w-3 h-3 rounded-full bg-slate-700 border border-white shadow-inner"></span>
+                  <span class="font-silkscreen text-[10px] font-bold text-slate-900 tracking-widest">
+                    RETENTION: 480N // VOLTAGE 1.48V
+                  </span>
+                  <span class="w-3 h-3 rounded-full bg-slate-700 border border-white shadow-inner"></span>
+                </div>
+
+                <!-- Glowing Orange Micro-Pin Array Cavity -->
+                <div class="cpu-pin-cavity flex flex-col gap-3">
+
+                  <!-- Primary High-Voltage EXECUTE Button: RUN MENDER IN RAM -->
+                  <button id="btnSocketExecute" onclick="triggerMenderFoamExtinguish()" class="cpu-die-btn w-full py-3.5 px-5 flex items-center justify-between group">
+                    <div class="text-left">
+                      <span class="block text-[10px] font-silkscreen text-orange-300 tracking-widest">
+                        RAM INGESTION
+                      </span>
+                      <span class="font-hud text-xl sm:text-2xl font-black tracking-widest bg-gradient-to-r from-white via-amber-200 to-orange-400 bg-clip-text text-transparent">
+                        EXECUTE MENDER
+                      </span>
+                    </div>
+                    <div class="w-9 h-9 rounded-lg bg-orange-500/25 border border-orange-400 flex items-center justify-center group-hover:scale-110 transition">
+                      <svg class="w-5 h-5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                      </svg>
+                    </div>
+                  </button>
+
+                  <!-- Secondary High-Voltage ABORT / SCRAM Button: [TISSUE] WIPE -->
+                  <button id="btnSocketAbort" onclick="triggerMenderFoamExtinguish()" class="cpu-die-btn w-full py-2.5 px-5 flex items-center justify-between group">
+                    <span class="font-hud text-sm sm:text-base font-bold tracking-widest text-slate-200 group-hover:text-cyan-300 transition">
+                      [TISSUE] PURGE &amp; DISSOLVE
+                    </span>
+                    <span class="font-silkscreen text-[11px] text-cyan-300/90 group-hover:text-white">
+                      [300ms ZERO-FILL]
+                    </span>
+                  </button>
+
+                </div>
+
+                <!-- Bottom Socket Retention Lever Arm -->
+                <div class="mt-2.5 flex items-center justify-between px-1">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-slate-700 border border-white shadow-inner"></span>
+                    <span id="socketPinStatusText" class="font-silkscreen text-[10px] font-bold text-slate-900">
+                      PINS: MOLTEN CONDUCTION
+                    </span>
+                  </div>
+                  <button id="toggleSocketLatchBtn" class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-silkscreen text-amber-300 border border-slate-600 hover:bg-slate-700">
+                    LATCH: LOCKED
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- DUAL MICRO-TURBINE ROTARY FAN DIALS (5 cols) -->
+            <div class="md:col-span-5 hardware-module heat-reactive rounded-2xl bg-emerald-950/55 border border-emerald-500/30 p-4 flex flex-col justify-between" id="moduleDualFans">
+              <div class="char-overlay"></div>
+
+              <div class="flex items-center justify-between mb-2">
+                <span class="silkscreen-tag text-cyan-300">FAN_SPD // 01 &amp; 02</span>
+                <button data-code-target="turbine-fan" class="px-2 py-0.5 rounded bg-orange-500/25 hover:bg-orange-500/45 border border-orange-400/50 text-[10px] font-silkscreen text-orange-200 transition">
+                  CSS
+                </button>
+              </div>
+
+              <p class="text-[11px] text-slate-300 mb-3">
+                Click or drag turbines to boost RPM &amp; fight thermal runaway:
+              </p>
+
+              <!-- Two Metallic Turbine Fan Dials side by side -->
+              <div class="flex items-center justify-around gap-3 my-1">
+                <!-- Fan 1 -->
+                <div class="flex flex-col items-center gap-1.5">
+                  <div id="turbineDial1" class="turbine-housing" title="Click or Drag Vertically to Boost Fan 01 RPM">
+                    <div class="turbine-cavity">
+                      <svg id="fanRotorSvg1" viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="44" fill="url(#overheatCoreGrad)" opacity="0.45"/>
+                        <g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1">
+                          <path d="M50,50 L42,10 L58,8 Z"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(40 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(80 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(120 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(160 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(200 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(240 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(280 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(320 50 50)"/>
+                        </g>
+                        <circle cx="50" cy="50" r="15" fill="url(#steelBladeGrad)" stroke="#e2e8f0" stroke-width="1.5"/>
+                        <circle cx="50" cy="50" r="5" fill="#0f172a"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <span class="silkscreen-tag text-[10px]">FAN_SPD // 01</span>
+                  <span id="fan1RpmText" class="font-mono text-xs font-bold text-cyan-300">4,200 RPM</span>
+                </div>
+
+                <!-- Fan 2 -->
+                <div class="flex flex-col items-center gap-1.5">
+                  <div id="turbineDial2" class="turbine-housing" title="Click or Drag Vertically to Boost Fan 02 RPM">
+                    <div class="turbine-cavity">
+                      <svg id="fanRotorSvg2" viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="44" fill="url(#overheatCoreGrad)" opacity="0.45"/>
+                        <g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1">
+                          <path d="M50,50 L42,10 L58,8 Z"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(40 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(80 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(120 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(160 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(200 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(240 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(280 50 50)"/>
+                          <path d="M50,50 L42,10 L58,8 Z" transform="rotate(320 50 50)"/>
+                        </g>
+                        <circle cx="50" cy="50" r="15" fill="url(#steelBladeGrad)" stroke="#e2e8f0" stroke-width="1.5"/>
+                        <circle cx="50" cy="50" r="5" fill="#0f172a"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <span class="silkscreen-tag text-[10px]">COOL_FLOW // 02</span>
+                  <span id="fan2RpmText" class="font-mono text-xs font-bold text-cyan-300">3,850 RPM</span>
+                </div>
+              </div>
+
+              <button id="maxFansBoostBtn" class="mt-2 w-full py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/50 font-silkscreen text-xs text-cyan-200 transition">
+                ENGAGE 100% TURBINE OVERDRIVE
+              </button>
+            </div>
+
+          </div>
+
+          <!-- BOILING GLASS LIQUID-COOLANT TUBE PROGRESS BAR -->
+          <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/60 border border-emerald-500/35 p-5" id="moduleCoolantBar">
+            <div class="char-overlay"></div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <span class="silkscreen-tag text-cyan-300 block">SYS_LOAD // P-BAR 02 &bull; BOROSILICATE LOOP</span>
+                <h3 class="font-hud text-sm sm:text-base font-bold text-white">
+                  LIQUID COOLANT PLASMA CONDUIT
+                </h3>
+              </div>
+              <div class="flex items-center gap-2">
+                <span id="coolantStateBadge" class="px-2.5 py-0.5 rounded font-silkscreen text-xs bg-cyan-500/25 text-cyan-200 border border-cyan-400/40">
+                  FLOW: 76% // LAMINAR
+                </span>
+                <button data-code-target="coolant-tube" class="px-2.5 py-1 rounded bg-orange-500/25 hover:bg-orange-500/45 border border-orange-400/50 text-[11px] font-silkscreen text-orange-200 transition">
+                  Get Tube CSS
+                </button>
+              </div>
+            </div>
+
+            <div class="relative px-2 py-1">
+              <div id="coolantTubeInteractive" class="coolant-tube-assembly">
+                <div class="tube-metal-clamp" style="left: 16%;"></div>
+                <div class="tube-metal-clamp" style="left: 58%;"></div>
+                <div class="tube-metal-clamp" style="left: 84%;"></div>
+                <canvas id="coolantTubeCanvas" class="w-full h-full block"></canvas>
+              </div>
+
+              <div class="mt-2 px-4 flex items-center justify-between font-silkscreen text-[10px] text-slate-400">
+                <span>0% INLET</span>
+                <span>|</span>
+                <span>25%</span>
+                <span>|</span>
+                <span>50% NOMINAL</span>
+                <span>|</span>
+                <span>75% BOIL</span>
+                <span>|</span>
+                <span>100% PLASMA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 24-PIN BRAIDED POWER BUS HEADER -->
+          <div class="hardware-module heat-reactive rounded-2xl bg-emerald-950/60 border border-emerald-500/35 p-5" id="modulePowerBus">
+            <div class="char-overlay"></div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <span class="silkscreen-tag text-amber-300 block">POWER_BUS // 04 &bull; 24-PIN ATX RAIL</span>
+                <h3 class="font-hud text-sm font-bold text-white">
+                  HIGH-AMPERAGE WIRE HARNESS &amp; RAIL BREAKERS
+                </h3>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2.5">
+                <button data-rail="12V" class="rail-toggle-btn px-3 py-2 rounded-lg bg-zinc-900 border-2 border-amber-400 text-amber-300 font-silkscreen text-xs font-bold shadow-lg transition">
+                  +12V_RAIL [ON]
+                </button>
+                <button data-rail="5V" class="rail-toggle-btn px-3 py-2 rounded-lg bg-zinc-900 border-2 border-cyan-400 text-cyan-300 font-silkscreen text-xs font-bold shadow-lg transition">
+                  +5V_AUX [ON]
+                </button>
+                <button id="triggerDisintegrateDemoBtn" class="px-3 py-2 rounded-lg bg-red-600/30 hover:bg-red-600/50 border border-red-400 text-red-200 font-silkscreen text-xs font-bold transition"
+                        title="Test immediate thermal overload fracture">
+                  TEST OVERLOAD FRACTURE
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-3 pt-3 border-t border-emerald-500/20 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-1.5 bg-zinc-950 p-1.5 rounded border border-slate-600">
+                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-zinc-800 border border-slate-600"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-orange-500/90 border border-orange-200 animate-pulse"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-zinc-800 border border-slate-600"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-cyan-500/80 border border-cyan-200"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-amber-500/80 border border-amber-200"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-red-500/90 border border-red-200"></span>
+                <span class="w-2.5 h-4 rounded-xs bg-zinc-800 border border-slate-600"></span>
+              </div>
+
+              <div id="telemetryLogText" class="font-silkscreen text-xs text-amber-300">
+                STATUS: CLICK ANY COMPONENT BEFORE INTEGRITY HITS 0% &bull; USE "FLUSH WITH MENDER" TO RECOVER
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       SECTION 03: MENDER ARCHITECTURE & GHOST PROTOCOLS
+       ========================================================================== -->
+  <section class="relative z-10 max-w-7xl w-full mx-auto px-3 sm:px-6 py-8">
+    <div class="bg-black/85 rounded-2xl p-6 sm:p-10 border border-white/10 shadow-2xl">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs font-silkscreen text-orange-400 font-bold block mb-1">
+          // POWERED BY R.E.P.™ (U.S. PAT. PEND. 64/160,289)
+        </span>
+        <h2 class="font-hud text-2xl sm:text-4xl font-black text-white uppercase">
+          HOW MENDER EXTINGUISHES BLOAT IN RAM
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-300 font-sans mt-2">
+          Traditional software writes persistent registries and DLLs. Mender provisions a volatile enclave in physical RAM, executes clean browser threads, and dissolves via 300ms [TISSUE] wipe leaving zero traces on disk.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 font-silkscreen text-xs">
+        <div class="p-5 rounded-xl bg-zinc-900/80 border border-white/10">
+          <span class="text-orange-400 font-bold block mb-1">01. RAM ENCLAVE</span>
+          <h4 class="font-hud text-sm font-bold text-white mb-2">tmpfs Isolation</h4>
+          <p class="text-slate-300 font-sans text-xs">
+            Allocates purely volatile memory space. Zero persistent registry writes, zero installation bloat.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-zinc-900/80 border border-white/10">
+          <span class="text-cyan-400 font-bold block mb-1">02. GHOST VACUUM</span>
+          <h4 class="font-hud text-sm font-bold text-white mb-2">Tripwire Collapse</h4>
+          <p class="text-slate-300 font-sans text-xs">
+            Any unmapped inspection or debugger hook triggers an instant 0-second TTL session scram.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-zinc-900/80 border border-white/10">
+          <span class="text-fuchsia-400 font-bold block mb-1">03. [TISSUE] PURGE</span>
+          <h4 class="font-hud text-sm font-bold text-white mb-2">300ms Memory Shredder</h4>
+          <p class="text-slate-300 font-sans text-xs">
+            Executes low-level <code class="text-pink-300">memset_s(0x00)</code> across physical RAM upon exit.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-zinc-900/80 border border-white/10">
+          <span class="text-emerald-400 font-bold block mb-1">04. TRUE BURNER</span>
+          <h4 class="font-hud text-sm font-bold text-white mb-2">Disposable Browser</h4>
+          <p class="text-slate-300 font-sans text-xs">
+            Fresh fingerprint for every session. Cross-site tracker cookies and canvas telemetry burned on close.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 04: COMMERCIAL SUITE ($75 LIFETIME LICENSE)
+       ========================================================================== -->
+  <section id="purchase" class="relative z-10 max-w-5xl w-full mx-auto px-3 sm:px-6 py-6 mb-12">
+    <div class="bg-gradient-to-br from-zinc-950 via-zinc-900 to-black rounded-3xl p-8 sm:p-12 border-2 border-orange-500/60 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+      <div>
+        <span class="px-3 py-1 rounded-full bg-orange-950 text-orange-300 border border-orange-500/40 font-silkscreen text-xs font-bold uppercase">
+          COMMERCIAL RUNTIME // LIFETIME LICENSE
+        </span>
+        <h2 class="font-hud text-3xl sm:text-5xl font-black text-white uppercase mt-3 mb-2">
+          GET MENDER &bull; $75 FLAT
+        </h2>
+        <p class="text-slate-300 text-xs sm:text-sm font-sans max-w-lg mb-4">
+          Includes the Mender Ephemeral Runtime binary, True Burner Ghost Browser, and lifetime updates. Zero recurring subscription fees.
+        </p>
+        <div class="flex items-center gap-4 text-xs font-silkscreen text-slate-400">
+          <span><i class="fa-solid fa-check text-cyan-400 mr-1"></i> Windows &bull; Mac &bull; Linux</span>
+          <span>&bull;</span>
+          <span><i class="fa-solid fa-lock text-cyan-400 mr-1"></i> 30-Day Guarantee</span>
+        </div>
+      </div>
+
+      <div class="w-full sm:w-72 flex flex-col gap-3 font-silkscreen text-xs">
+        <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold uppercase tracking-wider text-center shadow-[0_0_20px_rgba(249,115,22,0.6)] transition">
+          <i class="fa-solid fa-bolt mr-1"></i> Buy on Gumroad ($75)
+        </a>
+        <a href="https://www.paypal.com" target="_blank" rel="noopener noreferrer" class="block w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold border border-white/20 text-center transition">
+          <i class="fa-brands fa-paypal text-cyan-400 mr-1"></i> Pay via PayPal
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CODE INSPECTOR & COPY MODAL (From UI Kit)
+       ========================================================================== -->
+  <div id="codeModalBackdrop" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="w-full max-w-4xl rounded-2xl bg-zinc-950 border border-orange-500/40 shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+      <div class="px-6 py-4 bg-zinc-900 border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 id="modalComponentTitle" class="font-hud text-base sm:text-lg font-bold text-orange-400">
+            Glowing LGA CPU Socket Button CSS
+          </h3>
+          <p class="text-xs text-slate-400">
+            Self-contained HTML &amp; CSS with `--burn-level` thermal variables
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          <button data-modal-tab="cpu-socket" class="modal-tab-btn px-2.5 py-1 rounded text-xs font-silkscreen bg-orange-500/30 text-orange-200 border border-orange-400/50">
+            CPU Socket Button
+          </button>
+          <button data-modal-tab="coolant-tube" class="modal-tab-btn px-2.5 py-1 rounded text-xs font-silkscreen bg-zinc-800 text-slate-300">
+            Glass Coolant Tube
+          </button>
+          <button data-modal-tab="ram-slot" class="modal-tab-btn px-2.5 py-1 rounded text-xs font-silkscreen bg-zinc-800 text-slate-300">
+            RAM / PCI-E Slot
+          </button>
+          <button data-modal-tab="turbine-fan" class="modal-tab-btn px-2.5 py-1 rounded text-xs font-silkscreen bg-zinc-800 text-slate-300">
+            Turbine Fan Dial
+          </button>
+        </div>
+      </div>
+
+      <div class="px-6 py-2.5 bg-zinc-900/60 border-b border-white/10 flex items-center justify-between">
+        <span class="text-xs font-silkscreen text-emerald-400">// READY TO PASTE INTO YOUR PROJECT</span>
+        <div class="flex items-center gap-2">
+          <button id="copyCodeSnippetBtn" class="px-3.5 py-1.5 rounded-lg bg-emerald-500/25 hover:bg-emerald-500/40 border border-emerald-400/50 text-xs font-semibold text-emerald-200 transition">
+            Copy Code to Clipboard
+          </button>
+          <button id="closeCodeModalBtn" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-slate-300">
+            Close
+          </button>
+        </div>
+      </div>
+
+      <div class="p-6 overflow-y-auto flex-1 bg-[#050806]">
+        <pre class="text-xs sm:text-sm font-mono text-slate-200 leading-relaxed whitespace-pre-wrap"><code id="modalCodeOutput"></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- MASTER FOOTER -->
+  <footer class="max-w-7xl w-full mx-auto px-4 py-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-silkscreen text-slate-400 relative z-20">
+    <div>
+      <span>&copy; 2026 BURN-1 SYSTEMS // MENDER EPHEMERAL ACCELERATOR</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span>U.S. PAT. PEND. 64/160,289</span>
+      <span>&bull;</span>
+      <a href="index.html" class="hover:text-white underline">Home</a>
+      <span>&bull;</span>
+      <a href="tools.html" class="hover:text-emerald-400 underline">Free Tools Funnel</a>
+      <span>&bull;</span>
+      <a href="clinic.html" class="hover:text-cyan-400 underline">Cyber Clinic</a>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       THERMAL DISINTEGRATION ENGINE, BUBBLE CANVAS & PARTICLE PHYSICS (FROM UI KIT)
+       ========================================================================== -->
+  <script>
+    (function () {
+      const state = {
+        integrity: 78,
+        burnMode: 'slow',
+        coolantFill: 0.76,
+        fan1Rpm: 4200,
+        fan2Rpm: 3850,
+        fan1Angle: 0,
+        fan2Angle: 0,
+        socketLatched: true,
+        isMeltdown: false
+      };
+
+      const countdownTimerText = document.getElementById('countdownTimerText');
+      const integrityPercentText = document.getElementById('integrityPercentText');
+      const hudIntegrityBar = document.getElementById('hudIntegrityBar');
+      const manualIntegrityScrubber = document.getElementById('manualIntegrityScrubber');
+      const hudTempReadout = document.getElementById('hudTempReadout');
+      const vrmTempText = document.getElementById('vrmTempText');
+      const hudSystemStatus = document.getElementById('hudSystemStatus');
+      const telemetryLogText = document.getElementById('telemetryLogText');
+      const hardwareModules = document.querySelectorAll('.hardware-module');
+
+      // 1. FULLSCREEN CANVAS PARTICLE ENGINE
+      const pCanvas = document.getElementById('thermalParticleCanvas');
+      const pCtx = pCanvas.getContext('2d');
+      let particles = [];
+
+      function resizeParticleCanvas() {
+        pCanvas.width = window.innerWidth;
+        pCanvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeParticleCanvas);
+      resizeParticleCanvas();
+
+      function spawnThermalBurst(x, y, count, type) {
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = type === 'spark'
+            ? 2.5 + Math.random() * 6.5
+            : 0.6 + Math.random() * 2.4;
+
+          particles.push({
+            x: x + (Math.random() - 0.5) * 24,
+            y: y + (Math.random() - 0.5) * 24,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - (type === 'ash' ? 1.2 : 0.5),
+            size: type === 'ash' ? 3 + Math.random() * 5 : 1.5 + Math.random() * 3,
+            life: 1.0,
+            decay: type === 'spark' ? 0.028 + Math.random() * 0.03 : 0.008 + Math.random() * 0.014,
+            type: type
+          });
         }
-        window.addEventListener('resize', resizeParticleCanvas);
-        resizeParticleCanvas();
+      }
 
-        function spawnThermalBurst(x, y, count, type) {
-            for (let i = 0; i < count; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const speed = type === 'spark' ? 2.5 + Math.random() * 6.5 : 0.6 + Math.random() * 2.4;
-                particles.push({
-                    x: x + (Math.random() - 0.5) * 24,
-                    y: y + (Math.random() - 0.5) * 24,
-                    vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed - (type === 'ash' ? 1.2 : 0.5),
-                    size: type === 'ash' ? 3 + Math.random() * 5 : 1.5 + Math.random() * 3,
-                    life: 1.0,
-                    decay: type === 'spark' ? 0.028 + Math.random() * 0.03 : 0.008 + Math.random() * 0.014,
-                    type: type
-                });
-            }
+      function updateAndRenderParticles() {
+        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+        const burnLevel = (100 - state.integrity) / 100;
+
+        if (burnLevel > 0.18 && Math.random() < burnLevel * 0.65) {
+          const mod = hardwareModules[Math.floor(Math.random() * hardwareModules.length)];
+          if (mod) {
+            const rect = mod.getBoundingClientRect();
+            const px = rect.left + Math.random() * rect.width;
+            const py = rect.top + Math.random() * rect.height;
+            const pType = Math.random() < 0.35 ? 'ash' : (Math.random() < 0.75 ? 'ember' : 'spark');
+            spawnThermalBurst(px, py, 1, pType);
+          }
         }
 
-        function updateAndRenderParticles() {
-            pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-            const burnLevel = (100 - state.integrity) / 100;
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= p.decay;
 
-            if (burnLevel > 0.25 && Math.random() < burnLevel * 0.65) {
-                const mod = hardwareModules[Math.floor(Math.random() * hardwareModules.length)];
-                if (mod) {
-                    const rect = mod.getBoundingClientRect();
-                    const px = rect.left + Math.random() * rect.width;
-                    const py = rect.top + Math.random() * rect.height;
-                    const pType = Math.random() < 0.35 ? 'ash' : (Math.random() < 0.75 ? 'ember' : 'spark');
-                    spawnThermalBurst(px, py, 1, pType);
-                }
-            }
+          if (p.type === 'spark') {
+            p.vy += 0.18;
+          } else {
+            p.vy -= 0.03;
+            p.vx += Math.sin(p.life * 10) * 0.08;
+          }
 
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                p.x += p.vx;
-                p.y += p.vy;
-                p.life -= p.decay;
+          if (p.life <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
 
-                if (p.type === 'spark') {
-                    p.vy += 0.18;
-                } else {
-                    p.vy -= 0.03;
-                    p.vx += Math.sin(p.life * 10) * 0.08;
-                }
+          pCtx.save();
+          if (p.type === 'spark') {
+            pCtx.strokeStyle = `rgba(254, 240, 138, ${p.life})`;
+            pCtx.lineWidth = 2;
+            pCtx.shadowColor = '#f97316';
+            pCtx.shadowBlur = 10;
+            pCtx.beginPath();
+            pCtx.moveTo(p.x, p.y);
+            pCtx.lineTo(p.x - p.vx * 2.2, p.y - p.vy * 2.2);
+            pCtx.stroke();
+          } else if (p.type === 'ember') {
+            pCtx.fillStyle = `rgba(249, 115, 22, ${p.life})`;
+            pCtx.shadowColor = '#ef4444';
+            pCtx.shadowBlur = 12;
+            pCtx.beginPath();
+            pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            pCtx.fill();
+          } else {
+            pCtx.translate(p.x, p.y);
+            pCtx.rotate(p.life * 6);
+            pCtx.fillStyle = `rgba(24, 24, 27, ${p.life * 0.9})`;
+            pCtx.strokeStyle = `rgba(249, 115, 22, ${p.life * 0.85})`;
+            pCtx.lineWidth = 1;
+            pCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.75);
+            pCtx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.75);
+          }
+          pCtx.restore();
+        }
+      }
 
-                if (p.life <= 0) {
-                    particles.splice(i, 1);
-                    continue;
-                }
+      // 2. GLASS COOLANT TUBE CANVAS
+      const tubeCanvas = document.getElementById('coolantTubeCanvas');
+      const tubeCtx = tubeCanvas.getContext('2d');
+      const tubeEl = document.getElementById('coolantTubeInteractive');
+      let bubbles = [];
 
-                pCtx.save();
-                if (p.type === 'spark') {
-                    pCtx.strokeStyle = `rgba(254, 240, 138, ${p.life})`;
-                    pCtx.lineWidth = 2;
-                    pCtx.shadowColor = '#f97316';
-                    pCtx.shadowBlur = 10;
-                    pCtx.beginPath();
-                    pCtx.moveTo(p.x, p.y);
-                    pCtx.lineTo(p.x - p.vx * 2.2, p.y - p.vy * 2.2);
-                    pCtx.stroke();
-                } else if (p.type === 'ember') {
-                    pCtx.fillStyle = `rgba(249, 115, 22, ${p.life})`;
-                    pCtx.shadowColor = '#ef4444';
-                    pCtx.shadowBlur = 12;
-                    pCtx.beginPath();
-                    pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    pCtx.fill();
-                } else {
-                    pCtx.translate(p.x, p.y);
-                    pCtx.rotate(p.life * 6);
-                    pCtx.fillStyle = `rgba(24, 24, 27, ${p.life * 0.9})`;
-                    pCtx.strokeStyle = `rgba(249, 115, 22, ${p.life * 0.85})`;
-                    pCtx.lineWidth = 1;
-                    pCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.75);
-                    pCtx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.75);
-                }
-                pCtx.restore();
-            }
+      function initCoolantBubbles() {
+        const rect = tubeEl.getBoundingClientRect();
+        tubeCanvas.width = Math.max(280, Math.floor(rect.width));
+        tubeCanvas.height = Math.max(48, Math.floor(rect.height));
+        bubbles = [];
+
+        for (let i = 0; i < 65; i++) {
+          bubbles.push({
+            x: Math.random() * tubeCanvas.width,
+            y: 8 + Math.random() * (tubeCanvas.height - 16),
+            r: 1.5 + Math.random() * 4.2,
+            speed: 0.6 + Math.random() * 1.8,
+            wobble: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      function renderCoolantTube(timeSec) {
+        const w = tubeCanvas.width;
+        const h = tubeCanvas.height;
+        tubeCtx.clearRect(0, 0, w, h);
+
+        const burnLevel = (100 - state.integrity) / 100;
+        const fillW = w * state.coolantFill;
+        const hue = Math.round(198 - burnLevel * 182);
+
+        tubeCtx.save();
+        tubeCtx.beginPath();
+        tubeCtx.roundRect(0, 0, Math.max(28, fillW), h, 30);
+        tubeCtx.clip();
+
+        const liqGrad = tubeCtx.createLinearGradient(0, 0, 0, h);
+        liqGrad.addColorStop(0, `hsla(${hue}, 95%, 35%, 0.85)`);
+        liqGrad.addColorStop(0.5, `hsla(${hue}, 100%, 62%, 0.98)`);
+        liqGrad.addColorStop(1, `hsla(${hue}, 95%, 28%, 0.9)`);
+        tubeCtx.fillStyle = liqGrad;
+        tubeCtx.fillRect(0, 0, fillW, h);
+
+        const coreBeam = tubeCtx.createLinearGradient(0, h * 0.25, 0, h * 0.75);
+        coreBeam.addColorStop(0, 'rgba(255,255,255,0)');
+        coreBeam.addColorStop(0.5, 'rgba(255,255,255,0.65)');
+        coreBeam.addColorStop(1, 'rgba(255,255,255,0)');
+        tubeCtx.fillStyle = coreBeam;
+        tubeCtx.fillRect(0, h * 0.25, fillW, h * 0.5);
+
+        const boilSpeedMult = 1 + burnLevel * 4.5;
+        for (let i = 0; i < bubbles.length; i++) {
+          const b = bubbles[i];
+          b.x += b.speed * boilSpeedMult;
+          if (b.x > fillW) b.x = 4;
+
+          const by = b.y + Math.sin(timeSec * 4 + b.wobble) * (1.5 + burnLevel * 4);
+
+          tubeCtx.beginPath();
+          tubeCtx.arc(b.x, by, b.r, 0, Math.PI * 2);
+          tubeCtx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+          tubeCtx.fill();
         }
 
-        // ========================================================================
-        // 2. GLASS COOLANT TUBE CANVAS
-        // ========================================================================
-        const tubeCanvas = document.getElementById('coolantTubeCanvas');
-        const tubeCtx = tubeCanvas.getContext('2d');
-        const tubeEl = document.getElementById('coolantTubeInteractive');
-        let bubbles = [];
+        tubeCtx.restore();
+      }
 
-        function initCoolantBubbles() {
-            const rect = tubeEl.getBoundingClientRect();
-            tubeCanvas.width = Math.max(280, Math.floor(rect.width));
-            tubeCanvas.height = Math.max(48, Math.floor(rect.height));
-            bubbles = [];
+      let draggingTube = false;
+      function updateTubeFromClientX(clientX) {
+        const rect = tubeEl.getBoundingClientRect();
+        state.coolantFill = Math.max(0.08, Math.min(1, (clientX - rect.left) / rect.width));
+        const pct = Math.round(state.coolantFill * 100);
+        const burnLevel = (100 - state.integrity) / 100;
+        const flowLabel = burnLevel > 0.65 ? 'BOILING PLASMA' : 'LAMINAR COOL';
+        document.getElementById('coolantStateBadge').textContent = `FLOW: ${pct}% // ${flowLabel}`;
+      }
 
-            for (let i = 0; i < 60; i++) {
-                bubbles.push({
-                    x: Math.random() * tubeCanvas.width,
-                    y: 8 + Math.random() * (tubeCanvas.height - 16),
-                    r: 1.5 + Math.random() * 4,
-                    speed: 0.6 + Math.random() * 1.8,
-                    wobble: Math.random() * Math.PI * 2
-                });
-            }
+      tubeEl.addEventListener('mousedown', (e) => {
+        draggingTube = true;
+        updateTubeFromClientX(e.clientX);
+        spawnThermalBurst(e.clientX, e.clientY, 10, 'spark');
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (draggingTube) updateTubeFromClientX(e.clientX);
+      });
+      window.addEventListener('mouseup', () => {
+        draggingTube = false;
+      });
+
+      // 3. APPLY THERMAL STATE TO DOM
+      function applyThermalStateToDOM() {
+        const clamped = Math.max(0, Math.min(100, state.integrity));
+        const burnLevel = (100 - clamped) / 100;
+        const hue = Math.round(198 - burnLevel * 182);
+
+        document.documentElement.style.setProperty('--burn-level', burnLevel.toFixed(3));
+        document.documentElement.style.setProperty('--coolant-hue', hue);
+        document.documentElement.style.setProperty(
+          '--shake-amp',
+          burnLevel > 0.7 ? `${((burnLevel - 0.7) * 5).toFixed(2)}px` : '0px'
+        );
+
+        const secRemaining = (clamped * 0.6).toFixed(1);
+        countdownTimerText.textContent = `00:${secRemaining.padStart(4, '0')}`;
+        integrityPercentText.textContent = `${Math.round(clamped)}%`;
+        hudIntegrityBar.style.width = `${clamped}%`;
+        manualIntegrityScrubber.value = Math.round(clamped);
+
+        const coreTemp = Math.round(52 + burnLevel * 76);
+        hudTempReadout.textContent = `${coreTemp}°C`;
+        vrmTempText.textContent = `${coreTemp + 6}°C`;
+
+        if (clamped <= 5) {
+          if (!state.isMeltdown) {
+            state.isMeltdown = true;
+            hudSystemStatus.textContent = '[CRITICAL: SILICON DISINTEGRATED!]';
+            hudSystemStatus.className = 'font-silkscreen text-xs text-red-400 font-bold animate-bounce';
+            telemetryLogText.textContent = 'MELTDOWN REACHED — CLICK "FLUSH WITH MENDER" TO REBUILD SILICON!';
+            hardwareModules.forEach((m) => m.classList.add('is-disintegrated'));
+            spawnThermalBurst(window.innerWidth * 0.5, window.innerHeight * 0.5, 65, 'ash');
+            spawnThermalBurst(window.innerWidth * 0.6, window.innerHeight * 0.4, 45, 'spark');
+          }
+        } else {
+          if (state.isMeltdown) {
+            state.isMeltdown = false;
+            hardwareModules.forEach((m) => m.classList.remove('is-disintegrated'));
+          }
+          if (burnLevel > 0.6) {
+            hudSystemStatus.textContent = '[THERMAL RUNAWAY ACTIVE]';
+            hudSystemStatus.className = 'font-silkscreen text-xs text-orange-400 font-bold animate-pulse';
+          } else {
+            hudSystemStatus.textContent = '[MENDER OPTIMIZED: STABLE]';
+            hudSystemStatus.className = 'font-silkscreen text-xs text-cyan-300 font-bold';
+          }
         }
+      }
 
-        function renderCoolantTube(timeSec) {
-            const w = tubeCanvas.width;
-            const h = tubeCanvas.height;
-            tubeCtx.clearRect(0, 0, w, h);
+      manualIntegrityScrubber.addEventListener('input', (e) => {
+        state.integrity = parseFloat(e.target.value);
+        applyThermalStateToDOM();
+        spawnThermalBurst(window.innerWidth * 0.5, window.innerHeight * 0.4, 6, 'spark');
+      });
 
-            const burnLevel = (100 - state.integrity) / 100;
-            const fillW = w * state.coolantFill;
-            const hue = Math.round(198 - burnLevel * 182);
-
-            tubeCtx.save();
-            tubeCtx.beginPath();
-            tubeCtx.roundRect(0, 0, Math.max(28, fillW), h, 30);
-            tubeCtx.clip();
-
-            const liqGrad = tubeCtx.createLinearGradient(0, 0, 0, h);
-            liqGrad.addColorStop(0, `hsla(${hue}, 95%, 35%, 0.85)`);
-            liqGrad.addColorStop(0.5, `hsla(${hue}, 100%, 62%, 0.98)`);
-            liqGrad.addColorStop(1, `hsla(${hue}, 95%, 28%, 0.9)`);
-            tubeCtx.fillStyle = liqGrad;
-            tubeCtx.fillRect(0, 0, fillW, h);
-
-            const coreBeam = tubeCtx.createLinearGradient(0, h * 0.25, 0, h * 0.75);
-            coreBeam.addColorStop(0, 'rgba(255,255,255,0)');
-            coreBeam.addColorStop(0.5, 'rgba(255,255,255,0.65)');
-            coreBeam.addColorStop(1, 'rgba(255,255,255,0)');
-            tubeCtx.fillStyle = coreBeam;
-            tubeCtx.fillRect(0, h * 0.25, fillW, h * 0.5);
-
-            const boilSpeedMult = 1 + burnLevel * 4.5;
-            for (let i = 0; i < bubbles.length; i++) {
-                const b = bubbles[i];
-                b.x += b.speed * boilSpeedMult;
-                if (b.x > fillW) b.x = 4;
-                const by = b.y + Math.sin(timeSec * 4 + b.wobble) * (1.5 + burnLevel * 4);
-
-                tubeCtx.beginPath();
-                tubeCtx.arc(b.x, by, b.r, 0, Math.PI * 2);
-                tubeCtx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-                tubeCtx.fill();
-            }
-
-            tubeCtx.restore();
-        }
-
-        // ========================================================================
-        // 3. THERMAL SYNC TO CSS VARIABLES
-        // ========================================================================
-        function applyThermalStateToDOM() {
-            const clamped = Math.max(0, Math.min(100, state.integrity));
-            const burnLevel = (100 - clamped) / 100;
-            const hue = Math.round(198 - burnLevel * 182);
-
-            document.documentElement.style.setProperty('--burn-level', burnLevel.toFixed(3));
-            document.documentElement.style.setProperty('--coolant-hue', hue);
-            document.documentElement.style.setProperty(
-                '--shake-amp',
-                burnLevel > 0.7 ? `${((burnLevel - 0.7) * 5).toFixed(2)}px` : '0px'
-            );
-
-            const secRemaining = (clamped * 0.6).toFixed(1);
-            countdownTimerText.textContent = `00:${secRemaining.padStart(4, '0')}`;
-            integrityPercentText.textContent = `${Math.round(clamped)}%`;
-            hudIntegrityBar.style.width = `${clamped}%`;
-            manualIntegrityScrubber.value = Math.round(clamped);
-
-            const coreTemp = Math.round(24 + burnLevel * 64);
-            hudTempReadout.textContent = `${coreTemp}°C`;
-            vrmTempText.textContent = `${coreTemp + 7}°C`;
-
-            const flowLabel = burnLevel > 0.65 ? 'BOILING PLASMA' : 'LAMINAR COOL';
-            document.getElementById('coolantStateBadge').textContent = `FLOW: ${Math.round(state.coolantFill * 100)}% // ${flowLabel}`;
-        }
-
-        function onScrubberInput(val) {
-            state.integrity = parseFloat(val);
-            applyThermalStateToDOM();
-            spawnThermalBurst(window.innerWidth * 0.5, window.innerHeight * 0.4, 8, 'spark');
-        }
-
-        // Action: Discharge CMOS
-        function dischargeCmosSurge() {
-            state.integrity = Math.min(100, state.integrity + 15);
-            applyThermalStateToDOM();
-            document.getElementById('cmosChargeText').textContent = 'PULSED!';
-            setTimeout(() => {
-                document.getElementById('cmosChargeText').textContent = 'SURGE RDY';
-            }, 1200);
-            spawnThermalBurst(window.innerWidth * 0.35, window.innerHeight * 0.45, 20, 'spark');
-        }
-
-        // Action: Purge Manifold Vent
-        function purgeManifoldVent() {
-            state.integrity = Math.min(100, state.integrity + 18);
-            applyThermalStateToDOM();
-            telemetryLogText.textContent = 'STEAM PURGED &bull; -18% HEAT DISSIPATED';
-            spawnThermalBurst(window.innerWidth * 0.4, window.innerHeight * 0.6, 25, 'ash');
-        }
-
-        // Action: Boost Turbines
-        function boostTurbines() {
-            state.fan1Rpm = 6400;
-            state.fan2Rpm = 6200;
-            document.getElementById('fan1RpmText').textContent = '6,400 RPM';
-            document.getElementById('fan2RpmText').textContent = '6,200 RPM';
-            state.integrity = Math.min(100, state.integrity + 20);
-            applyThermalStateToDOM();
-            spawnThermalBurst(window.innerWidth * 0.7, window.innerHeight * 0.4, 15, 'spark');
-        }
-
-        // ACTION: TRIGGER MENDER FOAM EXTINGUISH & RAM PURGE
-        function triggerMenderFoamExtinguish() {
-            state.integrity = 96;
-            state.coolantFill = 0.92;
-            state.fan1Rpm = 3200;
-            state.fan2Rpm = 2900;
-            document.getElementById('fan1RpmText').textContent = '3,200 RPM';
-            document.getElementById('fan2RpmText').textContent = '2,900 RPM';
-            applyThermalStateToDOM();
-
-            // Re-trigger mender extinguishing video
-            const vMender = document.getElementById('vid-mender');
-            if (vMender) {
-                vMender.currentTime = 0;
-                vMender.play();
-            }
-
-            telemetryLogText.textContent = '[TISSUE MEMORY SHREDDER] PURGED 100% BLOAT &bull; RAM CLEAN &bull; 0 BYTES ON DISK';
-            spawnThermalBurst(window.innerWidth * 0.5, window.innerHeight * 0.5, 40, 'spark');
-            alert('[TISSUE KILLSWITCH ACTIVATED]\n\nMender foam purged all bloatware listeners.\nVolatile RAM zero-filled via memset_s(0x00).\nMotherboard running cryogenic 24°C.\nZero bytes remain on disk.');
-        }
-
-        // Animation Loop
-        let startTime = performance.now();
-        function loop(now) {
-            const timeSec = (now - startTime) / 1000;
-            state.fanAngle += 0.08;
-            const r1 = document.getElementById('fanRotorSvg1');
-            const r2 = document.getElementById('fanRotorSvg2');
-            if (r1) r1.style.transform = `rotate(${state.fanAngle * 50}deg)`;
-            if (r2) r2.style.transform = `rotate(${state.fanAngle * -45}deg)`;
-
-            updateAndRenderParticles();
-            renderCoolantTube(timeSec);
-            requestAnimationFrame(loop);
-        }
-
-        // Initialize on load
-        window.addEventListener('load', () => {
-            initCoolantBubbles();
-            applyThermalStateToDOM();
-            requestAnimationFrame(loop);
+      document.querySelectorAll('.burn-mode-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.burn-mode-btn').forEach((b) => {
+            b.className = 'burn-mode-btn px-2.5 py-1 rounded-lg font-medium text-slate-300 hover:text-white transition';
+          });
+          btn.className = 'burn-mode-btn px-2.5 py-1 rounded-lg font-medium bg-amber-500/30 text-amber-200 border border-amber-400/50 transition';
+          state.burnMode = btn.getAttribute('data-burn-mode');
         });
-        window.addEventListener('resize', initCoolantBubbles);
-    </script>
+      });
+
+      // 4. MENDER FLUSH TRIGGER (PURGE & RESTORE)
+      window.triggerMenderFoamExtinguish = function () {
+        state.integrity = 98;
+        state.coolantFill = 0.94;
+        state.fan1Rpm = 3400;
+        state.fan2Rpm = 3100;
+        document.getElementById('fan1RpmText').textContent = '3,400 RPM';
+        document.getElementById('fan2RpmText').textContent = '3,100 RPM';
+        applyThermalStateToDOM();
+
+        const vMender = document.getElementById('vid-mender');
+        if (vMender) {
+          vMender.currentTime = 0;
+          vMender.play();
+        }
+
+        telemetryLogText.textContent = '[TISSUE MEMORY SHREDDER] PURGED 100% BLOAT &bull; RAM CLEAN &bull; 0 BYTES ON DISK';
+        spawnThermalBurst(window.innerWidth * 0.5, window.innerHeight * 0.45, 50, 'spark');
+        alert('[TISSUE KILLSWITCH ACTIVATED]\n\nMender foam purged all bloatware listeners.\nVolatile RAM zero-filled via memset_s(0x00).\nMotherboard running cryogenic 24°C.\nZero persistent bytes remain on disk.');
+      };
+
+      document.getElementById('btnSocketAbort').addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnThermalBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 18, 'spark');
+        state.integrity = Math.min(100, state.integrity + 25);
+        applyThermalStateToDOM();
+        telemetryLogText.textContent = 'CORE SCRAM ENGAGED — THERMAL INTEGRITY RESTORED +25%!';
+      });
+
+      document.getElementById('toggleSocketLatchBtn').addEventListener('click', (e) => {
+        state.socketLatched = !state.socketLatched;
+        e.currentTarget.textContent = state.socketLatched ? 'LATCH: LOCKED' : 'LATCH: OPEN (VENTING)';
+        document.getElementById('socketPinStatusText').textContent = state.socketLatched
+          ? 'PINS: MOLTEN CONDUCTION'
+          : 'PINS: UNLATCHED COOLING';
+      });
+
+      document.querySelectorAll('.ram-slot-btn').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const rect = btn.getBoundingClientRect();
+          spawnThermalBurst(rect.left + rect.width * 0.5, rect.bottom, 22, 'spark');
+          btn.classList.toggle('border-orange-400');
+          const badge = btn.querySelector('.slot-status-badge');
+          if (badge.textContent.trim() === 'VOLATILE TMPFS' || badge.textContent.trim() === 'GHOST RUNTIME' || badge.textContent.trim() === 'ISOLATED BUS') {
+            badge.textContent = 'COOLED // ECO';
+            badge.className = 'slot-status-badge px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/25 text-emerald-200 border border-emerald-400/40';
+            state.integrity = Math.min(100, state.integrity + 8);
+          } else {
+            badge.textContent = 'VOLATILE TMPFS';
+            badge.className = 'slot-status-badge px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/30 text-orange-200 border border-orange-400/50';
+            state.integrity = Math.max(0, state.integrity - 8);
+          }
+          applyThermalStateToDOM();
+          telemetryLogText.textContent = `BUS SLOT ${btn.getAttribute('data-slot-id')} LATCHED — GOLD CONTACTS SPARKING`;
+        });
+      });
+
+      document.getElementById('cmosBatteryBtn').addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnThermalBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 30, 'spark');
+        state.integrity = Math.min(100, state.integrity + 18);
+        applyThermalStateToDOM();
+        telemetryLogText.textContent = 'CMOS 3V CAPACITOR DISCHARGED — BIOS THERMAL TABLES RESET (+18%)!';
+      });
+
+      document.getElementById('purgeManifoldBtn').addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnThermalBurst(rect.left + rect.width / 2, rect.top, 25, 'ash');
+        state.integrity = Math.min(100, state.integrity + 15);
+        applyThermalStateToDOM();
+        telemetryLogText.textContent = 'SOUTHBRIDGE MANIFOLD VENTED — +15% INTEGRITY RECOVERED!';
+      });
+
+      function boostTurbines(e) {
+        state.fan1Rpm = Math.min(7200, state.fan1Rpm + 950);
+        state.fan2Rpm = Math.min(7200, state.fan2Rpm + 950);
+        document.getElementById('fan1RpmText').textContent = `${state.fan1Rpm.toLocaleString()} RPM`;
+        document.getElementById('fan2RpmText').textContent = `${state.fan2Rpm.toLocaleString()} RPM`;
+        state.integrity = Math.min(100, state.integrity + 10);
+        applyThermalStateToDOM();
+        if (e) spawnThermalBurst(e.clientX, e.clientY, 14, 'spark');
+        telemetryLogText.textContent = `TURBINES BOOSTED TO ${state.fan1Rpm} RPM — COOLING ACTIVE!`;
+      }
+
+      document.getElementById('turbineDial1').addEventListener('click', boostTurbines);
+      document.getElementById('turbineDial2').addEventListener('click', boostTurbines);
+      document.getElementById('maxFansBoostBtn').addEventListener('click', boostTurbines);
+
+      document.getElementById('triggerDisintegrateDemoBtn').addEventListener('click', (e) => {
+        state.integrity = 2;
+        applyThermalStateToDOM();
+        spawnThermalBurst(e.clientX, e.clientY, 55, 'ash');
+        spawnThermalBurst(e.clientX, e.clientY, 35, 'ember');
+        telemetryLogText.textContent = 'CRITICAL OVERLOAD FRACTURE — CLICK "FLUSH WITH MENDER" TO RESTORE!';
+      });
+
+      // 5. CODE INSPECTOR & COPY MODAL
+      const HARDWARE_SNIPPETS = {
+        'cpu-socket': {
+          title: 'Glowing Orange LGA CPU Socket Primary Action Module',
+          code: `<!-- Glowing CPU Socket Action Module with Molten Pin Matrix -->
+<div class="cpu-socket-housing">
+  <div class="cpu-pin-cavity">
+    <button class="cpu-die-btn">EXECUTE SILICON COMMIT</button>
+  </div>
+</div>`
+        },
+        'coolant-tube': {
+          title: 'Borosilicate Glass Liquid-Coolant Tube Progress Bar (SYS_LOAD // P-BAR 02)',
+          code: `<!-- Glass Coolant Tube with Metal Compression Clamps -->
+<div class="coolant-tube-assembly">
+  <div class="tube-metal-clamp" style="left: 20%;"></div>
+  <div class="tube-metal-clamp" style="left: 75%;"></div>
+  <div class="coolant-plasma-fill" style="width: 76%;"></div>
+</div>`
+        },
+        'ram-slot': {
+          title: 'RAM DIMM / PCI-E Expansion Slot Button with Gold Contact Pins',
+          code: `<!-- Motherboard Memory Latch Button with Gold Contact Pins -->
+<button class="ram-slot-module">
+  <div class="ram-header">DIMM_A1 // 64GB OVERCLOCKED</div>
+  <div class="gold-contact-pins"></div>
+</button>`
+        },
+        'turbine-fan': {
+          title: 'Micro-Turbine Rotary Fan Dial Housing (FAN_SPD // 01)',
+          code: `<div class="turbine-housing">
+  <div class="turbine-cavity">
+    <!-- Spinning SVG impeller inside -->
+  </div>
+</div>`
+        }
+      };
+
+      const codeModalBackdrop = document.getElementById('codeModalBackdrop');
+      const modalComponentTitle = document.getElementById('modalComponentTitle');
+      const modalCodeOutput = document.getElementById('modalCodeOutput');
+
+      function openCodeModal(key) {
+        const item = HARDWARE_SNIPPETS[key] || HARDWARE_SNIPPETS['cpu-socket'];
+        modalComponentTitle.textContent = item.title;
+        modalCodeOutput.textContent = item.code;
+        codeModalBackdrop.classList.remove('hidden');
+        codeModalBackdrop.classList.add('flex');
+      }
+
+      document.querySelectorAll('[data-code-target]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openCodeModal(btn.getAttribute('data-code-target'));
+        });
+      });
+
+      document.getElementById('openCodeModalBtn').addEventListener('click', () => {
+        openCodeModal('cpu-socket');
+      });
+
+      document.querySelectorAll('[data-modal-tab]').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          openCodeModal(tab.getAttribute('data-modal-tab'));
+        });
+      });
+
+      document.getElementById('closeCodeModalBtn').addEventListener('click', () => {
+        codeModalBackdrop.classList.add('hidden');
+        codeModalBackdrop.classList.remove('flex');
+      });
+
+      document.getElementById('copyCodeSnippetBtn').addEventListener('click', (e) => {
+        const ta = document.createElement('textarea');
+        ta.value = modalCodeOutput.textContent;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        e.currentTarget.textContent = 'Copied to Clipboard!';
+        setTimeout(() => {
+          e.currentTarget.textContent = 'Copy Code to Clipboard';
+        }, 1800);
+      });
+
+      // 6. MAIN 60FPS HARDWARE & THERMAL SIMULATION LOOP
+      let lastTimeMs = performance.now();
+      const fanRotorSvg1 = document.getElementById('fanRotorSvg1');
+      const fanRotorSvg2 = document.getElementById('fanRotorSvg2');
+
+      function mainLoop(nowMs) {
+        const dt = Math.min(0.1, (nowMs - lastTimeMs) / 1000);
+        lastTimeMs = nowMs;
+        const timeSec = nowMs * 0.001;
+
+        if (state.burnMode !== 'pause' && state.integrity > 0) {
+          const drainRate = state.burnMode === 'rapid' ? 8.5 : 1.65;
+          const fanCoolingFactor = ((state.fan1Rpm + state.fan2Rpm) / 14400) * 0.85;
+          const netDrain = Math.max(0.25, drainRate - fanCoolingFactor);
+          state.integrity = Math.max(0, state.integrity - netDrain * dt);
+          applyThermalStateToDOM();
+        }
+
+        const integrityFactor = state.isMeltdown ? 0.05 : 1.0;
+        state.fan1Angle = (state.fan1Angle + (state.fan1Rpm / 60) * 360 * dt * 0.15 * integrityFactor) % 360;
+        state.fan2Angle = (state.fan2Angle + (state.fan2Rpm / 60) * 360 * dt * 0.15 * integrityFactor) % 360;
+        fanRotorSvg1.style.transform = `rotate(${state.fan1Angle.toFixed(1)}deg)`;
+        fanRotorSvg2.style.transform = `rotate(${state.fan2Angle.toFixed(1)}deg)`;
+
+        renderCoolantTube(timeSec);
+        updateAndRenderParticles();
+
+        requestAnimationFrame(mainLoop);
+      }
+
+      window.addEventListener('resize', initCoolantBubbles);
+
+      window.onload = function () {
+        initCoolantBubbles();
+        applyThermalStateToDOM();
+        requestAnimationFrame(mainLoop);
+      };
+    })();
+  </script>
 </body>
 </html>

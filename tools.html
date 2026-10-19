@@ -179,6 +179,43 @@
             border: 1.5px solid #94a3b8;
             box-shadow: 0 16px 30px rgba(0, 0, 0, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.8);
         }
+
+        .coolant-tube-assembly {
+            position: relative;
+            height: 52px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(15,23,42,0.45) 45%, rgba(2,6,23,0.85) 82%, rgba(148,163,184,0.38) 100%);
+            border: 2px solid rgba(203, 213, 225, 0.65);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.9), 0 0 25px rgba(6, 182, 212, 0.5);
+            overflow: hidden;
+        }
+
+        .tube-metal-clamp {
+            position: absolute;
+            top: -4px; bottom: -4px; width: 16px; border-radius: 4px;
+            background: linear-gradient(180deg, #f8fafc 0%, #94a3b8 30%, #1e293b 55%, #cbd5e1 80%, #334155 100%);
+            border: 1px solid #f1f5f9;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .turbine-housing {
+            position: relative; width: 84px; height: 84px; border-radius: 50%; padding: 6px;
+            background: conic-gradient(from 45deg, #f1f5f9, #64748b, #1e293b, #cbd5e1, #334155, #f8fafc);
+            border: 1.5px solid #e2e8f0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+        }
+
+        .turbine-cavity {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 85%);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .gold-contact-pins {
+            height: 8px;
+            background: repeating-linear-gradient(90deg, #fbbf24 0px, #f59e0b 3px, #090d16 3px, #090d16 6px);
+        }
         .machine-border::before {
             content: '';
             position: absolute;
@@ -313,6 +350,45 @@
                         <button type="button" id="cam-wall" onclick="setCameraAngle('wallmount')" class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/20 text-slate-400 font-bold transition-all border border-white/5">
                             Machine Rack [Tilt]
                         </button>
+                    </div>
+                </div>
+
+                <!-- HARDWARE TELEMETRY TUBE & ROTARY FAN BAR -->
+                <div class="relative z-10 mb-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    <div class="md:col-span-9">
+                        <div class="flex items-center justify-between mb-1 font-mono text-[10px] text-cyan-300">
+                            <span>SYS_LOAD // BOROSILICATE COOLANT LOOP</span>
+                            <span id="tools-coolant-badge" class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-200 border border-cyan-500/40">FLOW: 76% // LAMINAR</span>
+                        </div>
+                        <div class="coolant-tube-assembly">
+                            <div class="tube-metal-clamp" style="left: 18%;"></div>
+                            <div class="tube-metal-clamp" style="left: 72%;"></div>
+                            <canvas id="toolsCoolantCanvas" class="w-full h-full block"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 flex items-center justify-center gap-3">
+                        <div class="turbine-housing">
+                            <div class="turbine-cavity">
+                                <svg id="toolsFanRotor" viewBox="0 0 100 100" class="w-full h-full">
+                                    <circle cx="50" cy="50" r="44" fill="#0369a1" opacity="0.45"/>
+                                    <g fill="#94a3b8" stroke="#0f172a" stroke-width="1">
+                                        <path d="M50,50 L42,10 L58,8 Z"/>
+                                        <path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/>
+                                        <path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/>
+                                        <path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/>
+                                        <path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/>
+                                        <path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/>
+                                        <path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/>
+                                        <path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/>
+                                    </g>
+                                    <circle cx="50" cy="50" r="14" fill="#cbd5e1"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="font-mono text-xs text-left">
+                            <span class="silkscreen-tag block text-[9px]">FAN_SPD // 01</span>
+                            <span id="toolsFanRpm" class="text-cyan-400 font-bold text-xs">4,200 RPM</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1181,6 +1257,61 @@
                 }, 6000);
             }
         }
+
+        // Coolant Canvas & Fan Physics for Tools Hub
+        const toolsCanvas = document.getElementById('toolsCoolantCanvas');
+        const toolsCtx = toolsCanvas ? toolsCanvas.getContext('2d') : null;
+        let toolsBubbles = [];
+        let toolsFanAngle = 0;
+
+        function initToolsCoolant() {
+            if (!toolsCanvas) return;
+            toolsCanvas.width = toolsCanvas.parentElement.clientWidth || 300;
+            toolsCanvas.height = 52;
+            toolsBubbles = [];
+            for (let i = 0; i < 45; i++) {
+                toolsBubbles.push({
+                    x: Math.random() * toolsCanvas.width,
+                    y: 6 + Math.random() * (toolsCanvas.height - 12),
+                    r: 1.5 + Math.random() * 3.5,
+                    speed: 0.8 + Math.random() * 1.5
+                });
+            }
+        }
+
+        function renderToolsCoolant() {
+            if (!toolsCtx || !toolsCanvas) return;
+            toolsCtx.clearRect(0, 0, toolsCanvas.width, toolsCanvas.height);
+            
+            const grad = toolsCtx.createLinearGradient(0, 0, 0, toolsCanvas.height);
+            grad.addColorStop(0, 'rgba(6, 182, 212, 0.4)');
+            grad.addColorStop(0.5, 'rgba(6, 182, 212, 0.85)');
+            grad.addColorStop(1, 'rgba(6, 182, 212, 0.35)');
+            toolsCtx.fillStyle = grad;
+            toolsCtx.fillRect(0, 0, toolsCanvas.width, toolsCanvas.height);
+
+            for (let i = 0; i < toolsBubbles.length; i++) {
+                const b = toolsBubbles[i];
+                b.x += b.speed;
+                if (b.x > toolsCanvas.width) b.x = 2;
+                toolsCtx.beginPath();
+                toolsCtx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+                toolsCtx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                toolsCtx.fill();
+            }
+
+            toolsFanAngle += 0.08;
+            const fanSvg = document.getElementById('toolsFanRotor');
+            if (fanSvg) fanSvg.style.transform = `rotate(${toolsFanAngle * 45}deg)`;
+
+            requestAnimationFrame(renderToolsCoolant);
+        }
+
+        window.addEventListener('load', () => {
+            initToolsCoolant();
+            requestAnimationFrame(renderToolsCoolant);
+        });
+        window.addEventListener('resize', initToolsCoolant);
     </script>
 </body>
 </html>
