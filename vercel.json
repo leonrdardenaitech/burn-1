@@ -93,7 +93,7 @@
     },
     {
       "source": "/it-infra",
-      "destination": "/it-infra.html"
+      "destination": "/it.html"
     },
     {
       "source": "/finance",
@@ -140,40 +140,8 @@
       "destination": "/government.html"
     },
     {
-      "source": "/lab",
-      "destination": "/lab.html"
-    },
-    {
-      "source": "/tools",
-      "destination": "/tools.html"
-    },
-    {
-      "source": "/wordpuzzle",
-      "destination": "/wordpuzzle.html"
-    },
-    {
-      "source": "/letterfill",
-      "destination": "/letterfill.html"
-    },
-    {
-      "source": "/bingo_lingo",
-      "destination": "/bingo_lingo.html"
-    },
-    {
-      "source": "/qr-builder",
-      "destination": "/qr-builder.html"
-    },
-    {
       "source": "/home",
       "destination": "/index.html"
-    },
-    {
-      "source": "/privacy-first",
-      "destination": "/privacy_first_protocol.html"
-    },
-    {
-      "source": "/challenge",
-      "destination": "/privacy_first_challenge.html"
     }
   ]
 }

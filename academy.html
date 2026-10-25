@@ -213,7 +213,7 @@
             <!-- ========================================================================= -->
             <section id="road-to-remediation-section" class="relative rounded-3xl shadow-2xl border-4 border-amber-400 overflow-hidden bg-black cyber-road-anim">
                 <!-- Background Digital Road Video -->
-                <video id="video-digital-road" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-screen"></video>
+                <video id="video-digital-road" src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40"></video>
                 <!-- Deep Cyber Overlay -->
                 <div class="absolute inset-0 bg-[#180512]/90 mix-blend-multiply"></div>
                 
@@ -399,7 +399,7 @@
                                 <!-- EMBEDDED DIAGRAM VIDEO CLIP -->
                                 <div class="lg:col-span-5 bg-[#090514] border-2 border-orange-500/50 rounded-xl overflow-hidden shadow-xl">
                                     <div class="relative h-40 cyber-road-anim flex items-center justify-center">
-                                        <video id="video-posture-diagram" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-75"></video>
+                                        <video id="video-posture-diagram" src="assets/Circuit_board_transforms_into_logo_20261023161155.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-80"></video>
                                         <div class="relative z-10 text-center p-3">
                                             <i class="fa-solid fa-diagram-project text-3xl text-amber-400 mb-1"></i>
                                             <div class="font-mono text-[10px] text-cyan-300 uppercase font-bold">ALCOA+ Cryptographic Hash Loop</div>
@@ -583,7 +583,7 @@
                 
                 <!-- 1. Times Running Video Clock -->
                 <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-[#2A081C] bg-black aspect-video relative flex items-center justify-center cyber-road-anim">
-                    <video id="video-times-running" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-70"></video>
+                    <video id="video-times-running" src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60"></video>
                     <div class="absolute inset-0 bg-[#522d8a]/20 mix-blend-multiply"></div>
                     <div class="relative z-10 text-center px-4">
                         <i class="fa-solid fa-user-secret text-4xl text-white/60 mb-2"></i>
@@ -2215,19 +2215,12 @@
 
         // Bind optional local video/image assets when running from local filesystem
         function bindLocalMediaIfPresent() {
-            if (window.location.protocol === "file:") {
-                const roadVid = document.getElementById("video-digital-road");
-                if (roadVid) roadVid.src = "Camera_moving_on_digital_road_20261020020857.mp4";
-                const clockVid = document.getElementById("video-times-running");
-                if (clockVid) clockVid.src = "timesrunning.mp4";
-                const diagVid = document.getElementById("video-posture-diagram");
-                if (diagVid) diagVid.src = "assets/clips/posture_assessment_diagram.mp4";
-                document.querySelectorAll("img[data-local-src]").forEach(img => {
-                    const fallback = img.src;
-                    img.onerror = () => { img.src = fallback; };
-                    img.src = img.getAttribute("data-local-src");
-                });
-            }
+            const roadVid = document.getElementById("video-digital-road");
+            if (roadVid && !roadVid.src) roadVid.src = "assets/timesrunning.mp4";
+            const clockVid = document.getElementById("video-times-running");
+            if (clockVid && !clockVid.src) clockVid.src = "assets/timesrunning.mp4";
+            const diagVid = document.getElementById("video-posture-diagram");
+            if (diagVid && !diagVid.src) diagVid.src = "assets/Circuit_board_transforms_into_logo_20261023161155.mp4";
         }
 
         window.addEventListener('DOMContentLoaded', () => {
