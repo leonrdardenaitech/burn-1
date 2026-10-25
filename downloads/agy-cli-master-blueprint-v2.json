@@ -1,0 +1,253 @@
+{
+  "cli_metadata": {
+    "tool_name": "agy",
+    "full_name": "Agency CLI - SLM Orchestrator & Compliance Engine",
+    "version": "2026.3.0",
+    "source_authority": "Gemini Notebook Assessment Guides",
+    "description": "Master configuration and component blueprint for agy CLI to ingest, map, chunk, embed, and orchestrate local SLM models and RAG workflows.",
+    "created_at": "2026-10-11"
+  },
+  "environment_config": {
+    "local_root_directory": "/drive/slm_library/",
+    "vector_db": {
+      "engine": "ChromaDB / Qdrant / FAISS Local",
+      "collection_name": "agency_slm_knowledge_base",
+      "distance_metric": "cosine",
+      "embedding_model": "bge-large-en-v1.5",
+      "chunking": {
+        "strategy": "Semantic Markdown Header Splitting",
+        "chunk_size": 512,
+        "chunk_overlap": 64
+      }
+    },
+    "slm_fine_tuning": {
+      "target_format": "JSON-L (Instruction-Context-Response)",
+      "output_directory": "/drive/slm_library/training_jsonl/",
+      "train_eval_split": 0.9
+    }
+  },
+  "puzzle_piece_architecture": {
+    "description": "How the 8 core dataset components connect into a unified cybersecurity & compliance intelligence engine.",
+    "components": [
+      {
+        "piece_id": "PUZZLE-01",
+        "module_id": "MOD-001-PHISH",
+        "component_name": "Phishing & Social Engineering Awareness Track",
+        "source_file": "phishing-course-template-v2.md",
+        "role_in_system": "Human Layer Defense & Awareness Input",
+        "inputs": [
+          "Real-world phishing vectors",
+          "Role-based threat profiles"
+        ],
+        "outputs": [
+          "User vulnerability metrics",
+          "Reported threat logs",
+          "Training completion state"
+        ],
+        "downstream_dependencies": [
+          "PUZZLE-04 (SAQ Scorecard)",
+          "PUZZLE-06 (Insurance Binder)"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-02",
+        "module_id": "MOD-002-REM",
+        "component_name": "Vulnerability Remediation, Virtual Patching & POA&M",
+        "source_file": "remediation-poam-playbook-template.md",
+        "role_in_system": "Technical Triage & Defect Resolution Engine",
+        "inputs": [
+          "Vulnerability scanner exports",
+          "CVSS severity scores",
+          "OT/IT asset tags"
+        ],
+        "outputs": [
+          "Active POA&M tracker table",
+          "Compensating control rules",
+          "SLA compliance logs"
+        ],
+        "downstream_dependencies": [
+          "PUZZLE-04 (SAQ Scorecard)",
+          "PUZZLE-05 (SOP Compliance)",
+          "PUZZLE-06 (Insurance Binder)"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-03",
+        "module_id": "MOD-003-TTX",
+        "component_name": "Tabletop Exercise (TTX) & Crisis Simulation Playbook",
+        "source_file": "ttx-playbook-template.md",
+        "role_in_system": "Operational Crisis & Incident Response Simulator",
+        "inputs": [
+          "Ransomware injects",
+          "OT sabotage scenarios",
+          "Supply chain breach narratives"
+        ],
+        "outputs": [
+          "After-Action Reports (AAR)",
+          "Executive IR readiness metrics",
+          "Corrective action plans"
+        ],
+        "downstream_dependencies": [
+          "PUZZLE-04 (SAQ Scorecard)",
+          "PUZZLE-06 (Insurance Binder)"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-04",
+        "module_id": "MOD-004-SAQ",
+        "component_name": "Internal Self-Assessment Questionnaire & Maturity Index",
+        "source_file": "saq-template.md",
+        "role_in_system": "GRC Readiness & Gap Assessment Core",
+        "inputs": [
+          "Data from PUZZLE-01, 02, 03, 05"
+        ],
+        "outputs": [
+          "5-Tier Maturity Scores (0-4)",
+          "Cross-framework gap analysis",
+          "Executive Sign-Offs"
+        ],
+        "downstream_dependencies": [
+          "PUZZLE-06 (Insurance Binder)",
+          "PUZZLE-07 (Sector Regulatory Compliance)"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-05",
+        "module_id": "MOD-005-SOP",
+        "component_name": "Baseline Security Policies & SOP Suite",
+        "source_file": "baseline-security-policies-sop.md",
+        "role_in_system": "Institutional Governance & Operating Rules",
+        "inputs": [
+          "Regulatory mandates",
+          "NIST/ISO/CIS baselines"
+        ],
+        "outputs": [
+          "Operational SOP procedures",
+          "Access control matrices",
+          "Mandatory vendor SLAs"
+        ],
+        "downstream_dependencies": [
+          "PUZZLE-01",
+          "PUZZLE-02",
+          "PUZZLE-04",
+          "PUZZLE-06"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-06",
+        "module_id": "MOD-006-INS",
+        "component_name": "Cyber Insurance Renewal Evidence Binder v2",
+        "source_file": "cyber-insurance-evidence-binder-v2.md",
+        "role_in_system": "Financial Defense & Underwriting Proof Engine",
+        "inputs": [
+          "MFA logs",
+          "EDR reports",
+          "Backup restore logs",
+          "DMARC exports",
+          "IRP AARs"
+        ],
+        "outputs": [
+          "Audit-ready evidence package",
+          "Carrier-specific application scorecards",
+          "Premium discount proof (20-40%)"
+        ],
+        "downstream_dependencies": [
+          "Underwriter Submissions (Chubb, Beazley, Coalition, Travelers)"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-07",
+        "module_id": "MOD-007-SECTORS",
+        "component_name": "18-Sector Regulatory Compliance Guidelines & Research Reports",
+        "source_file": "Research_reports_18_sectors.md",
+        "role_in_system": "Domain Knowledge & Statutory Citation Foundation",
+        "inputs": [
+          "HIPAA",
+          "FDA 524B",
+          "CMMC",
+          "NERC CIP",
+          "FERPA",
+          "UNECE R155",
+          "NIS2",
+          "EU AI Act"
+        ],
+        "outputs": [
+          "Sector-specific compliance overlays",
+          "Statutory rules",
+          "Audit checklists"
+        ],
+        "downstream_dependencies": [
+          "PUZZLE-04 (SAQ)",
+          "PUZZLE-05 (SOPs)",
+          "PUZZLE-06 (Insurance)"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-08",
+        "module_id": "MOD-008-MANIFEST",
+        "component_name": "SLM Master Dataset Manifest v2",
+        "source_file": "slm-master-manifest-v2.yaml",
+        "role_in_system": "Data Indexing, Ingestion & Metadata Schema Directory",
+        "inputs": [
+          "All 7 module files and sector markdown documents"
+        ],
+        "outputs": [
+          "Vector embedding instructions",
+          "Metadata tag registry",
+          "JSON-L dataset schema"
+        ],
+        "downstream_dependencies": [
+          "agy CLI Core Ingestion Engine"
+        ]
+      },
+      {
+        "piece_id": "PUZZLE-08-BACKUP",
+        "module_id": "MOD-008-BACKUP",
+        "component_name": "Zero-Cost Immutable Cloud Backups & Storage Lock Setup Database",
+        "source_file": "zero-cost-immutable-backups-guide.md",
+        "role_in_system": "BCDR & Immutable Storage Setup Engine",
+        "inputs": [
+          "AWS S3 API",
+          "Veeam PowerShell module",
+          "Windows ReFS ACLs",
+          "90-Day Restore Test logs"
+        ],
+        "outputs": [
+          "WORM Object Lock JSON proof",
+          "Immutable Veeam repository exports",
+          "Audit-ready restore test logs"
+        ],
+        "downstream_dependencies": [
+          "PUZZLE-04 (SAQ Audit)",
+          "PUZZLE-06 (Cyber Insurance Binder)"
+        ]
+      }
+    ]
+  },
+  "cli_commands_schema": {
+    "agy init": {
+      "description": "Initialize local drive taxonomy and verify file presence against slm-master-manifest-v2.yaml.",
+      "exec": "agy init --config /drive/slm_library/slm-master-manifest-v2.yaml"
+    },
+    "agy ingest": {
+      "description": "Parse, semantic-chunk, tag, and generate vector embeddings for ChromaDB/Qdrant.",
+      "exec": "agy ingest --source /drive/slm_library/ --chunk-size 512 --overlap 64 --db-path /drive/slm_library/vector_db/"
+    },
+    "agy fine-tune": {
+      "description": "Extract instruction-context-response JSON-L pairs for fine-tuning local SLM models.",
+      "exec": "agy fine-tune --input-dir /drive/slm_library/ --out-file /drive/slm_library/training_jsonl/dataset.jsonl"
+    },
+    "agy audit": {
+      "description": "Run automated self-assessment (SAQ) scoring against local vector DB and evidence files.",
+      "exec": "agy audit --framework NIST_CSF_2.0 --output-report /drive/slm_library/audits/report.pdf"
+    },
+    "agy simulate": {
+      "description": "Trigger automated tabletop exercise (TTX) scenario or phishing evaluation prompt for local users.",
+      "exec": "agy simulate --module TTX --scenario ransomware_industrial_ot"
+    },
+    "agy export-binder": {
+      "description": "Assemble and validate carrier-specific cyber insurance evidence package.",
+      "exec": "agy export-binder --carrier Coalition --output /drive/slm_library/cyber_insurance_binder/"
+    }
+  }
+}

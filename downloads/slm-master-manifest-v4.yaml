@@ -1,0 +1,113 @@
+dataset_metadata:
+  name: "Local SLM Security, Compliance & Insurance Optimization Training Dataset"
+  version: "4.0.0"
+  created_at: "2026-10-11"
+  description: "Comprehensive local drive training library, setup databases, client proposals, onboarding contracts, and RAG context store for Small Language Models (SLMs) covering phishing awareness, remediation/POA&M, tabletop exercises, self-assessments, baseline security SOPs, cyber insurance evidence binders, zero-cost identity/MFA setup guides, zero-cost immutable backup setup guides, executive client proposals, and onboarding MSAs."
+  target_architecture: "Local RAG / Vector DB Ingestion & SLM Fine-Tuning"
+  supported_frameworks:
+    - "NIST CSF 2.0"
+    - "NIST SP 800-53 Rev. 5"
+    - "NIST SP 800-82 Rev. 3 (OT/ICS)"
+    - "CMMC 2.0 (32 CFR / 48 CFR)"
+    - "PCI DSS v4.0"
+    - "NYDFS 23 NYCRR Part 500"
+    - "HIPAA / State Health Privacy (CMIA, MHMD)"
+    - "EU NIS2 Directive"
+    - "EU AI Act (Regulation EU 2024/1689)"
+    - "CIRCIA (72h Incident Reporting)"
+
+directory_structure:
+  root: "/drive/slm_library/"
+  subdirectories:
+    - path: "/drive/slm_library/courses/"
+      description: "Interactive role-based training courses and threat spotting modules"
+    - path: "/drive/slm_library/playbooks/remediation/"
+      description: "Vulnerability triage, CVSS SLAs, compensating controls, and POA&M tracking"
+    - path: "/drive/slm_library/playbooks/ttx/"
+      description: "Scenario-based tabletop exercises, injects, and After-Action Reports"
+    - path: "/drive/slm_library/audits/saq/"
+      description: "Internal readiness self-assessment questionnaires and maturity scoring"
+    - path: "/drive/slm_library/policies_sops/"
+      description: "Baseline operational security policies and standard operating procedures"
+    - path: "/drive/slm_library/insurance_binder/"
+      description: "Carrier evidence binders, export logs, and pre-renewal roadmaps"
+    - path: "/drive/slm_library/setup_databases/mfa/"
+      description: "Zero-cost identity setup guides, PowerShell scripts, and IdP policies"
+    - path: "/drive/slm_library/setup_databases/backups/"
+      description: "Zero-cost immutable backup guides, S3 Object Lock, and Veeam XFS setup"
+    - path: "/drive/slm_library/sales_onboarding/"
+      description: "Executive proposals, service tiers, financial ROI tools, and onboarding MSAs"
+
+vector_index_config:
+  chunking_strategy: "Semantic Header-Based Chunking"
+  target_chunk_size: 512
+  chunk_overlap: 64
+  embedding_model_compatibility: "bge-large-en-v1.5 / e5-mistral-7b / nomic-embed-text"
+  metadata_fields_indexed:
+    - "doc_id"
+    - "category"
+    - "industry_sector"
+    - "framework_ids"
+    - "target_role"
+    - "urgency_level"
+
+manifest_entries:
+  - doc_id: "MOD-001-PHISH"
+    file_name: "phishing-course-template-v2.md"
+    local_path: "/drive/slm_library/courses/phishing-course-template-v2.md"
+    title: "Phishing & Social Engineering Awareness Course & Simulation Playbook"
+    category: "Security Awareness & Training"
+
+  - doc_id: "MOD-002-REM"
+    file_name: "remediation-poam-playbook-template.md"
+    local_path: "/drive/slm_library/playbooks/remediation/remediation-poam-playbook-template.md"
+    title: "Vulnerability Remediation, Virtual Patching & POA&M Management Playbook"
+    category: "Vulnerability Management & GRC"
+
+  - doc_id: "MOD-003-TTX"
+    file_name: "ttx-playbook-template.md"
+    local_path: "/drive/slm_library/playbooks/ttx/ttx-playbook-template.md"
+    title: "Tabletop Incident Response Exercise (TTX) Scenario Playbook"
+    category: "Incident Response & Crisis Management"
+
+  - doc_id: "MOD-004-SAQ"
+    file_name: "saq-template.md"
+    local_path: "/drive/slm_library/audits/saq/saq-template.md"
+    title: "Internal Self-Assessment Questionnaire (SAQ) & Maturity Scorecard"
+    category: "GRC & Audit Readiness"
+
+  - doc_id: "MOD-005-SOP"
+    file_name: "baseline-security-policies-sop.md"
+    local_path: "/drive/slm_library/policies_sops/baseline-security-policies-sop.md"
+    title: "Baseline Security Policy & Standard Operating Procedure (SOP) Suite"
+    category: "Operational Governance & Security SOPs"
+
+  - doc_id: "MOD-006-INS-v2"
+    file_name: "cyber-insurance-evidence-binder-v2.md"
+    local_path: "/drive/slm_library/insurance_binder/cyber-insurance-evidence-binder-v2.md"
+    title: "Cyber Insurance Renewal Evidence Binder & Underwriting Proof Package"
+    category: "Cyber Insurance & Financial Risk Management"
+
+  - doc_id: "MOD-007-MFA-SETUP"
+    file_name: "zero-cost-mfa-setup-guide.md"
+    local_path: "/drive/slm_library/setup_databases/mfa/zero-cost-mfa-setup-guide.md"
+    title: "Zero-Cost Identity Hardening, MFA Setup & Evidence Export Database"
+    category: "Identity & Access Management Setup"
+
+  - doc_id: "MOD-008-BACKUP-SETUP"
+    file_name: "zero-cost-immutable-backups-guide.md"
+    local_path: "/drive/slm_library/setup_databases/backups/zero-cost-immutable-backups-guide.md"
+    title: "Zero-Cost Immutable Backups, Storage Lock & Restoration Setup Database"
+    category: "Business Continuity & Data Protection Setup"
+
+  - doc_id: "MOD-009-PROP"
+    file_name: "executive-client-proposal.md"
+    local_path: "/drive/slm_library/sales_onboarding/executive-client-proposal.md"
+    title: "Executive Client Proposal: Audit-Ready Managed Security, Compliance & Insurance Optimization Suite"
+    category: "Sales & Client Proposal"
+
+  - doc_id: "MOD-010-AGREE"
+    file_name: "client-onboarding-agreement.md"
+    local_path: "/drive/slm_library/sales_onboarding/client-onboarding-agreement.md"
+    title: "Client Onboarding & Master Services Agreement (MSA): Security, Compliance & Insurance Optimization"
+    category: "Client Onboarding & Contracts"

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Executive Digital Etiquette Playbook</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap');
+
+@page {
+    size: letter portrait;
+    margin: 20mm 18mm 20mm 18mm;
+    @bottom-right {
+        content: counter(page);
+    }
+}
+
+@page:first {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1a1a24;
+    background-color: #ffffff;
+    line-height: 1.6;
+    font-size: 10.5pt;
+    margin: 0;
+    padding: 0;
+}
+
+.page-break {
+    page-break-before: always;
+    break-before: page;
+}
+
+.avoid-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* COVER PAGE */
+.cover-page {
+    width: 100vw;
+    height: 100vh;
+    min-height: 11in;
+    background: #090a10 linear-gradient(135deg, #090a10 0%, #121422 60%, #1a1528 100%);
+    color: #ffffff;
+    padding: 2.8in 0.8in 1in 0.8in;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+}
+
+.cover-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 87, 34, 0.15);
+    border: 1px solid #ff5722;
+    color: #ff7043;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    border-radius: 4px;
+}
+
+.cover-title {
+    font-family: 'Cinzel', serif;
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+}
+
+.cover-title span {
+    color: #ff5722;
+}
+
+.cover-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13pt;
+    color: #94a3b8;
+    letter-spacing: 1.5px;
+    margin: 0 0 32px 0;
+    text-transform: uppercase;
+    border-left: 3px solid #ff5722;
+    padding-left: 14px;
+}
+
+.cover-footer {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8.5pt;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* TYPOGRAPHY */
+h1.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 20pt;
+    font-weight: 800;
+    color: #0f172a;
+    border-bottom: 2px solid #ff5722;
+    padding-bottom: 8px;
+    margin: 0 0 18px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+h2.sub-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13pt;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 22px 0 10px 0;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+h2.sub-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 14px;
+    background: #ff5722;
+    border-radius: 2px;
+}
+
+p {
+    margin: 0 0 12px 0;
+    color: #334155;
+}
+
+/* CALLOUT BOXES */
+.callout {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #ff5722;
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 4px;
+    font-size: 10pt;
+}
+
+.callout-dark {
+    background: #0f172a;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-left: 4px solid #38bdf8;
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 4px;
+    font-size: 9.5pt;
+}
+
+.callout-dark p {
+    color: #cbd5e1;
+}
+
+/* GRIDS & CARDS */
+.rule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+}
+
+.rule-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.rule-card strong {
+    font-family: 'Share Tech Mono', monospace;
+    color: #ff5722;
+    font-size: 10pt;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+/* TABLES */
+table.proto-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 9.5pt;
+}
+
+table.proto-table th {
+    background: #0f172a;
+    color: #ffffff;
+    font-family: 'Share Tech Mono', monospace;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid #0f172a;
+}
+
+table.proto-table td {
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+table.proto-table tr:nth-child(even) td {
+    background: #f8fafc;
+}
+
+/* CHECKLIST */
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0;
+}
+
+.checklist li {
+    padding: 8px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 9.5pt;
+}
+
+.check-box {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #ff5722;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* HEADER & FOOTER ON CONTENT PAGES */
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 7.5pt;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-bottom: 24px;
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================== -->
+<!-- 1. COVER PAGE                              -->
+<!-- ========================================== -->
+<div class="cover-page">
+    <div>
+        <div class="cover-badge">SYS: PLAYBOOK-09 // OFFICIAL PROTOCOL</div>
+        <h1 class="cover-title">Executive Digital<br><span>Etiquette</span> Playbook</h1>
+        <div class="cover-subtitle">Human-to-Human Protocols, Industrial Standards &amp; OpSec Hygiene</div>
+    </div>
+    
+    <div class="cover-footer">
+        <div>BURN-1 SYSTEMS // REPUTATION ARCHITECTURE</div>
+        <div>2026 EDITION · 48-PAGE EXECUTIVE COMPENDIUM</div>
+    </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 2. TABLE OF CONTENTS                       -->
+<!-- ========================================== -->
+<div class="page-break"></div>
+<div class="doc-header">
+    <span>BURN-1 SYSTEMS · EXECUTIVE PLAYBOOK</span>
+    <span>TABLE OF CONTENTS</span>
+</div>
+
+<h1 class="section-title">Protocol Table of Contents</h1>
+<p style="font-size: 10pt; color: #64748b; margin-bottom: 24px;">This manual establishes the non-negotiable operational standard for client-facing leadership, remote team communications, and spatial etiquette.</p>
+
+<table class="proto-table">
+    <tr>
+        <th style="width: 15%;">SECTION</th>
+        <th style="width: 70%;">MODULE / PROTOCOL TITLE</th>
+        <th style="width: 15%; text-align: right;">CODE</th>
+    </tr>
+    <tr>
+        <td><strong>01</strong></td>
+        <td>The Psychology of the First Impression &amp; The 10-4 Rule</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-01</td>
+    </tr>
+    <tr>
+        <td><strong>02</strong></td>
+        <td>Elite Table Mechanics &amp; Silent Dining Choreography</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-02</td>
+    </tr>
+    <tr>
+        <td><strong>03</strong></td>
+        <td>Anticipatory Service, The "Scan" &amp; Behavioral Decoding</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-03</td>
+    </tr>
+    <tr>
+        <td><strong>04</strong></td>
+        <td>Industrial Facility Protocols, PPE &amp; The Hand-off Pivot</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-04</td>
+    </tr>
+    <tr>
+        <td><strong>05</strong></td>
+        <td>Precision Communication in Loud &amp; High-Stakes Environments</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-05</td>
+    </tr>
+    <tr>
+        <td><strong>06</strong></td>
+        <td>Professional Communication: Email Etiquette for 2026</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-06</td>
+    </tr>
+    <tr>
+        <td><strong>07</strong></td>
+        <td>Service Recovery (The LAST Method) &amp; Modern Tipping Matrix</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-07</td>
+    </tr>
+    <tr>
+        <td><strong>08</strong></td>
+        <td>Operational Readiness Assessment, Certification &amp; Accord</td>
+        <td style="text-align: right; font-family: monospace;">EXEC-08</td>
+    </tr>
+</table>
+
+<div class="callout-dark">
+    <strong style="color: #38bdf8; font-family: 'Share Tech Mono', monospace; letter-spacing: 1px;">STRATEGIST FOREWORD // THE 2026 IMPERATIVE</strong>
+    <p style="margin-top: 6px; font-size: 9pt; line-height: 1.5;">
+        In an era saturated by automated notifications and generative AI communications, genuine Human-to-Human (H2H) precision has become the rarest and highest-leverage competitive differentiator. Adherence to these operational protocols protects organizational credibility and establishes immediate executive presence.
+    </p>
+</div>
+
+<!-- ========================================== -->
+<!-- MODULE 1: FIRST IMPRESSIONS                -->
+<!-- ========================================== -->
+<div class="page-break"></div>
+<div class="doc-header">
+    <span>MODULE 01 · FIRST IMPRESSIONS</span>
+    <span>SYS: EXEC-01</span>
+</div>
+
+<h1 class="section-title">1. The Psychology of the First Impression</h1>
+
+<h2 class="sub-title">1.1. The Critical 30 Seconds &amp; The 10-4 Rule</h2>
+<p>
+    First impressions are irrevocably forged within the initial 30 seconds of an interaction. To dominate this decisive window, personnel must execute the <strong>10-4 Rule</strong> with clinical spatial discipline:
+</p>
+
+<div class="rule-grid">
+    <div class="rule-card">
+        <strong>At 10 Feet // The Anchor</strong>
+        <p style="font-size: 9.5pt; margin: 0;">Establish deliberate, steady eye contact and project a sincere, measured smile to formally acknowledge the guest's presence before they enter your immediate perimeter.</p>
+    </div>
+    <div class="rule-card">
+        <strong>At 4 Feet // The Engagement</strong>
+        <p style="font-size: 9.5pt; margin: 0;">Deliver a clear, articulate, and confident verbal greeting. Project warmth without sacrificing professional authority.</p>
+    </div>
+</div>
+
+<h2 class="sub-title">Commanding Body Language Requirements</h2>
+<ul class="checklist">
+    <li><span class="check-box"></span> <strong>Command the Space:</strong> Maintain an upright, open posture. Keep shoulders squared; never slouch or cross arms.</li>
+    <li><span class="check-box"></span> <strong>Neutralize Distractions:</strong> Hands must remain out of pockets at all times during client-facing operations.</li>
+    <li><span class="check-box"></span> <strong>The Polite Nod:</strong> Employ a subtle, measured nod during verbal delivery to validate reception and signal active listening.</li>
+</ul>
+
+<h2 class="sub-title">1.2. The Art of Professional Introductions</h2>
+<p>
+    Introductions reflect social hierarchy and organizational discipline. Execute these rules to project high emotional intelligence:
+</p>
+
+<div class="callout">
+    <strong>Hierarchy Principle:</strong> Always introduce the junior or less prominent individual to the senior or more prominent person first:
+    <br><em style="color: #0f172a;">"Executive Director Smith, I would like to introduce our Associate Strategist, James Reed."</em>
+</div>
+
+<p>
+    <strong>Naming Protocols:</strong> Always articulate both first and last names clearly. Include professional titles (e.g., <em>"Doctor," "Professor," "Director"</em>) during initial introductions to reinforce operational respect.
+</p>
+
+<h2 class="sub-title">1.3. The Geometry of Greetings: Handshakes &amp; Name Tags</h2>
+<p>
+    <strong>The Arrival:</strong> If seated, you must stand immediately upon a guest or client approaching your station or table.
+</p>
+<p>
+    <strong>The Handshake:</strong> Extend your hand firmly, web-to-web, executing a solid handshake lasting exactly 3 to 4 seconds. Maintain steady eye contact, smile, and verbally repeat the other party's name to solidify memory retention.
+</p>
+<p>
+    <strong>Name Tag Placement:</strong> Affix identification tags strictly to the <strong>right front shoulder</strong>. This positioning follows natural eye progression during a right-handed greeting, allowing seamless identification without breaking eye contact.
+</p>
+
+<!-- ========================================== -->
+<!-- MODULE 2: TABLE MECHANICS                  -->
+<!-- ========================================== -->
+<div class="page-break"></div>
+<div class="doc-header">
+    <span>MODULE 02 · DINING MECHANICS</span>
+    <span>SYS: EXEC-02</span>
+</div>
+
+<h1 class="section-title">2. Elite Table Mechanics &amp; Dining Protocols</h1>
+
+<h2 class="sub-title">2.1. The Invisible Server: Movement &amp; Spatial Discipline</h2>
+<p>
+    High-level hospitality is a silent choreography—seamless, non-intrusive, and mathematically predictable.
+</p>
+
+<div class="callout">
+    <strong>The Golden Directional Rule:</strong> <em>Serve from the Left, Clear from the Right.</em> This is the universal standard of executive table mechanics.
+</div>
+
+<p>
+    <strong>Open-Hand Service:</strong> Never cross your arm across a guest's field of vision or plate. Switch hands dynamically to maintain an open posture: use your left hand when attending to the left side and your right hand when clearing on the right.
+</p>
+
+<h2 class="sub-title">2.2. Refining the Dialogue: Transactional vs. Elite Tier</h2>
+<p>Elevate conversational mechanics by replacing common service phrases with preparatory, high-regard dialogue:</p>
+
+<table class="proto-table">
+    <tr>
+        <th>COMMON / TRANSACTIONAL PHRASE</th>
+        <th>ELITE EXECUTIVE REPLACEMENT</th>
+    </tr>
+    <tr>
+        <td>"What do you want?"</td>
+        <td><strong>"What may I prepare for you?"</strong></td>
+    </tr>
+    <tr>
+        <td>"Is that all?"</td>
+        <td><strong>"Excellent choice."</strong></td>
+    </tr>
+    <tr>
+        <td>"I'll get that for you."</td>
+        <td><strong>"It would be my pleasure."</strong></td>
+    </tr>
+    <tr>
+        <td>"Hold on a second."</td>
+        <td><strong>"Thank you for your patience."</strong></td>
+    </tr>
+</table>
+
+<h2 class="sub-title">2.3. Napkin &amp; Seating Etiquette</h2>
+<ul class="checklist">
+    <li><span class="check-box"></span> <strong>Immediate Sequence:</strong> Place napkin on lap immediately upon being seated; allow it to unfold naturally.</li>
+    <li><span class="check-box"></span> <strong>The Fold:</strong> Position the fold towards yourself across your thighs.</li>
+    <li><span class="check-box"></span> <strong>Temporary Departure:</strong> Place loosely folded napkin on your chair when stepping away mid-meal.</li>
+    <li><span class="check-box"></span> <strong>Completion:</strong> Upon finishing, place the loosely folded napkin to the left of the place setting.</li>
+    <li><span class="check-box"></span> <strong>Apparel Protocol:</strong> Do not remove suit jackets unless the senior host does so first, or polite permission is requested.</li>
+</ul>
+
+<!-- ========================================== -->
+<!-- MODULE 3 & 4: ANTICIPATION & INDUSTRIAL    -->
+<!-- ========================================== -->
+<div class="page-break"></div>
+<div class="doc-header">
+    <span>MODULE 03 &amp; 04 · ANTICIPATION &amp; INDUSTRIAL</span>
+    <span>SYS: EXEC-03 / 04</span>
+</div>
+
+<h1 class="section-title">3. Anticipatory Service &amp; Behavioral Decoding</h1>
+
+<h2 class="sub-title">3.1. The "Scan" Technique &amp; Operational Discipline</h2>
+<p>Exceptional service is never requested; it is delivered in advance. Perform the following scan on every floor pass:</p>
+
+<div class="rule-grid">
+    <div class="rule-card">
+        <strong>1. Plate Clearance</strong>
+        <p style="font-size: 9pt; margin: 0;">Detect finished courses immediately and clear silently from the right.</p>
+    </div>
+    <div class="rule-card">
+        <strong>2. Refill Velocity</strong>
+        <p style="font-size: 9pt; margin: 0;">Refill water or beverage glasses before they drop below the 1/3 mark.</p>
+    </div>
+</div>
+
+<h2 class="sub-title">3.2. Decoding Silent Behavioral Cues</h2>
+<p><strong>Leaning Back:</strong> Signals course completion or readiness for the bill. Intercept without making the guest wait.</p>
+<p><strong>Searching Eyes:</strong> Indicates a guest needs assistance. Step in immediately before they raise a hand.</p>
+
+<h1 class="section-title" style="margin-top: 36px;">4. Industrial Service &amp; Facility Standards</h1>
+
+<h2 class="sub-title">4.1. VIP Industrial Welcome &amp; Safety Integration</h2>
+<p>
+    In high-stakes industrial facilities, hospitality is defined by safety and operational rigor. Every handshake with a visiting client, inspector, or vendor must be followed immediately by a formal safety briefing.
+</p>
+
+<div class="callout">
+    <strong>Spatial Pride &amp; The Hand-off Pivot:</strong> When approached on the facility floor by a visiting stakeholder, maintain your operational focus while ensuring they feel valued. Execute <em>The Pivot</em>:<br>
+    <em style="color: #0f172a;">"I want to ensure you get the exact technical data you need; let me introduce you to my supervisor who oversees those specifications."</em>
+</div>
+
+<!-- ========================================== -->
+<!-- MODULE 5 & 6: PRECISION & EMAIL 2026       -->
+<!-- ========================================== -->
+<div class="page-break"></div>
+<div class="doc-header">
+    <span>MODULE 05 &amp; 06 · PRECISION COMM &amp; EMAIL 2026</span>
+    <span>SYS: EXEC-05 / 06</span>
+</div>
+
+<h1 class="section-title">5. Precision Communication in High-Decibel Settings</h1>
+
+<h2 class="sub-title">5.1. The Radio Voice &amp; Echo Technique</h2>
+<p>
+    Shouting causes panic and distorts critical data. In high-noise environments, employ the <strong>Radio Voice</strong>: lower your pitch, deliberately slow your tempo, and enunciate sharply.
+</p>
+<div class="callout">
+    <strong>The Echo Technique:</strong> Guarantee alignment by repeating back mission-critical instructions verbatim:<br>
+    <em>"Copy that: moving shipment pallet B to Bay 4 by 14:00."</em>
+</div>
+
+<h1 class="section-title" style="margin-top: 36px;">6. Professional Email Etiquette for 2026</h1>
+
+<h2 class="sub-title">6.1. Clarity, Brevity &amp; Cognitive Load Reduction</h2>
+<p>In 2026, brevity is the highest form of professional courtesy. Structure all executive communications around three tenets:</p>
+
+<div class="rule-grid">
+    <div class="rule-card">
+        <strong>1. Cognitive Load Signal</strong>
+        <p style="font-size: 9pt; margin: 0;">State time required at the very top: <code>[FYI / 30-sec scan]</code> or <code>[Decision Req / 3-min read]</code>.</p>
+    </div>
+    <div class="rule-card">
+        <strong>2. The 3-5 Sentence Rule</strong>
+        <p style="font-size: 9pt; margin: 0;">Keep message bodies strictly under five sentences; optimize for three clear points.</p>
+    </div>
+</div>
+
+<p>
+    <strong>Human-to-Human (H2H) Authenticity:</strong> In an ecosystem inundated by AI-generated boilerplate, include at least one concrete, specific observational detail to prove human authorship and preserve trust.
+</p>
+
+<!-- ========================================== -->
+<!-- MODULE 7 & 8: RECOVERY & CERTIFICATION     -->
+<!-- ========================================== -->
+<div class="page-break"></div>
+<div class="doc-header">
+    <span>MODULE 07 &amp; 08 · RECOVERY &amp; CERTIFICATION</span>
+    <span>SYS: EXEC-07 / 08</span>
+</div>
+
+<h1 class="section-title">7. Service Recovery &amp; De-escalation</h1>
+
+<h2 class="sub-title">7.1. The L.A.S.T. Recovery Framework</h2>
+<p>When resolving client friction or service breakdowns, execute the four-stage de-escalation protocol:</p>
+
+<table class="proto-table">
+    <tr>
+        <th>STAGE</th>
+        <th>ACTION REQUIREMENT</th>
+    </tr>
+    <tr>
+        <td><strong>L — Listen</strong></td>
+        <td>Allow the client to explain their grievance fully without interruption.</td>
+    </tr>
+    <tr>
+        <td><strong>A — Apologize</strong></td>
+        <td>Offer a genuine acknowledgment of their frustration without deflecting blame.</td>
+    </tr>
+    <tr>
+        <td><strong>S — Solve</strong></td>
+        <td>Present an immediate, concrete resolution with a definite timestamp.</td>
+    </tr>
+    <tr>
+        <td><strong>T — Thank</strong></td>
+        <td>Express sincere appreciation for their feedback, turning a defect into loyalty.</td>
+    </tr>
+</table>
+
+<h1 class="section-title" style="margin-top: 36px;">8. Operational Readiness Accord</h1>
+
+<div class="callout" style="background: #ffffff; border: 2px solid #0f172a; margin-top: 20px;">
+    <p style="font-size: 9.5pt; color: #0f172a; font-weight: 600; margin-bottom: 24px;">
+        "I acknowledge that as an Executive Lead and Brand Ambassador, my adherence to these protocols directly shapes the client experience and institutional reputation. I commit to enforcing spatial pride, precision communication, and proactive human-to-human standards across all professional engagements."
+    </p>
+    
+    <div style="display: flex; justify-content: space-between; margin-top: 30px; font-family: 'Share Tech Mono', monospace; font-size: 9pt;">
+        <div>SIGNATURE: ________________________________________</div>
+        <div>DATE: _______________</div>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 40px; font-family: 'Share Tech Mono', monospace; font-size: 8pt; color: #94a3b8;">
+    BURN-1 SYSTEMS // EXECUTIVE DIGITAL ETIQUETTE PLAYBOOK · VERIFIED FULFILLMENT ASSET
+</div>
+
+</body>
+</html>

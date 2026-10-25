@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burn-1 Wednesday Studio // Visual Storyboard & Clip Arranger</title>
+  <style>
+    :root {
+      --bg: #040208;
+      --panel: #0c0814;
+      --border: #271a3c;
+      --purple: #9333ea;
+      --amber: #f59e0b;
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, rgba(147,51,234,0.16), rgba(6,182,212,0.08));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 24px;
+    }
+    .brand-tag {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-weight: 700;
+    }
+    h1 { font-size: 22px; margin-top: 4px; }
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; }
+    button, select {
+      background: #140d22;
+      color: var(--text);
+      border: 1px solid var(--purple);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    button:hover { background: var(--purple); color: #fff; }
+    button.amber { border-color: var(--amber); color: var(--amber); }
+    button.amber:hover { background: var(--amber); color: #000; }
+    button.cyan { border-color: var(--cyan); color: var(--cyan); }
+    button.cyan:hover { background: var(--cyan); color: #000; }
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 1024px) {
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+    .stage-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+    }
+    .viewport {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 1px solid var(--purple);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .viewport img, .viewport video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .lower-third {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      background: rgba(4, 2, 8, 0.88);
+      border-left: 4px solid var(--amber);
+      padding: 12px 16px;
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
+    }
+    .lt-speaker {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .lt-line {
+      font-size: 14px;
+      line-height: 1.45;
+      color: #fff;
+    }
+    .roi-ticker {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .roi-ticker strong { color: var(--emerald); }
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .scene-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .scene-card:hover, .scene-card.active {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+    }
+    .scene-thumb {
+      width: 150px;
+      height: 86px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid #2e1d47;
+    }
+    .scene-thumb img, .scene-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .scene-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: var(--amber);
+      font-weight: 700;
+    }
+    .scene-dialog {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .scene-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .scene-actions select, .scene-actions button {
+      padding: 5px 10px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="brand-tag">BURN-1 SYSTEMS & CYBER READINESS CLINIC // WEDNESDAY STUDIO</div>
+      <h1>Visual Storyboard, Clip Arranger & Teleprompter</h1>
+    </div>
+    <div class="controls">
+      <button class="cyan" id="modeToggleBtn" onclick="toggleHostMode()">Host Mode: Robo Lamp & Cyber Cup</button>
+      <button onclick="playSequence()">▶ Play Full Sequence</button>
+      <button class="amber" onclick="exportCueSheet()">⬇ Export NotebookLM & Studio Cue Sheet</button>
+    </div>
+  </header>
+
+  <div style="background:#0c0814;border:1px solid #06b6d4;border-radius:14px;padding:18px;margin-bottom:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;align-items:center;">
+    <div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid #271a3c;background:#000;">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/pUTdcKOMgMQ?rel=0" title="Burn-1 Wednesday Video Briefing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="border:0;width:100%;height:100%;"></iframe>
+    </div>
+    <div>
+      <div class="brand-tag" style="color:#06b6d4;">🎬 LIVE YOUTUBE STUDIO MASTER EPISODE</div>
+      <h2 style="font-size:20px;margin:6px 0 10px 0;">The Lifecycle of a Perimeter Disaster (NotebookLM &amp; Burn-1 Studio)</h2>
+      <p style="font-size:13px;color:#94a3b8;line-height:1.5;margin-bottom:12px;">
+        Hosted on YouTube (<a href="https://youtu.be/pUTdcKOMgMQ" target="_blank" style="color:#06b6d4;">https://youtu.be/pUTdcKOMgMQ</a>) for instant zero-lag streaming across all Burn-1 &amp; Cyber Readiness Clinic pages. Use the scene cards below to arrange additional B-roll clock clips, stock frames, and Robo Lamp &amp; Cyber Cup dialog cues.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="wednesday-briefing.html" style="background:#9333ea;color:#fff;text-decoration:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;">📰 Open 3,000-Word Article</a>
+        <a href="wednesday-lapsed-policy-edition.html" style="background:#f59e0b;color:#000;text-decoration:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;">⚠️ Open Lapsed Insurance Edition</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="studio-grid">
+    <div class="stage-box">
+      <div class="viewport" id="stageViewport"></div>
+      <div class="roi-ticker">
+        <strong>💡 THE MILLION-DOLLAR POSTURE ASSESSMENT TIDBIT:</strong><br/>
+        Oracle Health/Cerner (~19.93M records, $15M+ exposure), Stadler Rail ($12.3M Everest extortion demand), and Kettering Health ($7.42M sector benchmark) all started at an unverified perimeter or vendor gateway. A <strong>$250–$2,400 Proactive Posture Assessment</strong> at the Cyber Readiness Clinic flags unpatched CISA KEVs and missing MFA <em>before</em> the attack—delivering <strong>99.98% cost avoidance</strong> and protecting cyber insurance claim eligibility.
+      </div>
+    </div>
+
+    <div>
+      <div class="timeline-list" id="timelineContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const AVAILABLE_ASSETS = [
+      { label: "CLIP: Times Running Clock (MP4)", type: "video", src: "assets/clips/timesrunning.mp4" },
+      { label: "CLIP: Clock Hands Amid Debris (MP4)", type: "video", src: "assets/clips/Clock_hands_revolve_amid_debris_20261019225304.mp4" },
+      { label: "CLIP: Shattering Clock Into Void (MP4)", type: "video", src: "assets/clips/Shattering_clock_falling_into_void_20261019221724.mp4" },
+      { label: "CLIP: Falling Glass Shards (MP4)", type: "video", src: "assets/clips/falling_glass.mp4" },
+      { label: "CLIP: Glass Shards Mosaic Clock (MP4)", type: "video", src: "assets/clips/Glass_shards_form_mosaic_clock_20261019222328.mp4" },
+      { label: "IMG: Robo Lamp & Cyber Cup Studio", type: "image", src: "assets/robo_lamp_cyber_cup_studio.jpg" },
+      { label: "IMG: Luminous Clock & Shattered Glass", type: "image", src: "assets/hero_clock.jpg" },
+      { label: "IMG: Healthcare Clinical Operating Room", type: "image", src: "assets/healthcare_or.jpg" },
+      { label: "IMG: Finance Cyber Vault & Ledger", type: "image", src: "assets/finance_vault.jpg" },
+      { label: "IMG: Legal Services Architecture", type: "image", src: "assets/legal_arch.jpg" },
+      { label: "IMG: Telecom Orbital Satellite", type: "image", src: "assets/telecom_sat.jpg" },
+      { label: "IMG: Government Federal Building", type: "image", src: "assets/gov_bldg.jpg" },
+      { label: "IMG: Lapsed Cyber Insurance Boardroom (Studio)", type: "image", src: "assets/lapsed_cyber_insurance_boardroom.jpg" },
+      { label: "STOCK: Cyber SOC Telemetry Monitors", type: "image", src: "assets/cyber_soc_monitors.jpg" },
+      { label: "STOCK: Enterprise Server Datacenter", type: "image", src: "assets/server_datacenter_corridor.jpg" },
+      { label: "STOCK: Cyber Insurance Contract Signing", type: "image", src: "assets/boardroom_insurance_contract.jpg" },
+      { label: "STOCK: Digital Lock & Encryption Matrix", type: "image", src: "assets/cyber_lock_matrix.jpg" },
+      { label: "STOCK: Perimeter Firewall & Code", type: "image", src: "assets/perimeter_firewall_code.jpg" },
+      { label: "STOCK: Executive Incident Response", type: "image", src: "assets/executive_stress_laptop.jpg" },
+      { label: "STOCK: Energy & Utilities Power Grid", type: "image", src: "assets/energy_power_grid.jpg" },
+      { label: "STOCK: Retail POS Checkout Terminal", type: "image", src: "assets/retail_pos_checkout.jpg" },
+      { label: "STOCK: Defense CMMC Command Center", type: "image", src: "assets/defense_radar_command.jpg" },
+      { label: "STOCK: Construction Blueprint & Job-Site", type: "image", src: "assets/construction_site_blueprint.jpg" },
+      { label: "STOCK: Food Cold-Chain Logistics", type: "image", src: "assets/food_cold_chain_logistics.jpg" },
+      { label: "STOCK: Chemicals & Pharma R&D Lab", type: "image", src: "assets/chemicals_pharma_lab.jpg" },
+      { label: "STOCK: Manufacturing ICS/OT Robotics", type: "image", src: "assets/manufacturing_robotics_ot.jpg" },
+      { label: "STOCK: Smart Farm Precision Agriculture", type: "image", src: "assets/agriculture_smart_farm.jpg" },
+      { label: "STOCK: Aerospace & Orbital Telemetry", type: "image", src: "assets/aerospace_orbital_tech.jpg" },
+      { label: "STOCK: Non-Profit Donor Community", type: "image", src: "assets/nonprofit_community_trust.jpg" },
+      { label: "CLIP: Anergi 3D Rotating Logo (MP4)", type: "video", src: "assets/clips/Anergi_logo_rotates_in_3D_20261020074244.mp4" },
+      { label: "CLIP: Camera Moving on Digital Road (MP4)", type: "video", src: "assets/clips/Camera_moving_on_digital_road_20261020020857.mp4" },
+      { label: "CLIP: Mechanical Letter B Transform (MP4)", type: "video", src: "assets/clips/Mechanical_letter_B_transforms_text_20261019233732.mp4" }
+    ];
+
+    let hostMode = "robolamp"; // "robolamp" or "executive"
+    let activeIndex = 0;
+    let playTimer = null;
+
+    const SCENES = [
+      {
+        act: "ACT 1 [0:00 - 0:25] // COLD OPEN",
+        assetIdx: 0,
+        robolampSpeaker: "LAPTOP NEWS BROADCASTER (NLM AUDIO)",
+        robolampText: "Breaking telemetry this Wednesday: CISA's Known Exploited Vulnerabilities catalog has crossed 1,700 active entries under BOD 26-04 as Fortinet, BeyondTrust, and Palo Alto edge appliances face relentless ransomware weaponization.",
+        execSpeaker: "EXECUTIVE BRIEFING ANCHOR",
+        execText: "Welcome to the Burn-1 Wednesday Cyber Intelligence Briefing. This week, CISA's Known Exploited Vulnerabilities catalog crossed 1,700 entries under BOD 26-04 as automated ransomware crews target enterprise edge appliances."
+      },
+      {
+        act: "ACT 1 [0:25 - 0:45] // BREACH LEDGER",
+        assetIdx: 7,
+        robolampSpeaker: "LAPTOP NEWS BROADCASTER (NLM AUDIO)",
+        robolampText: "In healthcare, legacy unmigrated Oracle Health Cerner servers exposed nearly 20 million patient records, while Kettering Health faced a 1.7-million-record Interlock ransomware strike and Stadler Rail battled a $12.3M supplier portal extortion demand.",
+        execSpeaker: "EXECUTIVE BRIEFING ANCHOR",
+        execText: "From 19.93 million patient records exposed on unmigrated Oracle Health Cerner servers to Stadler Rail's $12.3M supplier portal extortion demand, every headline trace points back to an unverified external perimeter."
+      },
+      {
+        act: "ACT 2 [0:45 - 1:15] // DESK REACTION",
+        assetIdx: 5,
+        robolampSpeaker: "CYBER CUP & ROBO LAMP",
+        robolampText: "CYBER CUP: 'Twenty million records on a legacy server nobody unplugged! Lamp, companies spend millions on cloud migrations and leave the old basement door unlocked!' ROBO LAMP: 'And the attackers didn't even need zero-day magic—just stolen credentials and an unassessed portal.'",
+        execSpeaker: "LEAD SECURITY ARCHITECT",
+        execText: "Notice the pattern across all three breaches: attackers didn't defeat next-gen encryption. They walked through legacy unmigrated servers, third-party vendor file portals, and unpatched CISA KEV edge gateways."
+      },
+      {
+        act: "ACT 2 [1:15 - 1:40] // SUPPLIER & KEV BLIND SPOTS",
+        assetIdx: 1,
+        robolampSpeaker: "ROBO LAMP",
+        robolampText: "ROBO LAMP: 'Look at Stadler Rail—Everest demanded $12.3 million after slipping through an external supplier data-exchange portal. And in healthcare, the average breach now burns $7.42 million while insurers look for any unpatched KEV to deny the claim.'",
+        execSpeaker: "LEAD SECURITY ARCHITECT",
+        execText: "In manufacturing, a single supplier portal triggered a $12.3 million extortion demand. In healthcare, the average breach now costs $7.42 million—and carriers are denying claims when post-breach forensics uncover unpatched KEVs."
+      },
+      {
+        act: "ACT 3 [1:40 - 2:25] // THE MILLION-DOLLAR POSTURE TIDBIT",
+        assetIdx: 8,
+        robolampSpeaker: "CYBER CUP & ROBO LAMP (ROI BREAKDOWN)",
+        robolampText: "CYBER CUP: 'Here is the million-dollar math every CFO needs taped to their monitor: A proactive Posture Assessment at the Cyber Readiness Clinic costs $250 to $2,400. A reactive breach costs $7.4 million to $15 million! That one posture check catches the legacy server and saves the entire company!'",
+        execSpeaker: "EXECUTIVE FINANCIAL ANALYST",
+        execText: "Here is the financial bottom line: A non-intrusive Posture Assessment at the Cyber Readiness Clinic costs between $250 and $2,400. Conducting that assessment beforehand flags legacy servers, missing MFA, and KEV exposures—saving $7.4M to $15M+ in reactive breach losses."
+      },
+      {
+        act: "ACT 4 [2:25 - 2:45] // BURN-1 OUTRO & CTA",
+        assetIdx: 2,
+        robolampSpeaker: "ROBO LAMP & CYBER CUP",
+        robolampText: "ROBO LAMP: 'Don't let your clock run out. Validate your cyber readiness before the carrier—or the cartel—does.' CYBER CUP: 'Run your 60-second Mini S.P.A. scan at Burn-1 today. Keep your coffee hot and your perimeter locked!'",
+        execSpeaker: "BURN-1 STUDIO OUTRO",
+        execText: "Don't let your clock run out: validate your cyber readiness before the carrier does. Run your Mini S.P.A. perimeter check and build your underwriter Evidence Binder today at Burn-1."
+      }
+    ];
+
+    function renderStage(idx) {
+      activeIndex = idx;
+      const scene = SCENES[idx];
+      const asset = AVAILABLE_ASSETS[scene.assetIdx];
+      const vp = document.getElementById("stageViewport");
+      const speaker = hostMode === "robolamp" ? scene.robolampSpeaker : scene.execSpeaker;
+      const line = hostMode === "robolamp" ? scene.robolampText : scene.execText;
+
+      let mediaHtml = asset.type === "video"
+        ? `<video src="${asset.src}" autoplay loop muted playsinline></video>`
+        : `<img src="${asset.src}" alt="${asset.label}" />`;
+
+      vp.innerHTML = `
+        ${mediaHtml}
+        <div class="lower-third">
+          <div class="lt-speaker">${scene.act} — ${speaker}</div>
+          <div class="lt-line">${line}</div>
+        </div>
+      `;
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      const container = document.getElementById("timelineContainer");
+      container.innerHTML = SCENES.map((s, i) => {
+        const asset = AVAILABLE_ASSETS[s.assetIdx];
+        const speaker = hostMode === "robolamp" ? s.robolampSpeaker : s.execSpeaker;
+        const line = hostMode === "robolamp" ? s.robolampText : s.execText;
+        const thumbMedia = asset.type === "video"
+          ? `<video src="${asset.src}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`
+          : `<img src="${asset.src}" alt="" />`;
+
+        const options = AVAILABLE_ASSETS.map((a, aIdx) =>
+          `<option value="${aIdx}" ${aIdx === s.assetIdx ? "selected" : ""}>${a.label}</option>`
+        ).join("");
+
+        return `
+          <div class="scene-card ${i === activeIndex ? "active" : ""}" onclick="renderStage(${i})">
+            <div class="scene-thumb">${thumbMedia}</div>
+            <div>
+              <div class="scene-meta">
+                <span>${s.act}</span>
+                <span>${speaker}</span>
+              </div>
+              <div class="scene-dialog">${line}</div>
+              <div class="scene-actions" onclick="event.stopPropagation()">
+                <select onchange="changeAsset(${i}, this.value)">${options}</select>
+                <button onclick="moveScene(${i}, -1)">↑ Move Up</button>
+                <button onclick="moveScene(${i}, 1)">↓ Move Down</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function changeAsset(sceneIdx, newAssetIdx) {
+      SCENES[sceneIdx].assetIdx = parseInt(newAssetIdx, 10);
+      renderStage(sceneIdx);
+    }
+
+    function moveScene(idx, dir) {
+      const target = idx + dir;
+      if (target < 0 || target >= SCENES.length) return;
+      const temp = SCENES[idx];
+      SCENES[idx] = SCENES[target];
+      SCENES[target] = temp;
+      renderStage(target);
+    }
+
+    function toggleHostMode() {
+      hostMode = hostMode === "robolamp" ? "executive" : "robolamp";
+      document.getElementById("modeToggleBtn").textContent =
+        hostMode === "robolamp" ? "Host Mode: Robo Lamp & Cyber Cup" : "Host Mode: Standard Executive Narrator";
+      renderStage(activeIndex);
+    }
+
+    function playSequence() {
+      if (playTimer) {
+        clearInterval(playTimer);
+        playTimer = null;
+      }
+      renderStage(0);
+      playTimer = setInterval(() => {
+        if (activeIndex + 1 < SCENES.length) {
+          renderStage(activeIndex + 1);
+        } else {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }, 6000);
+    }
+
+    function exportCueSheet() {
+      const lines = SCENES.map((s, i) => {
+        const asset = AVAILABLE_ASSETS[s.assetIdx];
+        const speaker = hostMode === "robolamp" ? s.robolampSpeaker : s.execSpeaker;
+        const text = hostMode === "robolamp" ? s.robolampText : s.execText;
+        return `SCENE ${i + 1}: ${s.act}\nVISUAL ASSET: ${asset.src} (${asset.label})\nSPEAKER: ${speaker}\nDIALOGUE: ${text}\n`;
+      }).join("\n------------------------------------------------------------\n");
+
+      const blob = new Blob([lines], { type: "text/plain;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "wednesday_storyboard_cue_sheet.txt";
+      a.click();
+    }
+
+    renderStage(0);
+  </script>
+</body>
+</html>

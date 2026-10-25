@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Intake | Cyber Readiness Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #EBF1F5; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* 1. Header Typography: Extra-heavy main title heading (.clinic-title) */
+        .clinic-title {
+            font-weight: 900;
+            -webkit-text-stroke: 1px #2A081C;
+            letter-spacing: -0.04em;
+        }
+
+        /* Clinical Clipboard Outer Frame Feel */
+        .clipboard-frame {
+            border-top: 6px solid #2A081C;
+            box-shadow: 0 12px 35px rgba(42, 8, 28, 0.12);
+        }
+
+        /* 3. Smooth Expand/Collapse + Collapsed State Text Visibility Bug Fix */
+        .step-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            display: none;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.6s ease, opacity 0.3s ease;
+        }
+        .step-container:not(.active) .step-content,
+        .step-container:not(.active) .step-descriptive-text {
+            max-height: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            opacity: 0 !important;
+            display: none !important;
+            overflow: hidden !important;
+        }
+        .step-container.active .step-content {
+            display: flex;
+            max-height: 1600px; /* Big enough for terminals and videos */
+            opacity: 1;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .step-container.active .step-content.block-step-content {
+            display: block;
+        }
+        .step-container.active .step-content.dark-pane-step-content {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        /* 2 & 3. Step Guide Color Uniformity across Step 1, Step 2, and subsequent steps */
+        .step-container > button {
+            background-color: rgba(230, 224, 248, 0.35);
+        }
+        .step-container.active > button {
+            background-color: rgba(230, 224, 248, 0.65);
+        }
+        .step-container.active h2 {
+            color: #2A081C !important;
+        }
+        .step-container.active [id$="-indicator"] {
+            background-color: #2A081C !important;
+            border-color: #2A081C !important;
+            color: #ffffff !important;
+        }
+        .step-container.active .toggle-icon {
+            color: #522d8a !important;
+        }
+
+        /* The Clinic Holo-Circuitry Background */
+        .holo-bg {
+            background-image: radial-gradient(circle at 50% 50%, rgba(230, 224, 248, 0.8) 0%, rgba(235, 241, 245, 1) 100%),
+                              linear-gradient(rgba(42, 8, 28, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(42, 8, 28, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        /* Custom Inputs */
+        .clinic-input {
+            width: 100%;
+            padding: 1.25rem;
+            font-size: 1.125rem;
+            border-radius: 1rem;
+            border: 2px solid #C4D4E0;
+            background: #ffffff;
+            color: #2A081C;
+            transition: all 0.3s ease;
+        }
+        .clinic-input:focus {
+            outline: none;
+            border-color: #D92B8A;
+            box-shadow: 0 0 15px rgba(217, 43, 138, 0.2);
+        }
+
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    </style>
+</head>
+<body class="holo-bg text-[#2A081C] min-h-screen pb-40">
+
+    <!-- Inline Toast Notification (Non-blocking replacement for alert) -->
+    <div id="clinic-toast" class="hidden fixed top-5 right-5 z-50 bg-[#2A081C] text-white px-6 py-4 rounded-2xl border-2 border-[#D92B8A] shadow-2xl font-mono text-sm font-bold"></div>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 4 EDIT: IMMEDIATE SIGN-IN / SIGN-UP MODAL UPON SCAN         -->
+    <!-- =================================================================== -->
+    <div id="scan-auth-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 border-4 border-[#2A081C] shadow-2xl relative space-y-6 animate-fade-in">
+            <button type="button" onclick="closeScanModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-[#E6E0F8] text-[#2A081C] font-black text-xl flex items-center justify-center hover:bg-[#D92B8A] hover:text-white transition-colors">
+                ✕
+            </button>
+            <div class="flex items-center gap-4">
+                <span class="flex items-center justify-center w-14 h-14 rounded-full bg-[#2A081C] text-white font-black text-2xl shadow-md">
+                    <i class="fa-solid fa-user-lock"></i>
+                </span>
+                <div>
+                    <p class="font-mono text-xs text-[#D92B8A] font-black uppercase tracking-widest">Anergi Mini S.P.A. Telemetry</p>
+                    <h3 class="text-2xl sm:text-3xl font-black text-[#2A081C] tracking-tight uppercase">Sign In / Sign Up to Unlock Report</h3>
+                </div>
+            </div>
+            <p class="text-base font-bold text-slate-600 leading-relaxed">
+                Establish or verify your operator credentials to unlock your full Anergi Mini S.P.A. diagnostic results, gap report, and downstream remediation blueprint.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block font-black mb-2 text-sm text-[#2A081C] uppercase tracking-wide">Work Email Address</label>
+                    <input type="email" id="modal-form-email" class="clinic-input font-bold text-base" placeholder="admin@yourcompany.com">
+                </div>
+                <div>
+                    <label class="block font-black mb-2 text-sm text-[#2A081C] uppercase tracking-wide">Secure Password</label>
+                    <input type="password" id="modal-form-password" class="clinic-input font-bold text-base" placeholder="••••••••••••">
+                </div>
+            </div>
+            <button type="button" onclick="submitScanModalAuth()" class="w-full px-8 py-5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-wider rounded-xl text-lg transition-all shadow-lg">
+                Verify Credentials &amp; Unlock Full S.P.A. Report &rarr;
+            </button>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- 1. HEADER WITH INTEGRATED BURN-1 LOGO & HOLOGRAPHIC TOUCH-SCREEN BG -->
+    <!-- =================================================================== -->
+    <header class="relative overflow-hidden p-6 sm:p-8 max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-6 rounded-t-3xl mt-4 bg-white/85 backdrop-blur-md border-x-2 border-t-2 border-[#C4D4E0] clipboard-frame">
+        <!-- Header Background Video ("People_using_holographic_touch-s…_20261023210748.mp4" at 0.5x half speed) -->
+        <video id="header-holo-video"
+               src="file:///C:/Users/Leonr/Downloads/People_using_holographic_touch-s%E2%80%A6_20261023210748.mp4"
+               data-local-src="People_using_holographic_touch-s…_20261023210748.mp4"
+               data-alt-src="People_using_holographic_touch-screen_20261023210748.mp4"
+               autoplay loop muted playsinline
+               class="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"></video>
+
+        <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6">
+            <!-- Burn-1 Official Logo (.branding-logo) in Nav Bar -->
+            <img id="header-logo-img"
+                 src="file:///C:/Users/Leonr/Downloads/image.png_20261023160839.jpg"
+                 data-local-src="image.png_20261023160839.jpg"
+                 alt="Burn-1 Systems Logo"
+                 class="branding-logo w-24 h-24 object-cover rounded-2xl shadow-[0_10px_20px_rgba(42,8,28,0.15)] border-2 border-[#C4D4E0] bg-[#2A081C]">
+            <div>
+                <h1 class="clinic-title text-4xl sm:text-6xl font-black tracking-tighter text-[#2A081C] uppercase mt-2 sm:mt-0">Cyber Readiness Clinic</h1>
+                <p class="font-mono text-sm text-[#522d8a] font-black mt-2 tracking-widest">CINEMATIC INTAKE PROTOCOL // SECURE VAULT</p>
+            </div>
+        </div>
+        <div class="relative z-10">
+            <span id="header-status-badge" class="px-5 py-3 bg-[#E6E0F8] text-[#2A081C] font-black uppercase tracking-wider rounded-full border-2 border-[#d2c5f1] shadow-sm inline-block">
+                STATUS: AWAITING INTAKE
+            </span>
+        </div>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- THIN CHECK-IN SEPARATOR BETWEEN 2 THIN BORDERS (HERO -> INTAKE)     -->
+    <!-- =================================================================== -->
+    <div class="max-w-6xl mx-auto mb-6 border-x-2 border-b-2 border-[#C4D4E0] rounded-b-3xl overflow-hidden shadow-md bg-[#2A081C]">
+        <!-- Framed between 2 thin borders to separate the hero from the first intake for a clinical clipboard feel -->
+        <div class="border-t-2 border-b-2 border-[#2A081C] py-0.5 bg-[#C4D4E0]">
+            <div class="relative h-20 sm:h-24 w-full overflow-hidden border-t border-b border-[#522d8a] bg-slate-900 flex items-center justify-between px-6 sm:px-8">
+                <img id="step1-upper-hero-img"
+                     src="file:///C:/Users/Leonr/Downloads/Patients%20Using%20Robotic%20Check-In.jpg"
+                     data-local-src="Patients Using Robotic Check-In.jpg"
+                     alt="Patients Using Robotic Check-In"
+                     class="absolute inset-0 w-full h-full object-cover opacity-80">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#2A081C]/85 via-[#2A081C]/40 to-[#2A081C]/85"></div>
+                <div class="relative z-10 flex items-center gap-3">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest text-[#E6E0F8]">
+                        CLINICAL CLIPBOARD CHECK-IN // PATIENTS USING ROBOTIC CHECK-IN
+                    </span>
+                </div>
+                <span class="relative z-10 hidden sm:inline-block font-mono text-xs font-bold text-[#C4D4E0] uppercase tracking-wider">
+                    INTAKE FORM #B1-2026
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Accordion -->
+    <main class="max-w-6xl mx-auto px-4 space-y-6">
+
+        <!-- =============================================================== -->
+        <!-- STEP 1: CLINIC INTAKE & VAULT PROVISIONING                      -->
+        <!-- =============================================================== -->
+        <div class="step-container active bg-white rounded-3xl shadow-xl border-2 border-[#E6E0F8] overflow-hidden" id="step-1">
+            <button onclick="toggleStep(1)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center bg-[#E6E0F8]/50 hover:bg-[#E6E0F8] transition-colors">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full bg-[#2A081C] text-white font-black text-2xl shadow-md" id="step-1-indicator">1</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-[#2A081C] tracking-tight" id="step-1-title">Clinic Intake &amp; Vault Provisioning</h2>
+                </div>
+                <span class="text-4xl text-[#522d8a] toggle-icon font-black">−</span>
+            </button>
+            <div class="step-content px-6 sm:px-8 flex flex-col lg:flex-row gap-10">
+                <div class="w-full lg:w-1/2 space-y-8">
+                    <p class="step-descriptive-text text-xl font-bold text-slate-700 leading-relaxed">Welcome to the clinic. Let's establish your secure vault directory profile to anchor your compliance assets.</p>
+                    <div>
+                        <label class="block font-black mb-3 text-xl text-[#2A081C] uppercase tracking-wide">Company / Entity Name</label>
+                        <input type="text" id="form-company" class="clinic-input font-bold" placeholder="e.g. Apex Healthcare Partners" onfocus="triggerStep1IntakeClipOnce()" oninput="updateLiveOrder()">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block font-black mb-3 text-lg text-[#2A081C] uppercase tracking-wide">Sector Lens</label>
+                            <select id="form-sector" class="clinic-input font-bold text-base" onchange="triggerStep1IntakeClipOnce(); syncSectorSelection(this.value)">
+                                <option value="">Select industry...</option>
+                                <option value="Healthcare">1. Healthcare &amp; Medical (HIPAA)</option>
+                                <option value="Finance">2. Financial Services (NYDFS / GLBA)</option>
+                                <option value="Defense">3. Defense &amp; Aerospace (CMMC 2.0)</option>
+                                <option value="Retail">4. Retail &amp; E-Commerce (PCI-DSS v4.0)</option>
+                                <option value="Legal">5. Legal &amp; Law Practices (ABA / SOC 2)</option>
+                                <option value="Logistics">6. Logistics &amp; Supply Chain (ISO 28000)</option>
+                                <option value="Energy">7. Energy &amp; Utilities (NERC CIP)</option>
+                                <option value="Manufacturing">8. Manufacturing &amp; Industrial OT (IEC 62443)</option>
+                                <option value="SaaS">9. SaaS &amp; Cloud Technology (SOC 2 / ISO 27001)</option>
+                                <option value="MSP">10. Managed Service Providers (CIS IG3)</option>
+                                <option value="Government">11. Government &amp; Municipal (CJIS / NIST 800-53)</option>
+                                <option value="Education">12. Education &amp; Higher Ed (FERPA / GLBA)</option>
+                                <option value="Biotech">13. Biotech &amp; Pharmaceuticals (FDA 21 CFR 11)</option>
+                                <option value="RealEstate">14. Real Estate, Title &amp; Escrow (ALTA)</option>
+                                <option value="Insurance">15. Insurance &amp; Underwriting (NAIC Model Law)</option>
+                                <option value="Automotive">16. Automotive &amp; Dealerships (FTC Safeguards)</option>
+                                <option value="Hospitality">17. Hospitality &amp; Entertainment (PCI POS)</option>
+                                <option value="Construction">18. Construction &amp; Engineering (NIST 800-171)</option>
+                                <option value="Telecom">19. Telecom &amp; Media (FCC CPNI)</option>
+                                <option value="NonProfit">20. Non-Profit &amp; Foundations (CIS IG1)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-black mb-3 text-lg text-[#2A081C] uppercase tracking-wide">Employee Count</label>
+                            <select id="form-employees" class="clinic-input font-bold text-base" onchange="triggerStep1IntakeClipOnce(); updateLiveOrder()">
+                                <option value="">Select size...</option>
+                                <option value="1-10">1 - 10</option>
+                                <option value="11-50">11 - 50</option>
+                                <option value="51-200">51 - 200</option>
+                                <option value="201+">201+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="handleStep1NextBtn()" class="mt-6 px-8 py-5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-wider rounded-xl text-xl w-full transition-all shadow-[0_10px_20px_rgba(42,8,28,0.2)]">
+                        Provision Vault &amp; Continue &rarr;
+                    </button>
+                </div>
+
+                <!-- Step 1 Preview Container: "C:\Users\Leonr\Downloads\Biometric_sensor_scanning_eyes_20261023210603.mp4" (Stop & Start on Event) -->
+                <div id="step1-preview-box"
+                     onclick="toggleStep1IntakeClip()"
+                     onmouseenter="triggerStep1IntakeClipOnce()"
+                     title="Click to start or stop biometric intake clip"
+                     class="cursor-pointer w-full lg:w-1/2 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-[#EBF1F5] bg-slate-900 aspect-video flex items-center justify-center group">
+                    <img id="step1-biometric-gif"
+                         src="file:///C:/Users/Leonr/Downloads/Biometric%20Sensor%20Scanning.gif"
+                         data-local-src="Biometric Sensor Scanning.gif"
+                         alt="Biometric Sensor Scanning"
+                         class="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-screen">
+                    <!-- Main Intake Clip: Biometric_sensor_scanning_eyes_20261023210603.mp4 (Paused on first frame; starts/stops on click, hover, or Next button) -->
+                    <video id="step1-biometric-video"
+                           src="file:///C:/Users/Leonr/Downloads/Biometric_sensor_scanning_eyes_20261023210603.mp4"
+                           data-local-src="Biometric_sensor_scanning_eyes_20261023210603.mp4"
+                           data-fallback-src="Biometric.mp4"
+                           preload="auto"
+                           muted
+                           playsinline
+                           class="absolute inset-0 w-full h-full object-cover opacity-85 mix-blend-screen"></video>
+                    <div class="absolute inset-0 bg-[#522d8a]/20 mix-blend-multiply pointer-events-none"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 2: ANERGI MINI S.P.A. DIAGNOSIS                            -->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-2">
+            <button onclick="toggleStep(2)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-2-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-2-indicator">2</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-[#2A081C] tracking-tight transition-colors" id="step-2-title">Anergi Mini S.P.A. Diagnosis</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <div class="step-content block-step-content relative overflow-hidden px-6 sm:px-8">
+                <!-- Step 2 Mini S.P.A. Background Clip: "C:\Users\Leonr\Downloads\People_using_holographic_touch-s…_20261023210748.mp4" at 0.5x half speed -->
+                <video id="step2-wellness-video"
+                       src="file:///C:/Users/Leonr/Downloads/People_using_holographic_touch-s%E2%80%A6_20261023210748.mp4"
+                       data-local-src="People_using_holographic_touch-s…_20261023210748.mp4"
+                       data-alt-src="People_using_holographic_touch-screen_20261023210748.mp4"
+                       data-fallback-src="People Relaxing in Wellness Center.mp4"
+                       autoplay loop muted playsinline
+                       class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"></video>
+
+                <div class="relative z-10 pb-4">
+                    <p class="step-descriptive-text text-xl font-bold text-slate-700 mb-8 text-center max-w-3xl mx-auto">Deploy the Anergi Mini S.P.A. omnibar. Enter your domain to initiate a 15-second non-intrusive diagnostic.</p>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full max-w-4xl mx-auto mb-10 shadow-2xl rounded-2xl overflow-hidden border-2 border-[#2A081C] bg-white">
+                        <input type="text" id="form-domain" class="w-full px-6 py-5 font-mono text-xl font-bold text-[#2A081C] bg-[#F8FAFC] focus:outline-none" placeholder="e.g. burn-1.com">
+                        <button onclick="runCinematicScan()" id="btn-run-scan" class="px-10 py-5 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xl tracking-widest uppercase transition-all shrink-0">Run Scan</button>
+                    </div>
+                    <!-- 15s Terminal -->
+                    <div id="scan-terminal" class="hidden rounded-3xl bg-[#0f172a] p-8 border-4 border-[#522d8a] shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] transition-all font-mono h-[500px] overflow-y-auto w-full max-w-5xl mx-auto relative scroll-smooth">
+                        <div class="sticky top-0 bg-[#0f172a]/90 backdrop-blur pb-4 mb-4 border-b border-[#522d8a]/50 flex justify-between items-center z-10">
+                            <span class="text-[#D92B8A] font-bold tracking-widest animate-pulse"><i class="fa-solid fa-satellite-dish mr-2"></i> ANERGI MINI S.P.A. ACTIVE</span>
+                            <span id="scan-timer" class="text-cyan-400 font-bold">00:15</span>
+                        </div>
+                        <div id="scan-log-container" class="space-y-4 text-[#E6E0F8] text-sm lg:text-base font-bold"></div>
+                        <!-- Results -->
+                        <div id="scan-result" class="hidden mt-8 pt-8 border-t-2 border-[#522d8a] animate-fade-in">
+                            <div class="bg-[#2A081C]/80 p-8 rounded-2xl border-2 border-[#D92B8A]">
+                                <h3 class="text-2xl font-black text-white mb-4 uppercase tracking-widest">Diagnostic Complete</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div class="bg-black/50 p-6 rounded-xl border border-emerald-500/30">
+                                        <span class="block text-emerald-400 font-bold mb-2 uppercase">Verified Controls</span>
+                                        <ul class="text-slate-300 space-y-2"><li>✓ TLS 1.3 Cipher Suites</li><li>✓ HSTS Validated</li></ul>
+                                    </div>
+                                    <div class="bg-black/50 p-6 rounded-xl border border-[#D92B8A]/50">
+                                        <span class="block text-[#D92B8A] font-bold mb-2 uppercase">Gaps Detected</span>
+                                        <ul class="text-slate-300 space-y-2"><li>⚠️ DMARC Policy Missing</li><li>⚠️ Exposed Management Ports</li></ul>
+                                    </div>
+                                </div>
+                                <button onclick="collapseAndNext(2, 3)" class="w-full px-6 py-4 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(217,43,138,0.4)] transition-all">
+                                    Secure Vault &amp; Get Report &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 3: VAULT REGISTRATION & REPORT                             -->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-3">
+            <button onclick="toggleStep(3)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-3-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-3-indicator">3</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-400 tracking-tight transition-colors" id="step-3-title">Vault Registration &amp; Report</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <!-- Step 3 Pane Background GIF: "People Using Holographic Touchscreen" -->
+            <div class="step-content relative overflow-hidden px-6 sm:px-8 flex flex-col lg:flex-row gap-10">
+                <img id="step3-pane-bg-gif"
+                     src="file:///C:/Users/Leonr/Downloads/People%20Using%20Holographic%20Touchscreen.gif"
+                     data-local-src="People Using Holographic Touchscreen.gif"
+                     alt="People Using Holographic Touchscreen"
+                     class="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none">
+
+                <!-- Pre-Scan Placeholder (Shown only if Step 3 is opened before initiating/completing scan; sign-up & results remain hidden until scan completes) -->
+                <div id="step3-pre-scan-placeholder" class="relative z-10 w-full py-10 text-center space-y-4">
+                    <i class="fa-solid fa-satellite-dish text-5xl text-[#522d8a]"></i>
+                    <h3 class="text-2xl font-black text-[#2A081C] uppercase">Complete Step 2 Scan to Reveal Sign-Up &amp; Results</h3>
+                    <p class="text-lg font-bold text-slate-600 max-w-xl mx-auto">
+                        Sign-up credentials and diagnostic report controls remain hidden until your Anergi Mini S.P.A. scan is initiated and completed.
+                    </p>
+                    <button type="button" onclick="collapseAndNext(3, 2)" class="px-8 py-4 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black uppercase tracking-wider rounded-xl shadow-md transition-all">
+                        Go to Step 2 &amp; Run Scan &rarr;
+                    </button>
+                </div>
+
+                <!-- Step 3 Sign-Up Prompt & Results Wrapper (Hidden until scan completes) -->
+                <div id="step3-post-scan-wrapper" class="hidden relative z-10 w-full flex flex-col lg:flex-row gap-10">
+                    <div class="w-full lg:w-1/2 space-y-8 bg-white/90 backdrop-blur-sm p-6 rounded-2xl border border-[#E6E0F8]">
+                        <p class="step-descriptive-text text-xl font-bold text-slate-700 leading-relaxed">Establish your credentials to unlock diagnostic results. Your gap report and APEA justification will be emailed securely.</p>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block font-black mb-3 text-lg text-[#2A081C] uppercase tracking-wide">Work Email Address</label>
+                                <input type="email" id="form-email" class="clinic-input font-bold text-base" placeholder="admin@yourcompany.com">
+                            </div>
+                            <div>
+                                <label class="block font-black mb-3 text-lg text-[#2A081C] uppercase tracking-wide">Secure Password</label>
+                                <input type="password" id="form-password" class="clinic-input font-bold text-base" placeholder="••••••••••••">
+                            </div>
+                        </div>
+                        <button onclick="createVaultAccount()" id="btn-create-account" class="mt-6 px-8 py-5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-wider rounded-xl text-xl w-full transition-all shadow-[0_10px_20px_rgba(42,8,28,0.2)]">
+                            Create Account &amp; Unlock Assets
+                        </button>
+
+                        <!-- Dedicated Post-Auth Full Report Access CTA Area -->
+                        <div id="step3-full-report-cta" class="hidden p-6 rounded-2xl bg-[#E6E0F8] border-2 border-[#522d8a] space-y-3 animate-fade-in">
+                            <div class="flex items-center justify-between">
+                                <span class="font-mono text-xs font-black uppercase text-[#522d8a]">✓ Credentials Verified // Full Access</span>
+                                <i class="fa-solid fa-unlock-keyhole text-[#D92B8A]"></i>
+                            </div>
+                            <p class="text-sm font-bold text-[#2A081C]">
+                                Your full Anergi Mini S.P.A. assessment report and downstream remediation materials are ready for download.
+                            </p>
+                            <button type="button" onclick="downloadVaultAsset('full-report')" class="w-full px-6 py-4 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-between">
+                                <span>Access Full S.P.A. Assessment Report</span>
+                                <i class="fa-solid fa-file-arrow-down text-cyan-400 text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Locked Assets Side + "C:\Users\Leonr\Downloads\falling glass.mp4" Video -->
+                    <div class="w-full lg:w-1/2 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-[#EBF1F5] bg-slate-900 aspect-video flex flex-col items-center justify-center p-8">
+                        <video id="step3-clock-video"
+                               src="file:///C:/Users/Leonr/Downloads/falling%20glass.mp4"
+                               data-local-src="falling glass.mp4"
+                               data-fallback-src="Shattering Clock Falling Into Word.mp4"
+                               autoplay loop muted playsinline
+                               class="absolute inset-0 w-full h-full object-cover opacity-65 mix-blend-screen"></video>
+                        <div class="absolute inset-0 bg-[#2A081C]/70 mix-blend-multiply"></div>
+                        <div class="relative z-10 w-full max-w-sm space-y-4">
+                            <div class="text-center mb-6">
+                                <i id="lock-icon" class="fa-solid fa-lock text-5xl text-slate-400 mb-4 transition-colors duration-500"></i>
+                                <p id="vault-status-text" class="font-mono text-sm font-bold text-slate-300 tracking-widest uppercase">Vault Locked. Auth Required.</p>
+                            </div>
+                            <button id="btn-dl-report" onclick="downloadVaultAsset('gap')" disabled class="w-full px-6 py-4 bg-slate-700/80 text-slate-500 border-2 border-slate-600 font-black uppercase tracking-wider rounded-xl transition-all cursor-not-allowed flex items-center justify-between">
+                                <span>Digital Gap Report</span> <i class="fa-solid fa-file-shield"></i>
+                            </button>
+                            <button id="btn-dl-remediation" onclick="downloadVaultAsset('remediation')" disabled class="w-full px-6 py-4 bg-slate-700/80 text-slate-500 border-2 border-slate-600 font-black uppercase tracking-wider rounded-xl transition-all cursor-not-allowed flex items-center justify-between">
+                                <span>Remediation Blueprint</span> <i class="fa-solid fa-envelope-open-text"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 4: ACADEMY & SECURE DOWNLOADS                              -->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-4">
+            <button onclick="toggleStep(4)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-4-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-4-indicator">4</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-400 tracking-tight transition-colors" id="step-4-title">Academy &amp; Secure Downloads</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <div class="step-content px-6 sm:px-8 flex flex-col lg:flex-row-reverse gap-10">
+                <div class="w-full lg:w-1/2 space-y-6">
+                    <div class="bg-amber-100 border-2 border-amber-400 p-4 rounded-xl flex items-center gap-4">
+                        <i class="fa-solid fa-gift text-3xl text-amber-500"></i>
+                        <div>
+                            <span id="step4-credit-headline" class="block font-black text-[#2A081C] uppercase tracking-wider text-lg">Vault Verified: +40 Credits Earned!</span>
+                            <span class="text-sm font-bold text-slate-600">Max out at 120 CR to unlock 50% off your Evidence Binder.</span>
+                        </div>
+                    </div>
+                    <p class="step-descriptive-text text-xl font-bold text-slate-700">Hover over the assets below to inspect. Download now, or return to the Academy later to earn remaining credits.</p>
+                    <div class="space-y-4">
+                        <button onclick="downloadVaultAsset('mfa')" onmouseenter="showAssetInfo('mfa')" onmouseleave="hideAssetInfo()" class="w-full px-6 py-4 bg-white border-2 border-[#C4D4E0] hover:border-cyan-400 text-slate-700 hover:text-[#2A081C] font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-between shadow-sm">
+                            <span>Microsoft MFA Setup PDF</span> <i class="fa-solid fa-download text-cyan-400"></i>
+                        </button>
+                        <button onclick="openAcademyPortal()" onmouseenter="showAssetInfo('academy')" onmouseleave="hideAssetInfo()" class="w-full px-6 py-4 bg-white border-2 border-[#C4D4E0] hover:border-[#D92B8A] text-slate-700 hover:text-[#2A081C] font-black uppercase tracking-wider rounded-xl transition-all flex items-center justify-between shadow-sm">
+                            <span>Gamified Academy Portal</span> <i class="fa-solid fa-gamepad text-[#D92B8A]"></i>
+                        </button>
+                    </div>
+                    <button onclick="collapseAndNext(4, 5)" class="mt-8 px-8 py-5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-wider rounded-xl text-xl w-full transition-all shadow-md">
+                        Continue to Architecture &rarr;
+                    </button>
+                </div>
+                <div class="w-full lg:w-1/2 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-[#EBF1F5] bg-slate-900 aspect-video flex items-center justify-center">
+                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen"></video>
+                    <!-- Dynamic Hover Overlay -->
+                    <div id="asset-hover-overlay" class="absolute inset-0 bg-[#522d8a]/90 backdrop-blur-sm p-8 flex flex-col items-center justify-center text-center opacity-0 transition-opacity duration-300 pointer-events-none z-20">
+                        <i id="asset-icon" class="fa-solid fa-file-pdf text-6xl text-white mb-6"></i>
+                        <h3 id="asset-title" class="text-3xl font-black text-white uppercase tracking-widest mb-4">Title</h3>
+                        <p id="asset-desc" class="text-lg text-slate-200 font-bold">Description goes here.</p>
+                    </div>
+                    <div class="absolute inset-0 bg-[#2A081C]/40 mix-blend-multiply"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 5: EVIDENCE BINDER ARCHITECTURE (20-Industry Selector)     -->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-5">
+            <button onclick="toggleStep(5)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-5-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-5-indicator">5</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-400 tracking-tight transition-colors" id="step-5-title">Evidence Binder Architecture</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <div class="step-content px-6 sm:px-8 flex flex-col lg:flex-row gap-10">
+                <div class="w-full lg:w-1/2 space-y-6">
+                    <p class="step-descriptive-text text-xl font-bold text-slate-700 leading-relaxed">Select your operating industry (up to 20 regulated sectors). The Evidence Binder replaces questionnaires with cryptographic proof.</p>
+
+                    <!-- Replaced static 4 framework buttons with 20-Industry Selection Input -->
+                    <div>
+                        <label class="block font-black mb-3 text-lg text-[#2A081C] uppercase tracking-wide">Operating Industry &amp; Regulatory Baseline (20 Sectors)</label>
+                        <select id="step5-industry-select" onchange="selectFramework(this.value)" class="clinic-input font-bold text-base">
+                            <option value="Healthcare">1. Healthcare &amp; Medical — HIPAA / HITECH</option>
+                            <option value="Defense">2. Defense &amp; Aerospace — DoD CMMC 2.0</option>
+                            <option value="Finance">3. Financial Services — NYDFS 23 NYCRR 500</option>
+                            <option value="Retail">4. Retail &amp; E-Commerce — PCI-DSS v4.0</option>
+                            <option value="Legal">5. Legal &amp; Law Practices — ABA / SOC 2 Privacy</option>
+                            <option value="Logistics">6. Logistics &amp; Supply Chain — NIST CSF / ISO 28000</option>
+                            <option value="Energy">7. Energy &amp; Utilities — NERC CIP / CIRCIA</option>
+                            <option value="Manufacturing">8. Manufacturing &amp; Industrial OT — IEC 62443</option>
+                            <option value="SaaS">9. SaaS &amp; Cloud Providers — SOC 2 Type II / ISO 27001</option>
+                            <option value="MSP">10. Managed Service Providers (MSPs) — CIS Controls IG3</option>
+                            <option value="Government">11. Government &amp; Municipal — CJIS / NIST 800-53</option>
+                            <option value="Education">12. K-12 &amp; Higher Education — FERPA / GLBA</option>
+                            <option value="Biotech">13. Biotech &amp; Pharmaceuticals — FDA 21 CFR Part 11</option>
+                            <option value="RealEstate">14. Real Estate, Title &amp; Escrow — ALTA Pillar 3</option>
+                            <option value="Insurance">15. Insurance &amp; Underwriting — NAIC Data Security Law</option>
+                            <option value="Automotive">16. Automotive &amp; Dealership Groups — FTC Safeguards</option>
+                            <option value="Hospitality">17. Hospitality, Dining &amp; Entertainment — PCI POS</option>
+                            <option value="Construction">18. Construction &amp; Engineering — NIST SP 800-171</option>
+                            <option value="Telecom">19. Media, Broadcast &amp; Telecom — FCC CPNI</option>
+                            <option value="NonProfit">20. Non-Profit &amp; Civic Foundations — CIS IG1 / Donor Privacy</option>
+                        </select>
+                    </div>
+
+                    <!-- Preserved Pricing & Copy Verbatim -->
+                    <div class="bg-[#EBF1F5] p-6 rounded-2xl border-2 border-[#C4D4E0]">
+                        <h4 class="font-black text-[#2A081C] text-xl uppercase tracking-wider mb-2">Automated Evidence Binder</h4>
+                        <p class="font-bold text-slate-600 mb-4">Includes Vault &amp; Directory Seal.</p>
+                        <button onclick="toggleBinderCart()" id="btn-add-binder" class="w-full px-6 py-4 bg-white border-2 border-emerald-500 text-emerald-600 font-black uppercase tracking-wider rounded-xl transition-all shadow-sm flex justify-between items-center">
+                            <span id="binder-btn-text">Add to Order (+$500)</span>
+                            <i class="fa-solid fa-plus-circle text-2xl"></i>
+                        </button>
+                        <p class="text-xs font-bold text-[#D92B8A] mt-3 text-center uppercase tracking-widest">Pass Academy to drop price to $250!</p>
+                    </div>
+                    <button onclick="collapseAndNext(5, 6)" class="mt-4 px-8 py-5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-wider rounded-xl text-xl w-full transition-all shadow-md">
+                        Confirm Framework &rarr;
+                    </button>
+                </div>
+
+                <!-- Step 5 Pane Background Video Player: Robotic_arm_performs_retinal_scan_20261023154020.mp4 -->
+                <div class="w-full lg:w-1/2 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-[#EBF1F5] bg-slate-900 aspect-video flex items-center justify-center">
+                    <video id="step5-retinal-video"
+                           src="file:///C:/Users/Leonr/Downloads/Robotic_arm_performs_retinal_scan_20261023154020.mp4"
+                           data-local-src="Robotic_arm_performs_retinal_scan_20261023154020.mp4"
+                           autoplay loop muted playsinline
+                           class="absolute inset-0 w-full h-full object-cover opacity-75 mix-blend-screen"></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 6: VAULT DIRECTORY PROFILE (With Medical Worker Video BG)  -->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-6">
+            <button onclick="toggleStep(6)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-6-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-6-indicator">6</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-400 tracking-tight transition-colors" id="step-6-title">Vault Directory Profile</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <div class="step-content block-step-content relative overflow-hidden px-6 sm:px-8">
+                <!-- Step 6 Background Video: Medical_worker_walking_in_clinic_20261023154149.mp4 -->
+                <video id="step6-clinic-video"
+                       src="file:///C:/Users/Leonr/Downloads/Medical_worker_walking_in_clinic_20261023154149.mp4"
+                       data-local-src="Medical_worker_walking_in_clinic_20261023154149.mp4"
+                       autoplay loop muted playsinline
+                       class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"></video>
+
+                <div class="relative z-10 max-w-3xl mx-auto text-center space-y-8 py-4">
+                    <p class="step-descriptive-text text-xl font-bold text-slate-700">Claim your public-facing directory space where underwriters verify your seal.</p>
+                    <div class="relative max-w-2xl mx-auto">
+                        <div class="flex items-center bg-[#F8FAFC] border-4 border-[#2A081C] rounded-2xl overflow-hidden shadow-xl">
+                            <span class="px-6 py-5 bg-[#E6E0F8] text-[#522d8a] font-black text-xl border-r-4 border-[#2A081C]">https://</span>
+                            <input type="text" id="form-subdomain" class="w-full px-4 py-5 font-mono text-xl font-bold text-[#2A081C] bg-transparent focus:outline-none" placeholder="yourcompany">
+                            <span class="px-6 py-5 bg-[#2A081C] text-white font-black text-xl">.burn-1.com</span>
+                        </div>
+                    </div>
+                    <button onclick="collapseAndNext(6, 7)" class="px-10 py-5 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black uppercase tracking-widest rounded-xl text-xl transition-all">
+                        Lock Subdomain &rarr;
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 7: CONTINUOUS MONITORING & PRICING SUITE (Over Dark Pane)  -->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-7">
+            <button onclick="toggleStep(7)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-7-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-7-indicator">7</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-400 tracking-tight transition-colors" id="step-7-title">Continuous Monitoring Setup</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <!-- Dark Section with "People_moving_through_medical_fa…_20261023154117.mp4" over the dark pane at 0.75x speed -->
+            <div class="step-content dark-pane-step-content relative overflow-hidden h-auto md:min-h-[680px] p-0 flex flex-col bg-slate-900">
+                <video id="step7-facility-video"
+                       src="file:///C:/Users/Leonr/Downloads/People_moving_through_medical_fa%E2%80%A6_20261023154117.mp4"
+                       data-local-src="People_moving_through_medical_fa…_20261023154117.mp4"
+                       data-alt-src="People_moving_through_medical_facility_20261023154117.mp4"
+                       autoplay loop muted playsinline
+                       class="absolute inset-0 w-full h-full object-cover opacity-65 mix-blend-screen pointer-events-none z-0"></video>
+                <div class="absolute inset-0 bg-[#2A081C]/35 mix-blend-multiply pointer-events-none z-0"></div>
+
+                <!-- Pricing Cards Scooted Down / Lowered & Centered inside the Dark Video Pane -->
+                <div class="relative z-10 w-full min-h-[680px] flex flex-col items-center justify-center pt-28 md:pt-36 pb-14 px-8">
+                    <div class="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-auto mb-6">
+                        <!-- Tier 1: Evidence Binder ($250 Pass Academy) -->
+                        <div class="bg-black/45 backdrop-blur-md border-2 border-white/20 p-6 rounded-3xl text-center shadow-2xl flex flex-col justify-between">
+                            <div>
+                                <span class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold uppercase mb-3">Pass Academy Discount</span>
+                                <h3 class="text-xl font-black text-white uppercase tracking-wider mb-2">Evidence Binder</h3>
+                                <div class="text-3xl font-black text-white mb-1">$250<span class="text-sm text-slate-400 line-through ml-2">$500</span></div>
+                                <p class="text-xs text-slate-300 font-bold mb-6">Pass Academy discount applied from $500 base. Includes Vault &amp; Directory Seal.</p>
+                            </div>
+                            <button onclick="selectStep7Plan('binder')" class="w-full py-3.5 border-2 border-emerald-400 text-emerald-300 font-black uppercase rounded-xl hover:bg-emerald-500 hover:text-white transition-all text-sm">
+                                Select Binder ($250)
+                            </button>
+                        </div>
+
+                        <!-- Tier 2: APEA ($500) -->
+                        <div class="bg-black/45 backdrop-blur-md border-2 border-white/20 p-6 rounded-3xl text-center shadow-2xl flex flex-col justify-between">
+                            <div>
+                                <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-slate-300 font-mono text-xs font-bold uppercase mb-3">Standard Posture</span>
+                                <h3 class="text-xl font-black text-white uppercase tracking-wider mb-2">APEA Assessment</h3>
+                                <div class="text-3xl font-black text-white mb-1">$500</div>
+                                <p class="text-xs text-slate-300 font-bold mb-6">One-time Automated Posture Exposure Assessment (APEA) &amp; gap remediation report.</p>
+                            </div>
+                            <button onclick="collapseAndNext(7, 8)" class="w-full py-3.5 border-2 border-slate-400 text-white font-black uppercase rounded-xl hover:bg-white/10 transition-all text-sm">
+                                Keep Current Plan
+                            </button>
+                        </div>
+
+                        <!-- Tier 3: Yearly Package ($1,000) -->
+                        <div class="bg-black/45 backdrop-blur-md border-2 border-[#C4D4E0]/40 p-6 rounded-3xl text-center shadow-2xl flex flex-col justify-between">
+                            <div>
+                                <span class="inline-block px-3 py-1 rounded-full bg-[#522d8a] text-[#E6E0F8] font-mono text-xs font-bold uppercase mb-3">Annual Bundle</span>
+                                <h3 class="text-xl font-black text-white uppercase tracking-wider mb-2">Yearly Package</h3>
+                                <div class="text-3xl font-black text-white mb-1">$1,000<span class="text-sm text-slate-400">/yr</span></div>
+                                <p class="text-xs text-slate-300 font-bold mb-6">Scheduled rescan, Evidence Binder creation, and maintaining your official seal on the directory for 1 year.</p>
+                            </div>
+                            <button onclick="selectStep7Plan('yearly')" class="w-full py-3.5 bg-[#522d8a] hover:bg-[#2A081C] text-white font-black uppercase rounded-xl transition-all text-sm">
+                                Select Yearly ($1,000)
+                            </button>
+                        </div>
+
+                        <!-- Tier 4: Master Upgrade Card - Continuous Monitoring ($2,400 / yr) -->
+                        <div class="bg-[#2A081C]/75 backdrop-blur-md border-2 border-[#D92B8A] p-6 rounded-3xl text-center shadow-[0_0_40px_rgba(217,43,138,0.4)] relative flex flex-col justify-between">
+                            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#D92B8A] text-white px-4 py-1 font-black uppercase text-xs rounded-full whitespace-nowrap">Anergi Managed</div>
+                            <div>
+                                <h3 class="text-xl font-black text-[#E6E0F8] uppercase tracking-wider mt-2 mb-2">Continuous Monitoring</h3>
+                                <div class="text-3xl font-black text-white mb-2">$2,400<span class="text-sm text-slate-400">/yr</span></div>
+                                <p class="text-xs text-slate-300 font-bold mb-6">Automated quarterly APEA rescans, perimeter drift detection, and priority escalation.</p>
+                            </div>
+                            <button onclick="upgradeToMasterPlan()" class="w-full py-3.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black uppercase rounded-xl transition-all shadow-lg text-sm">
+                                Add Full Shield &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 8: DIAGNOSTIC PRESCRIPTION (Final Review)                  -->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-8">
+            <button onclick="toggleStep(8)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-8-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-8-indicator">8</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-400 tracking-tight transition-colors" id="step-8-title">Diagnostic Prescription</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <div class="step-content block-step-content px-6 sm:px-8">
+                <div class="max-w-3xl mx-auto bg-[#FAFCFF] border-t-8 border-[#2A081C] border-x border-b border-[#C4D4E0] shadow-xl p-8 sm:p-12" style="background-image: repeating-linear-gradient(transparent, transparent 31px, #e5e7eb 31px, #e5e7eb 32px); line-height: 32px;">
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h2 class="text-3xl font-black text-[#2A081C] uppercase tracking-tighter">Rx: Cyber Readiness</h2>
+                            <p class="font-bold text-slate-500 font-mono text-sm mt-1">Burn-1 Systems Clinical Hub</p>
+                        </div>
+                        <i class="fa-solid fa-staff-snake text-5xl text-[#C4D4E0]"></i>
+                    </div>
+                    <div class="space-y-4 mb-12 relative z-10 bg-[#FAFCFF]/80 backdrop-blur-sm p-4 rounded-xl border border-slate-200">
+                        <div class="flex justify-between border-b border-slate-300 pb-2">
+                            <span class="font-black text-slate-700 uppercase">Entity:</span><span id="rx-company" class="font-mono text-lg text-[#2A081C] font-bold">Pending</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-300 pb-2">
+                            <span class="font-black text-slate-700 uppercase">1. Auto Posture Exposure Assessment (APEA)</span><span id="rx-apea-cost" class="font-mono text-lg text-[#2A081C] font-bold">$500.00</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-300 pb-2">
+                            <span class="font-black text-slate-700 uppercase">2. Evidence Binder &amp; Directory Vault</span><span id="rx-binder-cost" class="font-mono text-lg text-slate-400 font-bold">Not Added</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-300 pb-2">
+                            <span class="font-black text-slate-700 uppercase">3. Continuous Monitoring / Yearly Plan</span><span id="rx-monitor-cost" class="font-mono text-lg text-slate-400 font-bold">Not Added</span>
+                        </div>
+                        <div class="flex justify-between text-[#D92B8A]">
+                            <span class="font-black uppercase">Academy Credits Applied:</span><span id="rx-discount" class="font-mono text-lg font-bold">-$0.00</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end pt-4">
+                        <div class="text-right">
+                            <span class="block text-slate-500 font-black uppercase tracking-widest text-sm">Total Payable</span>
+                            <span id="rx-total" class="text-5xl font-black text-[#2A081C]">$500.00</span>
+                        </div>
+                    </div>
+                    <button onclick="collapseAndNext(8, 9)" class="mt-8 px-10 py-5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-widest rounded-xl text-xl w-full transition-all shadow-lg">
+                        Sign Prescription &amp; Checkout &rarr;
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- STEP 9: CHECKOUT & SEAL ISSUANCE (Clean Clip Without Bottom Text)-->
+        <!-- =============================================================== -->
+        <div class="step-container bg-white rounded-3xl shadow-lg border-2 border-[#E6E0F8] overflow-hidden" id="step-9">
+            <button onclick="toggleStep(9)" class="w-full text-left p-6 sm:p-8 flex justify-between items-center hover:bg-[#E6E0F8]/50 transition-colors disabled-toggle" id="step-9-btn">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center justify-center w-14 h-14 rounded-full border-4 border-[#C4D4E0] text-[#C4D4E0] font-black text-2xl transition-colors" id="step-9-indicator">9</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-400 tracking-tight transition-colors" id="step-9-title">Secure Checkout &amp; Seal Issuance</h2>
+                </div>
+                <span class="text-4xl text-slate-300 toggle-icon font-black">+</span>
+            </button>
+            <div class="step-content px-6 sm:px-8 flex flex-col md:flex-row gap-10">
+                <!-- Step 9 Media Container: Circuit_board_transforms_into_logo_20261023161155.mp4 (Bottom wording removed so clip plays cleanly) -->
+                <div class="w-full md:w-1/2 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-[#EBF1F5] bg-slate-900 aspect-square flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#2A081C] to-[#522d8a]"></div>
+                    <video id="step9-circuit-video"
+                           src="file:///C:/Users/Leonr/Downloads/Circuit_board_transforms_into_logo_20261023161155.mp4"
+                           data-local-src="Circuit_board_transforms_into_logo_20261023161155.mp4"
+                           autoplay loop muted playsinline
+                           class="absolute inset-0 w-full h-full object-cover opacity-90"></video>
+                </div>
+                <div class="w-full md:w-1/2 flex flex-col justify-center">
+                    <h3 class="text-2xl font-black text-[#2A081C] uppercase tracking-tighter mb-4">Complete Transaction</h3>
+                    <p class="text-lg font-bold text-slate-600 mb-6">Secure single-use token will be generated by the Bee Webhook Server upon approval.</p>
+                    <p id="step9-seal-status" class="font-mono text-sm text-[#522d8a] font-bold mb-6 uppercase tracking-wider">Awaiting Payment Verification...</p>
+                    <div id="paypal-button-container" class="w-full max-w-sm space-y-4">
+                        <!-- PayPal renders here -->
+                        <div class="p-8 border-4 border-dashed border-[#C4D4E0] rounded-2xl text-center text-slate-400 font-black uppercase">
+                            [ PayPal Render Target ]
+                        </div>
+                        <button type="button" onclick="completeSealIssuance()" class="w-full px-8 py-4 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-wider rounded-xl shadow-lg transition-all">
+                            Verify Payment &amp; Issue Official Seal &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- LIVE ORDER FORM (Sticky Bottom Bar) -->
+    <div class="fixed bottom-0 left-0 w-full bg-[#2A081C] text-white p-4 sm:p-5 shadow-[0_-15px_50px_rgba(42,8,28,0.3)] border-t-4 border-[#D92B8A] z-40 transition-transform duration-300" id="live-order-bar">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-6">
+            <div class="flex-1 flex flex-wrap items-center gap-x-10 gap-y-3 w-full">
+                <div>
+                    <span class="block text-xs text-slate-400 font-mono font-bold uppercase tracking-widest mb-1">Entity Vault</span>
+                    <span id="receipt-company" class="font-black text-xl text-[#E6E0F8] truncate max-w-[250px] block">Pending...</span>
+                </div>
+                <div>
+                    <span class="block text-xs text-slate-400 font-mono font-bold uppercase tracking-widest mb-1">Sector Profile</span>
+                    <span id="receipt-sector" class="font-black text-xl text-emerald-400">---</span>
+                </div>
+                <!-- Dynamic Email slot -->
+                <div id="receipt-email-container"></div>
+            </div>
+            <div class="flex items-center gap-6 bg-black/40 p-4 rounded-2xl border border-white/10 w-full lg:w-auto justify-between lg:justify-end shadow-inner">
+                <div class="text-right">
+                    <span class="block text-xs text-[#D92B8A] font-black uppercase tracking-widest mb-1">APEA &amp; Vault Setup</span>
+                    <span id="receipt-total" class="font-black text-3xl text-white tracking-tight">$0.00</span>
+                </div>
+                <button onclick="scrollToCheckout()" class="px-8 py-4 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black rounded-xl shadow-[0_0_20px_rgba(217,43,138,0.5)] transition-all uppercase tracking-wider whitespace-nowrap">
+                    Checkout <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        // PRICING & WORKFLOW STATE
+        let orderState = {
+            baseApea: 500,
+            hasBinder: false,
+            hasYearly: false,
+            hasMonitoring: false,
+            credits: 0,
+            scanCompleted: false,
+            authenticated: false,
+            step1ClipPlayedOnce: false
+        };
+
+        function showNotice(msg) {
+            const toast = document.getElementById('clinic-toast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3500);
+        }
+
+        // STEP 1 BIOMETRIC EYES CLIP ("Biometric_sensor_scanning_eyes_20261023210603.mp4"):
+        // Starts paused on initial frame; starts & stops on click, hover, or Next button!
+        function playStep1IntakeClip() {
+            const vid = document.getElementById('step1-biometric-video');
+            if (!vid) return;
+
+            if (vid.paused) {
+                try {
+                    if (vid.ended) {
+                        vid.currentTime = 0;
+                    }
+                    const playPromise = vid.play();
+                    if (playPromise && typeof playPromise.then === 'function') {
+                        playPromise.catch(() => {});
+                    }
+                } catch (e) {}
+            }
+        }
+
+        function toggleStep1IntakeClip() {
+            const vid = document.getElementById('step1-biometric-video');
+            if (!vid) return;
+            if (vid.paused) {
+                playStep1IntakeClip();
+            } else {
+                vid.pause();
+            }
+        }
+
+        function triggerStep1IntakeClipOnce() {
+            if (!orderState.step1ClipPlayedOnce) {
+                orderState.step1ClipPlayedOnce = true;
+                playStep1IntakeClip();
+            }
+        }
+
+        function handleStep1NextBtn() {
+            playStep1IntakeClip();
+            collapseAndNext(1, 2);
+        }
+
+        // Enforce 0.5x Half Speed on Header & Step 2 Anergi Scan Clip ("People_using_holographic_touch-s…_20261023210748.mp4")
+        function enforceHoloHalfSpeed() {
+            ['header-holo-video', 'step2-wellness-video'].forEach(id => {
+                const v = document.getElementById(id);
+                if (v) {
+                    try {
+                        v.defaultPlaybackRate = 0.5;
+                        v.playbackRate = 0.5;
+                    } catch (e) {}
+                }
+            });
+        }
+
+        // ACCORDION LOGIC
+        function toggleStep(stepNum) {
+            const container = document.getElementById(`step-${stepNum}`);
+            const icon = container.querySelector('.toggle-icon');
+            if (container.classList.contains('active')) {
+                container.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                container.classList.add('active');
+                icon.textContent = '−';
+                if (stepNum === 2) enforceHoloHalfSpeed();
+                if (stepNum === 7) enforceStep7PlaybackRate();
+            }
+        }
+
+        function collapseAndNext(current, next) {
+            const currEl = document.getElementById(`step-${current}`);
+            if (currEl && currEl.classList.contains('active')) {
+                toggleStep(current);
+            }
+            setTimeout(() => {
+                const nextEl = document.getElementById(`step-${next}`);
+                if (nextEl && !nextEl.classList.contains('active')) {
+                    toggleStep(next);
+                }
+                nextEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 400);
+        }
+
+        // STEP 2: SCAN + IMMEDIATE SIGN-IN / SIGN-UP MODAL TRIGGER
+        function runCinematicScan() {
+            const domainInput = document.getElementById('form-domain').value.trim();
+            const btn = document.getElementById('btn-run-scan');
+            const terminal = document.getElementById('scan-terminal');
+            const logContainer = document.getElementById('scan-log-container');
+            const timerEl = document.getElementById('scan-timer');
+
+            if (!domainInput) {
+                showNotice("Enter a target domain (e.g. burn-1.com) to initiate scan.");
+                document.getElementById('form-domain').focus();
+                return;
+            }
+            enforceHoloHalfSpeed();
+            btn.disabled = true;
+            btn.classList.replace('bg-[#D92B8A]', 'bg-slate-600');
+            btn.innerText = "SCAN IN PROGRESS...";
+            document.getElementById('form-domain').disabled = true;
+
+            terminal.classList.remove('hidden');
+            document.getElementById('scan-result').classList.add('hidden');
+            logContainer.innerHTML = '';
+
+            const logSequence = [
+                `> TARGET ACQUIRED: ${domainInput.toUpperCase()}`,
+                `> Initiating Anergi Enumeration...`,
+                `> Analyzing DNS Records...`,
+                `> SPF Record: Validated.`,
+                `> DKIM Signatures: Detected.`,
+                `> WARN: DMARC p=none found. Vulnerable.`,
+                `> Initiating TLS Handshake...`,
+                `> Cipher Suite: TLS 1.3 - SECURE`,
+                `> Probing exposed ports...`,
+                `> Open Port: 3389 (RDP) - Flagged.`
+            ];
+
+            let secondsLeft = 15;
+            const countdown = setInterval(() => {
+                secondsLeft--;
+                timerEl.innerText = `00:${secondsLeft.toString().padStart(2, '0')}`;
+                if (secondsLeft <= 0) clearInterval(countdown);
+            }, 1000);
+
+            logSequence.forEach((log, index) => {
+                setTimeout(() => {
+                    const line = document.createElement('div');
+                    line.className = "opacity-0 animate-fade-in py-2 border-b border-white/5";
+                    line.innerHTML = log.includes("WARN") || log.includes("Flagged") ? `<span class="text-[#D92B8A]">${log}</span>` : log;
+                    logContainer.appendChild(line);
+                    terminal.scrollTop = terminal.scrollHeight;
+                }, index * 1300);
+            });
+
+            setTimeout(() => {
+                orderState.scanCompleted = true;
+                document.getElementById('scan-result').classList.remove('hidden');
+                terminal.scrollTop = terminal.scrollHeight;
+
+                // Reveal Step 3 Sign-Up Prompt & Results Area now that scan is completed
+                document.getElementById('step3-pre-scan-placeholder').classList.add('hidden');
+                document.getElementById('step3-post-scan-wrapper').classList.remove('hidden');
+
+                updateLiveOrder();
+                markStepComplete(2, true);
+
+                // Trigger immediate Sign-In / Sign-Up Pop-Up Modal upon scan completion
+                if (!orderState.authenticated) {
+                    document.getElementById('scan-auth-modal').classList.remove('hidden');
+                }
+            }, 15000);
+        }
+
+        function closeScanModal() {
+            document.getElementById('scan-auth-modal').classList.add('hidden');
+        }
+
+        function submitScanModalAuth() {
+            const modalEmail = document.getElementById('modal-form-email').value.trim();
+            const modalPass = document.getElementById('modal-form-password').value.trim();
+            if (!modalEmail || !modalPass) {
+                showNotice("Please provide your work email and password.");
+                return;
+            }
+            document.getElementById('form-email').value = modalEmail;
+            document.getElementById('form-password').value = modalPass;
+            closeScanModal();
+            collapseAndNext(2, 3);
+            createVaultAccount();
+        }
+
+        // STEP 3: VAULT ACCOUNT & POST-AUTH FULL REPORT ACCESS
+        function createVaultAccount() {
+            const email = document.getElementById('form-email').value.trim();
+            const pass = document.getElementById('form-password').value.trim();
+            if (!email || !pass) {
+                showNotice("Provide email & password to unlock vault assets.");
+                return;
+            }
+
+            const btn = document.getElementById('btn-create-account');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin mr-2"></i> Encrypting...';
+            btn.classList.replace('bg-[#2A081C]', 'bg-[#522d8a]');
+
+            setTimeout(() => {
+                orderState.authenticated = true;
+                btn.innerHTML = '✓ Account Verified & Email Sent';
+                btn.classList.replace('bg-[#522d8a]', 'bg-emerald-600');
+                btn.disabled = true;
+
+                document.getElementById('lock-icon').classList.replace('fa-lock', 'fa-lock-open');
+                document.getElementById('lock-icon').classList.replace('text-slate-400', 'text-[#D92B8A]');
+                document.getElementById('vault-status-text').innerText = "VAULT UNLOCKED.";
+
+                const btnRep = document.getElementById('btn-dl-report');
+                btnRep.disabled = false;
+                btnRep.classList.replace('bg-slate-700/80', 'bg-cyan-900');
+                btnRep.classList.replace('text-slate-500', 'text-cyan-400');
+                btnRep.classList.remove('cursor-not-allowed');
+
+                const btnRem = document.getElementById('btn-dl-remediation');
+                btnRem.disabled = false;
+                btnRem.classList.replace('bg-slate-700/80', 'bg-[#D92B8A]');
+                btnRem.classList.replace('text-slate-500', 'text-white');
+                btnRem.classList.remove('cursor-not-allowed');
+
+                // Reveal dedicated Post-Auth Full Report Access CTA
+                document.getElementById('step3-full-report-cta').classList.remove('hidden');
+
+                markStepComplete(3, true);
+
+                // Add email to bottom bar
+                const emailContainer = document.getElementById('receipt-email-container');
+                emailContainer.innerHTML = `
+                    <span class="block text-xs text-slate-400 font-mono font-bold uppercase tracking-widest mb-1">Admin Email</span>
+                    <span class="font-black text-xl text-cyan-400 truncate max-w-[200px] block">${email}</span>
+                `;
+
+                updateLiveOrder();
+                setTimeout(() => { collapseAndNext(3, 4); }, 2000); // Auto advance
+            }, 1800);
+        }
+
+        function downloadVaultAsset(kind) {
+            const domain = document.getElementById('form-domain').value.trim() || "burn-1.com";
+            const company = document.getElementById('form-company').value.trim() || "Client Entity";
+            let filename = `Burn1_${kind}_${domain}.md`;
+            let body = `# BURN-1 SYSTEMS // CYBER READINESS CLINIC\nEntity: ${company}\nDomain: ${domain}\nAsset: ${kind.toUpperCase()}\n\n- Verified Controls: TLS 1.3, HSTS Validated\n- Gaps Flagged: DMARC Policy (p=none), Exposed Port 3389 (RDP)\n- Recommended Next Step: Complete Automated Evidence Binder & Lock Directory Seal.\n`;
+            const blob = new Blob([body], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+            showNotice(`Downloaded ${filename}`);
+        }
+
+        function openAcademyPortal() {
+            showNotice("Opening Gamified Academy Portal (eduacademy.html)...");
+            if (window.location.protocol === "file:") {
+                window.location.href = "eduacademy.html";
+            }
+        }
+
+        // STEP 4: HOVER LOGIC
+        function showAssetInfo(type) {
+            const overlay = document.getElementById('asset-hover-overlay');
+            const icon = document.getElementById('asset-icon');
+            const title = document.getElementById('asset-title');
+            const desc = document.getElementById('asset-desc');
+            overlay.classList.remove('opacity-0');
+            overlay.classList.add('opacity-100');
+            if (type === 'mfa') {
+                icon.className = "fa-brands fa-microsoft text-6xl text-cyan-400 mb-6";
+                title.innerText = "Microsoft MFA Setup";
+                desc.innerText = "PDF guide for MFA enforcement.";
+            } else {
+                icon.className = "fa-solid fa-gamepad text-6xl text-[#D92B8A] mb-6";
+                title.innerText = "Gamified Academy";
+                desc.innerText = "Earn 120 CR to get 50% off Evidence Binder.";
+            }
+        }
+        function hideAssetInfo() {
+            document.getElementById('asset-hover-overlay').classList.replace('opacity-100', 'opacity-0');
+        }
+
+        // STEP 5: 20-INDUSTRY SELECTION & BINDER LOGIC
+        function syncSectorSelection(sectorValue) {
+            const step5Select = document.getElementById('step5-industry-select');
+            if (step5Select && sectorValue) {
+                step5Select.value = sectorValue;
+            }
+            updateLiveOrder();
+        }
+
+        function selectFramework(industryVal) {
+            const step1Select = document.getElementById('form-sector');
+            if (step1Select && industryVal) {
+                step1Select.value = industryVal;
+            }
+            markStepComplete(5, true);
+            updateLiveOrder();
+        }
+
+        function toggleBinderCart() {
+            const btn = document.getElementById('btn-add-binder');
+            const text = document.getElementById('binder-btn-text');
+            orderState.hasBinder = !orderState.hasBinder;
+            if (orderState.hasBinder) {
+                btn.classList.replace('bg-white', 'bg-emerald-500');
+                btn.classList.replace('text-emerald-600', 'text-white');
+                text.innerText = "Binder Added (+$500)";
+                orderState.credits = 250; // Pass Academy drops price from $500 to $250
+            } else {
+                btn.classList.replace('bg-emerald-500', 'bg-white');
+                btn.classList.replace('text-white', 'text-emerald-600');
+                text.innerText = "Add to Order (+$500)";
+                orderState.credits = 0;
+            }
+            updateLiveOrder();
+        }
+
+        // STEP 7: PRICING SUITE TIERS & 0.75x PLAYBACK RATE
+        function enforceStep7PlaybackRate() {
+            const vid7 = document.getElementById('step7-facility-video');
+            if (vid7) {
+                try {
+                    vid7.defaultPlaybackRate = 0.75;
+                    vid7.playbackRate = 0.75;
+                } catch (e) {}
+            }
+        }
+
+        function selectStep7Plan(planType) {
+            if (planType === 'binder') {
+                orderState.hasBinder = true;
+                orderState.hasYearly = false;
+                orderState.hasMonitoring = false;
+                orderState.credits = 250;
+                const btn = document.getElementById('btn-add-binder');
+                const text = document.getElementById('binder-btn-text');
+                if (btn && text) {
+                    btn.classList.replace('bg-white', 'bg-emerald-500');
+                    btn.classList.replace('text-emerald-600', 'text-white');
+                    text.innerText = "Binder Added (+$500)";
+                }
+            } else if (planType === 'yearly') {
+                orderState.hasYearly = true;
+                orderState.hasMonitoring = false;
+                orderState.hasBinder = true;
+                orderState.credits = 250;
+            }
+            markStepComplete(7, true);
+            updateLiveOrder();
+            collapseAndNext(7, 8);
+        }
+
+        function upgradeToMasterPlan() {
+            orderState.hasMonitoring = true;
+            orderState.hasYearly = false;
+            markStepComplete(7, true);
+            updateLiveOrder();
+            collapseAndNext(7, 8);
+        }
+
+        // MASTER PRICING ENGINE
+        function updateLiveOrder() {
+            const company = document.getElementById('form-company').value;
+            const sector = document.getElementById('form-sector').value || document.getElementById('step5-industry-select').value;
+
+            document.getElementById('receipt-company').textContent = company || "Pending...";
+            document.getElementById('receipt-sector').textContent = sector || "---";
+            document.getElementById('rx-company').textContent = company || "Pending...";
+
+            let total = 0;
+            if (company || sector) {
+                if (orderState.hasMonitoring) {
+                    total = 2400; // $2,400/yr Continuous Monitoring
+                    document.getElementById('rx-binder-cost').textContent = "INCLUDED";
+                    document.getElementById('rx-monitor-cost').textContent = "$2,400.00 / yr";
+                    document.getElementById('rx-monitor-cost').classList.replace('text-slate-400', 'text-[#2A081C]');
+                    document.getElementById('rx-discount').textContent = "-$0.00";
+                } else if (orderState.hasYearly) {
+                    total = 1000; // $1,000 Yearly Package
+                    document.getElementById('rx-binder-cost').textContent = "INCLUDED";
+                    document.getElementById('rx-monitor-cost').textContent = "$1,000.00 (Yearly Package)";
+                    document.getElementById('rx-monitor-cost').classList.replace('text-slate-400', 'text-[#2A081C]');
+                    document.getElementById('rx-discount').textContent = "-$250.00 (Academy Pass)";
+                } else {
+                    total = orderState.baseApea;
+                    document.getElementById('rx-monitor-cost').textContent = "Not Added";
+                    document.getElementById('rx-monitor-cost').classList.replace('text-[#2A081C]', 'text-slate-400');
+                    if (orderState.hasBinder) {
+                        total += 500;
+                        document.getElementById('rx-binder-cost').textContent = "$500.00";
+                        document.getElementById('rx-binder-cost').classList.replace('text-slate-400', 'text-[#2A081C]');
+                        total -= orderState.credits;
+                        document.getElementById('rx-discount').textContent = `-$${orderState.credits.toFixed(2)}`;
+                    } else {
+                        document.getElementById('rx-binder-cost').textContent = "Not Added";
+                        document.getElementById('rx-binder-cost').classList.replace('text-[#2A081C]', 'text-slate-400');
+                        document.getElementById('rx-discount').textContent = "-$0.00";
+                    }
+                }
+            }
+            document.getElementById('receipt-total').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('rx-total').textContent = `$${total.toFixed(2)}`;
+            markStepComplete(1, !!(company && sector));
+        }
+
+        function markStepComplete(step, isComplete) {
+            const ind = document.getElementById(`step-${step}-indicator`);
+            const tit = document.getElementById(`step-${step}-title`);
+            if (!ind) return;
+            if (isComplete) {
+                ind.classList.replace('text-[#C4D4E0]', 'bg-[#2A081C]');
+                ind.classList.add('text-white', 'border-[#2A081C]');
+                if (tit) tit.classList.replace('text-slate-400', 'text-[#2A081C]');
+            }
+        }
+
+        function scrollToCheckout() {
+            const s9 = document.getElementById('step-9');
+            if (s9 && !s9.classList.contains('active')) toggleStep(9);
+            s9.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function completeSealIssuance() {
+            markStepComplete(9, true);
+            const status = document.getElementById('step9-seal-status');
+            if (status) {
+                status.textContent = "✓ OFFICIAL SEAL ISSUED & VERIFIED";
+                status.className = "font-mono text-sm text-emerald-600 font-black mb-6 uppercase tracking-wider";
+            }
+            showNotice("Official Burn-1 Cyber Hygiene Protocol Seal Issued!");
+        }
+
+        // Bind local Downloads assets seamlessly + Canvas fallback
+        function makeFallbackSvg(label) {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180"><rect width="320" height="180" fill="#2A081C"/><text x="160" y="95" font-family="monospace" font-weight="bold" font-size="13" fill="#E6E0F8" text-anchor="middle">${label}</text></svg>`;
+            return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Set clean fallback on images if opened inside online Canvas sandbox
+            document.querySelectorAll('img[data-local-src]').forEach(img => {
+                const localName = img.getAttribute('data-local-src');
+                img.onerror = function() {
+                    if (!this.dataset.triedRelative) {
+                        this.dataset.triedRelative = "1";
+                        this.src = localName;
+                    } else {
+                        this.onerror = null;
+                        this.src = makeFallbackSvg(localName);
+                    }
+                };
+                if (window.location.protocol !== 'file:') {
+                    img.src = makeFallbackSvg(localName);
+                }
+            });
+
+            // Smart multi-path fallback for local videos (handles ellipsis vs full filename and relative vs C:\Users\Leonr\Downloads\)
+            document.querySelectorAll('video[data-local-src]').forEach(vid => {
+                const localName = vid.getAttribute('data-local-src');
+                const altName = vid.getAttribute('data-alt-src');
+                const fallbackName = vid.getAttribute('data-fallback-src');
+                const candidates = [
+                    localName,
+                    altName,
+                    altName ? `file:///C:/Users/Leonr/Downloads/${encodeURIComponent(altName)}` : null,
+                    fallbackName,
+                    fallbackName ? `file:///C:/Users/Leonr/Downloads/${encodeURIComponent(fallbackName)}` : null
+                ].filter(Boolean);
+
+                let idx = 0;
+                vid.onerror = function() {
+                    if (idx < candidates.length) {
+                        this.src = candidates[idx++];
+                    }
+                };
+            });
+
+            // Configure Step 1 Biometric Eye Scan Video ("Biometric_sensor_scanning_eyes_20261023210603.mp4"):
+            // Pause on initial first frame, start/stop on event, stop when ended
+            const v1 = document.getElementById('step1-biometric-video');
+            if (v1) {
+                v1.loop = false;
+                v1.autoplay = false;
+                v1.addEventListener('loadeddata', () => {
+                    if (v1.paused) {
+                        try { v1.currentTime = 0.05; } catch (e) {}
+                    }
+                }, { once: true });
+                v1.addEventListener('ended', () => {
+                    v1.pause();
+                });
+            }
+
+            // Configure Header & Step 2 Anergi Scan Video ("People_using_holographic_touch-s…_20261023210748.mp4") at 0.5x Half Speed
+            ['header-holo-video', 'step2-wellness-video'].forEach(id => {
+                const vid = document.getElementById(id);
+                if (vid) {
+                    vid.defaultPlaybackRate = 0.5;
+                    vid.playbackRate = 0.5;
+                    vid.addEventListener('loadedmetadata', () => { vid.playbackRate = 0.5; });
+                    vid.addEventListener('play', () => { vid.playbackRate = 0.5; });
+                }
+            });
+
+            // Configure Step 7 Facility Video: 0.75x (slowed down 25%) over the dark pane
+            const vid7 = document.getElementById('step7-facility-video');
+            if (vid7) {
+                vid7.defaultPlaybackRate = 0.75;
+                vid7.playbackRate = 0.75;
+                vid7.addEventListener('loadedmetadata', () => { vid7.playbackRate = 0.75; });
+                vid7.addEventListener('play', () => { vid7.playbackRate = 0.75; });
+            }
+
+            // Sync earned credits from eduacademy.html if available
+            try {
+                const savedCredits = parseInt(localStorage.getItem('burn1_clinic_credits') || '0', 10);
+                if (savedCredits > 0) {
+                    const hl = document.getElementById('step4-credit-headline');
+                    if (hl) hl.textContent = `Vault Verified: +${savedCredits} Credits Earned!`;
+                }
+            } catch (e) {}
+
+            // If navigated from eduacademy.html#step-5, open Step 5
+            if (window.location.hash === '#step-5') {
+                collapseAndNext(1, 5);
+            }
+        });
+    </script>
+    <script src="assets/burn1_onboarding_modal.js"></script>
+</body>
+</html>
