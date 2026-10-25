@@ -101,7 +101,11 @@
     },
     {
       "source": "/legal",
-      "destination": "/terms.html"
+      "destination": "/legal-services.html"
+    },
+    {
+      "source": "/legal-services",
+      "destination": "/legal-services.html"
     },
     {
       "source": "/terms",

@@ -16,76 +16,19 @@
         
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    
-    <!-- UNIVERSAL 24-PAGE SUITE NAVIGATION & DOWNLOADS BAR -->
-    <div class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/15 px-4 py-2.5 text-xs font-mono text-white">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-                <a href="index.html" class="px-2.5 py-1 rounded bg-emerald-500 text-slate-950 font-black tracking-wider uppercase text-[11px]">BURN-1 // CLINIC SUITE</a>
-                <span class="hidden md:inline text-slate-400 text-[11px]">target: <code class="text-cyan-300">downloads/construction.html</code></span>
-            </div>
-            <div class="hidden xl:flex items-center gap-1">
-                <a href="index.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Index Hub</a>
-<a href="healthcare.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Healthcare</a>
-<a href="it.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">IT & Cloud</a>
-<a href="finance.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Finance</a>
-<a href="legal-services.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Legal</a>
-<a href="energy.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Energy & OT</a>
-<a href="retail.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Retail & PCI</a>
-<a href="academy.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Academy</a>
-<a href="defense.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Defense CMMC</a>
-<a href="construction.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-emerald-500 text-slate-950 font-black">Construction</a>
-            </div>
-            <div class="flex items-center gap-2">
-                <button type="button" onclick="window.openBurn1Modal('tab-checkout')" class="px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[11px] font-mono flex items-center gap-1.5 shadow cursor-pointer"><span>🛡️ CLIENT VAULT</span></button>
-                <select aria-label="Switch Suite Page" onchange="if(this.value) window.location.href=this.value" class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-cyan-500/40 text-cyan-200 text-[11px] font-mono">
-                    <option value="index.html" >00. Index Hub (downloads/index.html)</option>
-<option value="healthcare.html" >01. Healthcare (downloads/healthcare.html)</option>
-<option value="it.html" >02. IT & Cloud (downloads/it.html)</option>
-<option value="finance.html" >03. Finance (downloads/finance.html)</option>
-<option value="legal-services.html" >04. Legal (downloads/legal-services.html)</option>
-<option value="energy.html" >05. Energy & OT (downloads/energy.html)</option>
-<option value="retail.html" >06. Retail & PCI (downloads/retail.html)</option>
-<option value="academy.html" >07. Academy (downloads/academy.html)</option>
-<option value="defense.html" >08. Defense CMMC (downloads/defense.html)</option>
-<option value="construction.html" selected>09. Construction (downloads/construction.html)</option>
-<option value="food.html" >10. Food FSMA (downloads/food.html)</option>
-<option value="chemicals.html" >11. Chemicals (downloads/chemicals.html)</option>
-<option value="manufacturing.html" >12. Manufacturing (downloads/manufacturing.html)</option>
-<option value="government.html" >13. Government (downloads/government.html)</option>
-<option value="transportation.html" >14. Transportation (downloads/transportation.html)</option>
-<option value="hospitality.html" >15. Hospitality (downloads/hospitality.html)</option>
-<option value="media.html" >16. Media & IP (downloads/media.html)</option>
-<option value="telecom.html" >17. Telecom 5G (downloads/telecom.html)</option>
-<option value="realestate.html" >18. Real Estate (downloads/realestate.html)</option>
-<option value="nonprofit.html" >19. Non-Profit (downloads/nonprofit.html)</option>
-<option value="agri-aero.html" >20. Agri & Aero (downloads/agri-aero.html)</option>
-<option value="onboarding.html" >21. Onboarding (downloads/onboarding.html)</option>
-<option value="lab.html" >22. Lab & Directory (downloads/lab.html)</option>
-<option value="legal.html" >23. Legal (MOD-010) (downloads/legal.html)</option>
-                </select>
-                <a href="clinic.html?industry=construction" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-[11px]">
-                    🎮 Game &amp; Binder (CONSTRUCTION)
-                </a>
-                <button type="button" onclick="saveCurrentPageToDownloads('construction.html')" class="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-[11px]">
-                    ⬇ Save Page to Downloads/
-                </button>
-            </div>
-        </div>
-    </div>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
     
     <main class="px-4 sm:px-6 lg:px-10 py-8">
         
         <section class="max-w-7xl mx-auto rounded-3xl p-6 sm:p-10 bg-slate-900 border-2 border-amber-500/40 mb-10">
-            <span class="px-3 py-1 rounded bg-amber-500/20 text-amber-300 font-mono text-xs font-bold uppercase">
+            <span class="px-3 py-1 rounded bg-[#f8fafc]mber-500/20 text-amber-300 font-mono text-xs font-bold uppercase">
                 GENERAL CONTRACTORS &amp; TRADES // WIRE BEC &amp; CAD VAULT PROTECTION
             </span>
             <h1 class="text-3xl sm:text-5xl font-black heading text-white uppercase mt-3 mb-4">
                 Subcontractor Pay-App Wire Defense &amp; Crew Training Log Intake
             </h1>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 font-mono text-xs mt-6">
-                <div class="p-6 rounded-2xl bg-slate-950 border border-white/10 space-y-3">
+                <div class="p-6 rounded-2xl bg-slate-50 border border-white/10 space-y-3">
                     <span class="text-emerald-400 font-bold uppercase block">// DIGITAL CREW TRAINING LOG INTAKE</span>
                     <p class="text-slate-300 font-sans">Log field superintendent and project manager completion of anti-phishing and AIA pay-application ACH callback verification.</p>
                     <div class="flex gap-2">
@@ -93,7 +36,7 @@
                         <button type="button" onclick="alert('✓ Crew Lead Training Logged to Construction Evidence Binder!')" class="px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black uppercase">Log Crew</button>
                     </div>
                 </div>
-                <div class="p-6 rounded-2xl bg-amber-950/30 border border-amber-500/40 space-y-2">
+                <div class="p-6 rounded-2xl bg-[#f8fafc]mber-950/30 border border-amber-500/40 space-y-2">
                     <span class="text-amber-400 font-bold uppercase block">// INDEPENDENT OSHA PHYSICAL AUDIT PARTNER REFERRALS</span>
                     <p class="text-slate-200 font-sans">
                         Burn One Systems strictly performs non-intrusive digital cyber readiness assessments (MOD-010-AGREE). For jobsite physical safety inspections and OSHA 1926 compliance audits, request an introduction to our independent accredited OSHA physical audit partners.
@@ -104,7 +47,7 @@
         
         
     <!-- UNIFIED GLM ZCODE INDUSTRY ASSESSMENT, GAME, BINDER & MONITORING MODULE -->
-    <section class="max-w-7xl mx-auto my-12 rounded-3xl p-6 sm:p-8 bg-slate-950/95 text-white border-2 border-cyan-500/40 shadow-2xl font-mono">
+    <section class="max-w-7xl mx-auto my-12 rounded-3xl p-6 sm:p-8 bg-slate-50/95 text-white border-2 border-cyan-500/40 shadow-2xl font-mono">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div>
                 <div class="flex flex-wrap items-center gap-2 mb-1">
@@ -211,7 +154,7 @@
                         </a>
                     </div>
                 </div>
-                <button type="button" onclick="exportSectorBinder('construction', 'Construction, General Contractors & Heavy Trades', 'Travelers Item 4C Wire Callback • CAD/BIM Ransomware • Independent OSHA Partner')" class="w-full py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase">
+                <button type="button" onclick="exportSectorBinder('construction', 'Construction, General Contractors & Heavy Trades', 'Travelers Item 4C Wire Callback • CAD/BIM Ransomware • Independent OSHA Partner')" class="w-full py-2.5 rounded-xl bg-[#f8fafc]mber-400 hover:bg-[#f8fafc]mber-300 text-slate-950 font-black text-xs uppercase">
                     🛡 Export CONSTRUCTION Evidence Binder
                 </button>
             </div>

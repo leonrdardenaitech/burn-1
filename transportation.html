@@ -16,96 +16,39 @@
         
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen">
-    
-    <!-- UNIVERSAL 24-PAGE SUITE NAVIGATION & DOWNLOADS BAR -->
-    <div class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/15 px-4 py-2.5 text-xs font-mono text-white">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-                <a href="index.html" class="px-2.5 py-1 rounded bg-emerald-500 text-slate-950 font-black tracking-wider uppercase text-[11px]">BURN-1 // CLINIC SUITE</a>
-                <span class="hidden md:inline text-slate-400 text-[11px]">target: <code class="text-cyan-300">downloads/transportation.html</code></span>
-            </div>
-            <div class="hidden xl:flex items-center gap-1">
-                <a href="index.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Index Hub</a>
-<a href="healthcare.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Healthcare</a>
-<a href="it.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">IT & Cloud</a>
-<a href="finance.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Finance</a>
-<a href="legal-services.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Legal</a>
-<a href="energy.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Energy & OT</a>
-<a href="retail.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Retail & PCI</a>
-<a href="academy.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Academy</a>
-<a href="defense.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Defense CMMC</a>
-<a href="construction.html" class="px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all bg-white/5 text-slate-300 hover:bg-white/10">Construction</a>
-            </div>
-            <div class="flex items-center gap-2">
-                <button type="button" onclick="window.openBurn1Modal('tab-checkout')" class="px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[11px] font-mono flex items-center gap-1.5 shadow cursor-pointer"><span>🛡️ CLIENT VAULT</span></button>
-                <select aria-label="Switch Suite Page" onchange="if(this.value) window.location.href=this.value" class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-cyan-500/40 text-cyan-200 text-[11px] font-mono">
-                    <option value="index.html" >00. Index Hub (downloads/index.html)</option>
-<option value="healthcare.html" >01. Healthcare (downloads/healthcare.html)</option>
-<option value="it.html" >02. IT & Cloud (downloads/it.html)</option>
-<option value="finance.html" >03. Finance (downloads/finance.html)</option>
-<option value="legal-services.html" >04. Legal (downloads/legal-services.html)</option>
-<option value="energy.html" >05. Energy & OT (downloads/energy.html)</option>
-<option value="retail.html" >06. Retail & PCI (downloads/retail.html)</option>
-<option value="academy.html" >07. Academy (downloads/academy.html)</option>
-<option value="defense.html" >08. Defense CMMC (downloads/defense.html)</option>
-<option value="construction.html" >09. Construction (downloads/construction.html)</option>
-<option value="food.html" >10. Food FSMA (downloads/food.html)</option>
-<option value="chemicals.html" >11. Chemicals (downloads/chemicals.html)</option>
-<option value="manufacturing.html" >12. Manufacturing (downloads/manufacturing.html)</option>
-<option value="government.html" >13. Government (downloads/government.html)</option>
-<option value="transportation.html" selected>14. Transportation (downloads/transportation.html)</option>
-<option value="hospitality.html" >15. Hospitality (downloads/hospitality.html)</option>
-<option value="media.html" >16. Media & IP (downloads/media.html)</option>
-<option value="telecom.html" >17. Telecom 5G (downloads/telecom.html)</option>
-<option value="realestate.html" >18. Real Estate (downloads/realestate.html)</option>
-<option value="nonprofit.html" >19. Non-Profit (downloads/nonprofit.html)</option>
-<option value="agri-aero.html" >20. Agri & Aero (downloads/agri-aero.html)</option>
-<option value="onboarding.html" >21. Onboarding (downloads/onboarding.html)</option>
-<option value="lab.html" >22. Lab & Directory (downloads/lab.html)</option>
-<option value="legal.html" >23. Legal (MOD-010) (downloads/legal.html)</option>
-                </select>
-                <a href="clinic.html?industry=transportation" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-[11px]">
-                    🎮 Game &amp; Binder (TRANSPORTATION)
-                </a>
-                <button type="button" onclick="saveCurrentPageToDownloads('transportation.html')" class="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-[11px]">
-                    ⬇ Save Page to Downloads/
-                </button>
-            </div>
-        </div>
-    </div>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
     
     <main class="px-4 sm:px-6 lg:px-10 py-8">
         
         <section class="max-w-7xl mx-auto rounded-3xl overflow-hidden bg-slate-900 border border-amber-500/40 mb-10">
-            <img src="downloads/assets/transport_fleet.jpg" alt="Bird's-Eye Futuristic Fleet Parking Lot" class="w-full h-56 sm:h-72 object-cover opacity-70">
+            <img src="assets/transport_fleet.jpg" alt="Bird's-Eye Futuristic Fleet Parking Lot" class="w-full h-56 sm:h-72 object-cover opacity-70">
             <div class="p-6 sm:p-8">
                 <span class="text-xs font-mono text-amber-400 font-bold uppercase">// BIRD'S-EYE FUTURISTIC FLEET PARKING LOT &bull; CLICK ANY BAY TO FLIP</span>
                 <h1 class="text-3xl sm:text-4xl font-black heading text-white uppercase mt-1 mb-6">
                     6 Interactive Flip-Card Regulatory Fleet Bays
                 </h1>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs">
-                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-950 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
+                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-50 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
                         <div class="flex justify-between items-center"><span class="text-2xl font-black text-amber-400">BAY 01 // DOT</span><span class="text-[10px] text-slate-400">CLICK TO FLIP ↻</span></div>
                         <p class="bay-detail mt-3 text-slate-300 font-sans">U.S. Department of Transportation freight routing &amp; hazardous material manifest integrity.</p>
                     </div>
-                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-950 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
+                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-50 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
                         <div class="flex justify-between items-center"><span class="text-2xl font-black text-cyan-400">BAY 02 // FMCSA</span><span class="text-[10px] text-slate-400">CLICK TO FLIP ↻</span></div>
                         <p class="bay-detail mt-3 text-slate-300 font-sans">ELD (Electronic Logging Device) telematics API authentication and carrier authority anti-hijacking.</p>
                     </div>
-                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-950 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
+                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-50 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
                         <div class="flex justify-between items-center"><span class="text-2xl font-black text-emerald-400">BAY 03 // TSA</span><span class="text-[10px] text-slate-400">CLICK TO FLIP ↻</span></div>
                         <p class="bay-detail mt-3 text-slate-300 font-sans">TSA Surface, Rail &amp; Aviation Security Directives: 24-hour CISA incident reporting &amp; network segmentation.</p>
                     </div>
-                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-950 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
+                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-50 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
                         <div class="flex justify-between items-center"><span class="text-2xl font-black text-purple-400">BAY 04 // CISA</span><span class="text-[10px] text-slate-400">CLICK TO FLIP ↻</span></div>
                         <p class="bay-detail mt-3 text-slate-300 font-sans">Transportation Systems Sector CPGs: phishing-resistant MFA on dispatch TMS and warehouse WMS portals.</p>
                     </div>
-                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-950 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
+                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-50 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
                         <div class="flex justify-between items-center"><span class="text-2xl font-black text-pink-400">BAY 05 // ISO 28000</span><span class="text-[10px] text-slate-400">CLICK TO FLIP ↻</span></div>
                         <p class="bay-detail mt-3 text-slate-300 font-sans">Supply Chain Security Management System: verified bill-of-lading EDI signing and double-brokering fraud defense.</p>
                     </div>
-                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-950 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
+                    <div onclick="this.querySelector('.bay-detail').classList.toggle('hidden')" class="cursor-pointer p-5 rounded-2xl bg-slate-50 border-2 border-amber-400/50 hover:border-cyan-400 transition-all">
                         <div class="flex justify-between items-center"><span class="text-2xl font-black text-blue-400">BAY 06 // UNECE R155</span><span class="text-[10px] text-slate-400">CLICK TO FLIP ↻</span></div>
                         <p class="bay-detail mt-3 text-slate-300 font-sans">Vehicle Cyber Security Management System (CSMS) &amp; OTA firmware cryptographic verification.</p>
                     </div>
@@ -115,7 +58,7 @@
         
         
     <!-- UNIFIED GLM ZCODE INDUSTRY ASSESSMENT, GAME, BINDER & MONITORING MODULE -->
-    <section class="max-w-7xl mx-auto my-12 rounded-3xl p-6 sm:p-8 bg-slate-950/95 text-white border-2 border-cyan-500/40 shadow-2xl font-mono">
+    <section class="max-w-7xl mx-auto my-12 rounded-3xl p-6 sm:p-8 bg-slate-50/95 text-white border-2 border-cyan-500/40 shadow-2xl font-mono">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div>
                 <div class="flex flex-wrap items-center gap-2 mb-1">
@@ -222,7 +165,7 @@
                         </a>
                     </div>
                 </div>
-                <button type="button" onclick="exportSectorBinder('transportation', 'Transportation, Fleet Logistics & Freight', 'DOT • FMCSA • TSA • CISA • ISO 28000 • UNECE R155')" class="w-full py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase">
+                <button type="button" onclick="exportSectorBinder('transportation', 'Transportation, Fleet Logistics & Freight', 'DOT • FMCSA • TSA • CISA • ISO 28000 • UNECE R155')" class="w-full py-2.5 rounded-xl bg-[#f8fafc]mber-400 hover:bg-[#f8fafc]mber-300 text-slate-950 font-black text-xs uppercase">
                     🛡 Export TRANSPORTATION Evidence Binder
                 </button>
             </div>
