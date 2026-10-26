@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aerospace & Defense Shield | Cyber Readiness Clinic</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #020617; 
+      background-image: 
+        radial-gradient(circle at 50% 18%, rgba(6, 182, 212, 0.05) 0%, transparent 100%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 12px);
+      color: #e2e8f0;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-hud { font-family: 'Orbitron', sans-serif; }
+
+    .grey-unibar {
+      background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 55%, #b8c4d4 100%);
+      border-bottom: 2px solid #64748b;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+    .grey-unibar-sub {
+      background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.65);
+      border-bottom: 2px solid #475569;
+    }
+    .nav-pill-idle {
+      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
+      color: #0f172a;
+      border: 1px solid #64748b;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
+    }
+    .nav-pill-idle:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+      transform: translateY(-1px);
+    }
+    .nav-pill-active {
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+    }
+
+    .flip-card { perspective: 1000px; height: 380px; }
+    .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1rem; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+    .flip-card-back { transform: rotateY(180deg); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+  <header class="grey-unibar sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 text-cyan-400 border border-cyan-400/60 font-extrabold flex items-center justify-center shadow-md font-hud">B1</div>
+        <div>
+          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase" style="font-family: 'Inter', sans-serif;">Cyber Readiness Clinic</div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Aero & Defense Module • <span class="text-cyan-700 font-bold">CMMC Shield</span></div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 bg-slate-900 text-white px-3 py-1.5 rounded-xl border border-slate-600 text-xs font-mono shadow">
+        <span class="text-slate-400">Target Path:</span>
+        <span id="active-file-path" class="text-cyan-400 font-bold">downloads/aerospace.html</span>
+      </div>
+    </div>
+    <div class="grey-unibar-sub">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 overflow-x-auto">
+        <a href="index.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="cinematic-onboarding.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Cinematic Onboarding</a>
+        <a href="aerospace.html" class="nav-pill nav-pill-active px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Aerospace & Defense</a>
+        <a href="academy.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Operator Academy</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex-1 relative z-10">
+
+    <div class="rounded-3xl overflow-hidden bg-slate-950 text-white border-2 border-slate-700 shadow-2xl mb-12 relative">
+      <div class="relative h-96 overflow-hidden border-b border-slate-800">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80" alt="Orbital Technology Earth View" class="w-full h-full object-cover opacity-30 mix-blend-luminosity">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent pointer-events-none"></div>
+        
+        <div class="absolute inset-0 flex flex-col justify-center p-6 sm:p-12 z-10 max-w-4xl">
+          <span class="inline-block px-3 py-1 rounded bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest mb-4 w-max">
+            CMMC & ITAR Defense
+          </span>
+          <h1 class="text-3xl sm:text-5xl font-extrabold mt-1 tracking-tight leading-tight">
+            Defending the orbital frontier <br><span class="text-cyan-400">and defense supply chains.</span>
+          </h1>
+          <p class="text-slate-300 text-sm sm:text-base font-medium mt-4 leading-relaxed max-w-2xl">
+            CMMC compliance is non-negotiable for federal contractors. Protect sensitive defense data from nation-state actors and prove your posture instantly with our cryptographically sealed <strong>Automated Posture Exposure Assessments (APEA)</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-10 bg-[#020617]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+          
+          <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 transition-colors shadow-lg">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-500/50 flex items-center justify-center text-cyan-400 text-xl mb-4">
+              <i class="fa-solid fa-satellite-dish"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">CMMC / ITAR Mandates</h3>
+            <p class="text-slate-400 leading-relaxed">
+              Losing a DoD contract due to lapsed compliance is a fatal business error. Our evidence binders automatically map your perimeter to strict federal mandates, giving you the proof required to keep your clearance.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 transition-colors shadow-lg">
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-500/50 flex items-center justify-center text-indigo-400 text-xl mb-4">
+              <i class="fa-solid fa-user-secret"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Nation-State Threats</h3>
+            <p class="text-slate-400 leading-relaxed">
+              Aerospace IP is the highest value target for APTs (Advanced Persistent Threats). We provide frictionless, agentless scanning to ensure your outer perimeter isn't leaking proprietary data.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-colors shadow-lg">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/50 flex items-center justify-center text-blue-400 text-xl mb-4">
+              <i class="fa-solid fa-link-slash"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Supply Chain Weak Links</h3>
+            <p class="text-slate-400 leading-relaxed">
+              Prime contractors demand perfection from sub-tier manufacturers. Our tool validates your defensive posture with zero downtime, proving to Primes that you are a hardened link in the chain.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PRICING TIERS -->
+    <div id="pricing" class="bg-slate-900 rounded-3xl p-6 sm:p-8 border-2 border-slate-700 shadow-xl mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-2xl font-black text-white uppercase tracking-tight">Defense Readiness Packages</h2>
+          <p class="text-sm text-slate-400 font-bold mt-1">Acquire mathematical proof of compliance. Hover to unlock configurations.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
+        
+        <!-- Tier 1: A-La-Carte ($500) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-slate-600 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-folder-closed text-3xl text-slate-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">A-La-Carte</h3>
+                <p class="text-[10px] font-bold text-cyan-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$500</div>
+                <p class="text-[11px] text-slate-400 font-medium mb-4 leading-relaxed">Single Cryptographic eBinder compilation OR a standalone Posture Assessment scan.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-colors">Select $500</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tier 2: Sub-Contractor ($999) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-cyan-500 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-900 px-2 py-1 text-[8px] font-black uppercase tracking-widest rounded-b-md shadow-sm z-20 w-3/4">Tier 2 Supplier</div>
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-cyan-950/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-gears text-3xl text-cyan-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Sub-Contractor</h3>
+                <p class="text-[10px] font-bold text-cyan-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-cyan-950 text-white border-2 border-cyan-500">
+              <div>
+                <h3 class="text-xs font-black text-cyan-400 uppercase tracking-widest mt-2">Compliance Base</h3>
+                <div class="text-3xl font-black text-white my-2">$999<span class="text-sm text-cyan-600 font-bold">/yr</span></div>
+                <p class="text-[11px] text-cyan-100 font-medium mb-4 leading-relaxed">1 Domain. Includes CMMC-mapped eBinder, 1 Free Rescan, Binder Vault access, and Cyber Seal.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-cyan-500 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-cyan-400 transition-colors">Select $999</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3: Multi-Facility ($2,500) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-indigo-500 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-indigo-950/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-industry text-3xl text-indigo-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Multi-Facility</h3>
+                <p class="text-[10px] font-bold text-indigo-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-indigo-950 text-white border-2 border-indigo-500">
+              <div>
+                <h3 class="text-xs font-black text-indigo-300 uppercase tracking-widest mt-2">Tier 1 Supplier</h3>
+                <div class="text-3xl font-black text-white my-2">$2.5k<span class="text-sm text-indigo-500 font-bold">/yr</span></div>
+                <p class="text-[11px] text-indigo-200 font-medium mb-4 leading-relaxed">Up to 5 domains/plants. Consolidated legal eBinder, and Unlimited SLM Rescans.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-indigo-500 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-indigo-400 transition-colors">Select $2.5k</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 4: Defense Prime ($5,000) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-slate-300 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-800/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-jet-fighter-up text-3xl text-slate-300 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Defense Prime</h3>
+                <p class="text-[10px] font-bold text-slate-300 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-slate-200 text-slate-900 border-2 border-slate-400">
+              <div>
+                <h3 class="text-xs font-black text-slate-600 uppercase tracking-widest mt-2">Global Contractor</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$5k<span class="text-sm text-slate-500 font-bold">/yr</span></div>
+                <p class="text-[11px] text-slate-700 font-medium mb-4 leading-relaxed">Up to 15 Domains. Custom Executive Scorecards and multi-framework CMMC overlay routing.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-900 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select $5k</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 5: Pentest -->
+        <div class="flip-card md:col-span-2 lg:col-span-1 xl:col-span-1">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-[#D92B8A] bg-black shadow-lg flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-[#2A081C]/90 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-user-ninja text-3xl text-[#D92B8A] mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Deep Pentest</h3>
+                <p class="text-[10px] font-bold text-[#D92B8A] mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-[#2A081C] text-white border-2 border-[#D92B8A]">
+              <div>
+                <h3 class="text-xs font-black text-[#D92B8A] uppercase tracking-widest mt-2">Escalation</h3>
+                <div class="text-3xl font-black text-white my-2">Custom</div>
+                <p class="text-[11px] text-slate-300 font-medium mb-4 leading-relaxed">Forensic legal discovery, active incident response, and deep manual pentesting via Anergi.io.</p>
+              </div>
+              <a href="https://anergi.io/contacts.html" target="_blank" class="w-full text-center py-2.5 bg-[#D92B8A] text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-[#bf2277] transition-colors shadow-md">Consult Anergi &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
