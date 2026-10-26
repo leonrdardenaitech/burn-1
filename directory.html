@@ -138,7 +138,36 @@
                 border-color: rgba(6, 182, 212, 1);
             }
         }
-    </style>
+    
+    /* Top Unibar Navigation */
+    .grey-unibar {
+      background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 55%, #b8c4d4 100%);
+      border-bottom: 2px solid #64748b;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+    .grey-unibar-sub {
+      background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.65);
+      border-bottom: 2px solid #475569;
+    }
+    .nav-pill-idle {
+      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
+      color: #0f172a;
+      border: 1px solid #64748b;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
+    }
+    .nav-pill-idle:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+      transform: translateY(-1px);
+    }
+    .nav-pill-active {
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+    }
+
+  </style>
 </head>
 <body class="min-h-screen pb-16">
 
@@ -162,21 +191,38 @@
     </nav>
 
     <!-- SILHOUETTE SKYLINE HEADER (Centered) -->
-    <header class="skyline-container flex flex-col justify-center items-center p-6 md:p-8">
-        <div class="z-10 flex flex-col items-center justify-center text-center gap-2">
-            <div>
-                <span class="text-xs font-bold tracking-widest bg-red-600 text-white px-2.5 py-1 uppercase rounded-sm">Burn-1 Platform</span>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tighter mt-2 uppercase text-white">Business Directory</h1>
-            </div>
-            <p class="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-widest neon-blue-glow mt-1">
-                ★ METROPOLITAN LOBBY DISPLAY ★
-            </p>
-            <div class="bg-black/90 px-4 py-1 rounded border border-cyan-500/30 text-[10px] font-mono text-emerald-400 font-bold mt-2 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
-                SYSTEM STATUS: ACTIVE // GRID ROTATION IN SYNC
-            </div>
-        </div>
-        <div class="skyline-silhouette"></div>
-    </header>
+      <!-- Top Global Grey Unibar -->
+  <header class="grey-unibar sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="assets/burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
+          <div>
+            <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
+            <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Accelerating Systems • <span class="text-[#D92B8A] font-bold">Automated Posture Exposure</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
+        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Enter Clinic Checkout &rarr;</a>
+      </div>
+    </div>
+    <div class="grey-unibar-sub">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <a href="index.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="healthcare.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
+        <a href="it.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">IT &amp; Cloud</a>
+        <a href="finance.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Finance</a>
+        <a href="legal-services.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Legal</a>
+        <a href="retail.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
+        <a href="realestate.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Real Estate</a>
+        <a href="defense.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense</a>
+        <a href="government.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Government</a>
+        <a href="directory.html" class="nav-pill nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Metro Directory</a>
+      </div>
+    </div>
+  </header>
 
     <!-- FLOATING MAIN CONTROL INTERFACE WITH INTERACTIVE SEARCH COMPASS -->
     <div class="max-w-[1700px] mx-auto px-4 md:px-8 mt-6 flex flex-col md:flex-row justify-between items-center border-b border-slate-800 pb-4 gap-4 relative z-50">

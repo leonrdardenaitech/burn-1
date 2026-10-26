@@ -1,5 +1,6 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
+Disallow: /downloads/
 
 # Canonical Sitemap for Burn-1 Platform
 Sitemap: https://www.burn-1.com/sitemap.xml

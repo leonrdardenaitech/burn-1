@@ -1,8 +1,11 @@
-# ============================================================
+﻿# ============================================================
 # BURN-1 SYSTEMS SUBDOMAIN ROUTING (.htaccess for Apache/cPanel)
 # ============================================================
 RewriteEngine On
 RewriteBase /
+
+# Block public access to /downloads/
+RewriteRule ^downloads(/.*)?$ / [R=301,L]
 
 # 1. Ignore the main www.burn-1.com or burn-1.com root domain
 RewriteCond %{HTTP_HOST} !^www\.burn-1\.com$ [NC]
@@ -12,3 +15,4 @@ RewriteCond %{HTTP_HOST} !^burn-1\.com$ [NC]
 RewriteCond %{HTTP_HOST} ^([^.]+)\.burn-1\.com$ [NC]
 RewriteRule ^$ card.html [L]
 RewriteRule ^$ burn1-digital-card.html [L]
+
