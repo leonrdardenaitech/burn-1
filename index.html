@@ -48,7 +48,7 @@
       box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
     }
 
-    /* 3D FLIP-CARD PRICING ARCHITECTURE STYLES */
+    /* Flip Card Pricing Styles */
     .flip-card {
       perspective: 1000px;
       height: 380px;
@@ -65,87 +65,69 @@
     }
     .flip-card-front, .flip-card-back {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.25rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border: 2px solid #e2e8f0;
+      overflow: hidden;
     }
     .flip-card-back {
       transform: rotateY(180deg);
     }
 
-    /* THINGY 2.0 (Holographic Shell) WIDGET STYLES */
+    /* Holographic Widget Styles */
     .widget-container {
-      background-color: #04050a;
-      position: relative;
+      background-color: #08080f;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 40px 15px;
-      border-radius: 28px;
-      border: 2px solid #2e3040;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      padding: 60px 20px;
+      border-radius: 32px;
+      border: 2px solid #4a4a5a;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
       font-family: 'Rajdhani', sans-serif;
       overflow: hidden;
       margin-bottom: 40px;
     }
-
-    /* BURSTING LINE CIRCUITRY GRAPHICS BACKGROUND */
-    .circuitry-bg {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: 
-        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.3) 0%, rgba(168, 85, 247, 0.18) 35%, transparent 70%),
-        repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0, 243, 255, 0.1) 20px),
-        repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(0, 243, 255, 0.1) 20px);
-      opacity: 0.85;
-      animation: circuitPulse 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes circuitPulse {
-      0% { opacity: 0.6; transform: scale(0.98); }
-      100% { opacity: 1; transform: scale(1.02); }
-    }
-
-    /* CONDENSED & SLEEK SILVER METALLIC SHELL */
+    
     .metallic-shell {
       position: relative;
-      z-index: 10;
       width: 100%;
-      max-width: 680px;
-      height: 520px;
-      border-radius: 28px;
-      padding: 24px;
+      max-width: 850px;
+      height: 850px;
+      border-radius: 40px;
+      padding: 40px;
       background: 
-        linear-gradient(135deg, #ffffff 0%, #d8dae5 20%, #9e9eb0 40%, #e2e4ed 55%, #7a7d90 85%, #4a4d5e 100%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0px, rgba(255,255,255,0.12) 1px, transparent 1px, transparent 8px),
-        repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 8px);
+        linear-gradient(105deg, rgba(255,255,255,0.15) 0%, transparent 40%, rgba(0,0,0,0.15) 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px),
+        linear-gradient(135deg, #d3d3df 0%, #9a9ab0 50%, #646478 100%);
       box-shadow: 
-        inset 3px 3px 12px rgba(255,255,255,0.95),
-        inset -5px -5px 20px rgba(0,0,0,0.85),
-        0 0 35px rgba(0, 243, 255, 0.3),
-        0 0 70px rgba(168, 85, 247, 0.2);
-      border: 2px solid #a0a4b8;
+        inset 3px 3px 15px rgba(255,255,255,0.8),
+        inset -5px -5px 25px rgba(0,0,0,0.8),
+        0 0 40px rgba(168, 85, 247, 0.3),
+        0 0 80px rgba(6, 182, 212, 0.15);
+      border: 2px solid #4a4a5a;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(3, 1fr);
-      gap: 14px;
+      gap: 20px;
       align-items: center;
       justify-items: center;
+      transform: scale(0.95);
     }
 
     .rivet {
       position: absolute;
-      width: 16px;
-      height: 16px;
-      background: radial-gradient(circle, #f0f0f5 0%, #505060 100%);
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #e0e0e5 0%, #505060 100%);
       border-radius: 50%;
       box-shadow: inset 1px 1px 3px rgba(255,255,255,0.9), 2px 2px 5px rgba(0,0,0,0.7);
     }
@@ -156,38 +138,29 @@
       transform: translateY(-50%) rotate(45deg);
       border-bottom: 1px solid rgba(255,255,255,0.3);
     }
-    .r-tl { top: 16px; left: 16px; }
-    .r-tr { top: 16px; right: 16px; }
-    .r-bl { bottom: 16px; left: 16px; }
-    .r-br { bottom: 16px; right: 16px; }
+    .r-tl { top: 25px; left: 25px; }
+    .r-tr { top: 25px; right: 25px; }
+    .r-bl { bottom: 25px; left: 25px; }
+    .r-br { bottom: 25px; right: 25px; }
 
     .core-logo {
       grid-column: 2 / 3;
       grid-row: 2 / 3;
       width: 100%;
-      max-width: 170px;
-      border-radius: 14px;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.7)) drop-shadow(0 0 20px rgba(168,85,247,0.5));
+      max-width: 340px;
+      border-radius: 20px;
+      filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)) drop-shadow(0 0 35px rgba(168,85,247,0.6));
       z-index: 10;
+      transform: scale(1.15);
     }
 
     .industry-node {
       position: relative;
       width: 100%;
-      max-width: 160px;
-      height: 52px;
-      background: rgba(10, 10, 15, 0.9);
-      border: 1px solid rgba(168, 85, 247, 0.6);
-      border-radius: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: inset 0 0 10px rgba(168, 85, 247, 0.25), 2px 2px 8px rgba(0,0,0,0.6);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      backdrop-filter: blur(5px);
-      z-index: 20;
-    }
+      max-width: 190px;
+      height: 60px;
+      background: rgba(10, 10, 15, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.5);
       border-radius: 8px;
       display: flex;
       justify-content: center;
@@ -312,17 +285,15 @@
 </head>
 <body class="min-h-screen flex flex-col relative">
 
-    <!-- Top Global Grey Unibar -->
+  <!-- Top Global Grey Unibar -->
   <header class="grey-unibar sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-3">
-          <img src="assets/burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
-          <div>
-            <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
-            <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Accelerating Systems â€¢ <span class="text-[#D92B8A] font-bold">Automated Posture Exposure</span></div>
-          </div>
-        </a>
+        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
+        <div>
+          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Accelerating Systems â€¢ <span class="text-[#D92B8A] font-bold">Automated Posture Exposure</span></div>
+        </div>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
@@ -332,15 +303,10 @@
     <div class="grey-unibar-sub">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
         <a href="index.html" class="nav-pill nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
-        <a href="healthcare.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
-        <a href="it.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">IT &amp; Cloud</a>
+        <a href="healthcare.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare (OR Map)</a>
+        <a href="it-infra.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">IT & Infra (Core)</a>
         <a href="finance.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Finance</a>
-        <a href="legal-services.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Legal</a>
-        <a href="retail.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
-        <a href="realestate.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Real Estate</a>
-        <a href="defense.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense</a>
-        <a href="government.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Government</a>
-        <a href="directory.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Metro Directory</a>
+        <a href="defense.html" class="nav-pill nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense (CMMC)</a>
       </div>
     </div>
   </header>
@@ -360,13 +326,62 @@
         <div class="w-full max-w-2xl bg-slate-900/95 border border-cyan-500/50 rounded-2xl p-4 shadow-xl backdrop-blur-md">
           <div class="flex flex-col sm:flex-row gap-2">
             <input id="omnibar-input" type="text" placeholder="Enter target domain..." class="flex-1 bg-slate-950 text-white px-4 py-4 rounded-xl border border-slate-700 focus:border-cyan-400 outline-none text-sm font-mono">
-            <button onclick="window.location.href='cinematic-onboarding.html?domain=' + encodeURIComponent(document.getElementById('omnibar-input').value)" type="button" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-8 py-4 rounded-xl transition-all text-sm uppercase tracking-widest shrink-0">Run Free Mini S.P.A.</button>
+            <button type="button" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-8 py-4 rounded-xl transition-all text-sm uppercase tracking-widest shrink-0">Run Free Mini S.P.A.</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- INTERACTIVE 3D FLIP-CARD PRICING ARCHITECTURE -->
+    <!-- Engine Status & 3-Step Onboarding Preview -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+      <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-300 shadow-md">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">Seamless 3-Step Enterprise Onboarding</h2>
+        <p class="text-sm text-slate-600 mb-4">Start with the <strong>Free Mini S.P.A. ($0)</strong> (minimal surface info, remediation greyed out), unlock <strong>Credit Scans (5â€“10 CR)</strong> in the Academy, or run our full <strong>Automated Posture Exposure Assessment (APEA)</strong>.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center mb-2">1</div>
+            <h3 class="font-bold text-slate-900 text-sm">Free Mini S.P.A. &amp; Credit Scans</h3>
+            <p class="text-xs text-slate-600 mt-1">Select your industry module and run the non-intrusive surface scan.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center mb-2">2</div>
+            <h3 class="font-bold text-slate-900 text-sm">Evidence Binder Setup</h3>
+            <p class="text-xs text-slate-600 mt-1">Compile read-only MFA, immutable backup, and DMARC proof logs mapped to carrier scorecards.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center mb-2">3</div>
+            <h3 class="font-bold text-slate-900 text-sm">Continuous Oversight</h3>
+            <p class="text-xs text-slate-600 mt-1">Activate lightweight API webhooks for continuous compliance or partner deep validation via Anergi.io.</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative overflow-hidden bg-slate-900 text-white rounded-2xl p-6 border border-slate-700 shadow-lg flex flex-col justify-between">
+        <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"></video>
+        <div class="relative z-10">
+          <div class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-1">Burn-1 APEA Compliance Engine</div>
+          <h3 class="text-lg font-bold mb-4">Ready for Continuous Oversight</h3>
+          <div class="space-y-2.5 text-xs font-mono">
+            <div class="bg-slate-950/90 p-3 rounded-xl flex justify-between border border-slate-800">
+              <span class="text-slate-400">Real-Time API Webhooks</span>
+              <span class="text-emerald-400 font-bold">â— ACTIVE</span>
+            </div>
+            <div class="bg-slate-950/90 p-3 rounded-xl flex justify-between border border-slate-800">
+              <span class="text-slate-400">Automated Posture Scans</span>
+              <span class="text-emerald-400 font-bold">â— ACTIVE</span>
+            </div>
+            <div class="bg-slate-950/90 p-3 rounded-xl flex justify-between border border-slate-800">
+              <span class="text-slate-400">Anergi.io Deep Escalation</span>
+              <span class="text-cyan-400 font-bold">â— READY (2â€“4 Wks)</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="relative z-10 mt-4 w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors">
+          Start Automated Assessment â†’
+        </button>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE 3D FLIP-CARD PRICING ARCHITECTURE (5 TIERS) -->
     <div id="pricing" class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-300 shadow-md mb-10">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b-2 border-slate-100 pb-4">
         <div>
@@ -375,98 +390,131 @@
         </div>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+      <!-- 5-Column Grid on Extra Large Screens -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
         
-        <!-- Tier 1: Evidence Binder -->
+        <!-- Tier 1: A-La-Carte ($500) -->
         <div class="flip-card">
           <div class="flip-card-inner">
-            <!-- Front -->
-            <div class="flip-card-front bg-slate-50 shadow-sm flex items-center justify-center text-center">
-              <div>
-                <span class="inline-block px-3 py-1.5 bg-slate-900 text-white font-mono text-xs font-black uppercase tracking-widest rounded-lg mb-3">TIER 1</span>
-                <h3 class="text-xl font-black text-slate-800 uppercase tracking-tight">Evidence Binder</h3>
-                <p class="text-xs font-bold text-cyan-500 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+            <!-- Front with Video Background -->
+            <div class="flip-card-front border-2 border-slate-600 bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
+              <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-folder-closed text-3xl text-slate-300 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">A-La-Carte</h3>
+                <p class="text-[10px] font-bold text-cyan-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
               </div>
             </div>
             <!-- Back -->
-            <div class="flip-card-back bg-slate-900 text-white border-slate-700">
+            <div class="flip-card-back bg-slate-900 text-white border-2 border-slate-700">
               <div>
-                <div class="inline-block px-2 py-1 bg-amber-500/20 text-amber-400 text-[9px] font-black uppercase tracking-widest rounded mb-3">Save $250 with Academy</div>
-                <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest">Evidence Binder</h3>
-                <div class="text-4xl font-black text-white my-2">$500</div>
-                <p class="text-xs text-slate-300 font-medium mb-6">Cryptographic Evidence Binder compilation. Standalone automated assessment available for $500.</p>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$500</div>
+                <p class="text-[11px] text-slate-300 font-medium mb-4 leading-relaxed">Cryptographic eBinder compilation OR a standalone Automated Posture Exposure Assessment.</p>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-3 bg-white text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-200 transition-colors">Select Binder</a>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-white text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-200 transition-colors">Select $500</a>
             </div>
           </div>
         </div>
         
-        <!-- Tier 2: Single Domain -->
+        <!-- Tier 2: Single Domain ($1,000) -->
         <div class="flip-card">
           <div class="flip-card-inner">
-            <!-- Front -->
-            <div class="flip-card-front bg-cyan-50 border-cyan-300 shadow-sm flex items-center justify-center text-center relative">
-              <div class="absolute -top-3 inset-x-0 mx-auto w-max bg-cyan-400 text-slate-900 px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded shadow-sm" style="-webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(1px);">Most Popular</div>
-              <div>
-                <span class="inline-block px-3 py-1.5 bg-cyan-500 text-slate-950 font-mono text-xs font-black uppercase tracking-widest rounded-lg mb-3">TIER 2</span>
-                <h3 class="text-xl font-black text-cyan-900 uppercase tracking-tight">Single Domain</h3>
-                <p class="text-xs font-bold text-cyan-500 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+            <!-- Front with Video Background -->
+            <div class="flip-card-front border-2 border-cyan-500 bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-2 py-1 text-[8px] font-black uppercase tracking-widest rounded-b-md shadow-sm z-20 w-3/4">Most Popular</div>
+              <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-cyan-950/70 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-globe text-3xl text-cyan-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Single Domain</h3>
+                <p class="text-[10px] font-bold text-cyan-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
               </div>
             </div>
             <!-- Back -->
-            <div class="flip-card-back bg-cyan-500 text-slate-900 border-cyan-400">
+            <div class="flip-card-back bg-cyan-500 text-slate-900 border-2 border-cyan-400">
               <div>
-                <h3 class="text-sm font-black text-cyan-900 uppercase tracking-widest mt-2">Standard Single Domain</h3>
-                <div class="text-4xl font-black text-slate-900 my-2">$1,000<span class="text-base text-cyan-800 font-bold">/yr</span></div>
-                <p class="text-xs text-cyan-900 font-bold mb-6">Perfect for single-site clinics or regional firms. 1 Domain + Binder + 1 Free Rescan within 12 months.</p>
+                <h3 class="text-xs font-black text-cyan-900 uppercase tracking-widest mt-2">Standard Setup</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$1k<span class="text-sm text-cyan-800 font-bold">/yr</span></div>
+                <p class="text-[11px] text-cyan-950 font-bold mb-4 leading-relaxed">1 Domain. Includes eBinder, Automated Assessment Rescan, Binder Vault access, and Cyber Seal.</p>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-3 bg-slate-900 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select Standard</a>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-900 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select $1k</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 3: Multi-Domain -->
+        <!-- Tier 3: Multi-Domain ($2,500) -->
         <div class="flip-card">
           <div class="flip-card-inner">
-            <!-- Front -->
-            <div class="flip-card-front bg-slate-50 shadow-sm flex items-center justify-center text-center">
-              <div>
-                <span class="inline-block px-3 py-1.5 bg-emerald-600 text-white font-mono text-xs font-black uppercase tracking-widest rounded-lg mb-3">TIER 3</span>
-                <h3 class="text-xl font-black text-slate-800 uppercase tracking-tight">Multi-Domain</h3>
-                <p class="text-xs font-bold text-cyan-500 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+            <!-- Front with Video Background -->
+            <div class="flip-card-front border-2 border-emerald-500 bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
+              <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-emerald-950/70 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-network-wired text-3xl text-emerald-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Multi-Domain</h3>
+                <p class="text-[10px] font-bold text-emerald-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
               </div>
             </div>
             <!-- Back -->
-            <div class="flip-card-back bg-emerald-600 text-white border-emerald-500">
+            <div class="flip-card-back bg-emerald-600 text-white border-2 border-emerald-500">
               <div>
-                <h3 class="text-sm font-black text-emerald-200 uppercase tracking-widest mt-2">Multi-Domain Tier</h3>
-                <div class="text-4xl font-black text-white my-2">$2.4k<span class="text-base text-emerald-200 font-bold">/yr</span></div>
-                <p class="text-xs text-emerald-100 font-medium mb-6">For mid-sized systems. Covers up to 5 domains/subdomains with unlimited SLM rescans.</p>
+                <h3 class="text-xs font-black text-emerald-200 uppercase tracking-widest mt-2">Multi-Tier</h3>
+                <div class="text-3xl font-black text-white my-2">$2.5k<span class="text-sm text-emerald-200 font-bold">/yr</span></div>
+                <p class="text-[11px] text-emerald-100 font-medium mb-4 leading-relaxed">Covers up to 5 domains. Consolidated eBinder, Binder Vault, and Unlimited SLM Rescans.</p>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-3 bg-white text-emerald-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-emerald-50 transition-colors">Select Multi-Tier</a>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-white text-emerald-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-emerald-50 transition-colors">Select $2.5k</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 4: Anergi Deep Pentest -->
+        <!-- Tier 4: Enterprise Footprint ($5,000) -->
         <div class="flip-card">
           <div class="flip-card-inner">
-            <!-- Front -->
-            <div class="flip-card-front bg-[#2A081C] border-[#D92B8A] shadow-lg flex items-center justify-center text-center">
-              <div>
-                <span class="inline-block px-3 py-1.5 bg-[#D92B8A] text-white font-mono text-xs font-black uppercase tracking-widest rounded-lg mb-3">TIER 4</span>
-                <h3 class="text-xl font-black text-white uppercase tracking-tight">Deep Pentest</h3>
-                <p class="text-xs font-bold text-[#D92B8A] mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+            <!-- Front with Video Background -->
+            <div class="flip-card-front border-2 border-purple-500 bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
+              <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-purple-950/70 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-server text-3xl text-purple-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Enterprise</h3>
+                <p class="text-[10px] font-bold text-purple-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
               </div>
             </div>
             <!-- Back -->
-            <div class="flip-card-back bg-slate-900 text-white border-[#D92B8A]">
+            <div class="flip-card-back bg-purple-700 text-white border-2 border-purple-500">
               <div>
-                <h3 class="text-sm font-black text-[#D92B8A] uppercase tracking-widest mt-2">Enterprise Escalation</h3>
-                <div class="text-4xl font-black text-white my-2">Custom</div>
-                <p class="text-xs text-slate-300 font-medium mb-6">Need deep manual testing? Escalated pentesting and boundary tests routed directly to Anergi.io.</p>
+                <h3 class="text-xs font-black text-purple-200 uppercase tracking-widest mt-2">Global Footprint</h3>
+                <div class="text-3xl font-black text-white my-2">$5k<span class="text-sm text-purple-300 font-bold">/yr</span></div>
+                <p class="text-[11px] text-purple-100 font-medium mb-4 leading-relaxed">Up to 15 Domains. Multi-Sector Overlay Customization and custom Executive Scorecards.</p>
               </div>
-              <a href="https://anergi.io/contacts.html" target="_blank" rel="noopener" class="w-full text-center py-3 bg-[#D92B8A] text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-[#bf2277] transition-colors shadow-md">Consult Anergi &rarr;</a>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-white text-purple-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-purple-50 transition-colors">Select $5k</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 5: Continuous Pentest / Anergi.io -->
+        <div class="flip-card md:col-span-2 lg:col-span-1 xl:col-span-1">
+          <div class="flip-card-inner">
+            <!-- Front with Video Background -->
+            <div class="flip-card-front border-2 border-[#D92B8A] bg-slate-950 shadow-lg flex items-center justify-center text-center relative">
+              <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-[#2A081C]/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-shield-halved text-3xl text-[#D92B8A] mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Deep Pentest</h3>
+                <p class="text-[10px] font-bold text-[#D92B8A] mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <!-- Back -->
+            <div class="flip-card-back bg-slate-900 text-white border-2 border-[#D92B8A]">
+              <div>
+                <h3 class="text-xs font-black text-[#D92B8A] uppercase tracking-widest mt-2">Continuous</h3>
+                <div class="text-3xl font-black text-white my-2">Custom</div>
+                <p class="text-[11px] text-slate-300 font-medium mb-4 leading-relaxed">Deep manual pentesting, compliance hardening, and continuous monitoring routed to Anergi.io.</p>
+              </div>
+              <a href="https://anergi.io/contacts.html" target="_blank" class="w-full text-center py-2.5 bg-[#D92B8A] text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-[#bf2277] transition-colors shadow-md">Consult Anergi &rarr;</a>
             </div>
           </div>
         </div>
@@ -474,33 +522,58 @@
       </div>
     </div>
 
-        <!-- PROMO MEDIA (Replaced Process Shells) -->
+    <!-- FUTURISTIC PROMO CLIPS (3-VIDEO SEQUENCE) -->
     <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 border-2 border-slate-700 shadow-xl mb-10 text-white">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <!-- Promo Video -->
-        <div class="rounded-2xl overflow-hidden border-2 border-slate-700 shadow-lg bg-black">
-          <video src="clip11111.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+      <div class="text-center mb-8">
+        <h3 class="text-2xl font-black uppercase tracking-widest text-cyan-400">The Autonomous Onboarding Sequence</h3>
+        <p class="text-sm text-slate-400 mt-2 font-medium">Watch the seamless 3-step lifecycle of an Automated Posture Exposure Assessment.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Video 1: Intake -->
+        <div class="relative bg-black rounded-2xl overflow-hidden border border-slate-700 aspect-video group shadow-lg">
+          <video src="clip11111.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"></video>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <span class="text-[10px] font-mono font-bold text-cyan-400 bg-slate-900/80 px-2 py-1 rounded border border-cyan-500/30">PHASE 1</span>
+            <p class="font-bold text-slate-200 mt-1 text-sm drop-shadow-md">Domain Intake & Surface Mapping</p>
+          </div>
         </div>
-        <!-- Promo Image -->
-        <div class="rounded-2xl overflow-hidden border-2 border-slate-700 shadow-lg bg-black flex items-center justify-center">
-          <img src="assets/burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-full h-full object-cover">
+        
+        <!-- Video 2: Transport -->
+        <div class="relative bg-black rounded-2xl overflow-hidden border border-slate-700 aspect-video group shadow-lg">
+          <video src="clip2222.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"></video>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <span class="text-[10px] font-mono font-bold text-purple-400 bg-slate-900/80 px-2 py-1 rounded border border-purple-500/30">PHASE 2</span>
+            <p class="font-bold text-slate-200 mt-1 text-sm drop-shadow-md">Passive Transport Assessment</p>
+          </div>
+        </div>
+        
+        <!-- Video 3: Binder -->
+        <div class="relative bg-black rounded-2xl overflow-hidden border border-slate-700 aspect-video group shadow-lg">
+          <video src="clip33.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"></video>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-4 left-4 right-4 z-10">
+            <span class="text-[10px] font-mono font-bold text-[#D92B8A] bg-slate-900/80 px-2 py-1 rounded border border-[#D92B8A]/30">PHASE 3</span>
+            <p class="font-bold text-slate-200 mt-1 text-sm drop-shadow-md">Binder Compilation & Escalation</p>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- THINGY 2.0: HOLOGRAPHIC COMPASS WIDGET -->
     <div class="widget-container">
-      <div class="circuitry-bg"></div>
       <div class="metallic-shell">
         <div class="rivet r-tl"></div>
         <div class="rivet r-tr"></div>
         <div class="rivet r-bl"></div>
         <div class="rivet r-br"></div>
 
-        <img src="assets/burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-400 shadow-md" alt="Burn-1 Logo" class="core-logo">
+        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="core-logo">
 
         <!-- NW: Healthcare -->
-        <div class="industry-node pos-nw" onclick="window.location.href='healthcare.html'">
+        <div class="industry-node pos-nw">
           <div class="node-title">Healthcare</div>
           <div class="holo-pane">
             <div class="holo-title">HEALTHCARE</div>
@@ -514,13 +587,13 @@
         </div>
 
         <!-- N: Finance -->
-        <div class="industry-node pos-n" onclick="window.location.href='finance.html'">
+        <div class="industry-node pos-n">
           <div class="node-title">Finance</div>
           <div class="holo-pane" style="border-top-color: #a855f7;"> 
             <div class="holo-title" style="color: #a855f7; border-bottom-color: rgba(168,85,247,0.3);">FINANCE</div>
             <div class="holo-subtitle" style="color: #06b6d4;">Compliance Overlay</div>
             <ul class="holo-list">
-              <li>CRI Profile v2.2</li>
+              <li style="--bullet-color: #a855f7;">CRI Profile v2.2</li>
               <li>NYDFS Part 500</li>
               <li>SEC 4-Day Incident</li>
             </ul>
@@ -528,7 +601,7 @@
         </div>
 
         <!-- NE: Defense -->
-        <div class="industry-node pos-ne" onclick="window.location.href='defense.html'">
+        <div class="industry-node pos-ne">
           <div class="node-title">Defense</div>
           <div class="holo-pane">
             <div class="holo-title">DEFENSE</div>
@@ -542,7 +615,7 @@
         </div>
 
         <!-- W: Legal -->
-        <div class="industry-node pos-w" onclick="window.location.href='legal.html'">
+        <div class="industry-node pos-w">
           <div class="node-title">Legal</div>
           <div class="holo-pane" style="border-top-color: #a855f7;">
             <div class="holo-title" style="color: #a855f7; border-bottom-color: rgba(168,85,247,0.3);">LEGAL</div>
@@ -556,7 +629,7 @@
         </div>
 
         <!-- E: Energy / OT -->
-        <div class="industry-node pos-e" onclick="window.location.href='energy.html'">
+        <div class="industry-node pos-e">
           <div class="node-title">Energy</div>
           <div class="holo-pane" style="border-top-color: #a855f7;">
             <div class="holo-title" style="color: #a855f7; border-bottom-color: rgba(168,85,247,0.3);">ENERGY / OT</div>
@@ -570,7 +643,7 @@
         </div>
 
         <!-- SW: Retail -->
-        <div class="industry-node pos-sw" onclick="window.location.href='retail.html'">
+        <div class="industry-node pos-sw">
           <div class="node-title">Retail</div>
           <div class="holo-pane">
             <div class="holo-title">RETAIL</div>
@@ -584,7 +657,7 @@
         </div>
 
         <!-- S: Real Estate -->
-        <div class="industry-node pos-s" onclick="window.location.href='realestate.html'">
+        <div class="industry-node pos-s">
           <div class="node-title">Real Estate</div>
           <div class="holo-pane">
             <div class="holo-title">REAL ESTATE</div>
@@ -598,7 +671,7 @@
         </div>
 
         <!-- SE: Government -->
-        <div class="industry-node pos-se" onclick="window.location.href='government.html'">
+        <div class="industry-node pos-se">
           <div class="node-title">Government</div>
           <div class="holo-pane" style="border-top-color: #a855f7;">
             <div class="holo-title" style="color: #a855f7; border-bottom-color: rgba(168,85,247,0.3);">GOVERNMENT</div>
@@ -614,19 +687,5 @@
     </div>
 
   </main>
-
-  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-xs font-mono">
-    <p>Â© Burn-1 Systems. Cyber Readiness Clinic & Automated Posture Exposure Assessment.</p>
-  </footer>
-
-  <script src="assets/burn1_onboarding_modal.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
