@@ -1,31 +1,44 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthcare & Medical Suite | Burn-1 Systems</title>
+  <title>Healthcare & Life Sciences Shield | Cyber Readiness Clinic</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
+    :root {
+      --clinic-slate: #0f172a;
+      --clinic-teal: #0d9488;
+      --clinic-emerald: #10b981;
+      --clinic-rose: #f43f5e;
+    }
+    
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #EBF1F5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      /* The Burn-1 Silver Metallic Background */
+      background-color: #d8dee6;
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.92) 0%, rgba(226, 232, 240, 0.88) 48%, rgba(186, 196, 210, 0.95) 100%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0px, rgba(255,255,255,0.18) 1px, transparent 1px, transparent 12px);
+      background-attachment: fixed;
       color: #0f172a;
     }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-hud { font-family: 'Orbitron', sans-serif; }
 
     /* Top Unibar Navigation */
     .grey-unibar {
       background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 55%, #b8c4d4 100%);
-      border-bottom: 2px solid #3A4B56;
+      border-bottom: 2px solid #64748b;
       box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
     .grey-unibar-sub {
       background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
       border-top: 1px solid rgba(255, 255, 255, 0.65);
-      border-bottom: 2px solid #3A4B56;
+      border-bottom: 2px solid #475569;
     }
     .nav-pill-idle {
       background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
@@ -37,339 +50,410 @@
       background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
       transform: translateY(-1px);
     }
-
-    /* Flip Card Pricing Styles (With alignment fix) */
-    .flip-card {
-      perspective: 1000px;
-      height: 380px;
-    }
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-style: preserve-3d;
-    }
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: 1rem;
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-    }
-    .flip-card-back {
-      transform: rotateY(180deg);
+    .nav-pill-active {
+      background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+      color: #10b981;
+      border: 1px solid #10b981;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.45);
     }
 
-    /* Clinical Interactive Hotspots */
+    /* Flip Card Pricing Styles */
+    .flip-card { perspective: 1000px; height: 380px; }
+    .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1rem; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+    .flip-card-back { transform: rotateY(180deg); }
+
+    /* Custom Panes */
+    .clinic-pane {
+      background-color: var(--clinic-slate);
+      border: 2px solid #334155;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.6);
+    }
+
+    /* O.R. Hotspot Map Styles */
     .or-hotspot {
-      animation: pulse-border 2s infinite;
+      transition: all 0.3s ease;
+      opacity: 0.8;
+      backdrop-filter: blur(4px);
     }
-    @keyframes pulse-border {
-      0% { box-shadow: 0 0 0 0 rgba(217, 43, 138, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(217, 43, 138, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(217, 43, 138, 0); }
+    .or-hotspot:hover, .or-hotspot.active {
+      opacity: 1;
+      transform: scale(1.05);
+      z-index: 20;
+    }
+    .or-hotspot.active {
+      border-color: #22d3ee !important;
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.5) !important;
+      background-color: rgba(15, 23, 42, 0.95) !important;
+      color: #22d3ee !important;
+    }
+
+    /* EKG Animation */
+    .ekg-line {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawEKG 3s linear infinite;
+    }
+    @keyframes drawEKG {
+      0% { stroke-dashoffset: 1000; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+    @keyframes pulseGlow {
+      from { box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); border-color: rgba(51, 65, 85, 1); }
+      to { box-shadow: 0 0 30px rgba(16, 185, 129, 0.4); border-color: rgba(16, 185, 129, 0.6); }
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
 
-  <!-- Global Nav Bar -->
   <header class="grey-unibar sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center gap-3">
         <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
         <div>
-          <div class="text-base sm:text-lg font-extrabold tracking-tight text-[#2A081C] leading-none uppercase">Cyber Readiness Clinic</div>
-          <div class="text-[11px] font-mono text-[#3A4B56] font-semibold mt-0.5 uppercase tracking-widest">Healthcare • <span class="text-[#D92B8A] font-bold">Automated Posture Exposure</span></div>
+          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Healthcare Module â€¢ <span class="text-emerald-700 font-bold">HIPAA Shield</span></div>
         </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 bg-[#0f172a] text-white px-3 py-1.5 rounded-xl border border-slate-700 text-xs font-mono shadow">
+        <span class="text-slate-400">Target Path:</span>
+        <span class="text-emerald-400 font-bold">downloads/healthcare.html</span>
       </div>
     </div>
     <div class="grey-unibar-sub">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 overflow-x-auto">
         <a href="index.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
-        <a href="cinematic-onboarding.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 text-[#D92B8A]">Cinematic Onboarding &rarr;</a>
+        <a href="cinematic-onboarding.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Cinematic Onboarding</a>
+        <a href="healthcare.html" class="nav-pill nav-pill-active px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare & Life Sciences</a>
         <a href="academy.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Operator Academy</a>
       </div>
     </div>
   </header>
 
-  <main class="w-full flex-1">
-    
-    <!-- HERO SECTION: Clinical Tone -->
-    <section class="bg-[#2A081C] text-white py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b-8 border-[#D92B8A]">
-      <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #ffffff 10px, #ffffff 11px);"></div>
-      <div class="max-w-5xl mx-auto text-center relative z-10">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-[#D92B8A]/20 border border-[#D92B8A] text-[#ff85c8] font-mono text-xs font-bold uppercase tracking-widest mb-6">
-          Sector: Healthcare & Life Sciences
-        </span>
-        <h1 class="text-4xl sm:text-6xl font-black leading-tight tracking-tight mb-6">
-          Patient Care Comes First. <br><span class="text-[#D92B8A]">System Downtime Is Not an Option.</span>
-        </h1>
-        <p class="text-[#D8E2E9] text-lg sm:text-xl font-medium max-w-3xl mx-auto mb-10">
-          Agentless posture exposure assessments engineered for hospital networks. Secure patient portals, DICOM imaging boundaries, and RDP gateways before the cyber underwriter asks.
-        </p>
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex-1 relative z-10">
+
+    <!-- HERO SECTION -->
+    <div class="clinic-pane rounded-3xl overflow-hidden text-white mb-12 relative">
+      <div class="relative h-[24rem] overflow-hidden border-b border-slate-700">
+        <!-- Stock Image + Clock Video Overlay -->
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80" alt="Clinical Hospital Operating Room" class="w-full h-full object-cover opacity-30 mix-blend-luminosity">
+        <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-transparent pointer-events-none"></div>
         
-        <div class="flex flex-wrap justify-center gap-4 font-mono text-xs font-bold uppercase tracking-widest">
-          <span class="px-4 py-2 rounded-lg bg-black/40 border border-slate-600">HIPAA 45 CFR § 164.312</span>
-          <span class="px-4 py-2 rounded-lg bg-black/40 border border-slate-600">HITECH Safe Harbor</span>
-          <span class="px-4 py-2 rounded-lg bg-black/40 border border-slate-600">NIST SP 800-66</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTENT WRAPPER -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
-
-      <!-- OPTION 2: O.R. MAP CONTEXT & INTERACTIVE COMPONENT -->
-      <div>
-        <div class="bg-[#3A4B56] rounded-t-3xl p-8 sm:p-10 border-2 border-b-0 border-[#C4D4E0] shadow-xl text-white">
-            <div class="flex flex-col lg:flex-row gap-8 items-center">
-                <div class="lg:w-2/3">
-                    <h2 class="text-3xl font-black uppercase tracking-tight mb-4 text-[#D8E2E9]">Step Inside the Secure O.R.</h2>
-                    <p class="text-slate-300 font-medium text-sm leading-relaxed mb-4">
-                        Clinical security extends far beyond the server room. From IoT-connected surgical tables to external DICOM imaging gateways, every node is a potential entry point for lateral movement and ePHI exfiltration.
-                    </p>
-                    <p class="text-[#A3C1AD] font-bold text-sm leading-relaxed">
-                        Explore the interactive clinical map below. See exactly how the Burn-1 APEA engine maps passive telemetry to strict HIPAA control families—validating your perimeter without deploying a single intrusive agent.
-                    </p>
-                </div>
-                <div class="lg:w-1/3 flex justify-center">
-                    <i class="fa-solid fa-heart-pulse text-8xl text-[#D92B8A] animate-pulse drop-shadow-lg"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- The Interactive O.R. Map -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 items-stretch border-2 border-t-0 border-[#C4D4E0] rounded-b-3xl overflow-hidden shadow-2xl bg-[#2A081C]">
-          <div class="lg:col-span-2 relative bg-slate-900 min-h-[400px]">
-            <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80" alt="Clinical Operating Room Architecture Map" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity">
-            
-            <button type="button" style="bottom:15%;left:10%;" class="or-hotspot absolute px-3 py-1.5 rounded bg-[#2A081C]/95 border-2 border-[#D92B8A] text-white text-xs font-mono shadow-lg hover:scale-105 transition-transform z-10">
-              [1] Inventory
-            </button>
-            <button type="button" style="top:20%;left:25%;" class="or-hotspot absolute px-3 py-1.5 rounded bg-[#D8E2E9]/95 border-2 border-[#3A4B56] text-slate-900 text-xs font-mono font-bold shadow-md hover:scale-105 transition-transform z-10">
-              [2] Audit Logs
-            </button>
-            <button type="button" style="bottom:30%;left:45%;" class="or-hotspot absolute px-4 py-2 rounded bg-[#2A081C]/95 border-2 border-[#D92B8A] text-[#ff85c8] text-sm font-mono font-black shadow-lg hover:scale-105 transition-transform z-10">
-              [4] Core HIPAA Scan
-            </button>
-            <button type="button" style="top:30%;right:15%;" class="or-hotspot absolute px-3 py-1.5 rounded bg-[#2A081C]/95 border-2 border-[#D92B8A] text-white text-xs font-mono shadow-lg hover:scale-105 transition-transform z-10">
-              [5] Live Telemetry
-            </button>
+        <div class="absolute inset-0 flex flex-col justify-center p-6 sm:p-12 z-10 max-w-4xl">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fa-solid fa-heart-pulse text-2xl text-emerald-400"></i>
+            <span class="inline-block px-3 py-1 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold uppercase tracking-widest w-max">
+              HIPAA â€¢ HITECH â€¢ ePHI Defense
+            </span>
           </div>
           
-          <div class="relative p-8 font-mono text-white flex flex-col justify-center">
-            <div class="absolute inset-0 bg-gradient-to-b from-[#2A081C] to-[#522d8a] opacity-90"></div>
-            <div class="relative z-10">
-              <div class="flex items-center justify-between border-b border-[#D92B8A]/40 pb-3 mb-4">
-                <span class="text-xs text-[#ff85c8] uppercase tracking-wider">Vitality Readout</span>
-                <span class="px-2 py-0.5 text-[10px] bg-[#D92B8A] text-white rounded font-bold animate-pulse">HIPAA LIVE</span>
-              </div>
-              <div class="text-lg font-black text-white mb-2">[4] Center Surgical Table</div>
-              <p class="text-xs text-pink-100 leading-relaxed mb-6">
-                Primary Core System Assessment trigger. Executes non-intrusive <strong>Automated Posture Exposure Assessment</strong> surface validation of EHR/EMR portals, TLS 1.3 cipher suites, and HITECH encryption boundaries.
-              </p>
-              <div class="bg-black/55 p-4 rounded-xl border border-[#D92B8A]/40 text-xs space-y-2 text-pink-200 shadow-inner">
-                <div>• Control Map: <span class="text-white font-bold">45 CFR § 164.312(a)(1)</span></div>
-                <div>• ePHI Boundary: <span class="text-[#A3C1AD] font-bold">VERIFIED</span></div>
-                <div>• Target: <span class="text-white font-bold">acmehealth.org</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DEEP COMPLIANCE STRATEGY (Targeting the Multi-Domain Tier) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white border-t-4 border-[#3A4B56] p-6 rounded-2xl shadow-md">
-            <h3 class="font-black text-[#2A081C] text-lg mb-2 uppercase">Operational Paralysis</h3>
-            <p class="text-sm text-slate-600 font-medium">A single exposed RDP port doesn't just invite ransomware; it forces EMS diversions and reverts medical staff to paper charting. We map and close the edge.</p>
-        </div>
-        <div class="bg-white border-t-4 border-[#D92B8A] p-6 rounded-2xl shadow-md">
-            <h3 class="font-black text-[#2A081C] text-lg mb-2 uppercase">Devastating Fines</h3>
-            <p class="text-sm text-slate-600 font-medium">HITECH breach penalties scale up to $1.9M per violation. Self-attestation is no longer enough to satisfy HHS OCR auditors when patient data leaks.</p>
-        </div>
-        <div class="bg-white border-t-4 border-[#A3C1AD] p-6 rounded-2xl shadow-md">
-            <h3 class="font-black text-[#2A081C] text-lg mb-2 uppercase">Policy Rescission</h3>
-            <p class="text-sm text-slate-600 font-medium">Cyber insurers will deny your ransomware co-pay if your perimeter doesn't mathematically match the claims on your yearly insurance renewal questionnaire.</p>
-        </div>
-      </div>
-
-      <!-- OPTION 3: THE $2,499 UPSELL PITCH -->
-      <div class="bg-gradient-to-br from-[#D8E2E9] to-[#ffffff] rounded-3xl p-8 sm:p-12 border-2 border-[#3A4B56] shadow-xl text-center relative overflow-hidden">
-          <div class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
-              <i class="fa-solid fa-network-wired text-9xl text-[#2A081C]"></i>
-          </div>
-          <h2 class="text-3xl font-black text-[#2A081C] uppercase tracking-tighter mb-4 relative z-10">
-              Managing Multiple Clinics? <br>Scale Your Shield for <span class="text-[#D92B8A]">$2,499/yr</span>
-          </h2>
-          <p class="text-slate-700 text-base font-medium mb-8 max-w-2xl mx-auto relative z-10">
-              For regional health systems, dental groups, and multi-location practices, managing compliance across separate domains is a logistical nightmare. 
-              <strong>Our Multi-Domain Clinical Tier completely automates your footprint.</strong>
+          <h1 class="text-3xl sm:text-4xl font-extrabold mt-1 tracking-tight leading-tight">
+            Validate clinical systems <br><span class="text-emerald-400">without disrupting patient care.</span>
+          </h1>
+          <p class="text-slate-300 text-sm sm:text-base font-medium mt-4 leading-relaxed max-w-2xl">
+            Ransomware on EHR portals and unmonitored PACS imaging gateways halt surgeries and trigger severe HITECH breach penalties. Ensure your patient portals meet underwriter standards before the audit with our 100% agentless <strong>Automated Posture Exposure Assessments (APEA)</strong>.
           </p>
-          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 text-left relative z-10">
-              <div class="bg-white/80 p-4 rounded-xl border border-[#C4D4E0] shadow-sm">
-                  <h4 class="font-black text-slate-800 text-sm uppercase mb-1">Up to 5 Domains</h4>
-                  <p class="text-xs text-slate-600">Cover main hospitals and branch networks under one policy.</p>
-              </div>
-              <div class="bg-white/80 p-4 rounded-xl border border-[#C4D4E0] shadow-sm">
-                  <h4 class="font-black text-slate-800 text-sm uppercase mb-1">Infinite Rescans</h4>
-                  <p class="text-xs text-slate-600">EHR systems update constantly. Scan as often as your network evolves.</p>
-              </div>
-              <div class="bg-white/80 p-4 rounded-xl border border-[#C4D4E0] shadow-sm">
-                  <h4 class="font-black text-slate-800 text-sm uppercase mb-1">Unified eBinder</h4>
-                  <p class="text-xs text-slate-600">Generate a single cryptographically sealed report for underwriters.</p>
-              </div>
-              <div class="bg-[#2A081C] p-4 rounded-xl border border-[#D92B8A] shadow-md">
-                  <h4 class="font-black text-white text-sm uppercase mb-1">Zero Disruption</h4>
-                  <p class="text-xs text-pink-100">100% agentless telemetry. We evaluate without touching live clinical data.</p>
-              </div>
-          </div>
+        </div>
       </div>
 
-      <!-- INTERACTIVE 3D FLIP-CARD PRICING ARCHITECTURE (With falling glass video) -->
-      <div id="pricing" class="bg-[#3A4B56] rounded-3xl p-6 sm:p-8 border-2 border-[#2A081C] shadow-2xl mb-10">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b-2 border-slate-500 pb-4">
-          <div>
-            <h2 class="text-2xl font-black text-white uppercase tracking-tight">Clinical Assessment Tiers</h2>
-            <p class="text-sm text-slate-300 font-bold mt-1">Scale your coverage. Hover to unlock pricing configurations.</p>
-          </div>
+      <!-- INTERACTIVE O.R. MAP & VITALITY MONITOR -->
+      <div class="p-6 sm:p-10 bg-[#020617]">
+        <div class="text-center mb-8">
+          <h2 class="text-xl font-hud font-bold text-emerald-400 tracking-widest">CLINICAL OPERATING ROOM TOPOLOGY</h2>
+          <p class="text-sm font-mono text-slate-400 mt-2">Select an isolated zone in the O.R. to inspect HIPAA telemetry and compliance controls.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <!-- Tier 1: A-La-Carte ($500) -->
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front border-2 border-slate-400 bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
-                <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
-                <div class="absolute inset-0 bg-[#2A081C]/70 z-0"></div>
-                <div class="relative z-10">
-                  <i class="fa-solid fa-folder-closed text-3xl text-slate-300 mb-4 drop-shadow-lg"></i>
-                  <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">A-La-Carte</h3>
-                  <p class="text-[10px] font-bold text-pink-300 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
-                </div>
-              </div>
-              <div class="flip-card-back bg-slate-100 text-[#2A081C] border-2 border-slate-400">
-                <div>
-                  <h3 class="text-xs font-black text-slate-500 uppercase tracking-widest">Evidence Binder</h3>
-                  <div class="text-3xl font-black text-[#2A081C] my-2">$500</div>
-                  <p class="text-[11px] text-slate-700 font-medium mb-4 leading-relaxed">Cryptographic eBinder compilation OR a standalone Automated Posture Exposure Assessment.</p>
-                </div>
-                <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-[#2A081C] text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-[#522d8a] transition-colors">Select $500</a>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Tier 2: Single Domain ($999) -->
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front border-2 border-[#A3C1AD] bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
-                <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
-                <div class="absolute inset-0 bg-[#3A4B56]/80 z-0"></div>
-                <div class="relative z-10">
-                  <i class="fa-solid fa-hospital text-3xl text-[#A3C1AD] mb-4 drop-shadow-lg"></i>
-                  <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Single Clinic</h3>
-                  <p class="text-[10px] font-bold text-[#A3C1AD] mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
-                </div>
-              </div>
-              <div class="flip-card-back bg-[#A3C1AD] text-slate-900 border-2 border-white">
-                <div>
-                  <h3 class="text-xs font-black text-slate-800 uppercase tracking-widest mt-2">Standard Setup</h3>
-                  <div class="text-3xl font-black text-slate-900 my-2">$999<span class="text-sm font-bold">/yr</span></div>
-                  <p class="text-[11px] text-slate-900 font-bold mb-4 leading-relaxed">1 Domain. Includes eBinder, Automated Assessment Rescan, Binder Vault access, and Cyber Seal.</p>
-                </div>
-                <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-900 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select $999</a>
-              </div>
-            </div>
+          <!-- The Interactive Map -->
+          <div class="lg:col-span-7 relative rounded-2xl overflow-hidden border-2 border-slate-700 shadow-xl bg-slate-900 h-[450px]">
+            <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80" alt="Clinical Operating Room Architecture Map" class="w-full h-full object-cover opacity-60 mix-blend-luminosity block max-w-full">
+            
+            <!-- Hotspots -->
+            <button type="button" data-or-zone="table" style="bottom:25%;left:45%; transform: translate(-50%, 0);" class="or-hotspot active absolute px-3 py-1.5 rounded-lg bg-slate-900/90 border-2 border-emerald-500 text-emerald-400 text-xs font-mono font-bold shadow-lg">
+              [1] Surgical Table: Core EMR
+            </button>
+            <button type="button" data-or-zone="monitors" style="top:25%;right:10%;" class="or-hotspot absolute px-2.5 py-1.5 rounded-lg bg-slate-800/90 border border-slate-500 text-slate-300 text-xs font-mono shadow-md">
+              [2] Monitors: Live Telemetry
+            </button>
+            <button type="button" data-or-zone="xray" style="top:40%;left:15%;" class="or-hotspot absolute px-2.5 py-1.5 rounded-lg bg-slate-800/90 border border-slate-500 text-slate-300 text-xs font-mono shadow-md">
+              [3] Lightbox: PACS/DICOM
+            </button>
+            <button type="button" data-or-zone="staff" style="top:15%;left:35%;" class="or-hotspot absolute px-2.5 py-1.5 rounded-lg bg-slate-800/90 border border-slate-500 text-slate-300 text-xs font-mono shadow-md">
+              [4] Staff: HIPAA RBAC
+            </button>
           </div>
 
-          <!-- Tier 3: Multi-Domain ($2,499) -->
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front border-2 border-[#D92B8A] bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-[#D92B8A] text-white px-2 py-1 text-[8px] font-black uppercase tracking-widest rounded-b-md shadow-sm z-20 w-3/4">Network Scale</div>
-                <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-                <div class="absolute inset-0 bg-[#2A081C]/80 z-0"></div>
-                <div class="relative z-10">
-                  <i class="fa-solid fa-network-wired text-3xl text-[#ff85c8] mb-4 drop-shadow-lg"></i>
-                  <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Multi-Domain</h3>
-                  <p class="text-[10px] font-bold text-[#ff85c8] mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+          <!-- The Vitality Readout Monitor -->
+          <div class="lg:col-span-5">
+            <div class="relative overflow-hidden bg-[#05050a] text-white p-6 rounded-2xl border-2 border-slate-700 pulse-glow font-mono h-[450px] flex flex-col">
+              <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"></video>
+              
+              <div class="relative z-10 flex-1 flex flex-col">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
+                  <span class="text-xs text-emerald-500 uppercase tracking-wider font-bold">Vitality Readout Monitor</span>
+                  <span class="px-2 py-0.5 text-[10px] bg-emerald-500 text-slate-950 rounded font-black animate-pulse">HIPAA LIVE</span>
                 </div>
-              </div>
-              <div class="flip-card-back bg-[#2A081C] text-white border-2 border-[#D92B8A]">
-                <div>
-                  <h3 class="text-xs font-black text-[#ff85c8] uppercase tracking-widest mt-2">Health System</h3>
-                  <div class="text-3xl font-black text-white my-2">$2.5k<span class="text-sm text-pink-200 font-bold">/yr</span></div>
-                  <p class="text-[11px] text-pink-100 font-medium mb-4 leading-relaxed">Covers up to 5 domains. Consolidated eBinder, Binder Vault, and Unlimited SLM Rescans.</p>
+                
+                <!-- Animated EKG SVG -->
+                <div class="w-full h-24 bg-slate-900/50 rounded-xl border border-slate-800 mb-6 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                  <svg viewBox="0 0 500 100" class="w-full h-full opacity-90">
+                    <polyline class="ekg-line" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" 
+                      points="0,50 50,50 70,20 90,80 110,50 250,50 270,10 290,90 310,50 500,50"/>
+                  </svg>
                 </div>
-                <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-[#D92B8A] text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-[#bf2277] transition-colors shadow-md">Select $2.5k</a>
-              </div>
-            </div>
-          </div>
 
-          <!-- Tier 4: Enterprise Footprint ($4,999) -->
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front border-2 border-[#C4D4E0] bg-slate-950 shadow-sm flex items-center justify-center text-center relative">
-                <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
-                <div class="absolute inset-0 bg-[#3A4B56]/80 z-0"></div>
-                <div class="relative z-10">
-                  <i class="fa-solid fa-server text-3xl text-[#C4D4E0] mb-4 drop-shadow-lg"></i>
-                  <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Enterprise</h3>
-                  <p class="text-[10px] font-bold text-[#C4D4E0] mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+                <div id="or-zone-title" class="text-base font-bold text-white mb-2 tracking-tight">[1] Center Surgical Table & EMR</div>
+                <p id="or-zone-desc" class="text-xs text-slate-400 leading-relaxed mb-4 flex-1">
+                  Primary Core System Assessment trigger. Executes non-intrusive <strong>Automated Posture Exposure Assessment</strong> surface validation of EHR/EMR portals, TLS 1.3 cipher suites, and HITECH encryption boundaries.
+                </p>
+                
+                <div id="or-zone-metrics" class="bg-black/80 p-4 rounded-xl border border-slate-800 text-xs space-y-2 text-slate-300">
+                  <div class="flex justify-between border-b border-slate-800 pb-1">
+                    <span>Control Map:</span> <span class="text-white font-bold">45 CFR Â§ 164.312(a)(1)</span>
+                  </div>
+                  <div class="flex justify-between border-b border-slate-800 pb-1">
+                    <span>ePHI Boundary:</span> <span class="text-emerald-400 font-bold">ENCRYPTED</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Liability Risk:</span> <span class="text-emerald-400 font-bold">SECURE (0)</span>
+                  </div>
                 </div>
-              </div>
-              <div class="flip-card-back bg-[#D8E2E9] text-[#2A081C] border-2 border-[#3A4B56]">
-                <div>
-                  <h3 class="text-xs font-black text-[#3A4B56] uppercase tracking-widest mt-2">Global Footprint</h3>
-                  <div class="text-3xl font-black text-[#2A081C] my-2">$5k<span class="text-sm text-slate-500 font-bold">/yr</span></div>
-                  <p class="text-[11px] text-slate-700 font-medium mb-4 leading-relaxed">Up to 15 Domains. Multi-Sector Overlay Customization and custom Executive Scorecards.</p>
-                </div>
-                <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-[#3A4B56] text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select $5k</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tier 5: Continuous Pentest / Anergi.io -->
-          <div class="flip-card md:col-span-2 lg:col-span-1 xl:col-span-1">
-            <div class="flip-card-inner">
-              <div class="flip-card-front border-2 border-white bg-slate-950 shadow-lg flex items-center justify-center text-center relative">
-                <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-                <div class="absolute inset-0 bg-black/80 z-0"></div>
-                <div class="relative z-10">
-                  <i class="fa-solid fa-user-ninja text-3xl text-white mb-4 drop-shadow-lg"></i>
-                  <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Deep Pentest</h3>
-                  <p class="text-[10px] font-bold text-slate-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
-                </div>
-              </div>
-              <div class="flip-card-back bg-black text-white border-2 border-white">
-                <div>
-                  <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mt-2">Continuous</h3>
-                  <div class="text-3xl font-black text-white my-2">Custom</div>
-                  <p class="text-[11px] text-slate-300 font-medium mb-4 leading-relaxed">Deep manual pentesting, compliance hardening, and continuous monitoring routed to Anergi.io.</p>
-                </div>
-                <a href="https://anergi.io/contacts.html" target="_blank" class="w-full text-center py-2.5 bg-white text-black rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-200 transition-colors shadow-md">Consult Anergi &rarr;</a>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-
     </div>
+
+    <!-- PRICING TIERS: Flip Cards -->
+    <div id="pricing" class="clinic-pane rounded-3xl p-6 sm:p-8 mb-10 relative z-20">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-slate-700 pb-4">
+        <div>
+          <h2 class="text-2xl font-black text-white uppercase tracking-tight">Clinical Readiness Packages</h2>
+          <p class="text-sm text-slate-400 font-bold mt-1">Acquire mathematical proof of HIPAA compliance. Hover to unlock configurations.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
+        
+        <!-- Tier 1: A-La-Carte ($500) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-slate-600 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-folder-closed text-3xl text-slate-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">A-La-Carte</h3>
+                <p class="text-[10px] font-bold text-emerald-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$500</div>
+                <p class="text-[11px] text-slate-400 font-medium mb-4 leading-relaxed">Single Cryptographic eBinder compilation for a specific HIPAA audit or baseline IT scan.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-colors">Select $500</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tier 2: Single Clinic ($999) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-teal-500 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-teal-500 text-slate-900 px-2 py-1 text-[8px] font-black uppercase tracking-widest rounded-b-md shadow-sm z-20 w-3/4">Private Practice</div>
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-teal-950/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-stethoscope text-3xl text-teal-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Single Clinic</h3>
+                <p class="text-[10px] font-bold text-teal-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-teal-950 text-white border-2 border-teal-500">
+              <div>
+                <h3 class="text-xs font-black text-teal-400 uppercase tracking-widest mt-2">Compliance Base</h3>
+                <div class="text-3xl font-black text-white my-2">$999<span class="text-sm text-teal-600 font-bold">/yr</span></div>
+                <p class="text-[11px] text-teal-100 font-medium mb-4 leading-relaxed">1 Domain. Includes HIPAA eBinder, 1 Free Rescan, Binder Vault access, and Cyber Seal.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-teal-500 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-teal-400 transition-colors">Select $999</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3: Regional Health System ($2,500) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-emerald-500 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-emerald-950/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-hospital text-3xl text-emerald-400 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Regional System</h3>
+                <p class="text-[10px] font-bold text-emerald-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-emerald-950 text-white border-2 border-emerald-500">
+              <div>
+                <h3 class="text-xs font-black text-emerald-300 uppercase tracking-widest mt-2">Multi-Facility</h3>
+                <div class="text-3xl font-black text-white my-2">$2.5k<span class="text-sm text-emerald-500 font-bold">/yr</span></div>
+                <p class="text-[11px] text-emerald-100 font-medium mb-4 leading-relaxed">Up to 5 domains/clinics. Consolidated HIPAA eBinder, and Unlimited SLM Rescans.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-emerald-500 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-emerald-400 transition-colors">Select $2.5k</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 4: National Network ($5,000) -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-slate-300 bg-black shadow-sm flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-800/80 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-truck-medical text-3xl text-slate-300 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">National Network</h3>
+                <p class="text-[10px] font-bold text-slate-300 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-slate-200 text-slate-900 border-2 border-slate-400">
+              <div>
+                <h3 class="text-xs font-black text-slate-600 uppercase tracking-widest mt-2">Hospital Group</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$5k<span class="text-sm text-slate-500 font-bold">/yr</span></div>
+                <p class="text-[11px] text-slate-700 font-medium mb-4 leading-relaxed">Up to 15 Domains. Custom Executive Scorecards and multi-framework HIPAA/HITRUST overlay routing.</p>
+              </div>
+              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-900 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select $5k</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 5: Pentest -->
+        <div class="flip-card md:col-span-2 lg:col-span-1 xl:col-span-1">
+          <div class="flip-card-inner">
+            <div class="flip-card-front border-2 border-rose-500 bg-black shadow-lg flex items-center justify-center text-center relative">
+              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-rose-950/90 z-0"></div>
+              <div class="relative z-10">
+                <i class="fa-solid fa-user-ninja text-3xl text-rose-500 mb-4 drop-shadow-lg"></i>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Deep Pentest</h3>
+                <p class="text-[10px] font-bold text-rose-500 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+              </div>
+            </div>
+            <div class="flip-card-back bg-rose-950 text-white border-2 border-rose-500">
+              <div>
+                <h3 class="text-xs font-black text-rose-400 uppercase tracking-widest mt-2">Escalation</h3>
+                <div class="text-3xl font-black text-white my-2">Custom</div>
+                <p class="text-[11px] text-slate-300 font-medium mb-4 leading-relaxed">ePHI forensic discovery, active incident response, and deep manual pentesting via Anergi.io.</p>
+              </div>
+              <a href="https://anergi.io/contacts.html" target="_blank" class="w-full text-center py-2.5 bg-rose-600 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-rose-500 transition-colors shadow-md">Consult Anergi &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hotspots = document.querySelectorAll('.or-hotspot');
+      const titleEl = document.getElementById('or-zone-title');
+      const descEl = document.getElementById('or-zone-desc');
+      const metricsEl = document.getElementById('or-zone-metrics');
+
+      const zoneData = {
+        'table': {
+          title: '[1] Center Surgical Table & EMR',
+          desc: 'Primary Core System Assessment trigger. Executes non-intrusive Automated Posture Exposure Assessment surface validation of EHR/EMR portals, TLS 1.3 cipher suites, and HITECH encryption boundaries.',
+          metrics: `
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>Control Map:</span> <span class="text-white font-bold">45 CFR Â§ 164.312(a)(1)</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>ePHI Boundary:</span> <span class="text-emerald-400 font-bold">ENCRYPTED</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Liability Risk:</span> <span class="text-emerald-400 font-bold">SECURE (0)</span>
+            </div>`
+        },
+        'monitors': {
+          title: '[2] Monitors: Live Telemetry',
+          desc: 'Validates active network monitoring protocols and alerting rules. Ensures malicious lateral movement on the clinical network triggers instant SOC response without impacting active surgical hardware.',
+          metrics: `
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>Control Map:</span> <span class="text-white font-bold">HITRUST 09.m</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>Anomaly Detection:</span> <span class="text-emerald-400 font-bold">ACTIVE</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Sensor Health:</span> <span class="text-emerald-400 font-bold">NOMINAL</span>
+            </div>`
+        },
+        'xray': {
+          title: '[3] Lightbox: PACS/DICOM',
+          desc: 'Imaging gateways (DICOM/PACS) are highly vulnerable to ransomware. We scan the perimeter guarding these massive databases to ensure IP and patient histories are shielded from public internet exposure.',
+          metrics: `
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>Control Map:</span> <span class="text-white font-bold">NIST CSF PR.DS-1</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>Public Exposure:</span> <span class="text-emerald-400 font-bold">BLOCKED</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Imaging Subnet:</span> <span class="text-white font-bold">ISOLATED</span>
+            </div>`
+        },
+        'staff': {
+          title: '[4] Staff: HIPAA RBAC',
+          desc: 'Automates the validation of Role-Based Access Controls (RBAC) and Multi-Factor Authentication (MFA) policies across all clinical staff directory groups, generating cryptographic proof for underwriters.',
+          metrics: `
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>Control Map:</span> <span class="text-white font-bold">45 CFR Â§ 164.308(a)</span>
+            </div>
+            <div class="flex justify-between border-b border-slate-800 pb-1">
+              <span>MFA Enforcement:</span> <span class="text-emerald-400 font-bold">100% VERIFIED</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Audit Readiness:</span> <span class="text-emerald-400 font-bold">PASSED</span>
+            </div>`
+        }
+      };
+
+      hotspots.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Reset styles
+          hotspots.forEach(b => {
+            b.classList.remove('active', 'border-emerald-500', 'bg-slate-900/90', 'text-emerald-400');
+            b.classList.add('bg-slate-800/90', 'border-slate-500', 'text-slate-300');
+          });
+
+          // Set active styles
+          btn.classList.remove('bg-slate-800/90', 'border-slate-500', 'text-slate-300');
+          btn.classList.add('active', 'border-emerald-500', 'bg-slate-900/90', 'text-emerald-400');
+
+          // Update Content
+          const zoneId = btn.getAttribute('data-or-zone');
+          const data = zoneData[zoneId];
+          
+          if(data) {
+            titleEl.innerHTML = data.title;
+            descEl.innerHTML = data.desc;
+            metricsEl.innerHTML = data.metrics;
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
