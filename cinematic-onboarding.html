@@ -210,7 +210,7 @@
         <div class="flex items-center gap-3">
             <span class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
             <span class="font-mono text-sm font-bold uppercase tracking-widest text-cyan-300">Target Path:</span>
-            <span class="font-mono text-sm font-bold text-slate-300">downloads/cinematic-onboarding.html</span>
+            <span class="font-mono text-sm font-bold text-slate-300"></span>
         </div>
         <span class="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">INTAKE FORM #B1-2026</span>
     </div>
@@ -225,7 +225,7 @@
                     <span class="flex items-center justify-center w-14 h-14 rounded-full bg-[#2A081C] text-white font-black text-2xl shadow-md" id="step-1-indicator">1</span>
                     <h2 class="text-3xl sm:text-4xl font-black text-[#2A081C] tracking-tight" id="step-1-title">Clinic Intake &amp; Vault Provisioning</h2>
                 </div>
-                <span class="text-4xl text-[#522d8a] toggle-icon font-black">âˆ’</span>
+                <span class="text-4xl text-[#522d8a] toggle-icon font-black">-</span>
             </button>
             <div class="step-content px-6 sm:px-8 flex flex-col lg:flex-row gap-10">
                 <div class="w-full lg:w-1/2 space-y-8">
@@ -764,7 +764,7 @@
                 icon.textContent = '+';
             } else {
                 container.classList.add('active');
-                icon.textContent = 'âˆ’';
+                icon.textContent = '-';
             }
         }
         function collapseAndNext(current, next) {
@@ -974,6 +974,8 @@
             if (v1) {
                 v1.loop = false;
                 v1.autoplay = false;
+                v1.parentElement.addEventListener('mouseenter', () => { v1.play(); });
+                v1.parentElement.addEventListener('mouseleave', () => { v1.pause(); v1.currentTime = 0.05; });
                 v1.addEventListener('loadeddata', () => { if (v1.paused) try { v1.currentTime = 0.05; } catch (e) {} }, { once: true });
                 v1.addEventListener('ended', () => v1.pause());
             }
@@ -982,4 +984,9 @@
     </script>
 </body>
 </html>
+
+
+
+
+
 
