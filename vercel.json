@@ -30,6 +30,10 @@
             "destination": "http://129.212.176.154/api/:path*"
         },
         {
+            "source": "/webhook/:path*",
+            "destination": "http://129.212.176.154/webhook/:path*"
+        },
+        {
             "source": "/",
             "has": [
                 {
