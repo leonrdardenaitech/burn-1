@@ -290,6 +290,50 @@
     ],
     "redirects": [
         {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^tool\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/tool",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^tools\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/tools",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^inklife\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/inklife",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^(?!(www|phase25|tool|tools|inklife)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/cards/:subdomain",
+            "permanent": false
+        },
+        {
             "destination": "/",
             "permanent": false,
             "source": "/downloads"
