@@ -34,13 +34,73 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "^(www\\.)?burn-1\\.com$"
+                    "value": "^tool\\.burn-1\\.com$"
                 }
             ],
-            "destination": "/index.html"
+            "destination": "/tools.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^tool\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/tools.html"
         },
         {
             "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^tools\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/tools.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^tools\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/tools.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^inklife\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/cards/inklife.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^inklife\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/cards/inklife.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^phase25\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/phase25.html"
+        },
+        {
+            "source": "/(.*)",
             "has": [
                 {
                     "type": "host",
@@ -60,14 +120,44 @@
             "destination": "/cards/jasonkuts.html"
         },
         {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^jasonkuts\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/cards/jasonkuts.html"
+        },
+        {
             "source": "/",
             "has": [
                 {
                     "type": "host",
-                    "value": "^(?!(www|phase25)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                    "value": "^(?!(www|phase25|tool|tools)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
                 }
             ],
             "destination": "/cards/:subdomain.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^(?!(www|phase25|tool|tools)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/cards/:subdomain.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^(www\\.)?burn-1\\.com$"
+                }
+            ],
+            "destination": "/index.html"
         },
         {
             "source": "/directory",
