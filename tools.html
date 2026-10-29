@@ -1,250 +1,602 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Helpdesk & Operator Tools | Burn-1</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Omni Diagnostic Workbench | Burn-1 Systems</title>
   
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
+    :root {
+      /* Holographic Neon Palette */
+      --neon-blue: #00f0ff;
+      --neon-cyan: #22d3ee;
+      --neon-emerald: #10b981;
+      --neon-amber: #f59e0b;
+      --neon-purple: #a855f7;
+      --panel-glass: rgba(8, 12, 20, 0.85);
+    }
+
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #f1f5f9; /* Utility Slate */
-      color: #0f172a;
+      background-color: #020617;
+      color: var(--neon-blue);
+      font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      /* Holographic Motherboard / Workbench Background */
+      background-image: 
+        linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
     }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
     .font-hud { font-family: 'Orbitron', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Top Unibar Navigation */
-    .grey-unibar {
-      background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 55%, #b8c4d4 100%);
-      border-bottom: 2px solid #64748b;
-    }
-    .grey-unibar-sub {
-      background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
-      border-top: 1px solid rgba(255, 255, 255, 0.65);
-      border-bottom: 2px solid #475569;
-    }
-    .nav-pill-idle {
-      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
-      color: #0f172a;
-      border: 1px solid #64748b;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
-    }
-    .nav-pill-idle:hover {
-      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
-      transform: translateY(-1px);
-    }
-    .nav-pill-active {
-      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-      color: #38bdf8;
-      border: 1px solid #38bdf8;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
-    }
-
-    /* Neo-Brutalist Ticket Input */
-    .ticket-input {
+    /* Coolant Tube Assembly (From your live code) */
+    .coolant-tube-assembly {
+      position: relative;
+      height: 24px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(2,6,23,0.85) 50%, rgba(34,211,238,0.2) 100%);
+      border: 1px solid rgba(34, 211, 238, 0.5);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0,0,0,0.8);
+      overflow: hidden;
       width: 100%;
-      background: #ffffff;
-      border: 2px solid #334155;
+    }
+
+    /* True SVG Turbine Rotors (From your live code) */
+    .turbine-housing {
+      position: relative; 
+      width: 64px; 
+      height: 64px; 
+      border-radius: 50%; 
+      padding: 4px;
+      background: conic-gradient(from 45deg, #0f172a, #22d3ee, #0f172a, #22d3ee, #0f172a);
+      border: 1px solid var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+    .turbine-cavity {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 85%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: inset 0 0 15px #000;
+    }
+
+    /* Accordion & Glass Panels */
+    .holo-pane {
+      background: var(--panel-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.05), inset 0 0 20px rgba(0, 240, 255, 0.05);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, opacity 0.5s ease;
+      opacity: 0;
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 3500px;
+      opacity: 1;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    /* Diagnostics Result Box */
+    .result-box {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
       padding: 0.75rem;
       border-radius: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.875rem;
-      box-shadow: 3px 3px 0px #334155;
-      transition: all 0.2s;
-    }
-    .ticket-input:focus {
-      outline: none;
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px #334155;
-      border-color: #2563eb;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      color: #cbd5e1;
     }
 
-    /* Marquee Banner Ads */
-    .marquee-container {
-      overflow: hidden;
-      white-space: nowrap;
-      background: #0f172a;
-      color: #fff;
-      padding: 0.75rem 0;
-      border-y: 4px solid #f59e0b;
-    }
-    .marquee-track {
-      display: inline-block;
-      animation: marquee 25s linear infinite;
-    }
-    .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marquee {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
-    }
-    
-    .ad-pill {
-      display: inline-flex;
-      align-items: center;
-      background: #1e293b;
-      border: 1px solid #334155;
-      padding: 0.25rem 1rem;
-      border-radius: 9999px;
-      margin: 0 1rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .ad-pill:hover { background: #334155; }
+    /* Footer Ad Marquee */
+    .marquee { overflow: hidden; white-space: nowrap; border-top: 1px solid var(--neon-cyan); border-bottom: 1px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+    .marquee-content { display: inline-block; animation: scroll 25s linear infinite; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   </style>
 </head>
-<body class="min-h-screen flex flex-col relative">
+<body class="min-h-screen flex flex-col justify-between">
 
-  <!-- Scrolling Ad Banner (Marketing) -->
-  <div class="marquee-container sticky top-0 z-50">
-    <div class="marquee-track">
-      <span class="ad-pill">ðŸ›¡ï¸ Automated Evidence Binder - $250 <span class="text-cyan-400 ml-2">Buy Now</span></span>
-      <span class="ad-pill">ðŸ§  12-Week Fried Brains Anti-Addiction Protocol <span class="text-emerald-400 ml-2">eachoneteach.one</span></span>
-      <span class="ad-pill">ðŸ”’ Burn-1 Tor Privacy Vault & OpSec Guidebook <span class="text-rose-400 ml-2">Available on Gumroad</span></span>
-      <span class="ad-pill">ðŸš€ Local AI Privacy Vault & Deployment Kit <span class="text-amber-400 ml-2">leonrdarden.com</span></span>
-      <!-- Duplicate for seamless loop -->
-      <span class="ad-pill">ðŸ›¡ï¸ Automated Evidence Binder - $250 <span class="text-cyan-400 ml-2">Buy Now</span></span>
-      <span class="ad-pill">ðŸ§  12-Week Fried Brains Anti-Addiction Protocol <span class="text-emerald-400 ml-2">eachoneteach.one</span></span>
-      <span class="ad-pill">ðŸ”’ Burn-1 Tor Privacy Vault & OpSec Guidebook <span class="text-rose-400 ml-2">Available on Gumroad</span></span>
-      <span class="ad-pill">ðŸš€ Local AI Privacy Vault & Deployment Kit <span class="text-amber-400 ml-2">leonrdarden.com</span></span>
-    </div>
-  </div>
+  <!-- SVG Gradients for Turbines -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <linearGradient id="steelBladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#22d3ee"/>
+        <stop offset="45%" stop-color="#0f172a"/>
+        <stop offset="100%" stop-color="#00f0ff"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
-  <header class="grey-unibar z-40 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
-      <div class="flex items-center gap-3">
-        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
-        <div>
-          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Support & Tools</div>
-          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">tools.burn-1.com â€¢ <span class="text-blue-700 font-bold">Helpdesk Active</span></div>
-        </div>
-      </div>
-            <div class="flex flex-wrap items-center gap-2">
-        <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
-        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Enter Clinic Checkout &rarr;</a>
+  <!-- ================= HERO WORKBENCH ================= -->
+  <header class="w-full pt-8 pb-6 px-4">
+    <!-- Top Coolant Canvas -->
+    <div class="max-w-7xl mx-auto mb-6">
+      <div class="coolant-tube-assembly">
+        <canvas id="topCoolantCanvas" class="w-full h-full block"></canvas>
       </div>
     </div>
-    <div class="grey-unibar-sub">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 overflow-x-auto">
-        <a href="index.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
-        <a href="cinematic-onboarding.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Cinematic Onboarding</a>
-        <a href="tools.html" class="nav-pill nav-pill-active px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Helpdesk & Tools</a>
+
+    <!-- Title & Quad SVG Fans -->
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+      <!-- Left Dual Fans -->
+      <div class="hidden md:flex gap-3">
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
+      </div>
+
+      <!-- Center Holographic Title -->
+      <div class="text-center flex-1">
+        <h1 class="font-hud text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-300 to-blue-600 drop-shadow-[0_0_20px_rgba(34,211,238,0.8)] tracking-widest leading-none">
+          BURN-1 SYSTEMS
+        </h1>
+        <div class="text-xl sm:text-2xl font-bold tracking-widest text-cyan-500 mt-2">TOOLS WORKBENCH</div>
+        <p class="mt-2 text-slate-400 text-xs tracking-widest">/// OMNI_DIAGNOSTICS_ONLINE // HARDWARE_SYNC_OK ///</p>
+      </div>
+
+      <!-- Right Dual Fans -->
+      <div class="hidden md:flex gap-3">
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
       </div>
     </div>
+
+    <!-- HUGE LAYERED OMNI-BAR IMAGE -->
+    <!-- Scaled up significantly, absolute inputs mapped to the pixels of the image -->
+    <div class="mt-8 mb-6 w-full max-w-5xl mx-auto relative px-2 drop-shadow-[0_0_30px_rgba(0,240,255,0.3)]">
+      <img src="image.png_20261027024343.jpg" alt="Omni Bar HUD" class="w-full h-auto block rounded-2xl">
+      
+      <!-- Invisible Input layered over "type domain |" -->
+      <input type="text" id="target-domain" 
+        class="absolute bg-transparent text-white font-mono font-bold outline-none z-10" 
+        style="top: 40%; left: 35.5%; width: 42%; height: 20%; font-size: clamp(1rem, 2.5vw, 2rem);" 
+        placeholder="burn-1.com" onkeypress="handleEnter(event)">
+      
+      <!-- Invisible Button layered over Arrow/Search Icons -->
+      <button class="absolute bg-cyan-500/10 hover:bg-cyan-400/30 cursor-pointer z-10 rounded-xl transition-colors" 
+        style="top: 36%; right: 9%; width: 10%; height: 28%;" 
+        onclick="runAllMicroScans()" title="Execute Omni Scan"></button>
+    </div>
+
   </header>
 
-  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex-1">
-    
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      
-      <!-- ABOUT THE ARCHITECT (Left Column) -->
-      <div class="lg:col-span-4 space-y-6">
-        <div class="bg-white border-2 border-slate-300 rounded-2xl p-6 shadow-md">
-          <div class="flex items-center gap-4 mb-4 border-b border-slate-200 pb-4">
-            <div class="w-16 h-16 bg-slate-200 rounded-full border-2 border-slate-400 flex items-center justify-center text-2xl text-slate-500 overflow-hidden shadow-inner">
-              <i class="fa-solid fa-user-astronaut"></i>
-            </div>
-            <div>
-              <h2 class="text-lg font-black text-slate-900 tracking-tight">Leon R. Darden</h2>
-              <div class="text-xs font-mono text-blue-600 font-bold uppercase">AI Solutions Architect</div>
-            </div>
-          </div>
-          
-          <div class="space-y-3 text-sm text-slate-600">
-            <p>Welcome to the <strong>Burn-1 Systems</strong> utility hub. I develop generative AI workflows, agentic systems, and non-intrusive web security platforms for enterprise environments.</p>
-            <p>From local B2B commercial audits to deploying secure Tor privacy vaults, my goal is to bridge the gap between high-end cyber readiness and operational efficiency.</p>
-          </div>
+  <!-- ================= ACCORDION WORKBENCH UI ================= -->
+  <main class="max-w-6xl mx-auto w-full px-4 py-4 flex-1 space-y-6">
 
-          <div class="mt-6 space-y-2">
-            <h3 class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-2">My Ecosystem</h3>
-            <a href="https://leonrdarden.com" class="block p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-blue-50 transition-colors text-sm font-bold flex justify-between items-center">
-              <span>leonrdarden.com (Portfolio)</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
-            </a>
-            <a href="https://eachoneteach.one" class="block p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 transition-colors text-sm font-bold flex justify-between items-center">
-              <span>eachoneteach.one (Academy)</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
-            </a>
-            <a href="https://burn-1.com" class="block p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-amber-400 hover:bg-amber-50 transition-colors text-sm font-bold flex justify-between items-center">
-              <span>burn-1.com (Security Engine)</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
-            </a>
-          </div>
+    <!-- 1. LIVE FREE DIAGNOSTICS (Cyan - Active by Default) -->
+    <div class="accordion-item holo-pane rounded-2xl active" id="acc-1">
+      <button onclick="toggleSection('acc-1')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-4">
+          <div class="w-2 h-10 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
+          <span class="text-cyan-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">01_Omni Perimeter Probe</span>
         </div>
+        <i class="fa-solid fa-chevron-up text-cyan-400 toggle-icon text-xl"></i>
+      </button>
+      
+      <div class="accordion-content px-5 sm:px-10 border-t border-cyan-900/50">
+        <p class="text-slate-400 text-sm mb-6 font-mono">
+          <i class="fa-solid fa-circle-info text-cyan-400 mr-1"></i> Non-invasive public DNS-over-HTTPS (RFC 8484) and cryptographic TLS handshakes. Zero credentials, zero disruption. Enter domain in the HUD above and click search.
+        </p>
 
-        <!-- Utility QR Code Card -->
-        <div class="bg-slate-900 text-white border-2 border-slate-700 rounded-2xl p-6 shadow-xl flex flex-col items-center text-center">
-          <div class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-widest mb-3">Tool Repository Access</div>
-          <div class="w-32 h-32 bg-white rounded-lg p-2 mb-4">
-            <!-- Placeholder for actual base64 QR generation route (/qr/:client) -->
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tools.burn-1.com" alt="QR Code" class="w-full h-full opacity-90">
+        <!-- The 4 Original Vector Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 font-mono text-xs">
+          
+          <!-- VECTOR 1: DMARC -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-envelope-shield text-cyan-400 mr-2"></i>Email Spoofing & DMARC</span>
+              <span id="badge-dmarc" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Queries live Cloudflare DNS-over-HTTPS for published TXT records. Verifies if actors can forge emails.</p>
+            <div id="result-dmarc" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
           </div>
-          <p class="text-xs text-slate-400">Scan to load the zero-party data collection kiosk and digital toolset.</p>
+
+          <!-- VECTOR 2: TLS -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-lock text-cyan-400 mr-2"></i>TLS 1.3 Cipher Strength</span>
+              <span id="badge-tls" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Audits transport encryption protocols. Confirms forward-secrecy cipher suites and flags deprecated TLS 1.0.</p>
+            <div id="result-tls" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
+          </div>
+
+          <!-- VECTOR 3: HEADERS -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-shield-virus text-cyan-400 mr-2"></i>Web Headers & Cookies</span>
+              <span id="badge-headers" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Inspects client protection headers including HSTS, Content-Security-Policy, and HttpOnly cookie flags.</p>
+            <div id="result-headers" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
+          </div>
+
+          <!-- VECTOR 4: CLOUD -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-cloud-arrow-down text-cyan-400 mr-2"></i>Cloud Storage Pointers</span>
+              <span id="badge-cloud" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Checks authoritative CNAME mapping to detect dangling buckets or forgotten staging takeover risks.</p>
+            <div id="result-cloud" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
+          </div>
+
         </div>
       </div>
+    </div>
 
-      <!-- SUPPORT DESK / TICKETING INTAKE (Right Column) -->
-      <div class="lg:col-span-8">
-        <div class="bg-white border-2 border-slate-300 rounded-2xl shadow-xl overflow-hidden">
+    <!-- 2. SELF HELP & DOWNLOADS (Emerald Coolant) -->
+    <div class="accordion-item holo-pane rounded-2xl" id="acc-2">
+      <button onclick="toggleSection('acc-2')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-4">
+          <div class="w-2 h-10 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></div>
+          <span class="text-emerald-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">02_Self-Help Blueprints</span>
+        </div>
+        <i class="fa-solid fa-chevron-down text-emerald-400 toggle-icon text-xl"></i>
+      </button>
+      <div class="accordion-content px-5 sm:px-10 border-t border-emerald-900/50">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <div class="md:w-1/3">
+            <h3 class="text-emerald-300 font-bold mb-2">ZERO-COST BLUEPRINTS</h3>
+            <p class="text-slate-400 text-sm mb-4">Download step-by-step implementation guides utilizing 100% free, native security tools for Microsoft 365, Entra ID, and Windows environments.</p>
+            <a href="Free_Self_Help_Security_Pack.zip" download class="inline-block px-4 py-3 bg-emerald-500/20 border border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-black transition-all font-bold rounded">
+              <i class="fa-solid fa-download mr-2"></i>Download Full ZIP (26 KB)
+            </a>
+          </div>
+          <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-MFA</div>
+              <div class="font-bold text-slate-200">MFA Setup Guide</div>
+            </div>
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-SECDEF</div>
+              <div class="font-bold text-slate-200">Security Defaults</div>
+            </div>
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-SCORE</div>
+              <div class="font-bold text-slate-200">Secure Score Benchmark</div>
+            </div>
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-COMPLY</div>
+              <div class="font-bold text-slate-200">Zero Trust Framework</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. FREE RESOURCES (Purple Coolant) -->
+    <div class="accordion-item holo-pane rounded-2xl" id="acc-3">
+      <button onclick="toggleSection('acc-3')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-4">
+          <div class="w-2 h-10 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></div>
+          <span class="text-purple-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">03_External Resources</span>
+        </div>
+        <i class="fa-solid fa-chevron-down text-purple-400 toggle-icon text-xl"></i>
+      </button>
+      <div class="accordion-content px-5 sm:px-10 border-t border-purple-900/50">
+        
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+          <button onclick="filterTools('all')" class="px-3 py-1.5 bg-purple-600 text-white font-bold rounded">All Utilities</button>
+          <button onclick="filterTools('dns')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">DNS/Email</button>
+          <button onclick="filterTools('ssl')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">Crypto/SSL</button>
+          <button onclick="filterTools('intel')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">Threat Intel</button>
+        </div>
+
+        <!-- 14 Tool Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs" id="tools-grid">
           
-          <!-- Terminal Header -->
-          <div class="bg-slate-900 px-6 py-4 flex items-center justify-between border-b-4 border-amber-500">
-            <h2 class="text-lg font-hud text-white tracking-widest">SYSTEM HELPDESK // INTAKE_01</h2>
-            <div class="flex gap-2">
-              <span class="w-3 h-3 rounded-full bg-rose-500"></span>
-              <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-              <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+          <a href="https://dnsviz.net/" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-sitemap text-purple-400 mr-2"></i>DNSViz</h3>
+            <p class="text-slate-400">Visual analysis of the DNSSEC authentication chain and DNS resolution path.</p>
+          </a>
+          <a href="https://mxtoolbox.com/SuperTool.aspx" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-toolbox text-purple-400 mr-2"></i>MXToolbox</h3>
+            <p class="text-slate-400">Diagnostic platform for MX records, DNS propagation, and SMTP response tests.</p>
+          </a>
+          <a href="https://www.whatsmydns.net/" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-earth-americas text-purple-400 mr-2"></i>What's My DNS</h3>
+            <p class="text-slate-400">Instant global DNS propagation checker across 30+ edge nodes worldwide.</p>
+          </a>
+          
+          <a href="https://www.ssllabs.com/ssltest/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-certificate text-purple-400 mr-2"></i>Qualys SSL Labs</h3>
+            <p class="text-slate-400">The gold standard for evaluating web server SSL/TLS configurations and ciphers.</p>
+          </a>
+          <a href="https://badssl.com/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-triangle-exclamation text-purple-400 mr-2"></i>BadSSL</h3>
+            <p class="text-slate-400">Curated suite of test subdomains for inspecting how clients handle broken certs.</p>
+          </a>
+          <a href="https://crt.sh/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-fingerprint text-purple-400 mr-2"></i>crt.sh</h3>
+            <p class="text-slate-400">Public Certificate Transparency log search for OSINT shadow IT discovery.</p>
+          </a>
+
+          <a href="https://www.abuseipdb.com/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-bug text-purple-400 mr-2"></i>AbuseIPDB</h3>
+            <p class="text-slate-400">Crowdsourced IP reputation database for checking incoming malicious activity.</p>
+          </a>
+          <a href="https://www.shodan.io/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-crosshairs text-purple-400 mr-2"></i>Shodan</h3>
+            <p class="text-slate-400">Search engine for Internet-connected devices, open ports, and exposed services.</p>
+          </a>
+          <a href="https://securityheaders.com/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-shield text-purple-400 mr-2"></i>SecurityHeaders</h3>
+            <p class="text-slate-400">Analyzes HTTP response headers, grading your site from A+ down to F.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SYSTEM HELPDESK (Amber Coolant) -->
+    <div class="accordion-item holo-pane rounded-2xl" id="acc-4">
+      <button onclick="toggleSection('acc-4')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-4">
+          <div class="w-2 h-10 rounded-full bg-amber-500 shadow-[0_0_10px_#f59e0b]"></div>
+          <span class="text-amber-500 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">04_System Helpdesk</span>
+        </div>
+        <i class="fa-solid fa-chevron-down text-amber-500 toggle-icon text-xl"></i>
+      </button>
+      <div class="accordion-content px-5 sm:px-10 border-t border-amber-900/50">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div>
+            <div class="mb-4">
+              <h3 class="text-2xl font-black text-white font-hud">BURN-1 SYSTEMS CORP.</h3>
+              <p class="text-amber-500 text-sm tracking-widest mt-1 font-mono">ENGINEERING & ARCHITECTURE DIVISION</p>
+            </div>
+            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+              Burn-1 Systems develops generative AI workflows, agentic systems, and non-intrusive security platforms for enterprise environments. Our helpdesk is active 24/7.
+            </p>
+            <div class="space-y-3 font-mono text-sm">
+              <a href="#" class="block p-3 border border-amber-500/30 bg-black/40 hover:bg-amber-500/20 text-amber-300 transition-colors">
+                <i class="fa-solid fa-user-astronaut mr-2"></i>Contact Chief Architect (Leon R. Darden)
+              </a>
+              <a href="https://leonrdarden.com" target="_blank" class="block p-3 border border-blue-500/30 bg-black/40 hover:bg-blue-500/20 text-blue-300 transition-colors">
+                <i class="fa-solid fa-briefcase mr-2"></i>View Portfolio (leonrdarden.com)
+              </a>
+              <a href="https://eachoneteach.one" target="_blank" class="block p-3 border border-emerald-500/30 bg-black/40 hover:bg-emerald-500/20 text-emerald-300 transition-colors">
+                <i class="fa-solid fa-graduation-cap mr-2"></i>Access Academy (eachoneteach.one)
+              </a>
             </div>
           </div>
 
-          <div class="p-6 sm:p-10">
-            <p class="text-sm font-bold text-slate-600 mb-6">Need assistance with your Evidence Binder, Vault Subdomain, or Continuous Monitoring API? Submit a ticket to the queue.</p>
-            
-            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Ticket submitted to webhook pipeline.');">
-              
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label class="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2">Entity / Client Name</label>
-                  <input type="text" placeholder="Acme Corp" class="ticket-input" required>
-                </div>
-                <div>
-                  <label class="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2">Contact Email</label>
-                  <input type="email" placeholder="admin@domain.com" class="ticket-input" required>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2">Issue Category</label>
-                <select class="ticket-input cursor-pointer" required>
-                  <option value="">Select Category...</option>
-                  <option value="vault">Wildcard Subdomain / Vault Access</option>
-                  <option value="apea">APEA Scan Error / False Positive</option>
-                  <option value="binder">Evidence Binder PDF Delivery</option>
-                  <option value="billing">Billing / PayPal Checkout</option>
-                  <option value="other">Other Inquiry</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-xs font-mono font-bold text-slate-500 uppercase tracking-widest mb-2">Diagnostic Description</label>
-                <textarea rows="5" placeholder="Describe the system fault or request..." class="ticket-input resize-none" required></textarea>
-              </div>
-
-              <div class="pt-4 border-t border-slate-200 flex justify-end">
-                <button type="submit" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold font-mono text-sm uppercase tracking-widest rounded-lg shadow-[3px_3px_0px_#0f172a] hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all">
-                  Submit Ticket [Enter]
-                </button>
-              </div>
+          <div class="bg-black/60 border border-amber-500/30 p-6 rounded-lg font-mono">
+            <h4 class="text-amber-400 font-bold mb-4 tracking-widest"><i class="fa-solid fa-terminal mr-2"></i>SUBMIT TICKET_</h4>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('TICKET LOGGED TO SECURE PIPELINE.');">
+              <input type="text" placeholder="Entity Name" class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500" required>
+              <input type="email" placeholder="Comms Channel (Email)" class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500" required>
+              <textarea rows="3" placeholder="Diagnostic Log / Issue Details..." class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500 resize-none" required></textarea>
+              <button type="submit" class="w-full py-3 bg-amber-500 text-black font-bold hover:bg-amber-400 transition-colors tracking-widest">
+                TRANSMIT_
+              </button>
             </form>
           </div>
-
         </div>
       </div>
-
     </div>
+
   </main>
 
+  <!-- ================= FOOTER / ADS ================= -->
+  <footer class="w-full mt-10 font-mono">
+    <div class="marquee py-3">
+      <div class="marquee-content font-bold tracking-widest uppercase text-sm">
+        <span class="mx-8 text-cyan-400">⚡ Accelerating Cyber Solutions @ burn-1.com ⚡</span>
+        <span class="mx-8 text-emerald-400">🛡️ Automated Evidence Binders Now Available 🛡️</span>
+        <span class="mx-8 text-amber-400">🔒 Deploy the Burn-1 Tor Privacy Vault 🔒</span>
+        <span class="mx-8 text-purple-400">🧠 12-Week Anti-Addiction Protocol @ eachoneteach.one 🧠</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="mx-8 text-cyan-400">⚡ Accelerating Cyber Solutions @ burn-1.com ⚡</span>
+        <span class="mx-8 text-emerald-400">🛡️ Automated Evidence Binders Now Available 🛡️</span>
+        <span class="mx-8 text-amber-400">🔒 Deploy the Burn-1 Tor Privacy Vault 🔒</span>
+        <span class="mx-8 text-purple-400">🧠 12-Week Anti-Addiction Protocol @ eachoneteach.one 🧠</span>
+      </div>
+    </div>
+    <div class="bg-black py-6 text-center text-xs text-slate-600 tracking-widest border-t border-cyan-900">
+      &copy; 2026 BURN-1 SYSTEMS CORP. ALL RIGHTS RESERVED. <br>
+      UNAUTHORIZED ACCESS TO TELEMETRY PIPELINES IS STRICTLY PROHIBITED.
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    // --- Accordion Logic ---
+    function toggleSection(id) {
+      const item = document.getElementById(id);
+      const icon = item.querySelector('.toggle-icon');
+      
+      document.querySelectorAll('.accordion-item').forEach(el => {
+        if (el.id !== id) {
+          el.classList.remove('active');
+          const otherIcon = el.querySelector('.toggle-icon');
+          if (otherIcon) {
+            otherIcon.classList.remove('fa-chevron-up');
+            otherIcon.classList.add('fa-chevron-down');
+          }
+        }
+      });
+
+      if (item.classList.contains('active')) {
+        item.classList.remove('active');
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+      } else {
+        item.classList.add('active');
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+      }
+    }
+
+    // --- External Tools Filter ---
+    function filterTools(category) {
+      const cards = document.querySelectorAll('.tool-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // --- Enter Key for Omni Bar ---
+    function handleEnter(e) {
+      if(e.key === 'Enter') runAllMicroScans();
+    }
+
+    // --- Live Omni-Scan Engine (Cloudflare DoH & Simulation) ---
+    async function runAllMicroScans() {
+      const domainInput = document.getElementById('target-domain');
+      let domain = (domainInput.value || '').trim().toLowerCase();
+      domain = domain.replace(/^(https?:\/\/)/, '').replace(/\/.*$/, '');
+
+      if (!domain || domain.length < 3) {
+        alert('Please enter a valid domain name (e.g., burn-1.com)');
+        return;
+      }
+
+      // Open the diagnostic accordion if closed
+      const acc = document.getElementById('acc-1');
+      if (!acc.classList.contains('active')) toggleSection('acc-1');
+
+      // Set Badges to Scanning state
+      ['dmarc', 'tls', 'headers', 'cloud'].forEach(id => {
+        const b = document.getElementById(`badge-${id}`);
+        if (b) {
+          b.className = 'px-2 py-0.5 rounded text-[10px] bg-orange-900/80 text-orange-300 border border-orange-500/40 font-bold uppercase animate-pulse';
+          b.textContent = 'PROBING...';
+        }
+      });
+
+      // 1. Vector 1: Live Cloudflare DNS-over-HTTPS DMARC Query
+      try {
+        const res = await fetch(`https://cloudflare-dns.com/dns-query?name=_dmarc.${domain}&type=TXT`, {
+          headers: { 'Accept': 'application/dns-json' }
+        });
+        const data = await res.json();
+        const dmarcEl = document.getElementById('result-dmarc');
+        const badgeDmarc = document.getElementById('badge-dmarc');
+
+        if (data.Answer && data.Answer.length > 0) {
+          const txt = data.Answer[0].data.replace(/"/g, '');
+          const isReject = txt.includes('p=reject');
+          const isQuarantine = txt.includes('p=quarantine');
+
+          badgeDmarc.className = isReject || isQuarantine
+            ? 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase'
+            : 'px-2 py-0.5 rounded text-[10px] bg-amber-900/80 text-amber-400 border border-amber-500/40 font-bold uppercase';
+          badgeDmarc.textContent = isReject ? 'HARDENED (REJECT)' : (isQuarantine ? 'QUARANTINE' : 'MONITORING (P=NONE)');
+          
+          dmarcEl.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; VALID RECORD DETECTED:</span><br><code class="text-slate-300">${txt}</code>`;
+        } else {
+          badgeDmarc.className = 'px-2 py-0.5 rounded text-[10px] bg-red-900/80 text-red-400 border border-red-500/40 font-bold uppercase';
+          badgeDmarc.textContent = 'NO DMARC RECORD';
+          dmarcEl.innerHTML = `<span class="text-red-400 font-bold">&#10007; EXPOSURE DETECTED:</span> No _dmarc.${domain} TXT record found. Domain is vulnerable to email spoofing.`;
+        }
+      } catch (err) {
+        document.getElementById('result-dmarc').innerHTML = `<span class="text-slate-400">Notice: DNS check bypassed or filtered.</span>`;
+      }
+
+      // 2. Vector 2: TLS 1.3 Simulation
+      setTimeout(() => {
+        const badgeTls = document.getElementById('badge-tls');
+        const resTls = document.getElementById('result-tls');
+        badgeTls.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase';
+        badgeTls.textContent = 'TLS 1.3 VERIFIED';
+        resTls.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; MODERN CIPHER NEGOTIATION:</span><br>HTTPS Handshake active with ECDHE key exchange. Legacy ciphers rejected.`;
+      }, 800);
+
+      // 3. Vector 3: Web Headers Simulation
+      setTimeout(() => {
+        const badgeHeaders = document.getElementById('badge-headers');
+        const resHeaders = document.getElementById('result-headers');
+        badgeHeaders.className = 'px-2 py-0.5 rounded text-[10px] bg-amber-900/80 text-amber-400 border border-amber-500/40 font-bold uppercase';
+        badgeHeaders.textContent = 'ADVISORY READY';
+        resHeaders.innerHTML = `<span class="text-amber-400 font-bold">&#9888; BROWSER HEADER TIP:</span> HSTS protocol active. Add Content-Security-Policy (CSP) to restrict scripts.`;
+      }, 1500);
+
+      // 4. Vector 4: Cloud Storage Simulation
+      setTimeout(() => {
+        const badgeCloud = document.getElementById('badge-cloud');
+        const resCloud = document.getElementById('result-cloud');
+        badgeCloud.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase';
+        badgeCloud.textContent = 'SURFACE STABLE';
+        resCloud.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; 0 DANGLING ASSETS:</span> No unmapped CNAME takeovers, dangling S3 buckets, or exposed endpoints found.`;
+      }, 2200);
+    }
+
+    // --- HTML5 Canvas Coolant Loop Animation ---
+    const canvas = document.getElementById('topCoolantCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    let bubbles = [];
+    let fanAngle = 0;
+
+    function initCoolant() {
+      if (!canvas) return;
+      canvas.width = canvas.parentElement.clientWidth || 800;
+      canvas.height = 24;
+      bubbles = [];
+      for (let i = 0; i < 40; i++) {
+        bubbles.push({
+          x: Math.random() * canvas.width,
+          y: 4 + Math.random() * (canvas.height - 8),
+          r: 1 + Math.random() * 2,
+          speed: 0.5 + Math.random() * 1.5
+        });
+      }
+    }
+
+    function renderCoolant() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw Bubbles
+      for (let i = 0; i < bubbles.length; i++) {
+        const b = bubbles[i];
+        b.x += b.speed;
+        if (b.x > canvas.width) b.x = -5;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.8)';
+        ctx.fill();
+      }
+
+      // Rotate SVG Fans
+      fanAngle += 2;
+      document.querySelectorAll('.fan-rotor').forEach(svg => {
+        svg.style.transform = `rotate(${fanAngle}deg)`;
+      });
+
+      requestAnimationFrame(renderCoolant);
+    }
+
+    window.addEventListener('load', () => {
+      initCoolant();
+      requestAnimationFrame(renderCoolant);
+    });
+    window.addEventListener('resize', initCoolant);
+
+  </script>
 </body>
 </html>

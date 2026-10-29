@@ -5,18 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamified Academy | Burn-1 Systems</title>
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #EBF1F5; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
+
         .holo-bg {
-            background-image: radial-gradient(circle at 50% 50%, rgba(230, 224, 248, 0.8) 0%, rgba(235, 241, 245, 1) 100%), 
-                              linear-gradient(rgba(42, 8, 28, 0.03) 1px, transparent 1px), 
+            background-image: radial-gradient(circle at 50% 50%, rgba(230, 224, 248, 0.8) 0%, rgba(235, 241, 245, 1) 100%),
+                              linear-gradient(rgba(42, 8, 28, 0.03) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(42, 8, 28, 0.03) 1px, transparent 1px);
             background-size: 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        /* Top unibar (matches index.html) */
+        .grey-unibar {
+            background: linear-gradient(180deg,#e2e8f0 0%,#cbd5e1 55%,#b8c4d4 100%);
+            border-bottom: 2px solid #64748b;
+            box-shadow: 0 6px 20px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+        .grey-unibar-sub {
+            background: linear-gradient(180deg,#cbd5e1 0%,#94a3b8 100%);
+            border-top: 1px solid rgba(255,255,255,0.65);
+            border-bottom: 2px solid #475569;
+        }
+        .nav-pill-idle {
+            background: linear-gradient(180deg,#f8fafc 0%,#cbd5e1 100%);
+            color: #0f172a; border: 1px solid #64748b;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
+        }
+        .nav-pill-idle:hover { background: linear-gradient(180deg,#ffffff 0%,#e2e8f0 100%); transform: translateY(-1px); }
+        .nav-pill-active {
+            background: linear-gradient(180deg,#0f172a 0%,#1e293b 100%);
+            color: #38bdf8; border: 1px solid #38bdf8;
+            box-shadow: 0 0 12px rgba(56,189,248,0.45);
         }
 
         .module-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, padding 0.5s ease; }
@@ -29,7 +52,7 @@
         .cyber-checkbox { appearance: none; width: 1.5rem; height: 1.5rem; border: 2px solid #C4D4E0; border-radius: 0.375rem; outline: none; cursor: pointer; position: relative; transition: all 0.2s ease; }
         .cyber-checkbox:checked { background-color: #10b981; border-color: #10b981; }
         .cyber-checkbox:checked::after { content: '✓'; position: absolute; color: white; font-weight: bold; left: 50%; top: 50%; transform: translate(-50%, -50%); }
-        
+
         .fade-step { animation: fadeIn 0.3s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
 
@@ -37,152 +60,176 @@
         .term-warn { color: #D92B8A; margin-bottom: 6px; font-weight: bold; font-size: 12px; }
         .term-succ { color: #10b981; margin-bottom: 6px; font-weight: bold; font-size: 12px; }
 
-        /* Animated Cyber Grid Fallback for Video Boxes */
         .cyber-road-anim {
             background: radial-gradient(ellipse at center, #2A081C 0%, #090d16 100%);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
         .cyber-road-anim::before {
-            content: '';
-            position: absolute;
-            inset: -50%;
-            background-image: 
+            content: ''; position: absolute; inset: -50%;
+            background-image:
                 linear-gradient(rgba(0, 229, 255, 0.15) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(217, 43, 138, 0.15) 1px, transparent 1px);
             background-size: 36px 36px;
             transform: perspective(300px) rotateX(60deg);
             animation: roadMove 4s linear infinite;
         }
-        @keyframes roadMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 72px; }
-        }
+        @keyframes roadMove { 0% { background-position: 0 0; } 100% { background-position: 0 72px; } }
 
-        /* Burn-1 Radar Scanner CSS (from burn1_onboarding_modal.js) */
         .burn1-radar {
-            width: 84px;
-            height: 84px;
-            border-radius: 9999px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(15, 23, 42, 0.95) 75%);
-            border: 2px solid #10b981;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+            width: 84px; height: 84px; border-radius: 9999px;
+            background: radial-gradient(circle, rgba(16,185,129,0.2) 0%, rgba(15,23,42,0.95) 75%);
+            border: 2px solid #10b981; position: relative; overflow: hidden;
+            flex-shrink: 0; box-shadow: 0 0 20px rgba(16,185,129,0.35);
         }
-        .burn1-radar::before {
-            content: '';
-            position: absolute;
-            inset: 14px;
-            border-radius: 9999px;
-            border: 1px dashed rgba(16, 185, 129, 0.45);
-        }
-        .burn1-radar-vline {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 50%;
-            height: 2px;
-            background: linear-gradient(90deg, #10b981, transparent);
-            transform-origin: left center;
-            animation: radarSweep 2.4s linear infinite;
-        }
-        .burn1-radar-pulse {
-            position: absolute;
-            inset: 0;
-            border-radius: 9999px;
-            border: 2px solid rgba(242, 101, 34, 0.6);
-            animation: radarPulse 2s ease-out infinite;
-        }
-        @keyframes radarSweep {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes radarPulse {
-            0% { transform: scale(0.2); opacity: 1; }
-            100% { transform: scale(1.1); opacity: 0; }
-        }
+        .burn1-radar::before { content:''; position:absolute; inset:14px; border-radius:9999px; border:1px dashed rgba(16,185,129,0.45); }
+        .burn1-radar-vline { position:absolute; top:50%; left:50%; width:50%; height:2px; background:linear-gradient(90deg,#10b981,transparent); transform-origin:left center; animation: radarSweep 2.4s linear infinite; }
+        .burn1-radar-pulse { position:absolute; inset:0; border-radius:9999px; border:2px solid rgba(242,101,34,0.6); animation: radarPulse 2s ease-out infinite; }
+        @keyframes radarSweep { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+        @keyframes radarPulse { 0%{transform:scale(0.2);opacity:1} 100%{transform:scale(1.1);opacity:0} }
 
         @keyframes ringPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(217, 43, 138, 0.6); }
-            50% { box-shadow: 0 0 0 10px rgba(217, 43, 138, 0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(217,43,138,0.6); }
+            50% { box-shadow: 0 0 0 10px rgba(217,43,138,0); }
         }
         .highlight-pulse { animation: ringPulse 1.2s ease-in-out 3; }
-    
-    /* Top Unibar Navigation */
-    .grey-unibar {
-      background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 55%, #b8c4d4 100%);
-      border-bottom: 2px solid #64748b;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    }
-    .grey-unibar-sub {
-      background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
-      border-top: 1px solid rgba(255, 255, 255, 0.65);
-      border-bottom: 2px solid #475569;
-    }
-    .nav-pill-idle {
-      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
-      color: #0f172a;
-      border: 1px solid #64748b;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
-    }
-    .nav-pill-idle:hover {
-      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
-      transform: translateY(-1px);
-    }
-    .nav-pill-active {
-      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-      color: #38bdf8;
-      border: 1px solid #38bdf8;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
-    }
 
-  </style>
+        /* 7s scan bar */
+        .scan-bar-track {
+            height: 10px; border-radius: 9999px; overflow: hidden;
+            background: rgba(42,8,28,0.5); border: 1px solid #522d8a;
+        }
+        .scan-bar-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #f26522, #facc15, #10b981);
+            box-shadow: 0 0 12px rgba(242,101,34,0.6);
+            transition: width 0.2s linear;
+        }
+
+        /* Earned badges row */
+        .badge-chip {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 10px; border-radius: 9999px;
+            background: #0f172a; color: #cbd5e1;
+            border: 1px solid #334155;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.35; filter: grayscale(1); transition: all .3s ease;
+            cursor: pointer;
+        }
+        .badge-chip.earned {
+            opacity: 1; filter: none;
+            background: linear-gradient(135deg, #1a0a2a 0%, #2A081C 100%);
+            border-color: #D92B8A; color: #fff;
+            box-shadow: 0 0 14px rgba(217,43,138,0.35);
+        }
+        .badge-chip .dot { width: 8px; height: 8px; border-radius: 9999px; background: #475569; }
+        .badge-chip.earned .dot { background: #10b981; box-shadow: 0 0 8px #10b981; }
+
+        .badge-img {
+            width: 64px; height: 64px; border-radius: 9999px; object-fit: cover;
+            border: 3px solid #2A081C;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            filter: grayscale(1) opacity(0.4);
+            transition: all .35s ease; cursor: pointer;
+        }
+        .badge-img.earned {
+            filter: none; border-color: #D92B8A;
+            box-shadow: 0 0 0 3px rgba(217,43,138,0.25), 0 10px 24px rgba(217,43,138,0.35);
+        }
+        .badge-img.earned:hover { transform: translateY(-3px) scale(1.05); }
+
+        /* Gamey auth ribbon */
+        .rank-ribbon {
+            background: linear-gradient(90deg, #2A081C 0%, #522d8a 50%, #2A081C 100%);
+            background-size: 200% 100%;
+            animation: ribbonShift 6s linear infinite;
+        }
+        @keyframes ribbonShift { 0%{background-position:0% 0} 100%{background-position:200% 0} }
+
+        /* Badge modal */
+        .fl-modal-backdrop {
+            position: fixed; inset: 0; z-index: 80;
+            background: rgba(0,0,0,0.78); backdrop-filter: blur(6px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 1rem;
+        }
+        .fl-modal-backdrop.hidden { display: none; }
+        .fl-modal-card {
+            background: #fff; border-radius: 24px; max-width: 520px; width: 100%;
+            border: 4px solid #2A081C;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            padding: 1.75rem; position: relative;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
+    </style>
 </head>
 <body class="holo-bg text-[#2A081C] min-h-screen pb-20">
 
-    <!-- Toast Notification Container -->
+    <!-- TOP NAV -->
+    <header class="grey-unibar sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
+                <div>
+                    <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase" style="font-family:'Inter',sans-serif;">Cyber Readiness Clinic</div>
+                    <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Accelerating Systems • <span class="text-[#D92B8A] font-bold">Operator Academy</span></div>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <a href="index.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Home</a>
+                <a href="index.html#burn1-fast-lane" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Fast Lane</a>
+                <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Guided Intake →</a>
+            </div>
+        </div>
+        <div class="grey-unibar-sub">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+                <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0" style="font-family:'Inter',sans-serif;">Home</a>
+                <a href="academy.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0" style="font-family:'Inter',sans-serif;">Academy</a>
+                <a href="cinematic-onboarding.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0" style="font-family:'Inter',sans-serif;">Cinematic Intake</a>
+            </div>
+        </div>
+    </header>
+
     <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-3 max-w-sm w-full pointer-events-none"></div>
 
     <main class="max-w-7xl mx-auto px-4 mt-8 flex flex-col lg:flex-row gap-8">
-        
-        <!-- LEFT COLUMN: The Academy Modules & Highlighted Road to Remediation -->
+
+        <!-- LEFT: MODULES + ROAD -->
         <div class="w-full lg:w-3/5 space-y-12">
-            
-            <!-- INTRO & VALUE PROP -->
+
+            <!-- INTRO -->
             <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-xl border-2 border-[#E6E0F8] flex flex-col md:flex-row items-center gap-8">
                 <div class="flex-1">
                     <div class="flex flex-wrap items-center gap-2 mb-2">
                         <p class="font-mono text-[#D92B8A] font-bold tracking-widest uppercase text-xs">Academy-1 // Active</p>
-                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-mono text-[10px] font-black uppercase">Stage 1 Free Live Session</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-mono text-[10px] font-black uppercase">Stage 1 Free Session</span>
                         <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-[#522d8a] font-mono text-[10px] font-black uppercase">Stage 2 Login Bound</span>
                     </div>
-                    <h2 class="text-3xl font-black text-[#2A081C] uppercase tracking-tighter mb-4">Earn 50% Off Your Evidence Binder</h2>
+                    <h2 class="text-3xl font-black text-[#2A081C] uppercase tracking-tighter mb-4">Earn credits toward your Evidence Binder</h2>
                     <p class="text-base sm:text-lg text-slate-600 font-bold mb-6 leading-relaxed">
-                        Underwriters reward verified hygiene. Complete the 8 free foundational protocols (40 CR) and sign in to unlock the 7 advanced Operator Simulators (80 CR) for 120 Underwriting Credits. Credits earned during your free live session automatically bind to your account at Intake and sync to <span class="font-mono text-[#D92B8A]">cinematicBoard1.html</span>.
+                        Complete the 8 free hygiene protocols (40 CR) and sign in to unlock the 7 advanced Operator Simulators (80 CR). Credits bind to your account at Intake and sync to the Evidence Binder at checkout. Earn the <strong>Cyber Hygiene</strong>, <strong>MFA-2</strong>, and <strong>Anti-Phishing</strong> badges along the way — the manager view your compliance file wants.
                     </p>
                     <div class="flex flex-wrap items-center gap-3">
                         <div class="inline-block px-4 py-2 bg-amber-100 border border-amber-400 rounded-lg text-amber-700 font-black text-xs uppercase tracking-widest">
                             <i class="fa-solid fa-clock mr-1"></i> Auto-Timer Starts on Any Phase
                         </div>
                         <button onclick="scrollToRoadSection()" class="px-4 py-2 bg-[#2A081C] hover:bg-[#522d8a] text-amber-400 font-mono font-bold text-xs uppercase tracking-widest rounded-lg transition-all shadow-sm">
-                            ⚡ Jump to Road to Remediation &darr;
+                            ⚡ Jump to Road to Remediation ↓
                         </button>
                     </div>
                 </div>
                 <i class="fa-solid fa-graduation-cap text-8xl text-[#C4D4E0] hidden md:block"></i>
             </div>
 
-            <!-- STAGE 1: HYGIENE LEVELS (All 8 Collapsed by Default, 100% Free Session) -->
+            <!-- STAGE 1 -->
             <section id="stage-1-section">
                 <div class="mb-6 flex flex-wrap justify-between items-end border-b-2 border-[#C4D4E0] pb-3 gap-2">
                     <div>
                         <div class="flex items-center gap-2">
                             <h3 class="text-3xl font-black text-[#2A081C] uppercase tracking-tight">Stage 1: System Hygiene</h3>
-                            <span class="px-2.5 py-0.5 bg-emerald-500 text-white font-mono text-[10px] font-black uppercase rounded-md">FREE ACCESS // NO LOGIN REQUIRED</span>
+                            <span class="px-2.5 py-0.5 bg-emerald-500 text-white font-mono text-[10px] font-black uppercase rounded-md">FREE // NO LOGIN</span>
                         </div>
-                        <p class="font-mono text-xs text-slate-500 mt-1">8 foundational protocols (all collapsed). Credits earned here transfer automatically when you create your account.</p>
+                        <p class="font-mono text-xs text-slate-500 mt-1">8 foundational protocols. Credits transfer automatically when you create an account.</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="collapseAllHygiene()" class="font-mono text-xs font-bold text-slate-600 hover:text-[#2A081C] bg-white border border-[#C4D4E0] px-3 py-1 rounded-lg transition-all">Collapse All</button>
@@ -192,7 +239,7 @@
                 <div id="hygiene-container" class="space-y-4"></div>
             </section>
 
-            <!-- STAGE 2: ADVANCED SIMULATORS (All A-G Collapsed by Default, Requires Login) -->
+            <!-- STAGE 2 -->
             <section id="stage-2-section">
                 <div class="mb-6 flex flex-wrap justify-between items-end border-b-2 border-[#D92B8A] pb-3 gap-2">
                     <div>
@@ -202,7 +249,7 @@
                                 <i class="fa-solid fa-lock"></i> Login Required
                             </span>
                         </div>
-                        <p class="font-mono text-xs text-slate-500 mt-1">7 multi-scenario drills (4 phases per alphabet). Authenticate in Intake Credentials to unlock and bind your free credits.</p>
+                        <p class="font-mono text-xs text-slate-500 mt-1">7 multi-scenario drills (4 phases each). Authenticate in the right panel to unlock and bind your free credits.</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="expandAllSims()" class="font-mono text-xs font-bold text-slate-600 hover:text-[#2A081C] bg-white border border-[#C4D4E0] px-3 py-1 rounded-lg transition-all">Expand All</button>
@@ -211,7 +258,6 @@
                     </div>
                 </div>
 
-                <!-- Stage 2 Auth Gate Banner (Shown until logged in) -->
                 <div id="stage2-gate-banner" class="mb-4 p-5 rounded-2xl bg-gradient-to-r from-[#2A081C] via-[#3b1230] to-[#522d8a] text-white border-2 border-[#D92B8A] shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-[#D92B8A]/20 border border-[#D92B8A] flex items-center justify-center shrink-0">
@@ -219,36 +265,31 @@
                         </div>
                         <div>
                             <h4 class="font-black text-base uppercase tracking-wider">Operator Authentication Required for Stage 2</h4>
-                            <p class="font-mono text-xs text-slate-300 mt-0.5">Complete Stage 1 for free first, or create/sign in to your account now. Any free-session credits (<span id="gate-unclaimed-credits" class="text-amber-400 font-bold">0 CR</span>) automatically carry over!</p>
+                            <p class="font-mono text-xs text-slate-300 mt-0.5">Complete Stage 1 for free first, or create/sign in now. Free-session credits (<span id="gate-unclaimed-credits" class="text-amber-400 font-bold">0 CR</span>) carry over.</p>
                         </div>
                     </div>
-                    <button onclick="promptIntakeLogin('Authenticate or create an account to unlock Stage 2 Operator Simulators.')" class="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-[#2A081C] font-black text-xs uppercase tracking-widest rounded-xl whitespace-nowrap shadow-md transition-all">
-                        Unlock Stage 2 &rarr;
+                    <button onclick="promptIntakeLogin('Authenticate to unlock Stage 2 Operator Simulators.')" class="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-[#2A081C] font-black text-xs uppercase tracking-widest rounded-xl whitespace-nowrap shadow-md transition-all">
+                        Unlock Stage 2 →
                     </button>
                 </div>
 
                 <div id="simulators-container" class="space-y-4"></div>
             </section>
 
-            <!-- TELEPORT LINK TO CINEMATIC BOARD 1 / ONBOARDING -->
+            <!-- TELEPORT -->
             <div class="py-2">
                 <button onclick="teleportToOnboarding()" class="w-full block text-center py-6 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black uppercase tracking-widest rounded-2xl shadow-xl transition-all border-2 border-[#D92B8A] group">
-                    <i class="fa-solid fa-bolt text-amber-400 mr-2 group-hover:animate-pulse"></i> Teleport to Evidence Binder Architecture (Step 5) &rarr;
+                    <i class="fa-solid fa-bolt text-amber-400 mr-2 group-hover:animate-pulse"></i> Teleport to Evidence Binder Architecture (Step 5) →
                 </button>
             </div>
 
-            <!-- ========================================================================= -->
-            <!-- STAGE 3: HIGHLIGHTED ROAD TO REMEDIATION — 4-PART SCAN LEARNING GAME       -->
-            <!-- ========================================================================= -->
+            <!-- ROAD TO REMEDIATION -->
             <section id="road-to-remediation-section" class="relative rounded-3xl shadow-2xl border-4 border-amber-400 overflow-hidden bg-black cyber-road-anim">
-                <!-- Background Digital Road Video -->
                 <video id="video-digital-road" src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40"></video>
-                <!-- Deep Cyber Overlay -->
                 <div class="absolute inset-0 bg-[#180512]/90 mix-blend-multiply"></div>
-                
+
                 <div class="relative z-10 p-6 sm:p-10 space-y-8">
-                    
-                    <!-- HEADER & INDIVIDUALIZED ECOSYSTEM CREDIT SINK BANNER -->
+
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-amber-400/30 pb-6">
                         <div>
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400 text-amber-300 font-mono text-[11px] font-extrabold uppercase tracking-widest mb-3">
@@ -259,7 +300,7 @@
                                 <h3 class="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">Road to Remediation</h3>
                             </div>
                             <p class="text-slate-300 font-semibold text-sm sm:text-base mt-2 max-w-2xl">
-                                Exhaust excess Operator Credits on individualized perimeter scans and targeted training reinforcement drills tailored to your domain's exact underwriting pain points.
+                                Exhaust excess Operator Credits on individualized perimeter scans and targeted reinforcement drills tailored to your domain's underwriting pain points.
                             </p>
                         </div>
                         <div class="bg-[#2A081C]/90 border-2 border-amber-400 rounded-2xl p-4 text-center min-w-[180px] shadow-lg">
@@ -269,7 +310,6 @@
                         </div>
                     </div>
 
-                    <!-- 4-PART LEARNING GAME STEPPER TABS -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="road-phase-tabs">
                         <button type="button" onclick="selectRoadGamePart(1)" id="road-tab-1" class="text-left p-3.5 rounded-2xl border-2 border-amber-400 bg-amber-400/20 text-white transition-all">
                             <div class="flex items-center justify-between font-mono text-[10px] text-amber-300 font-bold uppercase">
@@ -290,22 +330,19 @@
                                 <span>Part 3 // Drill</span>
                                 <span id="road-tab-status-3">ENFORCE</span>
                             </div>
-                            <div class="font-black text-xs sm:text-sm mt-1">Zero-Cost MFA &amp; Backups</div>
+                            <div class="font-black text-xs sm:text-sm mt-1">MFA &amp; Backups</div>
                         </button>
                         <button type="button" onclick="selectRoadGamePart(4)" id="road-tab-4" class="text-left p-3.5 rounded-2xl border-2 border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 transition-all">
                             <div class="flex items-center justify-between font-mono text-[10px] text-emerald-300 font-bold uppercase">
                                 <span>Part 4 // Bind</span>
                                 <span id="road-tab-status-4">AWAITING</span>
                             </div>
-                            <div class="font-black text-xs sm:text-sm mt-1">Carrier Policy Binding</div>
+                            <div class="font-black text-xs sm:text-sm mt-1">Carrier Policy</div>
                         </button>
                     </div>
 
-                    <!-- ============================================================== -->
-                    <!-- PART 1: INDIVIDUALIZED PERIMETER RECONNAISSANCE SCAN & TRIAGE  -->
-                    <!-- ============================================================== -->
+                    <!-- PART 1 -->
                     <div id="road-part-1" class="space-y-6 fade-step">
-                        <!-- RADAR SCANNER CENTERPIECE (Adapted from burn1_onboarding_modal.js) -->
                         <div class="flex flex-col md:flex-row gap-6 items-center bg-white rounded-2xl border-2 border-slate-200 p-6 shadow-xl text-[#0f172a]">
                             <div class="burn1-radar">
                                 <div class="burn1-radar-vline"></div>
@@ -313,18 +350,11 @@
                             </div>
                             <div class="flex-1 w-full space-y-3">
                                 <div class="flex flex-wrap justify-between items-baseline gap-2">
-                                    <h4 class="text-lg font-black text-[#0f172a] uppercase tracking-tight">
-                                        Part 1: Individualized Perimeter Reconnaissance Scan
-                                    </h4>
-                                    <span id="scan-status-indicator" class="font-mono text-xs font-extrabold text-slate-500 uppercase">
-                                        AWAITING TARGET
-                                    </span>
+                                    <h4 class="text-lg font-black text-[#0f172a] uppercase tracking-tight">Part 1: Individualized Perimeter Reconnaissance Scan</h4>
+                                    <span id="scan-status-indicator" class="font-mono text-xs font-extrabold text-slate-500 uppercase">AWAITING TARGET</span>
                                 </div>
-                                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                                    Select your primary operational pain point and enter your domain. The scan customizes outside-in telemetry, Day-Three CVE deltas, and shadow endpoint discovery to your exact profile.
-                                </p>
+                                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Select your primary operational pain point and enter your domain. The scan customizes outside-in telemetry, Day-Three CVE deltas, and shadow endpoint discovery to your profile.</p>
 
-                                <!-- INDIVIDUALIZED PAIN-POINT & SECTOR SELECTOR -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                                     <div>
                                         <label class="block font-mono text-[10px] font-bold uppercase text-slate-500 mb-1">Target Pain-Point Profile</label>
@@ -341,20 +371,29 @@
                                     </div>
                                 </div>
 
-                                <!-- SCAN TRIGGERS: FREE PRELIMINARY OR 10 CR DEEP SCAN -->
                                 <div class="flex flex-wrap gap-3 pt-2">
                                     <button type="button" onclick="executeRemediationScan('deep')" id="btn-trigger-scan" class="flex-1 min-w-[200px] py-3 px-5 bg-amber-400 hover:bg-amber-500 text-[#2A081C] font-black text-xs uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
-                                        <span>⚡ Run 20s Scan</span>
+                                        <span>⚡ Run 7s Scan</span>
                                         <span class="bg-[#2A081C] text-amber-400 px-2 py-0.5 rounded text-[10px] font-mono">10 CR</span>
                                     </button>
                                     <button type="button" onclick="executeRemediationScan('prelim')" id="btn-trigger-prelim-scan" class="py-3 px-4 bg-slate-900 hover:bg-slate-800 text-cyan-400 font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
-                                        Run Preliminary Recon (0 CR)
+                                        Run Preliminary (0 CR)
                                     </button>
+                                </div>
+
+                                <!-- 7s scan bar -->
+                                <div id="scan-bar-wrap" class="hidden pt-2">
+                                    <div class="flex justify-between font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-1">
+                                        <span id="scan-bar-label">Perimeter scan</span>
+                                        <span id="scan-bar-eta">7s</span>
+                                    </div>
+                                    <div class="scan-bar-track">
+                                        <div id="scan-bar-fill" class="scan-bar-fill"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- SIMULATED SCAN TERMINAL (SEQUENCED TELEMETRY) -->
                         <div id="scan-terminal-wrapper" class="hidden bg-[#0f172a]/95 backdrop-blur-md p-5 font-mono h-[230px] overflow-y-auto scroll-smooth border-2 border-[#522d8a] rounded-2xl shadow-inner">
                             <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3 text-[11px] text-slate-400">
                                 <span id="terminal-profile-label">BURN-1 PERIMETER TELEMETRY // ACTIVE</span>
@@ -365,23 +404,17 @@
                             </div>
                         </div>
 
-                        <!-- SCAN COMPLETION CONFIRMATION STRIP + REINFORCEMENT QUESTION -->
                         <div id="scan-report-ready-card" class="hidden bg-emerald-50 border-2 border-emerald-500 rounded-2xl p-5 text-[#0f172a] space-y-4">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                                 <div>
-                                    <div class="font-black text-sm text-emerald-900 uppercase">
-                                        ✓ Individualized Threat Assessment Dispatched!
-                                    </div>
-                                    <div id="scan-summary-line" class="font-mono text-xs text-emerald-700 mt-0.5">
-                                        Digital recon report generated and queued for Evidence Binder assembly.
-                                    </div>
+                                    <div class="font-black text-sm text-emerald-900 uppercase">✓ Individualized Threat Assessment Dispatched!</div>
+                                    <div id="scan-summary-line" class="font-mono text-xs text-emerald-700 mt-0.5">Digital recon report generated and queued for Evidence Binder assembly.</div>
                                 </div>
                                 <button type="button" onclick="selectRoadGamePart(2)" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-sm whitespace-nowrap">
-                                    View Evidence Findings (Part 2) &rarr;
+                                    View Evidence Findings (Part 2) →
                                 </button>
                             </div>
 
-                            <!-- Individualized Learning Reinforcement Mini-Drill inside Part 1 -->
                             <div class="bg-white p-4 rounded-xl border border-emerald-200 space-y-3">
                                 <div class="flex items-center justify-between">
                                     <span class="font-mono text-[10px] font-black uppercase text-[#D92B8A] bg-pink-50 px-2.5 py-0.5 rounded">Part 1 Triage Reinforcement (+5 Bonus CR)</span>
@@ -393,39 +426,30 @@
                         </div>
                     </div>
 
-                    <!-- ============================================================== -->
-                    <!-- PART 2: ROADMAP PREVIEW, VIDEO BRIEFING & EVIDENCE BINDER SEAL -->
-                    <!-- ============================================================== -->
+                    <!-- PART 2 -->
                     <div id="road-part-2" class="hidden space-y-6 fade-step">
                         <div class="bg-white/95 backdrop-blur-md rounded-2xl p-6 border-2 border-cyan-400 text-[#0f172a] space-y-5">
                             <div class="flex flex-wrap items-center justify-between gap-2">
-                                <div class="font-mono text-xs text-slate-500 uppercase font-black">
-                                    Continuous Threat Exposure Management (CTEM) // 4-Phase Roadmap
-                                </div>
+                                <div class="font-mono text-xs text-slate-500 uppercase font-black">Continuous Threat Exposure Management (CTEM) // 4-Phase Roadmap</div>
                                 <span class="px-2.5 py-0.5 bg-cyan-100 text-cyan-800 font-mono text-[10px] font-black rounded uppercase">Part 2 of 4 // Posture Seal</span>
                             </div>
 
-                            <!-- ROADMAP PREVIEW WITH EMBEDDED CLIP (From burn1_onboarding_modal.js) -->
                             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
                                 <div class="lg:col-span-7 space-y-3">
                                     <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-semibold">
                                         Insurance carriers no longer accept annual point-in-time questionnaires. The <strong>Road to Remediation</strong> provides automated verification, machine-signed evidence, and verified posture seals tailored to <span id="part2-domain-label" class="font-mono text-[#D92B8A] font-bold">your domain</span>.
                                     </p>
-
                                     <div class="bg-slate-50 border-2 border-slate-200 rounded-xl p-4">
-                                        <div id="roadmap-status-headline" class="font-mono text-xs font-extrabold text-emerald-600 mb-2">
-                                            PROGRESSION STATUS: 75% UNDERWRITER COMPLIANT
-                                        </div>
+                                        <div id="roadmap-status-headline" class="font-mono text-xs font-extrabold text-emerald-600 mb-2">PROGRESSION STATUS: 75% UNDERWRITER COMPLIANT</div>
                                         <div class="font-mono text-xs text-slate-900 space-y-1.5">
                                             <div>[Phase 1] Outer Reconnaissance Scan — <span id="rm-p1" class="text-emerald-600 font-bold">COMPLETE ✓</span></div>
                                             <div>[Phase 2] Evidence Binder v2 Assembly — <span id="rm-p2" class="text-blue-600 font-bold">READY TO SEAL</span></div>
-                                            <div>[Phase 3] Zero-Cost MFA &amp; Immutable Backups — <span id="rm-p3" class="text-orange-600 font-bold">ENFORCEABLE</span></div>
+                                            <div>[Phase 3] MFA &amp; Immutable Backups — <span id="rm-p3" class="text-orange-600 font-bold">ENFORCEABLE</span></div>
                                             <div>[Phase 4] Carrier Policy Binding — <span id="rm-p4" class="text-slate-500 font-bold">AWAITING ATTESTATION</span></div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- EMBEDDED DIAGRAM VIDEO CLIP -->
                                 <div class="lg:col-span-5 bg-[#090514] border-2 border-orange-500/50 rounded-xl overflow-hidden shadow-xl">
                                     <div class="relative h-40 cyber-road-anim flex items-center justify-center">
                                         <video id="video-posture-diagram" src="assets/Circuit_board_transforms_into_logo_20261023161155.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-80"></video>
@@ -434,21 +458,16 @@
                                             <div class="font-mono text-[10px] text-cyan-300 uppercase font-bold">ALCOA+ Cryptographic Hash Loop</div>
                                         </div>
                                     </div>
-                                    <div class="py-2 px-3 bg-[#16062c] font-mono text-[11px] text-amber-400 text-center font-bold">
-                                        Telemetry: Dynamic Posture Assessment Loop
-                                    </div>
+                                    <div class="py-2 px-3 bg-[#16062c] font-mono text-[11px] text-amber-400 text-center font-bold">Telemetry: Dynamic Posture Assessment Loop</div>
                                 </div>
                             </div>
 
-                            <!-- PART 2 INTERACTIVE SEAL CHALLENGE -->
                             <div class="bg-slate-900 text-white p-5 rounded-xl border border-cyan-500/40 space-y-3">
                                 <div class="flex flex-wrap items-center justify-between gap-2">
                                     <span class="font-mono text-xs text-cyan-400 font-bold uppercase"><i class="fa-solid fa-stamp mr-1"></i> Part 2 Learning Drill: Cryptographic Binder Seal</span>
                                     <span id="part2-seal-badge" class="font-mono text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">AWAITING SEAL</span>
                                 </div>
-                                <p class="font-mono text-xs text-slate-300 leading-relaxed">
-                                    To seal Phase 2 of your Evidence Binder under ALCOA+ governance, how must your scan logs and MFA configuration exports be packaged for the underwriter?
-                                </p>
+                                <p class="font-mono text-xs text-slate-300 leading-relaxed">To seal Phase 2 of your Evidence Binder under ALCOA+ governance, how must your scan logs and MFA configuration exports be packaged for the underwriter?</p>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <button type="button" onclick="handlePart2Seal(true, this)" class="p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-left font-mono text-xs text-slate-200 font-bold transition-all">
                                         A. Timestamped SHA-256 machine-signed JSON/PDF manifests with immutable audit trail.
@@ -460,15 +479,13 @@
                             </div>
 
                             <div class="flex justify-between items-center pt-2">
-                                <button type="button" onclick="selectRoadGamePart(1)" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-mono text-xs font-bold rounded-lg">&larr; Back to Recon</button>
-                                <button type="button" onclick="selectRoadGamePart(3)" class="px-5 py-2.5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black text-xs uppercase tracking-wider rounded-xl">Proceed to Part 3: Remediation Lab &rarr;</button>
+                                <button type="button" onclick="selectRoadGamePart(1)" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-mono text-xs font-bold rounded-lg">← Back to Recon</button>
+                                <button type="button" onclick="selectRoadGamePart(3)" class="px-5 py-2.5 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black text-xs uppercase tracking-wider rounded-xl">Proceed to Part 3: Remediation Lab →</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ============================================================== -->
-                    <!-- PART 3: PAIN-POINT REMEDIATION & CREDIT-EXHAUSTION LAB         -->
-                    <!-- ============================================================== -->
+                    <!-- PART 3 -->
                     <div id="road-part-3" class="hidden space-y-6 fade-step">
                         <div class="bg-white/95 backdrop-blur-md rounded-2xl p-6 border-2 border-orange-400 text-[#0f172a] space-y-5">
                             <div class="flex flex-wrap items-center justify-between gap-2">
@@ -484,7 +501,6 @@
                             </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="pain-point-drills-grid">
-                                <!-- Drill Card 1 -->
                                 <div class="p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col justify-between space-y-3">
                                     <div>
                                         <div class="flex justify-between items-center mb-2">
@@ -499,7 +515,6 @@
                                     </button>
                                 </div>
 
-                                <!-- Drill Card 2 -->
                                 <div class="p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col justify-between space-y-3">
                                     <div>
                                         <div class="flex justify-between items-center mb-2">
@@ -514,7 +529,6 @@
                                     </button>
                                 </div>
 
-                                <!-- Drill Card 3 -->
                                 <div class="p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col justify-between space-y-3">
                                     <div>
                                         <div class="flex justify-between items-center mb-2">
@@ -530,34 +544,26 @@
                                 </div>
                             </div>
 
-                            <!-- FREE VS AUTOMATED PATHWAY (From burn1_onboarding_modal.js) -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                                 <div class="bg-white border-2 border-slate-200 rounded-xl p-4">
                                     <h5 class="text-sm font-black text-[#0f172a] mb-1">Self-Help Remediation (Free)</h5>
-                                    <p class="text-xs text-slate-500 mb-3">
-                                        Download individualized open-source POAM templates and configure your controls manually.
-                                    </p>
+                                    <p class="text-xs text-slate-500 mb-3">Download individualized open-source POAM templates and configure your controls manually.</p>
                                     <button type="button" id="btn-download-free-poam" onclick="downloadPOAM()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono text-xs font-bold uppercase rounded-lg border border-slate-300 transition-all">
                                         Download Free POAM Markdown
                                     </button>
                                 </div>
-
                                 <div class="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-[#f26522] rounded-xl p-4">
                                     <h5 class="text-sm font-black text-[#d84f10] mb-1">Automated Binder &amp; S.P.A. (Recommended)</h5>
-                                    <p class="text-xs text-slate-600 mb-3">
-                                        Machine-signed binder + automated diagnosis. Spend earned credits to cut price by 50%!
-                                    </p>
+                                    <p class="text-xs text-slate-600 mb-3">Machine-signed binder + automated diagnosis. Spend earned credits to cut the binder price.</p>
                                     <button type="button" onclick="selectRoadGamePart(4)" class="w-full py-2.5 bg-[#f26522] hover:bg-[#d84f10] text-white font-mono text-xs font-black uppercase rounded-lg shadow-sm transition-all">
-                                        View Tiers &amp; Apply Credits (Part 4) &rarr;
+                                        View Tiers &amp; Apply Credits (Part 4) →
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ============================================================== -->
-                    <!-- PART 4: CREDITS REDEMPTION & DISCOUNT BREAKDOWN TAPE           -->
-                    <!-- ============================================================== -->
+                    <!-- PART 4 -->
                     <div id="road-part-4" class="hidden space-y-6 fade-step">
                         <div class="bg-white/95 backdrop-blur-md rounded-2xl p-6 border-2 border-emerald-400 text-[#0f172a] space-y-5">
                             <div class="flex flex-wrap justify-between items-center gap-3">
@@ -571,32 +577,29 @@
                                 </label>
                             </div>
 
-                            <!-- DYNAMIC PACKAGES LIST CONTAINER ($500 Binder, $500 S.P.A., $1,000 Retainer, $2,400 Monitoring) -->
                             <div id="packages-list-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
 
-                            <!-- PRICING BREAKDOWN TAPE (From burn1_onboarding_modal.js) -->
                             <div class="bg-white border-2 border-[#f26522] rounded-xl p-5 space-y-2 shadow-sm">
                                 <div class="flex justify-between text-xs sm:text-sm text-slate-600 font-semibold">
                                     <span>Selected Package Base Price:</span>
-                                    <span id="price-summary-base" class="text-[#0f172a] font-mono font-extrabold">$500.00</span>
+                                    <span id="price-summary-base" class="text-[#0f172a] font-mono font-extrabold">$750.00</span>
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm text-[#f26522] font-bold">
-                                    <span>Training Credits Applied ($2.08/CR up to 50% cap):</span>
+                                    <span>Training Credits Applied ($2.08/CR up to cap):</span>
                                     <span id="price-summary-discount" class="font-mono font-extrabold">-$0.00</span>
                                 </div>
                                 <div class="flex justify-between text-lg sm:text-xl font-black text-[#0f172a] border-t-2 border-dashed border-slate-300 pt-3">
                                     <span>FINAL COMMERCIAL TOTAL:</span>
-                                    <span id="price-summary-final" class="font-mono text-[#f26522]">$500.00 USD</span>
+                                    <span id="price-summary-final" class="font-mono text-[#f26522]">$750.00 USD</span>
                                 </div>
                             </div>
 
-                            <!-- BIND & SYNC TO CINEMATICBOARD1.HTML -->
                             <div class="flex flex-col sm:flex-row gap-3 pt-1">
                                 <button type="button" onclick="downloadPOAM()" class="py-3.5 px-5 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2">
                                     <i class="fa-solid fa-download"></i> Download Free POAM Markdown
                                 </button>
                                 <button type="button" onclick="teleportToOnboarding()" class="flex-1 py-3.5 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-file-shield"></i> Lock Discount &amp; Open Evidence Binder (<span class="font-mono">cinematicBoard1.html</span>) &rarr;
+                                    <i class="fa-solid fa-file-shield"></i> Lock Discount &amp; Open Evidence Binder (<span class="font-mono">cinematic-onboarding.html</span>) →
                                 </button>
                             </div>
                         </div>
@@ -606,11 +609,11 @@
             </section>
         </div>
 
-        <!-- RIGHT COLUMN: Sticky Command Center -->
+        <!-- RIGHT: STICKY COMMAND CENTER -->
         <div class="w-full lg:w-2/5">
             <div class="sticky top-8 space-y-6">
-                
-                <!-- 1. Times Running Video Clock -->
+
+                <!-- Times Running -->
                 <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-[#2A081C] bg-black aspect-video relative flex items-center justify-center cyber-road-anim">
                     <video id="video-times-running" src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60"></video>
                     <div class="absolute inset-0 bg-[#522d8a]/20 mix-blend-multiply"></div>
@@ -620,7 +623,7 @@
                     </div>
                 </div>
 
-                <!-- 2. Stopwatch & Manual Toggle (Auto-starts on ANY phase) -->
+                <!-- Timer -->
                 <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-[#E6E0F8] flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-full border-4 border-cyan-400 flex items-center justify-center relative bg-slate-900 shadow-inner">
@@ -633,26 +636,38 @@
                             <span id="active-mission-label" class="block text-[10px] text-[#D92B8A] font-mono uppercase mt-1">Awaiting Phase Interaction</span>
                         </div>
                     </div>
-                    <!-- Manual Play/Pause Toggle -->
                     <button onclick="toggleTimerManually()" id="btn-timer-toggle" title="Play / Pause Mission Timer" class="w-12 h-12 rounded-full bg-slate-100 hover:bg-slate-200 text-[#D92B8A] flex items-center justify-center text-xl transition-colors">
                         <i id="timer-icon" class="fa-solid fa-play"></i>
                     </button>
                 </div>
 
-                <!-- 3. Expanding Login & Intake Card with Live Free-Session Credit Carryover -->
+                <!-- Rank ribbon (gamey) -->
+                <div id="rank-ribbon" class="hidden rank-ribbon rounded-2xl p-4 text-white shadow-xl border-2 border-[#D92B8A]">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="block font-mono text-[10px] uppercase tracking-widest text-amber-300">Operator Rank</span>
+                            <span id="ribbon-rank" class="font-black text-xl tracking-widest uppercase">Defender</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block font-mono text-[10px] uppercase tracking-widest text-cyan-300">Credits</span>
+                            <span id="ribbon-credits" class="font-black text-xl tracking-widest">0 / 120</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intake credentials -->
                 <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-[#E6E0F8] overflow-hidden transition-all duration-300" id="login-card-container">
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center gap-3">
                             <i class="fa-solid fa-user-shield text-2xl text-[#522d8a]"></i>
                             <div>
                                 <h2 class="text-lg font-black tracking-tight text-[#2A081C] uppercase leading-none">Intake Credentials</h2>
-                                <span class="font-mono text-[10px] text-slate-400 font-bold">Syncs with cinematicBoard1.html</span>
+                                <span class="font-mono text-[10px] text-slate-400 font-bold">Syncs with cinematic-onboarding.html</span>
                             </div>
                         </div>
                         <span id="auth-status-badge" class="px-2.5 py-1 bg-amber-100 text-amber-800 font-mono font-bold text-[10px] uppercase rounded">Free Session</span>
                     </div>
 
-                    <!-- LIVE INTAKE CREDIT LEDGER (Accumulates on ANY Phase, Free or Logged In) -->
                     <div class="bg-[#2A081C] text-white rounded-2xl p-3.5 mb-4 border border-[#522d8a]">
                         <div class="flex items-center justify-between text-[10px] font-mono uppercase text-slate-300 mb-1.5">
                             <span id="intake-ledger-status">Unclaimed Free Session Credits</span>
@@ -673,22 +688,20 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Login / Account Creation Form -->
+
                     <div id="login-form-area" class="space-y-3">
                         <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-100 rounded-xl font-mono text-[11px] font-bold">
                             <button type="button" id="tab-mode-create" onclick="setIntakeMode('create')" class="py-1.5 rounded-lg bg-[#2A081C] text-white transition-all">Create Account</button>
                             <button type="button" id="tab-mode-signin" onclick="setIntakeMode('signin')" class="py-1.5 rounded-lg text-slate-600 hover:text-[#2A081C] transition-all">Operator Sign In</button>
                         </div>
                         <input type="email" id="login-email" placeholder="Operator Email (e.g. secops@company.com)" class="w-full px-4 py-2.5 bg-slate-50 border border-[#C4D4E0] rounded-lg text-sm font-bold focus:border-[#D92B8A] focus:outline-none">
-                        <input type="text" id="login-domain" placeholder="Target Corporate Domain (e.g. portal.burn-1.com)" class="w-full px-4 py-2.5 bg-slate-50 border border-[#C4D4E0] rounded-lg text-sm font-mono focus:border-[#D92B8A] focus:outline-none">
+                        <input type="text" id="login-domain" placeholder="Target Corporate Domain" class="w-full px-4 py-2.5 bg-slate-50 border border-[#C4D4E0] rounded-lg text-sm font-mono focus:border-[#D92B8A] focus:outline-none">
                         <input type="password" id="login-pass" placeholder="Secure Operator Passphrase" class="w-full px-4 py-2.5 bg-slate-50 border border-[#C4D4E0] rounded-lg text-sm font-bold focus:border-[#D92B8A] focus:outline-none">
                         <button onclick="processLogin()" id="btn-submit-intake" class="w-full py-3 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black text-xs uppercase tracking-widest rounded-lg transition-all shadow-sm">
                             Authenticate
                         </button>
                     </div>
 
-                    <!-- Authenticated State (Hidden initially) -->
                     <div id="login-success-area" class="hidden text-center py-2 space-y-2">
                         <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-600">
                             <i class="fa-solid fa-circle-check text-3xl"></i>
@@ -697,17 +710,40 @@
                         <p id="verified-email-text" class="text-[#D92B8A] font-black text-sm"></p>
                         <p id="verified-domain-text" class="font-mono text-xs text-slate-500"></p>
                         <div class="pt-1 flex justify-center gap-2">
-                            <button onclick="teleportToOnboarding()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-[10px] font-bold uppercase rounded-lg">
-                                Sync to cinematicBoard1.html &rarr;
-                            </button>
-                            <button onclick="logoutOperator()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-mono text-[10px] font-bold uppercase rounded-lg">
-                                Switch Account
-                            </button>
+                            <button onclick="teleportToOnboarding()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-[10px] font-bold uppercase rounded-lg">Sync to Evidence Binder →</button>
+                            <button onclick="logoutOperator()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-mono text-[10px] font-bold uppercase rounded-lg">Switch Account</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. Dynamic HUD (Rank, Score, Credits) -->
+                <!-- Earned badges -->
+                <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-[#E6E0F8]">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-black tracking-tight text-[#2A081C] uppercase">Earned Badges</h3>
+                        <span class="font-mono text-[10px] text-slate-400 font-bold">Manager view</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <div id="badge-chip-completion" class="badge-chip"><span class="dot"></span> Completion</div>
+                        <div id="badge-chip-mfa2" class="badge-chip"><span class="dot"></span> MFA-2</div>
+                        <div id="badge-chip-phishing" class="badge-chip"><span class="dot"></span> Anti-Phishing</div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 items-center pt-3 border-t border-slate-100">
+                        <div class="text-center">
+                            <img id="badge-img-completion" src="coursecompletion.jpg" alt="Course Completion badge" class="badge-img" onclick="openBadgeModal('completion')" onerror="this.style.display='none'">
+                        </div>
+                        <div class="text-center">
+                            <img id="badge-img-mfa2" src="MFAbadge.jpg" alt="MFA-2 badge" class="badge-img" onclick="openBadgeModal('mfa2')" onerror="this.style.display='none'">
+                        </div>
+                        <div class="text-center">
+                            <img id="badge-img-phishing" src="anti-phishingbadge.jpg" alt="Anti-Phishing badge" class="badge-img" onclick="openBadgeModal('phishing')" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-mono mt-3 leading-relaxed">
+                        Click a badge to see the requirement. These are training marks — the Anergi Cyber Seal is the underwriting artifact.
+                    </p>
+                </div>
+
+                <!-- HUD -->
                 <div class="bg-[#2A081C] rounded-3xl p-6 shadow-xl border-2 border-[#522d8a] grid grid-cols-3 gap-2">
                     <div class="text-center">
                         <span class="block text-[10px] text-slate-400 font-mono uppercase tracking-widest mb-1">Rank</span>
@@ -723,20 +759,37 @@
                     </div>
                 </div>
 
-                <!-- 5. Update Evidence Button (Unlocks at 120 CR or when authenticated with credits) -->
                 <button id="btn-update-evidence" onclick="teleportToOnboarding()" class="hidden w-full py-4 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(217,43,138,0.5)] transition-all flex items-center justify-center gap-3">
-                    Update Evidence ($250 Unlocked) <i class="fa-solid fa-magnifying-glass"></i>
+                    Update Evidence <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
 
             </div>
         </div>
-
     </main>
 
-    <!-- JAVASCRIPT ARRAYS AND ENGINE LOGIC -->
+    <!-- Badge modal -->
+    <div id="badge-modal" class="fl-modal-backdrop hidden" onclick="if(event.target.id==='badge-modal')closeBadgeModal()">
+        <div class="fl-modal-card" role="dialog" aria-modal="true" aria-labelledby="badge-modal-title">
+            <button type="button" onclick="closeBadgeModal()" aria-label="Close" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-100 hover:bg-[#D92B8A] hover:text-white text-[#2A081C] font-black text-lg flex items-center justify-center transition-colors">✕</button>
+            <div class="text-center mb-5">
+                <img id="badge-modal-img" src="coursecompletion.jpg" alt="" class="w-28 h-28 rounded-full object-cover mx-auto border-4 border-[#D92B8A] shadow-xl">
+                <h3 id="badge-modal-title" class="mt-3 text-xl font-black text-[#2A081C] uppercase tracking-tight">Course Completion</h3>
+                <p id="badge-modal-sub" class="font-mono text-[11px] uppercase tracking-widest text-[#522d8a] font-bold">Operator Academy</p>
+            </div>
+            <p id="badge-modal-desc" class="text-sm text-slate-700 font-semibold leading-relaxed mb-4"></p>
+            <div class="p-4 rounded-xl bg-slate-50 border-2 border-slate-200">
+                <div class="font-mono text-[10px] uppercase tracking-widest text-slate-500 font-black mb-1">Earned by</div>
+                <div id="badge-modal-req-text" class="text-sm text-slate-700 font-semibold"></div>
+            </div>
+            <div class="mt-5 flex gap-2">
+                <button type="button" onclick="closeBadgeModal()" class="flex-1 text-center py-3 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black text-xs uppercase tracking-widest rounded-xl">Got it</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ---------------------------------------------------------
-        // 0. SANDBOX-SAFE TOAST & MULTI-ENGINE STORAGE SYNC
+        // 0. TOAST
         // ---------------------------------------------------------
         function showToast(message, type = "info") {
             const container = document.getElementById("toast-container");
@@ -769,377 +822,209 @@
         }
 
         // ---------------------------------------------------------
-        // 1. ACADEMY DATA (Stage 1 L1-L8 & Extended Stage 2 A-G)
+        // 1. DATA (preserved from the original)
         // ---------------------------------------------------------
         const PROTOCOL_LEVELS = [
-            {
-                id: 1, code: "L1", name: "Cookie Purge Protocol", tagline: "Clear tracking residue.",
-                reward: { score: 10, credits: 5 }, img: "assets/images/l1.jpg", accent: "#10b981",
-                steps: [
-                    { title: "Clear browser cookies", detail: "Settings -> Privacy -> Clear browsing data & cached tokens." },
-                    { title: "Sign out of stale sessions", detail: "Log out of cloud & SaaS accounts idle for 90+ days." }
-                ]
-            },
-            {
-                id: 2, code: "L2", name: "Background Shutdown", tagline: "Reduce hidden processes.",
-                reward: { score: 15, credits: 5 }, img: "assets/images/l2.jpg", accent: "#0ea5e9",
-                steps: [
-                    { title: "Audit Task Manager", detail: "Inspect active processes and terminate unsigned background daemons." },
-                    { title: "Disable auto-start apps", detail: "Task Manager -> Startup apps -> Disable non-essential launchers." }
-                ]
-            },
-            {
-                id: 3, code: "L3", name: "Permission Creep Review", tagline: "Find apps with excessive access.",
-                reward: { score: 20, credits: 5 }, img: "assets/images/l3.jpg", accent: "#f59e0b",
-                steps: [
-                    { title: "Audit camera and mic permissions", detail: "Settings -> Privacy & security -> Revoke background hardware access." },
-                    { title: "Revoke location access", detail: "Set browser and OS geolocation permissions to 'Ask every time'." }
-                ]
-            },
-            {
-                id: 4, code: "L4", name: "Extension Audit", tagline: "Remove risky browser extensions.",
-                reward: { score: 20, credits: 5 }, img: "assets/images/l4.jpg", accent: "#d946ef",
-                steps: [
-                    { title: "List all add-ons", detail: "Open chrome://extensions and review site-access scopes." },
-                    { title: "Remove unused extensions", detail: "Uninstall unverified extensions — dead weight can turn hostile." }
-                ]
-            },
-            {
-                id: 5, code: "L5", name: "Password Posture Check", tagline: "Strengthen authentication.",
-                reward: { score: 25, credits: 5 }, img: "assets/images/l5.jpg", accent: "#f43f5e",
-                steps: [
-                    { title: "Replace reused passwords", detail: "Generate unique 16+ char passphrases (four random words beat symbols)." },
-                    { title: "Enable MFA on email", detail: "Primary email is the master reset key — lock it with hardware/app MFA." }
-                ]
-            },
-            {
-                id: 6, code: "L6", name: "Digital Footprint Reduction", tagline: "Reduce public exposure.",
-                reward: { score: 30, credits: 5 }, img: "assets/images/l6.jpg", accent: "#8ef58e",
-                steps: [
-                    { title: "Search your name & domain", detail: "Audit public OSINT exposure and leaked credential indexes." },
-                    { title: "Deactivate old accounts", detail: "Purge dormant SaaS trials and legacy vendor logins." }
-                ]
-            },
-            {
-                id: 7, code: "L7", name: "Tracking Lockdown", tagline: "Block fingerprinting.",
-                reward: { score: 35, credits: 5 }, img: "assets/images/l7.jpg", accent: "#c084fc",
-                steps: [
-                    { title: "Block third-party cookies", detail: "Enable strict tracking prevention to blind ad-tech beacons." },
-                    { title: "Add anti-fingerprinting", detail: "Use hardened browser profiles (Brave, Mullvad, or Burn-1 Ghost Browser)." }
-                ]
-            },
-            {
-                id: 8, code: "L8", name: "Device Integrity Check", tagline: "Patch vulnerabilities.",
-                reward: { score: 40, credits: 5 }, img: "assets/images/l8.jpg", accent: "#ffd166",
-                steps: [
-                    { title: "Install pending OS updates", detail: "Apply critical kernel/browser patches and reboot to commit." },
-                    { title: "Verify firewall is active", detail: "Confirm host firewall blocks unsolicited inbound connections." }
-                ]
-            }
+            { id: 1, code: "L1", name: "Cookie Purge Protocol", tagline: "Clear tracking residue.", reward: { score: 10, credits: 5 }, img: "assets/images/l1.jpg", accent: "#10b981", steps: [
+                { title: "Clear browser cookies", detail: "Settings -> Privacy -> Clear browsing data & cached tokens." },
+                { title: "Sign out of stale sessions", detail: "Log out of cloud & SaaS accounts idle for 90+ days." }
+            ]},
+            { id: 2, code: "L2", name: "Background Shutdown", tagline: "Reduce hidden processes.", reward: { score: 15, credits: 5 }, img: "assets/images/l2.jpg", accent: "#0ea5e9", steps: [
+                { title: "Audit Task Manager", detail: "Inspect active processes and terminate unsigned background daemons." },
+                { title: "Disable auto-start apps", detail: "Task Manager -> Startup apps -> Disable non-essential launchers." }
+            ]},
+            { id: 3, code: "L3", name: "Permission Creep Review", tagline: "Find apps with excessive access.", reward: { score: 20, credits: 5 }, img: "assets/images/l3.jpg", accent: "#f59e0b", steps: [
+                { title: "Audit camera and mic permissions", detail: "Settings -> Privacy & security -> Revoke background hardware access." },
+                { title: "Revoke location access", detail: "Set browser and OS geolocation permissions to 'Ask every time'." }
+            ]},
+            { id: 4, code: "L4", name: "Extension Audit", tagline: "Remove risky browser extensions.", reward: { score: 20, credits: 5 }, img: "assets/images/l4.jpg", accent: "#d946ef", steps: [
+                { title: "List all add-ons", detail: "Open chrome://extensions and review site-access scopes." },
+                { title: "Remove unused extensions", detail: "Uninstall unverified extensions — dead weight can turn hostile." }
+            ]},
+            { id: 5, code: "L5", name: "Password Posture Check", tagline: "Strengthen authentication.", reward: { score: 25, credits: 5 }, img: "assets/images/l5.jpg", accent: "#f43f5e", steps: [
+                { title: "Replace reused passwords", detail: "Generate unique 16+ char passphrases (four random words beat symbols)." },
+                { title: "Enable MFA on email", detail: "Primary email is the master reset key — lock it with hardware/app MFA." }
+            ]},
+            { id: 6, code: "L6", name: "Digital Footprint Reduction", tagline: "Reduce public exposure.", reward: { score: 30, credits: 5 }, img: "assets/images/l6.jpg", accent: "#8ef58e", steps: [
+                { title: "Search your name & domain", detail: "Audit public OSINT exposure and leaked credential indexes." },
+                { title: "Deactivate old accounts", detail: "Purge dormant SaaS trials and legacy vendor logins." }
+            ]},
+            { id: 7, code: "L7", name: "Tracking Lockdown", tagline: "Block fingerprinting.", reward: { score: 35, credits: 5 }, img: "assets/images/l7.jpg", accent: "#c084fc", steps: [
+                { title: "Block third-party cookies", detail: "Enable strict tracking prevention to blind ad-tech beacons." },
+                { title: "Add anti-fingerprinting", detail: "Use hardened browser profiles (Brave, Mullvad, or Burn-1 Ghost Browser)." }
+            ]},
+            { id: 8, code: "L8", name: "Device Integrity Check", tagline: "Patch vulnerabilities.", reward: { score: 40, credits: 5 }, img: "assets/images/l8.jpg", accent: "#ffd166", steps: [
+                { title: "Install pending OS updates", detail: "Apply critical kernel/browser patches and reboot to commit." },
+                { title: "Verify firewall is active", detail: "Confirm host firewall blocks unsolicited inbound connections." }
+            ]}
         ];
 
         const ADVANCED_MODULES = [
-            {
-                id: "A", code: "MOD-A", name: "Phishing Signal Decoder", score: 30, credits: 10, accent: "#00e5ff",
-                briefing: { industry: "Finance", company: "Apex Wealth Partners", dept: "Accounts Payable", role: "Financial Controller" },
-                scenarios: [
-                    {
-                        prompt: "An 'Urgent ACH Update' arrives from cfo@apex-wealth-portal.co at 4:55 PM on Friday demanding an immediate $185,000 wire routing change. What is your first action?",
-                        hint: "Check the sender's root domain carefully. Are we .com or a lookalike .co domain?",
-                        options: [
-                            { text: "Reply to the email asking for the updated W-9 and routing sheet.", correct: false },
-                            { text: "Quarantine the email and initiate out-of-band verification via a known internal phone extension.", correct: true },
-                            { text: "Forward the attachment to the treasury clerk to queue the wire before cutoff.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Before you finish dialing, your desk phone rings. The caller ID displays 'Apex Main Line' and the voice sounds identical to the CFO, pressuring you to waive protocol. Proceed?",
-                        hint: "Real-time AI voice cloning only needs 3 seconds of public audio. Trust cryptographic or verbal protocols, not voice timbre.",
-                        options: [
-                            { text: "Process the wire immediately to avoid delaying the acquisition closing.", correct: false },
-                            { text: "Demand the rotating internal verbal passphrase and secondary Dual-Control sign-off in the ERP.", correct: true },
-                            { text: "Ask the caller to text you a photo of their corporate badge via SMS.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "The caller abruptly hangs up when asked for the passphrase. You inspect the email headers and see 'Reply-To: settlement@fast-escrow-wire.net'. What is the mandatory underwriting response?",
-                        hint: "Business Email Compromise (BEC) campaigns rarely target a single seat in isolation.",
-                        options: [
-                            { text: "Report to SecOps, block the lookalike domain at the email gateway, and sweep the tenant for matching inbox IOCs.", correct: true },
-                            { text: "Delete the email and move on since no funds left the bank account.", correct: false },
-                            { text: "Reply to the attacker warning them that law enforcement has been notified.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Underwriters auditing your Cyber Insurance application ask how Apex Wealth prevents unauthorized ACH vendor bank changes permanently. Which control satisfies the warranty?",
-                        hint: "Underwriters require Dual-Control + Out-of-Band (OOB) callback using pre-existing directory numbers.",
-                        options: [
-                            { text: "Requiring dual-authorization in ERP plus mandatory phone callback using pre-verified contact records on file.", correct: true },
-                            { text: "Accepting PDF bank change letters as long as they contain a handwritten signature.", correct: false },
-                            { text: "Relying solely on default spam filters to catch spoofed vendor invoices.", correct: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: "B", code: "MOD-B", name: "URL Deconstruction Lab", score: 30, credits: 10, accent: "#38bdf8",
-                briefing: { industry: "Retail", company: "Global Cart", dept: "Logistics", role: "Supply Chain Manager" },
-                scenarios: [
-                    {
-                        prompt: "Inspect this customs manifest link: https://login.microsoft.com.auth-node.net/login. Which actual host receives your credentials if you submit the form?",
-                        hint: "Read the hostname right-to-left immediately before the first single forward slash (/).",
-                        options: [
-                            { text: "microsoft.com", correct: false },
-                            { text: "auth-node.net", correct: true },
-                            { text: "login.microsoft.com", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "A freight vendor sends a portal link that renders as 'https://globalcart-freight.com' in chat, but hovering reveals 'https://xn--glbalcart-freight-1zb.com/auth'. What attack vector is this?",
-                        hint: "The 'xn--' prefix indicates an Internationalized Domain Name (IDN) Punycode representation.",
-                        options: [
-                            { text: "Standard TLS 1.3 certificate compression.", correct: false },
-                            { text: "IDN Homograph attack substituting a non-ASCII lookalike character to spoof the brand domain.", correct: true },
-                            { text: "A legitimate CDN load-balancer alias owned by Global Cart.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "You spot a shipment tracking URL formatted as: https://portal.globalcart.com@45.33.19.88/track?id=992. Where will the browser actually connect?",
-                        hint: "In RFC 3986 URI syntax, everything before '@' in the authority section is treated as username/userinfo!",
-                        options: [
-                            { text: "It connects to 45.33.19.88 while treating 'portal.globalcart.com' as a username string.", correct: true },
-                            { text: "It connects securely to portal.globalcart.com and passes 45.33.19.88 as a tracking parameter.", correct: false },
-                            { text: "It routes traffic through an internal corporate VPN concentrator.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "A warehouse supervisor scans a physical QR code sticker placed over a pallet manifest ('Quishing') that redirects through bit.ly to an external SSO login page. How do you harden against this?",
-                        hint: "Shortened URLs and unmanaged mobile browsers bypass corporate DNS filters unless protected.",
-                        options: [
-                            { text: "Enforce FIDO2 passkeys (which bind to the true domain) and route mobile scanners through protective DNS filtering.", correct: true },
-                            { text: "Instruct warehouse staff to only scan QR codes after 5:00 PM.", correct: false },
-                            { text: "Disable HTTPS inspection on warehouse Wi-Fi networks.", correct: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: "C", code: "MOD-C", name: "MFA Architecture Defense", score: 35, credits: 12, accent: "#a855f7",
-                briefing: { industry: "Healthcare", company: "Metro Gen", dept: "IT Staff", role: "Admin" },
-                scenarios: [
-                    {
-                        prompt: "At 11:45 PM your phone receives 6 consecutive MFA push prompts you did not initiate. What is happening and what is your immediate response?",
-                        hint: "Push notifications without number-matching fall victim to MFA Push-Fatigue (Prompt Bombing).",
-                        options: [
-                            { text: "Approve one prompt so the background sync stops alerting your phone.", correct: false },
-                            { text: "MFA Push-Fatigue attack: Deny all prompts, rotate credentials immediately, and enforce number-matching/FIDO2.", correct: true },
-                            { text: "Put the phone in Airplane Mode and wait until Monday morning to check logs.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "An attacker uses an Evilginx Adversary-in-the-Middle (AiTM) reverse proxy to steal a doctor's session cookie after they enter a 6-digit TOTP code. Which MFA upgrade stops AiTM proxy harvesting?",
-                        hint: "TOTP 6-digit codes can be relayed in real time; cryptographic origin-bound keys cannot.",
-                        options: [
-                            { text: "Switching from authenticator app TOTP codes to SMS text message codes.", correct: false },
-                            { text: "Enforcing FIDO2 / WebAuthn phishing-resistant hardware keys or passkeys bound to the cryptographic domain origin.", correct: true },
-                            { text: "Shortening the TOTP code rotation window from 30 seconds to 15 seconds.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "A caller claiming to be an ER surgeon on rotation calls the IT Helpdesk stating they lost their phone and urgently need their MFA reset to access patient EHR charts. Protocol?",
-                        hint: "Helpdesk social engineering (Scattered Spider style) targets MFA enrollment resets.",
-                        options: [
-                            { text: "Generate a temporary MFA bypass code immediately over the phone since ER operations are urgent.", correct: false },
-                            { text: "Require live video verification with government/hospital photo ID and manager co-sign before issuing a Time-Bound Access Pass.", correct: true },
-                            { text: "Disable MFA on the entire ER department group for 24 hours.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "During your Cyber Readiness Clinic pre-underwriting scan, you discover legacy IMAP and SMTP Basic Authentication are still enabled on the mail tenant. Why does this fail underwriting?",
-                        hint: "Legacy protocols do not support modern MFA challenges, allowing attackers to spray passwords directly.",
-                        options: [
-                            { text: "Legacy protocols bypass MFA enforcement entirely — disable Basic Auth tenant-wide and require modern OAuth2/OIDC.", correct: true },
-                            { text: "IMAP only affects outbound printer scans and poses zero risk to user mailboxes.", correct: false },
-                            { text: "Underwriters prefer Basic Auth because it uses less bandwidth.", correct: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: "D", code: "MOD-D", name: "Identity Threat Detection", score: 35, credits: 12, accent: "#f43f5e",
-                briefing: { industry: "Energy", company: "GridCore", dept: "SecOps", role: "Analyst" },
-                scenarios: [
-                    {
-                        prompt: "During an identity audit, you find an unapproved OAuth app ('PDF-Cloud-Converter') with Mail.ReadWrite scope and a hidden inbox rule moving 'Invoice' emails to RSS Subscriptions. Remediation?",
-                        hint: "OAuth access tokens persist even after a password reset unless explicitly revoked.",
-                        options: [
-                            { text: "Revoke the OAuth enterprise grant, purge the hidden inbox rule, revoke all active refresh tokens, and audit sent items.", correct: true },
-                            { text: "Only force a password reset on the user's Active Directory account.", correct: false },
-                            { text: "Rename the RSS Subscriptions folder and leave the OAuth token active to monitor the attacker.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Identity logs show a GridCore engineer signed in from Atlanta, GA at 09:00 AM, and the exact same session token accessed SCADA documentation from an unmanaged residential proxy ASN 4 minutes later. Diagnosis?",
-                        hint: "When the session token ID is identical across two distant networks without a new MFA prompt, the token was stolen.",
-                        options: [
-                            { text: "Normal mobile carrier tower handoff; mark the alert as a false positive.", correct: false },
-                            { text: "Session token replay / infostealer theft: trigger Continuous Access Evaluation (CAE) token revocation and isolate the endpoint.", correct: true },
-                            { text: "Ask the engineer to clear their browser history at the end of the shift.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Your SIEM flags a sudden spike in RC4-encrypted Kerberos TGS ticket requests (Event ID 4769) targeting high-privilege SQL and SCADA service accounts. What attack is underway?",
-                        hint: "Requesting RC4 service tickets to crack service account passwords offline is a classic AD post-exploitation technique.",
-                        options: [
-                            { text: "Kerberoasting: contain the source host, rotate service accounts to Group Managed Service Accounts (gMSA) with AES-256.", correct: true },
-                            { text: "Routine DNS zone transfer between domain controllers.", correct: false },
-                            { text: "A harmless Windows Update background bandwidth test.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "To seal the Identity section of your Evidence Binder, how should Third-Party AdminConsent for OAuth applications be configured across the tenant?",
-                        hint: "Users should never be allowed to grant tenant-wide read/write scopes to unverified third-party apps.",
-                        options: [
-                            { text: "Block user consent for unverified publishers and require cryptographically logged Admin Approval workflows.", correct: true },
-                            { text: "Allow all users to consent to any OAuth app so productivity is never slowed down.", correct: false },
-                            { text: "Only block OAuth apps on weekends.", correct: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: "E", code: "MOD-E", name: "Network & DNS Hygiene", score: 30, credits: 10, accent: "#10b981",
-                briefing: { industry: "Legal", company: "Smith & Co", dept: "Partners", role: "Managing Partner" },
-                scenarios: [
-                    {
-                        prompt: "Your outside-in perimeter scan shows SPF is valid and DKIM is aligned, but DMARC is published as 'v=DMARC1; p=none;'. How do cyber underwriters score this?",
-                        hint: "A DMARC policy of 'p=none' is monitoring-only and allows spoofed wire-fraud emails to reach client inboxes.",
-                        options: [
-                            { text: "Full pass — p=none blocks all spoofed domains automatically.", correct: false },
-                            { text: "High-priority underwriting gap — upgrade DMARC enforcement to p=quarantine or p=reject with RUA reporting.", correct: true },
-                            { text: "Delete the SPF record so DMARC can run in standalone mode.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Reconnaissance reveals 'events.smithlaw.com' has a CNAME record pointing to an expired cloud bucket that anyone can register. What is the risk and fix?",
-                        hint: "Dangling CNAME records allow attackers to register the external resource and serve malicious content on your trusted subdomain.",
-                        options: [
-                            { text: "Subdomain Takeover risk: immediately remove the dangling DNS CNAME record before an attacker claims the cloud endpoint.", correct: true },
-                            { text: "Leave the DNS record in place since the marketing campaign ended last year.", correct: false },
-                            { text: "Lower the DNS TTL to 60 seconds and keep pointing to the unclaimed bucket.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Shodan indexing shows TCP port 3389 (RDP) and port 445 (SMB) open on the firm's branch office static IP for remote paralegals. What is the mandatory remediation?",
-                        hint: "Exposed RDP is the #1 initial access vector for ransomware and an automatic declination trigger for underwriters.",
-                        options: [
-                            { text: "Change the RDP port from 3389 to 3390 so scanners won't notice it.", correct: false },
-                            { text: "Close all inbound RDP/SMB ports at the firewall perimeter immediately and enforce Zero-Trust VPN/ZTNA with MFA.", correct: true },
-                            { text: "Keep port 3389 open but ask paralegals to use an 8-character password.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Your SPF record currently ends with '+all' (`v=spf1 include:_spf.google.com +all`). What does '+all' tell receiving mail servers?",
-                        hint: "The '+' qualifier explicitly authorizes ANY IP address on the internet to send email on behalf of your domain!",
-                        options: [
-                            { text: "It authorizes every server on the internet to spoof your domain — replace '+all' with '-all' (Hard Fail) or '~all' (Soft Fail).", correct: true },
-                            { text: "It enables maximum encryption for all outbound legal attachments.", correct: false },
-                            { text: "It restricts email delivery strictly to Google Workspace IP ranges.", correct: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: "F", code: "MOD-F", name: "Zero-Knowledge Storage", score: 35, credits: 13, accent: "#f59e0b",
-                briefing: { industry: "Defense", company: "AeroTech", dept: "Compliance", role: "CISO" },
-                scenarios: [
-                    {
-                        prompt: "Travelers Cyber Warranty Item 6A asks how your backups survive a full Active Directory Domain Admin compromise. Which architecture passes?",
-                        hint: "The '1-0' in 3-2-1-1-0 stands for 1 immutable/air-gapped copy and 0 unverified recovery errors.",
-                        options: [
-                            { text: "Nightly SMB network shares stored on a NAS joined to the primary Active Directory domain.", correct: false },
-                            { text: "3-2-1-1-0 backups with WORM/S3 Object Lock (Compliance Mode), isolated non-AD credentials, and logged restore drills.", correct: true },
-                            { text: "Local USB hard drives plugged continuously into the primary Hyper-V host.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Ransomware operators execute `vssadmin delete shadows /all /quiet` on an engineering file server. Why did your local Volume Shadow Copies vanish, and what prevents total loss?",
-                        hint: "Local OS shadow copies reside on the same host kernel; local admin privileges can wipe them in milliseconds.",
-                        options: [
-                            { text: "Local shadow copies are not immutable backups — rely on off-host, append-only immutable snapshots isolated from host admin rights.", correct: true },
-                            { text: "Rename vssadmin.exe to notepad.exe so ransomware scripts cannot find it.", correct: false },
-                            { text: "Schedule shadow copies every 15 minutes on the same C: drive.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "AeroTech stores ITAR-controlled CAD schematics in cloud object storage. How do you ensure a compromise of the cloud vendor itself cannot expose the plaintext files?",
-                        hint: "Zero-knowledge storage requires client-side encryption before data ever leaves your boundary.",
-                        options: [
-                            { text: "Enforce client-side AES-256-GCM encryption with Customer-Managed Keys (BYOK/HYOK) inside a dedicated HSM before upload.", correct: true },
-                            { text: "Rely on default provider-managed server-side encryption where the cloud host holds the master decrypt key.", correct: false },
-                            { text: "Compress the CAD files into a password-protected .zip using the company name.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "An underwriter requests proof that your immutable backups are actually recoverable within your stated 4-hour RTO. What artifact goes into the Evidence Binder?",
-                        hint: "Untested backups are Schrodinger's backups — underwriters require timestamped restoration logs.",
-                        options: [
-                            { text: "A verbal assurance from the backup vendor account executive.", correct: false },
-                            { text: "Automated quarterly sandbox bare-metal restore logs with SHA-256 integrity verification hashes and elapsed RTO timestamps.", correct: true },
-                            { text: "A screenshot showing the backup job schedule is set to 'Enabled'.", correct: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: "G", code: "MOD-G", name: "Incident Response", score: 35, credits: 13, accent: "#ffd166",
-                briefing: { industry: "Government", company: "Dept of Transit", dept: "IT Ops", role: "SysAdmin" },
-                scenarios: [
-                    {
-                        prompt: "An endpoint triggers a ransomware canary file alert at 02:15 AM. What is the mandatory Golden-Hour containment action?",
-                        hint: "Pulling the power cord destroys volatile RAM containing active encryption keys, process trees, and C2 socket states.",
-                        options: [
-                            { text: "Sever network connectivity (isolate via EDR or pull Ethernet / disable Wi-Fi) while keeping the machine powered on to preserve RAM.", correct: true },
-                            { text: "Immediately hard-reboot the machine and run disk defragmentation.", correct: false },
-                            { text: "Log into the infected machine using your Domain Admin account to inspect the ransom note.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Before wiping or re-imaging the isolated host, what forensic artifacts must be captured to satisfy carrier breach counsel and law enforcement?",
-                        hint: "Forensic triage requires volatile memory and event logs with a verifiable chain of custody.",
-                        options: [
-                            { text: "Capture a volatile RAM dump, Windows Event Logs (.evtx), MFT/prefetch tables, and record SHA-256 hashes in the chain-of-custody log.", correct: true },
-                            { text: "Format the C: drive immediately so the computer can be returned to the user before 8:00 AM.", correct: false },
-                            { text: "Take a photo of the monitor with a personal phone and delete the system logs.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "You suspect the threat actor has compromised Microsoft 365 / corporate email and is watching internal IT channels for IR coordination. How do you communicate?",
-                        hint: "Never coordinate incident response over a communication plane the adversary may be monitoring.",
-                        options: [
-                            { text: "Send an 'ALL STAFF: WE ARE HACKED' email from the primary corporate Exchange server.", correct: false },
-                            { text: "Shift immediately to pre-established Out-of-Band (OOB) encrypted communication channels and external war-room bridges.", correct: true },
-                            { text: "Post the containment plan in the public #general Slack channel.", correct: false }
-                        ]
-                    },
-                    {
-                        prompt: "Containment is achieved. Under cyber insurance policy terms and CIRCIA / state breach statutes, what is the critical governance step within the 24–72 hour window?",
-                        hint: "Unilateral ransom payments or delayed carrier notice can void cyber coverage entirely.",
-                        options: [
-                            { text: "Notify the cyber insurance carrier's breach hotline, engage panel forensic counsel under privilege, and file statutory disclosures.", correct: true },
-                            { text: "Secretly pay the ransom using a corporate credit card without notifying legal or the insurer.", correct: false },
-                            { text: "Wait 90 days to see if the attacker leaks any data before logging the incident.", correct: false }
-                        ]
-                    }
-                ]
-            }
+            { id: "A", code: "MOD-A", name: "Phishing Signal Decoder", score: 30, credits: 10, accent: "#00e5ff", briefing: { industry: "Finance", company: "Apex Wealth Partners", dept: "Accounts Payable", role: "Financial Controller" },
+              scenarios: [
+                { prompt: "An 'Urgent ACH Update' arrives from cfo@apex-wealth-portal.co at 4:55 PM on Friday demanding an immediate $185,000 wire routing change. What is your first action?", hint: "Check the sender's root domain carefully. Are we .com or a lookalike .co domain?", options: [
+                    { text: "Reply to the email asking for the updated W-9 and routing sheet.", correct: false },
+                    { text: "Quarantine the email and initiate out-of-band verification via a known internal phone extension.", correct: true },
+                    { text: "Forward the attachment to the treasury clerk to queue the wire before cutoff.", correct: false }
+                ]},
+                { prompt: "Before you finish dialing, your desk phone rings. The caller ID displays 'Apex Main Line' and the voice sounds identical to the CFO, pressuring you to waive protocol. Proceed?", hint: "Real-time AI voice cloning only needs 3 seconds of public audio. Trust cryptographic or verbal protocols, not voice timbre.", options: [
+                    { text: "Process the wire immediately to avoid delaying the acquisition closing.", correct: false },
+                    { text: "Demand the rotating internal verbal passphrase and secondary Dual-Control sign-off in the ERP.", correct: true },
+                    { text: "Ask the caller to text you a photo of their corporate badge via SMS.", correct: false }
+                ]},
+                { prompt: "The caller abruptly hangs up when asked for the passphrase. You inspect the email headers and see 'Reply-To: settlement@fast-escrow-wire.net'. What is the mandatory underwriting response?", hint: "Business Email Compromise (BEC) campaigns rarely target a single seat in isolation.", options: [
+                    { text: "Report to SecOps, block the lookalike domain at the email gateway, and sweep the tenant for matching inbox IOCs.", correct: true },
+                    { text: "Delete the email and move on since no funds left the bank account.", correct: false },
+                    { text: "Reply to the attacker warning them that law enforcement has been notified.", correct: false }
+                ]},
+                { prompt: "Underwriters auditing your Cyber Insurance application ask how Apex Wealth prevents unauthorized ACH vendor bank changes permanently. Which control satisfies the warranty?", hint: "Underwriters require Dual-Control + Out-of-Band (OOB) callback using pre-existing directory numbers.", options: [
+                    { text: "Requiring dual-authorization in ERP plus mandatory phone callback using pre-verified contact records on file.", correct: true },
+                    { text: "Accepting PDF bank change letters as long as they contain a handwritten signature.", correct: false },
+                    { text: "Relying solely on default spam filters to catch spoofed vendor invoices.", correct: false }
+                ]}
+              ]},
+            { id: "B", code: "MOD-B", name: "URL Deconstruction Lab", score: 30, credits: 10, accent: "#38bdf8", briefing: { industry: "Retail", company: "Global Cart", dept: "Logistics", role: "Supply Chain Manager" },
+              scenarios: [
+                { prompt: "Inspect this customs manifest link: https://login.microsoft.com.auth-node.net/login. Which actual host receives your credentials if you submit the form?", hint: "Read the hostname right-to-left immediately before the first single forward slash (/).", options: [
+                    { text: "microsoft.com", correct: false },
+                    { text: "auth-node.net", correct: true },
+                    { text: "login.microsoft.com", correct: false }
+                ]},
+                { prompt: "A freight vendor sends a portal link that renders as 'https://globalcart-freight.com' in chat, but hovering reveals 'https://xn--glbalcart-freight-1zb.com/auth'. What attack vector is this?", hint: "The 'xn--' prefix indicates an Internationalized Domain Name (IDN) Punycode representation.", options: [
+                    { text: "Standard TLS 1.3 certificate compression.", correct: false },
+                    { text: "IDN Homograph attack substituting a non-ASCII lookalike character to spoof the brand domain.", correct: true },
+                    { text: "A legitimate CDN load-balancer alias owned by Global Cart.", correct: false }
+                ]},
+                { prompt: "You spot a shipment tracking URL formatted as: https://portal.globalcart.com@45.33.19.88/track?id=992. Where will the browser actually connect?", hint: "In RFC 3986 URI syntax, everything before '@' in the authority section is treated as username/userinfo!", options: [
+                    { text: "It connects to 45.33.19.88 while treating 'portal.globalcart.com' as a username string.", correct: true },
+                    { text: "It connects securely to portal.globalcart.com and passes 45.33.19.88 as a tracking parameter.", correct: false },
+                    { text: "It routes traffic through an internal corporate VPN concentrator.", correct: false }
+                ]},
+                { prompt: "A warehouse supervisor scans a physical QR code sticker placed over a pallet manifest ('Quishing') that redirects through bit.ly to an external SSO login page. How do you harden against this?", hint: "Shortened URLs and unmanaged mobile browsers bypass corporate DNS filters unless protected.", options: [
+                    { text: "Enforce FIDO2 passkeys (which bind to the true domain) and route mobile scanners through protective DNS filtering.", correct: true },
+                    { text: "Instruct warehouse staff to only scan QR codes after 5:00 PM.", correct: false },
+                    { text: "Disable HTTPS inspection on warehouse Wi-Fi networks.", correct: false }
+                ]}
+              ]},
+            { id: "C", code: "MOD-C", name: "MFA Architecture Defense", score: 35, credits: 12, accent: "#a855f7", briefing: { industry: "Healthcare", company: "Metro Gen", dept: "IT Staff", role: "Admin" },
+              scenarios: [
+                { prompt: "At 11:45 PM your phone receives 6 consecutive MFA push prompts you did not initiate. What is happening and what is your immediate response?", hint: "Push notifications without number-matching fall victim to MFA Push-Fatigue (Prompt Bombing).", options: [
+                    { text: "Approve one prompt so the background sync stops alerting your phone.", correct: false },
+                    { text: "MFA Push-Fatigue attack: Deny all prompts, rotate credentials immediately, and enforce number-matching/FIDO2.", correct: true },
+                    { text: "Put the phone in Airplane Mode and wait until Monday morning to check logs.", correct: false }
+                ]},
+                { prompt: "An attacker uses an Evilginx Adversary-in-the-Middle (AiTM) reverse proxy to steal a doctor's session cookie after they enter a 6-digit TOTP code. Which MFA upgrade stops AiTM proxy harvesting?", hint: "TOTP 6-digit codes can be relayed in real time; cryptographic origin-bound keys cannot.", options: [
+                    { text: "Switching from authenticator app TOTP codes to SMS text message codes.", correct: false },
+                    { text: "Enforcing FIDO2 / WebAuthn phishing-resistant hardware keys or passkeys bound to the cryptographic domain origin.", correct: true },
+                    { text: "Shortening the TOTP code rotation window from 30 seconds to 15 seconds.", correct: false }
+                ]},
+                { prompt: "A caller claiming to be an ER surgeon on rotation calls the IT Helpdesk stating they lost their phone and urgently need their MFA reset to access patient EHR charts. Protocol?", hint: "Helpdesk social engineering (Scattered Spider style) targets MFA enrollment resets.", options: [
+                    { text: "Generate a temporary MFA bypass code immediately over the phone since ER operations are urgent.", correct: false },
+                    { text: "Require live video verification with government/hospital photo ID and manager co-sign before issuing a Time-Bound Access Pass.", correct: true },
+                    { text: "Disable MFA on the entire ER department group for 24 hours.", correct: false }
+                ]},
+                { prompt: "During your Cyber Readiness Clinic pre-underwriting scan, you discover legacy IMAP and SMTP Basic Authentication are still enabled on the mail tenant. Why does this fail underwriting?", hint: "Legacy protocols do not support modern MFA challenges, allowing attackers to spray passwords directly.", options: [
+                    { text: "Legacy protocols bypass MFA enforcement entirely — disable Basic Auth tenant-wide and require modern OAuth2/OIDC.", correct: true },
+                    { text: "IMAP only affects outbound printer scans and poses zero risk to user mailboxes.", correct: false },
+                    { text: "Underwriters prefer Basic Auth because it uses less bandwidth.", correct: false }
+                ]}
+              ]},
+            { id: "D", code: "MOD-D", name: "Identity Threat Detection", score: 35, credits: 12, accent: "#f43f5e", briefing: { industry: "Energy", company: "GridCore", dept: "SecOps", role: "Analyst" },
+              scenarios: [
+                { prompt: "During an identity audit, you find an unapproved OAuth app ('PDF-Cloud-Converter') with Mail.ReadWrite scope and a hidden inbox rule moving 'Invoice' emails to RSS Subscriptions. Remediation?", hint: "OAuth access tokens persist even after a password reset unless explicitly revoked.", options: [
+                    { text: "Revoke the OAuth enterprise grant, purge the hidden inbox rule, revoke all active refresh tokens, and audit sent items.", correct: true },
+                    { text: "Only force a password reset on the user's Active Directory account.", correct: false },
+                    { text: "Rename the RSS Subscriptions folder and leave the OAuth token active to monitor the attacker.", correct: false }
+                ]},
+                { prompt: "Identity logs show a GridCore engineer signed in from Atlanta, GA at 09:00 AM, and the exact same session token accessed SCADA documentation from an unmanaged residential proxy ASN 4 minutes later. Diagnosis?", hint: "When the session token ID is identical across two distant networks without a new MFA prompt, the token was stolen.", options: [
+                    { text: "Normal mobile carrier tower handoff; mark the alert as a false positive.", correct: false },
+                    { text: "Session token replay / infostealer theft: trigger Continuous Access Evaluation (CAE) token revocation and isolate the endpoint.", correct: true },
+                    { text: "Ask the engineer to clear their browser history at the end of the shift.", correct: false }
+                ]},
+                { prompt: "Your SIEM flags a sudden spike in RC4-encrypted Kerberos TGS ticket requests (Event ID 4769) targeting high-privilege SQL and SCADA service accounts. What attack is underway?", hint: "Requesting RC4 service tickets to crack service account passwords offline is a classic AD post-exploitation technique.", options: [
+                    { text: "Kerberoasting: contain the source host, rotate service accounts to Group Managed Service Accounts (gMSA) with AES-256.", correct: true },
+                    { text: "Routine DNS zone transfer between domain controllers.", correct: false },
+                    { text: "A harmless Windows Update background bandwidth test.", correct: false }
+                ]},
+                { prompt: "To seal the Identity section of your Evidence Binder, how should Third-Party AdminConsent for OAuth applications be configured across the tenant?", hint: "Users should never be allowed to grant tenant-wide read/write scopes to unverified third-party apps.", options: [
+                    { text: "Block user consent for unverified publishers and require cryptographically logged Admin Approval workflows.", correct: true },
+                    { text: "Allow all users to consent to any OAuth app so productivity is never slowed down.", correct: false },
+                    { text: "Only block OAuth apps on weekends.", correct: false }
+                ]}
+              ]},
+            { id: "E", code: "MOD-E", name: "Network & DNS Hygiene", score: 30, credits: 10, accent: "#10b981", briefing: { industry: "Legal", company: "Smith & Co", dept: "Partners", role: "Managing Partner" },
+              scenarios: [
+                { prompt: "Your outside-in perimeter scan shows SPF is valid and DKIM is aligned, but DMARC is published as 'v=DMARC1; p=none;'. How do cyber underwriters score this?", hint: "A DMARC policy of 'p=none' is monitoring-only and allows spoofed wire-fraud emails to reach client inboxes.", options: [
+                    { text: "Full pass — p=none blocks all spoofed domains automatically.", correct: false },
+                    { text: "High-priority underwriting gap — upgrade DMARC enforcement to p=quarantine or p=reject with RUA reporting.", correct: true },
+                    { text: "Delete the SPF record so DMARC can run in standalone mode.", correct: false }
+                ]},
+                { prompt: "Reconnaissance reveals 'events.smithlaw.com' has a CNAME record pointing to an expired cloud bucket that anyone can register. What is the risk and fix?", hint: "Dangling CNAME records allow attackers to register the external resource and serve malicious content on your trusted subdomain.", options: [
+                    { text: "Subdomain Takeover risk: immediately remove the dangling DNS CNAME record before an attacker claims the cloud endpoint.", correct: true },
+                    { text: "Leave the DNS record in place since the marketing campaign ended last year.", correct: false },
+                    { text: "Lower the DNS TTL to 60 seconds and keep pointing to the unclaimed bucket.", correct: false }
+                ]},
+                { prompt: "Shodan indexing shows TCP port 3389 (RDP) and port 445 (SMB) open on the firm's branch office static IP for remote paralegals. What is the mandatory remediation?", hint: "Exposed RDP is the #1 initial access vector for ransomware and an automatic declination trigger for underwriters.", options: [
+                    { text: "Change the RDP port from 3389 to 3390 so scanners won't notice it.", correct: false },
+                    { text: "Close all inbound RDP/SMB ports at the firewall perimeter immediately and enforce Zero-Trust VPN/ZTNA with MFA.", correct: true },
+                    { text: "Keep port 3389 open but ask paralegals to use an 8-character password.", correct: false }
+                ]},
+                { prompt: "Your SPF record currently ends with '+all' (`v=spf1 include:_spf.google.com +all`). What does '+all' tell receiving mail servers?", hint: "The '+' qualifier explicitly authorizes ANY IP address on the internet to send email on behalf of your domain!", options: [
+                    { text: "It authorizes every server on the internet to spoof your domain — replace '+all' with '-all' (Hard Fail) or '~all' (Soft Fail).", correct: true },
+                    { text: "It enables maximum encryption for all outbound legal attachments.", correct: false },
+                    { text: "It restricts email delivery strictly to Google Workspace IP ranges.", correct: false }
+                ]}
+              ]},
+            { id: "F", code: "MOD-F", name: "Zero-Knowledge Storage", score: 35, credits: 13, accent: "#f59e0b", briefing: { industry: "Defense", company: "AeroTech", dept: "Compliance", role: "CISO" },
+              scenarios: [
+                { prompt: "Travelers Cyber Warranty Item 6A asks how your backups survive a full Active Directory Domain Admin compromise. Which architecture passes?", hint: "The '1-0' in 3-2-1-1-0 stands for 1 immutable/air-gapped copy and 0 unverified recovery errors.", options: [
+                    { text: "Nightly SMB network shares stored on a NAS joined to the primary Active Directory domain.", correct: false },
+                    { text: "3-2-1-1-0 backups with WORM/S3 Object Lock (Compliance Mode), isolated non-AD credentials, and logged restore drills.", correct: true },
+                    { text: "Local USB hard drives plugged continuously into the primary Hyper-V host.", correct: false }
+                ]},
+                { prompt: "Ransomware operators execute `vssadmin delete shadows /all /quiet` on an engineering file server. Why did your local Volume Shadow Copies vanish, and what prevents total loss?", hint: "Local OS shadow copies reside on the same host kernel; local admin privileges can wipe them in milliseconds.", options: [
+                    { text: "Local shadow copies are not immutable backups — rely on off-host, append-only immutable snapshots isolated from host admin rights.", correct: true },
+                    { text: "Rename vssadmin.exe to notepad.exe so ransomware scripts cannot find it.", correct: false },
+                    { text: "Schedule shadow copies every 15 minutes on the same C: drive.", correct: false }
+                ]},
+                { prompt: "AeroTech stores ITAR-controlled CAD schematics in cloud object storage. How do you ensure a compromise of the cloud vendor itself cannot expose the plaintext files?", hint: "Zero-knowledge storage requires client-side encryption before data ever leaves your boundary.", options: [
+                    { text: "Enforce client-side AES-256-GCM encryption with Customer-Managed Keys (BYOK/HYOK) inside a dedicated HSM before upload.", correct: true },
+                    { text: "Rely on default provider-managed server-side encryption where the cloud host holds the master decrypt key.", correct: false },
+                    { text: "Compress the CAD files into a password-protected .zip using the company name.", correct: false }
+                ]},
+                { prompt: "An underwriter requests proof that your immutable backups are actually recoverable within your stated 4-hour RTO. What artifact goes into the Evidence Binder?", hint: "Untested backups are Schrodinger's backups — underwriters require timestamped restoration logs.", options: [
+                    { text: "A verbal assurance from the backup vendor account executive.", correct: false },
+                    { text: "Automated quarterly sandbox bare-metal restore logs with SHA-256 integrity verification hashes and elapsed RTO timestamps.", correct: true },
+                    { text: "A screenshot showing the backup job schedule is set to 'Enabled'.", correct: false }
+                ]}
+              ]},
+            { id: "G", code: "MOD-G", name: "Incident Response", score: 35, credits: 13, accent: "#ffd166", briefing: { industry: "Government", company: "Dept of Transit", dept: "IT Ops", role: "SysAdmin" },
+              scenarios: [
+                { prompt: "An endpoint triggers a ransomware canary file alert at 02:15 AM. What is the mandatory Golden-Hour containment action?", hint: "Pulling the power cord destroys volatile RAM containing active encryption keys, process trees, and C2 socket states.", options: [
+                    { text: "Sever network connectivity (isolate via EDR or pull Ethernet / disable Wi-Fi) while keeping the machine powered on to preserve RAM.", correct: true },
+                    { text: "Immediately hard-reboot the machine and run disk defragmentation.", correct: false },
+                    { text: "Log into the infected machine using your Domain Admin account to inspect the ransom note.", correct: false }
+                ]},
+                { prompt: "Before wiping or re-imaging the isolated host, what forensic artifacts must be captured to satisfy carrier breach counsel and law enforcement?", hint: "Forensic triage requires volatile memory and event logs with a verifiable chain of custody.", options: [
+                    { text: "Capture a volatile RAM dump, Windows Event Logs (.evtx), MFT/prefetch tables, and record SHA-256 hashes in the chain-of-custody log.", correct: true },
+                    { text: "Format the C: drive immediately so the computer can be returned to the user before 8:00 AM.", correct: false },
+                    { text: "Take a photo of the monitor with a personal phone and delete the system logs.", correct: false }
+                ]},
+                { prompt: "You suspect the threat actor has compromised Microsoft 365 / corporate email and is watching internal IT channels for IR coordination. How do you communicate?", hint: "Never coordinate incident response over a communication plane the adversary may be monitoring.", options: [
+                    { text: "Send an 'ALL STAFF: WE ARE HACKED' email from the primary corporate Exchange server.", correct: false },
+                    { text: "Shift immediately to pre-established Out-of-Band (OOB) encrypted communication channels and external war-room bridges.", correct: true },
+                    { text: "Post the containment plan in the public #general Slack channel.", correct: false }
+                ]},
+                { prompt: "Containment is achieved. Under cyber insurance policy terms and CIRCIA / state breach statutes, what is the critical governance step within the 24–72 hour window?", hint: "Unilateral ransom payments or delayed carrier notice can void cyber coverage entirely.", options: [
+                    { text: "Notify the cyber insurance carrier's breach hotline, engage panel forensic counsel under privilege, and file statutory disclosures.", correct: true },
+                    { text: "Secretly pay the ransom using a corporate credit card without notifying legal or the insurer.", correct: false },
+                    { text: "Wait 90 days to see if the attacker leaks any data before logging the incident.", correct: false }
+                ]}
+              ]}
         ];
 
-        // Individualized Pain-Point Profiles for Stage 3 Road to Remediation
         const PAIN_POINT_PROFILES = {
-            bec_wire: {
-                standard: "NYDFS Part 500 & SOC 2 Type II",
-                defaultDomain: "portal.apexwealth-partners.com",
+            bec_wire: { standard: "NYDFS Part 500 & SOC 2 Type II", defaultDomain: "portal.apexwealth-partners.com",
                 logs: (dom) => [
                     `<div class='term-log'>&gt; Resolving DNS, SPF, DKIM &amp; DMARC records for [${dom}]... [OK]</div>`,
                     `<div class='term-warn'>&gt; PAIN POINT DETECTED: DMARC set to p=none; 2 lookalike cousin domains active.</div>`,
@@ -1156,9 +1041,7 @@
                     { text: "Leave DMARC at p=none and rely on employees spotting typos.", correct: false }
                 ]
             },
-            mfa_identity: {
-                standard: "HIPAA Security Rule & NIST SP 800-63B",
-                defaultDomain: "ehr.metrogen-health.org",
+            mfa_identity: { standard: "HIPAA Security Rule & NIST SP 800-63B", defaultDomain: "ehr.metrogen-health.org",
                 logs: (dom) => [
                     `<div class='term-log'>&gt; Probing OIDC / SAML identity endpoints on [${dom}]... [OK]</div>`,
                     `<div class='term-warn'>&gt; PAIN POINT DETECTED: Legacy IMAP/SMTP Basic Auth active on 3 service mailboxes.</div>`,
@@ -1175,9 +1058,7 @@
                     { text: "Switch clinical staff to SMS 6-digit text codes.", correct: false }
                 ]
             },
-            ransom_backup: {
-                standard: "CMMC 2.0 Level 2 & NIST SP 800-171",
-                defaultDomain: "cui-vault.aerotech-defense.com",
+            ransom_backup: { standard: "CMMC 2.0 Level 2 & NIST SP 800-171", defaultDomain: "cui-vault.aerotech-defense.com",
                 logs: (dom) => [
                     `<div class='term-log'>&gt; Scanning perimeter firewall &amp; BGP routes for [${dom}]... [OK]</div>`,
                     `<div class='term-warn'>&gt; PAIN POINT DETECTED: Shadow management port 3389 (RDP) responsive on secondary subnet.</div>`,
@@ -1194,9 +1075,7 @@
                     { text: "Change RDP to port 3390 and keep backups on the primary AD domain.", correct: false }
                 ]
             },
-            supply_chain: {
-                standard: "PCI-DSS v4.0 & ISO/IEC 27001",
-                defaultDomain: "manifest.globalcart-logistics.com",
+            supply_chain: { standard: "PCI-DSS v4.0 & ISO/IEC 27001", defaultDomain: "manifest.globalcart-logistics.com",
                 logs: (dom) => [
                     `<div class='term-log'>&gt; Enumerating DNS zone CNAMEs &amp; third-party OAuth grants for [${dom}]... [OK]</div>`,
                     `<div class='term-warn'>&gt; PAIN POINT DETECTED: Dangling CNAME on promo.${dom} pointing to unclaimed bucket.</div>`,
@@ -1215,67 +1094,26 @@
             }
         };
 
-        // Underwriting Delivery Packages (from burn1_onboarding_modal.js Stage 4)
         const PACKAGES = [
-            {
-                id: "pkg-binder-500",
-                name: "Cryptographic Evidence Binder v2",
-                tag: "MOST POPULAR // 50% CREDIT CAP",
-                basePrice: 500.00,
-                maxDiscount: 250.00,
-                desc: "Machine-signed ALCOA+ underwriting evidence binder, 7-domain SAQ attestation, and carrier submission seal."
-            },
-            {
-                id: "pkg-spa-500",
-                name: "Automated S.P.A. & Perimeter Audit",
-                tag: "OUTSIDE-IN RECON",
-                basePrice: 500.00,
-                maxDiscount: 250.00,
-                desc: "Full Security Posture Assessment (S.P.A.), shadow subdomain enumeration, and 72-hour Day-Three CVE delta."
-            },
-            {
-                id: "pkg-retainer-1000",
-                name: "Golden-Hour Incident Retainer",
-                tag: "SLA < 1 HR",
-                basePrice: 1000.00,
-                maxDiscount: 250.00,
-                desc: "Pre-negotiated IR war-room retainer, Tabletop Exercise (TTX) facilitation, and forensic chain-of-custody kit."
-            },
-            {
-                id: "pkg-ctem-2400",
-                name: "Continuous CTEM Monitoring (Annual)",
-                tag: "24/7 DRIFT WATCH",
-                basePrice: 2400.00,
-                maxDiscount: 250.00,
-                desc: "Year-round automated DNS/DMARC drift alerts, dark-web duopoly watch, and quarterly backup restore verification."
-            }
+            { id: "pkg-binder-500", name: "Cryptographic Evidence Binder v2", tag: "MOST POPULAR // 50% CREDIT CAP", basePrice: 750.00, maxDiscount: 250.00,
+              desc: "Machine-signed ALCOA+ underwriting evidence binder, 7-domain SAQ attestation, and carrier submission seal." },
+            { id: "pkg-spa-500", name: "Automated S.P.A. & Perimeter Audit", tag: "OUTSIDE-IN RECON", basePrice: 500.00, maxDiscount: 250.00,
+              desc: "Full Security Posture Assessment (S.P.A.), shadow subdomain enumeration, and 72-hour Day-Three CVE delta." },
+            { id: "pkg-retainer-1000", name: "Golden-Hour Incident Retainer", tag: "SLA < 1 HR", basePrice: 1000.00, maxDiscount: 250.00,
+              desc: "Pre-negotiated IR war-room retainer, Tabletop Exercise (TTX) facilitation, and forensic chain-of-custody kit." },
+            { id: "pkg-ctem-2400", name: "Continuous CTEM Monitoring (Annual)", tag: "24/7 DRIFT WATCH", basePrice: 2400.00, maxDiscount: 250.00,
+              desc: "Year-round automated DNS/DMARC drift alerts, dark-web duopoly watch, and quarterly backup restore verification." }
         ];
 
         // ---------------------------------------------------------
-        // 2. STATE, AUTHENTICATION & PERSISTENCE ENGINE
+        // 2. STATE, AUTH, PERSISTENCE
         // ---------------------------------------------------------
         let academyState = {
-            isAuthenticated: false,
-            intakeMode: "create",
-            operatorEmail: "",
-            operatorDomain: "",
-            completedSteps: {},
-            modulesPassed: {},
-            stage1Credits: 0,
-            stage2Credits: 0,
-            bonusCredits: 0,
-            spentCredits: 0,
-            score: 0,
-            credits: 0,
-            selectedPackageId: "pkg-binder-500",
-            applyCreditsDiscount: true,
-            roadParts: {
-                part1ScanDone: false,
-                part1DrillDone: false,
-                part2Sealed: false,
-                part3Drills: {},
-                part4Bound: false
-            }
+            isAuthenticated: false, intakeMode: "create", operatorEmail: "", operatorDomain: "",
+            completedSteps: {}, modulesPassed: {},
+            stage1Credits: 0, stage2Credits: 0, bonusCredits: 0, spentCredits: 0, score: 0, credits: 0,
+            selectedPackageId: "pkg-binder-500", applyCreditsDiscount: true,
+            roadParts: { part1ScanDone: false, part1DrillDone: false, part2Sealed: false, part3Drills: {}, part4Bound: false }
         };
 
         let activeTimer = null;
@@ -1288,53 +1126,29 @@
             return `${mins}:${secs}`;
         }
 
-        // Sync across all Burn-1 localStorage keys (burn1_clinic_v1, cyber-hygiene-protocol-v1, cinematicBoard1.html)
         function saveClinicState() {
             const badgesList = [
                 ...Object.keys(academyState.modulesPassed),
                 ...PROTOCOL_LEVELS.filter(l => l.steps.every((_, i) => academyState.completedSteps[`${l.code}_${i}`])).map(l => l.code)
             ];
             const payload = {
-                credits: academyState.credits,
-                score: academyState.score,
-                badges: badgesList,
-                completedSteps: academyState.completedSteps,
-                modulesPassed: academyState.modulesPassed,
-                stage1Credits: academyState.stage1Credits,
-                stage2Credits: academyState.stage2Credits,
-                bonusCredits: academyState.bonusCredits,
-                spentCredits: academyState.spentCredits,
-                isAuthenticated: academyState.isAuthenticated,
-                roadParts: academyState.roadParts,
-                profile: {
-                    email: academyState.operatorEmail,
-                    domain: academyState.operatorDomain || document.getElementById('input-scan-domain')?.value || 'portal.burn-1.com',
-                    authenticated: academyState.isAuthenticated
-                }
+                credits: academyState.credits, score: academyState.score, badges: badgesList,
+                completedSteps: academyState.completedSteps, modulesPassed: academyState.modulesPassed,
+                stage1Credits: academyState.stage1Credits, stage2Credits: academyState.stage2Credits,
+                bonusCredits: academyState.bonusCredits, spentCredits: academyState.spentCredits,
+                isAuthenticated: academyState.isAuthenticated, roadParts: academyState.roadParts,
+                profile: { email: academyState.operatorEmail, domain: academyState.operatorDomain || document.getElementById('input-scan-domain')?.value || 'portal.burn-1.com', authenticated: academyState.isAuthenticated }
             };
             try {
                 localStorage.setItem("burn1_clinic_v1", JSON.stringify(payload));
-                localStorage.setItem("cyber-hygiene-protocol-v1", JSON.stringify({
-                    score: academyState.score,
-                    credits: academyState.credits,
-                    authenticated: academyState.isAuthenticated,
-                    email: academyState.operatorEmail
-                }));
+                localStorage.setItem("cyber-hygiene-protocol-v1", JSON.stringify({ score: academyState.score, credits: academyState.credits, authenticated: academyState.isAuthenticated, email: academyState.operatorEmail }));
                 localStorage.setItem("burn1_clinic_credits", String(academyState.credits));
                 localStorage.setItem("burn1_clinic_score", String(academyState.score));
                 localStorage.setItem("burn1_badges", String(badgesList.length));
                 if (academyState.isAuthenticated) {
-                    localStorage.setItem("burn1_auth_user", JSON.stringify({
-                        email: academyState.operatorEmail,
-                        domain: academyState.operatorDomain,
-                        credits: academyState.credits,
-                        score: academyState.score,
-                        authenticatedAt: new Date().toISOString()
-                    }));
+                    localStorage.setItem("burn1_auth_user", JSON.stringify({ email: academyState.operatorEmail, domain: academyState.operatorDomain, credits: academyState.credits, score: academyState.score, authenticatedAt: new Date().toISOString() }));
                 }
-            } catch (e) {
-                // Ignore storage errors in sandboxed iframes
-            }
+            } catch (e) {}
         }
 
         function loadSavedClinicState() {
@@ -1347,9 +1161,7 @@
                     academyState.modulesPassed = saved.modulesPassed || {};
                     academyState.bonusCredits = parseInt(saved.bonusCredits || 0, 10);
                     academyState.spentCredits = parseInt(saved.spentCredits || 0, 10);
-                    if (saved.roadParts) {
-                        academyState.roadParts = Object.assign(academyState.roadParts, saved.roadParts);
-                    }
+                    if (saved.roadParts) academyState.roadParts = Object.assign(academyState.roadParts, saved.roadParts);
                     if (saved.isAuthenticated && saved.profile && saved.profile.email) {
                         academyState.isAuthenticated = true;
                         academyState.operatorEmail = saved.profile.email;
@@ -1360,27 +1172,23 @@
         }
 
         // ---------------------------------------------------------
-        // 3. AUTO-TIMER ENGINE ("Timing is the feel of the game")
+        // 3. TIMER
         // ---------------------------------------------------------
         function startTimer(phaseLabel) {
-            if (activeTimer) clearInterval(activeTimer);
-            if (!isTimerRunning) {
-                isTimerRunning = true;
-            }
+            if (activeTimer) { clearInterval(activeTimer); activeTimer = null; }
+            isTimerRunning = true;
             const icon = document.getElementById('timer-icon');
             const spinner = document.getElementById('clock-spinner');
             if (icon) icon.classList.replace('fa-play', 'fa-pause');
             if (spinner) spinner.classList.add('clock-hand');
             document.getElementById('active-mission-label').innerText = `Active: ${phaseLabel}`;
-            
             activeTimer = setInterval(() => {
                 elapsedSeconds++;
                 document.getElementById('global-timer').innerText = formatElapsed(elapsedSeconds);
             }, 1000);
         }
-
         function stopTimer(customStatus = "Mission Complete") {
-            if (activeTimer) clearInterval(activeTimer);
+            if (activeTimer) { clearInterval(activeTimer); activeTimer = null; }
             isTimerRunning = false;
             const icon = document.getElementById('timer-icon');
             const spinner = document.getElementById('clock-spinner');
@@ -1389,60 +1197,81 @@
             document.getElementById('active-mission-label').innerText = customStatus;
             return document.getElementById('global-timer').innerText;
         }
-
         function toggleTimerManually() {
             const icon = document.getElementById('timer-icon');
             const spinner = document.getElementById('clock-spinner');
-            
             if (isTimerRunning) {
-                clearInterval(activeTimer);
-                isTimerRunning = false;
+                clearInterval(activeTimer); activeTimer = null; isTimerRunning = false;
                 icon.classList.replace('fa-pause', 'fa-play');
                 spinner.classList.remove('clock-hand');
                 document.getElementById('active-mission-label').innerText = "Timer Paused";
             } else {
-                const label = elapsedSeconds === 0 ? "Manual Deployment" : "Timer Resumed";
-                startTimer(label);
+                startTimer(elapsedSeconds === 0 ? "Manual Deployment" : "Timer Resumed");
             }
         }
 
         // ---------------------------------------------------------
-        // 4. HUD, INTAKE LEDGER & PRICING TAPE UPDATES
+        // 4. HUD, LEDGER, PRICING
         // ---------------------------------------------------------
         function calculatePricing() {
             const pkg = PACKAGES.find(p => p.id === academyState.selectedPackageId) || PACKAGES[0];
-            // Up to 120 CR -> $250 max discount (~$2.0833 per credit)
             const dollarPerCredit = 250 / 120;
             const rawDiscount = Math.round(academyState.credits * dollarPerCredit * 100) / 100;
             const discount = academyState.applyCreditsDiscount ? Math.min(rawDiscount, pkg.maxDiscount) : 0;
             const finalPrice = Math.max(25.00, pkg.basePrice - discount);
+            return { pkg, basePrice: pkg.basePrice, discount, finalPrice, creditsAvailable: academyState.credits };
+        }
+
+        function rankFor(lDoneCount, advDoneCount) {
+            if (lDoneCount === 8 && advDoneCount === 7) return "OPERATOR";
+            if (lDoneCount === 8 || advDoneCount >= 5) return "GUARDIAN";
+            if (lDoneCount >= 4 || advDoneCount >= 2) return "DEFENDER";
+            return "INITIATE";
+        }
+
+        function badgeStateFor() {
+            const allHygiene = PROTOCOL_LEVELS.every(l => l.steps.every((_, i) => academyState.completedSteps[`${l.code}_${i}`]));
+            const allSims = Object.keys(academyState.modulesPassed).length === ADVANCED_MODULES.length;
+            const roadPartsDone = (academyState.roadParts.part1ScanDone || academyState.roadParts.part1DrillDone) && academyState.roadParts.part2Sealed && Object.keys(academyState.roadParts.part3Drills || {}).length > 0;
             return {
-                pkg,
-                basePrice: pkg.basePrice,
-                discount,
-                finalPrice,
-                creditsAvailable: academyState.credits
+                completion: allHygiene && allSims && roadPartsDone,
+                mfa2: academyState.roadParts.part3Drills?.mfa2 === true,
+                phishing: academyState.modulesPassed?.["MOD-A"] === true
             };
+        }
+
+        function reflectBadges() {
+            const b = badgeStateFor();
+            const map = [
+                ["badge-chip-completion", "badge-img-completion", b.completion],
+                ["badge-chip-mfa2", "badge-img-mfa2", b.mfa2],
+                ["badge-chip-phishing", "badge-img-phishing", b.phishing]
+            ];
+            map.forEach(([chipId, imgId, earned]) => {
+                const chip = document.getElementById(chipId);
+                const img = document.getElementById(imgId);
+                if (chip) chip.classList.toggle('earned', earned);
+                if (img) img.classList.toggle('earned', earned);
+            });
         }
 
         function updateHUD() {
             document.getElementById('hud-score').innerText = academyState.score;
             document.getElementById('hud-credits').innerText = `${academyState.credits} / 120`;
-            
+
             let lDoneCount = 0;
-            PROTOCOL_LEVELS.forEach(l => {
-                if (l.steps.every((_, i) => academyState.completedSteps[`${l.code}_${i}`])) lDoneCount++;
-            });
-            let advDoneCount = Object.keys(academyState.modulesPassed).length;
-
-            let rank = "INITIATE";
-            if (lDoneCount === 8 && advDoneCount === 7) rank = "OPERATOR";
-            else if (lDoneCount === 8 || advDoneCount >= 5) rank = "GUARDIAN";
-            else if (lDoneCount >= 4 || advDoneCount >= 2) rank = "DEFENDER";
-
+            PROTOCOL_LEVELS.forEach(l => { if (l.steps.every((_, i) => academyState.completedSteps[`${l.code}_${i}`])) lDoneCount++; });
+            const advDoneCount = Object.keys(academyState.modulesPassed).length;
+            const rank = rankFor(lDoneCount, advDoneCount);
             document.getElementById('hud-rank').innerText = rank;
 
-            // Update Intake Credentials Live Credit Ledger
+            const ribbon = document.getElementById('rank-ribbon');
+            if (ribbon) {
+                ribbon.classList.remove('hidden');
+                document.getElementById('ribbon-rank').innerText = rank;
+                document.getElementById('ribbon-credits').innerText = `${academyState.credits} / 120`;
+            }
+
             const s1El = document.getElementById('intake-s1-credits');
             const s2El = document.getElementById('intake-s2-credits');
             const netEl = document.getElementById('intake-net-credits');
@@ -1450,7 +1279,6 @@
             const offsetEl = document.getElementById('intake-binder-offset');
             const gateUnclaimed = document.getElementById('gate-unclaimed-credits');
             const roadAvail = document.getElementById('road-credits-available');
-
             const pricing = calculatePricing();
 
             if (s1El) s1El.innerText = `${academyState.stage1Credits} / 40 CR`;
@@ -1459,59 +1287,34 @@
             if (offsetEl) offsetEl.innerText = `-$${pricing.discount.toFixed(2)} Binder Offset`;
             if (gateUnclaimed) gateUnclaimed.innerText = `${academyState.stage1Credits} CR`;
             if (roadAvail) roadAvail.innerText = `${academyState.credits} CR`;
+            if (ledgerStatus) ledgerStatus.innerText = academyState.isAuthenticated ? `Bound to: ${academyState.operatorEmail}` : `Unclaimed Free Session Credits`;
 
-            if (ledgerStatus) {
-                ledgerStatus.innerText = academyState.isAuthenticated
-                    ? `Bound to: ${academyState.operatorEmail}`
-                    : `Unclaimed Free Session Credits`;
-            }
-
-            // Show Update Evidence button when credits earned or authenticated
             const evidenceBtn = document.getElementById('btn-update-evidence');
             if (evidenceBtn) {
-                if (academyState.credits >= 40 || academyState.isAuthenticated) {
-                    evidenceBtn.classList.remove('hidden');
-                } else {
-                    evidenceBtn.classList.add('hidden');
-                }
+                if (academyState.credits >= 40 || academyState.isAuthenticated) evidenceBtn.classList.remove('hidden');
+                else evidenceBtn.classList.add('hidden');
             }
 
+            reflectBadges();
             updatePricingDisplay();
             updateRoadComplianceStatus();
         }
 
         function recomputeTotals() {
-            let s1Score = 0;
-            let s1Creds = 0;
-
+            let s1Score = 0, s1Creds = 0;
             PROTOCOL_LEVELS.forEach(l => {
                 let done = 0;
-                for (let i = 0; i < l.steps.length; i++) {
-                    if (academyState.completedSteps[`${l.code}_${i}`]) done++;
-                }
+                for (let i = 0; i < l.steps.length; i++) if (academyState.completedSteps[`${l.code}_${i}`]) done++;
                 const badge = document.getElementById(`hygiene-badge-${l.code}`);
-                if (done === l.steps.length) {
-                    s1Score += l.reward.score;
-                    s1Creds += l.reward.credits;
-                    if (badge) badge.classList.remove('hidden');
-                } else {
-                    if (badge) badge.classList.add('hidden');
-                }
+                if (done === l.steps.length) { s1Score += l.reward.score; s1Creds += l.reward.credits; if (badge) badge.classList.remove('hidden'); }
+                else { if (badge) badge.classList.add('hidden'); }
             });
 
-            let s2Score = 0;
-            let s2Creds = 0;
-            ADVANCED_MODULES.forEach(m => {
-                if (academyState.modulesPassed[m.code]) {
-                    s2Score += m.score;
-                    s2Creds += m.credits;
-                }
-            });
+            let s2Score = 0, s2Creds = 0;
+            ADVANCED_MODULES.forEach(m => { if (academyState.modulesPassed[m.code]) { s2Score += m.score; s2Creds += m.credits; } });
 
             const drillCount = Object.keys(academyState.roadParts.part3Drills || {}).length;
-            const roadScore = (academyState.roadParts.part1DrillDone ? 15 : 0) +
-                              (academyState.roadParts.part2Sealed ? 20 : 0) +
-                              (drillCount * 25);
+            const roadScore = (academyState.roadParts.part1DrillDone ? 15 : 0) + (academyState.roadParts.part2Sealed ? 20 : 0) + (drillCount * 25);
 
             academyState.stage1Credits = s1Creds;
             academyState.stage2Credits = s2Creds;
@@ -1523,14 +1326,13 @@
         }
 
         // ---------------------------------------------------------
-        // 5. INTAKE / LOGIN & STAGE 2 GATING LOGIC
+        // 5. LOGIN
         // ---------------------------------------------------------
         function setIntakeMode(mode) {
             academyState.intakeMode = mode;
             const btnCreate = document.getElementById('tab-mode-create');
             const btnSignin = document.getElementById('tab-mode-signin');
             const submitBtn = document.getElementById('btn-submit-intake');
-
             if (mode === 'create') {
                 btnCreate.className = "py-1.5 rounded-lg bg-[#2A081C] text-white transition-all";
                 btnSignin.className = "py-1.5 rounded-lg text-slate-600 hover:text-[#2A081C] transition-all";
@@ -1545,11 +1347,7 @@
         function promptIntakeLogin(reasonMsg) {
             showToast(reasonMsg || "Stage 2 Operator Simulators require authentication. Sign in or create an account to bind your free credits.", "warn");
             const card = document.getElementById('login-card-container');
-            if (card) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                card.classList.add('highlight-pulse');
-                setTimeout(() => card.classList.remove('highlight-pulse'), 3600);
-            }
+            if (card) { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); card.classList.add('highlight-pulse'); setTimeout(() => card.classList.remove('highlight-pulse'), 3600); }
             const emailInput = document.getElementById('login-email');
             if (emailInput) setTimeout(() => emailInput.focus(), 450);
         }
@@ -1558,31 +1356,23 @@
             document.getElementById('login-form-area').classList.add('hidden');
             document.getElementById('login-success-area').classList.remove('hidden');
             document.getElementById('verified-email-text').innerText = academyState.operatorEmail;
-            document.getElementById('verified-domain-text').innerText = academyState.operatorDomain
-                ? `Target Domain: ${academyState.operatorDomain}`
-                : `Session Bound to Evidence Binder`;
-
+            document.getElementById('verified-domain-text').innerText = academyState.operatorDomain ? `Target Domain: ${academyState.operatorDomain}` : `Session Bound to Evidence Binder`;
             const badge = document.getElementById('auth-status-badge');
             badge.innerText = "AUTHENTICATED";
             badge.className = "px-2.5 py-1 bg-emerald-100 text-emerald-700 font-mono font-bold text-[10px] uppercase rounded";
-
             const s2Pill = document.getElementById('stage2-auth-pill');
             if (s2Pill) {
                 s2Pill.className = "px-2.5 py-0.5 bg-emerald-500 text-white font-mono text-[10px] font-black uppercase rounded-md flex items-center gap-1";
                 s2Pill.innerHTML = `<i class="fa-solid fa-unlock"></i> Unlocked`;
             }
-
             const gateBanner = document.getElementById('stage2-gate-banner');
             if (gateBanner) gateBanner.classList.add('hidden');
-
             if (academyState.operatorDomain) {
                 const scanInput = document.getElementById('input-scan-domain');
                 if (scanInput && !scanInput.value) scanInput.value = academyState.operatorDomain;
                 const p2Dom = document.getElementById('part2-domain-label');
                 if (p2Dom) p2Dom.innerText = academyState.operatorDomain;
             }
-
-            // Update simulator badges from LOCKED (LOGIN) to 0 / 4 PHASES
             ADVANCED_MODULES.forEach(mod => {
                 const modBadge = document.getElementById(`badge-${mod.code}`);
                 if (modBadge && !academyState.modulesPassed[mod.code]) {
@@ -1595,26 +1385,16 @@
         function processLogin() {
             const email = document.getElementById('login-email').value.trim();
             const domain = document.getElementById('login-domain').value.trim();
-            if (!email) {
-                showToast("Enter your Operator Email to create an account or sign in.", "warn");
-                document.getElementById('login-email').focus();
-                return;
-            }
-
+            if (!email) { showToast("Enter your Operator Email to create an account or sign in.", "warn"); document.getElementById('login-email').focus(); return; }
             const carriedCredits = academyState.credits;
             academyState.isAuthenticated = true;
             academyState.operatorEmail = email;
             academyState.operatorDomain = domain || email.split('@')[1] || "portal.burn-1.com";
-
             startTimer(`Intake Bound // ${email}`);
             applyAuthenticatedUI();
             recomputeTotals();
-
-            if (carriedCredits > 0) {
-                showToast(`Account verified for ${email}! ${carriedCredits} CR from your free session automatically bound to your account.`, "success");
-            } else {
-                showToast(`Operator ${email} authenticated! Stage 2 Operator Simulators (A–G) are now unlocked.`, "success");
-            }
+            if (carriedCredits > 0) showToast(`Account verified for ${email}! ${carriedCredits} CR from your free session automatically bound to your account.`, "success");
+            else showToast(`Operator ${email} authenticated! Stage 2 Operator Simulators (A–G) are now unlocked.`, "success");
         }
 
         function logoutOperator() {
@@ -1622,20 +1402,16 @@
             academyState.operatorEmail = "";
             document.getElementById('login-form-area').classList.remove('hidden');
             document.getElementById('login-success-area').classList.add('hidden');
-
             const badge = document.getElementById('auth-status-badge');
             badge.innerText = "Free Session";
             badge.className = "px-2.5 py-1 bg-amber-100 text-amber-800 font-mono font-bold text-[10px] uppercase rounded";
-
             const s2Pill = document.getElementById('stage2-auth-pill');
             if (s2Pill) {
                 s2Pill.className = "px-2.5 py-0.5 bg-rose-600 text-white font-mono text-[10px] font-black uppercase rounded-md flex items-center gap-1";
                 s2Pill.innerHTML = `<i class="fa-solid fa-lock"></i> Login Required`;
             }
-
             const gateBanner = document.getElementById('stage2-gate-banner');
             if (gateBanner) gateBanner.classList.remove('hidden');
-
             collapseAllSims();
             buildSimulators();
             saveClinicState();
@@ -1645,13 +1421,9 @@
 
         function teleportToOnboarding() {
             saveClinicState();
-            const targetUrl = `cinematicBoard1.html?email=${encodeURIComponent(academyState.operatorEmail || 'guest')}&credits=${academyState.credits}&score=${academyState.score}#step-5`;
-            showToast(`Syncing ${academyState.credits} CR & Sign-In state to cinematicBoard1.html...`, "success");
-            setTimeout(() => {
-                if (window.location.protocol === "file:") {
-                    window.location.href = targetUrl;
-                }
-            }, 900);
+            const targetUrl = `cinematic-onboarding.html?email=${encodeURIComponent(academyState.operatorEmail || 'guest')}&credits=${academyState.credits}&score=${academyState.score}#step-5`;
+            showToast(`Syncing ${academyState.credits} CR & Sign-In state to cinematic-onboarding.html...`, "success");
+            setTimeout(() => { window.location.href = targetUrl; }, 900);
         }
 
         function scrollToRoadSection() {
@@ -1661,7 +1433,7 @@
         }
 
         // ---------------------------------------------------------
-        // 6. UI BUILDERS (All Stage 1 & Stage 2 Collapsed Initially)
+        // 6. BUILDERS
         // ---------------------------------------------------------
         function buildHygieneLevels() {
             const container = document.getElementById('hygiene-container');
@@ -1680,8 +1452,6 @@
                         </label>
                     `;
                 }).join('');
-
-                // Notice: No 'active' class added initially so all 8 are collapsed!
                 container.innerHTML += `
                     <div id="hygiene-container-${level.code}" class="module-container bg-white rounded-2xl shadow-sm border border-[#C4D4E0] overflow-hidden">
                         <button onclick="toggleModule(this)" class="w-full p-4 flex items-center justify-between hover:bg-[#EBF1F5] transition-colors">
@@ -1690,7 +1460,7 @@
                                     <img data-local-src="${level.img}" src="${fallbackSvg}" alt="${level.name}" class="w-full h-full object-cover">
                                 </div>
                                 <div class="text-left">
-                                    <span class="font-mono text-xs font-bold text-slate-400">${level.code} &bull; FREE SESSION &bull; +${level.reward.credits} CR &bull; +${level.reward.score} PTS</span>
+                                    <span class="font-mono text-xs font-bold text-slate-400">${level.code} • FREE SESSION • +${level.reward.credits} CR • +${level.reward.score} PTS</span>
                                     <h4 class="text-xl font-black text-[#2A081C]">${level.name}</h4>
                                     <p class="text-xs text-slate-500 font-semibold">${level.tagline}</p>
                                 </div>
@@ -1716,19 +1486,15 @@
                 const isPassed = !!academyState.modulesPassed[mod.code];
                 let scensHTML = mod.scenarios.map((scen, idx) => {
                     let progressPills = mod.scenarios.map((_, pIdx) => {
-                        let pillClass = pIdx < idx
-                            ? "bg-emerald-400"
-                            : (pIdx === idx ? "bg-cyan-400 animate-pulse" : "bg-slate-700");
+                        let pillClass = pIdx < idx ? "bg-emerald-400" : (pIdx === idx ? "bg-cyan-400 animate-pulse" : "bg-slate-700");
                         return `<div class="h-1.5 flex-1 rounded-full ${pillClass}"></div>`;
                     }).join('');
-
                     let optsHTML = scen.options.map((opt, optIdx) => `
                         <button onclick="handleSimAnswer('${mod.code}', ${opt.correct}, this, ${idx})" class="w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold border border-slate-700 transition-all flex items-start gap-3">
                             <span class="font-mono text-xs px-2 py-0.5 rounded bg-slate-900 text-cyan-400 border border-slate-700 mt-0.5 shrink-0">${String.fromCharCode(65 + optIdx)}</span>
                             <span class="opt-label flex-1">${opt.text}</span>
                         </button>
                     `).join('');
-
                     return `
                         <div id="scen-${mod.code}-${idx}" class="${idx === 0 ? 'fade-step' : 'hidden'} space-y-4">
                             <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
@@ -1747,7 +1513,7 @@
                             <div id="feedback-${mod.code}-${idx}" class="hidden text-xs font-mono p-3 rounded-lg"></div>
                             <div class="flex justify-end mt-4">
                                 <button id="next-${mod.code}-${idx}" onclick="nextScenario('${mod.code}', ${idx}, ${totalScens})" class="hidden px-8 py-3 bg-cyan-400 hover:bg-cyan-300 text-[#2A081C] font-black uppercase tracking-wider rounded-lg shadow-lg transition-all">
-                                    ${idx === totalScens - 1 ? 'Complete Mission &rarr;' : `Advance to Phase ${idx + 2} &rarr;`}
+                                    ${idx === totalScens - 1 ? 'Complete Mission →' : `Advance to Phase ${idx + 2} →`}
                                 </button>
                             </div>
                         </div>
@@ -1756,22 +1522,16 @@
 
                 let badgeClass = "px-3 py-1 bg-slate-800 text-rose-400 text-xs font-mono font-bold rounded-md border border-rose-500/30";
                 let badgeText = "🔒 LOGIN REQUIRED";
-                if (isPassed) {
-                    badgeClass = "px-3 py-1 bg-emerald-500 text-white text-xs font-mono font-black rounded-md";
-                    badgeText = `PASSED (${totalScens}/${totalScens})`;
-                } else if (academyState.isAuthenticated) {
-                    badgeClass = "px-3 py-1 bg-slate-800 text-cyan-300 text-xs font-mono font-bold rounded-md border border-cyan-500/30";
-                    badgeText = `UNLOCKED // 0 / ${totalScens}`;
-                }
+                if (isPassed) { badgeClass = "px-3 py-1 bg-emerald-500 text-white text-xs font-mono font-black rounded-md"; badgeText = `PASSED (${totalScens}/${totalScens})`; }
+                else if (academyState.isAuthenticated) { badgeClass = "px-3 py-1 bg-slate-800 text-cyan-300 text-xs font-mono font-bold rounded-md border border-cyan-500/30"; badgeText = `UNLOCKED // 0 / ${totalScens}`; }
 
-                // All A-G start collapsed (no 'active' class)
                 container.innerHTML += `
                     <div id="mod-container-${mod.code}" class="module-container bg-[#0f172a] rounded-2xl shadow-lg border-2 border-[#1e293b] overflow-hidden">
                         <button onclick="toggleModAndStartTimer(this, '${mod.code}')" class="w-full text-left p-5 flex items-center justify-between hover:bg-slate-800/80 transition-colors">
                             <div class="flex items-center gap-4">
                                 <span class="flex items-center justify-center w-12 h-12 rounded-xl bg-[#2A081C] text-[#D92B8A] font-black text-xl border border-[#D92B8A] shrink-0">${mod.id}</span>
                                 <div>
-                                    <span class="font-mono text-xs font-bold text-slate-400">${mod.code} &bull; ${totalScens} SCENARIOS &bull; +${mod.credits} CR &bull; +${mod.score} PTS</span>
+                                    <span class="font-mono text-xs font-bold text-slate-400">${mod.code} • ${totalScens} SCENARIOS • +${mod.credits} CR • +${mod.score} PTS</span>
                                     <h4 class="text-xl font-black text-white">${mod.name}</h4>
                                 </div>
                             </div>
@@ -1806,66 +1566,36 @@
         }
 
         // ---------------------------------------------------------
-        // 7. STAGE 1 & STAGE 2 INTERACTION HANDLERS
+        // 7. INTERACTION
         // ---------------------------------------------------------
         function toggleModule(btn) {
             const container = btn.closest('.module-container');
             container.classList.toggle('active');
-            // Auto-start timer on ANY phase interaction
             if (container.classList.contains('active')) {
                 const code = (container.id || '').replace('hygiene-container-', '') || 'Hygiene';
                 startTimer(`Stage 1 // ${code}`);
             }
         }
-
-        function collapseAllHygiene() {
-            PROTOCOL_LEVELS.forEach(l => {
-                const el = document.getElementById(`hygiene-container-${l.code}`);
-                if (el) el.classList.remove('active');
-            });
-        }
-
+        function collapseAllHygiene() { PROTOCOL_LEVELS.forEach(l => { const el = document.getElementById(`hygiene-container-${l.code}`); if (el) el.classList.remove('active'); }); }
         function toggleModAndStartTimer(btn, modCode) {
-            if (!academyState.isAuthenticated) {
-                promptIntakeLogin(`🔒 ${modCode} requires an Operator Account. Sign in or create an account in Intake Credentials — your ${academyState.stage1Credits} CR from Stage 1 will carry over!`);
-                return;
-            }
+            if (!academyState.isAuthenticated) { promptIntakeLogin(`🔒 ${modCode} requires an Operator Account. Sign in or create an account in Intake Credentials — your ${academyState.stage1Credits} CR from Stage 1 will carry over!`); return; }
             const container = btn.closest('.module-container');
             container.classList.toggle('active');
-            if (container.classList.contains('active')) {
-                startTimer(`${modCode} // Phase 1`);
-            }
+            if (container.classList.contains('active')) startTimer(`${modCode} // Phase 1`);
         }
-
         function expandAllSims() {
-            if (!academyState.isAuthenticated) {
-                promptIntakeLogin("Authenticate in Intake Credentials first to unlock and expand Stage 2 Simulators (A–G).");
-                return;
-            }
-            ADVANCED_MODULES.forEach(mod => {
-                const el = document.getElementById(`mod-container-${mod.code}`);
-                if (el) el.classList.add('active');
-            });
+            if (!academyState.isAuthenticated) { promptIntakeLogin("Authenticate in Intake Credentials first to unlock and expand Stage 2 Simulators (A–G)."); return; }
+            ADVANCED_MODULES.forEach(mod => { const el = document.getElementById(`mod-container-${mod.code}`); if (el) el.classList.add('active'); });
             startTimer("Stage 2 // All Sims");
             showToast("Expanded all 7 Operator Simulators (A–G).", "info");
         }
-
-        function collapseAllSims() {
-            ADVANCED_MODULES.forEach(mod => {
-                const el = document.getElementById(`mod-container-${mod.code}`);
-                if (el) el.classList.remove('active');
-            });
-        }
+        function collapseAllSims() { ADVANCED_MODULES.forEach(mod => { const el = document.getElementById(`mod-container-${mod.code}`); if (el) el.classList.remove('active'); }); }
 
         function handleHygieneStep(levelCode, stepIdx, isChecked) {
             const stepKey = `${levelCode}_${stepIdx}`;
-            if (isChecked) academyState.completedSteps[stepKey] = true;
-            else delete academyState.completedSteps[stepKey];
-
-            // Auto-start timer on any Stage 1 step check!
+            if (isChecked) academyState.completedSteps[stepKey] = true; else delete academyState.completedSteps[stepKey];
             startTimer(`Stage 1 // ${levelCode} Step ${stepIdx + 1}`);
             recomputeTotals();
-
             const levelObj = PROTOCOL_LEVELS.find(l => l.code === levelCode);
             if (levelObj && levelObj.steps.every((_, i) => academyState.completedSteps[`${levelCode}_${i}`])) {
                 showToast(`${levelCode} (${levelObj.name}) verified! +${levelObj.reward.credits} CR added to Intake Ledger.`, "success");
@@ -1873,51 +1603,30 @@
         }
 
         function handleSimAnswer(modCode, isCorrect, btnClicked, idx) {
-            if (!academyState.isAuthenticated) {
-                promptIntakeLogin();
-                return;
-            }
+            if (!academyState.isAuthenticated) { promptIntakeLogin(); return; }
             startTimer(`${modCode} // Phase ${idx + 1}`);
             const container = document.getElementById(`opts-${modCode}-${idx}`);
             const feedback = document.getElementById(`feedback-${modCode}-${idx}`);
             const modData = ADVANCED_MODULES.find(m => m.code === modCode);
             const totalScens = modData ? modData.scenarios.length : 4;
-
             if (isCorrect) {
                 btnClicked.classList.remove('bg-slate-800', 'hover:bg-slate-700', 'border-slate-700');
                 btnClicked.classList.add('bg-emerald-600', 'text-white', 'border-emerald-400');
                 const labelSpan = btnClicked.querySelector('.opt-label');
-                if (labelSpan && !labelSpan.innerText.startsWith('✓ ')) {
-                    labelSpan.innerText = `✓ ${labelSpan.innerText}`;
-                }
-                container.querySelectorAll('button').forEach(b => {
-                    b.disabled = true;
-                    if (b !== btnClicked) b.classList.add('opacity-30', 'pointer-events-none');
-                });
-                if (feedback) {
-                    feedback.className = "text-xs font-mono p-3 rounded-lg bg-emerald-950/80 border border-emerald-500/50 text-emerald-300";
-                    feedback.innerText = `✓ PHASE ${idx + 1} VERIFIED: Protocol aligned with underwriting control baseline.`;
-                }
+                if (labelSpan && !labelSpan.innerText.startsWith('✓ ')) labelSpan.innerText = `✓ ${labelSpan.innerText}`;
+                container.querySelectorAll('button').forEach(b => { b.disabled = true; if (b !== btnClicked) b.classList.add('opacity-30', 'pointer-events-none'); });
+                if (feedback) { feedback.className = "text-xs font-mono p-3 rounded-lg bg-emerald-950/80 border border-emerald-500/50 text-emerald-300"; feedback.innerText = `✓ PHASE ${idx + 1} VERIFIED: Protocol aligned with underwriting control baseline.`; }
                 document.getElementById(`next-${modCode}-${idx}`).classList.remove('hidden');
-
                 if (!academyState.modulesPassed[modCode]) {
                     const badge = document.getElementById(`badge-${modCode}`);
-                    if (badge) {
-                        badge.innerText = `${idx + 1} / ${totalScens} PHASES`;
-                        badge.className = "px-3 py-1 bg-cyan-950 text-cyan-300 text-xs font-mono font-bold rounded-md border border-cyan-500/40";
-                    }
+                    if (badge) { badge.innerText = `${idx + 1} / ${totalScens} PHASES`; badge.className = "px-3 py-1 bg-cyan-950 text-cyan-300 text-xs font-mono font-bold rounded-md border border-cyan-500/40"; }
                 }
             } else {
                 btnClicked.classList.remove('bg-slate-800', 'hover:bg-slate-700', 'border-slate-700');
                 btnClicked.classList.add('bg-red-900/50', 'text-red-300', 'border-red-500');
                 const labelSpan = btnClicked.querySelector('.opt-label');
-                if (labelSpan && !labelSpan.innerText.startsWith('✗ ')) {
-                    labelSpan.innerText = `✗ ${labelSpan.innerText}`;
-                }
-                if (feedback) {
-                    feedback.className = "text-xs font-mono p-3 rounded-lg bg-rose-950/80 border border-rose-500/50 text-rose-300";
-                    feedback.innerText = `✗ CONTROL FAILURE: Review the hint below and select the underwriter-compliant action.`;
-                }
+                if (labelSpan && !labelSpan.innerText.startsWith('✗ ')) labelSpan.innerText = `✗ ${labelSpan.innerText}`;
+                if (feedback) { feedback.className = "text-xs font-mono p-3 rounded-lg bg-rose-950/80 border border-rose-500/50 text-rose-300"; feedback.innerText = `✗ CONTROL FAILURE: Review the hint below and select the underwriter-compliant action.`; }
             }
         }
 
@@ -1932,7 +1641,6 @@
                 const finalTime = stopTimer(`${modCode} Complete`);
                 document.getElementById(`time-${modCode}`).innerText = finalTime;
                 document.getElementById(`success-${modCode}`).classList.remove('hidden');
-                
                 if (!academyState.modulesPassed[modCode]) {
                     const modData = ADVANCED_MODULES.find(m => m.code === modCode);
                     academyState.modulesPassed[modCode] = true;
@@ -1948,14 +1656,11 @@
         function resetModule(modCode) {
             buildSimulators();
             const container = document.getElementById(`mod-container-${modCode}`);
-            if (container) {
-                container.classList.add('active');
-                startTimer(`${modCode} // Replay`);
-            }
+            if (container) { container.classList.add('active'); startTimer(`${modCode} // Replay`); }
         }
 
         // ---------------------------------------------------------
-        // 8. STAGE 3: 4-PART ROAD TO REMEDIATION LEARNING GAME
+        // 8. ROAD TO REMEDIATION
         // ---------------------------------------------------------
         let isScanning = false;
 
@@ -1964,22 +1669,13 @@
             for (let i = 1; i <= 4; i++) {
                 const pane = document.getElementById(`road-part-${i}`);
                 const tab = document.getElementById(`road-tab-${i}`);
-                if (pane) {
-                    if (i === partNum) pane.classList.remove('hidden');
-                    else pane.classList.add('hidden');
-                }
+                if (pane) { if (i === partNum) pane.classList.remove('hidden'); else pane.classList.add('hidden'); }
                 if (tab) {
-                    if (i === partNum) {
-                        tab.className = "text-left p-3.5 rounded-2xl border-2 border-amber-400 bg-amber-400/20 text-white transition-all shadow-md";
-                    } else {
-                        tab.className = "text-left p-3.5 rounded-2xl border-2 border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 transition-all";
-                    }
+                    if (i === partNum) tab.className = "text-left p-3.5 rounded-2xl border-2 border-amber-400 bg-amber-400/20 text-white transition-all shadow-md";
+                    else tab.className = "text-left p-3.5 rounded-2xl border-2 border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 transition-all";
                 }
             }
-            if (partNum === 4) {
-                renderPackagesList();
-                updatePricingDisplay();
-            }
+            if (partNum === 4) { renderPackagesList(); updatePricingDisplay(); }
         }
 
         function handlePainPointChange() {
@@ -1998,7 +1694,6 @@
             const promptEl = document.getElementById('part1-drill-prompt');
             const optsEl = document.getElementById('part1-drill-options');
             if (!promptEl || !optsEl) return;
-
             promptEl.innerText = profile.drillPrompt;
             optsEl.innerHTML = profile.drillOptions.map(opt => `
                 <button type="button" onclick="handlePart1DrillAnswer(${opt.correct}, this)" class="p-3 rounded-xl border border-slate-300 bg-slate-50 hover:bg-slate-100 text-left font-mono text-xs font-bold text-slate-800 transition-all">
@@ -2012,10 +1707,7 @@
             const statusEl = document.getElementById('part1-drill-status');
             if (isCorrect) {
                 btn.className = "p-3 rounded-xl border-2 border-emerald-500 bg-emerald-600 text-left font-mono text-xs font-bold text-white";
-                if (statusEl) {
-                    statusEl.innerText = "VERIFIED ✓ (+5 CR)";
-                    statusEl.className = "font-mono text-[10px] text-emerald-600 font-black";
-                }
+                if (statusEl) { statusEl.innerText = "VERIFIED ✓ (+5 CR)"; statusEl.className = "font-mono text-[10px] text-emerald-600 font-black"; }
                 if (!academyState.roadParts.part1DrillDone) {
                     academyState.roadParts.part1DrillDone = true;
                     academyState.bonusCredits += 5;
@@ -2032,7 +1724,7 @@
             if (isScanning) return;
             const cost = mode === "prelim" ? 0 : 10;
             if (cost > 0 && academyState.credits < cost) {
-                showToast("Insufficient Credits for 10 CR Deep Scan! Complete 2 free Stage 1 Hygiene Levels first, or click 'Run Preliminary Recon (0 CR)'.", "warn");
+                showToast("Insufficient Credits for 10 CR Deep Scan! Complete 2 free Stage 1 Hygiene Levels first, or click 'Run Preliminary (0 CR)'.", "warn");
                 return;
             }
 
@@ -2042,10 +1734,7 @@
             const domainVal = (domainInput?.value || academyState.operatorDomain || profile.defaultDomain).trim();
             if (domainInput && !domainInput.value) domainInput.value = domainVal;
 
-            if (cost > 0) {
-                academyState.spentCredits += cost;
-                recomputeTotals();
-            }
+            if (cost > 0) { academyState.spentCredits += cost; recomputeTotals(); }
 
             startTimer(`Perimeter Scan // ${domainVal}`);
             isScanning = true;
@@ -2058,6 +1747,9 @@
             const statusInd = document.getElementById('scan-status-indicator');
             const profLabel = document.getElementById('terminal-profile-label');
             const p2Dom = document.getElementById('part2-domain-label');
+            const barWrap = document.getElementById('scan-bar-wrap');
+            const barFill = document.getElementById('scan-bar-fill');
+            const barEta = document.getElementById('scan-bar-eta');
 
             if (p2Dom) p2Dom.innerText = domainVal;
             if (profLabel) profLabel.innerText = `TELEMETRY // ${profile.standard.toUpperCase()}`;
@@ -2069,31 +1761,43 @@
             statusInd.innerText = '● SCANNING PERIMETER';
             statusInd.className = 'font-mono text-xs font-extrabold text-[#f26522] animate-pulse';
 
+            // 7s bar
+            const durationMs = mode === "prelim" ? 4000 : 7000;
+            if (barWrap && barFill) {
+                barWrap.classList.remove('hidden');
+                if (barEta) barEta.innerText = `${Math.round(durationMs/1000)}s`;
+                barFill.style.transition = 'none';
+                barFill.style.width = '0%';
+                void barFill.offsetWidth;
+                barFill.style.transition = `width ${durationMs}ms linear`;
+                requestAnimationFrame(() => { barFill.style.width = '100%'; });
+            }
+
             termOutput.innerHTML = `<div class="term-log">&gt; Targeting individualized perimeter host: [${domainVal}] (${mode === 'deep' ? 'DEEP 10-CR TELEMETRY' : 'PRELIMINARY PASSIVE SCAN'})...</div>`;
             renderPart1Drill();
 
             const scanLogs = profile.logs(domainVal);
-            let delay = 950;
+            const logInterval = Math.max(600, Math.floor(durationMs / Math.max(1, scanLogs.length)));
             scanLogs.forEach((msg, idx) => {
                 setTimeout(() => {
                     termOutput.innerHTML += msg;
                     termWrapper.scrollTop = termWrapper.scrollHeight;
-                    if (idx === scanLogs.length - 1) {
-                        isScanning = false;
-                        academyState.roadParts.part1ScanDone = true;
-                        if (scanBtn) scanBtn.disabled = false;
-                        if (prelimBtn) prelimBtn.disabled = false;
-                        statusInd.innerText = '✓ SCAN COMPLETE';
-                        statusInd.className = 'font-mono text-xs font-extrabold text-emerald-600';
-                        const sumLine = document.getElementById('scan-summary-line');
-                        if (sumLine) sumLine.innerText = `Target [${domainVal}] audited against ${profile.standard}. Complete the Triage Drill below or advance to Part 2.`;
-                        readyCard.classList.remove('hidden');
-                        recomputeTotals();
-                        showToast(`Individualized scan complete for ${domainVal}!`, "success");
-                    }
-                }, delay);
-                delay += 1100;
+                }, 400 + idx * logInterval);
             });
+
+            setTimeout(() => {
+                isScanning = false;
+                academyState.roadParts.part1ScanDone = true;
+                if (scanBtn) scanBtn.disabled = false;
+                if (prelimBtn) prelimBtn.disabled = false;
+                statusInd.innerText = '✓ SCAN COMPLETE';
+                statusInd.className = 'font-mono text-xs font-extrabold text-emerald-600';
+                const sumLine = document.getElementById('scan-summary-line');
+                if (sumLine) sumLine.innerText = `Target [${domainVal}] audited against ${profile.standard}. Complete the Triage Drill below or advance to Part 2.`;
+                readyCard.classList.remove('hidden');
+                recomputeTotals();
+                showToast(`Individualized scan complete for ${domainVal}!`, "success");
+            }, 400 + durationMs);
         }
 
         function handlePart2Seal(isCorrect, btn) {
@@ -2101,15 +1805,8 @@
             const badge = document.getElementById('part2-seal-badge');
             if (isCorrect) {
                 btn.className = "p-3.5 rounded-xl bg-emerald-600 border-2 border-emerald-300 text-left font-mono text-xs text-white font-bold";
-                if (badge) {
-                    badge.className = "font-mono text-[10px] px-2 py-0.5 rounded bg-emerald-500 text-white font-black";
-                    badge.innerText = "SEALED ✓";
-                }
-                if (!academyState.roadParts.part2Sealed) {
-                    academyState.roadParts.part2Sealed = true;
-                    recomputeTotals();
-                    showToast("Phase 2 Evidence Binder v2 Assembly SEALED! +20 Underwriting Score.", "success");
-                }
+                if (badge) { badge.className = "font-mono text-[10px] px-2 py-0.5 rounded bg-emerald-500 text-white font-black"; badge.innerText = "SEALED ✓"; }
+                if (!academyState.roadParts.part2Sealed) { academyState.roadParts.part2Sealed = true; recomputeTotals(); showToast("Phase 2 Evidence Binder v2 Assembly SEALED! +20 Underwriting Score.", "success"); }
             } else {
                 btn.className = "p-3.5 rounded-xl bg-rose-900/70 border-2 border-rose-400 text-left font-mono text-xs text-rose-200 font-bold";
                 showToast("Underwriters reject undated screenshots. Select machine-signed SHA-256 manifests.", "warn");
@@ -2117,18 +1814,11 @@
         }
 
         function runPainPointDrill(drillId, creditCost, btn) {
-            if (academyState.roadParts.part3Drills[drillId]) {
-                showToast("This remediation control is already enforced and sealed!", "info");
-                return;
-            }
-            if (academyState.credits < creditCost) {
-                showToast(`Need ${creditCost} CR to run this specialized remediation enforcement. Complete more Stage 1 or Stage 2 drills!`, "warn");
-                return;
-            }
+            if (academyState.roadParts.part3Drills[drillId]) { showToast("This remediation control is already enforced and sealed!", "info"); return; }
+            if (academyState.credits < creditCost) { showToast(`Need ${creditCost} CR to run this specialized remediation enforcement. Complete more Stage 1 or Stage 2 drills!`, "warn"); return; }
             academyState.spentCredits += creditCost;
             academyState.roadParts.part3Drills[drillId] = true;
             startTimer(`Road // Enforce ${drillId.toUpperCase()}`);
-
             btn.className = "w-full py-2.5 bg-emerald-600 text-white font-mono text-xs font-black uppercase rounded-lg cursor-default";
             btn.innerHTML = `<i class="fa-solid fa-check mr-1"></i> ENFORCED &amp; LOGGED ✓`;
             recomputeTotals();
@@ -2161,11 +1851,7 @@
             recomputeTotals();
         }
 
-        function handleCreditsToggle(isChecked) {
-            academyState.applyCreditsDiscount = isChecked;
-            startTimer("Road // Credits Tape");
-            updatePricingDisplay();
-        }
+        function handleCreditsToggle(isChecked) { academyState.applyCreditsDiscount = isChecked; startTimer("Road // Credits Tape"); updatePricingDisplay(); }
 
         function updatePricingDisplay() {
             const pricing = calculatePricing();
@@ -2173,13 +1859,8 @@
             const discountEl = document.getElementById('price-summary-discount');
             const finalEl = document.getElementById('price-summary-final');
             const discountLabel = document.getElementById('discount-amt-label');
-
             if (baseEl) baseEl.innerText = `$${pricing.basePrice.toFixed(2)}`;
-            if (discountEl) {
-                discountEl.innerText = pricing.discount > 0
-                    ? `${pricing.creditsAvailable} CR Redeemed (-$${pricing.discount.toFixed(2)} Offset)`
-                    : '0 CR Redeemed (-$0.00)';
-            }
+            if (discountEl) discountEl.innerText = pricing.discount > 0 ? `${pricing.creditsAvailable} CR Redeemed (-$${pricing.discount.toFixed(2)} Offset)` : '0 CR Redeemed (-$0.00)';
             if (finalEl) finalEl.innerText = `$${pricing.finalPrice.toFixed(2)} USD`;
             if (discountLabel) discountLabel.innerText = `${pricing.creditsAvailable} CR`;
         }
@@ -2192,13 +1873,10 @@
             if (drillCount > 0) pct += 15;
             if (drillCount >= 2 || academyState.roadParts.part4Bound) pct += 10;
             pct = Math.min(100, pct);
-
             const pctBadge = document.getElementById('road-compliance-pct');
             if (pctBadge) pctBadge.innerText = `${pct}% COMPLIANT`;
-
             const headline = document.getElementById('roadmap-status-headline');
             if (headline) headline.innerText = `PROGRESSION STATUS: ${pct}% UNDERWRITER COMPLIANT`;
-
             const t1 = document.getElementById('road-tab-status-1');
             const t2 = document.getElementById('road-tab-status-2');
             const t3 = document.getElementById('road-tab-status-3');
@@ -2207,22 +1885,12 @@
             if (t2) t2.innerText = academyState.roadParts.part2Sealed ? "SEALED ✓" : "READY";
             if (t3) t3.innerText = drillCount > 0 ? `ENFORCED (${drillCount}/3)` : "ENFORCE";
             if (t4) t4.innerText = academyState.roadParts.part4Bound ? "BOUND ✓" : "AWAITING";
-
             const rm2 = document.getElementById('rm-p2');
             const rm3 = document.getElementById('rm-p3');
             const rm4 = document.getElementById('rm-p4');
-            if (rm2 && academyState.roadParts.part2Sealed) {
-                rm2.innerText = "SEALED ✓";
-                rm2.className = "text-emerald-600 font-bold";
-            }
-            if (rm3 && drillCount > 0) {
-                rm3.innerText = `ENFORCED (${drillCount}/3 DRILLS) ✓`;
-                rm3.className = "text-emerald-600 font-bold";
-            }
-            if (rm4 && academyState.roadParts.part4Bound) {
-                rm4.innerText = "PACKAGE SELECTED ✓";
-                rm4.className = "text-emerald-600 font-bold";
-            }
+            if (rm2 && academyState.roadParts.part2Sealed) { rm2.innerText = "SEALED ✓"; rm2.className = "text-emerald-600 font-bold"; }
+            if (rm3 && drillCount > 0) { rm3.innerText = `ENFORCED (${drillCount}/3 DRILLS) ✓`; rm3.className = "text-emerald-600 font-bold"; }
+            if (rm4 && academyState.roadParts.part4Bound) { rm4.innerText = "PACKAGE SELECTED ✓"; rm4.className = "text-emerald-600 font-bold"; }
         }
 
         function downloadPOAM() {
@@ -2231,7 +1899,7 @@
             const profile = PAIN_POINT_PROFILES[key] || PAIN_POINT_PROFILES.bec_wire;
             const target = document.getElementById('input-scan-domain')?.value.trim() || academyState.operatorDomain || profile.defaultDomain;
             const pricing = calculatePricing();
-            const content = `# BURN-1 REMEDIATION PLAN OF ACTION & MILESTONES (POAM)\nStandard: ${profile.standard}\nTarget Domain: ${target}\nOperator Account: ${academyState.operatorEmail || 'Unverified Free Session'}\nEarned Credits: ${academyState.credits} CR (Commercial Offset: -$${pricing.discount.toFixed(2)})\nGenerated: ${new Date().toISOString().split('T')[0]}\n\n## Phase 1: Individualized Outer Recon Scan\n- Status: ${academyState.roadParts.part1ScanDone ? 'COMPLETE' : 'PENDING'}\n- Focus Profile: ${key.toUpperCase()}\n\n## Phase 2: Evidence Binder v2 Assembly (ALCOA+)\n- Status: ${academyState.roadParts.part2Sealed ? 'CRYPTOGRAPHICALLY SEALED' : 'READY TO SEAL'}\n\n## Phase 3: Zero-Cost MFA & Immutable Backups\n- Enforced Controls: ${Object.keys(academyState.roadParts.part3Drills).join(', ').toUpperCase() || 'Pending Enforcement'}\n- 1. Zero-Cost FIDO2 / Number-Matching MFA across all remote access portals.\n- 2. Immutable 3-2-1-1-0 WORM / S3 Object-Lock backup rotation airgap.\n- 3. DMARC p=reject enforcement & dangling CNAME elimination.\n\n## Phase 4: Carrier Policy Binding\n- Selected Package: ${pricing.pkg.name} ($${pricing.finalPrice.toFixed(2)} USD after credit offset)\n- Next Step: Open cinematicBoard1.html to finalize binder checkout.\n`;
+            const content = `# BURN-1 REMEDIATION PLAN OF ACTION & MILESTONES (POAM)\nStandard: ${profile.standard}\nTarget Domain: ${target}\nOperator Account: ${academyState.operatorEmail || 'Unverified Free Session'}\nEarned Credits: ${academyState.credits} CR (Commercial Offset: -$${pricing.discount.toFixed(2)})\nGenerated: ${new Date().toISOString().split('T')[0]}\n\n## Phase 1: Individualized Outer Recon Scan\n- Status: ${academyState.roadParts.part1ScanDone ? 'COMPLETE' : 'PENDING'}\n- Focus Profile: ${key.toUpperCase()}\n\n## Phase 2: Evidence Binder v2 Assembly (ALCOA+)\n- Status: ${academyState.roadParts.part2Sealed ? 'CRYPTOGRAPHICALLY SEALED' : 'READY TO SEAL'}\n\n## Phase 3: Zero-Cost MFA & Immutable Backups\n- Enforced Controls: ${Object.keys(academyState.roadParts.part3Drills).join(', ').toUpperCase() || 'Pending Enforcement'}\n- 1. Zero-Cost FIDO2 / Number-Matching MFA across all remote access portals.\n- 2. Immutable 3-2-1-1-0 WORM / S3 Object-Lock backup rotation airgap.\n- 3. DMARC p=reject enforcement & dangling CNAME elimination.\n\n## Phase 4: Carrier Policy Binding\n- Selected Package: ${pricing.pkg.name} ($${pricing.finalPrice.toFixed(2)} USD after credit offset)\n- Next Step: Open cinematic-onboarding.html to finalize binder checkout.\n`;
             const blob = new Blob([content], { type: 'text/markdown' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -2242,7 +1910,35 @@
             showToast(`Downloaded individualized POAM for ${target}!`, "success");
         }
 
-        // Bind optional local video/image assets when running from local filesystem
+        // Badge modal
+        const BADGE_DATA = {
+            completion: { img: "coursecompletion.jpg", title: "Course Completion", sub: "Operator Academy · All Stages",
+                desc: "Awarded for finishing all three Academy stages: the 8 free hygiene protocols, the 7 advanced Operator Simulators (A–G), and the Road to Remediation scan + reinforcement drills.",
+                req: "Complete Stage 1 (8/8), Stage 2 (7/7), and Part 1–3 of the Road to Remediation." },
+            mfa2: { img: "MFAbadge.jpg", title: "MFA-2", sub: "Identity & authentication",
+                desc: "Awarded for completing the MFA-2 remediation drill — binding FIDO2 or number-matching MFA to the shadow endpoints found in your perimeter scan, and disabling legacy Basic Auth.",
+                req: "Run the perimeter scan in Part 1, then complete the Shadow Subdomain MFA-2 Binding drill in Part 3." },
+            phishing: { img: "anti-phishingbadge.jpg", title: "Anti-Phishing", sub: "Phishing signal decoder",
+                desc: "Awarded for completing Module A (Phishing Signal Decoder) — all four BEC, voice-cloning, and underwriting-warranty scenarios.",
+                req: "Complete Module A in Stage 2: Operator Simulators." }
+        };
+        function openBadgeModal(key) {
+            const data = key ? BADGE_DATA[key] : BADGE_DATA.completion;
+            document.getElementById("badge-modal-img").src = data.img;
+            document.getElementById("badge-modal-title").textContent = data.title;
+            document.getElementById("badge-modal-sub").textContent = data.sub;
+            document.getElementById("badge-modal-desc").textContent = data.desc;
+            document.getElementById("badge-modal-req-text").textContent = data.req;
+            document.getElementById("badge-modal").classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+        }
+        function closeBadgeModal() {
+            document.getElementById("badge-modal").classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+        document.addEventListener("keydown", e => { if (e.key === "Escape") closeBadgeModal(); });
+
+        // Bind local media if present
         function bindLocalMediaIfPresent() {
             const roadVid = document.getElementById("video-digital-road");
             if (roadVid && !roadVid.src) roadVid.src = "assets/timesrunning.mp4";
@@ -2258,11 +1954,10 @@
             buildSimulators();
             renderPackagesList();
             handlePainPointChange();
-            if (academyState.isAuthenticated) {
-                applyAuthenticatedUI();
-            }
+            if (academyState.isAuthenticated) applyAuthenticatedUI();
             recomputeTotals();
             bindLocalMediaIfPresent();
+            setIntakeMode('create');
         });
     </script>
 </body>

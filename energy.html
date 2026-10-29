@@ -65,11 +65,7 @@
       box-shadow: 0 25px 50px -12px rgba(46, 16, 101, 0.5);
     }
 
-    /* Flip Card Pricing Styles */
-    .flip-card { perspective: 1000px; height: 380px; }
-    .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
-    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-    .flip-card-front, .flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1rem; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+    
     .flip-card-back { transform: rotateY(180deg); }
 
     /* Interactive Purdue Model Styles */
@@ -94,6 +90,22 @@
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+  
+    /* Shared Card CSS */
+    .b1-card { position: relative; border-radius: 1rem; cursor: pointer; touch-action: manipulation; perspective: 1200px; }
+    .b1-card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1); }
+    .b1-card.is-flipped .b1-card-inner { transform: rotateY(180deg); }
+    @media (hover: hover) and (pointer: fine) { .b1-card:hover .b1-card-inner { transform: rotateY(180deg); } }
+    .b1-face { position: relative; width: 100%; min-height: 380px; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .b1-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: rotateY(180deg); }
+    .b1-letter { font-family: 'Orbitron', 'Inter', sans-serif; font-weight: 900; font-size: 6rem; line-height: 1; letter-spacing: -0.02em; color: #ffffff; text-shadow: 0 0 30px rgba(6,182,212,0.45), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.accent { color: #f26522; text-shadow: 0 0 30px rgba(242,101,34,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.pink { color: #D92B8A; text-shadow: 0 0 30px rgba(217,43,138,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-tier { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; color: #cbd5e1; margin-top: 1rem; }
+    .b1-cue { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #06b6d4; margin-top: 1.25rem; animation: b1pulse 2s ease-in-out infinite; }
+    @keyframes b1pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (max-width: 640px) { .b1-letter { font-size: 4.5rem; } .b1-face { min-height: 320px; } }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
@@ -114,11 +126,12 @@
       </div>
     </div>
     <div class="grey-unibar-sub">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 overflow-x-auto">
-        <a href="index.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
-        <a href="cinematic-onboarding.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Cinematic Onboarding</a>
-        <a href="energy.html" class="nav-pill nav-pill-active px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Energy & Utilities</a>
-        <a href="academy.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Operator Academy</a>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="energy.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Energy</a>
+        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
+        <a href="cinematic-onboarding.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Guided Intake</a>
+        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
       </div>
     </div>
   </header>
@@ -257,128 +270,155 @@
     </div>
 
     <!-- PRICING TIERS: Purple/Silver Flip Cards -->
-    <div id="pricing" class="purple-pane rounded-3xl p-6 sm:p-8 mb-10 relative z-20">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-purple-900/50 pb-4">
+    <!-- ============ PRICING v5: B U R N -1 ============ -->
+    <div id="pricing" class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-300 shadow-md mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b-2 border-slate-100 pb-4">
         <div>
-          <h2 class="text-2xl font-black text-white uppercase tracking-tight">Grid Readiness Packages</h2>
-          <p class="text-sm text-purple-300 font-bold mt-1">Acquire mathematical proof of infrastructure compliance. Hover to unlock configurations.</p>
+          <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Assessment Packages</h2>
+          <p class="text-sm text-slate-600 font-bold mt-1">Five tiers. Click a card to see price, contents, and launch.</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
-        
-        <!-- Tier 1: A-La-Carte ($500) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-slate-500 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-[#1a0b2e]/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-folder-closed text-3xl text-slate-400 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">A-La-Carte</h3>
-                <p class="text-[10px] font-bold text-slate-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 items-start">
+
+        <!-- ===== B — Beginner ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Beginner tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">B</span>
+                <span class="b1-tier">Beginner</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-slate-900 text-white border-2 border-slate-500">
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
               <div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Evidence Binder</h3>
-                <div class="text-3xl font-black text-white my-2">$500</div>
-                <p class="text-[11px] text-slate-400 font-medium mb-4 leading-relaxed">Single Cryptographic eBinder compilation for a specific FERC/NERC audit or baseline IT scan.</p>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Beginner · Free Mini S.P.A.</h3>
+                <div class="text-3xl font-black text-white my-2">$0</div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Non-intrusive surface scan</li>
+                  <li>✓ Gaps shown, remediation greyed out</li>
+                  <li>✓ No install, no credit card</li>
+                </ul>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-colors">Select $500</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tier 2: Substation ($999) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-cyan-500 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-900 px-2 py-1 text-[8px] font-black uppercase tracking-widest rounded-b-md shadow-sm z-20 w-3/4">Local Generation</div>
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-cyan-950/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-bolt text-3xl text-cyan-400 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Substation</h3>
-                <p class="text-[10px] font-bold text-cyan-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
-              </div>
-            </div>
-            <div class="flip-card-back bg-cyan-950 text-white border-2 border-cyan-500">
-              <div>
-                <h3 class="text-xs font-black text-cyan-400 uppercase tracking-widest mt-2">Compliance Base</h3>
-                <div class="text-3xl font-black text-white my-2">$999<span class="text-sm text-cyan-600 font-bold">/yr</span></div>
-                <p class="text-[11px] text-cyan-100 font-medium mb-4 leading-relaxed">1 Domain/Facility. Includes compliance eBinder, 1 Free Rescan, and IT/OT Airgap Verification.</p>
-              </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-cyan-500 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-cyan-400 transition-colors">Select $999</a>
+              <a href="cinematic-onboarding.html?source=energy&tier=free" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Run free scan</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 3: Regional Co-op ($2,500) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-purple-500 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-[#2e1065]/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-network-wired text-3xl text-purple-400 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Regional Co-op</h3>
-                <p class="text-[10px] font-bold text-purple-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+        <!-- ===== U — Urgent ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Urgent tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter accent">U</span>
+                <span class="b1-tier">Urgent</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-[#2e1065] text-white border-2 border-purple-500">
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
               <div>
-                <h3 class="text-xs font-black text-purple-300 uppercase tracking-widest mt-2">Distributor Tier</h3>
-                <div class="text-3xl font-black text-white my-2">$2.5k<span class="text-sm text-purple-400 font-bold">/yr</span></div>
-                <p class="text-[11px] text-purple-200 font-medium mb-4 leading-relaxed">Up to 5 domains/facilities. Consolidated NERC eBinder, and Unlimited SLM Rescans.</p>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Urgent · Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$750</div>
+                <p class="text-[11px] text-cyan-400 font-bold mb-2">$500 academy price</p>
+                <ul class="text-[11px] text-slate-300 space-y-1.5">
+                  <li>✓ Scan + questionnaire + generated binder</li>
+                  <li>✓ Baseline framework mapping</li>
+                  <li>✗ Not human-reviewed</li>
+                  <li>✗ Not sealed</li>
+                </ul>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-purple-500 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-purple-400 transition-colors">Select $2.5k</a>
+              <a href="cinematic-onboarding.html?source=energy&tier=binder" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-slate-200 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get the binder</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 4: National Grid ($5,000) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-slate-300 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-slate-800/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-tower-observation text-3xl text-slate-300 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">National Grid</h3>
-                <p class="text-[10px] font-bold text-slate-300 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+        <!-- ===== R — Remediation (most chosen) ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Remediation tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-cyan-500 bg-slate-950">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-b-md z-20">Most chosen</div>
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-cyan-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">R</span>
+                <span class="b1-tier">Remediation</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-slate-200 text-slate-900 border-2 border-slate-400">
+            <div class="b1-back bg-cyan-500 text-slate-900 border-2 border-cyan-400">
               <div>
-                <h3 class="text-xs font-black text-slate-600 uppercase tracking-widest mt-2">Holding Co.</h3>
-                <div class="text-3xl font-black text-slate-900 my-2">$5k<span class="text-sm text-slate-500 font-bold">/yr</span></div>
-                <p class="text-[11px] text-slate-700 font-medium mb-4 leading-relaxed">Up to 15 Domains. Custom Executive Scorecards and multi-framework IT/OT overlay routing.</p>
+                <h3 class="text-xs font-black text-cyan-900 uppercase tracking-widest">Remediation · Verified Binder</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$1,000<span class="text-sm font-bold text-cyan-800">/yr</span></div>
+                <ul class="text-[11px] text-cyan-950 font-bold space-y-1.5 mt-3">
+                  <li>✓ 1 domain, binder + human review</li>
+                  <li>✓ Cyber Seal by Anergi.io</li>
+                  <li>✓ Quarterly rescans</li>
+                  <li>✓ The evidence your carrier accepts</li>
+                </ul>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-900 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select $5k</a>
+              <a href="cinematic-onboarding.html?source=energy&tier=verified" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get verified</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 5: Pentest -->
-        <div class="flip-card md:col-span-2 lg:col-span-1 xl:col-span-1">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-rose-500 bg-black shadow-lg flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-rose-950/90 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-user-ninja text-3xl text-rose-500 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Deep Pentest</h3>
-                <p class="text-[10px] font-bold text-rose-500 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+        <!-- ===== N — Networking ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Networking tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-emerald-500 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-emerald-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter" style="color:#34d399;text-shadow:0 0 30px rgba(52,211,153,.6),0 4px 12px rgba(0,0,0,.6)">N</span>
+                <span class="b1-tier">Networking</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-rose-950 text-white border-2 border-rose-500">
+            <div class="b1-back bg-emerald-600 text-white border-2 border-emerald-500">
               <div>
-                <h3 class="text-xs font-black text-rose-400 uppercase tracking-widest mt-2">Escalation</h3>
-                <div class="text-3xl font-black text-white my-2">Custom</div>
-                <p class="text-[11px] text-slate-300 font-medium mb-4 leading-relaxed">Passive SCADA forensic discovery, physical breach simulation, and deep manual pentesting via Anergi.io.</p>
+                <h3 class="text-xs font-black text-emerald-100 uppercase tracking-widest">Networking · Multi-Domain</h3>
+                <div class="text-3xl font-black text-white my-2">$2,500<span class="text-sm font-bold text-emerald-200">/yr</span></div>
+                <ul class="text-[11px] text-emerald-50 space-y-1.5 mt-3">
+                  <li>✓ Up to 5 domains</li>
+                  <li>✓ Consolidated eBinder</li>
+                  <li>✓ Unlimited SLM rescans</li>
+                  <li>✓ Sealed on every domain</li>
+                </ul>
               </div>
-              <a href="https://anergi.io/contacts.html" target="_blank" class="w-full text-center py-2.5 bg-rose-600 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-rose-500 transition-colors shadow-md">Consult Anergi &rarr;</a>
+              <a href="cinematic-onboarding.html?source=energy&tier=multi" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get multi-domain</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== -1 — Enterprise ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Enterprise tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-[#D92B8A] bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-[#2A081C]/80"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter pink">-1</span>
+                <span class="b1-tier">Enterprise</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-[#D92B8A]">
+              <div>
+                <h3 class="text-xs font-black text-[#D92B8A] uppercase tracking-widest">Enterprise · Up to 15 domains</h3>
+                <div class="text-3xl font-black text-white my-2">$5,000<span class="text-sm font-bold text-pink-300">/yr</span></div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Consolidated eBinder, 15 domains</li>
+                  <li>✓ Custom executive scorecards</li>
+                  <li>✓ Named human review contact</li>
+                  <li>✓ Carrier questionnaire walk-through</li>
+                  <li>✓ Priority review</li>
+                </ul>
+              </div>
+              <a href="mailto:hello@burn-1.com?subject=Enterprise%20binder%20quote" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Request quote →</a>
             </div>
           </div>
         </div>
@@ -407,6 +447,23 @@
       });
     });
   </script>
+
+  <script>
+    document.querySelectorAll('.b1-card').forEach(card => {
+      const toggle = (e) => {
+        if (e && e.target && e.target.closest('a,button')) return;
+        card.classList.toggle('is-flipped');
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('is-flipped');
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
 

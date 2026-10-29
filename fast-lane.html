@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burn-1 Fast Lane — Upload Existing Evidence, Sealed in Days</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root { --ink:#0f172a; --paper:#d8dee6; --cyan:#06b6d4; --pink:#D92B8A; --violet:#a855f7; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.92) 0%, rgba(226,232,240,0.88) 48%, rgba(186,196,210,0.95) 100%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0px, rgba(255,255,255,0.18) 1px, transparent 1px, transparent 12px);
+      background-attachment: fixed;
+      color: var(--ink);
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .grey-unibar {
+      background: linear-gradient(180deg,#e2e8f0 0%,#cbd5e1 55%,#b8c4d4 100%);
+      border-bottom: 2px solid #64748b;
+      box-shadow: 0 6px 20px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    .grey-unibar-sub {
+      background: linear-gradient(180deg,#cbd5e1 0%,#94a3b8 100%);
+      border-top: 1px solid rgba(255,255,255,0.65);
+      border-bottom: 2px solid #475569;
+    }
+    .nav-pill-idle {
+      background: linear-gradient(180deg,#f8fafc 0%,#cbd5e1 100%);
+      color: #0f172a; border: 1px solid #64748b;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
+    }
+    .nav-pill-idle:hover { background: linear-gradient(180deg,#ffffff 0%,#e2e8f0 100%); transform: translateY(-1px); }
+    .nav-pill-active {
+      background: linear-gradient(180deg,#0f172a 0%,#1e293b 100%);
+      color: #38bdf8; border: 1px solid #38bdf8;
+      box-shadow: 0 0 12px rgba(56,189,248,0.45);
+    }
+
+    /* Fast Lane Styles */
+    .fl-badge {
+      width: 72px; height: 72px; border-radius: 9999px; object-fit: cover;
+      border: 3px solid #2A081C;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+      filter: grayscale(1) opacity(0.45);
+      transition: all .35s ease; cursor: pointer;
+    }
+    .fl-badge.earned { filter: none; border-color: #D92B8A; box-shadow: 0 0 0 3px rgba(217,43,138,0.25), 0 10px 26px rgba(217,43,138,0.35); }
+    .fl-badge.earned:hover { transform: translateY(-3px) scale(1.04); }
+    .fl-input {
+      width: 100%; padding: .85rem 1rem;
+      border: 2px solid #C4D4E0; border-radius: 12px;
+      font-size: .95rem; font-weight: 700; color: #2A081C;
+      background: #F8FAFC; outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .fl-input:focus { border-color: #D92B8A; box-shadow: 0 0 0 4px rgba(217,43,138,0.12); }
+    .fl-upload {
+      border: 2px dashed #C4D4E0; border-radius: 14px;
+      padding: 1.25rem; text-align: center;
+      background: #F8FAFC; cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .fl-upload:hover, .fl-upload.dragover { border-color: #D92B8A; background: #FFF5FA; }
+    .fl-upload input { display: none; }
+    .fl-step-dot {
+      width: 26px; height: 26px; border-radius: 9999px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 800;
+      background: #E6E0F8; color: #522d8a;
+    }
+    .fl-step-dot.done { background: #10b981; color: #fff; }
+    .fl-step-dot.active { background: #2A081C; color: #fff; }
+
+    .fl-modal-backdrop {
+      position: fixed; inset: 0; z-index: 80;
+      background: rgba(0,0,0,0.78); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .fl-modal-backdrop.hidden { display: none; }
+    .fl-modal-card {
+      background: #fff; border-radius: 24px; max-width: 520px; width: 100%;
+      border: 4px solid #2A081C;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      padding: 1.75rem; position: relative;
+    }
+
+    /* Brand typography & legal notice */
+    .brand-title {
+      font-family: inherit;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .brand-tm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55em;
+      font-weight: 700;
+      color: #38bdf8;
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 2px;
+      margin-right: 4px;
+    }
+    .tm-notice {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+  <!-- REUSED HEADER & NAV FROM INDEX -->
+  <header class="grey-unibar sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
+        <div>
+          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Accelerating Systems • <span class="text-[#D92B8A] font-bold">Automated Posture Exposure</span></div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
+        <a href="fast-lane.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Fast Lane →</a>
+        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Guided Intake</a>
+      </div>
+    </div>
+    <div class="grey-unibar-sub">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="fast-lane.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
+        <a href="healthcare.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
+        <a href="finance.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Finance</a>
+        <a href="defense.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense</a>
+        <a href="manufacturing.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Manufacturing</a>
+        <a href="retail.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
+        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 relative z-10">
+
+    <!-- HERO (70vh with assets/sportscar.mp4) -->
+    <section class="relative rounded-3xl overflow-hidden bg-slate-950 text-white border-2 border-slate-700 shadow-2xl mb-10 h-[70vh] min-h-[480px] flex items-center justify-center">
+      <video src="assets/sportscar.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none mix-blend-screen"></video>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/40 z-10"></div>
+      <div class="relative z-20 text-center px-4 sm:px-6 max-w-4xl mx-auto flex flex-col items-center">
+        <span class="px-4 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 ring-1 ring-[#f26522] text-cyan-300 text-[10px] font-mono uppercase tracking-widest mb-4">Burn-1 Systems • Rapid Evidence Verification</span>
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4">
+          Burn-1 <span class="text-[#f26522]">Fast Lane</span>
+        </h1>
+        <p class="text-slate-300 text-base sm:text-xl font-medium max-w-2xl leading-relaxed">
+          Upload what you have. We verify, seal with Anergi.io, and post the receipt to your subdomain.
+        </p>
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN LAYOUT: 5-STEP FLOW + FULL FORM -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+
+      <!-- LEFT: 5-step flow -->
+      <div class="relative rounded-3xl overflow-hidden border-2 border-[#E6E0F8] shadow-lg bg-slate-950 flex flex-col justify-between">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#2A081C]/95 via-[#2A081C]/85 to-[#05070d]/90"></div>
+        <div class="relative z-10 p-6 sm:p-8 text-white">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-amber-400 font-bold block mb-2">VERIFICATION PROTOCOL</span>
+          <h2 class="text-2xl font-black uppercase tracking-tight text-white mb-6">How Fast Lane Works</h2>
+          <ol class="space-y-5">
+            <li class="flex items-start gap-3.5">
+              <span class="fl-step-dot active shrink-0 mt-0.5">1</span>
+              <div>
+                <div class="font-black text-base text-white">Upload what you have</div>
+                <div class="text-sm text-slate-300 mt-0.5">Binder, scan output, questionnaire, MFA/backup exports — whatever exists. If it's a folder, zip it.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="fl-step-dot shrink-0 mt-0.5">2</span>
+              <div>
+                <div class="font-black text-base text-white">AI prefills the template</div>
+                <div class="text-sm text-slate-300 mt-0.5">Your uploads are mapped to the Burn-1 binder template for your framework. No blank page.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="fl-step-dot shrink-0 mt-0.5">3</span>
+              <div>
+                <div class="font-black text-base text-white">System verifies completeness</div>
+                <div class="text-sm text-slate-300 mt-0.5">We check that every required control has evidence. You get an expected release time, not a "we'll be in touch."</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="fl-step-dot shrink-0 mt-0.5">4</span>
+              <div>
+                <div class="font-black text-base text-white">Human review → Anergi seal</div>
+                <div class="text-sm text-slate-300 mt-0.5">A human reviews the binder. Then Anergi.io signs the Cyber Seal. Nothing ships unreviewed.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-3.5">
+              <span class="fl-step-dot shrink-0 mt-0.5">5</span>
+              <div>
+                <div class="font-black text-base text-white">Receipt on your subdomain</div>
+                <div class="text-sm text-slate-300 mt-0.5">The sealed binder and 8-page report post to <span class="font-mono text-cyan-400">yourcompany.burn-1.com</span>. Your carrier verifies it there.</div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="mt-8 p-4 rounded-xl bg-amber-100/10 border-2 border-amber-400/50">
+            <div class="text-xs font-mono uppercase tracking-widest text-amber-300 font-black mb-1">Expected turnaround</div>
+            <div class="text-sm text-slate-200 font-semibold">Completeness check: minutes. Human review + seal: 1–3 business days from a complete upload. You'll see the release time after the upload is checked.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Full Fast Lane form -->
+      <div id="fastlane-form-card" class="bg-[#2A081C] rounded-3xl border-2 border-[#D92B8A] p-6 sm:p-8 shadow-2xl text-white">
+        <h2 class="text-2xl font-black uppercase tracking-tight mb-1">Start your Fast Lane upload</h2>
+        <p class="text-sm text-slate-300 font-semibold mb-5">5 fields. One upload. No account required to submit.</p>
+
+        <form id="fastlane-form" class="space-y-4" onsubmit="submitFastLane(event)">
+          <div>
+            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Work email</label>
+            <input required type="email" name="email" class="fl-input" placeholder="you@company.com">
+          </div>
+          <div>
+            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Company domain</label>
+            <input required type="text" name="domain" class="fl-input" placeholder="yourcompany.com">
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Carrier</label>
+              <input type="text" name="carrier" class="fl-input" placeholder="e.g. Travelers, Chubb">
+            </div>
+            <div>
+              <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Framework</label>
+              <select name="framework" class="fl-input">
+                <option value="">Select…</option>
+                <option>HIPAA</option>
+                <option>HITRUST</option>
+                <option>PCI DSS</option>
+                <option>NYDFS Part 500</option>
+                <option>CMMC 2.0</option>
+                <option>NIST 800-171</option>
+                <option>SOC 2</option>
+                <option>Other / not sure</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Renewal date</label>
+            <input type="date" name="renewal" class="fl-input">
+          </div>
+
+          <div>
+            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Existing evidence</label>
+            <label class="fl-upload block" id="fastlane-drop">
+              <input type="file" name="files" multiple accept=".pdf,.doc,.docx,.zip,.json,.csv,.png,.jpg,.jpeg" onchange="onFastLaneFiles(this)">
+              <div class="text-3xl text-[#D92B8A] mb-1"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <div class="text-sm font-black text-[#2A081C]">Click or drop files here</div>
+              <div class="text-[11px] font-mono text-slate-500 mt-1">PDF, DOCX, ZIP, JSON, CSV, images. Up to 25 MB.</div>
+            </label>
+            <div id="fastlane-file-list" class="mt-2 text-[11px] font-mono text-slate-300 space-y-1"></div>
+          </div>
+
+          <p class="text-[11px] font-mono text-slate-400 leading-relaxed">
+            Submitting opens a pre-filled email to hello@burn-1.com with your details and a request to attach the files. Until the upload endpoint is live, that's the handoff — no data is sent anywhere else.
+          </p>
+
+          <button type="submit" class="w-full py-3.5 bg-[#f26522] hover:bg-[#d95316] text-white font-black text-sm uppercase tracking-widest rounded-xl shadow-lg transition-all">
+            Request Fast Lane review →
+          </button>
+        </form>
+
+        <div id="fastlane-result" class="hidden mt-4 p-4 rounded-xl bg-emerald-950 border-2 border-emerald-400 text-emerald-100 text-sm font-mono"></div>
+      </div>
+    </div>
+
+    <!-- BADGES SHOWCASE -->
+    <div class="mb-12 bg-white rounded-3xl border-2 border-[#E6E0F8] p-6 sm:p-8 shadow-lg max-w-6xl mx-auto">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+        <div>
+          <h3 class="text-sm font-mono uppercase tracking-widest text-slate-500">Operator badges</h3>
+          <p class="text-lg font-black text-[#2A081C] uppercase tracking-tight">Operator badges earned in the Academy</p>
+        </div>
+        <button type="button" onclick="openBadgeModal()" class="px-4 py-2 bg-[#2A081C] hover:bg-[#522d8a] text-amber-400 font-mono text-xs font-bold uppercase tracking-widest rounded-lg transition-all">
+          View all badges →
+        </button>
+      </div>
+      <div class="flex flex-wrap gap-6 items-center">
+        <div class="text-center">
+          <img id="badge-img-completion" src="coursecompletion.jpg" alt="Course Completion badge" class="fl-badge" onclick="openBadgeModal('completion')" onerror="this.style.display='none'">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 mt-2 font-bold">Completion</div>
+        </div>
+        <div class="text-center">
+          <img id="badge-img-mfa2" src="MFAbadge.jpg" alt="MFA-2 badge" class="fl-badge" onclick="openBadgeModal('mfa2')" onerror="this.style.display='none'">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 mt-2 font-bold">MFA-2</div>
+        </div>
+        <div class="text-center">
+          <img id="badge-img-phishing" src="anti-phishingbadge.jpg" alt="Anti-Phishing badge" class="fl-badge" onclick="openBadgeModal('phishing')" onerror="this.style.display='none'">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 mt-2 font-bold">Anti-Phishing</div>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-500 font-mono mt-4 leading-relaxed">
+        Badges show in the manager view on your profile. They are <strong>not</strong> the Anergi Cyber Seal — the seal is the underwriting artifact; badges are the training record.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-400/40 text-center text-xs font-mono text-slate-600">
+    <p>© 2026 Leon R. Darden. All rights reserved.</p>
+    <p class="tm-notice">
+      ꟻried Brains<span class="brand-tm">™</span> and ꟻried Brains<span class="brand-tm">™</span> World are trademarks of Leon R. Darden.
+    </p>
+  </footer>
+
+  <!-- BADGE MODAL -->
+  <div id="badge-modal" class="fl-modal-backdrop hidden" onclick="if(event.target.id==='badge-modal')closeBadgeModal()">
+    <div class="fl-modal-card" role="dialog" aria-modal="true" aria-labelledby="badge-modal-title">
+      <button type="button" onclick="closeBadgeModal()" aria-label="Close" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-100 hover:bg-[#D92B8A] hover:text-white text-[#2A081C] font-black text-lg flex items-center justify-center transition-colors">✕</button>
+      <div class="text-center mb-5">
+        <img id="badge-modal-img" src="coursecompletion.jpg" alt="" class="w-28 h-28 rounded-full object-cover mx-auto border-4 border-[#D92B8A] shadow-xl">
+        <h3 id="badge-modal-title" class="mt-3 text-xl font-black text-[#2A081C] uppercase tracking-tight">Course Completion</h3>
+        <p id="badge-modal-sub" class="font-mono text-[11px] uppercase tracking-widest text-[#522d8a] font-bold">Operator Academy</p>
+      </div>
+      <p id="badge-modal-desc" class="text-sm text-slate-700 font-semibold leading-relaxed mb-4"></p>
+      <div class="p-4 rounded-xl bg-slate-50 border-2 border-slate-200">
+        <div class="font-mono text-[10px] uppercase tracking-widest text-slate-500 font-black mb-1">Earned by</div>
+        <div id="badge-modal-req-text" class="text-sm text-slate-700 font-semibold"></div>
+      </div>
+      <div class="mt-5 flex gap-2">
+        <a href="academy.html" class="flex-1 text-center py-3 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black text-xs uppercase tracking-widest rounded-xl">Go to Academy</a>
+        <button type="button" onclick="closeBadgeModal()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase tracking-widest rounded-xl">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Fast Lane Form Handling ----------
+    const FAST_LANE_EMAIL = "hello@burn-1.com";
+    const FAST_LANE_ENDPOINT = "/api/fastlane";
+
+    function onFastLaneFiles(input) {
+      const list = document.getElementById("fastlane-file-list");
+      list.innerHTML = "";
+      Array.from(input.files).forEach(f => {
+        const row = document.createElement("div");
+        row.textContent = `• ${f.name}  (${(f.size/1024/1024).toFixed(2)} MB)`;
+        list.appendChild(row);
+      });
+      const drop = document.getElementById("fastlane-drop");
+      if (input.files.length) drop.style.borderColor = "#10b981";
+    }
+
+    function submitFastLane(ev) {
+      ev.preventDefault();
+      const form = ev.target;
+      const data = new FormData(form);
+      const payload = {
+        email: data.get("email") || "",
+        domain: data.get("domain") || "",
+        carrier: data.get("carrier") || "",
+        framework: data.get("framework") || "",
+        renewal: data.get("renewal") || "",
+        fileNames: Array.from(form.querySelector("input[name=files]").files || []).map(f => f.name),
+        source: "fast-lane-page"
+      };
+
+      const result = document.getElementById("fastlane-result");
+      result.classList.remove("hidden");
+      result.textContent = "Packaging your Fast Lane request…";
+
+      if (FAST_LANE_ENDPOINT) {
+        fetch(FAST_LANE_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        })
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(res => {
+          result.className = "mt-4 p-4 rounded-xl bg-emerald-950 border-2 border-emerald-400 text-emerald-100 text-sm font-mono";
+          result.textContent = `Received. Expected release: ${res.eta || "1–3 business days"}. Check ${payload.email} for the completeness report.`;
+        })
+        .catch(err => {
+          result.className = "mt-4 p-4 rounded-xl bg-rose-950 border-2 border-rose-400 text-rose-100 text-sm font-mono";
+          result.textContent = `Upload endpoint error (${err}). Opening email fallback…`;
+          fastLaneMailto(payload);
+        });
+      } else {
+        result.className = "mt-4 p-4 rounded-xl bg-amber-950 border-2 border-amber-400 text-amber-100 text-sm font-mono";
+        result.textContent = "Opening your email client with a pre-filled Fast Lane request. Attach the files there — the upload endpoint isn't live yet.";
+        fastLaneMailto(payload);
+      }
+    }
+
+    function fastLaneMailto(p) {
+      const subject = encodeURIComponent(`Fast Lane request — ${p.domain || "new"}`);
+      const body = encodeURIComponent(
+        `Fast Lane request\n\n` +
+        `Email: ${p.email}\nDomain: ${p.domain}\nCarrier: ${p.carrier}\nFramework: ${p.framework}\nRenewal: ${p.renewal}\n\n` +
+        `Files to attach:\n${p.fileNames.length ? p.fileNames.map(n => `- ${n}`).join("\n") : "- (attach your existing binder/files here)"}\n\n` +
+        `— submitted from burn-1.com Fast Lane`
+      );
+      window.location.href = `mailto:${FAST_LANE_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    // ---------- Badge modal ----------
+    const BADGE_DATA = {
+      completion: {
+        img: "coursecompletion.jpg",
+        title: "Course Completion",
+        sub: "Operator Academy · All Stages",
+        desc: "Awarded for finishing all three Academy stages: the 8 free hygiene protocols, the 7 advanced Operator Simulators (A–G), and the Road to Remediation scan + reinforcement drills.",
+        req: "Complete Stage 1 (8/8), Stage 2 (7/7), and Part 1–3 of the Road to Remediation."
+      },
+      mfa2: {
+        img: "MFAbadge.jpg",
+        title: "MFA-2",
+        sub: "Identity & authentication",
+        desc: "Awarded for completing the MFA-2 remediation drill — binding FIDO2 or number-matching MFA to the shadow endpoints found in your perimeter scan, and disabling legacy Basic Auth.",
+        req: "Run the perimeter scan in Part 1, then complete the Shadow Subdomain MFA-2 Binding drill in Part 3."
+      },
+      phishing: {
+        img: "anti-phishingbadge.jpg",
+        title: "Anti-Phishing",
+        sub: "Phishing signal decoder",
+        desc: "Awarded for completing Module A (Phishing Signal Decoder) — all four BEC, voice-cloning, and underwriting-warranty scenarios.",
+        req: "Complete Module A in Stage 2: Operator Simulators."
+      }
+    };
+
+    function openBadgeModal(key) {
+      const data = key ? BADGE_DATA[key] : BADGE_DATA.completion;
+      document.getElementById("badge-modal-img").src = data.img;
+      document.getElementById("badge-modal-title").textContent = data.title;
+      document.getElementById("badge-modal-sub").textContent = data.sub;
+      document.getElementById("badge-modal-desc").textContent = data.desc;
+      document.getElementById("badge-modal-req-text").textContent = data.req;
+      document.getElementById("badge-modal").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+    function closeBadgeModal() {
+      document.getElementById("badge-modal").classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBadgeModal(); });
+
+    // Reflect earned badges from localStorage
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const raw = localStorage.getItem("burn1_clinic_v1");
+        if (!raw) return;
+        const s = JSON.parse(raw);
+        if (s.stage1Credits >= 40) document.getElementById("badge-img-completion")?.classList.add("earned");
+        if (s.roadParts?.part3Drills?.mfa2 === true) document.getElementById("badge-img-mfa2")?.classList.add("earned");
+        if (s.modulesPassed?.["MOD-A"] === true) document.getElementById("badge-img-phishing")?.classList.add("earned");
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
+

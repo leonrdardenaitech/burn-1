@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Healthcare & Life Sciences Shield | Cyber Readiness Clinic</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -57,12 +57,20 @@
       box-shadow: 0 0 12px rgba(16, 185, 129, 0.45);
     }
 
-    /* Flip Card Pricing Styles */
-    .flip-card { perspective: 1000px; height: 380px; }
-    .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
-    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-    .flip-card-front, .flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1rem; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-    .flip-card-back { transform: rotateY(180deg); }
+    /* Shared Card CSS */
+    .b1-card { position: relative; border-radius: 1rem; cursor: pointer; touch-action: manipulation; perspective: 1200px; }
+    .b1-card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1); }
+    .b1-card.is-flipped .b1-card-inner { transform: rotateY(180deg); }
+    @media (hover: hover) and (pointer: fine) { .b1-card:hover .b1-card-inner { transform: rotateY(180deg); } }
+    .b1-face { position: relative; width: 100%; min-height: 380px; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .b1-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: rotateY(180deg); }
+    .b1-letter { font-family: 'Orbitron', 'Inter', sans-serif; font-weight: 900; font-size: 6rem; line-height: 1; letter-spacing: -0.02em; color: #ffffff; text-shadow: 0 0 30px rgba(6,182,212,0.45), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.accent { color: #f26522; text-shadow: 0 0 30px rgba(242,101,34,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.pink { color: #D92B8A; text-shadow: 0 0 30px rgba(217,43,138,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-tier { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; color: #cbd5e1; margin-top: 1rem; }
+    .b1-cue { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #06b6d4; margin-top: 1.25rem; animation: b1pulse 2s ease-in-out infinite; }
+    @keyframes b1pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (max-width: 640px) { .b1-letter { font-size: 4.5rem; } .b1-face { min-height: 320px; } }
 
     /* Custom Panes */
     .clinic-pane {
@@ -106,6 +114,213 @@
       from { box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); border-color: rgba(51, 65, 85, 1); }
       to { box-shadow: 0 0 30px rgba(16, 185, 129, 0.4); border-color: rgba(16, 185, 129, 0.6); }
     }
+
+    /* ===== BURN-1 CONSOLE v2 ===== */
+    .b1-console {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 48px auto 48px;
+      min-height: 640px;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(6,182,212,0.20) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 70%, rgba(217,43,138,0.16) 0%, transparent 60%),
+        linear-gradient(180deg, #05070d 0%, #0a0f1e 55%, #05070d 100%);
+      border: 1px solid rgba(6,182,212,0.30);
+      box-shadow:
+        inset 0 0 120px rgba(6,182,212,0.10),
+        inset 0 0 160px rgba(217,43,138,0.08),
+        0 40px 90px rgba(0,0,0,0.45);
+      font-family: 'Rajdhani', 'Inter', sans-serif;
+      isolation: isolate;
+    }
+    .b1-console::before {
+      content: '';
+      position: absolute; inset: -20%;
+      background-image:
+        linear-gradient(rgba(6,182,212,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6,182,212,0.07) 1px, transparent 1px),
+        linear-gradient(rgba(217,43,138,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(217,43,138,0.05) 1px, transparent 1px);
+      background-size: 56px 56px, 56px 56px, 140px 140px, 140px 140px;
+      animation: b1Drift 70s linear infinite;
+      z-index: 0;
+    }
+    @keyframes b1Drift {
+      from { transform: translate(0,0); }
+      to   { transform: translate(112px, 112px); }
+    }
+    .b1-sweep {
+      position: absolute; left: 50%; top: 50%;
+      width: 2px; height: 42%;
+      background: linear-gradient(to top, transparent, rgba(6,182,212,0.55), transparent);
+      transform-origin: bottom center;
+      transform: translate(-50%, -100%);
+      animation: b1Sweep 11s linear infinite;
+      z-index: 1; opacity: 0.75;
+      filter: drop-shadow(0 0 6px rgba(6,182,212,0.6));
+    }
+    @keyframes b1Sweep { to { transform: translate(-50%, -100%) rotate(360deg); } }
+    .b1-orbit {
+      position: absolute; left: 50%; top: 50%;
+      border-radius: 50%;
+      border: 1px dashed rgba(6,182,212,0.20);
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .b1-orbit.r1 { width: 340px; height: 340px; }
+    .b1-orbit.r2 { width: 560px; height: 560px; border-color: rgba(168,85,247,0.16); }
+    .b1-orbit.r3 { width: 780px; height: 780px; border-color: rgba(217,43,138,0.14); }
+    .b1-core {
+      position: absolute; left: 50%; top: 42%;
+      transform: translate(-50%, -50%);
+      width: 180px; height: 180px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.20), transparent 60%),
+        linear-gradient(135deg, #1a0a2a 0%, #05070d 100%);
+      border: 1px solid rgba(217,43,138,0.55);
+      display: grid; place-items: center;
+      box-shadow:
+        0 0 60px rgba(217,43,138,0.40),
+        0 0 120px rgba(6,182,212,0.15),
+        inset 0 0 26px rgba(6,182,212,0.20);
+      z-index: 6;
+    }
+    .b1-core img {
+      width: 78%; height: 78%;
+      object-fit: contain;
+      border-radius: 16px;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+    }
+    .b1-ribbon {
+      position: absolute;
+      left: 50%; bottom: 28px;
+      transform: translateX(-50%);
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 26px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(10,15,30,0.85), rgba(5,7,13,0.95));
+      border: 1px solid rgba(6,182,212,0.35);
+      box-shadow:
+        0 0 24px rgba(6,182,212,0.15),
+        inset 0 0 20px rgba(6,182,212,0.08);
+      backdrop-filter: blur(10px);
+      z-index: 8;
+      font-family: 'Orbitron', 'JetBrains Mono', monospace;
+    }
+    .b1-ribbon .b1-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #10b981; box-shadow: 0 0 10px #10b981;
+      animation: b1Blink 2.4s ease-in-out infinite;
+    }
+    @keyframes b1Blink { 0%,100% { opacity:.4 } 50% { opacity:1 } }
+    .b1-ribbon .b1-word {
+      font-weight: 900; font-size: 14px; letter-spacing: 8px;
+      color: #ffffff;
+    }
+    .b1-ribbon .b1-word .hy { color: #06b6d4; }
+    .b1-ribbon .b1-tag {
+      font-size: 9px; letter-spacing: 3px; color: #94a3b8;
+      border-left: 1px solid rgba(6,182,212,0.3);
+      padding-left: 14px; text-transform: uppercase;
+    }
+    .b1-chips {
+      position: absolute;
+      left: 50%; top: 42%;
+      transform: translate(-50%, -50%);
+      width: 100%; height: 100%;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .b1-chip {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(5,7,13,0.78);
+      border: 1px solid rgba(6,182,212,0.35);
+      font-family: 'Orbitron', 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 800; letter-spacing: 2px;
+      color: #cfd8e3;
+      text-transform: uppercase;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset 0 0 12px rgba(6,182,212,0.06);
+      display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+    }
+    .b1-chip::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #06b6d4; box-shadow: 0 0 8px #06b6d4;
+      animation: b1Blink 3s ease-in-out infinite;
+    }
+    .b1-chip.pos-1 { left: 50%;  top: 8%; }
+    .b1-chip.pos-2 { left: 82%;  top: 24%; }
+    .b1-chip.pos-3 { left: 86%;  top: 58%; }
+    .b1-chip.pos-4 { left: 50%;  top: 78%; }
+    .b1-chip.pos-5 { left: 14%;  top: 58%; }
+    .b1-chip.pos-6 { left: 18%;  top: 24%; }
+    .b1-instruments {
+      position: absolute;
+      left: 0; right: 0; bottom: 96px;
+      display: flex; justify-content: center; gap: 20px;
+      padding: 0 24px;
+      z-index: 7;
+    }
+    .b1-gauge {
+      flex: 0 1 220px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(10,15,30,0.85), rgba(5,7,13,0.92));
+      border: 1px solid rgba(6,182,212,0.28);
+      box-shadow: inset 0 0 18px rgba(6,182,212,0.08);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .b1-gauge-label {
+      font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: #94a3b8; font-weight: 700;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .b1-gauge-label .live { color: #10b981; }
+    .b1-gauge-label .live::before { content: '●'; margin-right: 5px; }
+    .b1-gauge-bar {
+      margin-top: 6px; height: 6px; border-radius: 9999px;
+      background: rgba(6,182,212,0.12);
+      border: 1px solid rgba(6,182,212,0.25);
+      overflow: hidden;
+    }
+    .b1-gauge-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #06b6d4, #10b981);
+      box-shadow: 0 0 8px rgba(16,185,129,0.6);
+      transition: width 1.6s ease;
+    }
+    .b1-gauge-val {
+      margin-top: 4px;
+      font-size: 11px; font-weight: 800; color: #e2e8f0; letter-spacing: 1px;
+      display: flex; justify-content: space-between;
+    }
+    .b1-gauge-val .muted { color: #64748b; font-weight: 600; }
+
+    @media (max-width: 960px) {
+      .b1-instruments { flex-wrap: wrap; bottom: 88px; }
+      .b1-gauge { flex: 1 1 45%; }
+      .b1-orbit.r3 { display: none; }
+      .b1-core { width: 140px; height: 140px; }
+    }
+    @media (max-width: 640px) {
+      .b1-console { min-height: 720px; }
+      .b1-orbit.r2 { width: 420px; height: 420px; }
+      .b1-orbit.r1 { width: 280px; height: 280px; }
+      .b1-instruments { flex-direction: column; gap: 8px; bottom: 84px; }
+      .b1-gauge { flex: 1 1 100%; }
+      .b1-chip { font-size: 9px; padding: 6px 10px; letter-spacing: 1.5px; }
+      .b1-ribbon .b1-word { font-size: 11px; letter-spacing: 5px; }
+      .b1-ribbon .b1-tag { display: none; }
+      .b1-ribbon { padding: 10px 16px; }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
@@ -116,20 +331,22 @@
         <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
         <div>
           <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
-          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Healthcare Module â€¢ <span class="text-emerald-700 font-bold">HIPAA Shield</span></div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Healthcare Module • <span class="text-emerald-700 font-bold">HIPAA Shield</span></div>
         </div>
       </div>
-            <div class="flex flex-wrap items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
-        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Enter Clinic Checkout &rarr;</a>
+        <a href="fast-lane.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Fast Lane →</a>
+        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Guided Intake</a>
       </div>
     </div>
     <div class="grey-unibar-sub">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 overflow-x-auto">
-        <a href="index.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
-        <a href="cinematic-onboarding.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Cinematic Onboarding</a>
-        <a href="healthcare.html" class="nav-pill nav-pill-active px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare & Life Sciences</a>
-        <a href="academy.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Operator Academy</a>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="healthcare.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
+        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
+        <a href="cinematic-onboarding.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Guided Intake</a>
+        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
       </div>
     </div>
   </header>
@@ -148,7 +365,7 @@
           <div class="flex items-center gap-3 mb-4">
             <i class="fa-solid fa-heart-pulse text-2xl text-emerald-400"></i>
             <span class="inline-block px-3 py-1 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold uppercase tracking-widest w-max">
-              HIPAA â€¢ HITECH â€¢ ePHI Defense
+              HIPAA • HITECH • ePHI Defense
             </span>
           </div>
           
@@ -215,7 +432,7 @@
                 
                 <div id="or-zone-metrics" class="bg-black/80 p-4 rounded-xl border border-slate-800 text-xs space-y-2 text-slate-300">
                   <div class="flex justify-between border-b border-slate-800 pb-1">
-                    <span>Control Map:</span> <span class="text-white font-bold">45 CFR Â§ 164.312(a)(1)</span>
+                    <span>Control Map:</span> <span class="text-white font-bold">45 CFR § 164.312(a)(1)</span>
                   </div>
                   <div class="flex justify-between border-b border-slate-800 pb-1">
                     <span>ePHI Boundary:</span> <span class="text-emerald-400 font-bold">ENCRYPTED</span>
@@ -232,129 +449,155 @@
       </div>
     </div>
 
-    <!-- PRICING TIERS: Flip Cards -->
-    <div id="pricing" class="clinic-pane rounded-3xl p-6 sm:p-8 mb-10 relative z-20">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-slate-700 pb-4">
+    <!-- ============ PRICING v5: B U R N -1 ============ -->
+    <div id="pricing" class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-300 shadow-md mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b-2 border-slate-100 pb-4">
         <div>
-          <h2 class="text-2xl font-black text-white uppercase tracking-tight">Clinical Readiness Packages</h2>
-          <p class="text-sm text-slate-400 font-bold mt-1">Acquire mathematical proof of HIPAA compliance. Hover to unlock configurations.</p>
+          <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Assessment Packages</h2>
+          <p class="text-sm text-slate-600 font-bold mt-1">Five tiers. Click a card to see price, contents, and launch.</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
-        
-        <!-- Tier 1: A-La-Carte ($500) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-slate-600 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-slate-900/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-folder-closed text-3xl text-slate-400 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">A-La-Carte</h3>
-                <p class="text-[10px] font-bold text-emerald-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 items-start">
+
+        <!-- ===== B — Beginner ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Beginner tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">B</span>
+                <span class="b1-tier">Beginner</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-slate-950 text-white border-2 border-slate-600">
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
               <div>
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Evidence Binder</h3>
-                <div class="text-3xl font-black text-white my-2">$500</div>
-                <p class="text-[11px] text-slate-400 font-medium mb-4 leading-relaxed">Single Cryptographic eBinder compilation for a specific HIPAA audit or baseline IT scan.</p>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Beginner · Free Mini S.P.A.</h3>
+                <div class="text-3xl font-black text-white my-2">$0</div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Non-intrusive surface scan</li>
+                  <li>✓ Gaps shown, remediation greyed out</li>
+                  <li>✓ No install, no credit card</li>
+                </ul>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-700 transition-colors">Select $500</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tier 2: Single Clinic ($999) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-teal-500 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-teal-500 text-slate-900 px-2 py-1 text-[8px] font-black uppercase tracking-widest rounded-b-md shadow-sm z-20 w-3/4">Private Practice</div>
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-teal-950/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-stethoscope text-3xl text-teal-400 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Single Clinic</h3>
-                <p class="text-[10px] font-bold text-teal-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
-              </div>
-            </div>
-            <div class="flip-card-back bg-teal-950 text-white border-2 border-teal-500">
-              <div>
-                <h3 class="text-xs font-black text-teal-400 uppercase tracking-widest mt-2">Compliance Base</h3>
-                <div class="text-3xl font-black text-white my-2">$999<span class="text-sm text-teal-600 font-bold">/yr</span></div>
-                <p class="text-[11px] text-teal-100 font-medium mb-4 leading-relaxed">1 Domain. Includes HIPAA eBinder, 1 Free Rescan, Binder Vault access, and Cyber Seal.</p>
-              </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-teal-500 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-teal-400 transition-colors">Select $999</a>
+              <a href="cinematic-onboarding.html?source=healthcare&tier=free" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Run free scan</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 3: Regional Health System ($2,500) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-emerald-500 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-emerald-950/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-hospital text-3xl text-emerald-400 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Regional System</h3>
-                <p class="text-[10px] font-bold text-emerald-400 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+        <!-- ===== U — Urgent ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Urgent tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter accent">U</span>
+                <span class="b1-tier">Urgent</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-emerald-950 text-white border-2 border-emerald-500">
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
               <div>
-                <h3 class="text-xs font-black text-emerald-300 uppercase tracking-widest mt-2">Multi-Facility</h3>
-                <div class="text-3xl font-black text-white my-2">$2.5k<span class="text-sm text-emerald-500 font-bold">/yr</span></div>
-                <p class="text-[11px] text-emerald-100 font-medium mb-4 leading-relaxed">Up to 5 domains/clinics. Consolidated HIPAA eBinder, and Unlimited SLM Rescans.</p>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Urgent · Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$750</div>
+                <p class="text-[11px] text-cyan-400 font-bold mb-2">$500 academy price</p>
+                <ul class="text-[11px] text-slate-300 space-y-1.5">
+                  <li>✓ Scan + questionnaire + generated binder</li>
+                  <li>✓ Baseline framework mapping</li>
+                  <li>✗ Not human-reviewed</li>
+                  <li>✗ Not sealed</li>
+                </ul>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-emerald-500 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-emerald-400 transition-colors">Select $2.5k</a>
+              <a href="cinematic-onboarding.html?source=healthcare&tier=binder" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-slate-200 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get the binder</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 4: National Network ($5,000) -->
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-slate-300 bg-black shadow-sm flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-slate-800/80 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-truck-medical text-3xl text-slate-300 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">National Network</h3>
-                <p class="text-[10px] font-bold text-slate-300 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+        <!-- ===== R — Remediation (most chosen) ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Remediation tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-cyan-500 bg-slate-950">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-b-md z-20">Most chosen</div>
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-cyan-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">R</span>
+                <span class="b1-tier">Remediation</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-slate-200 text-slate-900 border-2 border-slate-400">
+            <div class="b1-back bg-cyan-500 text-slate-900 border-2 border-cyan-400">
               <div>
-                <h3 class="text-xs font-black text-slate-600 uppercase tracking-widest mt-2">Hospital Group</h3>
-                <div class="text-3xl font-black text-slate-900 my-2">$5k<span class="text-sm text-slate-500 font-bold">/yr</span></div>
-                <p class="text-[11px] text-slate-700 font-medium mb-4 leading-relaxed">Up to 15 Domains. Custom Executive Scorecards and multi-framework HIPAA/HITRUST overlay routing.</p>
+                <h3 class="text-xs font-black text-cyan-900 uppercase tracking-widest">Remediation · Verified Binder</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$1,000<span class="text-sm font-bold text-cyan-800">/yr</span></div>
+                <ul class="text-[11px] text-cyan-950 font-bold space-y-1.5 mt-3">
+                  <li>✓ 1 domain, binder + human review</li>
+                  <li>✓ Cyber Seal by Anergi.io</li>
+                  <li>✓ Quarterly rescans</li>
+                  <li>✓ The evidence your carrier accepts</li>
+                </ul>
               </div>
-              <a href="cinematic-onboarding.html" class="w-full text-center py-2.5 bg-slate-900 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors">Select $5k</a>
+              <a href="cinematic-onboarding.html?source=healthcare&tier=verified" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get verified</a>
             </div>
           </div>
         </div>
 
-        <!-- Tier 5: Pentest -->
-        <div class="flip-card md:col-span-2 lg:col-span-1 xl:col-span-1">
-          <div class="flip-card-inner">
-            <div class="flip-card-front border-2 border-rose-500 bg-black shadow-lg flex items-center justify-center text-center relative">
-              <video src="falling glass.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none mix-blend-screen"></video>
-              <div class="absolute inset-0 bg-rose-950/90 z-0"></div>
-              <div class="relative z-10">
-                <i class="fa-solid fa-user-ninja text-3xl text-rose-500 mb-4 drop-shadow-lg"></i>
-                <h3 class="text-lg font-black text-white uppercase tracking-tight drop-shadow-md">Deep Pentest</h3>
-                <p class="text-[10px] font-bold text-rose-500 mt-4 tracking-widest uppercase animate-pulse">Hover to Reveal</p>
+        <!-- ===== N — Networking ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Networking tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-emerald-500 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-emerald-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter" style="color:#34d399;text-shadow:0 0 30px rgba(52,211,153,.6),0 4px 12px rgba(0,0,0,.6)">N</span>
+                <span class="b1-tier">Networking</span>
+                <span class="b1-cue">▼ Tap for details</span>
               </div>
             </div>
-            <div class="flip-card-back bg-rose-950 text-white border-2 border-rose-500">
+            <div class="b1-back bg-emerald-600 text-white border-2 border-emerald-500">
               <div>
-                <h3 class="text-xs font-black text-rose-400 uppercase tracking-widest mt-2">Escalation</h3>
-                <div class="text-3xl font-black text-white my-2">Custom</div>
-                <p class="text-[11px] text-slate-300 font-medium mb-4 leading-relaxed">ePHI forensic discovery, active incident response, and deep manual pentesting via Anergi.io.</p>
+                <h3 class="text-xs font-black text-emerald-100 uppercase tracking-widest">Networking · Multi-Domain</h3>
+                <div class="text-3xl font-black text-white my-2">$2,500<span class="text-sm font-bold text-emerald-200">/yr</span></div>
+                <ul class="text-[11px] text-emerald-50 space-y-1.5 mt-3">
+                  <li>✓ Up to 5 domains</li>
+                  <li>✓ Consolidated eBinder</li>
+                  <li>✓ Unlimited SLM rescans</li>
+                  <li>✓ Sealed on every domain</li>
+                </ul>
               </div>
-              <a href="https://anergi.io/contacts.html" target="_blank" class="w-full text-center py-2.5 bg-rose-600 text-white rounded-lg text-xs font-black uppercase tracking-widest hover:bg-rose-500 transition-colors shadow-md">Consult Anergi &rarr;</a>
+              <a href="cinematic-onboarding.html?source=healthcare&tier=multi" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get multi-domain</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== -1 — Enterprise ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Enterprise tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-[#D92B8A] bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-[#2A081C]/80"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter pink">-1</span>
+                <span class="b1-tier">Enterprise</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-[#D92B8A]">
+              <div>
+                <h3 class="text-xs font-black text-[#D92B8A] uppercase tracking-widest">Enterprise · Up to 15 domains</h3>
+                <div class="text-3xl font-black text-white my-2">$5,000<span class="text-sm font-bold text-pink-300">/yr</span></div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Consolidated eBinder, 15 domains</li>
+                  <li>✓ Custom executive scorecards</li>
+                  <li>✓ Named human review contact</li>
+                  <li>✓ Carrier questionnaire walk-through</li>
+                  <li>✓ Priority review</li>
+                </ul>
+              </div>
+              <a href="mailto:hello@burn-1.com?subject=Enterprise%20binder%20quote" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Request quote →</a>
             </div>
           </div>
         </div>
@@ -362,7 +605,115 @@
       </div>
     </div>
 
+    <!-- MERGED PARTNER SERVICES & NAVIGATION STRIP -->
+    <div class="mb-10 rounded-3xl border-2 border-[#522d8a] bg-[#2A081C] text-white p-6 sm:p-8 shadow-2xl">
+      <div class="font-mono text-[10px] uppercase tracking-widest text-amber-400 font-black mb-4">PARTNER SERVICES</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start md:divide-x md:divide-white/10">
+        <!-- Left half -->
+        <div>
+          <h3 class="text-xl font-black text-white">Partner services</h3>
+          <div class="text-sm text-slate-300 mt-2 space-y-1">
+            <p class="font-semibold text-slate-200">Deep pentest &amp; incident response</p>
+            <p class="font-semibold text-slate-200">White-label MSP program</p>
+          </div>
+          <div class="mt-5">
+            <a href="https://anergi.io/" target="_blank" rel="noopener" class="inline-block px-5 py-2.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-colors">Visit Anergi.io →</a>
+          </div>
+        </div>
+
+        <!-- Right half -->
+        <div class="md:pl-8">
+          <h3 class="text-xl font-black text-white">Not sure where to start?</h3>
+          <p class="text-sm text-slate-300 mt-2 font-medium">Fast Lane if you already have a binder. Guided Intake if you don't.</p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="fast-lane.html" class="px-5 py-2.5 bg-[#f26522] hover:bg-[#d95316] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-colors">Fast Lane →</a>
+            <a href="cinematic-onboarding.html" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 rounded-xl transition-colors">Guided Intake →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FAST LANE PREVIEW TILE ============ -->
+    <section class="max-w-6xl mx-auto px-4 mb-10">
+      <div class="relative overflow-hidden rounded-3xl border-2 border-[#D92B8A] shadow-2xl min-h-[280px] sm:min-h-[280px]">
+        <video src="assets/fastlane.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"></video>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#05070d]/95 via-[#2A081C]/80 to-transparent"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 p-6 sm:p-10">
+          <div class="max-w-xl">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-amber-300 font-black">Burn-1 Fast Lane</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mt-1">Already have your evidence? Seal it in days.</h2>
+            <p class="text-sm text-slate-300 font-semibold mt-2">Upload what you have. We verify, seal with Anergi.io, and post the receipt to your subdomain.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+            <a href="fast-lane.html" class="text-center px-6 py-3 bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest rounded-xl whitespace-nowrap">Start Fast Lane →</a>
+            <a href="fast-lane.html" class="text-center px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-xs uppercase tracking-widest rounded-xl whitespace-nowrap">See how it works</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BURN-1 CONSOLE v2 ============ -->
+    <div class="b1-console" aria-label="Burn-1 Systems console">
+      <div class="b1-sweep"></div>
+      <div class="b1-orbit r1"></div>
+      <div class="b1-orbit r2"></div>
+      <div class="b1-orbit r3"></div>
+
+      <!-- Industry chips (static) -->
+      <div class="b1-chips">
+        <div class="b1-chip pos-1">Healthcare</div>
+        <div class="b1-chip pos-2">Finance</div>
+        <div class="b1-chip pos-3">Defense</div>
+        <div class="b1-chip pos-4">Retail</div>
+        <div class="b1-chip pos-5">Legal</div>
+        <div class="b1-chip pos-6">Government</div>
+      </div>
+
+      <!-- Center core -->
+      <div class="b1-core">
+        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Systems">
+      </div>
+
+      <!-- Instruments row -->
+      <div class="b1-instruments">
+        <div class="b1-gauge">
+          <div class="b1-gauge-label"><span>Posture</span><span class="live">Live</span></div>
+          <div class="b1-gauge-bar"><div class="b1-gauge-fill" data-fill="92"></div></div>
+          <div class="b1-gauge-val"><span>92 / 100</span><span class="muted">+4 wk</span></div>
+        </div>
+        <div class="b1-gauge">
+          <div class="b1-gauge-label"><span>Evidence</span><span class="live">Live</span></div>
+          <div class="b1-gauge-bar"><div class="b1-gauge-fill" data-fill="78"></div></div>
+          <div class="b1-gauge-val"><span>78% covered</span><span class="muted">carrier-ready</span></div>
+        </div>
+        <div class="b1-gauge">
+          <div class="b1-gauge-label"><span>Seal status</span><span class="live">Live</span></div>
+          <div class="b1-gauge-bar"><div class="b1-gauge-fill" data-fill="100"></div></div>
+          <div class="b1-gauge-val"><span>Current</span><span class="muted">Anergi.io</span></div>
+        </div>
+        <div class="b1-gauge">
+          <div class="b1-gauge-label"><span>Turnaround</span><span class="live">Live</span></div>
+          <div class="b1-gauge-bar"><div class="b1-gauge-fill" data-fill="86"></div></div>
+          <div class="b1-gauge-val"><span>1–3 days</span><span class="muted">fast lane</span></div>
+        </div>
+      </div>
+
+      <!-- Static BURN-1 SYSTEMS ribbon -->
+      <div class="b1-ribbon" aria-label="BURN-1 SYSTEMS">
+        <span class="b1-dot"></span>
+        <span class="b1-word">BURN<span class="hy">-1</span> SYSTEMS</span>
+        <span class="b1-tag">REP · patent pending</span>
+      </div>
+    </div>
+
   </main>
+
+  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-400/40 text-center text-xs font-mono text-slate-600">
+    <p>© 2026 Leon R. Darden. All rights reserved.</p>
+    <p class="tm-notice mt-1">
+      ꟻried Brains™ and ꟻried Brains™ World are trademarks of Leon R. Darden.
+    </p>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -377,7 +728,7 @@
           desc: 'Primary Core System Assessment trigger. Executes non-intrusive Automated Posture Exposure Assessment surface validation of EHR/EMR portals, TLS 1.3 cipher suites, and HITECH encryption boundaries.',
           metrics: `
             <div class="flex justify-between border-b border-slate-800 pb-1">
-              <span>Control Map:</span> <span class="text-white font-bold">45 CFR Â§ 164.312(a)(1)</span>
+              <span>Control Map:</span> <span class="text-white font-bold">45 CFR § 164.312(a)(1)</span>
             </div>
             <div class="flex justify-between border-b border-slate-800 pb-1">
               <span>ePHI Boundary:</span> <span class="text-emerald-400 font-bold">ENCRYPTED</span>
@@ -419,7 +770,7 @@
           desc: 'Automates the validation of Role-Based Access Controls (RBAC) and Multi-Factor Authentication (MFA) policies across all clinical staff directory groups, generating cryptographic proof for underwriters.',
           metrics: `
             <div class="flex justify-between border-b border-slate-800 pb-1">
-              <span>Control Map:</span> <span class="text-white font-bold">45 CFR Â§ 164.308(a)</span>
+              <span>Control Map:</span> <span class="text-white font-bold">45 CFR § 164.308(a)</span>
             </div>
             <div class="flex justify-between border-b border-slate-800 pb-1">
               <span>MFA Enforcement:</span> <span class="text-emerald-400 font-bold">100% VERIFIED</span>
@@ -432,20 +783,14 @@
 
       hotspots.forEach(btn => {
         btn.addEventListener('click', () => {
-          // Reset styles
           hotspots.forEach(b => {
             b.classList.remove('active', 'border-emerald-500', 'bg-slate-900/90', 'text-emerald-400');
             b.classList.add('bg-slate-800/90', 'border-slate-500', 'text-slate-300');
           });
-
-          // Set active styles
           btn.classList.remove('bg-slate-800/90', 'border-slate-500', 'text-slate-300');
           btn.classList.add('active', 'border-emerald-500', 'bg-slate-900/90', 'text-emerald-400');
-
-          // Update Content
           const zoneId = btn.getAttribute('data-or-zone');
           const data = zoneData[zoneId];
-          
           if(data) {
             titleEl.innerHTML = data.title;
             descEl.innerHTML = data.desc;
@@ -455,6 +800,43 @@
       });
     });
   </script>
+
+  <script>
+    document.querySelectorAll('.b1-card').forEach(card => {
+      const toggle = (e) => {
+        if (e && e.target && e.target.closest('a,button')) return;
+        card.classList.toggle('is-flipped');
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('is-flipped');
+        }
+      });
+    });
+  </script>
+
+  <script>
+    (function () {
+      const fills = document.querySelectorAll('.b1-gauge-fill');
+      if (!fills.length) return;
+      const animate = () => fills.forEach(el => {
+        const v = el.getAttribute('data-fill') || '0';
+        el.style.width = v + '%';
+      });
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) { animate(); io.disconnect(); }
+          });
+        }, { threshold: 0.25 });
+        const target = document.querySelector('.b1-console');
+        if (target) io.observe(target);
+      } else {
+        animate();
+      }
+    })();
+  </script>
 </body>
 </html>
-

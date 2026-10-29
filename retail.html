@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retail & E-Commerce // 2-Column Split-Screen PCI DSS v4.0 Binder | Cyber Readiness Clinic &amp; Burn One Systems</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .heading { font-family: 'Space Grotesk', sans-serif; }
-        
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retail & E-Commerce Shield | Cyber Readiness Clinic</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --dark-silver: #475569;
+      --mid-silver: #94a3b8;
+      --burnt-orange: #ea580c;
+      --light-orange: #fdba74;
+      --dark-purple: #3b0764; /* Deep, rich purple for accents/text */
+      --neon-purple: #9333ea;
+    }
     
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      /* Burn-1 Base Metallic Silver */
+      background-color: #d8dee6;
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.92) 0%, rgba(226, 232, 240, 0.88) 48%, rgba(186, 196, 210, 0.95) 100%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0px, rgba(255,255,255,0.18) 1px, transparent 1px, transparent 12px);
+      background-attachment: fixed;
+      color: #0f172a;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-hud { font-family: 'Orbitron', sans-serif; }
+
     /* Top Unibar Navigation */
     .grey-unibar {
       background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 55%, #b8c4d4 100%);
@@ -37,303 +53,459 @@
       transform: translateY(-1px);
     }
     .nav-pill-active {
-      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-      color: #38bdf8;
-      border: 1px solid #38bdf8;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+      background: linear-gradient(180deg, var(--dark-purple) 0%, #2e1065 100%);
+      color: var(--light-orange);
+      border: 1px solid var(--burnt-orange);
+      box-shadow: 0 0 12px rgba(234, 88, 12, 0.45);
     }
+
+    /* Retail Section Panes */
+    .retail-pane {
+      background: linear-gradient(145deg, var(--dark-silver), #334155);
+      border: 2px solid var(--burnt-orange);
+      box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.25);
+    }
+    .retail-light-pane {
+      background: linear-gradient(145deg, #e2e8f0, var(--mid-silver));
+      border: 2px solid var(--dark-purple);
+      box-shadow: 0 15px 30px -10px rgba(59, 7, 100, 0.3);
+    }
+
+    
+    .flip-card-back { transform: rotateY(180deg); }
+
+    /* Signal Animation for Hotspots */
+    .signal-hotspot {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background-color: var(--burnt-orange);
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 20;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px var(--burnt-orange);
+      transition: all 0.3s ease;
+    }
+    .signal-hotspot::before, .signal-hotspot::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid var(--burnt-orange);
+      animation: signalPulse 2s linear infinite;
+      pointer-events: none;
+    }
+    .signal-hotspot::after {
+      animation-delay: 1s;
+    }
+    .signal-hotspot:hover, .signal-hotspot.active {
+      background-color: var(--dark-purple);
+      border: 2px solid var(--light-orange);
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+    .signal-hotspot:hover::before, .signal-hotspot:hover::after,
+    .signal-hotspot.active::before, .signal-hotspot.active::after {
+      border-color: var(--dark-purple);
+    }
+
+    @keyframes signalPulse {
+      0% { width: 100%; height: 100%; opacity: 1; }
+      100% { width: 300%; height: 300%; opacity: 0; }
+    }
+  
+    /* Shared Card CSS */
+    .b1-card { position: relative; border-radius: 1rem; cursor: pointer; touch-action: manipulation; perspective: 1200px; }
+    .b1-card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1); }
+    .b1-card.is-flipped .b1-card-inner { transform: rotateY(180deg); }
+    @media (hover: hover) and (pointer: fine) { .b1-card:hover .b1-card-inner { transform: rotateY(180deg); } }
+    .b1-face { position: relative; width: 100%; min-height: 380px; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .b1-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: rotateY(180deg); }
+    .b1-letter { font-family: 'Orbitron', 'Inter', sans-serif; font-weight: 900; font-size: 6rem; line-height: 1; letter-spacing: -0.02em; color: #ffffff; text-shadow: 0 0 30px rgba(6,182,212,0.45), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.accent { color: #f26522; text-shadow: 0 0 30px rgba(242,101,34,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.pink { color: #D92B8A; text-shadow: 0 0 30px rgba(217,43,138,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-tier { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; color: #cbd5e1; margin-top: 1rem; }
+    .b1-cue { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #06b6d4; margin-top: 1.25rem; animation: b1pulse 2s ease-in-out infinite; }
+    @keyframes b1pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (max-width: 640px) { .b1-letter { font-size: 4.5rem; } .b1-face { min-height: 320px; } }
 
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
-    
-    <main class="px-4 sm:px-6 lg:px-10 py-8">
+<body class="min-h-screen flex flex-col relative">
+
+  <header class="grey-unibar sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[--dark-purple] text-[--light-orange] border border-[--burnt-orange] font-extrabold flex items-center justify-center shadow-md font-hud">B1</div>
+        <div>
+          <div class="text-base sm:text-lg font-extrabold tracking-tight text-[--dark-purple] leading-none uppercase">Cyber Readiness Clinic</div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Retail Module • <span class="text-[--burnt-orange] font-bold">PCI-DSS Shield</span></div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="grey-unibar-sub">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="retail.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
+        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
+        <a href="cinematic-onboarding.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Guided Intake</a>
+        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex-1 relative z-10">
+
+    <!-- HERO SECTION -->
+    <div class="retail-pane rounded-3xl overflow-hidden text-white mb-12 relative">
+      <div class="relative h-[26rem] overflow-hidden border-b border-[--burnt-orange]/50">
+        <!-- Stock Image + Clock Video Overlay -->
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80" alt="Retail Point of Sale Transaction" class="w-full h-full object-cover opacity-40 mix-blend-luminosity">
+        <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen pointer-events-none"></video>
+        <div class="absolute inset-0 bg-gradient-to-r from-[--dark-silver] via-[--dark-silver]/90 to-transparent pointer-events-none"></div>
         
-        <section class="max-w-7xl mx-auto mb-10">
-            <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 font-mono text-xs font-bold uppercase">
-                ACCELERATING THROUGH TIME // PCI DSS v4.0 SPLIT-SCREEN WORKBENCH
+        <div class="absolute inset-0 flex flex-col justify-center p-6 sm:p-12 z-10 max-w-4xl">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fa-solid fa-credit-card text-2xl text-[--light-orange]"></i>
+            <span class="inline-block px-3 py-1 rounded bg-[--dark-purple]/80 border border-[--burnt-orange] text-[--light-orange] font-mono text-xs font-bold uppercase tracking-widest w-max">
+              PCI-DSS v4.0 & Omnichannel Defense
             </span>
-            <h1 class="text-3xl sm:text-5xl font-black heading text-white uppercase mt-2 mb-6">
-                Retail &amp; E-Commerce PCI DSS v4.0 Evidence Binder
-            </h1>
+          </div>
+          
+          <h1 class="text-3xl sm:text-5xl font-extrabold mt-1 tracking-tight leading-tight text-white">
+            Secure the transaction before <br><span class="text-[--light-orange]">the cart is abandoned.</span>
+          </h1>
+          <p class="text-slate-300 text-sm sm:text-base font-medium mt-4 leading-relaxed max-w-2xl">
+            From physical POS malware to sophisticated Magecart e-skimming on your checkout pages, retail environments are under constant siege. Satisfy PCI-DSS auditors and prevent catastrophic PII leaks with our non-intrusive <strong>Automated Posture Exposure Assessments (APEA)</strong>.
+          </p>
+        </div>
+      </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <!-- LEFT: SCROLLABLE PCI DSS v4.0 EVIDENCE BINDER & SECURITY POLICY -->
-                <div class="lg:col-span-7 p-6 rounded-3xl bg-slate-900 border border-white/15 max-h-[460px] overflow-y-auto space-y-4 font-mono text-xs">
-                    <h3 class="text-lg font-black text-pink-400 uppercase sticky top-0 bg-slate-900 py-2 border-b border-white/10">
-                        📜 Scrollable PCI DSS v4.0 Evidence Binder &amp; Transaction Data Policy
-                    </h3>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-white/10">
-                        <strong class="text-white block mb-1">Section 1 — PCI DSS v4.0 Req. 6.4.3 (Payment Page Script Inventory):</strong>
-                        <p class="text-slate-300 font-sans">All third-party JavaScript executing on the hosted checkout page is authorized, inventoried, and enforced via Content-Security-Policy (CSP) and Subresource Integrity (SRI) hashes to prevent Magecart e-skimming.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-white/10">
-                        <strong class="text-white block mb-1">Section 2 — PCI DSS v4.0 Req. 11.6.1 (Tamper-Detection Mechanism):</strong>
-                        <p class="text-slate-300 font-sans">Automated HTTP header and script-integrity drift checks evaluate payment pages weekly and alert personnel to unauthorized modifications.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-white/10">
-                        <strong class="text-white block mb-1">Section 3 — Point-of-Sale (POS) Terminal VLAN Segmentation:</strong>
-                        <p class="text-slate-300 font-sans">Cardholder Data Environment (CDE) POS terminals operate on an isolated firewall VLAN separated from guest Wi-Fi and back-office workstations.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-slate-50 border border-white/10">
-                        <strong class="text-white block mb-1">Section 4 — Seasonal Associate Access &amp; Gift-Card Fraud Controls:</strong>
-                        <p class="text-slate-300 font-sans">Unique associate POS PINs/tokens with zero shared manager overrides and mandatory out-of-band callback for supplier bank changes.</p>
-                    </div>
-                </div>
-
-                <!-- RIGHT: STICKY RAPID ONBOARDING & SEAT SELECTOR -->
-                <div class="lg:col-span-5 sticky top-20 p-6 rounded-3xl bg-slate-900 border-2 border-pink-500/50 font-mono text-xs space-y-4">
-                    <span class="text-pink-400 font-bold uppercase block">// STICKY RAPID ONBOARDING &amp; SEAT SELECTOR</span>
-                    <h3 class="text-xl font-black text-white uppercase">Configure Store &amp; Associate Seats</h3>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Active Associate / POS Seats:</label>
-                        <input id="retail-seats" type="range" min="5" max="250" value="25" oninput="updateRetailSeats(this.value)" class="w-full">
-                        <div class="flex justify-between text-emerald-400 font-bold mt-1">
-                            <span id="retail-seat-label">25 Associate Seats</span>
-                            <span>PCI DSS v4.0 Ready</span>
-                        </div>
-                    </div>
-                    <a href="clinic.html?industry=retail" class="block text-center py-3 rounded-xl bg-pink-500 hover:bg-pink-400 text-white font-black uppercase">
-                        Launch Retail Hygiene Protocol &rarr;
-                    </a>
-                </div>
-            </div>
-        </section>
-        <script>
-            function updateRetailSeats(v) {
-                document.getElementById('retail-seat-label').textContent = `${v} Associate Seats`;
-            }
-        </script>
-        
-        
-    <!-- UNIFIED GLM ZCODE INDUSTRY ASSESSMENT, GAME, BINDER & MONITORING MODULE -->
-    <section class="max-w-7xl mx-auto my-12 rounded-3xl p-6 sm:p-8 bg-slate-50/95 text-white border-2 border-cyan-500/40 shadow-2xl font-mono">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10">
-            <div>
-                <div class="flex flex-wrap items-center gap-2 mb-1">
-                    <span class="px-2.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold uppercase">
-                        GLM ZCODE PARAMETRIC ENGINE // RETAIL
-                    </span>
-                    <span class="px-2.5 py-0.5 rounded bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-[10px] font-bold">
-                        PCI DSS v4.0 Req. 6.4.3 & 11.6.1 • CCPA / CPRA
-                    </span>
-                </div>
-                <h2 class="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-                    Retail, POS & E-Commerce Merchants — Live Scan, Hygiene Game, Evidence Binder &amp; Monitoring
-                </h2>
-                <p class="text-xs text-slate-400 font-sans mt-1">'Accelerating Through Time' 2-Column Split-Screen with scrollable PCI DSS v4.0 Evidence Binder & Retail Customer/Transaction Data Security Policy on the left and sticky rapid onboarding & seat selector on the right</p>
-            </div>
-            <div class="flex flex-wrap items-center gap-3 bg-slate-900 p-3 rounded-2xl border border-white/10">
-                <div>
-                    <span class="text-[10px] text-slate-400 block uppercase">EARNED CREDITS</span>
-                    <span id="dock-credits" class="text-xl font-black text-amber-400">0 / 120 CR</span>
-                </div>
-                <div class="border-l border-white/10 pl-3">
-                    <span class="text-[10px] text-slate-400 block uppercase">NET BINDER / AUDIT</span>
-                    <span id="dock-net-price" class="text-sm font-bold text-emerald-400">$250 / $500</span>
-                </div>
-            </div>
+      <!-- INTERACTIVE RETAIL TOPOLOGY WIDGET -->
+      <div class="retail-light-pane p-6 sm:p-10 m-6 rounded-2xl relative z-20 -mt-10">
+        <div class="text-center mb-8">
+          <h2 class="text-xl font-hud font-black text-[--dark-purple] tracking-widest">OMNICHANNEL EXPOSURE TOPOLOGY</h2>
+          <p class="text-sm font-mono text-slate-600 mt-2 font-bold">Select a signal beacon on the retail architecture map to analyze compliance vulnerabilities.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-            <!-- PILLAR 1: NON-INTRUSIVE OUTSIDE-IN SCANNER -->
-            <div class="p-5 rounded-2xl bg-slate-900/90 border border-white/10 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold text-cyan-400 uppercase">01. Sector Micro-Scanner</span>
-                        <span class="text-[10px] text-slate-400">MOD-010-AGREE</span>
-                    </div>
-                    <p class="text-xs text-slate-300 font-sans mb-4">
-                        Non-intrusive outside-in DNS (SPF/DKIM/DMARC), TLS 1.3, HSTS, and security header inspection mapped to <strong>PCI DSS v4.0 Req. 6.4.3 & 11.6.1 • CCPA / CPRA</strong>.
-                    </p>
-                    <div class="flex gap-2 mb-3">
-                        <input id="dock-scan-domain" type="text" placeholder="yourdomain.com" value="burn-1.com" class="w-full px-3 py-2 rounded-xl bg-black border border-cyan-500/40 text-white text-xs font-mono">
-                        <button type="button" onclick="runSectorMicroScan('retail')" class="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase shrink-0">
-                            Scan
-                        </button>
-                    </div>
-                    <div id="dock-scan-output" class="p-3 rounded-xl bg-black/80 border border-white/10 text-[11px] text-emerald-400 min-h-[78px]">
-                        [READY] Enter domain to run passive RETAIL perimeter check.
-                    </div>
-                </div>
-                <a href="burn-1systems.html?industry=retail" class="mt-4 block text-center py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase">
-                    Full 16-Check APEA Audit ($500) &rarr;
-                </a>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- The Interactive Map with Signals -->
+          <div class="lg:col-span-7 relative rounded-2xl overflow-hidden border-2 border-[--dark-purple] shadow-xl bg-slate-900 h-[450px]">
+            <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80" alt="Retail and Ecommerce Architecture Map" class="w-full h-full object-cover opacity-50 mix-blend-luminosity block max-w-full">
+            <div class="absolute inset-0 bg-[--dark-purple]/20 mix-blend-multiply"></div>
+            
+            <!-- Signal Hotspots -->
+            <div class="signal-hotspot active" data-target="pos" style="top:30%; left:25%;">
+              <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-white bg-black/80 px-2 py-1 rounded whitespace-nowrap border border-[--burnt-orange]">[1] POS Terminal</span>
             </div>
+            
+            <div class="signal-hotspot" data-target="gateway" style="top:60%; left:45%;">
+              <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-white bg-black/80 px-2 py-1 rounded whitespace-nowrap border border-[--burnt-orange]">[2] E-Comm Gateway</span>
+            </div>
+            
+            <div class="signal-hotspot" data-target="inventory" style="top:25%; left:75%;">
+              <span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-white bg-black/80 px-2 py-1 rounded whitespace-nowrap border border-[--burnt-orange]">[3] Inventory DB</span>
+            </div>
+            
+            <div class="signal-hotspot" data-target="loyalty" style="top:75%; left:80%;">
+              <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-mono font-bold text-white bg-black/80 px-2 py-1 rounded whitespace-nowrap border border-[--burnt-orange]">[4] Loyalty / CRM</span>
+            </div>
+          </div>
 
-            <!-- PILLAR 2: SECTOR HYGIENE GAME & SIMULATORS (L1-8 + A-G) -->
-            <div class="p-5 rounded-2xl bg-slate-900/90 border border-white/10 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold text-emerald-400 uppercase">02. Hygiene Game &amp; Simulators</span>
-                        <span class="text-[10px] text-amber-400 font-bold">+120 CR MAX</span>
-                    </div>
-                    <p class="text-xs text-slate-300 font-sans mb-3">
-                        Complete the 8 Free Hygiene Classes (40 CR) and 7 Advanced Anti-Phishing/MFA-2 Simulators (80 CR) under the <strong>Retail, POS & E-Commerce Merchants</strong> compliance lens.
-                    </p>
-                    <div class="space-y-2 text-[11px] mb-4">
-                        <div class="p-2.5 rounded-xl bg-black/60 border border-white/5 flex justify-between">
-                            <span>Free Protocol (Levels 1–8)</span>
-                            <span id="dock-l18-status" class="text-emerald-400 font-bold">40 CR Available</span>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-black/60 border border-white/5 flex justify-between">
-                            <span>Advanced Simulators (A–G)</span>
-                            <span id="dock-ag-status" class="text-cyan-400 font-bold">80 CR Available</span>
-                        </div>
-                    </div>
+          <!-- The Diagnostic Readout Panel -->
+          <div class="lg:col-span-5">
+            <div class="relative overflow-hidden bg-[--dark-purple] text-white p-6 rounded-2xl border-2 border-[--burnt-orange] shadow-[0_0_20px_rgba(234,88,12,0.3)] font-mono h-[450px] flex flex-col">
+              <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"></video>
+              
+              <div class="relative z-10 flex-1 flex flex-col">
+                <div class="flex items-center justify-between border-b border-[--burnt-orange]/40 pb-3 mb-4">
+                  <span class="text-xs text-[--light-orange] uppercase tracking-wider font-bold">Vulnerability Readout</span>
+                  <span class="px-2 py-0.5 text-[10px] bg-[--burnt-orange] text-white rounded font-black animate-pulse">LIVE SIGNAL</span>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <a href="clinic.html?industry=retail" class="text-center py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase">
-                        Launch L1–8 + A–G
-                    </a>
-                    <a href="academy.html?industry=retail" class="text-center py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase">
-                        Day-Mode Academy
-                    </a>
-                </div>
-            </div>
-
-            <!-- PILLAR 3: EVIDENCE BINDER V2 & DRIFT MONITORING -->
-            <div class="p-5 rounded-2xl bg-slate-900/90 border border-white/10 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold text-amber-400 uppercase">03. Binder &amp; Drift Monitor</span>
-                        <span class="text-[10px] text-emerald-400">SHA-256 SEALED</span>
-                    </div>
-                    <p class="text-xs text-slate-300 font-sans mb-3">
-                        Compile your machine-signed <strong>Evidence Binder v2</strong> for Chubb, Travelers, Coalition &amp; Beazley, or schedule quarterly drift monitoring.
-                    </p>
-                    <div class="space-y-1.5 text-[11px] mb-4">
-                        <a href="downloads/cyber-insurance-evidence-binder-v2.md" download class="block p-2 rounded-lg bg-black/60 hover:bg-black border border-white/10 text-cyan-300">
-                            ⬇ downloads/cyber-insurance-evidence-binder-v2.md
-                        </a>
-                        <a href="downloads/zero-cost-mfa-setup-guide.md" download class="block p-2 rounded-lg bg-black/60 hover:bg-black border border-white/10 text-emerald-300">
-                            ⬇ downloads/zero-cost-mfa-setup-guide.md
-                        </a>
-                        <a href="downloads/client-onboarding-agreement.md" download class="block p-2 rounded-lg bg-black/60 hover:bg-black border border-white/10 text-purple-300">
-                            ⬇ downloads/client-onboarding-agreement.md (MOD-010)
-                        </a>
-                    </div>
-                </div>
-                <button type="button" onclick="exportSectorBinder('retail', 'Retail, POS & E-Commerce Merchants', 'PCI DSS v4.0 Req. 6.4.3 & 11.6.1 • CCPA / CPRA')" class="w-full py-2.5 rounded-xl bg-[#f8fafc]mber-400 hover:bg-[#f8fafc]mber-300 text-slate-950 font-black text-xs uppercase">
-                    🛡 Export RETAIL Evidence Binder
-                </button>
-            </div>
-        </div>
-    </section>
-    
-    </main>
-    
-    <!-- LEGAL & SLA FOOTER (MOD-010-AGREE) -->
-    <footer class="max-w-7xl mx-auto mt-16 pt-8 pb-12 px-4 border-t border-white/15 font-mono text-xs text-slate-400">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div>
-                <span class="text-white font-bold uppercase block mb-1">BURN-1 SYSTEMS &amp; CYBER READINESS CLINIC</span>
-                <p class="text-[11px] leading-relaxed">
-                    Non-Intrusive Outside-In Digital Reconnaissance &amp; Underwriting Evidence Architecture. Governed by Master Services Agreement <a href="legal.html" class="text-cyan-400 underline">MOD-010-AGREE</a>.
+                
+                <div id="retail-zone-title" class="text-lg font-black text-white mb-2 tracking-tight">[1] Physical POS Terminals</div>
+                <p id="retail-zone-desc" class="text-xs text-purple-200 leading-relaxed mb-6 flex-1">
+                  Point-of-Sale networks are highly susceptible to memory-scraping malware. We validate network segmentation ensuring the POS VLAN is entirely airgapped from public guest Wi-Fi and corporate email.
                 </p>
+                
+                <div class="bg-black/60 p-4 rounded-xl border border-[--burnt-orange]/50 text-xs space-y-3 text-slate-300">
+                  <div class="text-[--light-orange] font-bold mb-2 uppercase tracking-widest border-b border-[--burnt-orange]/30 pb-1">Compliance Validation</div>
+                  <div class="flex justify-between">
+                    <span>PCI-DSS Req:</span> <span id="metric-pci" class="text-white font-bold">Req 1.2 (Segmentation)</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Malware Risk:</span> <span id="metric-risk" class="text-[--neon-purple] font-bold">ISOLATED</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Audit Status:</span> <span id="metric-status" class="text-emerald-400 font-bold">SEALED</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-                <span class="text-white font-bold uppercase block mb-1">DOWNLOADABLE GUIDES (downloads/)</span>
-                <ul class="space-y-1 text-[11px]">
-                    <li><a href="downloads/zero-cost-mfa-setup-guide.md" download class="hover:text-emerald-400 underline">downloads/zero-cost-mfa-setup-guide.md</a></li>
-                    <li><a href="downloads/cyber-insurance-evidence-binder-v2.md" download class="hover:text-cyan-400 underline">downloads/cyber-insurance-evidence-binder-v2.md</a></li>
-                    <li><a href="downloads/zero-cost-immutable-backups-guide.md" download class="hover:text-amber-400 underline">downloads/zero-cost-immutable-backups-guide.md</a></li>
-                    <li><a href="downloads/downloads_site_pages_bundle.zip" download class="hover:text-purple-400 underline font-bold">downloads/downloads_site_pages_bundle.zip</a></li>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PRICING TIERS: Flip Cards -->
+    <!-- ============ PRICING v5: B U R N -1 ============ -->
+    <div id="pricing" class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-300 shadow-md mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b-2 border-slate-100 pb-4">
+        <div>
+          <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Assessment Packages</h2>
+          <p class="text-sm text-slate-600 font-bold mt-1">Five tiers. Click a card to see price, contents, and launch.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 items-start">
+
+        <!-- ===== B — Beginner ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Beginner tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">B</span>
+                <span class="b1-tier">Beginner</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Beginner · Free Mini S.P.A.</h3>
+                <div class="text-3xl font-black text-white my-2">$0</div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Non-intrusive surface scan</li>
+                  <li>✓ Gaps shown, remediation greyed out</li>
+                  <li>✓ No install, no credit card</li>
                 </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=retail&tier=free" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Run free scan</a>
             </div>
-            <div>
-                <span class="text-white font-bold uppercase block mb-1">INDEPENDENT PARTNER DISCLOSURE</span>
-                <p class="text-[11px] leading-relaxed">
-                    Intrusive penetration testing, active incident response, and Tier-3 red-team engagements are referred to independent partner <strong>Anergi.io</strong> (<a href="yelle.html" class="text-amber-400 underline">Anergi Vault</a>) under separate Statement of Work.
-                </p>
-            </div>
+          </div>
         </div>
-        <div class="pt-4 border-t border-white/10 flex flex-wrap justify-between items-center gap-2 text-[11px]">
-            <span>&copy; 2026 Burn One Systems &bull; Path: <code>downloads/retail.html</code></span>
-            <div class="flex gap-4">
-                <a href="index.html" class="hover:text-white underline">Suite Index</a>
-                <a href="legal.html" class="hover:text-white underline">Legal &amp; SLAs</a>
-                <a href="lab.html" class="hover:text-white underline">The Lab &amp; Directory</a>
-                <a href="clinic.html?industry=retail" class="hover:text-emerald-400 underline">Full Clinic Workbench</a>
+
+        <!-- ===== U — Urgent ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Urgent tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter accent">U</span>
+                <span class="b1-tier">Urgent</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
             </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Urgent · Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$750</div>
+                <p class="text-[11px] text-cyan-400 font-bold mb-2">$500 academy price</p>
+                <ul class="text-[11px] text-slate-300 space-y-1.5">
+                  <li>✓ Scan + questionnaire + generated binder</li>
+                  <li>✓ Baseline framework mapping</li>
+                  <li>✗ Not human-reviewed</li>
+                  <li>✗ Not sealed</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=retail&tier=binder" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-slate-200 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get the binder</a>
+            </div>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        function saveCurrentPageToDownloads(filename) {
-            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+        <!-- ===== R — Remediation (most chosen) ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Remediation tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-cyan-500 bg-slate-950">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-b-md z-20">Most chosen</div>
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-cyan-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">R</span>
+                <span class="b1-tier">Remediation</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-cyan-500 text-slate-900 border-2 border-cyan-400">
+              <div>
+                <h3 class="text-xs font-black text-cyan-900 uppercase tracking-widest">Remediation · Verified Binder</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$1,000<span class="text-sm font-bold text-cyan-800">/yr</span></div>
+                <ul class="text-[11px] text-cyan-950 font-bold space-y-1.5 mt-3">
+                  <li>✓ 1 domain, binder + human review</li>
+                  <li>✓ Cyber Seal by Anergi.io</li>
+                  <li>✓ Quarterly rescans</li>
+                  <li>✓ The evidence your carrier accepts</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=retail&tier=verified" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get verified</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== N — Networking ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Networking tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-emerald-500 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-emerald-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter" style="color:#34d399;text-shadow:0 0 30px rgba(52,211,153,.6),0 4px 12px rgba(0,0,0,.6)">N</span>
+                <span class="b1-tier">Networking</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-emerald-600 text-white border-2 border-emerald-500">
+              <div>
+                <h3 class="text-xs font-black text-emerald-100 uppercase tracking-widest">Networking · Multi-Domain</h3>
+                <div class="text-3xl font-black text-white my-2">$2,500<span class="text-sm font-bold text-emerald-200">/yr</span></div>
+                <ul class="text-[11px] text-emerald-50 space-y-1.5 mt-3">
+                  <li>✓ Up to 5 domains</li>
+                  <li>✓ Consolidated eBinder</li>
+                  <li>✓ Unlimited SLM rescans</li>
+                  <li>✓ Sealed on every domain</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=retail&tier=multi" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get multi-domain</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== -1 — Enterprise ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Enterprise tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-[#D92B8A] bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-[#2A081C]/80"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter pink">-1</span>
+                <span class="b1-tier">Enterprise</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-[#D92B8A]">
+              <div>
+                <h3 class="text-xs font-black text-[#D92B8A] uppercase tracking-widest">Enterprise · Up to 15 domains</h3>
+                <div class="text-3xl font-black text-white my-2">$5,000<span class="text-sm font-bold text-pink-300">/yr</span></div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Consolidated eBinder, 15 domains</li>
+                  <li>✓ Custom executive scorecards</li>
+                  <li>✓ Named human review contact</li>
+                  <li>✓ Carrier questionnaire walk-through</li>
+                  <li>✓ Priority review</li>
+                </ul>
+              </div>
+              <a href="mailto:hello@burn-1.com?subject=Enterprise%20binder%20quote" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Request quote →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Interactive Retail Toplogy Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hotspots = document.querySelectorAll('.signal-hotspot');
+      const titleEl = document.getElementById('retail-zone-title');
+      const descEl = document.getElementById('retail-zone-desc');
+      
+      const metricPci = document.getElementById('metric-pci');
+      const metricRisk = document.getElementById('metric-risk');
+      const metricStatus = document.getElementById('metric-status');
+
+      const zoneData = {
+        'pos': {
+          title: '[1] Physical POS Terminals',
+          desc: 'Point-of-Sale networks are highly susceptible to memory-scraping malware. We validate network segmentation ensuring the POS VLAN is entirely airgapped from public guest Wi-Fi and corporate email.',
+          pci: 'Req 1.2 (Segmentation)',
+          risk: 'ISOLATED',
+          riskColor: 'text-[--neon-purple]',
+          status: 'SEALED',
+          statusColor: 'text-emerald-400'
+        },
+        'gateway': {
+          title: '[2] E-Commerce Payment Gateway',
+          desc: 'Checkout pages are targeted by Magecart and e-skimmers. Our APEA scan verifies TLS 1.3 encryption and strict Content-Security-Policy (CSP) headers to prevent malicious script injection.',
+          pci: 'Req 4.2 (Encryption)',
+          risk: 'TLS 1.3 ACTIVE',
+          riskColor: 'text-emerald-400',
+          status: 'SECURE',
+          statusColor: 'text-emerald-400'
+        },
+        'inventory': {
+          title: '[3] Inventory & Supply Chain ERP',
+          desc: 'Supply chain systems are the backdoor to retail networks. We scan the perimeter for exposed RDP or SMB ports that ransomware gangs exploit to halt your physical logistics operations.',
+          pci: 'Req 2.2 (Hardening)',
+          risk: '0 EXPOSED PORTS',
+          riskColor: 'text-emerald-400',
+          status: 'VERIFIED',
+          statusColor: 'text-emerald-400'
+        },
+        'loyalty': {
+          title: '[4] Customer Loyalty / CRM Database',
+          desc: 'Customer PII (Personally Identifiable Information) databases carry immense liability (GDPR/CCPA/Class-Action). We validate that database perimeters are completely invisible to the public internet.',
+          pci: 'Req 3.4 (Data Rest)',
+          risk: 'UNROUTABLE',
+          riskColor: 'text-[--neon-purple]',
+          status: 'PROTECTED',
+          statusColor: 'text-emerald-400'
         }
+      };
 
-        function runSectorMicroScan(industry) {
-            const domInput = document.getElementById("dock-scan-domain");
-            const out = document.getElementById("dock-scan-output");
-            const domain = (domInput && domInput.value.trim()) ? domInput.value.trim() : "burn-1.com";
-            if (!out) return;
-            out.innerHTML = `<span class="text-amber-300">[SCANNING]</span> Passive outside-in DNS/TLS/Header probe on <strong>${domain}</strong> (${industry.toUpperCase()} lens)...`;
-            setTimeout(() => {
-                const score = domain.includes("burn-1") ? 94 : 78;
-                out.innerHTML = `
-                    <div class="space-y-1">
-                        <div><span class="text-emerald-400 font-bold">✓ PASSIVE SCAN COMPLETE:</span> <strong>${domain}</strong> &bull; Readiness Score: <strong>${score}/100</strong></div>
-                        <div class="text-slate-300">TLS 1.3: <span class="text-emerald-400">PASS</span> | HSTS: <span class="text-emerald-400">PASS</span> | DMARC: <span class="text-amber-300">VERIFY p=reject</span> | Sector Lens: <span class="text-cyan-300">${industry.toUpperCase()}</span></div>
-                    </div>
-                `;
-            }, 550);
-        }
+      hotspots.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Reset all
+          hotspots.forEach(b => b.classList.remove('active'));
+          // Set active
+          btn.classList.add('active');
 
-        function exportSectorBinder(industry, title, frameworks) {
-            let credits = 0;
-            try {
-                const z = JSON.parse(localStorage.getItem("cyber-hygiene-protocol-v1") || "null");
-                const c = JSON.parse(localStorage.getItem("burn1_clinic_v1") || "null");
-                if (z && typeof z.credits === "number") credits = Math.max(credits, z.credits);
-                if (c && typeof c.credits === "number") credits = Math.max(credits, c.credits);
-            } catch (e) {}
-            const payload = {
-                dossier: "BURN-1 CYBER INSURANCE EVIDENCE BINDER V2",
-                msa: "MOD-010-AGREE",
-                industrySlug: industry,
-                industryTitle: title,
-                regulatoryFrameworks: frameworks,
-                earnedCredits: credits,
-                maxCredits: 120,
-                carrierMatrix: ["Chubb Cyber Enterprise Risk", "Travelers CyberRisk Item 4C/6A", "Coalition Active Posture", "Beazley Breach Response"],
-                generatedAt: new Date().toISOString(),
-                sha256Seal: "8A1907CB249DF1E38902AA710499C4187E601C33800B"
-            };
-            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = `Evidence_Binder_v2_${industry}_${Date.now()}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        window.addEventListener("DOMContentLoaded", () => {
-            try {
-                let credits = 0;
-                const z = JSON.parse(localStorage.getItem("cyber-hygiene-protocol-v1") || "null");
-                const c = JSON.parse(localStorage.getItem("burn1_clinic_v1") || "null");
-                if (z && typeof z.credits === "number") credits = Math.max(credits, z.credits);
-                if (c && typeof c.credits === "number") credits = Math.max(credits, c.credits);
-                const crEl = document.getElementById("dock-credits");
-                const netEl = document.getElementById("dock-net-price");
-                if (crEl) crEl.textContent = `${credits} / 120 CR`;
-                if (netEl) netEl.textContent = `$${Math.max(130, 250 - credits)} / $${Math.max(380, 500 - credits)}`;
-            } catch (e) {}
+          // Update Panel
+          const target = btn.getAttribute('data-target');
+          const data = zoneData[target];
+          
+          if(data) {
+            titleEl.innerHTML = data.title;
+            descEl.innerHTML = data.desc;
+            
+            metricPci.innerHTML = data.pci;
+            
+            metricRisk.innerHTML = data.risk;
+            metricRisk.className = `font-bold ${data.riskColor}`;
+            
+            metricStatus.innerHTML = data.status;
+            metricStatus.className = `font-bold ${data.statusColor}`;
+          }
         });
-    </script>
-    
-    <script src="assets/burn1_onboarding_modal.js" defer></script>
+      });
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll('.b1-card').forEach(card => {
+      const toggle = (e) => {
+        if (e && e.target && e.target.closest('a,button')) return;
+        card.classList.toggle('is-flipped');
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('is-flipped');
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

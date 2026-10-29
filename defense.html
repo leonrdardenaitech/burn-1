@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,20 +9,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
+    :root {
+      --def-black: #030005;
+      --def-purple: #7e22ce;
+      --def-neon: #c084fc;
+      --def-silver: #94a3b8;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #000000;
-      /* Deep Black with Purple/Silver CSS Grid Overlay */
+      background-color: var(--def-black);
+      /* Imperfect Security Grid over Randomized Circuit Texture */
       background-image: 
-        linear-gradient(rgba(168, 85, 247, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168, 85, 247, 0.15) 1px, transparent 1px),
-        radial-gradient(circle at 50% 30%, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
-      background-size: 40px 40px, 40px 40px, 100% 100%;
+        linear-gradient(rgba(126, 34, 206, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 34, 206, 0.15) 1px, transparent 1px),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234c1d95' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-size: 50px 50px, 50px 50px, 120px 120px;
       background-attachment: fixed;
       color: #e2e8f0;
     }
+    
     .font-mono { font-family: 'JetBrains Mono', monospace; }
     .font-hud { font-family: 'Orbitron', sans-serif; }
+    .font-tech { font-family: 'Share Tech Mono', monospace; }
 
     /* Top Unibar Navigation */
     .grey-unibar {
@@ -39,6 +48,7 @@
       color: #0f172a;
       border: 1px solid #64748b;
       box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
+      border-radius: 0.5rem;
     }
     .nav-pill-idle:hover {
       background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
@@ -46,21 +56,25 @@
     }
     .nav-pill-active {
       background: linear-gradient(180deg, #000000 0%, #1a0b2e 100%);
-      color: #c084fc;
-      border: 1px solid #a855f7;
+      color: var(--def-neon);
+      border: 1px solid var(--def-purple);
       box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+      border-radius: 0.5rem;
     }
 
-    /* CSS Radar/Globe Widget */
+    /* Supersized CSS Radar / Globe Widget */
     .radar-container {
       position: relative;
-      width: 200px;
-      height: 200px;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
-      border: 2px solid rgba(168, 85, 247, 0.4);
-      background: repeating-radial-gradient(transparent, transparent 15px, rgba(168, 85, 247, 0.1) 16px, transparent 17px);
+      border: 2px solid rgba(168, 85, 247, 0.6);
+      background: 
+        repeating-radial-gradient(transparent, transparent 25px, rgba(168, 85, 247, 0.15) 26px, transparent 27px),
+        url('https://images.unsplash.com/photo-1584291527908-033f4d6542c8?auto=format&fit=crop&q=80') center/cover;
+      background-blend-mode: overlay;
       overflow: hidden;
-      box-shadow: inset 0 0 30px rgba(168, 85, 247, 0.2);
+      box-shadow: 0 0 40px rgba(126, 34, 206, 0.4), inset 0 0 50px rgba(0,0,0,0.8);
     }
     .radar-container::after {
       content: '';
@@ -69,114 +83,413 @@
       left: 50%;
       width: 100%;
       height: 100%;
-      background: conic-gradient(from 0deg, transparent 70%, rgba(168, 85, 247, 0.8) 100%);
+      background: conic-gradient(from 0deg, transparent 75%, rgba(192, 132, 252, 0.9) 100%);
       transform-origin: 0 0;
-      animation: scan 4s linear infinite;
+      animation: scan 3s linear infinite;
+    }
+    .radar-crosshair {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: 
+        linear-gradient(90deg, transparent 49.5%, rgba(192,132,252,0.5) 50%, transparent 50.5%),
+        linear-gradient(0deg, transparent 49.5%, rgba(192,132,252,0.5) 50%, transparent 50.5%);
+      z-index: 10;
     }
     @keyframes scan {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    
-    .privacy-card:hover img {
-      filter: grayscale(0) brightness(1.2);
+
+    /* Tactical Panels */
+    .def-pane {
+      background: rgba(10, 2, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(126, 34, 206, 0.4);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(126, 34, 206, 0.1);
     }
+
+    /* Stat Bar Animations */
+    .stat-bar { height: 100%; border-radius: 2px; }
+    .stat-fill-1 { width: 92%; background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+    .stat-fill-2 { width: 78%; background: #f97316; box-shadow: 0 0 10px #f97316; }
+    .stat-fill-3 { width: 45%; background: #c084fc; box-shadow: 0 0 10px #c084fc; }
+
+    /* Tier Infographic Colors */
+    .tier-1 { border-left-color: #ef4444; background: linear-gradient(90deg, rgba(239,68,68,0.1), transparent); }
+    .tier-2 { border-left-color: #f97316; background: linear-gradient(90deg, rgba(249,115,22,0.1), transparent); }
+    .tier-3 { border-left-color: #eab308; background: linear-gradient(90deg, rgba(234,179,8,0.1), transparent); }
+    .tier-4 { border-left-color: #94a3b8; background: linear-gradient(90deg, rgba(148,163,184,0.1), transparent); }
+  
+    /* Shared Card CSS */
+    .b1-card { position: relative; border-radius: 1rem; cursor: pointer; touch-action: manipulation; perspective: 1200px; }
+    .b1-card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1); }
+    .b1-card.is-flipped .b1-card-inner { transform: rotateY(180deg); }
+    @media (hover: hover) and (pointer: fine) { .b1-card:hover .b1-card-inner { transform: rotateY(180deg); } }
+    .b1-face { position: relative; width: 100%; min-height: 380px; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .b1-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: rotateY(180deg); }
+    .b1-letter { font-family: 'Orbitron', 'Inter', sans-serif; font-weight: 900; font-size: 6rem; line-height: 1; letter-spacing: -0.02em; color: #ffffff; text-shadow: 0 0 30px rgba(6,182,212,0.45), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.accent { color: #f26522; text-shadow: 0 0 30px rgba(242,101,34,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.pink { color: #D92B8A; text-shadow: 0 0 30px rgba(217,43,138,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-tier { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; color: #cbd5e1; margin-top: 1rem; }
+    .b1-cue { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #06b6d4; margin-top: 1.25rem; animation: b1pulse 2s ease-in-out infinite; }
+    @keyframes b1pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (max-width: 640px) { .b1-letter { font-size: 4.5rem; } .b1-face { min-height: 320px; } }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
 
+  <!-- HEADER -->
   <header class="grey-unibar sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center gap-3">
-        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
+        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Systems Logo" class="w-10 h-10 rounded-xl object-cover border border-slate-500 shadow-md">
         <div>
-          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
-          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Defense Module â€¢ <span class="text-purple-700 font-bold">CMMC Shield</span></div>
+          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase" style="font-family: 'Plus Jakarta Sans', sans-serif;">Cyber Readiness Clinic</div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Defense Module • <span class="text-purple-700 font-bold">Posture Shield</span></div>
         </div>
       </div>
-            <div class="flex flex-wrap items-center gap-2">
-        <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
-        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Enter Clinic Checkout &rarr;</a>
-      </div>
+      
     </div>
     <div class="grey-unibar-sub">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-2 overflow-x-auto">
-        <a href="index.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
-        <a href="cinematic-onboarding.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Cinematic Onboarding</a>
-        <a href="defense.html" class="nav-pill nav-pill-active px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense & Gov</a>
-        <a href="tools.html" class="nav-pill nav-pill-idle px-4 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Helpdesk & Tools</a>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="defense.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense</a>
+        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
+        <a href="cinematic-onboarding.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Guided Intake</a>
+        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
       </div>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex-1 relative z-10">
 
-    <!-- HERO SECTION -->
-    <div class="bg-black/60 backdrop-blur-md rounded-3xl border border-purple-500/30 shadow-[0_0_50px_rgba(168,85,247,0.15)] mb-12 p-8 sm:p-12 flex flex-col md:flex-row items-center gap-10">
-      <div class="flex-1">
-        <span class="inline-block px-3 py-1 rounded bg-purple-900/40 border border-purple-500/40 text-purple-300 font-mono text-xs font-bold uppercase tracking-widest mb-4 w-max">
-          CMMC 2.0 â€¢ Non-Intrusive Audits
+    <!-- THE HOOK & GLOBAL RADAR HERO -->
+    <div class="def-pane rounded-3xl mb-12 p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded bg-purple-900/40 border border-purple-500/40 text-purple-300 font-tech text-xs font-bold uppercase tracking-widest mb-6">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+          Adversarial Exposure Management
         </span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
-          Secure the supply chain. <br><span class="text-purple-400">Maintain your clearance.</span>
+        
+        <h1 class="text-4xl sm:text-6xl font-black tracking-tighter leading-none text-white mb-6 uppercase">
+          A Blind Spot is a <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">Breach Waiting to Happen.</span>
         </h1>
-        <p class="text-slate-400 text-sm sm:text-base font-medium mt-4 leading-relaxed max-w-xl">
-          Third-party vendor risk is the primary vector for nation-state breaches. Deploy zero-touch <strong>Automated Posture Exposure Assessments (APEA)</strong> to generate verifiable, redacted cryptographic proof of your CMMC/ITAR perimeter without exposing classified networks.
+        
+        <p class="text-slate-300 text-sm sm:text-base font-medium leading-relaxed max-w-xl mb-6">
+          Compliance checkboxes don't stop nation-state actors. Relying solely on internal IT to grade your own security is a fatal conflict of interest. You need an objective, third-party <strong>Automated Posture Exposure Assessment (APEA)</strong> to generate graded, verifiable evidence of your actual perimeter strength.
         </p>
-        <button class="mt-8 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold font-mono text-xs uppercase tracking-widest rounded-xl transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)]">
-          Provision Security Vault
-        </button>
+
+        <div class="flex gap-4">
+          <div class="px-4 py-2 border-l-2 border-purple-500 bg-black/50 font-tech text-xs text-slate-400">
+            <span class="block text-white font-bold text-sm">Beyond Renewal</span>
+            Continuous Survivability
+          </div>
+          <div class="px-4 py-2 border-l-2 border-purple-500 bg-black/50 font-tech text-xs text-slate-400">
+            <span class="block text-white font-bold text-sm">Graded Evidence</span>
+            Zero-Trust Verification
+          </div>
+        </div>
       </div>
       
-      <!-- CSS Radar Widget -->
-      <div class="shrink-0 relative flex items-center justify-center">
-        <div class="absolute inset-0 bg-purple-600 blur-3xl opacity-20 rounded-full"></div>
-        <div class="radar-container bg-black z-10 flex items-center justify-center">
-          <i class="fa-solid fa-globe text-6xl text-purple-500/40 absolute z-0"></i>
-          <span class="relative z-20 font-mono text-[9px] text-purple-300 font-bold bg-black/60 px-2 py-1 rounded border border-purple-900">SCANNING 3RD-PARTY PIVOTS</span>
+      <!-- Supersized Global Radar Widget -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="radar-container">
+          <div class="radar-crosshair"></div>
+          <!-- Target blips -->
+          <div class="absolute w-2 h-2 bg-rose-500 rounded-full top-[30%] left-[60%] shadow-[0_0_10px_#ef4444] animate-ping z-20"></div>
+          <div class="absolute w-2 h-2 bg-amber-500 rounded-full bottom-[40%] left-[30%] shadow-[0_0_10px_#f59e0b] animate-ping z-20" style="animation-delay: 1s;"></div>
         </div>
       </div>
     </div>
 
-    <!-- THE SHOWCASE: 4-Grid Image Emphasis on Privacy -->
-    <div class="mb-12">
-      <h2 class="text-2xl font-black text-white uppercase tracking-widest mb-6 border-b border-purple-900/50 pb-3">The Defense Showcase Package</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- DEFENSE PLUS TEASER (No Pricing) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+      <div class="lg:col-span-4 def-pane rounded-2xl p-8 relative overflow-hidden flex flex-col justify-center">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600 blur-[80px] opacity-30 pointer-events-none"></div>
+        <h3 class="font-hud text-2xl text-white mb-2">Defense <span class="text-purple-400">+</span></h3>
+        <p class="text-xs font-tech text-slate-400 mb-6 uppercase tracking-widest border-b border-purple-900/50 pb-2">The Need for an Outside Opinion</p>
         
-        <!-- Showcase 1 -->
-        <div class="privacy-card group relative h-64 rounded-2xl overflow-hidden border border-purple-900/40 bg-black cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80" alt="Encrypted Node" class="w-full h-full object-cover opacity-40 mix-blend-luminosity grayscale transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-            <h3 class="text-xl font-bold text-white mb-1"><i class="fa-solid fa-user-secret text-purple-500 mr-2"></i>Non-Intrusive Scanning</h3>
-            <p class="text-xs text-slate-400 font-mono">We map external threat vectors passively. Zero deployed agents, zero network disruption, absolute privacy.</p>
+        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+          Internal IT teams are built to keep systems running, not to break them. When the same team that builds your network is tasked with auditing it, critical vulnerabilities are overlooked. 
+        </p>
+        <p class="text-sm text-slate-300 leading-relaxed mb-8">
+          <strong>Defense Plus</strong> provides the adversarial perspective. We act as an objective, third-party aggressor, delivering brutally honest, graded evidence of your supply chain and perimeter exposure before a real adversary finds it.
+        </p>
+        
+        <button class="w-full py-3 border border-purple-500 text-purple-300 font-tech font-bold tracking-widest hover:bg-purple-600 hover:text-white transition-colors">
+          REQUEST CAPABILITY BRIEF
+        </button>
+      </div>
+
+      <!-- STATS & CHARTS: Why APEA is needed beyond insurance -->
+      <div class="lg:col-span-8 def-pane rounded-2xl p-8 flex flex-col justify-center">
+        <h3 class="font-hud text-xl text-white mb-6 tracking-widest">TELEMETRY: APEA vs. STANDARD COMPLIANCE</h3>
+        
+        <div class="space-y-6">
+          <!-- Stat 1 -->
+          <div>
+            <div class="flex justify-between text-xs font-tech text-slate-300 mb-2 uppercase">
+              <span>Ransomware Penetration (Self-Audited vs 3rd Party)</span>
+              <span class="text-rose-400 font-bold">92% Exploit Rate</span>
+            </div>
+            <div class="w-full h-3 bg-black rounded border border-slate-800 overflow-hidden">
+              <div class="stat-bar stat-fill-1"></div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-1 font-mono">Networks relying solely on internal self-attestation questionnaires are successfully breached 92% of the time during targeted adversarial campaigns.</p>
+          </div>
+
+          <!-- Stat 2 -->
+          <div>
+            <div class="flex justify-between text-xs font-tech text-slate-300 mb-2 uppercase">
+              <span>Third-Party Vendor / Supply Chain Risk</span>
+              <span class="text-amber-400 font-bold">78% Blind Spot</span>
+            </div>
+            <div class="w-full h-3 bg-black rounded border border-slate-800 overflow-hidden">
+              <div class="stat-bar stat-fill-2"></div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-1 font-mono">Standard compliance checks fail to map deep downstream contractor access, leaving massive undocumented lateral pivot points.</p>
+          </div>
+
+          <!-- Stat 3 -->
+          <div>
+            <div class="flex justify-between text-xs font-tech text-slate-300 mb-2 uppercase">
+              <span>APEA Continuous Survivability Rate</span>
+              <span class="text-purple-400 font-bold">Objective Defense</span>
+            </div>
+            <div class="w-full h-3 bg-black rounded border border-slate-800 overflow-hidden">
+              <div class="stat-bar stat-fill-3"></div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-1 font-mono">Organizations utilizing continuous third-party APEA scans maintain persistent awareness of perimeter drift, far exceeding annual insurance baseline requirements.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE INFOGRAPHIC: OBJECTIVE RISK EXPOSURE TIERS -->
+    <div class="def-pane rounded-3xl p-8 sm:p-12 mb-12">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-black text-white uppercase tracking-tight">Objective Risk Exposure Profiling</h2>
+        <p class="text-sm font-tech text-purple-300 mt-2 max-w-2xl mx-auto">
+          Industries are grouped into tiers based on their objective risk exposure, operational dependencies, and the financial severity of potential security incidents.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- Tier 1 -->
+        <div class="border-l-4 p-5 rounded-r-xl tier-1 border-y border-r border-slate-800/50 backdrop-blur-sm relative group">
+          <div class="absolute right-4 top-4 text-rose-500/20 text-5xl font-black opacity-30 group-hover:opacity-100 transition-opacity">01</div>
+          <h3 class="text-lg font-black text-rose-400 uppercase tracking-widest mb-1">Tier 1: Highest Need</h3>
+          <div class="text-xs font-tech text-slate-400 mb-3 uppercase">Severe Financial & Regulatory Exposure</div>
+          <p class="text-sm text-slate-300 leading-relaxed font-medium mb-3">
+            Sectors in this tier experience the highest frequency of targeted attacks and face catastrophic operational or regulatory consequences from a breach.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><strong class="text-slate-200">Healthcare & Life Sciences:</strong> Most financially vulnerable due to the black-market value of PHI. Strict HIPAA enforcement and direct threats to patient safety (locked medical machinery) make cyber insurance an operational necessity.</li>
+            <li><strong class="text-slate-200">Banking, Financial Services, & Insurance (BFSI):</strong> Primary custodians of liquid capital facing intense regulatory oversight (SEC) requiring high-limit liability coverage against systemic wire fraud.</li>
+            <li><strong class="text-slate-200">Technology, SaaS, & IT Providers:</strong> Prime targets for devastating supply-chain attacks. Legally required by enterprise B2B clients to maintain active Tech E&O policies.</li>
+          </ul>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="border-l-4 p-5 rounded-r-xl tier-2 border-y border-r border-slate-800/50 backdrop-blur-sm relative group">
+          <div class="absolute right-4 top-4 text-orange-500/20 text-5xl font-black opacity-30 group-hover:opacity-100 transition-opacity">02</div>
+          <h3 class="text-lg font-black text-orange-400 uppercase tracking-widest mb-1">Tier 2: Elevated Need</h3>
+          <div class="text-xs font-tech text-slate-400 mb-3 uppercase">High Operational & Supply Chain Risk</div>
+          <p class="text-sm text-slate-300 leading-relaxed font-medium mb-3">
+            Primarily targeted for operational disruption rather than data theft, where system downtime causes immediate, compounding financial losses.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><strong class="text-slate-200">Manufacturing & Critical Infrastructure:</strong> OT and IT convergence makes plants prime ransomware targets. Downtime can cost $125,000/hour, demanding specialized Business Interruption (BI) coverage.</li>
+            <li><strong class="text-slate-200">Retail & E-Commerce:</strong> High exposure to PCI data breaches, merchant fraud, and class-action lawsuits following point-of-sale data leaks.</li>
+            <li><strong class="text-slate-200">Professional Services (Legal, Accounting):</strong> Handle highly confidential contracts and escrow funds. High adoption due to targeted Business Email Compromise (BEC) schemes.</li>
+          </ul>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="border-l-4 p-5 rounded-r-xl tier-3 border-y border-r border-slate-800/50 backdrop-blur-sm relative group">
+          <div class="absolute right-4 top-4 text-yellow-500/20 text-5xl font-black opacity-30 group-hover:opacity-100 transition-opacity">03</div>
+          <h3 class="text-lg font-black text-yellow-400 uppercase tracking-widest mb-1">Tier 3: Moderate Need</h3>
+          <div class="text-xs font-tech text-slate-400 mb-3 uppercase">Distributed Risk Profiles</div>
+          <p class="text-sm text-slate-300 leading-relaxed font-medium mb-3">
+            These industries face cyber risks but generally experience lower immediate regulatory fines or less severe operational dependency on real-time data networks.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><strong class="text-slate-200">Logistics & Transportation:</strong> Disruptions hit fleet routing, but lower PII holdings shift insurance focus to localized business interruption.</li>
+            <li><strong class="text-slate-200">Higher Education & Academia:</strong> Hold vast student PII and research IP, but decentralized network structures and lower regulatory fines place them in a moderate tier.</li>
+            <li><strong class="text-slate-200">Construction & Real Estate:</strong> Targeted by wire fraud during property closures, but day-to-day operations are less dependent on continuous network uptime.</li>
+          </ul>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="border-l-4 p-5 rounded-r-xl tier-4 border-y border-r border-slate-800/50 backdrop-blur-sm relative group">
+          <div class="absolute right-4 top-4 text-slate-500/20 text-5xl font-black opacity-30 group-hover:opacity-100 transition-opacity">04</div>
+          <h3 class="text-lg font-black text-slate-300 uppercase tracking-widest mb-1">Tier 4: Lowest Relative Need</h3>
+          <div class="text-xs font-tech text-slate-400 mb-3 uppercase">Minimal Data & Digital Dependency</div>
+          <p class="text-sm text-slate-300 leading-relaxed font-medium mb-3">
+            While no modern business is entirely free from cyber risk, these sectors have the lowest relative demand due to limited data footprints and lower cloud reliance.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><strong class="text-slate-200">Local Hospitality & Food Service:</strong> Risk is typically offloaded entirely to third-party payment processors (Square/Clover), minimizing direct digital attack surfaces.</li>
+            <li><strong class="text-slate-200">Agriculture & Mining:</strong> Core operations (farming, raw extraction) remain largely physical and less reliant on centralized IT data networks, resulting in lower insurance adoption rates.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+      <!-- ============ PRICING v5: B U R N -1 ============ -->
+    <div id="pricing" class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-300 shadow-md mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b-2 border-slate-100 pb-4">
+        <div>
+          <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Assessment Packages</h2>
+          <p class="text-sm text-slate-600 font-bold mt-1">Five tiers. Click a card to see price, contents, and launch.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 items-start">
+
+        <!-- ===== B — Beginner ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Beginner tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">B</span>
+                <span class="b1-tier">Beginner</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Beginner · Free Mini S.P.A.</h3>
+                <div class="text-3xl font-black text-white my-2">$0</div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Non-intrusive surface scan</li>
+                  <li>✓ Gaps shown, remediation greyed out</li>
+                  <li>✓ No install, no credit card</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=defense&tier=free" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Run free scan</a>
+            </div>
           </div>
         </div>
 
-        <!-- Showcase 2 -->
-        <div class="privacy-card group relative h-64 rounded-2xl overflow-hidden border border-purple-900/40 bg-black cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80" alt="Server Hardware" class="w-full h-full object-cover opacity-40 mix-blend-luminosity grayscale transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-            <h3 class="text-xl font-bold text-white mb-1"><i class="fa-solid fa-link-slash text-purple-500 mr-2"></i>Vendor Pivot Risk</h3>
-            <p class="text-xs text-slate-400 font-mono">Prime contractors demand proof. Our Evidence Binders instantly map your posture to DoD supply chain mandates.</p>
+        <!-- ===== U — Urgent ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Urgent tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter accent">U</span>
+                <span class="b1-tier">Urgent</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Urgent · Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$750</div>
+                <p class="text-[11px] text-cyan-400 font-bold mb-2">$500 academy price</p>
+                <ul class="text-[11px] text-slate-300 space-y-1.5">
+                  <li>✓ Scan + questionnaire + generated binder</li>
+                  <li>✓ Baseline framework mapping</li>
+                  <li>✗ Not human-reviewed</li>
+                  <li>✗ Not sealed</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=defense&tier=binder" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-slate-200 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get the binder</a>
+            </div>
           </div>
         </div>
 
-        <!-- Showcase 3 -->
-        <div class="privacy-card group relative h-64 rounded-2xl overflow-hidden border border-purple-900/40 bg-black cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1614064641913-6b71a2ea6898?auto=format&fit=crop&q=80" alt="Redacted Documents" class="w-full h-full object-cover opacity-40 mix-blend-luminosity grayscale transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-            <h3 class="text-xl font-bold text-white mb-1"><i class="fa-solid fa-file-shield text-purple-500 mr-2"></i>Redacted Evidence Vaults</h3>
-            <p class="text-xs text-slate-400 font-mono">Your `/vault` URL is cryptographically sealed. Distribute clean, redacted compliance reports securely to auditors.</p>
+        <!-- ===== R — Remediation (most chosen) ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Remediation tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-cyan-500 bg-slate-950">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-b-md z-20">Most chosen</div>
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-cyan-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">R</span>
+                <span class="b1-tier">Remediation</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-cyan-500 text-slate-900 border-2 border-cyan-400">
+              <div>
+                <h3 class="text-xs font-black text-cyan-900 uppercase tracking-widest">Remediation · Verified Binder</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$1,000<span class="text-sm font-bold text-cyan-800">/yr</span></div>
+                <ul class="text-[11px] text-cyan-950 font-bold space-y-1.5 mt-3">
+                  <li>✓ 1 domain, binder + human review</li>
+                  <li>✓ Cyber Seal by Anergi.io</li>
+                  <li>✓ Quarterly rescans</li>
+                  <li>✓ The evidence your carrier accepts</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=defense&tier=verified" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get verified</a>
+            </div>
           </div>
         </div>
 
-        <!-- Showcase 4 -->
-        <div class="privacy-card group relative h-64 rounded-2xl overflow-hidden border border-purple-900/40 bg-black cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80" alt="Secure Communications" class="w-full h-full object-cover opacity-40 mix-blend-luminosity grayscale transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-            <h3 class="text-xl font-bold text-white mb-1"><i class="fa-solid fa-satellite-dish text-purple-500 mr-2"></i>Dark Web Telemetry</h3>
-            <p class="text-xs text-slate-400 font-mono">Identify exposed credentials and proprietary blueprints floating in public domains before nation-states exploit them.</p>
+        <!-- ===== N — Networking ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Networking tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-emerald-500 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-emerald-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter" style="color:#34d399;text-shadow:0 0 30px rgba(52,211,153,.6),0 4px 12px rgba(0,0,0,.6)">N</span>
+                <span class="b1-tier">Networking</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-emerald-600 text-white border-2 border-emerald-500">
+              <div>
+                <h3 class="text-xs font-black text-emerald-100 uppercase tracking-widest">Networking · Multi-Domain</h3>
+                <div class="text-3xl font-black text-white my-2">$2,500<span class="text-sm font-bold text-emerald-200">/yr</span></div>
+                <ul class="text-[11px] text-emerald-50 space-y-1.5 mt-3">
+                  <li>✓ Up to 5 domains</li>
+                  <li>✓ Consolidated eBinder</li>
+                  <li>✓ Unlimited SLM rescans</li>
+                  <li>✓ Sealed on every domain</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=defense&tier=multi" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get multi-domain</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== -1 — Enterprise ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Enterprise tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-[#D92B8A] bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-[#2A081C]/80"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter pink">-1</span>
+                <span class="b1-tier">Enterprise</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-[#D92B8A]">
+              <div>
+                <h3 class="text-xs font-black text-[#D92B8A] uppercase tracking-widest">Enterprise · Up to 15 domains</h3>
+                <div class="text-3xl font-black text-white my-2">$5,000<span class="text-sm font-bold text-pink-300">/yr</span></div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Consolidated eBinder, 15 domains</li>
+                  <li>✓ Custom executive scorecards</li>
+                  <li>✓ Named human review contact</li>
+                  <li>✓ Carrier questionnaire walk-through</li>
+                  <li>✓ Priority review</li>
+                </ul>
+              </div>
+              <a href="mailto:hello@burn-1.com?subject=Enterprise%20binder%20quote" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Request quote →</a>
+            </div>
           </div>
         </div>
 
@@ -184,5 +497,22 @@
     </div>
 
   </main>
+
+  <script>
+    document.querySelectorAll('.b1-card').forEach(card => {
+      const toggle = (e) => {
+        if (e && e.target && e.target.closest('a,button')) return;
+        card.classList.toggle('is-flipped');
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('is-flipped');
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

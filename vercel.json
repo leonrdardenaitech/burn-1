@@ -1,178 +1,213 @@
-﻿{
-    "version":  2,
-    "cleanUrls":  true,
-    "headers":  [
-                    {
-                        "source":  "/(.*)",
-                        "headers":  [
-                                        {
-                                            "key":  "X-Frame-Options",
-                                            "value":  "SAMEORIGIN"
-                                        },
-                                        {
-                                            "key":  "X-Content-Type-Options",
-                                            "value":  "nosniff"
-                                        },
-                                        {
-                                            "key":  "Strict-Transport-Security",
-                                            "value":  "max-age=31536000; includeSubDomains; preload"
-                                        },
-                                        {
-                                            "key":  "Referrer-Policy",
-                                            "value":  "strict-origin-when-cross-origin"
-                                        }
-                                    ]
-                    }
-                ],
-    "rewrites":  [
-                     {
-                         "source":  "/",
-                         "has":  [
-                                     {
-                                         "type":  "host",
-                                         "value":  "^(www\\.)?burn-1\\.com$"
-                                     }
-                                 ],
-                         "destination":  "/index.html"
-                     },
-                     {
-                         "source":  "/",
-                         "has":  [
-                                     {
-                                         "type":  "host",
-                                         "value":  "^phase25\\.burn-1\\.com$"
-                                     }
-                                 ],
-                         "destination":  "/phase25.html"
-                     },
-                     {
-                         "source":  "/",
-                         "has":  [
-                                     {
-                                         "type":  "host",
-                                         "value":  "^jasonkuts\\.burn-1\\.com$"
-                                     }
-                                 ],
-                         "destination":  "/cards/jasonkuts.html"
-                     },
-                     {
-                         "source":  "/",
-                         "has":  [
-                                     {
-                                         "type":  "host",
-                                         "value":  "^(?!(www|phase25)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
-                                     }
-                                 ],
-                         "destination":  "/cards/:subdomain.html"
-                     },
-                     {
-                         "source":  "/directory",
-                         "destination":  "/directory.html"
-                     },
-                     {
-                         "source":  "/mal",
-                         "destination":  "/cards/malwdarazor.html"
-                     },
-                     {
-                         "source":  "/malwdarazor",
-                         "destination":  "/cards/malwdarazor.html"
-                     },
-                     {
-                         "source":  "/jasonkuts",
-                         "destination":  "/cards/jasonkuts.html"
-                     },
-                     {
-                         "source":  "/phase25",
-                         "destination":  "/phase25.html"
-                     },
-                     {
-                         "source":  "/academy",
-                         "destination":  "/academy.html"
-                     },
-                     {
-                         "source":  "/cinematic-onboarding",
-                         "destination":  "/cinematic-onboarding.html"
-                     },
-                     {
-                         "source":  "/onboarding",
-                         "destination":  "/cinematic-onboarding.html"
-                     },
-                     {
-                         "source":  "/healthcare",
-                         "destination":  "/healthcare.html"
-                     },
-                     {
-                         "source":  "/it",
-                         "destination":  "/it.html"
-                     },
-                     {
-                         "source":  "/it-infra",
-                         "destination":  "/it-infra.html"
-                     },
-                     {
-                         "source":  "/finance",
-                         "destination":  "/finance.html"
-                     },
-                     {
-                         "source":  "/legal",
-                         "destination":  "/legal-services.html"
-                     },
-                     {
-                         "source":  "/legal-services",
-                         "destination":  "/legal-services.html"
-                     },
-                     {
-                         "source":  "/terms",
-                         "destination":  "/terms.html"
-                     },
-                     {
-                         "source":  "/privacy",
-                         "destination":  "/terms.html"
-                     },
-                     {
-                         "source":  "/disclaimer",
-                         "destination":  "/terms.html"
-                     },
-                     {
-                         "source":  "/agreement",
-                         "destination":  "/terms.html"
-                     },
-                     {
-                         "source":  "/retail",
-                         "destination":  "/retail.html"
-                     },
-                     {
-                         "source":  "/realestate",
-                         "destination":  "/realestate.html"
-                     },
-                     {
-                         "source":  "/defense",
-                         "destination":  "/defense.html"
-                     },
-                     {
-                         "source":  "/government",
-                         "destination":  "/government.html"
-                     },
-                     {
-                         "source":  "/home",
-                         "destination":  "/index.html"
-                     },
-                     {
-                         "source":  "/tools",
-                         "destination":  "/tools.html"
-                     }
-                 ],
-    "redirects":  [
-                      {
-                          "destination":  "/",
-                          "permanent":  false,
-                          "source":  "/downloads"
-                      },
-                      {
-                          "destination":  "/",
-                          "permanent":  false,
-                          "source":  "/downloads/(.*)"
-                      }
-                  ]
+{
+    "version": 2,
+    "cleanUrls": true,
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Frame-Options",
+                    "value": "SAMEORIGIN"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "Strict-Transport-Security",
+                    "value": "max-age=31536000; includeSubDomains; preload"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "strict-origin-when-cross-origin"
+                }
+            ]
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "http://129.212.176.154/api/:path*"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^(www\\.)?burn-1\\.com$"
+                }
+            ],
+            "destination": "/index.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^phase25\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/phase25.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^jasonkuts\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/cards/jasonkuts.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^(?!(www|phase25)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/cards/:subdomain.html"
+        },
+        {
+            "source": "/directory",
+            "destination": "/directory.html"
+        },
+        {
+            "source": "/mal",
+            "destination": "/cards/malwdarazor.html"
+        },
+        {
+            "source": "/malwdarazor",
+            "destination": "/cards/malwdarazor.html"
+        },
+        {
+            "source": "/jasonkuts",
+            "destination": "/cards/jasonkuts.html"
+        },
+        {
+            "source": "/phase25",
+            "destination": "/phase25.html"
+        },
+        {
+            "source": "/academy",
+            "destination": "/academy.html"
+        },
+        {
+            "source": "/cinematic-onboarding",
+            "destination": "/cinematic-onboarding.html"
+        },
+        {
+            "source": "/onboarding",
+            "destination": "/cinematic-onboarding.html"
+        },
+        {
+            "source": "/healthcare",
+            "destination": "/healthcare.html"
+        },
+        {
+            "source": "/it",
+            "destination": "/it.html"
+        },
+        {
+            "source": "/it-infra",
+            "destination": "/it-infra.html"
+        },
+        {
+            "source": "/finance",
+            "destination": "/finance.html"
+        },
+        {
+            "source": "/legal",
+            "destination": "/legal-services.html"
+        },
+        {
+            "source": "/legal-services",
+            "destination": "/legal-services.html"
+        },
+        {
+            "source": "/terms",
+            "destination": "/terms.html"
+        },
+        {
+            "source": "/privacy",
+            "destination": "/terms.html"
+        },
+        {
+            "source": "/disclaimer",
+            "destination": "/terms.html"
+        },
+        {
+            "source": "/agreement",
+            "destination": "/terms.html"
+        },
+        {
+            "source": "/retail",
+            "destination": "/retail.html"
+        },
+        {
+            "source": "/realestate",
+            "destination": "/realestate.html"
+        },
+        {
+            "source": "/defense",
+            "destination": "/defense.html"
+        },
+        {
+            "source": "/government",
+            "destination": "/government.html"
+        },
+        {
+            "source": "/home",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/tools",
+            "destination": "/tools.html"
+        },
+        {
+            "source": "/fast-lane",
+            "destination": "/fast-lane.html"
+        },
+        {
+            "source": "/fastlane",
+            "destination": "/fast-lane.html"
+        },
+        {
+            "source": "/energy",
+            "destination": "/energy.html"
+        },
+        {
+            "source": "/manufacturing",
+            "destination": "/manufacturing.html"
+        },
+        {
+            "source": "/manufactoring",
+            "destination": "/manufacturing.html"
+        },
+        {
+            "source": "/it-infrastructure",
+            "destination": "/it-infra.html"
+        },
+        {
+            "source": "/inklife",
+            "destination": "/cards/inklife.html"
+        },
+        {
+            "source": "/tool",
+            "destination": "/tools.html"
+        }
+    ],
+    "redirects": [
+        {
+            "destination": "/",
+            "permanent": false,
+            "source": "/downloads"
+        },
+        {
+            "destination": "/",
+            "permanent": false,
+            "source": "/downloads/(.*)"
+        }
+    ]
 }
-

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manufacturing & OT Shield | Cyber Readiness Clinic</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --tactical-black: #050505;
+      --gunmetal: #1a1a1a;
+      --aviation-orange: #ff5500;
+      --terminal-amber: #ffb800;
+      --hud-green: #00ff66;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      /* Burn-1 Base Metallic Silver */
+      background-color: #d8dee6;
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.92) 0%, rgba(226, 232, 240, 0.88) 48%, rgba(186, 196, 210, 0.95) 100%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0px, rgba(255,255,255,0.18) 1px, transparent 1px, transparent 12px);
+      background-attachment: fixed;
+      color: #e2e8f0;
+    }
+    
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-scada { font-family: 'Share Tech Mono', monospace; }
+
+    /* Top Unibar Navigation */
+    .grey-unibar {
+      background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 55%, #b8c4d4 100%);
+      border-bottom: 2px solid #64748b;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+    .grey-unibar-sub {
+      background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.65);
+      border-bottom: 2px solid #475569;
+    }
+    .nav-pill-idle {
+      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
+      color: #0f172a;
+      border: 1px solid #64748b;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
+      border-radius: 0.5rem;
+    }
+    .nav-pill-idle:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+      transform: translateY(-1px);
+    }
+    .nav-pill-active {
+      background: var(--tactical-black);
+      color: var(--aviation-orange);
+      border: 1px solid var(--aviation-orange);
+      box-shadow: 0 0 10px rgba(255, 85, 0, 0.4);
+      border-radius: 0.5rem;
+    }
+
+    /* === TACTICAL INDUSTRIAL DESIGN SYSTEM === */
+    .pane-tactical {
+      background-color: var(--gunmetal);
+      border: 1px solid rgba(255, 85, 0, 0.4);
+      border-radius: 0px; 
+      clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+      box-shadow: 0 25px 50px -12px rgba(255, 85, 0, 0.2);
+      position: relative;
+    }
+
+    .hud-bracket {
+      position: relative;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid transparent;
+    }
+    .hud-bracket::before, .hud-bracket::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-color: var(--aviation-orange);
+      border-style: solid;
+      pointer-events: none;
+    }
+    .hud-bracket::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .hud-bracket::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    /* Industrial Data Blocks */
+    .data-block {
+      display: inline-flex;
+      align-items: center;
+      background: var(--tactical-black);
+      color: var(--aviation-orange);
+      border: 1px solid var(--aviation-orange);
+      border-left: 4px solid var(--aviation-orange);
+      padding: 0.25rem 0.75rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .data-block.amber { color: var(--terminal-amber); border-color: var(--terminal-amber); }
+    .data-block.green { color: var(--hud-green); border-color: var(--hud-green); }
+    
+    .hazard-stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 85, 0, 0.05),
+        rgba(255, 85, 0, 0.05) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+    }
+
+    
+    .flip-card-back { transform: rotateY(180deg); }
+
+    /* Tactical Hotspots for the Map */
+    .tactical-hotspot {
+      transition: all 0.3s ease;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--aviation-orange);
+      color: var(--aviation-orange);
+      box-shadow: 0 0 10px rgba(255, 85, 0, 0.4);
+    }
+    .tactical-hotspot:hover, .tactical-hotspot.active {
+      background: var(--aviation-orange);
+      color: var(--tactical-black);
+      transform: scale(1.05);
+      z-index: 20;
+      box-shadow: 0 0 20px rgba(255, 85, 0, 0.8);
+    }
+  
+    /* Shared Card CSS */
+    .b1-card { position: relative; border-radius: 1rem; cursor: pointer; touch-action: manipulation; perspective: 1200px; }
+    .b1-card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1); }
+    .b1-card.is-flipped .b1-card-inner { transform: rotateY(180deg); }
+    @media (hover: hover) and (pointer: fine) { .b1-card:hover .b1-card-inner { transform: rotateY(180deg); } }
+    .b1-face { position: relative; width: 100%; min-height: 380px; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .b1-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: rotateY(180deg); }
+    .b1-letter { font-family: 'Orbitron', 'Inter', sans-serif; font-weight: 900; font-size: 6rem; line-height: 1; letter-spacing: -0.02em; color: #ffffff; text-shadow: 0 0 30px rgba(6,182,212,0.45), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.accent { color: #f26522; text-shadow: 0 0 30px rgba(242,101,34,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-letter.pink { color: #D92B8A; text-shadow: 0 0 30px rgba(217,43,138,0.6), 0 4px 12px rgba(0,0,0,0.6); }
+    .b1-tier { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; color: #cbd5e1; margin-top: 1rem; }
+    .b1-cue { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #06b6d4; margin-top: 1.25rem; animation: b1pulse 2s ease-in-out infinite; }
+    @keyframes b1pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (max-width: 640px) { .b1-letter { font-size: 4.5rem; } .b1-face { min-height: 320px; } }
+
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+  <!-- GLOBAL NAV (With official Burn-1 Logo) -->
+  <header class="grey-unibar sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <!-- Replaced B1 Text with User's Official Logo -->
+        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Systems Logo" class="w-10 h-10 rounded-xl object-cover border border-slate-500 shadow-md">
+        <div>
+          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Manufacturing & OT • <span class="text-[#ff5500] font-bold">DRA Module</span></div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="grey-unibar-sub">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="manufacturing.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Manufacturing</a>
+        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
+        <a href="cinematic-onboarding.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Guided Intake</a>
+        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex-1 relative z-10">
+
+    <!-- THE HOOK (HERO) -->
+    <div class="pane-tactical mb-12 flex flex-col lg:flex-row">
+      <!-- Content Side -->
+      <div class="flex-1 p-8 sm:p-12 flex flex-col justify-center hazard-stripe border-b lg:border-b-0 lg:border-r border-[--aviation-orange]/30">
+        <div class="mb-6 flex gap-2 flex-wrap">
+          <span class="data-block">// OT & SCADA TELEMETRY</span>
+          <span class="data-block amber">[SYS.DEFENSE: ACTIVE]</span>
+        </div>
+        
+        <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight tracking-tighter uppercase font-mono">
+          Is your cyber insurance renewal a guaranteed pass,<br>
+          <span class="text-[--aviation-orange]">or a $50,000 surprise?</span>
+        </h1>
+        
+        <p class="mt-6 text-slate-300 font-mono text-sm leading-relaxed border-l-2 border-[--terminal-amber] pl-4">
+          For manufacturers and fabricators, missing just one required security control on the shop floor no longer means a higher premium—<span class="text-white font-bold">it means an outright denial of coverage.</span> If your renewal is less than 90 days away, carriers are already scanning your network for a reason to decline you. Find your blind spots before your underwriter does.
+        </p>
+      </div>
+
+      <!-- METRICS SIDE -->
+      <div class="w-full lg:w-1/3 bg-[#050505] p-6 flex flex-col justify-center gap-4">
+        <div class="hud-bracket p-4 border border-slate-800">
+          <div class="flex items-center justify-between mb-2">
+            <span class="data-block !text-rose-500 !border-rose-500">DOWNTIME_RISK</span>
+            <i class="fa-solid fa-industry text-rose-500"></i>
+          </div>
+          <div class="text-2xl font-black text-white font-mono">$125K <span class="text-xs text-slate-500">/ Hour Freeze</span></div>
+          <p class="text-slate-500 text-[10px] font-mono mt-1">Avg revenue loss during an assembly line ransomware halt.</p>
+        </div>
+        
+        <div class="hud-bracket p-4 border border-slate-800">
+          <div class="flex items-center justify-between mb-2">
+            <span class="data-block amber">ACCESS_FAULT</span>
+            <i class="fa-solid fa-fingerprint text-[--terminal-amber]"></i>
+          </div>
+          <div class="text-2xl font-black text-white font-mono">+50% <span class="text-xs text-slate-500">MFA Penalty</span></div>
+          <p class="text-slate-500 text-[10px] font-mono mt-1">Premium inflation triggered by exposed remote maintenance ports.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE SHOP FLOOR TOPOLOGY -->
+    <div class="bg-[#050505] p-6 sm:p-10 mb-12 border border-slate-800 relative shadow-2xl">
+      <div class="text-center mb-8">
+        <h2 class="text-xl font-hud font-bold text-[--aviation-orange] tracking-widest">INDUSTRIAL FLOOR EXPOSURE TOPOLOGY</h2>
+        <p class="text-sm font-mono text-slate-400 mt-2">Select a localized OT node to inspect carrier-grade telemetry and isolation limits.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Interactive Factory Image -->
+        <div class="lg:col-span-7 relative h-[450px] border border-[--aviation-orange]/50 hud-bracket">
+          <img src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&q=80" alt="Industrial Fabrication Floor" class="w-full h-full object-cover opacity-60 mix-blend-luminosity">
+          <div class="absolute inset-0 bg-[#1a1a1a]/30 mix-blend-multiply pointer-events-none"></div>
+          
+          <!-- Hotspots -->
+          <button type="button" data-ot-zone="robotics" style="top:40%; left:30%; transform: translate(-50%, -50%);" class="tactical-hotspot active absolute px-3 py-1.5 text-xs font-mono font-bold tracking-widest uppercase">
+            [1] Robotics / ICS
+          </button>
+          
+          <button type="button" data-ot-zone="hmi" style="bottom:20%; left:55%; transform: translate(-50%, -50%);" class="tactical-hotspot absolute px-3 py-1.5 text-xs font-mono font-bold tracking-widest uppercase">
+            [2] HMI Terminals
+          </button>
+
+          <button type="button" data-ot-zone="plc" style="top:25%; right:15%; transform: translate(-50%, -50%);" class="tactical-hotspot absolute px-3 py-1.5 text-xs font-mono font-bold tracking-widest uppercase">
+            [3] PLC Cabinet
+          </button>
+
+          <button type="button" data-ot-zone="gateway" style="top:10%; left:50%; transform: translate(-50%, -50%);" class="tactical-hotspot absolute px-3 py-1.5 text-xs font-mono font-bold tracking-widest uppercase">
+            [4] IT/OT Gateway
+          </button>
+        </div>
+
+        <!-- Tactical Readout Panel -->
+        <div class="lg:col-span-5">
+          <div class="relative overflow-hidden bg-[#1a1a1a] text-white p-6 border-l-4 border-[--aviation-orange] font-mono h-[450px] flex flex-col shadow-inner">
+            <video src="timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"></video>
+            
+            <div class="relative z-10 flex-1 flex flex-col">
+              <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
+                <span class="text-xs text-[--terminal-amber] uppercase tracking-wider font-bold">Telemetry Readout</span>
+                <span class="px-2 py-0.5 text-[10px] bg-[--aviation-orange] text-black rounded-sm font-black animate-pulse">LIVE SIGNAL</span>
+              </div>
+              
+              <div id="ot-zone-title" class="text-lg font-black text-white mb-2 tracking-tight">[1] Industrial Robotics / ICS</div>
+              <p id="ot-zone-desc" class="text-xs text-slate-400 leading-relaxed mb-6 flex-1">
+                Automated assembly lines operate on fragile, legacy protocols. Standard IT pentesting tools (like Nessus) can overwhelm these systems and cause physical shutdowns. We use 100% passive packet analysis to detect vulnerabilities without touching the hardware.
+              </p>
+              
+              <div class="bg-[#050505] p-4 border border-[--aviation-orange]/30 text-xs space-y-3">
+                <div class="text-[--aviation-orange] font-bold mb-2 uppercase tracking-widest border-b border-slate-800 pb-1">Underwriter Validation</div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Scan Protocol:</span> <span id="metric-protocol" class="text-white font-bold">PASSIVE (PCAP)</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Segmentation:</span> <span id="metric-segment" class="text-[--terminal-amber] font-bold">ISOLATED</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Audit Ready:</span> <span id="metric-audit" class="text-[--hud-green] font-bold">SEALED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PRICING TIERS: Tactical Flip Cards -->
+    <!-- ============ PRICING v5: B U R N -1 ============ -->
+    <div id="pricing" class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-300 shadow-md mb-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b-2 border-slate-100 pb-4">
+        <div>
+          <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Assessment Packages</h2>
+          <p class="text-sm text-slate-600 font-bold mt-1">Five tiers. Click a card to see price, contents, and launch.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 items-start">
+
+        <!-- ===== B — Beginner ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Beginner tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">B</span>
+                <span class="b1-tier">Beginner</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Beginner · Free Mini S.P.A.</h3>
+                <div class="text-3xl font-black text-white my-2">$0</div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Non-intrusive surface scan</li>
+                  <li>✓ Gaps shown, remediation greyed out</li>
+                  <li>✓ No install, no credit card</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=manufacturing&tier=free" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Run free scan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== U — Urgent ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Urgent tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-slate-600 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-slate-900/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter accent">U</span>
+                <span class="b1-tier">Urgent</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-slate-600">
+              <div>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Urgent · Evidence Binder</h3>
+                <div class="text-3xl font-black text-white my-2">$750</div>
+                <p class="text-[11px] text-cyan-400 font-bold mb-2">$500 academy price</p>
+                <ul class="text-[11px] text-slate-300 space-y-1.5">
+                  <li>✓ Scan + questionnaire + generated binder</li>
+                  <li>✓ Baseline framework mapping</li>
+                  <li>✗ Not human-reviewed</li>
+                  <li>✗ Not sealed</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=manufacturing&tier=binder" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-slate-200 text-slate-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get the binder</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== R — Remediation (most chosen) ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Remediation tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-cyan-500 bg-slate-950">
+              <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-950 px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-b-md z-20">Most chosen</div>
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-cyan-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter">R</span>
+                <span class="b1-tier">Remediation</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-cyan-500 text-slate-900 border-2 border-cyan-400">
+              <div>
+                <h3 class="text-xs font-black text-cyan-900 uppercase tracking-widest">Remediation · Verified Binder</h3>
+                <div class="text-3xl font-black text-slate-900 my-2">$1,000<span class="text-sm font-bold text-cyan-800">/yr</span></div>
+                <ul class="text-[11px] text-cyan-950 font-bold space-y-1.5 mt-3">
+                  <li>✓ 1 domain, binder + human review</li>
+                  <li>✓ Cyber Seal by Anergi.io</li>
+                  <li>✓ Quarterly rescans</li>
+                  <li>✓ The evidence your carrier accepts</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=manufacturing&tier=verified" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get verified</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== N — Networking ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Networking tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-emerald-500 bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-emerald-950/70"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter" style="color:#34d399;text-shadow:0 0 30px rgba(52,211,153,.6),0 4px 12px rgba(0,0,0,.6)">N</span>
+                <span class="b1-tier">Networking</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-emerald-600 text-white border-2 border-emerald-500">
+              <div>
+                <h3 class="text-xs font-black text-emerald-100 uppercase tracking-widest">Networking · Multi-Domain</h3>
+                <div class="text-3xl font-black text-white my-2">$2,500<span class="text-sm font-bold text-emerald-200">/yr</span></div>
+                <ul class="text-[11px] text-emerald-50 space-y-1.5 mt-3">
+                  <li>✓ Up to 5 domains</li>
+                  <li>✓ Consolidated eBinder</li>
+                  <li>✓ Unlimited SLM rescans</li>
+                  <li>✓ Sealed on every domain</li>
+                </ul>
+              </div>
+              <a href="cinematic-onboarding.html?source=manufacturing&tier=multi" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get multi-domain</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== -1 — Enterprise ===== -->
+        <div class="b1-card" role="button" tabindex="0" aria-label="Enterprise tier">
+          <div class="b1-card-inner">
+            <div class="b1-face border-2 border-[#D92B8A] bg-slate-950">
+              <video src="assets/timesrunning.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none mix-blend-screen"></video>
+              <div class="absolute inset-0 bg-[#2A081C]/80"></div>
+              <div class="relative z-10 flex flex-col items-center justify-center text-center">
+                <span class="b1-letter pink">-1</span>
+                <span class="b1-tier">Enterprise</span>
+                <span class="b1-cue">▼ Tap for details</span>
+              </div>
+            </div>
+            <div class="b1-back bg-slate-950 text-white border-2 border-[#D92B8A]">
+              <div>
+                <h3 class="text-xs font-black text-[#D92B8A] uppercase tracking-widest">Enterprise · Up to 15 domains</h3>
+                <div class="text-3xl font-black text-white my-2">$5,000<span class="text-sm font-bold text-pink-300">/yr</span></div>
+                <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
+                  <li>✓ Consolidated eBinder, 15 domains</li>
+                  <li>✓ Custom executive scorecards</li>
+                  <li>✓ Named human review contact</li>
+                  <li>✓ Carrier questionnaire walk-through</li>
+                  <li>✓ Priority review</li>
+                </ul>
+              </div>
+              <a href="mailto:hello@burn-1.com?subject=Enterprise%20binder%20quote" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Request quote →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Interactive Manufacturing Topology Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hotspots = document.querySelectorAll('.tactical-hotspot');
+      const titleEl = document.getElementById('ot-zone-title');
+      const descEl = document.getElementById('ot-zone-desc');
+      
+      const metricProtocol = document.getElementById('metric-protocol');
+      const metricSegment = document.getElementById('metric-segment');
+      const metricAudit = document.getElementById('metric-audit');
+
+      const zoneData = {
+        'robotics': {
+          title: '[1] Industrial Robotics / ICS',
+          desc: 'Automated assembly lines operate on fragile, legacy protocols. Standard IT pentesting tools (like Nessus) can overwhelm these systems and cause physical shutdowns. We use 100% passive packet analysis to detect vulnerabilities without touching the hardware.',
+          protocol: 'PASSIVE (PCAP)',
+          segment: 'ISOLATED',
+          segmentColor: 'text-[--terminal-amber]',
+          audit: 'SEALED',
+          auditColor: 'text-[--hud-green]'
+        },
+        'hmi': {
+          title: '[2] HMI Terminals',
+          desc: 'Human-Machine Interfaces (HMIs) control the physical floor. Attackers target these via weak default passwords or lack of MFA. We audit the authentication logs mapped to these endpoints to satisfy underwriter identity requirements.',
+          protocol: 'LOG AUDIT ONLY',
+          segment: 'MFA VERIFIED',
+          segmentColor: 'text-[--hud-green]',
+          audit: 'COMPLIANT',
+          auditColor: 'text-[--hud-green]'
+        },
+        'plc': {
+          title: '[3] PLC Cabinets',
+          desc: 'Programmable Logic Controllers direct physical processes (valves, motors, switches). We verify that the PLC network is strictly segmented from corporate IT, ensuring a phishing attack on HR cannot turn off the factory floor.',
+          protocol: 'ZERO-TOUCH',
+          segment: 'AIRGAPPED',
+          segmentColor: 'text-[--terminal-amber]',
+          audit: 'SECURE',
+          auditColor: 'text-[--hud-green]'
+        },
+        'gateway': {
+          title: '[4] IT / OT Gateway & DMZ',
+          desc: 'The only bridge between corporate email and the factory floor. This is where carriers focus their underwriting. Our DRA executes active firewall rule reviews to guarantee traffic cannot traverse downward into the OT environment.',
+          protocol: 'ACTIVE PROBE',
+          segment: 'BLOCKED (RDP)',
+          segmentColor: 'text-[--aviation-orange]',
+          audit: 'PASSED',
+          auditColor: 'text-[--hud-green]'
+        }
+      };
+
+      hotspots.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Reset all
+          hotspots.forEach(b => b.classList.remove('active'));
+          // Set active
+          btn.classList.add('active');
+
+          // Update Panel
+          const target = btn.getAttribute('data-ot-zone');
+          const data = zoneData[target];
+          
+          if(data) {
+            titleEl.innerHTML = data.title;
+            descEl.innerHTML = data.desc;
+            
+            metricProtocol.innerHTML = data.protocol;
+            
+            metricSegment.innerHTML = data.segment;
+            metricSegment.className = `font-bold ${data.segmentColor}`;
+            
+            metricAudit.innerHTML = data.audit;
+            metricAudit.className = `font-bold ${data.auditColor}`;
+          }
+        });
+      });
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll('.b1-card').forEach(card => {
+      const toggle = (e) => {
+        if (e && e.target && e.target.closest('a,button')) return;
+        card.classList.toggle('is-flipped');
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('is-flipped');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

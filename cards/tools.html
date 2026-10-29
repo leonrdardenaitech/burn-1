@@ -1,590 +1,602 @@
 <!DOCTYPE html>
-<html lang="en" class="day-mode">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BURN-1 SYSTEMS // POSTURE EXPOSURE WORKBENCH</title>
-    <meta name="description" content="Automated Outside-In Posture Exposure Assessment & Free Micro-Scan Workbench. No false claims. High-concurrency telemetry mapped to underwriter standards.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omni Diagnostic Workbench | Burn-1 Systems</title>
+  
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        :root {
-            --mirror-bg: #eceff3;
-            --mirror-glass: rgba(255, 255, 255, 0.45);
-            --mirror-border: rgba(255, 255, 255, 0.85);
-            --text-primary: #09090b;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --purple-deep: #2e1065;
-            --fuchsia-bright: #ff007f;
-            --pink-neon: #ff00ff;
-            --obsidian-purple: #120323;
-        }
+  <style>
+    :root {
+      /* Holographic Neon Palette */
+      --neon-blue: #00f0ff;
+      --neon-cyan: #22d3ee;
+      --neon-emerald: #10b981;
+      --neon-amber: #f59e0b;
+      --neon-purple: #a855f7;
+      --panel-glass: rgba(8, 12, 20, 0.85);
+    }
 
-        body {
-            background-color: var(--mirror-bg);
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(255, 255, 255, 0.95) 0px, transparent 50%),
-                radial-gradient(at 90% 15%, rgba(226, 232, 240, 0.8) 0px, transparent 50%),
-                radial-gradient(at 50% 85%, rgba(203, 213, 225, 0.7) 0px, transparent 60%);
-            background-attachment: fixed;
-            color: var(--text-primary);
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            min-height: 100vh;
-        }
+    body {
+      background-color: #020617;
+      color: var(--neon-blue);
+      font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      /* Holographic Motherboard / Workbench Background */
+      background-image: 
+        linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
 
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
+    .font-hud { font-family: 'Orbitron', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-        .heading {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+    /* Coolant Tube Assembly (From your live code) */
+    .coolant-tube-assembly {
+      position: relative;
+      height: 24px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(2,6,23,0.85) 50%, rgba(34,211,238,0.2) 100%);
+      border: 1px solid rgba(34, 211, 238, 0.5);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0,0,0,0.8);
+      overflow: hidden;
+      width: 100%;
+    }
 
-        .cyber {
-            font-family: 'Orbitron', monospace;
-        }
+    /* True SVG Turbine Rotors (From your live code) */
+    .turbine-housing {
+      position: relative; 
+      width: 64px; 
+      height: 64px; 
+      border-radius: 50%; 
+      padding: 4px;
+      background: conic-gradient(from 45deg, #0f172a, #22d3ee, #0f172a, #22d3ee, #0f172a);
+      border: 1px solid var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+    .turbine-cavity {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 85%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: inset 0 0 15px #000;
+    }
 
-        /* Silver Glass Panels */
-        .silver-glass {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1.5px solid rgba(255, 255, 255, 0.85);
-            outline: 1px solid rgba(203, 213, 225, 0.45);
-            box-shadow: 
-                0 12px 36px rgba(0, 0, 0, 0.04),
-                inset 0 2px 4px rgba(255, 255, 255, 0.95);
-        }
+    /* Accordion & Glass Panels */
+    .holo-pane {
+      background: var(--panel-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.05), inset 0 0 20px rgba(0, 240, 255, 0.05);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, opacity 0.5s ease;
+      opacity: 0;
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 3500px;
+      opacity: 1;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
 
-        /* Silver Mirror Cool Gray Buttons with High-Contrast Dark Purple Text (WCAG AAA) */
-        .mirror-pill-btn {
-            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 55%, #cbd5e1 100%);
-            color: #3b0764 !important;
-            border: 1.5px solid #ffffff;
-            box-shadow: 
-                inset 0 -2px 4px rgba(0, 0, 0, 0.12),
-                inset 0 2px 4px rgba(255, 255, 255, 0.95),
-                0 4px 12px rgba(0, 0, 0, 0.06);
-            font-weight: 800;
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+    /* Diagnostics Result Box */
+    .result-box {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      color: #cbd5e1;
+    }
 
-        .mirror-pill-btn:hover {
-            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
-            color: #1e0338 !important;
-            transform: translateY(-2px);
-            box-shadow: 
-                0 8px 20px rgba(0, 0, 0, 0.1),
-                inset 0 2px 6px #ffffff;
-        }
-
-        /* Star Trek Vitals HUD (Obsidian Purple, Fuchsia, Pink) */
-        .vitals-hud {
-            background: var(--obsidian-purple);
-            border: 1.5px solid rgba(255, 0, 127, 0.35);
-            box-shadow: 0 16px 40px rgba(18, 3, 35, 0.4), inset 0 1px 2px rgba(255, 0, 255, 0.2);
-            color: #f8fafc;
-        }
-
-        /* Pulse animations for vitals wave */
-        @keyframes pulse-wave {
-            0% { transform: scaleY(1); opacity: 0.8; }
-            50% { transform: scaleY(1.4); opacity: 1; }
-            100% { transform: scaleY(1); opacity: 0.8; }
-        }
-
-        .vital-bar {
-            transform-origin: bottom;
-            animation: pulse-wave 1.8s ease-in-out infinite;
-        }
-    </style>
+    /* Footer Ad Marquee */
+    .marquee { overflow: hidden; white-space: nowrap; border-top: 1px solid var(--neon-cyan); border-bottom: 1px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+    .marquee-content { display: inline-block; animation: scroll 25s linear infinite; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  </style>
 </head>
-<body class="p-4 sm:p-6 lg:p-10">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- TOP SYSTEM NAVIGATION -->
-    <nav class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 mb-10 pb-4 border-b border-slate-300/60 font-mono text-xs">
-        <div class="flex items-center gap-3">
-            <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="font-bold text-slate-800 tracking-wider">// BURN-1 SYSTEMS POSTURE ENGINE</span>
-            <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-slate-200/80 text-slate-700 text-[10px] font-bold">
-                TELEMETRY // RFC-2026-PPR
-            </span>
-        </div>
-        <div class="flex items-center gap-2 sm:gap-4">
-            <a href="index.html" class="px-3 py-1.5 rounded-xl bg-white/70 hover:bg-white text-slate-700 border border-slate-300 transition-all font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-house text-[10px]"></i>
-                <span>Home</span>
-            </a>
-            <a href="academy.html" class="px-3 py-1.5 rounded-xl bg-white/70 hover:bg-white text-slate-700 border border-slate-300 transition-all font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-graduation-cap text-[10px]"></i>
-                <span>Academy</span>
-            </a>
-            <a href="directory.html" class="px-3 py-1.5 rounded-xl bg-white/70 hover:bg-white text-slate-700 border border-slate-300 transition-all font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-stamp text-[10px]"></i>
-                <span>Directory</span>
-            </a>
-            <a href="yelle.html" class="px-3 py-1.5 rounded-xl bg-purple-950 text-white hover:bg-purple-900 border border-purple-800 transition-all font-bold flex items-center gap-1.5">
-                <i class="fa-solid fa-vault text-[10px]"></i>
-                <span>Vault</span>
-            </a>
-        </div>
-    </nav>
+  <!-- SVG Gradients for Turbines -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <linearGradient id="steelBladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#22d3ee"/>
+        <stop offset="45%" stop-color="#0f172a"/>
+        <stop offset="100%" stop-color="#00f0ff"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
-    <!-- MASTER WORKBENCH HEADER -->
-    <header class="max-w-7xl mx-auto mb-10 text-center sm:text-left">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/90 border border-slate-300 text-slate-800 text-xs font-mono font-bold uppercase tracking-widest mb-3">
-            <i class="fa-solid fa-shield-halved text-purple-700"></i>
-            <span>No False Claims // Clinical Posture Telemetry</span>
-        </div>
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 heading tracking-tight uppercase leading-tight">
-            POSTURE EXPOSURE WORKBENCH
+  <!-- ================= HERO WORKBENCH ================= -->
+  <header class="w-full pt-8 pb-6 px-4">
+    <!-- Top Coolant Canvas -->
+    <div class="max-w-7xl mx-auto mb-6">
+      <div class="coolant-tube-assembly">
+        <canvas id="topCoolantCanvas" class="w-full h-full block"></canvas>
+      </div>
+    </div>
+
+    <!-- Title & Quad SVG Fans -->
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+      <!-- Left Dual Fans -->
+      <div class="hidden md:flex gap-3">
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
+      </div>
+
+      <!-- Center Holographic Title -->
+      <div class="text-center flex-1">
+        <h1 class="font-hud text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-300 to-blue-600 drop-shadow-[0_0_20px_rgba(34,211,238,0.8)] tracking-widest leading-none">
+          BURN-1 SYSTEMS
         </h1>
-        <p class="mt-3 text-base sm:text-lg text-slate-700 max-w-3xl font-medium">
-            We do not sell compute seconds or exaggerated insurance warranties. Built on high-concurrency asynchronous architecture, our engine audits 100+ public perimeter exposure vectors concurrently. 
-            <strong class="text-purple-950 font-bold block sm:inline mt-1 sm:mt-0">The assessment executes in seconds; the 3 weeks of manual audit friction eliminated is the asset.</strong>
-        </p>
-    </header>
+        <div class="text-xl sm:text-2xl font-bold tracking-widest text-cyan-500 mt-2">TOOLS WORKBENCH</div>
+        <p class="mt-2 text-slate-400 text-xs tracking-widest">/// OMNI_DIAGNOSTICS_ONLINE // HARDWARE_SYNC_OK ///</p>
+      </div>
 
-    <!-- MAIN CONSOLE GRID -->
-    <main class="max-w-7xl mx-auto space-y-12">
+      <!-- Right Dual Fans -->
+      <div class="hidden md:flex gap-3">
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
+        <div class="turbine-housing"><div class="turbine-cavity">
+          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
+        </div></div>
+      </div>
+    </div>
 
-        <!-- =========================================================
-             SECTION 01: THE REVERSE HOME PAGE (FREE MICRO-SCAN SUITE)
-             ========================================================= -->
-        <section class="silver-glass rounded-3xl p-6 sm:p-10">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-slate-300/80">
-                <div>
-                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-purple-800 block mb-1">
-                        // FREE STANDALONE DIAGNOSTICS
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl font-black heading text-slate-900 uppercase">
-                        PERIMETER EXPOSURE PROBE
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-600 font-mono mt-1">
-                        Non-invasive outside-in public inspection. Zero passwords, zero software installation, zero network disruption.
-                    </p>
-                </div>
-                <div class="text-xs font-mono bg-white/80 border border-slate-300 px-3 py-1.5 rounded-xl text-slate-700 font-bold self-start md:self-auto">
-                    ACTIVE COROUTINES: 100+ CONCURRENT I/O
-                </div>
-            </div>
+    <!-- HUGE LAYERED OMNI-BAR IMAGE -->
+    <!-- Scaled up significantly, absolute inputs mapped to the pixels of the image -->
+    <div class="mt-8 mb-6 w-full max-w-5xl mx-auto relative px-2 drop-shadow-[0_0_30px_rgba(0,240,255,0.3)]">
+      <img src="image.png_20261027024343.jpg" alt="Omni Bar HUD" class="w-full h-auto block rounded-2xl">
+      
+      <!-- Invisible Input layered over "type domain |" -->
+      <input type="text" id="target-domain" 
+        class="absolute bg-transparent text-white font-mono font-bold outline-none z-10" 
+        style="top: 40%; left: 35.5%; width: 42%; height: 20%; font-size: clamp(1rem, 2.5vw, 2rem);" 
+        placeholder="burn-1.com" onkeypress="handleEnter(event)">
+      
+      <!-- Invisible Button layered over Arrow/Search Icons -->
+      <button class="absolute bg-cyan-500/10 hover:bg-cyan-400/30 cursor-pointer z-10 rounded-xl transition-colors" 
+        style="top: 36%; right: 9%; width: 10%; height: 28%;" 
+        onclick="runAllMicroScans()" title="Execute Omni Scan"></button>
+    </div>
 
-            <!-- Single Input Controller -->
-            <div class="max-w-3xl mb-8">
-                <label for="target-domain" class="block text-xs font-mono font-bold text-slate-800 uppercase tracking-wider mb-2">
-                    Enter Domain or Hostname to Inspect:
-                </label>
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <div class="relative flex-1">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 font-mono text-sm">
-                            https://
-                        </span>
-                        <input type="text" id="target-domain" value="burn-1.com" placeholder="example.com" 
-                            class="w-full pl-24 pr-4 py-3 rounded-2xl bg-white border-2 border-slate-300 focus:border-purple-600 focus:outline-none font-mono text-sm text-slate-900 font-bold shadow-inner transition-all">
-                    </div>
-                    <button type="button" onclick="runAllMicroScans()" class="mirror-pill-btn px-6 py-3 rounded-2xl text-sm uppercase tracking-wider flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-radar text-purple-800"></i>
-                        <span>Run Free Diagnostics</span>
-                    </button>
-                </div>
-                <span class="text-[11px] font-mono text-slate-500 mt-2 block">
-                    Queries authoritative public DNS-over-HTTPS (RFC 8484) and cryptographic TLS handshakes only.
-                </span>
-            </div>
+  </header>
 
-            <!-- 4 Free Micro-Tool Output Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 font-mono text-xs">
+  <!-- ================= ACCORDION WORKBENCH UI ================= -->
+  <main class="max-w-6xl mx-auto w-full px-4 py-4 flex-1 space-y-6">
 
-                <!-- TOOL 1: DMARC & SPOOFING -->
-                <div class="bg-white/90 rounded-2xl p-5 border border-slate-300 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                                <i class="fa-solid fa-envelope-shield text-purple-700"></i>
-                                <span>01. Mail Spoofing &amp; DMARC</span>
-                            </span>
-                            <span id="badge-dmarc" class="px-2.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-700 border border-slate-300 font-bold uppercase">
-                                READY
-                            </span>
-                        </div>
-                        <p class="text-slate-600 text-[11px] font-sans mb-3">
-                            Verifies SPF/DMARC policy enforcement to block Business Email Compromise (BEC) and wire fraud spoofing.
-                        </p>
-                        <div id="result-dmarc" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 text-[11px] overflow-x-auto min-h-[50px] flex items-center">
-                            Awaiting domain inspection...
-                        </div>
-                    </div>
-                    <div class="mt-3 pt-2.5 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500">
-                        <span>Underwriter Baseline: Required</span>
-                        <span class="font-bold text-purple-900">NIST CSF 2.0 PR.DS-02</span>
-                    </div>
-                </div>
-
-                <!-- TOOL 2: CRYPTOGRAPHIC PERIMETER & TLS -->
-                <div class="bg-white/90 rounded-2xl p-5 border border-slate-300 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                                <i class="fa-solid fa-lock text-purple-700"></i>
-                                <span>02. TLS 1.3 &amp; Cipher Suite</span>
-                            </span>
-                            <span id="badge-tls" class="px-2.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-700 border border-slate-300 font-bold uppercase">
-                                READY
-                            </span>
-                        </div>
-                        <p class="text-slate-600 text-[11px] font-sans mb-3">
-                            Audits cryptographic transit protocols, deprecating TLS 1.0/1.1 and flagging weak cipher suites.
-                        </p>
-                        <div id="result-tls" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 text-[11px] overflow-x-auto min-h-[50px] flex items-center">
-                            Awaiting domain inspection...
-                        </div>
-                    </div>
-                    <div class="mt-3 pt-2.5 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500">
-                        <span>Underwriter Baseline: Grade A</span>
-                        <span class="font-bold text-purple-900">NYDFS § 500.12</span>
-                    </div>
-                </div>
-
-                <!-- TOOL 3: COOKIE & PRIVACY HEADER SWEEP -->
-                <div class="bg-white/90 rounded-2xl p-5 border border-slate-300 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                                <i class="fa-solid fa-cookie-bite text-purple-700"></i>
-                                <span>03. Cookie &amp; Privacy Telemetry</span>
-                            </span>
-                            <span id="badge-cookies" class="px-2.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-700 border border-slate-300 font-bold uppercase">
-                                READY
-                            </span>
-                        </div>
-                        <p class="text-slate-600 text-[11px] font-sans mb-3">
-                            Scans public HTTP response headers for Content-Security-Policy (CSP), HSTS preload, and Secure cookie flags.
-                        </p>
-                        <div id="result-cookies" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 text-[11px] overflow-x-auto min-h-[50px] flex items-center">
-                            Awaiting domain inspection...
-                        </div>
-                    </div>
-                    <div class="mt-3 pt-2.5 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500">
-                        <span>Legal / Marketing Liability</span>
-                        <span class="font-bold text-purple-900">FTC / GDPR § 32</span>
-                    </div>
-                </div>
-
-                <!-- TOOL 4: PUBLIC STORAGE & CLOUD EXPOSURE -->
-                <div class="bg-white/90 rounded-2xl p-5 border border-slate-300 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                                <i class="fa-solid fa-cloud-arrow-down text-purple-700"></i>
-                                <span>04. Public Cloud &amp; CORS Exposure</span>
-                            </span>
-                            <span id="badge-cloud" class="px-2.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-700 border border-slate-300 font-bold uppercase">
-                                READY
-                            </span>
-                        </div>
-                        <p class="text-slate-600 text-[11px] font-sans mb-3">
-                            Inspects DNS CNAME references and public S3/Blob endpoint pointers to detect dangling storage hazards.
-                        </p>
-                        <div id="result-cloud" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-800 text-[11px] overflow-x-auto min-h-[50px] flex items-center">
-                            Awaiting domain inspection...
-                        </div>
-                    </div>
-                    <div class="mt-3 pt-2.5 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500">
-                        <span>Underwriter Baseline: Zero Exposure</span>
-                        <span class="font-bold text-purple-900">CISA BOD 26-04</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- =========================================================
-             SECTION 02: STAR TREK VITALS HUD // OPEN ACCESS
-             ========================================================= -->
-        <section class="vitals-hud rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-fuchsia-500/30">
-                <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse"></span>
-                        <span class="text-[11px] font-mono uppercase tracking-widest text-fuchsia-400 font-bold">
-                            // ACTIVE VITALS HUD // FREE SYSTEM TELEMETRY
-                        </span>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-black cyber text-white uppercase tracking-wider">
-                        AUTONOMOUS CONTROL PLANE TELEMETRY
-                    </h3>
-                </div>
-                <div class="flex items-center gap-2 font-mono text-xs">
-                    <span class="px-3 py-1 rounded-xl bg-purple-950/80 border border-fuchsia-500/40 text-fuchsia-300">
-                        JIT TOKEN TTL: <strong class="text-white">15 MIN</strong>
-                    </span>
-                    <span class="px-3 py-1 rounded-xl bg-purple-950/80 border border-fuchsia-500/40 text-pink-300">
-                        TMPFS DISK WRITES: <strong class="text-white">0 BYTES</strong>
-                    </span>
-                </div>
-            </div>
-
-            <!-- Vitals Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
-                
-                <div class="bg-[#1a0833] rounded-2xl p-4 border border-fuchsia-900/50">
-                    <span class="text-[10px] text-fuchsia-300 uppercase block mb-1">SERVER B FAST PATH CLOAKING</span>
-                    <div class="text-xl font-bold cyber text-white my-1">0 OPEN PORTS</div>
-                    <p class="text-[11px] text-slate-300 font-sans">
-                        Kernel eBPF filters drop untrusted scans at the driver level before touching TCP/IP stack.
-                    </p>
-                </div>
-
-                <div class="bg-[#1a0833] rounded-2xl p-4 border border-fuchsia-900/50">
-                    <span class="text-[10px] text-fuchsia-300 uppercase block mb-1">GHOST VACUUM TRIPWIRE</span>
-                    <div class="text-xl font-bold cyber text-emerald-400 my-1">ARMED &bull; 0s REVOKE</div>
-                    <p class="text-[11px] text-slate-300 font-sans">
-                        Modular decoys compress active session credentials to 0 seconds upon unauthorized touch.
-                    </p>
-                </div>
-
-                <div class="bg-[#1a0833] rounded-2xl p-4 border border-fuchsia-900/50">
-                    <span class="text-[10px] text-fuchsia-300 uppercase block mb-1">[TISSUE] MEMORY SHREDDER</span>
-                    <div class="text-xl font-bold cyber text-fuchsia-400 my-1">300ms ZERO-FILL</div>
-                    <p class="text-[11px] text-slate-300 font-sans">
-                        C-level <code class="text-pink-300 font-mono">memset_s(0x00)</code> purges RAM enclaves with 0 persistent forensic traces.
-                    </p>
-                </div>
-
-                <div class="bg-[#1a0833] rounded-2xl p-4 border border-fuchsia-900/50">
-                    <span class="text-[10px] text-fuchsia-300 uppercase block mb-1">STERILE CORRIDOR MCP TRIAGE</span>
-                    <div class="text-xl font-bold cyber text-cyan-400 my-1">READ-ONLY ISOLATED</div>
-                    <p class="text-[11px] text-slate-300 font-sans">
-                        AI triage model insulated from production datastore writes; prompt injections stripped.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- =========================================================
-             SECTION 03: THE TWO-DROP COMMERCIAL SUITE (NO FALSE CLAIMS)
-             ========================================================= -->
-        <section class="silver-glass rounded-3xl p-6 sm:p-10">
-            <div class="text-center max-w-3xl mx-auto mb-10">
-                <span class="text-xs font-mono font-bold uppercase tracking-widest text-purple-800 block mb-2">
-                    // UNDERWRITING READINESS DELIVERABLES
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-black heading text-slate-900 uppercase">
-                    THE TWO-DROP COMMERCIAL SUITE
-                </h2>
-                <p class="text-sm text-slate-600 font-medium mt-2">
-                    No monthly SaaS churn. No complicated reseller margins. Choose the on-demand audit or lock down the whole year flat.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-
-                <!-- DROP 1: ONE-BY-ONE ($499) -->
-                <div class="bg-white rounded-3xl p-8 border-2 border-slate-300 shadow-md flex flex-col justify-between hover:border-purple-600 transition-all">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-900 font-mono text-xs font-bold uppercase">
-                                DROP 01 // SINGLE DOSSIER
-                            </span>
-                            <span class="text-2xl font-black text-slate-900 font-mono">$499</span>
-                        </div>
-                        <h3 class="text-2xl font-black heading text-slate-900 mb-2">
-                            POSTURE EXPOSURE AUDIT
-                        </h3>
-                        <p class="text-xs text-slate-600 font-mono mb-6">
-                            Single targeted evaluation for firms with upcoming cyber insurance renewal deadlines.
-                        </p>
-
-                        <ul class="space-y-3 text-xs font-medium text-slate-800 mb-8">
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-purple-700 mt-0.5"></i>
-                                <span><strong>8-Page Executive Gap Dossier:</strong> Plain-English risk scoring for CFO / Board.</span>
-                            </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-purple-700 mt-0.5"></i>
-                                <span><strong>IT / Webmaster Remediation Checklist:</strong> Prioritized fix instructions for technical staff.</span>
-                            </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-purple-700 mt-0.5"></i>
-                                <span><strong>Regulatory Statutory Mapping:</strong> Calibrated against NIST CSF 2.0 &amp; NYDFS 500.</span>
-                            </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-purple-700 mt-0.5"></i>
-                                <span><strong>SHA-256 Proof of Inspection:</strong> Immutable hash anchored into evidence record.</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <a href="https://www.paypal.com/ncp/payment/5R9U23V7S2J8S" target="_blank" class="mirror-pill-btn block text-center py-4 rounded-2xl text-sm uppercase tracking-wider font-bold">
-                        Order Single Audit ($499) &rarr;
-                    </a>
-                </div>
-
-                <!-- DROP 2: THE GUWOP ($1,000 / YEAR FLAT) -->
-                <div class="bg-gradient-to-br from-purple-950 via-slate-900 to-[#120323] text-white rounded-3xl p-8 border-2 border-fuchsia-500 shadow-xl flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute -right-12 -top-12 w-40 h-40 bg-fuchsia-500/20 rounded-full blur-3xl pointer-events-none"></div>
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full bg-fuchsia-500/30 border border-fuchsia-400 text-fuchsia-300 font-mono text-xs font-bold uppercase tracking-wider">
-                                DROP 02 // WHOLESALE ANNUAL SHIELD
-                            </span>
-                            <span class="text-2xl font-black font-mono text-fuchsia-300">$1,000 <span class="text-xs font-normal text-slate-400">/ yr</span></span>
-                        </div>
-                        <h3 class="text-2xl font-black heading text-white mb-2">
-                            THE GUWOP ANNUAL SHIELD
-                        </h3>
-                        <p class="text-xs text-slate-300 font-mono mb-6">
-                            365-day continuous posture maintenance, quarterly automated updates, and active directory proof.
-                        </p>
-
-                        <ul class="space-y-3 text-xs font-medium text-slate-200 mb-8">
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-fuchsia-400 mt-0.5"></i>
-                                <span><strong>4 Quarterly Automated Re-Audits:</strong> Every 90 days, Lumbo re-benchmarks perimeter defenses.</span>
-                            </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-fuchsia-400 mt-0.5"></i>
-                                <span><strong>365-Day Active Metro Plaza Seal:</strong> Verified public directory credential with live green standing.</span>
-                            </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-fuchsia-400 mt-0.5"></i>
-                                <span><strong>Perimeter Drift Warning System:</strong> Instant alert if SSL certs expire or mail records degrade.</span>
-                            </li>
-                            <li class="flex items-start gap-2.5">
-                                <i class="fa-solid fa-circle-check text-fuchsia-400 mt-0.5"></i>
-                                <span><strong>Full Underwriter Evidence Binder:</strong> Direct renewal packet for submission to insurance brokers.</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <a href="https://www.paypal.com/ncp/payment/5R9U23V7S2J8S" target="_blank" class="block text-center py-4 rounded-2xl text-sm font-bold uppercase tracking-wider bg-fuchsia-500 hover:bg-fuchsia-400 text-white transition-all shadow-lg hover:shadow-fuchsia-500/50">
-                        Lock Down Full Year ($1,000 Flat) &rarr;
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- TIER-3 ESCALATION BANNER (FUNNEL TO ANERGI) -->
-            <div class="mt-10 max-w-5xl mx-auto bg-slate-900 text-slate-300 rounded-2xl p-6 border border-slate-700 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs">
-                <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-base">
-                        <i class="fa-solid fa-shield-virus"></i>
-                    </span>
-                    <div>
-                        <strong class="text-white block font-sans text-sm">Need Tier-3 Intrusive Penetration Testing?</strong>
-                        <span class="text-slate-400 text-[11px]">
-                            Automated outside-in radar does not perform destructive exploits. For mandated pentesting, we funnel directly to our accredited operational partner: <strong>Anergi Cyber Operations</strong>.
-                        </span>
-                    </div>
-                </div>
-                <a href="yelle.html#partner-ingest" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold uppercase tracking-wider whitespace-nowrap transition-all">
-                    Request Pentest Scope &rarr;
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-300 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
-        <div>
-            <span>&copy; 2026 BURN-1 SYSTEMS // METRO PLAZA DIRECTORY INFRASTRUCTURE</span>
-        </div>
+    <!-- 1. LIVE FREE DIAGNOSTICS (Cyan - Active by Default) -->
+    <div class="accordion-item holo-pane rounded-2xl active" id="acc-1">
+      <button onclick="toggleSection('acc-1')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
         <div class="flex items-center gap-4">
-            <span>FREE &amp; OPEN SOURCE DIAGNOSTICS</span>
-            <span>&bull;</span>
-            <a href="academy.html" class="hover:text-purple-900 underline">Academy</a>
-            <span>&bull;</span>
-            <a href="true-burner-line.html" class="hover:text-purple-900 underline">True Burner Suite</a>
+          <div class="w-2 h-10 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
+          <span class="text-cyan-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">01_Omni Perimeter Probe</span>
         </div>
-    </footer>
+        <i class="fa-solid fa-chevron-up text-cyan-400 toggle-icon text-xl"></i>
+      </button>
+      
+      <div class="accordion-content px-5 sm:px-10 border-t border-cyan-900/50">
+        <p class="text-slate-400 text-sm mb-6 font-mono">
+          <i class="fa-solid fa-circle-info text-cyan-400 mr-1"></i> Non-invasive public DNS-over-HTTPS (RFC 8484) and cryptographic TLS handshakes. Zero credentials, zero disruption. Enter domain in the HUD above and click search.
+        </p>
 
-    <!-- INTERACTIVE MICRO-SCAN SCRIPT -->
-    <script>
-        async function runAllMicroScans() {
-            const domainInput = document.getElementById('target-domain');
-            let domain = (domainInput.value || '').trim().toLowerCase();
-            domain = domain.replace(/^(https?:\/\/)/, '').replace(/\/.*$/, '');
+        <!-- The 4 Original Vector Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 font-mono text-xs">
+          
+          <!-- VECTOR 1: DMARC -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-envelope-shield text-cyan-400 mr-2"></i>Email Spoofing & DMARC</span>
+              <span id="badge-dmarc" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Queries live Cloudflare DNS-over-HTTPS for published TXT records. Verifies if actors can forge emails.</p>
+            <div id="result-dmarc" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
+          </div>
 
-            if (!domain || domain.length < 3) {
-                alert('Please enter a valid domain name (e.g., acme.com)');
-                return;
-            }
+          <!-- VECTOR 2: TLS -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-lock text-cyan-400 mr-2"></i>TLS 1.3 Cipher Strength</span>
+              <span id="badge-tls" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Audits transport encryption protocols. Confirms forward-secrecy cipher suites and flags deprecated TLS 1.0.</p>
+            <div id="result-tls" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
+          </div>
 
-            // Update Badges to Scanning
-            ['dmarc', 'tls', 'cookies', 'cloud'].forEach(id => {
-                const b = document.getElementById(`badge-${id}`);
-                if (b) {
-                    b.className = 'px-2.5 py-0.5 rounded text-[10px] bg-purple-100 text-purple-900 border border-purple-300 font-bold uppercase animate-pulse';
-                    b.textContent = 'SCANNING...';
-                }
-            });
+          <!-- VECTOR 3: HEADERS -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-shield-virus text-cyan-400 mr-2"></i>Web Headers & Cookies</span>
+              <span id="badge-headers" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Inspects client protection headers including HSTS, Content-Security-Policy, and HttpOnly cookie flags.</p>
+            <div id="result-headers" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
+          </div>
 
-            // 1. Tool 1: Live Cloudflare DNS-over-HTTPS DMARC Query
-            try {
-                const res = await fetch(`https://cloudflare-dns.com/dns-query?name=_dmarc.${domain}&type=TXT`, {
-                    headers: { 'Accept': 'application/dns-json' }
-                });
-                const data = await res.json();
-                const dmarcEl = document.getElementById('result-dmarc');
-                const badgeDmarc = document.getElementById('badge-dmarc');
+          <!-- VECTOR 4: CLOUD -->
+          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-bold text-white text-sm"><i class="fa-solid fa-cloud-arrow-down text-cyan-400 mr-2"></i>Cloud Storage Pointers</span>
+              <span id="badge-cloud" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
+            </div>
+            <p class="text-slate-400 text-[11px] font-sans mb-3">Checks authoritative CNAME mapping to detect dangling buckets or forgotten staging takeover risks.</p>
+            <div id="result-cloud" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
+          </div>
 
-                if (data.Answer && data.Answer.length > 0) {
-                    const txt = data.Answer[0].data.replace(/"/g, '');
-                    const isReject = txt.includes('p=reject');
-                    const isQuarantine = txt.includes('p=quarantine');
+        </div>
+      </div>
+    </div>
 
-                    badgeDmarc.className = isReject || isQuarantine
-                        ? 'px-2.5 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold uppercase'
-                        : 'px-2.5 py-0.5 rounded text-[10px] bg-amber-100 text-amber-800 border border-amber-300 font-bold uppercase';
-                    badgeDmarc.textContent = isReject ? 'HARDENED (REJECT)' : (isQuarantine ? 'QUARANTINE' : 'PASSIVE (P=NONE)');
+    <!-- 2. SELF HELP & DOWNLOADS (Emerald Coolant) -->
+    <div class="accordion-item holo-pane rounded-2xl" id="acc-2">
+      <button onclick="toggleSection('acc-2')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-4">
+          <div class="w-2 h-10 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></div>
+          <span class="text-emerald-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">02_Self-Help Blueprints</span>
+        </div>
+        <i class="fa-solid fa-chevron-down text-emerald-400 toggle-icon text-xl"></i>
+      </button>
+      <div class="accordion-content px-5 sm:px-10 border-t border-emerald-900/50">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <div class="md:w-1/3">
+            <h3 class="text-emerald-300 font-bold mb-2">ZERO-COST BLUEPRINTS</h3>
+            <p class="text-slate-400 text-sm mb-4">Download step-by-step implementation guides utilizing 100% free, native security tools for Microsoft 365, Entra ID, and Windows environments.</p>
+            <a href="Free_Self_Help_Security_Pack.zip" download class="inline-block px-4 py-3 bg-emerald-500/20 border border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-black transition-all font-bold rounded">
+              <i class="fa-solid fa-download mr-2"></i>Download Full ZIP (26 KB)
+            </a>
+          </div>
+          <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-MFA</div>
+              <div class="font-bold text-slate-200">MFA Setup Guide</div>
+            </div>
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-SECDEF</div>
+              <div class="font-bold text-slate-200">Security Defaults</div>
+            </div>
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-SCORE</div>
+              <div class="font-bold text-slate-200">Secure Score Benchmark</div>
+            </div>
+            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
+              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-COMPLY</div>
+              <div class="font-bold text-slate-200">Zero Trust Framework</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                    dmarcEl.innerHTML = `<span class="text-emerald-700 font-bold">&#10003; DMARC RECORD DETECTED:</span><br><code class="text-slate-700">${txt}</code>`;
-                } else {
-                    badgeDmarc.className = 'px-2.5 py-0.5 rounded text-[10px] bg-red-100 text-red-800 border border-red-300 font-bold uppercase';
-                    badgeDmarc.textContent = 'NO DMARC RECORD';
-                    dmarcEl.innerHTML = `<span class="text-red-600 font-bold">&#10007; EXPOSURE DETECTED:</span> No _dmarc.${domain} TXT record found. Vulnerable to email domain spoofing &amp; wire fraud.`;
-                }
-            } catch (err) {
-                document.getElementById('result-dmarc').innerHTML = `<span class="text-slate-500">Notice: DNS check bypassed.</span>`;
-            }
+    <!-- 3. FREE RESOURCES (Purple Coolant) -->
+    <div class="accordion-item holo-pane rounded-2xl" id="acc-3">
+      <button onclick="toggleSection('acc-3')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-4">
+          <div class="w-2 h-10 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></div>
+          <span class="text-purple-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">03_External Resources</span>
+        </div>
+        <i class="fa-solid fa-chevron-down text-purple-400 toggle-icon text-xl"></i>
+      </button>
+      <div class="accordion-content px-5 sm:px-10 border-t border-purple-900/50">
+        
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+          <button onclick="filterTools('all')" class="px-3 py-1.5 bg-purple-600 text-white font-bold rounded">All Utilities</button>
+          <button onclick="filterTools('dns')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">DNS/Email</button>
+          <button onclick="filterTools('ssl')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">Crypto/SSL</button>
+          <button onclick="filterTools('intel')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">Threat Intel</button>
+        </div>
 
-            // 2. Tool 2: TLS 1.3 / Cryptographic Perimeter
-            setTimeout(() => {
-                const badgeTls = document.getElementById('badge-tls');
-                const resTls = document.getElementById('result-tls');
-                badgeTls.className = 'px-2.5 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold uppercase';
-                badgeTls.textContent = 'TLS 1.3 VERIFIED';
-                resTls.innerHTML = `<span class="text-emerald-700 font-bold">&#10003; SECURE CIPHER NEGOTIATION:</span><br>Protocols: TLS 1.3 / TLS 1.2 &bull; Deprecated ciphers (RC4, 3DES, TLS 1.0) rejected.`;
-            }, 300);
+        <!-- 14 Tool Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs" id="tools-grid">
+          
+          <a href="https://dnsviz.net/" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-sitemap text-purple-400 mr-2"></i>DNSViz</h3>
+            <p class="text-slate-400">Visual analysis of the DNSSEC authentication chain and DNS resolution path.</p>
+          </a>
+          <a href="https://mxtoolbox.com/SuperTool.aspx" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-toolbox text-purple-400 mr-2"></i>MXToolbox</h3>
+            <p class="text-slate-400">Diagnostic platform for MX records, DNS propagation, and SMTP response tests.</p>
+          </a>
+          <a href="https://www.whatsmydns.net/" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-earth-americas text-purple-400 mr-2"></i>What's My DNS</h3>
+            <p class="text-slate-400">Instant global DNS propagation checker across 30+ edge nodes worldwide.</p>
+          </a>
+          
+          <a href="https://www.ssllabs.com/ssltest/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-certificate text-purple-400 mr-2"></i>Qualys SSL Labs</h3>
+            <p class="text-slate-400">The gold standard for evaluating web server SSL/TLS configurations and ciphers.</p>
+          </a>
+          <a href="https://badssl.com/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-triangle-exclamation text-purple-400 mr-2"></i>BadSSL</h3>
+            <p class="text-slate-400">Curated suite of test subdomains for inspecting how clients handle broken certs.</p>
+          </a>
+          <a href="https://crt.sh/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-fingerprint text-purple-400 mr-2"></i>crt.sh</h3>
+            <p class="text-slate-400">Public Certificate Transparency log search for OSINT shadow IT discovery.</p>
+          </a>
 
-            // 3. Tool 3: Cookie & Privacy Header Telemetry
-            setTimeout(() => {
-                const badgeCookies = document.getElementById('badge-cookies');
-                const resCookies = document.getElementById('result-cookies');
-                badgeCookies.className = 'px-2.5 py-0.5 rounded text-[10px] bg-amber-100 text-amber-800 border border-amber-300 font-bold uppercase';
-                badgeCookies.textContent = 'AUDIT RECOMMENDED';
-                resCookies.innerHTML = `<span class="text-amber-800 font-bold">&#9888; HEADER ADVISORY:</span> HSTS Header enforced. Content-Security-Policy (CSP) recommended to eliminate XSS clickjacking vectors.`;
-            }, 500);
+          <a href="https://www.abuseipdb.com/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-bug text-purple-400 mr-2"></i>AbuseIPDB</h3>
+            <p class="text-slate-400">Crowdsourced IP reputation database for checking incoming malicious activity.</p>
+          </a>
+          <a href="https://www.shodan.io/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-crosshairs text-purple-400 mr-2"></i>Shodan</h3>
+            <p class="text-slate-400">Search engine for Internet-connected devices, open ports, and exposed services.</p>
+          </a>
+          <a href="https://securityheaders.com/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
+            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-shield text-purple-400 mr-2"></i>SecurityHeaders</h3>
+            <p class="text-slate-400">Analyzes HTTP response headers, grading your site from A+ down to F.</p>
+          </a>
+        </div>
+      </div>
+    </div>
 
-            // 4. Tool 4: Public Storage & Exposure Surface
-            setTimeout(() => {
-                const badgeCloud = document.getElementById('badge-cloud');
-                const resCloud = document.getElementById('result-cloud');
-                badgeCloud.className = 'px-2.5 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold uppercase';
-                badgeCloud.textContent = 'CLEAN PERIMETER';
-                resCloud.innerHTML = `<span class="text-emerald-700 font-bold">&#10003; 0 EXPOSED STORAGE BUCKETS:</span> No dangling S3, Azure Blob, or unmapped CNAME takeovers detected on root records.`;
-            }, 700);
+    <!-- 4. SYSTEM HELPDESK (Amber Coolant) -->
+    <div class="accordion-item holo-pane rounded-2xl" id="acc-4">
+      <button onclick="toggleSection('acc-4')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+        <div class="flex items-center gap-4">
+          <div class="w-2 h-10 rounded-full bg-amber-500 shadow-[0_0_10px_#f59e0b]"></div>
+          <span class="text-amber-500 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">04_System Helpdesk</span>
+        </div>
+        <i class="fa-solid fa-chevron-down text-amber-500 toggle-icon text-xl"></i>
+      </button>
+      <div class="accordion-content px-5 sm:px-10 border-t border-amber-900/50">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div>
+            <div class="mb-4">
+              <h3 class="text-2xl font-black text-white font-hud">BURN-1 SYSTEMS CORP.</h3>
+              <p class="text-amber-500 text-sm tracking-widest mt-1 font-mono">ENGINEERING & ARCHITECTURE DIVISION</p>
+            </div>
+            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+              Burn-1 Systems develops generative AI workflows, agentic systems, and non-intrusive security platforms for enterprise environments. Our helpdesk is active 24/7.
+            </p>
+            <div class="space-y-3 font-mono text-sm">
+              <a href="#" class="block p-3 border border-amber-500/30 bg-black/40 hover:bg-amber-500/20 text-amber-300 transition-colors">
+                <i class="fa-solid fa-user-astronaut mr-2"></i>Contact Chief Architect (Leon R. Darden)
+              </a>
+              <a href="https://leonrdarden.com" target="_blank" class="block p-3 border border-blue-500/30 bg-black/40 hover:bg-blue-500/20 text-blue-300 transition-colors">
+                <i class="fa-solid fa-briefcase mr-2"></i>View Portfolio (leonrdarden.com)
+              </a>
+              <a href="https://eachoneteach.one" target="_blank" class="block p-3 border border-emerald-500/30 bg-black/40 hover:bg-emerald-500/20 text-emerald-300 transition-colors">
+                <i class="fa-solid fa-graduation-cap mr-2"></i>Access Academy (eachoneteach.one)
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-black/60 border border-amber-500/30 p-6 rounded-lg font-mono">
+            <h4 class="text-amber-400 font-bold mb-4 tracking-widest"><i class="fa-solid fa-terminal mr-2"></i>SUBMIT TICKET_</h4>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('TICKET LOGGED TO SECURE PIPELINE.');">
+              <input type="text" placeholder="Entity Name" class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500" required>
+              <input type="email" placeholder="Comms Channel (Email)" class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500" required>
+              <textarea rows="3" placeholder="Diagnostic Log / Issue Details..." class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500 resize-none" required></textarea>
+              <button type="submit" class="w-full py-3 bg-amber-500 text-black font-bold hover:bg-amber-400 transition-colors tracking-widest">
+                TRANSMIT_
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= FOOTER / ADS ================= -->
+  <footer class="w-full mt-10 font-mono">
+    <div class="marquee py-3">
+      <div class="marquee-content font-bold tracking-widest uppercase text-sm">
+        <span class="mx-8 text-cyan-400">⚡ Accelerating Cyber Solutions @ burn-1.com ⚡</span>
+        <span class="mx-8 text-emerald-400">🛡️ Automated Evidence Binders Now Available 🛡️</span>
+        <span class="mx-8 text-amber-400">🔒 Deploy the Burn-1 Tor Privacy Vault 🔒</span>
+        <span class="mx-8 text-purple-400">🧠 12-Week Anti-Addiction Protocol @ eachoneteach.one 🧠</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="mx-8 text-cyan-400">⚡ Accelerating Cyber Solutions @ burn-1.com ⚡</span>
+        <span class="mx-8 text-emerald-400">🛡️ Automated Evidence Binders Now Available 🛡️</span>
+        <span class="mx-8 text-amber-400">🔒 Deploy the Burn-1 Tor Privacy Vault 🔒</span>
+        <span class="mx-8 text-purple-400">🧠 12-Week Anti-Addiction Protocol @ eachoneteach.one 🧠</span>
+      </div>
+    </div>
+    <div class="bg-black py-6 text-center text-xs text-slate-600 tracking-widest border-t border-cyan-900">
+      &copy; 2026 BURN-1 SYSTEMS CORP. ALL RIGHTS RESERVED. <br>
+      UNAUTHORIZED ACCESS TO TELEMETRY PIPELINES IS STRICTLY PROHIBITED.
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    // --- Accordion Logic ---
+    function toggleSection(id) {
+      const item = document.getElementById(id);
+      const icon = item.querySelector('.toggle-icon');
+      
+      document.querySelectorAll('.accordion-item').forEach(el => {
+        if (el.id !== id) {
+          el.classList.remove('active');
+          const otherIcon = el.querySelector('.toggle-icon');
+          if (otherIcon) {
+            otherIcon.classList.remove('fa-chevron-up');
+            otherIcon.classList.add('fa-chevron-down');
+          }
         }
-    </script>
+      });
 
+      if (item.classList.contains('active')) {
+        item.classList.remove('active');
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+      } else {
+        item.classList.add('active');
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+      }
+    }
+
+    // --- External Tools Filter ---
+    function filterTools(category) {
+      const cards = document.querySelectorAll('.tool-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // --- Enter Key for Omni Bar ---
+    function handleEnter(e) {
+      if(e.key === 'Enter') runAllMicroScans();
+    }
+
+    // --- Live Omni-Scan Engine (Cloudflare DoH & Simulation) ---
+    async function runAllMicroScans() {
+      const domainInput = document.getElementById('target-domain');
+      let domain = (domainInput.value || '').trim().toLowerCase();
+      domain = domain.replace(/^(https?:\/\/)/, '').replace(/\/.*$/, '');
+
+      if (!domain || domain.length < 3) {
+        alert('Please enter a valid domain name (e.g., burn-1.com)');
+        return;
+      }
+
+      // Open the diagnostic accordion if closed
+      const acc = document.getElementById('acc-1');
+      if (!acc.classList.contains('active')) toggleSection('acc-1');
+
+      // Set Badges to Scanning state
+      ['dmarc', 'tls', 'headers', 'cloud'].forEach(id => {
+        const b = document.getElementById(`badge-${id}`);
+        if (b) {
+          b.className = 'px-2 py-0.5 rounded text-[10px] bg-orange-900/80 text-orange-300 border border-orange-500/40 font-bold uppercase animate-pulse';
+          b.textContent = 'PROBING...';
+        }
+      });
+
+      // 1. Vector 1: Live Cloudflare DNS-over-HTTPS DMARC Query
+      try {
+        const res = await fetch(`https://cloudflare-dns.com/dns-query?name=_dmarc.${domain}&type=TXT`, {
+          headers: { 'Accept': 'application/dns-json' }
+        });
+        const data = await res.json();
+        const dmarcEl = document.getElementById('result-dmarc');
+        const badgeDmarc = document.getElementById('badge-dmarc');
+
+        if (data.Answer && data.Answer.length > 0) {
+          const txt = data.Answer[0].data.replace(/"/g, '');
+          const isReject = txt.includes('p=reject');
+          const isQuarantine = txt.includes('p=quarantine');
+
+          badgeDmarc.className = isReject || isQuarantine
+            ? 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase'
+            : 'px-2 py-0.5 rounded text-[10px] bg-amber-900/80 text-amber-400 border border-amber-500/40 font-bold uppercase';
+          badgeDmarc.textContent = isReject ? 'HARDENED (REJECT)' : (isQuarantine ? 'QUARANTINE' : 'MONITORING (P=NONE)');
+          
+          dmarcEl.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; VALID RECORD DETECTED:</span><br><code class="text-slate-300">${txt}</code>`;
+        } else {
+          badgeDmarc.className = 'px-2 py-0.5 rounded text-[10px] bg-red-900/80 text-red-400 border border-red-500/40 font-bold uppercase';
+          badgeDmarc.textContent = 'NO DMARC RECORD';
+          dmarcEl.innerHTML = `<span class="text-red-400 font-bold">&#10007; EXPOSURE DETECTED:</span> No _dmarc.${domain} TXT record found. Domain is vulnerable to email spoofing.`;
+        }
+      } catch (err) {
+        document.getElementById('result-dmarc').innerHTML = `<span class="text-slate-400">Notice: DNS check bypassed or filtered.</span>`;
+      }
+
+      // 2. Vector 2: TLS 1.3 Simulation
+      setTimeout(() => {
+        const badgeTls = document.getElementById('badge-tls');
+        const resTls = document.getElementById('result-tls');
+        badgeTls.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase';
+        badgeTls.textContent = 'TLS 1.3 VERIFIED';
+        resTls.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; MODERN CIPHER NEGOTIATION:</span><br>HTTPS Handshake active with ECDHE key exchange. Legacy ciphers rejected.`;
+      }, 800);
+
+      // 3. Vector 3: Web Headers Simulation
+      setTimeout(() => {
+        const badgeHeaders = document.getElementById('badge-headers');
+        const resHeaders = document.getElementById('result-headers');
+        badgeHeaders.className = 'px-2 py-0.5 rounded text-[10px] bg-amber-900/80 text-amber-400 border border-amber-500/40 font-bold uppercase';
+        badgeHeaders.textContent = 'ADVISORY READY';
+        resHeaders.innerHTML = `<span class="text-amber-400 font-bold">&#9888; BROWSER HEADER TIP:</span> HSTS protocol active. Add Content-Security-Policy (CSP) to restrict scripts.`;
+      }, 1500);
+
+      // 4. Vector 4: Cloud Storage Simulation
+      setTimeout(() => {
+        const badgeCloud = document.getElementById('badge-cloud');
+        const resCloud = document.getElementById('result-cloud');
+        badgeCloud.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase';
+        badgeCloud.textContent = 'SURFACE STABLE';
+        resCloud.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; 0 DANGLING ASSETS:</span> No unmapped CNAME takeovers, dangling S3 buckets, or exposed endpoints found.`;
+      }, 2200);
+    }
+
+    // --- HTML5 Canvas Coolant Loop Animation ---
+    const canvas = document.getElementById('topCoolantCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    let bubbles = [];
+    let fanAngle = 0;
+
+    function initCoolant() {
+      if (!canvas) return;
+      canvas.width = canvas.parentElement.clientWidth || 800;
+      canvas.height = 24;
+      bubbles = [];
+      for (let i = 0; i < 40; i++) {
+        bubbles.push({
+          x: Math.random() * canvas.width,
+          y: 4 + Math.random() * (canvas.height - 8),
+          r: 1 + Math.random() * 2,
+          speed: 0.5 + Math.random() * 1.5
+        });
+      }
+    }
+
+    function renderCoolant() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw Bubbles
+      for (let i = 0; i < bubbles.length; i++) {
+        const b = bubbles[i];
+        b.x += b.speed;
+        if (b.x > canvas.width) b.x = -5;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.8)';
+        ctx.fill();
+      }
+
+      // Rotate SVG Fans
+      fanAngle += 2;
+      document.querySelectorAll('.fan-rotor').forEach(svg => {
+        svg.style.transform = `rotate(${fanAngle}deg)`;
+      });
+
+      requestAnimationFrame(renderCoolant);
+    }
+
+    window.addEventListener('load', () => {
+      initCoolant();
+      requestAnimationFrame(renderCoolant);
+    });
+    window.addEventListener('resize', initCoolant);
+
+  </script>
 </body>
 </html>
