@@ -1,0 +1,299 @@
+version: '8.0'
+platform: BURN-1 Autonomous SLM Engine & APEA Diagnostic Core
+description: Master Unified SLM Database Manifest v8.0 containing State Compliance
+  & Governance rules, Industry-Specific Protocol PLUS Marketplace Schemas (Protocols
+  1-12 A-L), non-intrusive passive telemetry protocols, and Underwriter Metric Mappings.
+last_updated: '2026-10-31'
+scanning_engine:
+  mode: 100% Agentless & Non-Intrusive
+  execution_time: 60-Second Passive Sweep
+  operational_risk: ZERO Downtime / Safe for Critical Infrastructure & SCADA
+  telemetry_protocols:
+  - category: Email Authenticity & Anti-Spoofing
+    protocols:
+    - DMARC (p=none/quarantine/reject)
+    - SPF TXT Record Scope
+    - DKIM Cryptographic Key
+    - BIMI Brand Indicator
+  - category: Web Transport & HTTP Header Hygiene
+    protocols:
+    - HSTS (Strict-Transport-Security)
+    - Content-Security-Policy (CSP)
+    - CORS (Access-Control-Allow-Origin)
+    - X-Frame-Options (Clickjacking)
+    - X-Content-Type-Options (nosniff)
+  - category: DNS & Certificate Infrastructure
+    protocols:
+    - DNSSEC Validation
+    - CAA Record Authorization
+    - TLS/SSL Handshake & Expiration (TLS 1.2/1.3 Enforcement)
+  - category: Perimeter & Service Cloaking
+    protocols:
+    - Passive Port 3389 (RDP) Exposure
+    - Passive Port 445 (SMB) Exposure
+    - SNMP Port 161 Check
+    - Zero Trust VPN Cloaking
+  - category: Threat Intelligence & Vulnerabilities
+    protocols:
+    - Public Banner Software Versioning
+    - CVE / CVSS Base Scoring
+    - CISA Known Exploited Vulnerabilities (KEV) Catalog Matching
+    - Dark Web Credential Breach Intelligence
+state_compliance_governance:
+  california_ccpa_cpra:
+    mandate: California Consumer Privacy Act & CPRA Amendments
+    key_requirements:
+    - Mandatory annual cybersecurity audits for high-risk data processing
+    - PCI DSS v4.0 Req 6.4.3 & 11.6.1 script inventory on checkout pages
+    - Consumer data deletion and opt-out API verification
+  new_york_nydfs_part_500:
+    mandate: 23 NYCRR Part 500 (2026 Enforcement Update)
+    key_requirements:
+    - "Universal MFA (\xA7 500.12) enforced across all user access, SaaS, and web\
+      \ portals"
+    - "Phishing-resistant authentication tokens (device recognition alone fails \xA7\
+      \ 500.12)"
+    - Sept 2026 Risk Assessment Guidance & Dual CISO/CEO Annual Compliance Attestation
+  washington_mhmd:
+    mandate: Washington My Health My Data Act (MHMD)
+    key_requirements:
+    - Strict opt-in consent for consumer health data outside HIPAA HIPAA boundaries
+    - Perimeter tracking script lockdown on health/wellness intake pages
+    - Private right of action shielding for non-consensual health data transfer
+  texas_hb_300:
+    mandate: Texas Medical Records Privacy Act (HB 300)
+    key_requirements:
+    - 15-day employee HIPAA/HB 300 training mandate
+    - Expanded definition of covered entities including tech contractors handling
+      ePHI
+    - Strict 15-day statutory breach disclosure window to state AG
+  nevada_gaming_reg_5_260:
+    mandate: Nevada Gaming Commission Regulation 5.260 & Form 2.24.26
+    key_requirements:
+    - Mandatory 24-hour initial cyber incident notification form filing
+    - Quarterly external vulnerability assessments for casino networks
+    - Title 31 AML/Cyber vendor due diligence for gaming floors
+  state_water_dep_guidance:
+    mandate: State Environmental Protection Agency & EPA Water SCADA Rules
+    key_requirements:
+    - Mandatory OT/SCADA network isolation for public drinking water systems
+    - Zero public WAN exposure for Modbus, DNP3, and BACnet controllers
+    - 24-hour CISA / State DEP incident report SLA
+protocol_plus_marketplace_schemas:
+  protocol_01_healthcare:
+    base_core:
+      id: protocol-01-hipaa
+      name: Healthcare Baseline (Core)
+      statutory_rules:
+      - "HIPAA \xA7 164.312"
+      - HITECH Safe Harbor
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-01b-hitrust-plus
+      name: Healthcare HITRUST PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: HITRUST CSF v11.9.0 (Sept 2024/2026 Release)
+      specialty_controls:
+      - OWASP Top 10 for Agentic Applications 2026 AI mapping
+      - HITRUST e1 (44 controls) / i1 (182 controls) / r2 tailored baseline
+      - FDA 524B Medical Device SBOM & IoMT 6-Zone OR Hotspot Map
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_02_financial:
+    base_core:
+      id: protocol-02-finra-sec
+      name: Financial Services Baseline (Core)
+      statutory_rules:
+      - FINRA Cyber Rule
+      - FTC Safeguards Rule
+      - SEC 4-Day 8-K Disclosure
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-02b-nydfs-cri-plus
+      name: Financial Services NYDFS / CRI PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: Cyber Risk Institute (CRI) Profile v2.2 & NYDFS 23 NYCRR Part
+        500
+      specialty_controls:
+      - "NYDFS \xA7 500.12 Universal Phishing-Resistant MFA Verification"
+      - EU Digital Operational Resilience Act (DORA) ICT Risk Mapping
+      - FIDO2 Passkey Enforcement & Immutable S3 Object Lock Proof
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_03_retail:
+    base_core:
+      id: protocol-03-pci-dss
+      name: Retail & E-Commerce Baseline (Core)
+      statutory_rules:
+      - PCI DSS Baseline
+      - CCPA Consumer Privacy
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-03b-pci-dss-4-plus
+      name: Retail PCI DSS v4.0 PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: PCI DSS v4.0 Requirements 6.4.3 & 11.6.1
+      specialty_controls:
+      - Req. 6.4.3 Third-Party Payment Page Script Inventory & CSP/SRI Hashes
+      - Req. 11.6.1 Automated Weekly Script & Header Tamper Detection
+      - Magecart E-Skimming Shield & POS Terminal VLAN Isolation
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_04_industrial_ot:
+    base_core:
+      id: protocol-04-isa-iec-62443
+      name: Industrial OT Baseline (Core)
+      statutory_rules:
+      - ISA/IEC 62443 Level 1-2 Baseline
+      - OSHA PSM 1910.119
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-04b-nerc-cip-tsa-plus
+      name: Industrial OT NERC CIP & TSA Directives PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: NERC CIP-002 through CIP-013 & TSA Pipeline Security Directives
+      specialty_controls:
+      - Purdue Model Level 2/3 SCADA Network Boundary Isolation
+      - 24-Hour CISA KEV Remediation SLA on Edge SCADA Gateways
+      - Zero Open WAN Port 445 (SMB) & Port 3389 (RDP) Cloaking
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_05_defense:
+    base_core:
+      id: protocol-05-dfars-nist171
+      name: Defense Supply Chain Baseline (Core)
+      statutory_rules:
+      - DFARS 252.204-7012
+      - NIST SP 800-171 Rev 3 Baseline
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-05b-cmmc-2-plus
+      name: Defense CMMC 2.0 Level 2 PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: CMMC 2.0 (32 CFR / 48 CFR) & NIST SP 800-172
+      specialty_controls:
+      - CUI Enclave Boundary Isolation & CSP Script Control (SC.7.177)
+      - CIRCIA 72-Hour Mandatory Cyber Incident Disclosure Automation
+      - DoD Supply Chain Audit Guarantee & FIDO2 Token Mandate
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_06_legal:
+    base_core:
+      id: protocol-06-aba-rules
+      name: Legal Industry Baseline (Core)
+      statutory_rules:
+      - ABA Model Rule 1.6(c)
+      - Client Privilege Baseline
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-06b-legal-vault-plus
+      name: Legal Privacy & Ethics PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: ABA Formal Opinion 483 & NY State Bar Ethics Rules
+      specialty_controls:
+      - Dark Web Leaked Partner Credential Shielding & MFA Mandate
+      - Client Document Vault TLS 1.3 Transport Verification
+      - Cross-Border eDiscovery & GDPR / DPF Safe Harbor Mapping
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_07_education:
+    base_core:
+      id: protocol-07-ferpa-coppa
+      name: Education & EdTech Baseline (Core)
+      statutory_rules:
+      - FERPA Baseline
+      - COPPA Requirements
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-07b-edtech-plus
+      name: EdTech Student Privacy PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: Combined FERPA / COPPA / CIPA & State Student Privacy Acts
+      specialty_controls:
+      - Third-Party EdTech Vendor Data Sharing & Tracking Script Audit
+      - Student PII Database Encryption & Auto-Purge Verification
+      - CIPA Compliant Perimeter Web Filtering & DNSSEC
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_08_automotive:
+    base_core:
+      id: protocol-08-iso21434
+      name: Automotive Baseline (Core)
+      statutory_rules:
+      - ISO/SAE 21434 Connected Vehicle Baseline
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-08b-unece-r155-r156-plus
+      name: Automotive UNECE R155 / R156 PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: UNECE Regulation R155 (CSMS) & R156 (Software Updates)
+      specialty_controls:
+      - Cyber Security Management System (CSMS) Verification
+      - Over-The-Air (OTA) Cryptographic Firmware Update Verification (R156)
+      - Telematics Gateway Mutual TLS 1.3 Authentication (mTLS)
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_09_telecom:
+    base_core:
+      id: protocol-09-telecom-sec
+      name: Telecommunications Baseline (Core)
+      statutory_rules:
+      - Telecom Security Regulations Baseline
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-09b-nis2-telecom-plus
+      name: Telecom 5G & EU NIS2 Directive PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: UK Telecommunications Security Act 2021 & EU NIS2 Directive
+      specialty_controls:
+      - 24-Hour Early Warning Incident Notification Automation
+      - 5G Core & Signaling Gateway Network Segmentation
+      - High-Risk Vendor Supply Chain Access Lockdown
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_10_gaming_hospitality:
+    base_core:
+      id: protocol-10-casino-sec
+      name: Gaming & Hospitality Baseline (Core)
+      statutory_rules:
+      - Gaming POS Isolation Baseline
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-10b-nevada-reg5-plus
+      name: Nevada Gaming Reg 5.260 PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: Nevada Gaming Commission Regulation 5.260 & Form 2.24.26
+      specialty_controls:
+      - 24-Hour Initial Cyber Response Form 2.24.26 Filing Automation
+      - Title 31 AML / Cyber Vendor Due Diligence for Casino Floors
+      - Hotel Management System (PMS) & POS Network Isolation
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_11_chemical_hazmat:
+    base_core:
+      id: protocol-11-rcsc
+      name: Chemical Processing Baseline (Core)
+      statutory_rules:
+      - ACC Responsible Care Security Code Baseline
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-11b-cfats-psm-plus
+      name: Chemical CFATS & OSHA PSM PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: CFATS Tier 1-4 & OSHA 1910.119 Process Safety Management
+      specialty_controls:
+      - Chemical Plant DCS/PLC Physical & Logical Boundary Cloaking
+      - Hazardous Materials SCADA WAN Port 445/3389 Lockdown
+      - OSHA PSM Cyber-Physical Safety Incident Response Alignment
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+  protocol_12_food_agtech:
+    base_core:
+      id: protocol-12-fsma-food
+      name: Food & AgTech Baseline (Core)
+      statutory_rules:
+      - FDA FSMA Preventive Controls Baseline
+      deliverable: Standard 16-Check APEA Scan + Evidence Report ($500) or Verified
+        Binder ($1,000/yr)
+    specialty_plus:
+      id: protocol-12b-fsma-204-haccp-plus
+      name: Food Safety FSMA Section 204 PLUS Upgrade (+$500 - $4,000/yr)
+      gold_standard: FDA FSMA Section 204 Food Traceability Rule & HACCP Cyber Interlocks
+      specialty_controls:
+      - FSMA 204 Critical Tracking Events (CTEs) & Key Data Elements (KDEs)
+      - Automated Food Processing Line PLC / SCADA Cyber Interlocks
+      - Cold-Chain IoT Sensor Network Segmentation
+      - Anergi.io Dual Cryptographic Seal on Specialty Binder
+database_backups:
+  primary_format: YAML / JSON Unified Schema
+  storage_location: /workspace/artifacts/slm-master-database-v8.yaml
+  sync_protocol: Automated DigitalOcean Droplet & Local SLM Ingestion
