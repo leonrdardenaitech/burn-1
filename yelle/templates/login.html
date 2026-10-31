@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YELLE // Reviewer Authentication Gate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #160f0b;
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: 
+                radial-gradient(ellipse 90% 40% at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 70%),
+                radial-gradient(circle at 85% 65%, rgba(44, 26, 18, 0.5) 0%, transparent 60%),
+                linear-gradient(180deg, #13171f 0%, #0d1b11 40%, #160f0b 100%);
+            background-attachment: fixed;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+        .vault-font { font-family: 'Cinzel', serif; }
+        .brutalist-card {
+            background: #f5ddb7;
+            color: #181818;
+            border: 3px solid #181818;
+            border-radius: 14px;
+            box-shadow: 8px 8px 0px #181818;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Brand Header -->
+        <div class="text-center mb-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 text-xs font-mono uppercase tracking-widest mb-3">
+                <i class="fa-solid fa-shield-halved"></i> Reviewer Verification Gate
+            </div>
+            <h1 class="text-3xl font-extrabold text-[#f5ddb7] tracking-wider vault-font">YELLE VAULT</h1>
+            <p class="text-xs font-mono text-stone-400 mt-1">Wednesday Executive Briefing &amp; Batch Review Surface</p>
+        </div>
+
+        <!-- Auth Card -->
+        <div class="brutalist-card p-8">
+            <div class="flex items-center justify-between pb-4 mb-6 border-b-2 border-stone-900">
+                <span class="text-xs font-bold font-mono tracking-wider uppercase text-stone-700">Protected Session</span>
+                <span class="text-xs font-mono bg-stone-900 text-[#f5ddb7] px-2 py-0.5 rounded font-bold">7-Day SLA</span>
+            </div>
+
+            {% if error %}
+            <div class="mb-5 p-3 rounded-lg bg-red-900/90 border border-red-700 text-red-100 text-xs font-mono flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-red-300"></i>
+                <span>{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <form action="/yelle/login" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold font-mono uppercase text-stone-800 mb-1">Reviewer Email</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-stone-500 text-xs"></i>
+                        <input type="email" name="email" required placeholder="anergi@burn-1.com" value="{{ email or '' }}" class="w-full bg-[#18100b] border-2 border-stone-900 rounded-lg pl-10 pr-4 py-2.5 text-sm font-mono text-white placeholder-stone-500 focus:outline-none focus:border-stone-900">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold font-mono uppercase text-stone-800 mb-1">Access Password</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-key absolute left-3.5 top-3.5 text-stone-500 text-xs"></i>
+                        <input type="password" name="password" required placeholder="••••••••••••" class="w-full bg-[#18100b] border-2 border-stone-900 rounded-lg pl-10 pr-4 py-2.5 text-sm font-mono text-white placeholder-stone-500 focus:outline-none focus:border-stone-900">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full mt-4 bg-stone-900 hover:bg-stone-800 text-[#f5ddb7] py-3 rounded-lg font-bold font-mono text-xs uppercase tracking-wider transition-all transform active:scale-95 shadow-md flex items-center justify-center gap-2 border-2 border-stone-900">
+                    <i class="fa-solid fa-lock-open text-cyan-400"></i> Authenticate &amp; Unlock Reviewer Hub
+                </button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-stone-800/30 text-center">
+                <p class="text-[11px] font-mono text-stone-700">Cryptographically signed session cookie issued on login.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
