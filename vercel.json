@@ -38,6 +38,86 @@
             "has": [
                 {
                     "type": "host",
+                    "value": "^freezer\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/freezer.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^freezer\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/freezer.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^acid\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/acid.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^acid\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/acid.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^times2\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/times2.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^times2\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/times2.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^sizzlean\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/sizzlean.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^sizzlean\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/sizzlean.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
                     "value": "^tool\\.burn-1\\.com$"
                 }
             ],
@@ -138,7 +218,7 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "^(?!(www|phase25|tool|tools)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                    "value": "^(?!(www|phase25|tool|tools|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
                 }
             ],
             "destination": "/cards/:subdomain.html"
@@ -148,7 +228,7 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "^(?!(www|phase25|tool|tools)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                    "value": "^(?!(www|phase25|tool|tools|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
                 }
             ],
             "destination": "/cards/:subdomain.html"
@@ -310,6 +390,22 @@
         {
             "source": "/central-hub",
             "destination": "/central-hub.html"
+        },
+        {
+            "source": "/freezer",
+            "destination": "/freezer.html"
+        },
+        {
+            "source": "/acid",
+            "destination": "/acid.html"
+        },
+        {
+            "source": "/times2",
+            "destination": "/times2.html"
+        },
+        {
+            "source": "/sizzlean",
+            "destination": "/sizzlean.html"
         }
     ],
     "redirects": [
@@ -351,7 +447,7 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "^(?!(www|phase25|tool|tools|inklife)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                    "value": "^(?!(www|phase25|tool|tools|inklife|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
                 }
             ],
             "destination": "/cards/:subdomain",
