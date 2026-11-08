@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIZZLEAN (sizzlean.burn-1.com) — Minimalist Guilloche Line-Art &amp; White-Label MSP Catalog</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --sz-bg: #0c1210;
+      --sz-emerald: #10b981;
+      --sz-gold: #f5d061;
+      --accent-blue: #38bdf8;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--sz-bg);
+      color: #f8fafc;
+      background-image:
+        repeating-radial-gradient(circle at 0 0, transparent 0, #0c1210 14px),
+        repeating-linear-gradient(rgba(16, 185, 129, 0.04), rgba(16, 185, 129, 0.04));
+    }
+    /* Minimalist Guilloche Line-Art Card */
+    .guilloche-card {
+      background:
+        linear-gradient(180deg, rgba(20, 32, 27, 0.94) 0%, rgba(11, 18, 15, 0.98) 100%);
+      border: 1.5px solid rgba(16, 185, 129, 0.45);
+      outline: 1px dashed rgba(245, 208, 97, 0.35);
+      outline-offset: -6px;
+      border-radius: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .guilloche-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 18px 40px rgba(16, 185, 129, 0.22);
+    }
+    /* Format & Style Mode: Paper Print PDF Preview Mode */
+    body.mode-paper .catalog-item-preview {
+      background: #f4efe0 !important;
+      color: #111814 !important;
+      border: 2px double #14452f !important;
+    }
+    /* GEMINI.md Mandatory Brand Title & TM CSS */
+    .brand-title {
+      font-family: var(--font-sans, inherit);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main, #ffffff);
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .flip-f {
+      display: inline-block;
+      transform: scaleX(-1);
+      margin-right: 1px;
+    }
+    .brand-tm {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.55em;
+      font-weight: 700;
+      color: var(--accent-blue, #38bdf8);
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 2px;
+      margin-right: 4px;
+    }
+    .tm-notice {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.75rem;
+      color: var(--text-muted, #94a3b8);
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body data-division="sizzlean" class="min-h-screen flex flex-col">
+
+  <!-- UNIVERSAL SIGN-IN & DIVISION HEADER -->
+  <header class="sticky top-0 z-40 bg-[#0c1210]/95 backdrop-blur-md border-b-2 border-emerald-500/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/divisions/show_this_logo_on_clothes_24c03a3b.jpg" alt="Sizzlean Apparel &amp; Brand Logo" class="w-11 h-11 rounded-xl object-cover border-2 border-emerald-400">
+        <div>
+          <div class="text-sm sm:text-base font-black tracking-tight text-white uppercase" style="font-family:'Cinzel',serif;">
+            SIZZLEAN <span class="text-emerald-400">// DIVISION 5</span>
+          </div>
+          <div class="text-[11px] font-mono text-slate-400 font-bold uppercase tracking-widest">
+            sizzlean.burn-1.com • Guilloche Line-Art &amp; White-Label MSP Catalog
+          </div>
+        </div>
+      </a>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">Core Site</a>
+        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">1. FreezerBurn</a>
+        <a href="acid.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">2. Acid</a>
+        <a href="times2.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">3. Times2</a>
+        <a href="sizzlean.html" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 text-xs font-extrabold shadow-[0_0_15px_rgba(16,185,129,0.5)]">4. Sizzlean</a>
+        <button
+          type="button"
+          onclick="window.Burn1DivisionEngine && window.Burn1DivisionEngine.openAuth()"
+          data-universal-auth-status
+          class="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-400 font-mono text-xs font-bold border border-emerald-400 cursor-pointer"
+        >
+          <i class="fa-solid fa-user-lock mr-1"></i> Universal Sign-In
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 space-y-10">
+
+    <!-- HERO + FORMAT & STYLE SELECTOR (PAPER PRINT PDF vs DIGITAL WEB DASHBOARD) -->
+    <section class="guilloche-card p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-7 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400 font-mono text-xs font-bold text-emerald-400 uppercase">
+          <i class="fa-solid fa-layer-group"></i> Minimalist Guilloche Line-Art + Netflix-Style Catalog
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight" style="font-family:'Cinzel',serif;">
+          Treasury-Grade Contracts &amp; White-Label MSP Compliance Kits.
+        </h1>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          Switch seamlessly between physical <strong>Paper Print Guilloche PDFs</strong> and interactive <strong>Digital Web Dashboards</strong>. Access free commercial templates or subscribe to $250–$500/mo White-Label MSP Scorecard Bundles.
+        </p>
+
+        <!-- Format & Style Selector -->
+        <div class="pt-2">
+          <div class="font-mono text-[11px] font-bold uppercase text-emerald-400 mb-2">FORMAT &amp; STYLE SELECTOR:</div>
+          <div class="inline-flex rounded-xl bg-black/60 p-1.5 border border-emerald-500/40 gap-2">
+            <button
+              id="btn-mode-digital"
+              type="button"
+              onclick="setSizzleanFormat('digital')"
+              class="px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 font-mono text-xs font-extrabold cursor-pointer transition-all"
+            >
+              <i class="fa-solid fa-display mr-1"></i> Digital Web Dashboard
+            </button>
+            <button
+              id="btn-mode-paper"
+              type="button"
+              onclick="setSizzleanFormat('paper')"
+              class="px-4 py-2 rounded-lg bg-transparent text-slate-300 hover:text-white font-mono text-xs font-bold cursor-pointer transition-all"
+            >
+              <i class="fa-solid fa-file-pdf mr-1"></i> Paper Print Guilloche PDF
+            </button>
+          </div>
+          <div id="format-readout" class="font-mono text-[11px] text-slate-400 mt-2">
+            Active Output Mode: <strong class="text-emerald-400">Digital Web Dashboard (Interactive Telemetry View)</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="p-3 rounded-2xl bg-black/60 border border-emerald-500/40">
+          <img
+            src="assets/divisions/show_this_logo_on_clothes_24c03a3b.jpg"
+            alt="Sizzlean Brand &amp; White-Label Showcase"
+            class="w-full h-64 object-cover rounded-xl"
+          >
+          <div class="mt-2 flex justify-between items-center font-mono text-[11px] text-emerald-400 px-1">
+            <span>SIZZLEAN // BRAND &amp; WHITE-LABEL</span>
+            <span>● GUILLOCHE VERIFIED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NETFLIX-STYLE CATALOG ROW 1: FREE LEGAL & COMMERCIAL TEMPLATES -->
+    <section class="space-y-4">
+      <div class="flex justify-between items-end">
+        <div>
+          <span class="font-mono text-xs font-extrabold uppercase text-emerald-400">ROW 01 // ZERO-COST PUBLIC VAULT</span>
+          <h2 class="text-2xl font-black text-white uppercase" style="font-family:'Cinzel',serif;">Free Guilloche Templates &amp; Instruments</h2>
+        </div>
+        <span class="font-mono text-xs text-slate-400">Instant Print PDF or Web View</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="guilloche-card catalog-item-preview p-5 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">FREE // $0</span>
+            <h3 class="text-lg font-black mt-2" style="font-family:'Cinzel',serif;">Master Commercial Contract Template</h3>
+            <p class="text-xs opacity-80 mt-1">Mutual NDA, SLA governance, and cyber indemnification schedule bordered with fine Guilloche line-art.</p>
+          </div>
+          <button
+            type="button"
+            onclick="selectSizzleanOffer('Free Master Commercial Contract Template ($0)', '0.00')"
+            class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-extrabold uppercase cursor-pointer"
+          >
+            Generate Free Contract →
+          </button>
+        </div>
+
+        <div class="guilloche-card catalog-item-preview p-5 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">FREE // $0</span>
+            <h3 class="text-lg font-black mt-2" style="font-family:'Cinzel',serif;">Asset &amp; Domain Title Transfer</h3>
+            <p class="text-xs opacity-80 mt-1">Chain-of-custody certificate for hardware, IP blocks, and domain ownership transfers with SHA-256 hash slot.</p>
+          </div>
+          <button
+            type="button"
+            onclick="selectSizzleanOffer('Free Asset & Domain Title Transfer ($0)', '0.00')"
+            class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-extrabold uppercase cursor-pointer"
+          >
+            Generate Title Transfer →
+          </button>
+        </div>
+
+        <div class="guilloche-card catalog-item-preview p-5 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">FREE // $0</span>
+            <h3 class="text-lg font-black mt-2" style="font-family:'Cinzel',serif;">UCC Commercial Bill of Sale</h3>
+            <p class="text-xs opacity-80 mt-1">Standardized commercial bill of sale with warranty attestation and dual-signatory Guilloche watermark.</p>
+          </div>
+          <button
+            type="button"
+            onclick="selectSizzleanOffer('Free UCC Commercial Bill of Sale ($0)', '0.00')"
+            class="mt-4 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-extrabold uppercase cursor-pointer"
+          >
+            Generate Bill of Sale →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- NETFLIX-STYLE CATALOG ROW 2: PAID WHITE-LABEL MSP KITS ($250-$500/MO) + CHECKOUT -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-7 space-y-4">
+        <div>
+          <span class="font-mono text-xs font-extrabold uppercase text-amber-300">ROW 02 // PARTNER SYNDICATION</span>
+          <h2 class="text-2xl font-black text-white uppercase" style="font-family:'Cinzel',serif;">White-Label MSP Compliance Kits ($250–$500/mo)</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div class="guilloche-card catalog-item-preview p-5 flex flex-col justify-between border-2 border-emerald-400">
+            <div>
+              <span class="font-mono text-[10px] font-extrabold text-emerald-400 uppercase">MSP PARTNER KIT // TIER 1</span>
+              <h3 class="text-xl font-black mt-1" style="font-family:'Cinzel',serif;">White-Label MSP Compliance Kit</h3>
+              <div class="text-3xl font-black text-emerald-400 my-2">$250<span class="text-xs font-normal">/mo</span></div>
+              <p class="text-xs opacity-80">Co-branded NIST CSF 2.0 &amp; carrier readiness binders for up to 5 client domains in Paper PDF + Web Dashboard formats.</p>
+            </div>
+            <button
+              type="button"
+              onclick="selectSizzleanOffer('White-Label MSP Compliance Kit ($250/mo)', '250.00')"
+              class="mt-4 w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono text-xs font-black uppercase cursor-pointer"
+            >
+              Select $250/mo MSP Kit
+            </button>
+          </div>
+
+          <div class="guilloche-card catalog-item-preview p-5 flex flex-col justify-between border-2 border-amber-400">
+            <div>
+              <span class="font-mono text-[10px] font-extrabold text-amber-300 uppercase">MSP SYNDICATE // TIER 2</span>
+              <h3 class="text-xl font-black mt-1" style="font-family:'Cinzel',serif;">Executive Scorecard Bundle</h3>
+              <div class="text-3xl font-black text-amber-300 my-2">$500<span class="text-xs font-normal">/mo</span></div>
+              <p class="text-xs opacity-80">Full 15-domain White-Label MSP Syndicate bundle with automated 5-minute `worker.py` drift seals and custom Guilloche crests.</p>
+            </div>
+            <button
+              type="button"
+              onclick="selectSizzleanOffer('White-Label Executive Scorecard Bundle ($500/mo)', '500.00')"
+              class="mt-4 w-full py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono text-xs font-black uppercase cursor-pointer"
+            >
+              Select $500/mo Bundle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sizzlean Dispatch Form -->
+      <div class="lg:col-span-5 guilloche-card p-6 space-y-4">
+        <div class="font-mono text-xs font-extrabold uppercase text-emerald-400">SIZZLEAN QUEUE &amp; DELIVERABLE COMPILER</div>
+        <h3 class="text-xl font-black text-white" style="font-family:'Cinzel',serif;">Compile &amp; Bind Selection</h3>
+        <form id="sizzlean-order-form" class="space-y-3">
+          <div>
+            <label class="block font-mono text-[11px] font-bold uppercase text-slate-300 mb-1">Partner / Client Domain *</label>
+            <input id="sz-domain" type="text" required placeholder="e.g. vanguard-msp.io" class="w-full px-3.5 py-2.5 rounded-xl bg-black/70 border border-emerald-500/50 font-mono text-xs text-white">
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] font-bold uppercase text-slate-300 mb-1">Partner Email *</label>
+            <input id="sz-email" type="email" required placeholder="partner@vanguard-msp.io" class="w-full px-3.5 py-2.5 rounded-xl bg-black/70 border border-emerald-500/50 font-mono text-xs text-white">
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] font-bold uppercase text-slate-300 mb-1">Selected Catalog Item</label>
+            <input id="sz-product" type="text" readonly value="White-Label MSP Compliance Kit ($250/mo)" class="w-full px-3.5 py-2.5 rounded-xl bg-emerald-950/60 border border-emerald-400 font-mono text-xs font-bold text-emerald-300">
+            <input id="sz-amount" type="hidden" value="250.00">
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono text-xs font-black uppercase tracking-widest shadow-lg cursor-pointer">
+            <i class="fa-solid fa-file-signature mr-1.5"></i> Compile via worker.py →
+          </button>
+        </form>
+        <div id="sz-receipt" class="hidden mt-3 p-3 rounded-xl bg-black border border-emerald-400 font-mono text-xs text-emerald-300 space-y-1"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MANDATORY LEGAL & TRADEMARK NOTICE PER GEMINI.MD -->
+  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-800 text-center text-xs text-slate-400">
+    <p>© 2026 Leon R. Darden. All rights reserved.</p>
+    <p class="tm-notice">
+      <span class="brand-title">ꟻried Brains<span class="brand-tm">™</span></span> and <span class="brand-title">ꟻried Brains<span class="brand-tm">™</span> World</span> are trademarks of Leon R. Darden.
+    </p>
+  </footer>
+
+  <script src="cosmo-widget.js"></script>
+  <script src="js/division-bots.js"></script>
+  <script>
+    let currentSizzleanFormat = 'Digital Web Dashboard';
+    function setSizzleanFormat(mode) {
+      const btnDig = document.getElementById('btn-mode-digital');
+      const btnPap = document.getElementById('btn-mode-paper');
+      const readout = document.getElementById('format-readout');
+      if (mode === 'paper') {
+        document.body.classList.add('mode-paper');
+        currentSizzleanFormat = 'Paper Print Guilloche PDF';
+        btnPap.className = 'px-4 py-2 rounded-lg bg-amber-400 text-slate-950 font-mono text-xs font-extrabold cursor-pointer transition-all';
+        btnDig.className = 'px-4 py-2 rounded-lg bg-transparent text-slate-300 hover:text-white font-mono text-xs font-bold cursor-pointer transition-all';
+        readout.innerHTML = 'Active Output Mode: <strong class="text-amber-300">Paper Print Guilloche PDF (High-Contrast Parchment Sheet)</strong>';
+      } else {
+        document.body.classList.remove('mode-paper');
+        currentSizzleanFormat = 'Digital Web Dashboard';
+        btnDig.className = 'px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 font-mono text-xs font-extrabold cursor-pointer transition-all';
+        btnPap.className = 'px-4 py-2 rounded-lg bg-transparent text-slate-300 hover:text-white font-mono text-xs font-bold cursor-pointer transition-all';
+        readout.innerHTML = 'Active Output Mode: <strong class="text-emerald-400">Digital Web Dashboard (Interactive Telemetry View)</strong>';
+      }
+    }
+
+    function selectSizzleanOffer(name, amount) {
+      document.getElementById('sz-product').value = name + ' [' + currentSizzleanFormat + ']';
+      document.getElementById('sz-amount').value = amount;
+      document.getElementById('sz-domain').focus();
+    }
+
+    document.getElementById('sizzlean-order-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const res = await window.Burn1DivisionEngine.submitOrder({
+        client_domain: document.getElementById('sz-domain').value.trim(),
+        contact_email: document.getElementById('sz-email').value.trim(),
+        product_type: document.getElementById('sz-product').value,
+        amount_paid: document.getElementById('sz-amount').value,
+        risk_index_score: '98'
+      });
+      const box = document.getElementById('sz-receipt');
+      box.classList.remove('hidden');
+      box.innerHTML = `
+        <div class="text-white font-bold">✓ SIZZLEAN DELIVERABLE COMPILED (${res.queued_order.order_id})</div>
+        <div>FORMAT: ${currentSizzleanFormat}</div>
+        <div class="break-all">SHA-256 SEAL: ${res.queued_order.sha256_seal || 'ISSUED_BY_WORKER'}</div>
+      `;
+    });
+  </script>
+</body>
+</html>

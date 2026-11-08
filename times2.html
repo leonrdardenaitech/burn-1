@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIMES2 (times2.burn-1.com) — The 2 Clocks Math Problem, Concentric Dials &amp; X² Regulatory Engine</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --t2-bg: #070b14;
+      --t2-amber: #f59e0b;
+      --t2-cyan: #38bdf8;
+      --accent-blue: #38bdf8;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--t2-bg);
+      color: #f8fafc;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 80% 75%, rgba(56, 189, 248, 0.12) 0%, transparent 50%);
+    }
+    .t2-pane {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1.5px solid rgba(245, 158, 11, 0.42);
+      border-radius: 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 0 24px rgba(245, 158, 11, 0.06);
+    }
+    .clock-ring-outer {
+      animation: spinSlow 36s linear infinite;
+      transform-origin: 120px 120px;
+    }
+    .clock-ring-inner {
+      animation: spinReverse 24s linear infinite;
+      transform-origin: 120px 120px;
+    }
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
+    @keyframes spinReverse { to { transform: rotate(-360deg); } }
+
+    /* GEMINI.md Mandatory Brand Title & TM CSS */
+    .brand-title {
+      font-family: var(--font-sans, inherit);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main, #ffffff);
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .flip-f {
+      display: inline-block;
+      transform: scaleX(-1);
+      margin-right: 1px;
+    }
+    .brand-tm {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.55em;
+      font-weight: 700;
+      color: var(--accent-blue, #38bdf8);
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 2px;
+      margin-right: 4px;
+    }
+    .tm-notice {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.75rem;
+      color: var(--text-muted, #94a3b8);
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body data-division="times2" class="min-h-screen flex flex-col">
+
+  <!-- UNIVERSAL SIGN-IN & DIVISION HEADER -->
+  <header class="sticky top-0 z-40 bg-[#070b14]/95 backdrop-blur-md border-b-2 border-amber-500/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/divisions/Times2_modern_logo_design_2610c0e1.jpg" alt="Times2 Logo" class="w-11 h-11 rounded-xl object-cover border-2 border-amber-400">
+        <div>
+          <div class="text-sm sm:text-base font-black tracking-tight text-white uppercase" style="font-family:'Orbitron',sans-serif;">
+            TIMES2 <span class="text-amber-400">// DIVISION 4 (X² ENGINE)</span>
+          </div>
+          <div class="text-[11px] font-mono text-slate-400 font-bold uppercase tracking-widest">
+            times2.burn-1.com • The 2 Clocks Math Problem &amp; Regulatory Drift Magazine
+          </div>
+        </div>
+      </a>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">Core Site</a>
+        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">1. FreezerBurn</a>
+        <a href="acid.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">2. Acid</a>
+        <a href="times2.html" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 text-xs font-extrabold shadow-[0_0_15px_rgba(245,158,11,0.5)]">3. Times2</a>
+        <a href="sizzlean.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">4. Sizzlean</a>
+        <button
+          type="button"
+          onclick="window.Burn1DivisionEngine && window.Burn1DivisionEngine.openAuth()"
+          data-universal-auth-status
+          class="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-400 font-mono text-xs font-bold border border-amber-400 cursor-pointer"
+        >
+          <i class="fa-solid fa-user-lock mr-1"></i> Universal Sign-In
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 space-y-10">
+
+    <!-- HERO: THE 2 CLOCKS MATH PROBLEM & CONCENTRIC COMPLETION DIALS -->
+    <section class="t2-pane p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-7 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400 font-mono text-xs font-bold text-amber-400 uppercase">
+          <i class="fa-solid fa-clock-rotate-left"></i> X² Engine // The 2 Clocks Math Problem
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight" style="font-family:'Orbitron',sans-serif;">
+          When <span class="text-amber-400">Clock 2</span> (Statutory Drift) Outruns <span class="text-sky-400">Clock 1</span> (Internal Telemetry).
+        </h1>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          Underwriters deny claims when municipal, state, and federal codes update faster than your internal security cadence. Our <strong>X² Engine</strong> cross-references your local telemetry against federal (NIST CSF 2.0, SEC, CISA KEV), state (NYDFS Part 500), and municipal ordinances — locking your <strong>$150 Times2 Shift Report Dossier</strong> with an Algorithmic Cryptographic SHA-256 Seal.
+        </p>
+      </div>
+
+      <!-- Concentric Circular Completion Dials + Downloaded Times2 Logo -->
+      <div class="lg:col-span-5 flex flex-col items-center">
+        <div class="relative w-64 h-64 flex items-center justify-center">
+          <svg viewBox="0 0 240 240" class="w-full h-full">
+            <!-- Outer Dial: Clock 2 Regulatory Sync (96%) -->
+            <circle cx="120" cy="120" r="104" fill="none" stroke="rgba(245,158,11,0.18)" stroke-width="12" />
+            <circle class="clock-ring-outer" cx="120" cy="120" r="104" fill="none" stroke="#f59e0b" stroke-width="12" stroke-dasharray="620 660" stroke-linecap="round" />
+            <!-- Inner Dial: Clock 1 Local Telemetry (92%) -->
+            <circle cx="120" cy="120" r="80" fill="none" stroke="rgba(56,189,248,0.18)" stroke-width="10" />
+            <circle class="clock-ring-inner" cx="120" cy="120" r="80" fill="none" stroke="#38bdf8" stroke-width="10" stroke-dasharray="460 510" stroke-linecap="round" />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+            <img src="assets/divisions/Times2_modern_logo_design_2610c0e1.jpg" alt="Times2 Emblem" class="w-20 h-20 rounded-full object-cover border-2 border-amber-400 shadow-lg mb-1">
+            <div class="font-mono text-xs font-black text-amber-400">X² SYNC: 96%</div>
+          </div>
+        </div>
+        <div class="font-mono text-[11px] text-slate-400 text-center mt-2">
+          <span class="text-amber-400 font-bold">● Outer Ring:</span> Statutory &amp; Ordinance Lock (96%) &nbsp;|&nbsp;
+          <span class="text-sky-400 font-bold">● Inner Ring:</span> Local Telemetry (92%)
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMES2 SHIFT: WEEKLY / MONTHLY REGULATORY MAGAZINE & DRIFT REPORT -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-7 t2-pane p-6 space-y-4">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+          <div>
+            <span class="font-mono text-[10px] font-bold uppercase text-amber-400">CORE FEATURE // REGULATORY MAGAZINE</span>
+            <h2 class="text-xl font-black text-white uppercase" style="font-family:'Orbitron',sans-serif;">Times2 Shift — Drift Dispatch</h2>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold">ISSUE // NOV 2026</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+            <img src="assets/divisions/Saved_frame_from_Futuristic_automated_c09ce429.jpg" alt="Automated Telemetry Frame" class="w-full h-36 object-cover rounded-lg mb-3 border border-amber-500/30">
+            <div class="font-mono text-[10px] text-amber-400 font-bold">FEDERAL &amp; STATE OVERLAY</div>
+            <h3 class="text-sm font-extrabold text-white mt-0.5">NYDFS 23 NYCRR 500 &amp; SEC 4-Day Incident Clock</h3>
+            <p class="text-xs text-slate-400 mt-1">Automated cross-reference of MFA enforcement, annual CISO attestation, and 72-hour underwriter notification clocks.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+            <div class="space-y-2.5">
+              <div class="font-mono text-[10px] text-sky-400 font-bold">MUNICIPAL &amp; UNDERWRITER MATRIX</div>
+              <h3 class="text-sm font-extrabold text-white">X² Engine Live Citation Feed</h3>
+              <ul class="font-mono text-[11px] text-slate-300 space-y-2">
+                <li class="border-l-2 border-amber-400 pl-2">NIST CSF 2.0 Govern (GV) &amp; Protect (PR) — Mapped</li>
+                <li class="border-l-2 border-sky-400 pl-2">NAIC Insurance Data Security Model Law (MDL-668) — Mapped</li>
+                <li class="border-l-2 border-amber-400 pl-2">Municipal Commercial Continuity Code §14-402 — Verified</li>
+                <li class="border-l-2 border-emerald-400 pl-2">CISA KEV Directive 22-01 — 0 Unpatched Flags</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-2 border-t border-slate-800 font-mono text-[10px] text-amber-300">
+              Updated every 5 minutes via worker.py X² Engine
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- $150 TIMES2 SHIFT REPORT DOSSIER + SHA-256 SEAL LOCK -->
+      <div class="lg:col-span-5 t2-pane p-6 space-y-4">
+        <span class="font-mono text-xs font-extrabold uppercase text-amber-400">PRODUCT // SHA-256 SEAL LOCK</span>
+        <h3 class="text-2xl font-black text-white">$150 Times2 Shift Report Dossier</h3>
+        <div class="text-3xl font-black text-amber-400">$150 <span class="text-xs font-mono text-slate-400 uppercase">/ Sealed Dossier</span></div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Maps your domain against our municipal ordinance &amp; regulatory update database, reconciles Clock 1 &amp; Clock 2 divergence, and issues a cryptographically sealed Jinja2 PDF/HTML Dossier.
+        </p>
+
+        <form id="times2-order-form" class="space-y-3">
+          <div>
+            <label class="block font-mono text-[11px] font-bold uppercase text-slate-300 mb-1">Entity Domain *</label>
+            <input id="t2-domain" type="text" required placeholder="e.g. metro-underwriters.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/50 font-mono text-xs text-white">
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] font-bold uppercase text-slate-300 mb-1">Counsel / Executive Email *</label>
+            <input id="t2-email" type="email" required placeholder="counsel@metro-underwriters.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/50 font-mono text-xs text-white">
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono text-xs font-black uppercase tracking-widest shadow-lg cursor-pointer">
+            <i class="fa-solid fa-stamp mr-1.5"></i> Lock $150 Times2 Shift Dossier →
+          </button>
+        </form>
+        <div id="t2-receipt" class="hidden mt-3 p-3 rounded-xl bg-slate-950 border border-amber-400 font-mono text-xs text-amber-300 space-y-1"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MANDATORY LEGAL & TRADEMARK NOTICE PER GEMINI.MD -->
+  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-800 text-center text-xs text-slate-400">
+    <p>© 2026 Leon R. Darden. All rights reserved.</p>
+    <p class="tm-notice">
+      <span class="brand-title">ꟻried Brains<span class="brand-tm">™</span></span> and <span class="brand-title">ꟻried Brains<span class="brand-tm">™</span> World</span> are trademarks of Leon R. Darden.
+    </p>
+  </footer>
+
+  <script src="cosmo-widget.js"></script>
+  <script src="js/division-bots.js"></script>
+  <script>
+    document.getElementById('times2-order-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const res = await window.Burn1DivisionEngine.submitOrder({
+        client_domain: document.getElementById('t2-domain').value.trim(),
+        contact_email: document.getElementById('t2-email').value.trim(),
+        product_type: 'Times2 Shift Report Dossier ($150)',
+        amount_paid: '150.00',
+        risk_index_score: '96'
+      });
+      const box = document.getElementById('t2-receipt');
+      box.classList.remove('hidden');
+      box.innerHTML = `
+        <div class="text-white font-bold">✓ X² DOSSIER LOCKED (${res.queued_order.order_id})</div>
+        <div>DOMAIN: ${res.queued_order.client_domain}</div>
+        <div class="break-all">SHA-256 SEAL: ${res.queued_order.sha256_seal || 'ISSUED_BY_WORKER'}</div>
+      `;
+    });
+  </script>
+</body>
+</html>

@@ -436,6 +436,41 @@ def cosmo_escalate():
         return jsonify({"status": "ERROR", "message": str(e)}), 500
 
 
+@app.route("/api/divisions/intake", methods=["POST"])
+def divisions_intake():
+    """Enqueues an order from Freezer, Acid, Times2, or Sizzlean into division_queue.csv."""
+    try:
+        import worker
+        data = request.get_json(force=True) or {}
+        row = worker.enqueue_division_order(data)
+        auto_sync = data.get("auto_sync", True)
+        sync_result = worker.process_pending_queue(target_division=row["division_origin"]) if auto_sync else None
+        return jsonify({
+            "status": "SUCCESS",
+            "queued_order": row,
+            "sync_result": sync_result
+        }), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "message": str(e)}), 500
+
+
+@app.route("/api/divisions/sync", methods=["POST", "GET"])
+def divisions_sync():
+    """Remote & agy CLI endpoint to trigger 4-division queue processing or inspect status."""
+    try:
+        import worker
+        if request.method == "GET":
+            rows = worker.read_queue_rows()
+            return jsonify({"status": "SUCCESS", "total_rows": len(rows), "queue": rows}), 200
+        data = request.get_json(silent=True) or {}
+        division = data.get("division", "all")
+        remote_ep = data.get("remote_endpoint", "")
+        result = worker.process_pending_queue(target_division=division, remote_endpoint=remote_ep)
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"status": "ERROR", "message": str(e)}), 500
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print(f"🚀 BURN-1 Central Intake API Server running on port {port}...")

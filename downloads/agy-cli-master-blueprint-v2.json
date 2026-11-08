@@ -248,6 +248,11 @@
     "agy export-binder": {
       "description": "Assemble and validate carrier-specific cyber insurance evidence package.",
       "exec": "agy export-binder --carrier Coalition --output /drive/slm_library/cyber_insurance_binder/"
+    },
+    "agy divisions-sync": {
+      "description": "Summon the 4-Division Shared Worker (Freezer, Acid, Times2, Sizzlean) locally or remotely to process completed orders, issue SHA-256 seals, and compile Jinja2 deliverables.",
+      "exec": "python worker.py --sync --division all",
+      "remote_exec": "curl -X POST https://burn-1.com/api/divisions/sync -H \"Content-Type: application/json\" -d \"{\\\"division\\\":\\\"all\\\"}\""
     }
   }
 }
