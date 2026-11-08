@@ -1,0 +1,58 @@
+:root {
+  --purple-dark: #0f0d18;
+  --purple-base: #150f24;
+  --purple-card: #2a1b42;
+  --purple-accent: #a855f7;
+  --clinical-slate: #d8e2e9;
+  --vitality-red: #d92b8a;
+  --flame-orange: #ff6600;
+  --neon-cyan: #00f0ff;
+  --emerald-pass: #00ff88;
+  --crisp-white: #ffffff;
+}
+
+body {
+  background: var(--purple-dark);
+  color: var(--crisp-white);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.bold-title { font-weight: 800; letter-spacing: -0.5px; }
+.header-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 40px; background: rgba(15, 13, 24, 0.95);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+}
+.brand-logo { font-size: 24px; font-weight: 900; color: #fff; text-decoration: none; }
+.hero-section {
+  padding: 80px 20px; text-align: center;
+  background: radial-gradient(circle at center, var(--purple-card) 0%, var(--purple-dark) 100%);
+}
+.hero-badge {
+  background: rgba(255, 102, 0, 0.15); border: 1px solid var(--flame-orange);
+  color: var(--flame-orange); padding: 6px 16px; border-radius: 20px;
+  font-size: 13px; font-weight: 700; text-transform: uppercase; display: inline-block;
+}
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px;
+  max-width: 1200px; margin: 50px auto; padding: 0 20px;
+}
+.price-card {
+  background: var(--purple-base); border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 14px; padding: 30px; text-align: center;
+}
+.price-card.featured {
+  border: 2px solid var(--flame-orange); background: linear-gradient(180deg, var(--purple-card) 0%, var(--purple-base) 100%);
+}
+.btn-checkout {
+  background: #ffc439; color: #000; font-weight: 900; padding: 14px 28px; border: none;
+  border-radius: 8px; font-size: 16px; cursor: pointer; width: 100%; margin-top: 20px;
+  text-decoration: none; display: inline-block; box-sizing: border-box;
+}
+.legal-footer {
+  background: #08060d; border-top: 1px solid rgba(255,255,255,0.1); padding: 50px 20px;
+  font-size: 13px; color: #8a819b; text-align: center; margin-top: 80px;
+}

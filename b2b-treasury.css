@@ -1,0 +1,765 @@
+/* ============================================================================
+ * BURN-1 SYSTEMS: B2B DAY-THEME FINANCIAL & INTAGLIO GUILLOCHE ENGINE (PHASE 1)
+ * Strictly Daylight Treasury / Intaglio Bond / Vault Architecture
+ * ============================================================================ */
+
+:root {
+  /* Core Palette - Daylight Financial & Intaglio */
+  --money-green: #14452F;
+  --money-green-deep: #0B291B;
+  --money-green-light: #1E6344;
+  --money-green-tint: rgba(20, 69, 47, 0.08);
+
+  --scroll-tan: #F4EFE0;
+  --scroll-tan-light: #FAF7F0;
+  --scroll-tan-dark: #E2D9C0;
+  --scroll-tan-border: #C4B693;
+
+  --money-blue: #1B365D;
+  --money-blue-deep: #0F2342;
+  --money-blue-light: #2B528C;
+  --money-blue-tint: rgba(27, 54, 93, 0.08);
+
+  --ink-charcoal: #111814;
+  --ink-muted: #4A554E;
+  --seal-crimson: #8B1E1E;
+  --amber-warn: #9A5B13;
+
+  /* Typography */
+  --font-serif: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Orbitron', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--scroll-tan);
+  color: var(--ink-charcoal);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle Daylight Financial Bond / Vault Background Layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 50% 25%, rgba(250, 247, 240, 0.88) 0%, rgba(244, 239, 224, 0.94) 60%, rgba(226, 217, 192, 0.97) 100%),
+    repeating-linear-gradient(45deg, rgba(20, 69, 47, 0.025) 0px, rgba(20, 69, 47, 0.025) 1px, transparent 1px, transparent 8px),
+    repeating-linear-gradient(-45deg, rgba(27, 54, 93, 0.02) 0px, rgba(27, 54, 93, 0.02) 1px, transparent 1px, transparent 8px),
+    url('vault-bg-placeholder.jpg'),
+    url('daybackground.png');
+  background-size: cover, auto, auto, cover, cover;
+  background-position: center;
+  background-blend-mode: normal, multiply, multiply, luminosity, overlay;
+  opacity: 0.95;
+}
+
+/* ============================================================================
+ * 1. FIXED 3-COLUMN FINANCIAL GUI GRID SHELL
+ * grid-cols-[200px_1fr_250px]
+ * ============================================================================ */
+.b2b-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 200px 1fr 250px;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* LEFT COLUMN: Persistent Navigation Vault Sidebar (200px) */
+.col-left-nav {
+  background: linear-gradient(180deg, #EDE5CE 0%, #E2D6B8 100%);
+  border-right: 2px solid var(--money-green);
+  box-shadow: inset -4px 0 12px rgba(20, 69, 47, 0.08), 4px 0 16px rgba(17, 24, 20, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* CENTER COLUMN: Main Scrollable Treasury Content Area (1fr) */
+.col-center-main {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.5rem 2rem 3rem 2rem;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar for Daylight Treasury Look */
+.col-center-main::-webkit-scrollbar,
+.col-right-status::-webkit-scrollbar {
+  width: 8px;
+}
+.col-center-main::-webkit-scrollbar-track,
+.col-right-status::-webkit-scrollbar-track {
+  background: var(--scroll-tan-dark);
+  border-left: 1px solid var(--scroll-tan-border);
+}
+.col-center-main::-webkit-scrollbar-thumb,
+.col-right-status::-webkit-scrollbar-thumb {
+  background: var(--money-green);
+  border-radius: 2px;
+}
+
+/* RIGHT COLUMN: Persistent Auth & Live Telemetry Feed (250px) */
+.col-right-status {
+  background: linear-gradient(180deg, #EDE5CE 0%, #E2D6B8 100%);
+  border-left: 2px solid var(--money-blue);
+  box-shadow: inset 4px 0 12px rgba(27, 54, 93, 0.08), -4px 0 16px rgba(17, 24, 20, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ============================================================================
+ * 2. GUILLOCHE PANE (.guilloche-pane) & MATHEMATICAL SVG ROSETTES
+ * ============================================================================ */
+.guilloche-pane {
+  position: relative;
+  background:
+    radial-gradient(ellipse at center, var(--scroll-tan-light) 0%, var(--scroll-tan) 70%, #E6DEC8 100%);
+  border: 2px solid var(--money-green);
+  outline: 1px solid var(--money-blue);
+  outline-offset: -6px;
+  box-shadow:
+    0 12px 30px rgba(20, 69, 47, 0.12),
+    0 2px 6px rgba(17, 24, 20, 0.08),
+    inset 0 0 32px rgba(196, 182, 147, 0.45);
+  padding: 2rem;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.guilloche-pane-blue {
+  border-color: var(--money-blue);
+  outline-color: var(--money-green);
+}
+
+.guilloche-pane-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* SVG Background Layer injected by Guilloche Engine */
+.guilloche-svg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.guilloche-corner {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.guilloche-corner.tl { top: 4px; left: 4px; }
+.guilloche-corner.tr { top: 4px; right: 4px; transform: scaleX(-1); }
+.guilloche-corner.bl { bottom: 4px; left: 4px; transform: scaleY(-1); }
+.guilloche-corner.br { bottom: 4px; right: 4px; transform: scale(-1, -1); }
+
+/* ============================================================================
+ * 3. 3D METALLIC COIN MEDALLION BUTTONS (.med-gold, .med-silver, .med-bronze)
+ * ============================================================================ */
+.med-coin {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 9999px;
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  user-select: none;
+}
+
+.med-coin::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 9999px;
+  border: 1px dashed rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+
+.med-coin:hover {
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.05);
+}
+
+.med-coin:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+/* GOLD MEDALLION */
+.med-gold {
+  background:
+    radial-gradient(ellipse at 30% 25%, #FFF6B7 0%, #F5D061 28%, #C9971C 68%, #7E5908 100%);
+  color: #2B1B00;
+  border: 2px solid #6E4D05;
+  text-shadow: 0 1px 0 rgba(255, 248, 210, 0.75), 0 -1px 1px rgba(69, 45, 0, 0.45);
+  box-shadow:
+    0 5px 14px rgba(126, 89, 8, 0.4),
+    0 2px 3px rgba(0, 0, 0, 0.25),
+    inset 0 2px 3px rgba(255, 252, 224, 0.9),
+    inset 0 -3px 6px rgba(92, 62, 2, 0.8);
+}
+
+/* SILVER MEDALLION */
+.med-silver {
+  background:
+    radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #E2E8F0 30%, #94A3B8 70%, #475569 100%);
+  color: #0F172A;
+  border: 2px solid #475569;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85), 0 -1px 1px rgba(15, 23, 42, 0.35);
+  box-shadow:
+    0 5px 14px rgba(71, 85, 105, 0.35),
+    0 2px 3px rgba(0, 0, 0, 0.2),
+    inset 0 2px 3px rgba(255, 255, 255, 0.95),
+    inset 0 -3px 6px rgba(51, 65, 85, 0.75);
+}
+
+/* BRONZE MEDALLION */
+.med-bronze {
+  background:
+    radial-gradient(ellipse at 30% 25%, #FCD9B6 0%, #D98A4E 30%, #9C5221 70%, #592B0B 100%);
+  color: #260E00;
+  border: 2px solid #592B0B;
+  text-shadow: 0 1px 0 rgba(255, 225, 196, 0.65), 0 -1px 1px rgba(54, 21, 0, 0.5);
+  box-shadow:
+    0 5px 14px rgba(89, 43, 11, 0.4),
+    0 2px 3px rgba(0, 0, 0, 0.25),
+    inset 0 2px 3px rgba(255, 232, 209, 0.85),
+    inset 0 -3px 6px rgba(69, 31, 5, 0.85);
+}
+
+/* ============================================================================
+ * 4. LEFT SIDEBAR NAVIGATION STYLING
+ * ============================================================================ */
+.vault-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--money-green-deep);
+  background: rgba(250, 247, 240, 0.65);
+  border: 1px solid var(--scroll-tan-border);
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.vault-nav-link:hover {
+  background: var(--scroll-tan-light);
+  border-color: var(--money-green);
+  transform: translateX(2px);
+}
+
+.vault-nav-link.active {
+  background: var(--money-green);
+  color: var(--scroll-tan-light);
+  border-color: var(--money-green-deep);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), 0 2px 6px rgba(20, 69, 47, 0.25);
+}
+
+/* ============================================================================
+ * 5. RIGHT SIDEBAR STATUS LIFECYCLE & TELEMETRY STYLING
+ * ============================================================================ */
+.lifecycle-node {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 3px;
+  background: rgba(250, 247, 240, 0.6);
+  border: 1px solid var(--scroll-tan-border);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  transition: all 0.25s ease;
+}
+
+.lifecycle-node.active-step {
+  background: var(--money-blue);
+  color: #FFFFFF;
+  border-color: var(--money-blue-deep);
+  box-shadow: 0 0 10px rgba(27, 54, 93, 0.35);
+}
+
+.lifecycle-node.completed-step {
+  background: rgba(20, 69, 47, 0.14);
+  color: var(--money-green-deep);
+  border-color: var(--money-green);
+}
+
+.lifecycle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--scroll-tan-border);
+  flex-shrink: 0;
+}
+
+.lifecycle-node.active-step .lifecycle-dot {
+  background: #F5D061;
+  box-shadow: 0 0 6px #F5D061;
+}
+
+.lifecycle-node.completed-step .lifecycle-dot {
+  background: var(--money-green);
+}
+
+/* Form Input Treasury Styling */
+.treasury-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  background: var(--scroll-tan-light);
+  border: 1.5px solid var(--money-green);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-charcoal);
+  box-shadow: inset 0 1px 3px rgba(17, 24, 20, 0.08);
+}
+
+.treasury-input:focus {
+  outline: none;
+  border-color: var(--money-blue);
+  box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.15);
+}
+
+/* ============================================================================
+ * 6. UNIFORM FOOTER STYLING
+ * ============================================================================ */
+.footer-legal {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 2px double var(--money-green);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--ink-charcoal);
+}
+
+/* Responsive fallback for narrow viewports */
+@media (max-width: 1024px) {
+  html, body {
+    overflow: auto;
+    height: auto;
+  }
+  .b2b-shell {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+  .col-left-nav, .col-center-main, .col-right-status {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+/* ============================================================================
+ * 7. BURN-1 SYSTEMS AGENT-1 (COSMO) — WIDGET, COIN LAUNCHER & MINI-CLI (PHASE 6)
+ * Powered by Muse — Daylight Guilloche Casing + Dark #05080a Terminal Contrast
+ * ============================================================================ */
+
+/* Pixel Logo & Flame Flicker (1.6s infinite) */
+.b1-logo {
+  display: inline-block;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes b1FlameFlicker {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(255, 154, 61, 0.85))
+            drop-shadow(0 0 12px rgba(255, 209, 102, 0.45))
+            brightness(1);
+    transform: scale(1);
+  }
+  25% {
+    filter: drop-shadow(0 0 8px rgba(255, 209, 102, 0.95))
+            drop-shadow(0 0 16px rgba(255, 122, 24, 0.65))
+            brightness(1.12);
+    transform: scale(1.03);
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgba(255, 122, 24, 0.75))
+            drop-shadow(0 0 10px rgba(125, 255, 154, 0.35))
+            brightness(0.96);
+    transform: scale(0.99);
+  }
+  75% {
+    filter: drop-shadow(0 0 9px rgba(255, 209, 102, 1))
+            drop-shadow(0 0 18px rgba(255, 154, 61, 0.75))
+            brightness(1.15);
+    transform: scale(1.04);
+  }
+}
+
+.b1-logo--flame {
+  animation: b1FlameFlicker 1.6s ease-in-out infinite;
+}
+
+/* Bold Colourful Highlighted Text Choices inside Terminal */
+.b1-choice {
+  display: inline;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.7rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  padding: 1px 5px;
+  margin-right: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  background: rgba(125, 255, 154, 0.16);
+  color: #7dff9a;
+  border: none;
+  line-height: 1.8;
+  transition: filter 0.15s ease, background-color 0.15s ease;
+}
+
+.b1-choice:hover,
+.b1-choice:focus-visible {
+  filter: brightness(1.22);
+  outline: 1px dashed rgba(244, 239, 224, 0.65);
+}
+
+.b1-choice--gold {
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.18);
+  text-decoration-color: #ffd166;
+}
+
+.b1-choice--green {
+  color: #7dff9a;
+  background: rgba(125, 255, 154, 0.16);
+  text-decoration-color: #7dff9a;
+}
+
+.b1-choice--purple {
+  color: #c084fc;
+  background: rgba(192, 132, 252, 0.18);
+  text-decoration-color: #c084fc;
+}
+
+.b1-choice--orange {
+  color: #ff9a3d;
+  background: rgba(255, 154, 61, 0.18);
+  text-decoration-color: #ff9a3d;
+}
+
+.b1-choice--blue {
+  color: #7dd3fc;
+  background: rgba(125, 211, 252, 0.18);
+  text-decoration-color: #7dd3fc;
+}
+
+/* State 1: Collapsed Floating Coin Button (Bottom-Right)
+ * Bot is NOT visible in button form — ONLY the round .med-gold coin + pixel logo + small label */
+.cosmo-floating-launcher {
+  position: fixed;
+  right: 16px;
+  bottom: 14px;
+  z-index: 9500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: auto;
+}
+
+.cosmo-floating-launcher.is-hidden {
+  display: none !important;
+}
+
+.cosmo-coin-btn {
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 8px 22px rgba(126, 89, 8, 0.55),
+    0 2px 5px rgba(0, 0, 0, 0.35),
+    inset 0 2px 4px rgba(255, 252, 224, 0.95),
+    inset 0 -3px 6px rgba(92, 62, 2, 0.85);
+}
+
+.cosmo-coin-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--money-green-deep);
+  background: var(--scroll-tan-light);
+  border: 1px solid var(--money-green);
+  border-radius: 3px;
+  padding: 1px 6px;
+  box-shadow: 0 2px 6px rgba(17, 24, 20, 0.18);
+  white-space: nowrap;
+}
+
+/* State 2 & State 3: Open Cosmo Guilloche Pane (Docked Bottom-Right / Right Column Slot) */
+.cosmo-pane-dock {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  z-index: 9600;
+  transition: height 0.2s ease, width 0.2s ease;
+}
+
+.cosmo-pane-dock.is-hidden {
+  display: none !important;
+}
+
+.cosmo-pane-dock.is-expanded {
+  width: 420px;
+}
+
+.cosmo-guilloche-shell.guilloche-pane {
+  padding: 0.75rem 0.85rem;
+  border: 2px solid var(--money-green);
+  outline: 1px solid var(--money-blue);
+  outline-offset: -4px;
+  box-shadow:
+    0 18px 42px rgba(11, 41, 27, 0.32),
+    0 4px 12px rgba(17, 24, 20, 0.22),
+    inset 0 0 24px rgba(196, 182, 147, 0.45);
+}
+
+.cosmo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  border-bottom: 1.5px solid var(--money-green);
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.55rem;
+}
+
+.cosmo-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.cosmo-header-title {
+  font-family: var(--font-serif);
+  font-size: 0.74rem;
+  font-weight: 900;
+  color: var(--money-green-deep);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cosmo-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.cosmo-win-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--scroll-tan-light);
+  color: var(--money-green-deep);
+  border: 1.5px solid var(--money-green);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.cosmo-win-btn:hover {
+  background: var(--money-green);
+  color: var(--scroll-tan-light);
+}
+
+/* State 2: Idle Open Logo Screen */
+.cosmo-idle-body {
+  background: linear-gradient(180deg, #05080a 0%, #0B291B 100%);
+  border: 1.5px solid var(--money-green);
+  border-radius: 3px;
+  padding: 1.15rem 0.85rem;
+  text-align: center;
+  color: var(--scroll-tan-light);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.85);
+}
+
+.cosmo-idle-tagline {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--scroll-tan);
+  margin: 0.55rem 0 0.75rem 0;
+}
+
+/* State 3: Dark Mini-CLI Screen (#05080a / Money Green-deep) */
+.cosmo-cli-body {
+  background: linear-gradient(180deg, #05080a 0%, #0B291B 100%);
+  border: 1.5px solid var(--money-green);
+  border-radius: 3px;
+  padding: 0.65rem 0.7rem;
+  color: #7dff9a;
+  font-family: var(--font-mono);
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.9);
+}
+
+.cosmo-pane-dock.is-expanded .cosmo-cli-transcript {
+  max-height: 250px;
+}
+
+.cosmo-cli-transcript {
+  max-height: 155px;
+  overflow-y: auto;
+  color: var(--scroll-tan);
+  font-size: 0.69rem;
+  line-height: 1.45;
+  margin-bottom: 0.55rem;
+  padding-right: 4px;
+}
+
+.cosmo-cli-choices {
+  margin-bottom: 0.55rem;
+  padding-top: 0.35rem;
+  border-top: 1px dashed rgba(244, 239, 224, 0.22);
+  font-size: 0.69rem;
+  line-height: 1.85;
+}
+
+.cosmo-cli-prompt-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #05080a;
+  border: 1px solid rgba(244, 239, 224, 0.38);
+  border-radius: 3px;
+  padding: 0.32rem 0.48rem;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.cosmo-cli-prompt-row:focus-within {
+  border-color: var(--scroll-tan);
+  box-shadow: 0 0 10px rgba(244, 239, 224, 0.6), inset 0 0 4px rgba(244, 239, 224, 0.25);
+}
+
+.cosmo-cli-prompt-prefix {
+  color: #7dff9a;
+  font-weight: 800;
+  font-size: 0.7rem;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.cosmo-cli-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--scroll-tan-light);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  width: 100%;
+}
+
+.cosmo-cli-input::placeholder {
+  color: rgba(244, 239, 224, 0.42);
+}
+
+.cosmo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.45rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--scroll-tan-border);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--ink-muted);
+}
+
+.cosmo-muse-credit {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--money-green-deep);
+  letter-spacing: 0.03em;
+}
+
+/* Mobile Bottom Sheet Rule (§2 & §4: Mobile = full-width bottom sheet, same states) */
+@media (max-width: 768px) {
+  .cosmo-pane-dock,
+  .cosmo-pane-dock.is-expanded {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  .cosmo-guilloche-shell.guilloche-pane {
+    border-radius: 10px 10px 0 0;
+    border-bottom: none;
+  }
+}
+
+

@@ -316,7 +316,7 @@
           </a>
           <a href="https://www.whatsmydns.net/" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
             <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-earth-americas text-purple-400 mr-2"></i>What's My DNS</h3>
-            <p class="text-slate-400">Instant global DNS propagation checker across 30+ edge nodes worldwide.</p>
+            <p class="text-slate-400">Global DNS propagation checker across 30+ edge nodes worldwide.</p>
           </a>
           
           <a href="https://www.ssllabs.com/ssltest/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
@@ -329,7 +329,7 @@
           </a>
           <a href="https://crt.sh/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
             <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-fingerprint text-purple-400 mr-2"></i>crt.sh</h3>
-            <p class="text-slate-400">Public Certificate Transparency log search for OSINT shadow IT discovery.</p>
+            <p class="text-slate-400">Public Certificate Transparency log search for Outside-In Exposure Audit shadow IT discovery.</p>
           </a>
 
           <a href="https://www.abuseipdb.com/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
@@ -594,6 +594,15 @@
     window.addEventListener('load', () => {
       initCoolant();
       requestAnimationFrame(renderCoolant);
+      
+      const hash = (window.location.hash || '').toLowerCase();
+      if (hash === '#helpdesk' || hash === '#acc-4' || hash === '#ticket' || hash === '#support') {
+        setTimeout(() => {
+          toggleSection('acc-4');
+          const el = document.getElementById('acc-4');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
     });
     window.addEventListener('resize', initCoolant);
 

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 Systems | Desktop Terminal Mockup — Light Partners + Dark Mini-CLI (Cosmo)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="b2b-treasury.css">
+  <link rel="stylesheet" href="burn1-logo-terminal.css">
+</head>
+<body>
+
+  <!-- FIXED 3-COLUMN FINANCIAL GUI SHELL (grid-cols-[200px_1fr_250px]) -->
+  <div class="b2b-shell">
+
+    <!-- COLUMN 1: LEFT NAVIGATION SIDEBAR (200px) -->
+    <aside class="col-left-nav p-3.5">
+      <div>
+        <div class="p-3 mb-4 rounded border-2 border-[#14452F] bg-[#FAF7F0] text-center shadow-sm">
+          <div class="flex items-center justify-center gap-1.5 mb-1">
+            <img
+              class="b1-logo b1-logo--flame"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADrSURBVFhH1ZLLDcIwFARTBAe6oApaoQi6pBNuSFyCTOTImfi3/kVZaS95zpuJlWk6c+bndTbl8yGx8EMkVvDrsXSkxA4+UoLw7+f97xCJEHyIRAreVSIX3kVChTeVSMEv99umnFdJqPDmEiXwHAlyvHG/nstioNhMuoWcr+fz1Fy6hVMI+CCxmS6Q8Q/Eyvekf8Ak9xZ85Xnp623cW1AkeM6FSwImqgTnVXCblESoTeA2lAjJcN4EbrNKeER2dc5yT1U2Ej4RzPl+cfizqeU+KVxWWu6VwmVqua84XJwq328Wglie75bDwK3zA2HiKmIGSgBEAAAAAElFTkSuQmCC"
+              width="22"
+              height="22"
+              alt="BURN-1"
+            />
+            <span class="text-[10px] font-mono font-extrabold tracking-widest text-[#1B365D] uppercase">
+              TREASURY VAULT
+            </span>
+          </div>
+          <div class="text-base font-black tracking-tight text-[#14452F]" style="font-family: var(--font-serif);">
+            BURN-1 SYSTEMS
+          </div>
+          <div class="text-[9px] font-mono text-[#4A554E] mt-0.5">
+            INTAGLIO B2B RESERVE
+          </div>
+        </div>
+
+        <div class="text-[9px] font-mono font-bold uppercase tracking-wider text-[#4A554E] mb-2 px-1">
+          Channel Routing
+        </div>
+        <nav>
+          <a href="index.html" class="vault-nav-link">
+            <i class="fa-solid fa-building-columns w-4 text-center text-[#1B365D]"></i>
+            <span>1. Core</span>
+          </a>
+          <a href="partners.html" class="vault-nav-link active">
+            <i class="fa-solid fa-Vault w-4 text-center"></i>
+            <span>2. Partners</span>
+          </a>
+          <a href="broker-portal.html" class="vault-nav-link">
+            <i class="fa-solid fa-file-shield w-4 text-center text-[#1B365D]"></i>
+            <span>3. Brokers</span>
+          </a>
+          <a href="msp-intake.html" class="vault-nav-link">
+            <i class="fa-solid fa-network-wired w-4 text-center text-[#14452F]"></i>
+            <span>4. MSP Intake</span>
+          </a>
+          <a href="intake.html" class="vault-nav-link">
+            <i class="fa-solid fa-clipboard-check w-4 text-center text-[#1B365D]"></i>
+            <span>5. Direct Intake</span>
+          </a>
+          <a href="burn1-mobile-cli-guide.html" class="vault-nav-link">
+            <i class="fa-solid fa-mobile-screen-button w-4 text-center text-[#14452F]"></i>
+            <span>6. Mobile CLI</span>
+          </a>
+        </nav>
+
+        <div class="mt-5 p-2.5 rounded bg-[#FAF7F0]/90 border border-[#C4B693] text-[10px] font-mono leading-relaxed">
+          <div class="font-extrabold text-[#14452F] uppercase mb-1">
+            <i class="fa-solid fa-certificate text-[#1B365D] mr-1"></i> Bind Doctrine
+          </div>
+          <p class="text-[9.5px] text-[#4A554E]">
+            Powered by <strong>Agentless Perimeter Telemetry</strong>, <strong>Outside-In Exposure Audit</strong>, &amp; sealed with an <strong>Algorithmic Cryptographic SHA-256 Seal</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-[#C4B693] text-[10px]">
+        <div class="font-serif font-black text-xs text-[#14452F] uppercase">
+          BURN-1 Systems
+        </div>
+        <div class="text-[9px] font-mono text-[#4A554E] mt-1">
+          Delivered within standard business turnaround up to 5 business days.
+        </div>
+      </div>
+    </aside>
+
+    <!-- COLUMN 2: CENTER MAIN DASHBOARD (1fr Scrollable) -->
+    <main class="col-center-main">
+      <!-- Visual State Inspector Bar for Mockup Review -->
+      <div class="mb-4 p-3 rounded bg-[#FAF7F0] border-2 border-[#1B365D] flex flex-wrap items-center justify-between gap-2 shadow-sm">
+        <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#14452F]">
+          <img
+            class="b1-logo b1-logo--flame"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADrSURBVFhH1ZLLDcIwFARTBAe6oApaoQi6pBNuSFyCTOTImfi3/kVZaS95zpuJlWk6c+bndTbl8yGx8EMkVvDrsXSkxA4+UoLw7+f97xCJEHyIRAreVSIX3kVChTeVSMEv99umnFdJqPDmEiXwHAlyvHG/nstioNhMuoWcr+fz1Fy6hVMI+CCxmS6Q8Q/Eyvekf8Ak9xZ85Xnp623cW1AkeM6FSwImqgTnVXCblESoTeA2lAjJcN4EbrNKeER2dc5yT1U2Ej4RzPl+cfizqeU+KVxWWu6VwmVqua84XJwq328Wglie75bDwK3zA2HiKmIGSgBEAAAAAElFTkSuQmCC"
+            width="20"
+            height="20"
+            alt="BURN-1"
+          />
+          <span>COSMO DESKTOP MOCKUP INSPECTOR:</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="window.Burn1Cosmo.minimise()" class="med-coin med-bronze text-[10px] py-1 px-3">
+            State 1: Coin Button (−)
+          </button>
+          <button type="button" onclick="window.Burn1Cosmo.openIdle()" class="med-coin med-silver text-[10px] py-1 px-3">
+            State 2: Logo Screen
+          </button>
+          <button type="button" onclick="window.Burn1Cosmo.openCli('greeting')" class="med-coin med-gold text-[10px] py-1 px-3">
+            State 3: Dark Mini-CLI (+)
+          </button>
+        </div>
+      </div>
+
+      <!-- Top Bond Header Banner -->
+      <div class="guilloche-pane mb-6">
+        <div class="guilloche-pane-content">
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#14452F] pb-4">
+            <div class="max-w-2xl">
+              <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase tracking-widest mb-2">
+                <span>TREASURY INSTRUMENT • MSP WHOLESALE CHANNEL (`/partners`)</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-black text-[#14452F] tracking-tight" style="font-family: var(--font-serif);">
+                MSP WHOLESALE PARTNER HUB
+              </h1>
+              <p class="text-xs sm:text-sm font-mono text-[#1B365D] font-semibold mt-1 leading-relaxed">
+                Multi-Tenant Underwriting Reserve powered by <strong>Agentless Perimeter Telemetry</strong>, <strong>Outside-In Exposure Audit</strong>, &amp; bound with our <strong>Algorithmic Cryptographic SHA-256 Seal</strong>.
+              </p>
+              <p class="text-[11px] font-mono text-[#4A554E] mt-1">
+                Delivered within standard business turnaround up to 5 business days.
+              </p>
+              <p class="text-[10.5px] font-mono text-[#14452F] font-semibold mt-2 bg-[#EDE5CE]/90 p-2 rounded border border-[#14452F]/50">
+                After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
+              </p>
+            </div>
+            <div class="w-28 h-28 shrink-0" data-guilloche-seal></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wholesale Portfolio Pricing Grid inside Scroll Tan Guilloche Pane -->
+      <div class="guilloche-pane mb-6">
+        <div class="guilloche-pane-content">
+          <div class="text-center max-w-2xl mx-auto mb-5">
+            <span class="px-3 py-0.5 rounded-full bg-[#1B365D]/10 border border-[#1B365D] text-[#1B365D] font-mono text-[10px] font-extrabold uppercase tracking-widest">
+              LOCKED WHOLESALE &amp; RETAIL SCHEDULE
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black text-[#14452F] mt-1.5" style="font-family: var(--font-serif);">
+              WHOLESALE MSP PORTFOLIO PACKAGES
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="font-mono text-[10px] font-extrabold text-[#14452F] uppercase">WHOLESALE SERIES I • MULTI-TENANT</div>
+                <h3 class="text-lg font-black text-[#111814]" style="font-family: var(--font-serif);">Monthly Delta Digest</h3>
+                <div class="my-2 p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex items-baseline gap-1">
+                  <span class="text-2xl font-black text-[#14452F]" style="font-family: var(--font-serif);">$249</span>
+                  <span class="font-mono text-xs font-bold text-[#4A554E]">/mo multi-tenant</span>
+                </div>
+                <p class="text-xs font-mono text-[#4A554E]">
+                  Continuous <strong>Agentless Perimeter Telemetry</strong> &amp; <strong>Outside-In Exposure Audit</strong> with <strong>Algorithmic Cryptographic SHA-256 Seal</strong>.
+                </p>
+              </div>
+              <div class="mt-3">
+                <a href="msp-intake.html?package=delta-digest" class="med-coin med-bronze w-full">Bind Delta Digest</a>
+              </div>
+            </div>
+
+            <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="font-mono text-[10px] font-extrabold text-[#14452F] uppercase">WHOLESALE SERIES II • 5 TENANTS</div>
+                <h3 class="text-lg font-black text-[#111814]" style="font-family: var(--font-serif);">Portfolio 5</h3>
+                <div class="my-2 p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex items-baseline gap-1">
+                  <span class="text-2xl font-black text-[#14452F]" style="font-family: var(--font-serif);">$2,500</span>
+                  <span class="font-mono text-xs font-bold text-[#4A554E]">/yr</span>
+                </div>
+                <p class="text-xs font-mono text-[#4A554E]">
+                  5 wholesale client binders bound via <strong>Agentless Perimeter Telemetry</strong> &amp; <strong>Algorithmic Cryptographic SHA-256 Seal</strong>.
+                </p>
+              </div>
+              <div class="mt-3">
+                <a href="msp-intake.html?package=portfolio-5" class="med-coin med-silver w-full">Bind Portfolio 5</a>
+              </div>
+            </div>
+
+            <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#1B365D] shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="font-mono text-[10px] font-extrabold text-[#1B365D] uppercase">WHOLESALE SERIES III • 15 TENANTS</div>
+                <h3 class="text-lg font-black text-[#111814]" style="font-family: var(--font-serif);">Portfolio 15</h3>
+                <div class="my-2 p-2 rounded bg-[#F4EFE0] border border-[#1B365D] flex items-baseline gap-1">
+                  <span class="text-2xl font-black text-[#1B365D]" style="font-family: var(--font-serif);">$5,000</span>
+                  <span class="font-mono text-xs font-bold text-[#4A554E]">/yr</span>
+                </div>
+                <p class="text-xs font-mono text-[#4A554E]">
+                  15 wholesale client binders bound via <strong>Outside-In Exposure Audit</strong> &amp; <strong>Algorithmic Cryptographic SHA-256 Seal</strong>.
+                </p>
+              </div>
+              <div class="mt-3">
+                <a href="msp-intake.html?package=portfolio-15" class="med-coin med-gold w-full">Bind Portfolio 15</a>
+              </div>
+            </div>
+
+            <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="font-mono text-[10px] font-extrabold text-[#14452F] uppercase">WHOLESALE SERIES IV • CHANNEL LEADER</div>
+                <h3 class="text-lg font-black text-[#111814]" style="font-family: var(--font-serif);">Leader Pack</h3>
+                <div class="my-2 p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex items-baseline gap-1">
+                  <span class="text-2xl font-black text-[#14452F]" style="font-family: var(--font-serif);">$500</span>
+                  <span class="font-mono text-xs font-bold text-[#4A554E]">/mo</span>
+                </div>
+                <p class="text-xs font-mono text-[#4A554E]">
+                  Co-branded executive underwriting reserve • Delivered within standard business turnaround up to 5 business days.
+                </p>
+              </div>
+              <div class="mt-3">
+                <a href="msp-intake.html?package=leader-pack" class="med-coin med-gold w-full">Bind Leader Pack</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer-legal">
+        <p>© 2026 Leon R. Darden. All rights reserved.</p>
+      </footer>
+    </main>
+
+    <!-- COLUMN 3: RIGHT AUTH & LIVE STATUS SIDEBAR (250px) -->
+    <aside class="col-right-status p-3.5">
+      <div class="p-3 rounded bg-[#FAF7F0] border-2 border-[#1B365D] shadow-sm">
+        <div class="flex items-center justify-between border-b border-[#C4B693] pb-2 mb-2.5">
+          <span class="font-serif font-extrabold text-[11px] text-[#1B365D] uppercase tracking-wider">
+            <i class="fa-solid fa-key text-[#14452F] mr-1"></i> Vault Sign-In
+          </span>
+          <span class="px-1.5 py-0.5 bg-[#14452F]/15 text-[#14452F] font-mono text-[9px] font-bold rounded">
+            TLS 1.3
+          </span>
+        </div>
+        <form onsubmit="event.preventDefault(); window.Burn1Treasury.triggerLifecycleProgression('MSP-SEAT-AUTH-VERIFIED');" class="space-y-2">
+          <div>
+            <label class="block font-mono text-[9px] font-bold uppercase text-[#4A554E] mb-0.5">Partner Seat ID</label>
+            <input type="text" placeholder="MSP-9042-TREASURY" class="treasury-input text-[11px] py-1 px-2" required>
+          </div>
+          <div>
+            <label class="block font-mono text-[9px] font-bold uppercase text-[#4A554E] mb-0.5">Cryptographic Key</label>
+            <input type="password" placeholder="••••••••••••" class="treasury-input text-[11px] py-1 px-2" required>
+          </div>
+          <button type="submit" class="med-coin med-silver w-full text-[10px] py-1.5">
+            <i class="fa-solid fa-lock"></i> Authenticate Seat
+          </button>
+        </form>
+      </div>
+
+      <div class="my-3 p-3 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-sm flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-[#C4B693] pb-1.5 mb-2">
+            <span class="font-serif font-extrabold text-[10px] text-[#14452F] uppercase">
+              5-State Lifecycle
+            </span>
+            <span id="rc-current-state-badge" class="px-1.5 py-0.5 bg-[#14452F] text-[#FAF7F0] font-mono text-[8.5px] font-bold rounded">
+              STANDBY
+            </span>
+          </div>
+
+          <div class="space-y-1.5" id="rc-lifecycle-list">
+            <div class="lifecycle-node" data-lifecycle-step="0">
+              <span class="lifecycle-dot"></span>
+              <span>PENDING</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="1">
+              <span class="lifecycle-dot"></span>
+              <span>COMPLETE_PASS</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="2">
+              <span class="lifecycle-dot"></span>
+              <span>NON_CONV_INCOMPLETE</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="3">
+              <span class="lifecycle-dot"></span>
+              <span>REJECTED_NEEDS_REMEDIATION</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="4">
+              <span class="lifecycle-dot"></span>
+              <span>APPROVED_SEALED</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 pt-2 border-t border-[#C4B693]">
+          <div class="text-[9px] font-mono font-extrabold text-[#1B365D] uppercase mb-1 flex items-center justify-between">
+            <span>Collector Telemetry Log</span>
+            <span class="text-[#14452F]">● LIVE</span>
+          </div>
+          <div id="rc-telemetry-log" class="h-28 overflow-y-auto bg-[#F4EFE0] border border-[#C4B693] rounded p-1.5 space-y-1">
+            <div class="text-[9.5px] font-mono text-[#4A554E]">
+              [SYSTEM]: Agentless Perimeter Telemetry collector ready. Delivered within standard business turnaround up to 5 business days.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM: Cosmo Slot -->
+      <div id="rc-cosmo-slot" class="p-2.5 rounded bg-[#FAF7F0] border border-[#1B365D]"></div>
+    </aside>
+
+  </div>
+
+  <script src="b2b-guilloche.js"></script>
+  <script src="cosmo-widget.js"></script>
+  <script>
+    // For the Desktop Terminal Mockup showcase, open the Dark Mini-CLI bottom-right automatically on load
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Burn1Cosmo) {
+        window.Burn1Cosmo.openCli('greeting');
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burn-1 Systems — B2B MSP Intake (/msp-intake) | Treasury Guilloche B2B Portal</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="b2b-treasury.css">
+</head>
+<body>
+
+  <!-- 3-COLUMN FIXED FINANCIAL GUI SHELL: grid-cols-[200px_1fr_250px] -->
+  <div class="b2b-shell grid grid-cols-[200px_1fr_250px]">
+
+    <!-- ======================================================================
+         COLUMN 1: LEFT NAVIGATION SIDEBAR (200px)
+         ====================================================================== -->
+    <aside class="col-left-nav p-3.5">
+      <div>
+        <!-- Vault Emblem Header -->
+        <div class="p-2.5 mb-4 rounded border-2 border-[#14452F] bg-[#FAF7F0] shadow-sm">
+          <div class="flex items-center gap-2">
+            <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md shrink-0">
+            <div>
+              <div class="text-[11px] font-serif font-black tracking-wider text-[#14452F] uppercase leading-tight">BURN-1 VAULT</div>
+              <div class="text-[9px] font-mono font-bold text-[#1B365D] uppercase">MSP INTAKE</div>
+            </div>
+          </div>
+          <div class="mt-2 pt-1.5 border-t border-[#C4B693] text-[9px] font-mono text-[#4A554E] flex justify-between">
+            <span>B2B LEDGER</span>
+            <span class="text-[#14452F] font-bold">● WEBHOOK SYNC</span>
+          </div>
+        </div>
+
+        <!-- Global Routing Menu -->
+        <div class="text-[9px] font-mono font-extrabold uppercase tracking-widest text-[#4A554E] px-1 mb-1.5">
+          Global Routing Menu
+        </div>
+        <nav aria-label="Global B2B Routing">
+          <a href="index.html" class="vault-nav-link">
+            <i class="fa-solid fa-landmark w-4 text-center text-[#1B365D]"></i>
+            <span>Core Reserve</span>
+          </a>
+          <a href="central-hub.html" class="vault-nav-link">
+            <i class="fa-solid fa-compass w-4 text-center text-[#1B365D]"></i>
+            <span>Central Hub</span>
+          </a>
+          <a href="partners.html" class="vault-nav-link">
+            <i class="fa-solid fa-sitemap w-4 text-center text-[#14452F]"></i>
+            <span>Partners Hub</span>
+          </a>
+          <a href="broker-portal.html" class="vault-nav-link">
+            <i class="fa-solid fa-file-shield w-4 text-center text-[#1B365D]"></i>
+            <span>Broker Portal</span>
+          </a>
+          <a href="msp-intake.html" class="vault-nav-link active">
+            <i class="fa-solid fa-building-lock w-4 text-center"></i>
+            <span>MSP Intake (B2B)</span>
+          </a>
+          <a href="intake.html" class="vault-nav-link">
+            <i class="fa-solid fa-clipboard-check w-4 text-center text-[#14452F]"></i>
+            <span>Direct Intake</span>
+          </a>
+        </nav>
+
+        <!-- Mandatory Governance Notice Box -->
+        <div class="mt-5 p-2.5 rounded bg-[#FAF7F0]/90 border border-[#1B365D] text-[10px] font-mono leading-relaxed text-[#111814]">
+          <div class="font-extrabold text-[#1B365D] uppercase mb-1 flex items-center gap-1">
+            <i class="fa-solid fa-certificate text-[#14452F]"></i> Data Collector
+          </div>
+          <p class="text-[9.5px] text-[#4A554E]">
+            B2B intake submissions dispatch to the backend webhook collector via <strong>Agentless Perimeter Telemetry</strong> &amp; issue an <strong>Algorithmic Cryptographic SHA-256 Seal</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Bottom Left Brand Stamp -->
+      <div class="pt-3 border-t border-[#C4B693] text-[10px]">
+        <div class="font-serif font-black text-xs text-[#14452F] uppercase">
+          BURN-1 Systems
+        </div>
+        <div class="text-[9px] font-mono text-[#4A554E] mt-1">
+          Delivered within standard business turnaround up to 5 business days.
+        </div>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         COLUMN 2: CENTER MAIN DASHBOARD (1fr Scrollable)
+         ====================================================================== -->
+    <main class="col-center-main">
+      <!-- Top Bond Header Banner -->
+      <div class="guilloche-pane mb-6">
+        <div class="guilloche-pane-content">
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#14452F] pb-4">
+            <div class="max-w-2xl">
+              <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase tracking-widest mb-2">
+                <span>B2B WHOLESALE INTAKE INSTRUMENT (`/msp-intake`)</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-black text-[#14452F] tracking-tight" style="font-family: var(--font-serif);">
+                MSP &amp; CHANNEL CLIENT TELEMETRY INTAKE
+              </h1>
+              <p class="text-xs sm:text-sm font-mono text-[#1B365D] font-semibold mt-1 leading-relaxed">
+                Provision wholesale client domains for <strong>Agentless Perimeter Telemetry</strong>, <strong>Outside-In Exposure Audit</strong> enumeration, and <strong>Algorithmic Cryptographic SHA-256 Seal</strong> binding.
+              </p>
+              <p class="text-[11px] font-mono text-[#4A554E] mt-1">
+                <strong>SLA COMMITMENT:</strong> Delivered within standard business turnaround up to 5 business days.
+              </p>
+              <p class="text-[10.5px] font-mono text-[#14452F] font-semibold mt-1.5 bg-[#EDE5CE]/90 p-2 rounded border border-[#14452F]/50">
+                After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
+              </p>
+            </div>
+            <div class="w-28 h-28 shrink-0" data-guilloche-seal></div>
+          </div>
+
+          <!-- Webhook Receipt Banner (Revealed on Submission) -->
+          <div id="webhook-post-receipt" class="hidden mt-4 p-3 rounded bg-[#14452F]/15 border-2 border-[#14452F] font-mono text-xs text-[#0B291B]"></div>
+        </div>
+      </div>
+
+      <!-- B2B MSP Intake Form inside Scroll Tan Guilloche Pane -->
+      <div class="guilloche-pane guilloche-pane-blue mb-6">
+        <div class="guilloche-pane-content">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4 border-b border-[#C4B693] pb-3">
+            <div>
+              <h2 class="text-lg sm:text-xl font-black text-[#1B365D] uppercase" style="font-family: var(--font-serif);">
+                B2B Client &amp; Framework Parameter Ledger Form
+              </h2>
+              <p class="text-xs font-mono text-[#4A554E]">
+                Submitting this form executes a simulated POST to <code>/webhook/msp-data-collector</code>, appends the Customer-Facing Spreadsheet, and initiates the 5-State Lifecycle in the Right Column.
+              </p>
+            </div>
+            <span class="px-3 py-1 bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase rounded">
+              WEBHOOK: /webhook/msp-data-collector
+            </span>
+          </div>
+
+          <form id="msp-b2b-intake-form" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#14452F] uppercase mb-1">
+                  MSP Partner Organization Name *
+                </label>
+                <input id="msp-org-name" type="text" value="Vanguard Managed Security Partners" class="treasury-input" required>
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#14452F] uppercase mb-1">
+                  MSP Operator Email (Manifest Recipient) *
+                </label>
+                <input id="msp-operator-email" type="email" value="underwriting-desk@vanguard-msp.io" class="treasury-input" required>
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#1B365D] uppercase mb-1">
+                  Managed Client Legal Entity Name *
+                </label>
+                <input id="msp-client-entity" type="text" value="Sterling Regional Bancorp LLC" class="treasury-input" required>
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#1B365D] uppercase mb-1">
+                  Managed Client Primary Perimeter Domain *
+                </label>
+                <input id="msp-client-domain" type="text" value="sterling-bancorp.com" class="treasury-input" required>
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#14452F] uppercase mb-1">
+                  Wholesale Portfolio Allocation Tier *
+                </label>
+                <select id="msp-package-tier" class="treasury-input">
+                  <option value="Monthly Delta Digest ($249/mo)">Monthly Delta Digest ($249/mo)</option>
+                  <option value="Portfolio 5 ($2,500/yr)">Portfolio 5 ($2,500/yr)</option>
+                  <option value="Portfolio 15 ($5,000/yr)" selected>Portfolio 15 ($5,000/yr)</option>
+                  <option value="Leader Pack ($500/mo)">Leader Pack ($500/mo)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#14452F] uppercase mb-1">
+                  Regulatory / Underwriting Framework Mapping *
+                </label>
+                <select id="msp-framework-select" class="treasury-input">
+                  <option value="NIST CSF 2.0 (8-Page Proof)">NIST CSF 2.0 (8-Page Proof)</option>
+                  <option value="NIST CSF 2.0 + NYDFS Part 500">NIST CSF 2.0 + NYDFS Part 500</option>
+                  <option value="NIST CSF 2.0 + HIPAA Security Rule">NIST CSF 2.0 + HIPAA Security Rule</option>
+                  <option value="NIST CSF 2.0 + CMMC 2.0 Level 2">NIST CSF 2.0 + CMMC 2.0 Level 2</option>
+                  <option value="NIST CSF 2.0 + PCI DSS v4.0">NIST CSF 2.0 + PCI DSS v4.0</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#4A554E] uppercase mb-1">
+                  Secondary / Subsidiary ASN or Subdomain Scope
+                </label>
+                <input id="msp-secondary-scope" type="text" value="vpn.sterling-bancorp.com, mail.sterling-bancorp.com" class="treasury-input">
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold text-[#4A554E] uppercase mb-1">
+                  Co-Branded Carrier / Broker Syndicate Counterparty
+                </label>
+                <input id="msp-broker-syndicate" type="text" value="Chubb / Lloyd's Cyber Syndicate 2026" class="treasury-input">
+              </div>
+            </div>
+
+            <!-- Mandatory Governance Attestation Box -->
+            <div class="p-3 rounded bg-[#FAF7F0] border border-[#14452F] text-xs font-mono text-[#111814] flex items-start gap-2.5">
+              <input id="msp-attest-check" type="checkbox" checked required class="mt-1 accent-[#14452F]">
+              <label for="msp-attest-check" class="leading-relaxed">
+                I authorize <strong>Agentless Perimeter Telemetry</strong> collection for the specified client domain(s) to generate an <strong>Algorithmic Cryptographic SHA-256 Seal</strong> dossier. I acknowledge that evidence packages are <strong>Delivered within standard business turnaround up to 5 business days</strong>.
+              </label>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <div class="text-[11px] font-mono text-[#4A554E]">
+                <i class="fa-solid fa-database text-[#1B365D] mr-1"></i> Saves directly to Customer-Facing Spreadsheet Ledger &amp; triggers 5-State Lifecycle.
+              </div>
+              <div class="flex flex-wrap gap-2.5">
+                <button type="submit" class="med-coin med-gold">
+                  <i class="fa-solid fa-paper-plane"></i> Dispatch B2B Intake &amp; Seal
+                </button>
+                <button type="button" onclick="populateSampleB2BClient()" class="med-coin med-silver">
+                  <i class="fa-solid fa-rotate"></i> Load Next Client Seat
+                </button>
+                <a href="partners.html" class="med-coin med-bronze">
+                  <i class="fa-solid fa-arrow-left"></i> Back to Partners
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Customer-Facing Spreadsheet Collector Ledger -->
+      <div class="guilloche-pane">
+        <div class="guilloche-pane-content">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3 border-b border-[#C4B693] pb-2.5">
+            <div>
+              <h2 class="text-base sm:text-lg font-black text-[#14452F] uppercase" style="font-family: var(--font-serif);">
+                <i class="fa-solid fa-table-list text-[#1B365D] mr-1.5"></i> Customer-Facing Spreadsheet Ledger (Live Webhook Sink)
+              </h2>
+              <p class="text-[11px] font-mono text-[#4A554E]">
+                Synchronized with the Right Column 5-State Lifecycle (`PENDING` → `COMPLETE_PASS` → `NON_CONV_INCOMPLETE` → `REJECTED_NEEDS_REMEDIATION` → `APPROVED_SEALED`).
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="window.Burn1Treasury.exportSpreadsheetCSV('burn1-msp-b2b-ledger.csv')" class="med-coin med-silver text-[10px] py-1 px-3">
+                <i class="fa-solid fa-file-csv"></i> Export CSV Ledger
+              </button>
+              <span class="px-2.5 py-1 bg-[#1B365D] text-[#FAF7F0] font-mono text-[10px] font-bold rounded">
+                SPREADSHEET SYNC: ACTIVE
+              </span>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse bg-[#FAF7F0]/95 border-2 border-[#14452F]">
+              <thead>
+                <tr class="bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] uppercase">
+                  <th class="p-2 border border-[#C4B693]">UTC Timestamp</th>
+                  <th class="p-2 border border-[#C4B693]">Client Legal Entity</th>
+                  <th class="p-2 border border-[#C4B693]">Perimeter Domain</th>
+                  <th class="p-2 border border-[#C4B693]">Framework</th>
+                  <th class="p-2 border border-[#C4B693]">Wholesale Tranche</th>
+                  <th class="p-2 border border-[#C4B693]">SHA-256 Seal Reference</th>
+                  <th class="p-2 border border-[#C4B693]">Lifecycle State</th>
+                </tr>
+              </thead>
+              <tbody id="customer-spreadsheet-tbody" class="text-xs">
+                <tr class="border-b border-[#C4B693]">
+                  <td class="p-2 font-mono text-[10px] text-[#4A554E]">2026-11-05 21:14:08 UTC</td>
+                  <td class="p-2 font-mono text-[11px] font-bold text-[#14452F]">Apex Logistics Group</td>
+                  <td class="p-2 font-mono text-[11px] text-[#1B365D] font-semibold">apex-freight-sys.com</td>
+                  <td class="p-2 font-mono text-[10px]">NIST CSF 2.0 (8-Page Proof)</td>
+                  <td class="p-2 font-mono text-[10px] font-bold">Portfolio 15 ($5,000/yr)</td>
+                  <td class="p-2 font-mono text-[10px] text-[#14452F]">SHA256-8F41C20B-91A4</td>
+                  <td class="p-2">
+                    <span class="px-2 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold">
+                      APPROVED_SEALED
+                    </span>
+                  </td>
+                </tr>
+                <tr class="border-b border-[#C4B693] bg-[#F4EFE0]/50">
+                  <td class="p-2 font-mono text-[10px] text-[#4A554E]">2026-11-05 18:42:51 UTC</td>
+                  <td class="p-2 font-mono text-[11px] font-bold text-[#14452F]">Covenant Surgical Partners</td>
+                  <td class="p-2 font-mono text-[11px] text-[#1B365D] font-semibold">covenant-surgical.org</td>
+                  <td class="p-2 font-mono text-[10px]">NIST CSF 2.0 + HIPAA Security Rule</td>
+                  <td class="p-2 font-mono text-[10px] font-bold">Portfolio 5 ($2,500/yr)</td>
+                  <td class="p-2 font-mono text-[10px] text-[#14452F]">SHA256-3E92D71A-44C0</td>
+                  <td class="p-2">
+                    <span class="px-2 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold">
+                      APPROVED_SEALED
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer-legal">
+        <p>© 2026 Leon R. Darden. All rights reserved.</p>
+      </footer>
+    </main>
+
+    <!-- ======================================================================
+         COLUMN 3: RIGHT AUTH & LIVE STATUS SIDEBAR (250px)
+         ====================================================================== -->
+    <aside class="col-right-status p-3.5">
+      <!-- TOP: Authentication / Sign-In Widget -->
+      <div class="p-3 rounded bg-[#FAF7F0] border-2 border-[#1B365D] shadow-sm">
+        <div class="flex items-center justify-between border-b border-[#C4B693] pb-2 mb-2.5">
+          <span class="font-serif font-extrabold text-[11px] text-[#1B365D] uppercase tracking-wider">
+            <i class="fa-solid fa-key text-[#14452F] mr-1"></i> MSP Vault Auth
+          </span>
+          <span class="px-1.5 py-0.5 bg-[#14452F]/15 text-[#14452F] font-mono text-[9px] font-bold rounded">
+            TLS 1.3
+          </span>
+        </div>
+        <form onsubmit="event.preventDefault(); window.Burn1Treasury.triggerLifecycleProgression('MSP-OPERATOR-SESSION-SEALED');" class="space-y-2">
+          <div>
+            <label class="block font-mono text-[9px] font-bold uppercase text-[#4A554E] mb-0.5">Partner Seat ID</label>
+            <input type="text" value="MSP-9042-TREASURY" class="treasury-input text-[11px] py-1 px-2" required>
+          </div>
+          <div>
+            <label class="block font-mono text-[9px] font-bold uppercase text-[#4A554E] mb-0.5">Cryptographic Key</label>
+            <input type="password" value="••••••••••••" class="treasury-input text-[11px] py-1 px-2" required>
+          </div>
+          <button type="submit" class="med-coin med-silver w-full text-[10px] py-1.5">
+            <i class="fa-solid fa-lock"></i> Verify Partner Key
+          </button>
+        </form>
+      </div>
+
+      <!-- MIDDLE: 5-State Lifecycle Telemetry Monitor -->
+      <div class="my-3 p-3 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-sm flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-[#C4B693] pb-1.5 mb-2">
+            <span class="font-serif font-extrabold text-[10px] text-[#14452F] uppercase">
+              5-State Lifecycle
+            </span>
+            <span id="rc-current-state-badge" class="px-1.5 py-0.5 bg-[#14452F] text-[#FAF7F0] font-mono text-[8.5px] font-bold rounded">
+              STANDBY
+            </span>
+          </div>
+
+          <div class="space-y-1.5" id="rc-lifecycle-list">
+            <div class="lifecycle-node" data-lifecycle-step="0">
+              <span class="lifecycle-dot"></span>
+              <span>PENDING</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="1">
+              <span class="lifecycle-dot"></span>
+              <span>COMPLETE_PASS</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="2">
+              <span class="lifecycle-dot"></span>
+              <span>NON_CONV_INCOMPLETE</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="3">
+              <span class="lifecycle-dot"></span>
+              <span>REJECTED_NEEDS_REMEDIATION</span>
+            </div>
+            <div class="lifecycle-node" data-lifecycle-step="4">
+              <span class="lifecycle-dot"></span>
+              <span>APPROVED_SEALED</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Backend Collector Feed -->
+        <div class="mt-3 pt-2 border-t border-[#C4B693]">
+          <div class="text-[9px] font-mono font-extrabold text-[#1B365D] uppercase mb-1 flex items-center justify-between">
+            <span>Collector Telemetry Log</span>
+            <span class="text-[#14452F]">● LIVE</span>
+          </div>
+          <div id="rc-telemetry-log" class="h-28 overflow-y-auto bg-[#F4EFE0] border border-[#C4B693] rounded p-1.5 space-y-1">
+            <div class="text-[9.5px] font-mono text-[#4A554E]">
+              [SYSTEM]: B2B Webhook Collector listening on /webhook/msp-data-collector. Submit form to begin 5-State Lifecycle...
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM: Cosmo (BURN-1 Systems Agent-1, Powered by Muse) Slot -->
+      <div id="rc-cosmo-slot" class="p-2.5 rounded bg-[#FAF7F0] border border-[#1B365D]">
+        <div class="text-[9px] font-mono font-extrabold text-[#1B365D] uppercase mb-1">
+          <i class="fa-solid fa-terminal text-[#14452F] mr-1"></i> BURN-1 Systems Agent-1 (Cosmo)
+        </div>
+        <div class="text-[9.5px] font-mono text-[#4A554E]">
+          Initializing guided intake concierge • Powered by Muse...
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="b2b-guilloche.js"></script>
+  <script src="cosmo-widget.js"></script>
+  <script>
+    // Pre-select package tier if passed via URL query string (?package=...)
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const pkg = params.get('package') || params.get('plan');
+      const select = document.getElementById('msp-package-tier');
+      if (pkg && select) {
+        if (pkg.includes('delta')) select.selectedIndex = 0;
+        else if (pkg.includes('5')) select.selectedIndex = 1;
+        else if (pkg.includes('15')) select.selectedIndex = 2;
+        else if (pkg.includes('leader')) select.selectedIndex = 3;
+      }
+    })();
+
+    const SAMPLE_CLIENTS = [
+      { entity: 'Ironclad Aerospace Defense Corp', domain: 'ironclad-aero.com', framework: 'NIST CSF 2.0 + CMMC 2.0 Level 2' },
+      { entity: 'Harborview Fiduciary Trust', domain: 'harborview-trust.com', framework: 'NIST CSF 2.0 + NYDFS Part 500' },
+      { entity: 'Mercy Diagnostics Network', domain: 'mercy-diagnostics.org', framework: 'NIST CSF 2.0 + HIPAA Security Rule' }
+    ];
+    let sampleIdx = 0;
+
+    function populateSampleB2BClient() {
+      const item = SAMPLE_CLIENTS[sampleIdx % SAMPLE_CLIENTS.length];
+      sampleIdx++;
+      document.getElementById('msp-client-entity').value = item.entity;
+      document.getElementById('msp-client-domain').value = item.domain;
+      document.getElementById('msp-framework-select').value = item.framework;
+    }
+
+    document.getElementById('msp-b2b-intake-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.Burn1Treasury.submitIntakeWebhook({
+        endpoint: '/api/intake',
+        client_type: 'msp',
+        entityName: document.getElementById('msp-client-entity').value,
+        primaryDomain: document.getElementById('msp-client-domain').value,
+        framework: document.getElementById('msp-framework-select').value,
+        packageTier: document.getElementById('msp-package-tier').value
+      });
+    });
+  </script>
+</body>
+</html>
+

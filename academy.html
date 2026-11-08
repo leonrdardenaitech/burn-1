@@ -177,6 +177,8 @@
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 <a href="index.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Home</a>
+        <a href="central-hub.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Central Hub</a>
+        <a href="partners.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Partners</a>
                 <a href="index.html#burn1-fast-lane" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Fast Lane</a>
                 <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Guided Intake →</a>
             </div>
@@ -547,7 +549,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                                 <div class="bg-white border-2 border-slate-200 rounded-xl p-4">
                                     <h5 class="text-sm font-black text-[#0f172a] mb-1">Self-Help Remediation (Free)</h5>
-                                    <p class="text-xs text-slate-500 mb-3">Download individualized open-source POAM templates and configure your controls manually.</p>
+                                    <p class="text-xs text-slate-500 mb-3">Download individualized Outside-In Exposure Audit POAM templates and configure your controls manually.</p>
                                     <button type="button" id="btn-download-free-poam" onclick="downloadPOAM()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono text-xs font-bold uppercase rounded-lg border border-slate-300 transition-all">
                                         Download Free POAM Markdown
                                     </button>
@@ -846,7 +848,7 @@
                 { title: "Enable MFA on email", detail: "Primary email is the master reset key — lock it with hardware/app MFA." }
             ]},
             { id: 6, code: "L6", name: "Digital Footprint Reduction", tagline: "Reduce public exposure.", reward: { score: 30, credits: 5 }, img: "assets/images/l6.jpg", accent: "#8ef58e", steps: [
-                { title: "Search your name & domain", detail: "Audit public OSINT exposure and leaked credential indexes." },
+                { title: "Search your name & domain", detail: "Audit public Outside-In Exposure Audit and leaked credential indexes." },
                 { title: "Deactivate old accounts", detail: "Purge dormant SaaS trials and legacy vendor logins." }
             ]},
             { id: 7, code: "L7", name: "Tracking Lockdown", tagline: "Block fingerprinting.", reward: { score: 35, credits: 5 }, img: "assets/images/l7.jpg", accent: "#c084fc", steps: [
@@ -962,7 +964,7 @@
                 { prompt: "Reconnaissance reveals 'events.smithlaw.com' has a CNAME record pointing to an expired cloud bucket that anyone can register. What is the risk and fix?", hint: "Dangling CNAME records allow attackers to register the external resource and serve malicious content on your trusted subdomain.", options: [
                     { text: "Subdomain Takeover risk: immediately remove the dangling DNS CNAME record before an attacker claims the cloud endpoint.", correct: true },
                     { text: "Leave the DNS record in place since the marketing campaign ended last year.", correct: false },
-                    { text: "Lower the DNS TTL to 60 seconds and keep pointing to the unclaimed bucket.", correct: false }
+                    { text: "Lower the DNS TTL value and keep pointing to the unclaimed bucket.", correct: false }
                 ]},
                 { prompt: "Shodan indexing shows TCP port 3389 (RDP) and port 445 (SMB) open on the firm's branch office static IP for remote paralegals. What is the mandatory remediation?", hint: "Exposed RDP is the #1 initial access vector for ransomware and an automatic declination trigger for underwriters.", options: [
                     { text: "Change the RDP port from 3389 to 3390 so scanners won't notice it.", correct: false },
@@ -1099,8 +1101,8 @@
               desc: "Machine-signed ALCOA+ underwriting evidence binder, 7-domain SAQ attestation, and carrier submission seal." },
             { id: "pkg-spa-500", name: "Automated S.P.A. & Perimeter Audit", tag: "OUTSIDE-IN RECON", basePrice: 500.00, maxDiscount: 250.00,
               desc: "Full Security Posture Assessment (S.P.A.), shadow subdomain enumeration, and 72-hour Day-Three CVE delta." },
-            { id: "pkg-retainer-1000", name: "Golden-Hour Incident Retainer", tag: "SLA < 1 HR", basePrice: 1000.00, maxDiscount: 250.00,
-              desc: "Pre-negotiated IR war-room retainer, Tabletop Exercise (TTX) facilitation, and forensic chain-of-custody kit." },
+            { id: "pkg-retainer-1000", name: "Golden-Hour Incident Retainer", tag: "PRIORITY SLA", basePrice: 1000.00, maxDiscount: 250.00,
+              desc: "Pre-negotiated IR war-room retainer, Tabletop Exercise (TTX) facilitation, and forensic chain-of-custody kit. Delivered within standard business turnaround up to 5 business days." },
             { id: "pkg-ctem-2400", name: "Continuous CTEM Monitoring (Annual)", tag: "24/7 DRIFT WATCH", basePrice: 2400.00, maxDiscount: 250.00,
               desc: "Year-round automated DNS/DMARC drift alerts, dark-web duopoly watch, and quarterly backup restore verification." }
         ];
@@ -1960,5 +1962,9 @@
             setIntakeMode('create');
         });
     </script>
+  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-400/40 text-center text-xs font-mono text-slate-600">
+    <p>© 2026 Leon R. Darden. All rights reserved.</p>
+  </footer>
+  <script src="cosmo-widget.js"></script>
 </body>
 </html>

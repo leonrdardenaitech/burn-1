@@ -1704,7 +1704,7 @@
                     </label>
                     <label style="display:flex; align-items:flex-start; gap:8px; font-size:0.78rem; color:#1e293b; cursor:pointer;">
                         <input type="checkbox" ${state.ackHuman ? 'checked' : ''} onchange="window.AcademyWidget.setAck('ackHuman', this.checked)" style="margin-top:2px; accent-color:#7c3aed;" />
-                        <span>A human reviews this before anyone treats it as evidence for a carrier, an auditor, or the Metro Plaza Directory. The directory is not updated from this page.</span>
+                        <span>An Outside-In Exposure Audit &amp; Algorithmic Cryptographic SHA-256 Seal verification is required before anyone treats it as evidence for a carrier, an auditor, or the Metro Plaza Directory. The directory is not updated from this page.</span>
                     </label>
                 </div>
 

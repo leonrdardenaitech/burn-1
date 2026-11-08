@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Burn-1 Fast Lane — Upload Existing Evidence, Sealed in Days</title>
+  <title>Burn-1 Fast Lane — Upload Existing Evidence, Algorithmic Cryptographic SHA-256 Seal</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -91,32 +91,6 @@
       box-shadow: 0 30px 80px rgba(0,0,0,0.6);
       padding: 1.75rem; position: relative;
     }
-
-    /* Brand typography & legal notice */
-    .brand-title {
-      font-family: inherit;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-      display: inline-flex;
-      align-items: baseline;
-    }
-    .brand-tm {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55em;
-      font-weight: 700;
-      color: #38bdf8;
-      vertical-align: super;
-      line-height: 0;
-      margin-left: 2px;
-      margin-right: 4px;
-    }
-    .tm-notice {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: #64748b;
-      margin-top: 0.5rem;
-    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
@@ -140,6 +114,8 @@
     <div class="grey-unibar-sub">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
         <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="central-hub.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Central Hub</a>
+        <a href="partners.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Partners</a>
         <a href="fast-lane.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
         <a href="healthcare.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
         <a href="finance.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Finance</a>
@@ -202,8 +178,8 @@
             <li class="flex items-start gap-3.5">
               <span class="fl-step-dot shrink-0 mt-0.5">4</span>
               <div>
-                <div class="font-black text-base text-white">Human review → Anergi seal</div>
-                <div class="text-sm text-slate-300 mt-0.5">A human reviews the binder. Then Anergi.io signs the Cyber Seal. Nothing ships unreviewed.</div>
+                <div class="font-black text-base text-white">Outside-In Exposure Audit → Algorithmic Cryptographic SHA-256 Seal</div>
+                <div class="text-sm text-slate-300 mt-0.5">Agentless Perimeter Telemetry validates the binder. Then Anergi.io signs the Algorithmic Cryptographic SHA-256 Seal.</div>
               </div>
             </li>
             <li class="flex items-start gap-3.5">
@@ -217,7 +193,7 @@
 
           <div class="mt-8 p-4 rounded-xl bg-amber-100/10 border-2 border-amber-400/50">
             <div class="text-xs font-mono uppercase tracking-widest text-amber-300 font-black mb-1">Expected turnaround</div>
-            <div class="text-sm text-slate-200 font-semibold">Completeness check: minutes. Human review + seal: 1–3 business days from a complete upload. You'll see the release time after the upload is checked.</div>
+            <div class="text-sm text-slate-200 font-semibold">Delivered within standard business turnaround up to 5 business days.</div>
           </div>
         </div>
       </div>
@@ -320,9 +296,6 @@
   <!-- FOOTER -->
   <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-400/40 text-center text-xs font-mono text-slate-600">
     <p>© 2026 Leon R. Darden. All rights reserved.</p>
-    <p class="tm-notice">
-      ꟻried Brains<span class="brand-tm">™</span> and ꟻried Brains<span class="brand-tm">™</span> World are trademarks of Leon R. Darden.
-    </p>
   </footer>
 
   <!-- BADGE MODAL -->
@@ -390,7 +363,7 @@
         .then(r => r.ok ? r.json() : Promise.reject(r.status))
         .then(res => {
           result.className = "mt-4 p-4 rounded-xl bg-emerald-950 border-2 border-emerald-400 text-emerald-100 text-sm font-mono";
-          result.textContent = `Received. Expected release: ${res.eta || "1–3 business days"}. Check ${payload.email} for the completeness report.`;
+          result.textContent = `Received. ${res.eta || "Delivered within standard business turnaround up to 5 business days."} Check ${payload.email} for the completeness report.`;
         })
         .catch(err => {
           result.className = "mt-4 p-4 rounded-xl bg-rose-950 border-2 border-rose-400 text-rose-100 text-sm font-mono";
@@ -468,6 +441,7 @@
       } catch (e) {}
     });
   </script>
+  <script src="cosmo-widget.js"></script>
 </body>
 </html>
 

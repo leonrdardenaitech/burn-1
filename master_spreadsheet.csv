@@ -1,0 +1,2 @@
+UTC Timestamp,Order ID,Legal Entity,Perimeter Domain,Contact Email,Framework,Wholesale Tier,SHA-256 Seal Reference,Lifecycle State,Vault Subdomain,Turnaround SLA
+2026-11-06T18:54:18.223091+00:00,REQ-1e3b729a,Apex Logistics Group,apex-freight-sys.com,dispatch@apex-freight-sys.com,NIST CSF 2.0,"Portfolio 15 (,000/yr)",ab98e4bc8c854997b6514e854280fcdfe4bceab9bb2f52f47df9fccfc5c4d99f,APPROVED_SEALED,apex-freight-sys.burn-1.com,Standard delivery up to 5 business days

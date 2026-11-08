@@ -116,7 +116,7 @@
             urlElement.innerText = targetUrl;
             urlElement.href = targetUrl;
 
-            // Generate scannable QR Code instantly using a secure, free API
+            // Generate scannable QR Code using a secure, free API
             const qrImg = document.getElementById('qr-image');
             qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=000000&data=${encodeURIComponent(targetUrl)}`;
             

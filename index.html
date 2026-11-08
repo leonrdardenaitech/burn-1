@@ -285,11 +285,9 @@
       animation: b1Blink 3s ease-in-out infinite;
     }
     .b1-chip.pos-1 { left: 50%;  top: 8%; }
-    .b1-chip.pos-2 { left: 82%;  top: 24%; }
-    .b1-chip.pos-3 { left: 86%;  top: 58%; }
-    .b1-chip.pos-4 { left: 50%;  top: 78%; }
-    .b1-chip.pos-5 { left: 14%;  top: 58%; }
-    .b1-chip.pos-6 { left: 18%;  top: 24%; }
+    .b1-chip.pos-2 { left: 84%;  top: 50%; }
+    .b1-chip.pos-3 { left: 50%;  top: 78%; }
+    .b1-chip.pos-4 { left: 16%;  top: 50%; }
 
     /* Instruments row — Star-Trek-ish gauges */
     .b1-instruments {
@@ -465,32 +463,6 @@
       .node.n-leg { left:22%; top:64%; }
       .node.n-gov { left:22%; top:36%; }
     }
-
-    /* Brand typography & legal notice */
-    .brand-title {
-      font-family: inherit;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-      display: inline-flex;
-      align-items: baseline;
-    }
-    .brand-tm {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55em;
-      font-weight: 700;
-      color: #38bdf8;
-      vertical-align: super;
-      line-height: 0;
-      margin-left: 2px;
-      margin-right: 4px;
-    }
-    .tm-notice {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: #64748b;
-      margin-top: 0.5rem;
-    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
@@ -513,15 +485,13 @@
     <div class="grey-unibar-sub">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
         <a href="index.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
+        <a href="central-hub.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Central Hub</a>
+        <a href="partners.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Partners</a>
         <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
         <a href="healthcare.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
         <a href="finance.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Finance</a>
-        <a href="defense.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense</a>
-        <a href="manufacturing.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Manufacturing</a>
         <a href="retail.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
-        <a href="energy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Energy</a>
-        <a href="it-infra.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">IT Infrastructure</a>
-        <a href="legal.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Legal</a>
+        <a href="it-infrastructure.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">IT Infrastructure</a>
         <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
       </div>
     </div>
@@ -539,7 +509,7 @@
           Prove your security posture <br><span class="text-white">before the </span><span class="text-[#f26522]">underwriter</span><span class="text-white"> asks.</span>
         </h1>
         <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mb-8 font-medium">
-          Automated scans, human-verified evidence binders, and a clear scorecard — built for cyber-insurance renewal. From $500. Binder delivered in days, not weeks.
+          Agentless Perimeter Telemetry, Outside-In Exposure Audit evidence binders, and an Algorithmic Cryptographic SHA-256 Seal — built for cyber-insurance renewal. From $500. Delivered within standard business turnaround up to 5 business days.
         </p>
 
         <form action="cinematic-onboarding.html" method="get" class="w-full max-w-2xl bg-slate-900/95 border border-cyan-500/50 rounded-2xl p-4 shadow-xl backdrop-blur-md">
@@ -648,9 +618,9 @@
                 <div class="text-3xl font-black text-white my-2">$750</div>
                 <p class="text-[11px] text-cyan-400 font-bold mb-2">$500 academy price</p>
                 <ul class="text-[11px] text-slate-300 space-y-1.5">
-                  <li>✓ Scan + questionnaire + generated binder</li>
+                  <li>✓ Outside-In Exposure Audit + generated binder</li>
                   <li>✓ Baseline framework mapping</li>
-                  <li>✗ Not human-reviewed</li>
+                  <li>✗ Unsealed baseline dossier</li>
                   <li>✗ Not sealed</li>
                 </ul>
               </div>
@@ -677,10 +647,10 @@
                 <h3 class="text-xs font-black text-cyan-900 uppercase tracking-widest">Remediation · Verified Binder</h3>
                 <div class="text-3xl font-black text-slate-900 my-2">$1,000<span class="text-sm font-bold text-cyan-800">/yr</span></div>
                 <ul class="text-[11px] text-cyan-950 font-bold space-y-1.5 mt-3">
-                  <li>✓ 1 domain, binder + human review</li>
-                  <li>✓ Cyber Seal by Anergi.io</li>
+                  <li>✓ 1 domain, Agentless Perimeter Telemetry binder</li>
+                  <li>✓ Algorithmic Cryptographic SHA-256 Seal</li>
                   <li>✓ Quarterly rescans</li>
-                  <li>✓ The evidence your carrier accepts</li>
+                  <li>✓ Delivered within standard business turnaround up to 5 business days</li>
                 </ul>
               </div>
               <a href="cinematic-onboarding.html?source=index&tier=verified" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Get verified</a>
@@ -735,9 +705,9 @@
                 <ul class="text-[11px] text-slate-300 space-y-1.5 mt-3">
                   <li>✓ Consolidated eBinder, 15 domains</li>
                   <li>✓ Custom executive scorecards</li>
-                  <li>✓ Named human review contact</li>
+                  <li>✓ Algorithmic Cryptographic SHA-256 Seal</li>
                   <li>✓ Carrier questionnaire walk-through</li>
-                  <li>✓ Priority review</li>
+                  <li>✓ Delivered within standard business turnaround up to 5 business days</li>
                 </ul>
               </div>
               <a href="mailto:hello@burn-1.com?subject=Enterprise%20binder%20quote" onclick="event.stopPropagation()" class="w-full text-center py-2.5 bg-[#D92B8A] hover:bg-[#bf2277] text-white rounded-lg text-xs font-black uppercase tracking-widest mt-4">Request quote →</a>
@@ -766,11 +736,12 @@
 
         <!-- Right half -->
         <div class="md:pl-8">
-          <h3 class="text-xl font-black text-white">Not sure where to start?</h3>
-          <p class="text-sm text-slate-300 mt-2 font-medium">Fast Lane if you already have a binder. Guided Intake if you don't.</p>
+          <h3 class="text-xl font-black text-white">Partner &amp; Underwriting Channels</h3>
+          <p class="text-sm text-slate-300 mt-2 font-medium">Wholesale MSP portfolio binders ($249/mo multi-tenant Delta Digest) and co-branded 8-page NIST CSF 2.0 pre-underwriting proof packages.</p>
           <div class="mt-5 flex flex-wrap gap-3">
-            <a href="#burn1-fast-lane-preview" class="px-5 py-2.5 bg-[#f26522] hover:bg-[#d95316] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-colors">Fast Lane →</a>
-            <a href="cinematic-onboarding.html" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 rounded-xl transition-colors">Guided Intake →</a>
+            <a href="partners.html" class="px-5 py-2.5 bg-[#f26522] hover:bg-[#d95316] text-white font-black text-xs uppercase tracking-widest rounded-xl transition-colors">Partners →</a>
+            <a href="msp-intake.html" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 rounded-xl transition-colors">MSP Partners →</a>
+            <a href="broker-portal.html" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold text-xs uppercase tracking-widest border border-slate-700 rounded-xl transition-colors">Broker Portal →</a>
           </div>
         </div>
       </div>
@@ -784,10 +755,10 @@
         <div class="w-full md:w-[60%]">
           <span class="font-mono text-xs uppercase tracking-widest text-[#f26522] font-black block mb-2">BURN-1 FAST LANE</span>
           <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase tracking-tight leading-tight">
-            Already have your evidence? Seal it in days.
+            Already have your evidence? Seal it with our Algorithmic Cryptographic SHA-256 Seal.
           </h2>
           <p class="text-sm sm:text-base text-slate-300 font-medium mt-3">
-            Upload what you have. We verify, seal with Anergi.io, and post the receipt to your subdomain.
+            Upload what you have. We validate via Outside-In Exposure Audit, seal with Anergi.io, and post the receipt to your subdomain. Delivered within standard business turnaround up to 5 business days.
           </p>
         </div>
         <div class="w-full md:w-[40%] flex flex-col gap-3 justify-center md:items-end">
@@ -812,10 +783,8 @@
       <div class="b1-chips">
         <div class="b1-chip pos-1">Healthcare</div>
         <div class="b1-chip pos-2">Finance</div>
-        <div class="b1-chip pos-3">Defense</div>
-        <div class="b1-chip pos-4">Retail</div>
-        <div class="b1-chip pos-5">Legal</div>
-        <div class="b1-chip pos-6">Government</div>
+        <div class="b1-chip pos-3">Retail</div>
+        <div class="b1-chip pos-4">IT Infrastructure</div>
       </div>
 
       <!-- Center core -->
@@ -843,7 +812,7 @@
         <div class="b1-gauge">
           <div class="b1-gauge-label"><span>Turnaround</span><span class="live">Live</span></div>
           <div class="b1-gauge-bar"><div class="b1-gauge-fill" data-fill="86"></div></div>
-          <div class="b1-gauge-val"><span>1–3 days</span><span class="muted">fast lane</span></div>
+          <div class="b1-gauge-val"><span>Up to 5 business days</span><span class="muted">standard SLA</span></div>
         </div>
       </div>
 
@@ -858,11 +827,19 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-400/40 text-center text-xs font-mono text-slate-600">
-    <p>© 2026 Leon R. Darden. All rights reserved.</p>
-    <p class="tm-notice">
-      ꟻried Brains<span class="brand-tm">™</span> and ꟻried Brains<span class="brand-tm">™</span> World are trademarks of Leon R. Darden.
-    </p>
+  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-700/60 text-xs font-mono text-slate-400">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <p class="text-slate-400 font-medium">© 2026 Leon R. Darden. All rights reserved.</p>
+        <p class="text-[11px] text-slate-500 mt-1">BURN-1 Systems • Renewal-Grade Cyber Insurance Evidence Automation</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="https://tools.burn-1.com#helpdesk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 border border-cyan-500/40 text-cyan-400 hover:text-cyan-300 hover:border-cyan-400 transition-all shadow-sm group">
+          <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 group-hover:scale-125 transition-transform shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
+          <span>Help Desk &amp; Ticket Portal: <strong class="text-white underline decoration-cyan-500">tools.burn-1.com</strong></span>
+        </a>
+      </div>
+    </div>
   </footer>
 
   <script>
@@ -947,5 +924,6 @@
       }
     })();
   </script>
+  <script src="cosmo-widget.js"></script>
 </body>
 </html>

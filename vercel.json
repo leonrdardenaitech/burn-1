@@ -290,6 +290,26 @@
         {
             "source": "/tool",
             "destination": "/tools.html"
+        },
+        {
+            "source": "/partners",
+            "destination": "/partners.html"
+        },
+        {
+            "source": "/broker-portal",
+            "destination": "/broker-portal.html"
+        },
+        {
+            "source": "/msp-intake",
+            "destination": "/msp-intake.html"
+        },
+        {
+            "source": "/intake",
+            "destination": "/intake.html"
+        },
+        {
+            "source": "/central-hub",
+            "destination": "/central-hub.html"
         }
     ],
     "redirects": [

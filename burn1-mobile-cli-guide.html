@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 Systems // Agent-1 — Mobile CLI Guide (Powered by Muse)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="b2b-treasury.css">
+  <link rel="stylesheet" href="burn1-logo-terminal.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: var(--scroll-tan, #F4EFE0);
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    }
+
+    /* Background when terminal is collapsed to the bottom-right coin */
+    .mobile-daylight-backdrop {
+      position: relative;
+      z-index: 1;
+      max-width: 540px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+    }
+
+    /* Full-Screen Dark Terminal Overlay for Mobile CLI Guide (§9) */
+    .mobile-cli-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9800;
+      background: linear-gradient(180deg, #05080a 0%, #07160f 65%, #05080a 100%);
+      color: #7dff9a;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .mobile-cli-overlay.is-hidden {
+      display: none !important;
+    }
+
+    .mobile-cli-frame {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      border: 1.5px solid #14452F;
+      border-radius: 6px;
+      background: rgba(5, 8, 10, 0.94);
+      box-shadow: 0 0 32px rgba(20, 69, 47, 0.45), inset 0 0 24px rgba(0, 0, 0, 0.85);
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 2rem);
+    }
+
+    .mobile-cli-header {
+      padding: 0.85rem 1rem;
+      border-bottom: 1.5px solid #14452F;
+      background: rgba(11, 41, 27, 0.55);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .mobile-cli-body {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cli-step-card {
+      padding: 0.75rem 0.85rem;
+      border-left: 2.5px solid #14452F;
+      background: rgba(11, 41, 27, 0.28);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .cli-step-card.active-focus {
+      border-left-color: #ffd166;
+      background: rgba(20, 69, 47, 0.36);
+    }
+
+    .cli-step-title {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: #ffd166;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .cli-step-copy {
+      font-size: 0.74rem;
+      line-height: 1.5;
+      color: #F4EFE0;
+    }
+
+    .mobile-cli-footer {
+      padding: 0.85rem 1rem;
+      border-top: 1.5px solid #14452F;
+      background: #05080a;
+    }
+
+    @keyframes blinkCursor {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .blinking-cursor {
+      display: inline-block;
+      width: 7px;
+      height: 13px;
+      background: #7dff9a;
+      vertical-align: middle;
+      margin-left: 3px;
+      animation: blinkCursor 1s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Daylight Treasury Backdrop (Visible when starts collapsed on the bottom-right gold coin) -->
+  <div class="mobile-daylight-backdrop">
+    <div class="guilloche-pane">
+      <div class="guilloche-pane-content">
+        <div style="display:flex;align-items:center;gap:10px;border-bottom:2px solid #14452F;padding-bottom:10px;margin-bottom:12px;">
+          <img
+            class="b1-logo b1-logo--flame"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADrSURBVFhH1ZLLDcIwFARTBAe6oApaoQi6pBNuSFyCTOTImfi3/kVZaS95zpuJlWk6c+bndTbl8yGx8EMkVvDrsXSkxA4+UoLw7+f97xCJEHyIRAreVSIX3kVChTeVSMEv99umnFdJqPDmEiXwHAlyvHG/nstioNhMuoWcr+fz1Fy6hVMI+CCxmS6Q8Q/Eyvekf8Ak9xZ85Xnp623cW1AkeM6FSwImqgTnVXCblESoTeA2lAjJcN4EbrNKeER2dc5yT1U2Ej4RzPl+cfizqeU+KVxWWu6VwmVqua84XJwq328Wglie75bDwK3zA2HiKmIGSgBEAAAAAElFTkSuQmCC"
+            width="28"
+            height="28"
+            alt="BURN-1"
+          />
+          <div>
+            <div style="font-family:var(--font-serif);font-weight:900;font-size:1rem;color:#14452F;">
+              BURN-1 SYSTEMS // AGENT-1 (COSMO)
+            </div>
+            <div style="font-size:0.68rem;color:#1B365D;font-weight:700;">
+              MOBILE CLI CONCIERGE STANDBY • TAP GOLD COIN BOTTOM-RIGHT TO OPEN
+            </div>
+          </div>
+        </div>
+        <p style="font-size:0.78rem;color:#111814;line-height:1.55;margin:0 0 10px 0;">
+          After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
+        </p>
+        <p style="font-size:0.72rem;color:#4A554E;margin:0;">
+          Agentless Perimeter Telemetry • Outside-In Exposure Audit • Algorithmic Cryptographic SHA-256 Seal • Delivered within standard business turnaround up to 5 business days.
+        </p>
+
+        <footer class="footer-legal" style="margin-top:1.25rem;padding-top:0.85rem;">
+          <p>© 2026 Leon R. Darden. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATE 1: Starts Collapsed — Only the Gold Coin with the Pixel Logo, Bottom-Right -->
+  <div id="mobile-coin-launcher" class="cosmo-floating-launcher">
+    <button
+      type="button"
+      id="mobile-open-coin-btn"
+      class="med-coin med-gold cosmo-coin-btn"
+      aria-label="Open BURN-1 Systems Agent-1 Mobile CLI"
+    >
+      <img
+        class="b1-logo b1-logo--flame"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADrSURBVFhH1ZLLDcIwFARTBAe6oApaoQi6pBNuSFyCTOTImfi3/kVZaS95zpuJlWk6c+bndTbl8yGx8EMkVvDrsXSkxA4+UoLw7+f97xCJEHyIRAreVSIX3kVChTeVSMEv99umnFdJqPDmEiXwHAlyvHG/nstioNhMuoWcr+fz1Fy6hVMI+CCxmS6Q8Q/Eyvekf8Ak9xZ85Xnp623cW1AkeM6FSwImqgTnVXCblESoTeA2lAjJcN4EbrNKeER2dc5yT1U2Ej4RzPl+cfizqeU+KVxWWu6VwmVqua84XJwq328Wglie75bDwK3zA2HiKmIGSgBEAAAAAElFTkSuQmCC"
+        width="28"
+        height="28"
+        alt="BURN-1"
+      />
+    </button>
+    <span class="cosmo-coin-label">BURN-1 Agent-1</span>
+  </div>
+
+  <!-- FULL-SCREEN DARK TERMINAL GUIDE FOR MOBILE (Opens on Coin Tap) -->
+  <div id="mobile-cli-overlay" class="mobile-cli-overlay is-hidden">
+    <div class="mobile-cli-frame">
+
+      <!-- HEADER -->
+      <header class="mobile-cli-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img
+            class="b1-logo b1-logo--flame"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADrSURBVFhH1ZLLDcIwFARTBAe6oApaoQi6pBNuSFyCTOTImfi3/kVZaS95zpuJlWk6c+bndTbl8yGx8EMkVvDrsXSkxA4+UoLw7+f97xCJEHyIRAreVSIX3kVChTeVSMEv99umnFdJqPDmEiXwHAlyvHG/nstioNhMuoWcr+fz1Fy6hVMI+CCxmS6Q8Q/Eyvekf8Ak9xZ85Xnp623cW1AkeM6FSwImqgTnVXCblESoTeA2lAjJcN4EbrNKeER2dc5yT1U2Ej4RzPl+cfizqeU+KVxWWu6VwmVqua84XJwq328Wglie75bDwK3zA2HiKmIGSgBEAAAAAElFTkSuQmCC"
+            width="28"
+            height="28"
+            alt="BURN-1"
+          />
+          <div>
+            <div style="font-size:0.82rem;font-weight:900;color:#F4EFE0;letter-spacing:0.06em;">
+              BURN-1 SYSTEMS // AGENT-1
+            </div>
+            <div style="font-size:0.62rem;color:#7dff9a;font-weight:700;letter-spacing:0.04em;">
+              SESSION_09 // ORBITAL CLOUD NETWORK [CONNECTED]
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:6px;">
+          <button type="button" id="mobile-sound-toggle" class="b1-sound-toggle" data-sound="on">
+            SOUND: ON — ding
+          </button>
+          <button
+            type="button"
+            id="mobile-minimise-btn"
+            class="b1-sound-toggle"
+            style="color:#ffd166;border-color:#ffd166;"
+          >
+            &minus; MINIMISE
+          </button>
+        </div>
+      </header>
+
+      <!-- BODY: 4 GUIDED STEPS (§9) -->
+      <main class="mobile-cli-body">
+
+        <!-- Live Cosmo Telemetry Output Banner -->
+        <div id="mobile-cli-status" style="padding:0.55rem 0.75rem;background:#05080a;border:1px dashed #7dff9a;border-radius:3px;font-size:0.7rem;color:#7dff9a;">
+          Welcome to BURN-1 Systems. I'm Cosmo, your interactive intake guide. Tap any highlighted text choice below. Delivered within standard business turnaround up to 5 business days.
+        </div>
+
+        <!-- STEP 01 -->
+        <section class="cli-step-card active-focus">
+          <div class="cli-step-title">01 — PICK YOUR PATH</div>
+          <div class="cli-step-copy">
+            <button type="button" class="b1-choice b1-choice--gold" data-mobile-choice="Free preview ($0) selected -> routing to /intake.">Free preview</button>
+            <button type="button" class="b1-choice b1-choice--green" data-mobile-choice="Verified Binder — $1,000/yr selected (+Guidance PLUS $500/yr, +Enforcement PLUS $750/yr available).">Verified Binder — $1,000/yr</button>
+            <button type="button" class="b1-choice b1-choice--purple" data-mobile-choice="MSP Pricing — Monthly Delta Digest $249/mo multi-tenant (Portfolio 5 $2,500/yr, Portfolio 15 $5,000/yr, Leader Pack $500/mo).">MSP Pricing — Delta $249/mo</button>
+            <button type="button" class="b1-choice b1-choice--orange" data-mobile-choice="Broker Mode retained in sessionStorage (client_type='broker') -> ready for 8-page NIST CSF 2.0 proof.">I'm a broker</button>
+          </div>
+        </section>
+
+        <!-- STEP 02 -->
+        <section class="cli-step-card">
+          <div class="cli-step-title">02 — BIND — GATHERING EVIDENCE</div>
+          <div class="cli-step-copy">
+            After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
+            <div style="margin-top:0.35rem;font-size:0.66rem;color:#7dd3fc;">
+              Agentless Perimeter Telemetry • Outside-In Exposure Audit • Delivered within standard business turnaround up to 5 business days.
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 03 -->
+        <section class="cli-step-card">
+          <div class="cli-step-title">03 — PICK A PROTOCOL</div>
+          <div class="cli-step-copy">
+            <button type="button" class="b1-choice b1-choice--gold" data-mobile-choice="Protocol locked: HITRUST CSF / Healthcare Underwriting Checklist.">HITRUST</button>
+            <button type="button" class="b1-choice b1-choice--green" data-mobile-choice="Protocol locked: HIPAA Security Rule / Clinical Perimeter Telemetry.">HIPAA</button>
+            <button type="button" class="b1-choice b1-choice--purple" data-mobile-choice="Protocol locked: NYDFS 23 NYCRR 500 Financial Services Attestation.">NYDFS</button>
+            <button type="button" class="b1-choice b1-choice--blue" data-mobile-choice="Protocol locked: PCI DSS v4.0 Cardholder Perimeter Audit.">PCI DSS</button>
+          </div>
+        </section>
+
+        <!-- STEP 04 -->
+        <section class="cli-step-card">
+          <div class="cli-step-title">04 — GET YOUR REPORT</div>
+          <div class="cli-step-copy">
+            <button type="button" class="b1-choice b1-choice--gold" data-mobile-choice="Affixing Algorithmic Cryptographic SHA-256 Seal • Delivered within standard business turnaround up to 5 business days.">Algorithmic Cryptographic SHA-256 Seal</button>
+            <button type="button" class="b1-choice b1-choice--blue" data-mobile-action="resend">Resend my report</button>
+            <button type="button" class="b1-choice b1-choice--green" data-mobile-action="escalate">Escalate to a person</button>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- BOTTOM: CHAT INPUT LINE WITH BLINKING CURSOR + SMALL "Powered by Muse" FOOTER -->
+      <footer class="mobile-cli-footer">
+        <form id="mobile-cli-form" class="b1-cli-prompt-row" autocomplete="off">
+          <span class="b1-cli-prompt-label">CHAT INPUT: burn-1&gt;</span>
+          <input
+            type="text"
+            id="mobile-cli-input"
+            class="b1-cli-input"
+            placeholder="Enter order number (e.g. ORD-2026-8841) or select choice above..."
+          />
+          <span class="blinking-cursor" aria-hidden="true"></span>
+        </form>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;font-size:0.64rem;color:#94a3b8;">
+          <span>Delivered within standard business turnaround up to 5 business days.</span>
+          <span style="color:#F4EFE0;font-weight:700;">Powered by Muse</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="b2b-guilloche.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      let soundOn = true;
+      let audioCtx = null;
+
+      function playDing() {
+        if (!soundOn) return;
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          if (!audioCtx) audioCtx = new AudioContextClass();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.09, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.14);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.14);
+        } catch (e) {}
+      }
+
+      const launcher = document.getElementById('mobile-coin-launcher');
+      const openBtn = document.getElementById('mobile-open-coin-btn');
+      const overlay = document.getElementById('mobile-cli-overlay');
+      const minBtn = document.getElementById('mobile-minimise-btn');
+      const soundBtn = document.getElementById('mobile-sound-toggle');
+      const statusBox = document.getElementById('mobile-cli-status');
+      const cliForm = document.getElementById('mobile-cli-form');
+      const cliInput = document.getElementById('mobile-cli-input');
+
+      openBtn.addEventListener('click', function () {
+        playDing();
+        launcher.classList.add('is-hidden');
+        overlay.classList.remove('is-hidden');
+      });
+
+      minBtn.addEventListener('click', function () {
+        overlay.classList.add('is-hidden');
+        launcher.classList.remove('is-hidden');
+      });
+
+      soundBtn.addEventListener('click', function () {
+        soundOn = !soundOn;
+        soundBtn.setAttribute('data-sound', soundOn ? 'on' : 'off');
+        soundBtn.textContent = soundOn ? 'SOUND: ON — ding' : 'SOUND: OFF';
+        if (soundOn) playDing();
+      });
+
+      document.querySelectorAll('[data-mobile-choice]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          playDing();
+          statusBox.textContent = '[COSMO // AGENT-1]: ' + btn.getAttribute('data-mobile-choice');
+        });
+      });
+
+      document.querySelectorAll('[data-mobile-action]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          playDing();
+          const act = btn.getAttribute('data-mobile-action');
+          if (act === 'resend') {
+            statusBox.textContent =
+              '[RESEND HOOK]: Enter your customer order number below (e.g. ORD-2026-8841) and press Enter.';
+            cliInput.focus();
+          } else if (act === 'escalate') {
+            statusBox.textContent = 'Escalated. Elleon will guide you from here.';
+          }
+        });
+      });
+
+      cliForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        playDing();
+        const val = (cliInput.value || '').trim();
+        cliInput.value = '';
+        if (!val) return;
+        if (/^(ORD|B1|SEAL|BURN)[-_A-Z0-9]{3,}$/i.test(val) || /^[A-Z0-9-]{5,18}$/i.test(val)) {
+          statusBox.textContent = 'Sent to j***@example.com';
+        } else {
+          statusBox.textContent =
+            'Cosmo follows guided sequences only. Choose a highlighted option above or tap Escalate to a person.';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
+

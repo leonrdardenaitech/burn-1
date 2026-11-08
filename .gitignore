@@ -1,0 +1,17 @@
+# Environment Variables & Credentials
+.env
+.env*.local
+*.env
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Databases
+*.db
+*.sqlite3
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db

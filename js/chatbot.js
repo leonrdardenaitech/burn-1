@@ -178,7 +178,7 @@
             } else if (query.includes('onboard') || query.includes('receipt') || query.includes('key')) {
                 bDiv.innerHTML = `<strong>[SYSTEM]:</strong> Activate receipt keys and download assets directly at <a href="onboarding.html" class="underline text-emerald-400 font-bold">burn-1.com/onboarding.html</a>.`;
             } else {
-                bDiv.innerHTML = `<strong>[SYSTEM]:</strong> Query received. All assets are flat $50 standalone zip downloads. Visit our <a href="onboarding.html" class="underline text-emerald-400 font-bold">Onboarding Portal</a> for instant dispatch.`;
+                bDiv.innerHTML = `<strong>[SYSTEM]:</strong> Query received. All assets are flat $50 standalone zip downloads. Visit our <a href="onboarding.html" class="underline text-emerald-400 font-bold">Onboarding Portal</a> for automated dispatch. Delivered within standard business turnaround up to 5 business days.`;
             }
 
             msgs.appendChild(bDiv);
