@@ -253,7 +253,11 @@
             ${profile.greeting}
           </div>
         </div>
-        <div id="div-bot-prompts" style="padding:0 14px 14px 14px;display:flex;flex-direction:column;gap:6px;"></div>
+        <div id="div-bot-prompts" style="padding:0 14px 10px 14px;display:flex;flex-direction:column;gap:6px;"></div>
+        <div style="padding:8px 14px;border-top:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.4);font-family:'JetBrains Mono',monospace;font-size:10px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:#94a3b8;">Need Human Escalation?</span>
+          <a href="https://tools.burn-1.com#helpdesk" target="_blank" rel="noopener noreferrer" style="color:${profile.accent};font-weight:800;text-decoration:underline;">tools.burn-1.com →</a>
+        </div>
       </div>
       <button id="div-bot-toggle" type="button" style="display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:9999px;background:${profile.bgPanel};border:2px solid ${profile.accent};color:#ffffff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;letter-spacing:0.05em;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,0.45);">
         <span style="width:9px;height:9px;border-radius:50%;background:${profile.accent};box-shadow:0 0 10px ${profile.accent};display:inline-block;"></span>
