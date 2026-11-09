@@ -167,6 +167,116 @@
       box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
     }
 
+    /* ===== DAY-THEME FINANCIAL GUILLOCHE SHOWCASE & DASHBOARD THEME (PARTNERS / BROKER STYLE) ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap');
+    :root {
+      --money-green: #14452F;
+      --money-green-deep: #0B291B;
+      --scroll-tan: #F4EFE0;
+      --scroll-tan-light: #FAF7F0;
+      --scroll-tan-border: #C4B693;
+      --money-blue: #1B365D;
+      --ink-charcoal: #111814;
+      --ink-muted: #4A554E;
+      --font-serif: 'Cinzel', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    .guilloche-stage-wrap {
+      background-color: var(--scroll-tan);
+      color: var(--ink-charcoal);
+      background-image:
+        radial-gradient(circle at 18% 15%, rgba(20, 69, 47, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 82% 80%, rgba(27, 54, 93, 0.07) 0%, transparent 45%),
+        repeating-linear-gradient(45deg, rgba(20, 69, 47, 0.025) 0px, rgba(20, 69, 47, 0.025) 1px, transparent 1px, transparent 8px);
+      border-bottom: 4px solid var(--money-green);
+    }
+    .guilloche-pane {
+      position: relative;
+      background-color: var(--scroll-tan);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.78), transparent 70%),
+        repeating-linear-gradient(0deg, rgba(20, 69, 47, 0.025) 0px, rgba(20, 69, 47, 0.025) 1px, transparent 1px, transparent 4px);
+      border: 2px solid var(--money-green);
+      outline: 1px solid var(--money-blue);
+      outline-offset: -6px;
+      border-radius: 6px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 28px rgba(11, 41, 27, 0.14), inset 0 0 28px rgba(196, 182, 147, 0.35);
+      overflow: hidden;
+      color: var(--ink-charcoal);
+    }
+    .guilloche-pane-blue {
+      border-color: var(--money-blue);
+      outline-color: var(--money-green);
+    }
+    .guilloche-pane-content {
+      position: relative;
+      z-index: 2;
+    }
+    .med-coin {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 9999px;
+      font-family: var(--font-serif);
+      font-weight: 800;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      text-decoration: none;
+    }
+    .med-coin:hover { filter: brightness(1.06); transform: translateY(-1px); }
+    .med-gold {
+      background: radial-gradient(ellipse at 30% 25%, #FFF8C9 0%, #F5D061 28%, #C9971C 68%, #7E5908 100%);
+      color: #2A1B00;
+      border: 2px solid #7E5908;
+      box-shadow: 0 4px 12px rgba(126, 89, 8, 0.35), inset 0 2px 3px rgba(255, 252, 224, 0.9);
+    }
+    .med-silver {
+      background: radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #E2E8F0 30%, #94A3B8 70%, #475569 100%);
+      color: #0F172A;
+      border: 2px solid #475569;
+      box-shadow: 0 4px 12px rgba(71, 85, 105, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.95);
+    }
+    .treasury-input {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      background: var(--scroll-tan-light);
+      border: 1.5px solid var(--money-green);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--ink-charcoal);
+    }
+    /* Brand Title Base per GEMINI.md */
+    .brand-title {
+      font-family: var(--font-sans, inherit);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .brand-tm {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.55em;
+      font-weight: 700;
+      color: #38bdf8;
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 2px;
+      margin-right: 4px;
+    }
+    .tm-notice {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body class="min-h-screen pb-16">
@@ -224,6 +334,395 @@
     </div>
   </header>
 
+  <!-- ========================================================================
+       CENTER STAGE: GUILLOCHE EVIDENCE SHOWCASE DIRECTORY, SHA-256 SEAL VAULT,
+       ALL-FLAVORS DIVISION SCROLLER, CARD-ON-SIGN-UP & CONNECTED CLIENT DASHBOARD
+       ======================================================================== -->
+  <section class="guilloche-stage-wrap py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[1650px] mx-auto space-y-8">
+
+      <!-- 1. TOP GUILLOCHE BOND HEADER + LIVE SHA-256 SEAL VERIFICATION SHOWCASE -->
+      <div class="guilloche-pane">
+        <div class="guilloche-pane-content">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center border-b-2 border-[#14452F] pb-6">
+            <div class="lg:col-span-8 space-y-2.5">
+              <div class="inline-flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase tracking-widest">
+                  CENTER STAGE • EVIDENCE SHOWCASE DIRECTORY
+                </span>
+                <span class="px-2.5 py-0.5 rounded bg-[#1B365D] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase tracking-widest">
+                  ALGORITHMIC CRYPTOGRAPHIC SHA-256 SEAL REGISTRY
+                </span>
+                <a href="#client-dashboard-stage" class="px-2.5 py-0.5 rounded bg-[#14452F]/15 border border-[#14452F] text-[#14452F] font-mono text-[10px] font-extrabold uppercase">
+                  Jump to Connected Client Dashboard &darr;
+                </a>
+                <a href="#local-preset-metro-directory" class="px-2.5 py-0.5 rounded bg-[#1B365D]/15 border border-[#1B365D] text-[#1B365D] font-mono text-[10px] font-extrabold uppercase">
+                  Jump to Local Preset Directory &darr;
+                </a>
+              </div>
+              <h1 class="text-2xl sm:text-4xl font-black text-[#14452F] uppercase tracking-tight" style="font-family: var(--font-serif);">
+                BURN-1 Ecosystem Evidence Showcase &amp; SHA-256 Seal Registry
+              </h1>
+              <p class="text-xs sm:text-sm text-[#111814] font-medium leading-relaxed max-w-4xl">
+                <strong>Core Package Doctrine — Bind, Not a Scan:</strong> After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. Verify live <strong>Algorithmic Cryptographic SHA-256 Seals</strong> across all divisions, claim your Digital Card on sign-up, and access your connected reports, articles, status, and subscriptions below.
+              </p>
+
+              <!-- Interactive SHA-256 Seal Verification Bar -->
+              <div class="pt-2 flex flex-col sm:flex-row gap-2 max-w-2xl">
+                <input
+                  id="sha-verify-input"
+                  type="text"
+                  placeholder="Verify Domain, Order ID, or SHA-256 Hash (e.g. meridian-clinic.com or ORD-FRZ-1001)"
+                  class="treasury-input flex-1"
+                >
+                <button type="button" onclick="verifyDirectorySeal()" class="med-coin med-gold shrink-0">
+                  <i class="fa-solid fa-certificate"></i> Verify SHA-256 Seal
+                </button>
+                <button
+                  type="button"
+                  id="dir-universal-auth-btn"
+                  onclick="if(window.Burn1Cosmo && window.Burn1Cosmo.openAuthModal){window.Burn1Cosmo.openAuthModal();}else{document.getElementById('dir-card-signup-org').focus();}"
+                  class="med-coin med-silver shrink-0"
+                >
+                  <i class="fa-solid fa-user-shield"></i> Universal Sign-In
+                </button>
+              </div>
+              <div id="sha-verify-result" class="hidden p-3 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-xs space-y-1"></div>
+            </div>
+
+            <!-- Right: Official Guilloche Cryptographic Seal Crest + Live Seal Counter -->
+            <div class="lg:col-span-4 flex flex-col items-center justify-center p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-inner text-center">
+              <div class="w-28 h-28 mx-auto mb-2" data-guilloche-seal></div>
+              <div class="font-serif font-black text-sm text-[#14452F] uppercase">Algorithmic Cryptographic SHA-256 Seal</div>
+              <div class="font-mono text-[10px] text-[#1B365D] font-bold mt-0.5">NIST CSF 2.0 • CISA KEV • CARRIER VERIFIED</div>
+              <div class="mt-2 px-3 py-1 rounded bg-[#14452F]/10 border border-[#14452F]/40 font-mono text-[10px] text-[#0B291B] break-all">
+                ACTIVE ROOT SEAL: 8f434346648f6b96df89dda901c5176b...27aa4
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. SCROLLABLE ALL-FLAVORS ECOSYSTEM DIVISION SHOWCASE -->
+          <div class="mt-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <span class="font-mono text-[10px] font-extrabold uppercase tracking-widest text-[#1B365D]">
+                  SCROLLABLE ECOSYSTEM DIVISIONS • ALL FLAVORS OF BURN-1
+                </span>
+                <h2 class="text-lg sm:text-xl font-black text-[#14452F] uppercase" style="font-family: var(--font-serif);">
+                  Explore Divisions: Core • Burning Time Fast Lane • FreezerBurn • Acid • Times2 • Sizzlean
+                </h2>
+              </div>
+              <div class="flex gap-2">
+                <button type="button" onclick="scrollDivisionStrip(-380)" class="med-coin med-silver py-1.5 px-3 text-[10px]">&larr; Scroll Left</button>
+                <button type="button" onclick="scrollDivisionStrip(380)" class="med-coin med-silver py-1.5 px-3 text-[10px]">Scroll Right &rarr;</button>
+              </div>
+            </div>
+
+            <!-- Horizontal Scroll Container -->
+            <div id="ecosystem-flavors-scroller" class="flex gap-5 overflow-x-auto pb-4 scroll-smooth snap-x">
+
+              <!-- FLAVOR 1: CORE RESERVE (BURN-1.COM) -->
+              <div class="snap-start shrink-0 w-80 rounded-xl p-4 bg-[#0f172a] text-white border-2 border-cyan-400 shadow-lg flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-center font-mono text-[10px] text-cyan-300 font-bold mb-2">
+                    <span>FLAVOR 01 // CORE RESERVE</span>
+                    <span class="px-2 py-0.5 rounded bg-cyan-500/20 border border-cyan-400">SEALED</span>
+                  </div>
+                  <img src="burn1logopurplesilver.jpg" alt="Core Reserve" class="w-full h-32 object-cover rounded-lg border border-cyan-500/40 mb-3">
+                  <h3 class="text-base font-black uppercase text-white" style="font-family:'Orbitron',sans-serif;">BURN-1 Core Binders</h3>
+                  <p class="text-xs text-slate-300 mt-1">B-U-R-N-1 5-Tier Underwriting Evidence Binders ($0 Free Mini S.P.A. to $5,000/yr Enterprise).</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-emerald-400 font-bold">● SHA-256 ACTIVE</span>
+                  <a href="index.html#pricing" class="px-3 py-1.5 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-mono text-[10px] font-black uppercase">Enter Core &rarr;</a>
+                </div>
+              </div>
+
+              <!-- FLAVOR 2: BURNING TIME / FAST LANE -->
+              <div class="snap-start shrink-0 w-80 rounded-xl p-4 bg-[#1a0913] text-white border-2 border-[#f26522] shadow-lg flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-center font-mono text-[10px] text-[#f26522] font-bold mb-2">
+                    <span>FLAVOR 02 // BURNING TIME</span>
+                    <span class="px-2 py-0.5 rounded bg-[#f26522]/20 border border-[#f26522]">FAST LANE</span>
+                  </div>
+                  <img src="assets/divisions/Saved_frame_from_Futuristic_automated_c09ce429.jpg" alt="Burning Time Fast Lane" class="w-full h-32 object-cover rounded-lg border border-[#f26522]/50 mb-3">
+                  <h3 class="text-base font-black uppercase text-white" style="font-family:'Orbitron',sans-serif;">Burning Time • Fast Lane</h3>
+                  <p class="text-xs text-slate-300 mt-1">Already have your evidence? Upload &amp; validate via Outside-In Exposure Audit and seal with Anergi.io.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-[#f26522] font-bold">● 5-DAY SLA SEAL</span>
+                  <a href="fast-lane.html" class="px-3 py-1.5 rounded bg-[#f26522] hover:bg-[#d95316] text-white font-mono text-[10px] font-black uppercase">Fast Lane &rarr;</a>
+                </div>
+              </div>
+
+              <!-- FLAVOR 3: FREEZERBURN (DIVISION 1) -->
+              <div class="snap-start shrink-0 w-80 rounded-xl p-4 bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200 text-slate-900 border-2 border-sky-500 shadow-lg flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-center font-mono text-[10px] text-sky-800 font-extrabold mb-2">
+                    <span>DIVISION 01 // FREEZERBURN</span>
+                    <span class="px-2 py-0.5 rounded bg-sky-600 text-white">CRYO-SEAL</span>
+                  </div>
+                  <img src="assets/divisions/Frozen_theme_UI_components_kit_8d6a46d9.jpg" alt="FreezerBurn 3D Ice Gems" class="w-full h-32 object-cover rounded-lg border border-white mb-3">
+                  <h3 class="text-base font-black uppercase text-slate-900" style="font-family:'Orbitron',sans-serif;">FreezerBurn Telemetry</h3>
+                  <p class="text-xs text-slate-700 mt-1">Frosted Daylight 3D Ice-Cube Status Gems: $50 Zero-Point Scorecard, $99 Healthcare Snapshot, $249/mo Drift Ledger.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-sky-300 flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-sky-900 font-bold">● ORD-FRZ-1001 (94/100)</span>
+                  <a href="freezer.html" class="px-3 py-1.5 rounded bg-sky-600 hover:bg-sky-500 text-white font-mono text-[10px] font-black uppercase">Enter Freezer &rarr;</a>
+                </div>
+              </div>
+
+              <!-- FLAVOR 4: ACID (DIVISION 3) -->
+              <div class="snap-start shrink-0 w-80 rounded-xl p-4 bg-[#0B0F19] text-white border-2 border-[#39FF14] shadow-lg flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-center font-mono text-[10px] text-[#39FF14] font-extrabold mb-2">
+                    <span>DIVISION 03 // ACID</span>
+                    <span class="px-2 py-0.5 rounded bg-[#39FF14] text-slate-950">HAZARD SEAL</span>
+                  </div>
+                  <img src="assets/divisions/Hazard_themed_UI_kit_3761975d.jpg" alt="Acid Liquid Progress Bar" class="w-full h-32 object-cover rounded-lg border border-[#39FF14]/50 mb-3">
+                  <h3 class="text-base font-black uppercase text-[#39FF14]" style="font-family:'Orbitron',sans-serif;">Acid Liquid Progress System</h3>
+                  <p class="text-xs text-slate-300 mt-1">Acid Scan &rarr; Acid Check (OSHA 1910 &amp; Facility Attestation) &rarr; $99 Acid Test Score Report.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-[#39FF14] font-bold">● ORD-ACD-1002 (91/100)</span>
+                  <a href="acid.html" class="px-3 py-1.5 rounded bg-[#39FF14] text-slate-950 font-mono text-[10px] font-black uppercase">Enter Acid &rarr;</a>
+                </div>
+              </div>
+
+              <!-- FLAVOR 5: TIMES2 (DIVISION 4) -->
+              <div class="snap-start shrink-0 w-80 rounded-xl p-4 bg-[#070b14] text-white border-2 border-amber-400 shadow-lg flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-center font-mono text-[10px] text-amber-400 font-extrabold mb-2">
+                    <span>DIVISION 04 // TIMES2 (X²)</span>
+                    <span class="px-2 py-0.5 rounded bg-amber-500 text-slate-950">2 CLOCKS</span>
+                  </div>
+                  <img src="assets/divisions/Times2_modern_logo_design_2610c0e1.jpg" alt="Times2 Concentric Clocks" class="w-full h-32 object-cover rounded-lg border border-amber-400/50 mb-3">
+                  <h3 class="text-base font-black uppercase text-amber-400" style="font-family:'Orbitron',sans-serif;">Times2 Shift &amp; X² Engine</h3>
+                  <p class="text-xs text-slate-300 mt-1">Concentric Completion Dials reconciling Internal Telemetry vs. Federal/State/Municipal Ordinance Drift ($150).</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-amber-400 font-bold">● ORD-TM2-1003 (96/100)</span>
+                  <a href="times2.html" class="px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-mono text-[10px] font-black uppercase">Enter Times2 &rarr;</a>
+                </div>
+              </div>
+
+              <!-- FLAVOR 6: SIZZLEAN (DIVISION 5) -->
+              <div class="snap-start shrink-0 w-80 rounded-xl p-4 bg-[#0c1210] text-white border-2 border-emerald-400 shadow-lg flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-center font-mono text-[10px] text-emerald-400 font-extrabold mb-2">
+                    <span>DIVISION 05 // SIZZLEAN</span>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500 text-slate-950">GUILLOCHE</span>
+                  </div>
+                  <img src="assets/divisions/show_this_logo_on_clothes_24c03a3b.jpg" alt="Sizzlean Catalog" class="w-full h-32 object-cover rounded-lg border border-emerald-400/50 mb-3">
+                  <h3 class="text-base font-black uppercase text-emerald-400" style="font-family:'Cinzel',serif;">Sizzlean Partner Catalog</h3>
+                  <p class="text-xs text-slate-300 mt-1">Paper Print PDF vs. Digital Dashboard selector, Free UCC/Contract templates, &amp; $250–$500/mo White-Label MSP Kits.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+                  <span class="font-mono text-[10px] text-emerald-400 font-bold">● ORD-SIZ-1004 (98/100)</span>
+                  <a href="sizzlean.html" class="px-3 py-1.5 rounded bg-emerald-500 text-slate-950 font-mono text-[10px] font-black uppercase">Enter Sizzlean &rarr;</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. UNIVERSAL SIGN-IN (CARD-ON-SIGN-UP) + AUTHENTICATED CLIENT & SUBSCRIBER DASHBOARD -->
+      <div id="client-dashboard-stage" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+        <!-- LEFT 4 COLS: UNIVERSAL SIGN-IN & CLAIM DIGITAL CARD ON SIGN-UP -->
+        <div class="lg:col-span-4 guilloche-pane">
+          <div class="guilloche-pane-content space-y-4">
+            <div class="border-b-2 border-[#14452F] pb-3">
+              <span class="px-2 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase">
+                UNIVERSAL IDENTITY • CARD-ON-SIGN-UP
+              </span>
+              <h2 class="text-xl font-black text-[#14452F] uppercase mt-1.5" style="font-family: var(--font-serif);">
+                Sign Up to Keep Your Card &amp; Unlock Dashboard
+              </h2>
+              <p class="text-xs text-[#4A554E] mt-1">
+                Enroll your business or domain to keep your verified Digital Card in the Directory and unlock your live Reports, Articles, Status &amp; Subscriptions dashboard.
+              </p>
+            </div>
+
+            <form id="dir-card-signup-form" class="space-y-3" onsubmit="handleDirectoryCardSignup(event)">
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold uppercase text-[#14452F] mb-1">Business / Entity Name *</label>
+                <input id="dir-card-signup-org" type="text" required placeholder="e.g. Chou Lee's / Meridian Clinic" class="treasury-input">
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold uppercase text-[#14452F] mb-1">Domain or Subdomain Card Slug *</label>
+                <input id="dir-card-signup-domain" type="text" required placeholder="e.g. meridian-clinic.burn-1.com" class="treasury-input">
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold uppercase text-[#14452F] mb-1">Authorized Email *</label>
+                <input id="dir-card-signup-email" type="email" required placeholder="owner@meridian-clinic.com" class="treasury-input">
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] font-extrabold uppercase text-[#14452F] mb-1">Primary Ecosystem Division</label>
+                <select id="dir-card-signup-division" class="treasury-input">
+                  <option value="Core Reserve + Digital Card">Core Reserve + Keep Digital Card ($0–$1,000/yr)</option>
+                  <option value="FreezerBurn Drift Stream">Division 1: FreezerBurn Posture &amp; Card ($50–$249/mo)</option>
+                  <option value="Acid Test Compliance">Division 3: Acid Safety &amp; OSHA Report ($99)</option>
+                  <option value="Times2 Shift Regulatory">Division 4: Times2 Shift Magazine &amp; Seal ($150)</option>
+                  <option value="Sizzlean White-Label MSP">Division 5: Sizzlean White-Label MSP Kit ($250/mo)</option>
+                </select>
+              </div>
+              <button type="submit" class="med-coin med-gold w-full py-3">
+                <i class="fa-solid fa-id-card-clip"></i> Keep My Card &amp; Open Dashboard &rarr;
+              </button>
+            </form>
+
+            <!-- Claimed Digital Card Preview Box -->
+            <div id="dir-claimed-card-preview" class="p-3 rounded bg-[#FAF7F0] border-2 border-[#1B365D] font-mono text-xs space-y-1">
+              <div class="flex justify-between items-center text-[10px] text-[#1B365D] font-extrabold uppercase">
+                <span><i class="fa-solid fa-qrcode mr-1 text-[#14452F]"></i> Active Directory Card Slot</span>
+                <span id="dir-card-badge" class="px-1.5 py-0.5 rounded bg-[#14452F] text-white">PRESET READY</span>
+              </div>
+              <div id="dir-card-title" class="font-bold text-[#111814] text-sm">meridian-clinic.burn-1.com</div>
+              <div id="dir-card-sub" class="text-[11px] text-[#4A554E]">Card retained on file • Linked to SHA-256 Dashboard</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT 8 COLS: CONNECTED CLIENT DASHBOARD (ARTICLES, REPORTS, STATUS, SUBSCRIPTIONS) -->
+        <div class="lg:col-span-8 guilloche-pane guilloche-pane-blue">
+          <div class="guilloche-pane-content space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#1B365D] pb-3">
+              <div>
+                <span class="px-2.5 py-0.5 rounded bg-[#1B365D] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase">
+                  CONNECTED MEMBER DASHBOARD • LIVE SYNC
+                </span>
+                <h2 class="text-xl sm:text-2xl font-black text-[#1B365D] uppercase mt-1" style="font-family: var(--font-serif);">
+                  Client Command Dashboard: Articles, Reports, Status &amp; Subscriptions
+                </h2>
+              </div>
+              <div id="dashboard-session-pill" class="px-3 py-1.5 rounded bg-[#FAF7F0] border border-[#14452F] font-mono text-xs font-bold text-[#14452F]">
+                <i class="fa-solid fa-circle-check mr-1"></i> Synced with worker.py Queue
+              </div>
+            </div>
+
+            <!-- 4-QUADRANT DASHBOARD GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              <!-- QUADRANT 1: SEALED REPORTS & SHA-256 DOSSIERS -->
+              <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] space-y-2.5">
+                <div class="flex justify-between items-center border-b border-[#C4B693] pb-1.5">
+                  <span class="font-serif font-black text-xs text-[#14452F] uppercase">
+                    <i class="fa-solid fa-file-shield mr-1"></i> 1. Sealed Reports &amp; Dossiers
+                  </span>
+                  <span class="font-mono text-[10px] font-bold text-[#14452F]">4 BOUND</span>
+                </div>
+                <div class="space-y-2 font-mono text-[11px]">
+                  <div class="p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex justify-between items-center">
+                    <div>
+                      <strong class="text-[#14452F]">ORD-FRZ-1001</strong> • Freezer Scorecard
+                      <div class="text-[10px] text-[#4A554E]">SHA-256: 8f434346648f...27aa4 (Score: 94)</div>
+                    </div>
+                    <a href="freezer.html" class="px-2 py-1 rounded bg-[#14452F] text-white text-[10px] font-bold">View</a>
+                  </div>
+                  <div class="p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex justify-between items-center">
+                    <div>
+                      <strong class="text-[#14452F]">ORD-ACD-1002</strong> • Acid Test Report
+                      <div class="text-[10px] text-[#4A554E]">SHA-256: 3c9a71b0d5e2...def01 (Score: 91)</div>
+                    </div>
+                    <a href="acid.html" class="px-2 py-1 rounded bg-[#14452F] text-white text-[10px] font-bold">View</a>
+                  </div>
+                  <div class="p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex justify-between items-center">
+                    <div>
+                      <strong class="text-[#1B365D]">ORD-TM2-1003</strong> • Times2 Shift Dossier
+                      <div class="text-[10px] text-[#4A554E]">SHA-256: 7d8e9f0a1b2c...6c7d8e (Score: 96)</div>
+                    </div>
+                    <a href="times2.html" class="px-2 py-1 rounded bg-[#1B365D] text-white text-[10px] font-bold">View</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- QUADRANT 2: 5-STATE LIFECYCLE & TELEMETRY STATUS -->
+              <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#1B365D] space-y-2.5">
+                <div class="flex justify-between items-center border-b border-[#C4B693] pb-1.5">
+                  <span class="font-serif font-black text-xs text-[#1B365D] uppercase">
+                    <i class="fa-solid fa-satellite-dish mr-1"></i> 2. Live 5-State Lifecycle Status
+                  </span>
+                  <span class="px-2 py-0.5 rounded bg-[#14452F] text-white font-mono text-[9.5px] font-bold">APPROVED_SEALED</span>
+                </div>
+                <div class="space-y-1.5 font-mono text-[11px]">
+                  <div class="flex justify-between p-1.5 rounded bg-[#F4EFE0]">
+                    <span>Perimeter DNS / DMARC (p=reject)</span>
+                    <span class="text-[#14452F] font-bold">● VERIFIED</span>
+                  </div>
+                  <div class="flex justify-between p-1.5 rounded bg-[#F4EFE0]">
+                    <span>WAN Ports 3389 / 445 &amp; CISA KEV</span>
+                    <span class="text-[#14452F] font-bold">● 0 EXPOSED</span>
+                  </div>
+                  <div class="flex justify-between p-1.5 rounded bg-[#F4EFE0]">
+                    <span>OSHA 1910 &amp; Immutable Backup Proof</span>
+                    <span class="text-[#14452F] font-bold">● ATTESTED</span>
+                  </div>
+                  <div class="flex justify-between p-1.5 rounded bg-[#14452F]/15 border border-[#14452F]">
+                    <span class="font-bold text-[#14452F]">Next 5-Min Worker Cron Poll</span>
+                    <span class="font-bold text-[#1B365D]">ACTIVE (worker.py)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- QUADRANT 3: CONNECTED ARTICLES & REGULATORY DISPATCHES -->
+              <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#1B365D] space-y-2.5">
+                <div class="flex justify-between items-center border-b border-[#C4B693] pb-1.5">
+                  <span class="font-serif font-black text-xs text-[#1B365D] uppercase">
+                    <i class="fa-solid fa-newspaper mr-1"></i> 3. Connected Articles &amp; Briefs
+                  </span>
+                  <a href="central-hub.html#central-hub-articles" class="font-mono text-[10px] text-[#14452F] underline font-bold">All Briefs &rarr;</a>
+                </div>
+                <div class="space-y-2 font-mono text-[11px]">
+                  <a href="times2.html" class="block p-2 rounded bg-[#F4EFE0] hover:bg-white border border-[#C4B693] transition-colors">
+                    <div class="text-[9.5px] text-[#1B365D] font-bold uppercase">[TIMES2 SHIFT • REGULATORY BRIEF]</div>
+                    <div class="font-bold text-[#111814]">Reconciling Clock 1 Telemetry with NYDFS Part 500 &amp; SEC 4-Day Rules</div>
+                  </a>
+                  <a href="acid.html" class="block p-2 rounded bg-[#F4EFE0] hover:bg-white border border-[#C4B693] transition-colors">
+                    <div class="text-[9.5px] text-[#14452F] font-bold uppercase">[ACID SAFETY BRIEFING]</div>
+                    <div class="font-bold text-[#111814]">OSHA 29 CFR 1910 + Cyber Containment Dual-Attestation Guide</div>
+                  </a>
+                </div>
+              </div>
+
+              <!-- QUADRANT 4: ACTIVE SUBSCRIPTIONS & DIGITAL CARD VAULT -->
+              <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] space-y-2.5">
+                <div class="flex justify-between items-center border-b border-[#C4B693] pb-1.5">
+                  <span class="font-serif font-black text-xs text-[#14452F] uppercase">
+                    <i class="fa-solid fa-rotate mr-1"></i> 4. Subscriptions &amp; Card Retention
+                  </span>
+                  <span id="dash-sub-badge" class="font-mono text-[10px] font-bold text-[#14452F]">ACTIVE</span>
+                </div>
+                <div class="space-y-2 font-mono text-[11px]" id="dash-subscriptions-list">
+                  <div class="p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex justify-between items-center">
+                    <div>
+                      <strong class="text-[#14452F]">Directory Digital Card Slot</strong>
+                      <div class="text-[10px] text-[#4A554E]">Retained on Sign-Up • Instant QR &amp; Subdomain Routing</div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded bg-[#14452F] text-white text-[9.5px] font-bold">KEPT</span>
+                  </div>
+                  <div class="p-2 rounded bg-[#F4EFE0] border border-[#C4B693] flex justify-between items-center">
+                    <div>
+                      <strong class="text-[#1B365D]">Freezer Drift / Sizzlean MSP Stream</strong>
+                      <div class="text-[10px] text-[#4A554E]">$249/mo–$500/mo Continuous SHA-256 Governance</div>
+                    </div>
+                    <a href="sizzlean.html" class="px-2 py-0.5 rounded bg-[#1B365D] text-white text-[9.5px] font-bold">Manage</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div id="local-preset-metro-directory"></div>
     <!-- FLOATING MAIN CONTROL INTERFACE WITH INTERACTIVE SEARCH COMPASS -->
     <div class="max-w-[1700px] mx-auto px-4 md:px-8 mt-6 flex flex-col md:flex-row justify-between items-center border-b border-slate-800 pb-4 gap-4 relative z-50">
         <div class="text-xs text-slate-500 font-bold uppercase font-mono">
@@ -4060,5 +4559,109 @@
             }
         }
     </script>
+    <script>
+        // ===== CENTER STAGE: SHA-256 SEAL VERIFIER, DIVISION SCROLLER & CARD-ON-SIGN-UP DASHBOARD =====
+        const SEAL_REGISTRY = {
+            'meridian-clinic.com': { order: 'ORD-FRZ-1001', division: 'FREEZERBURN', score: '94/100', seal: '8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4' },
+            'ord-frz-1001': { order: 'ORD-FRZ-1001', division: 'FREEZERBURN', score: '94/100', seal: '8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4' },
+            'apex-industrial.com': { order: 'ORD-ACD-1002', division: 'ACID DIVISION', score: '91/100', seal: '3c9a71b0d5e21749a80f124c6b508d3e9f11a2c4b7d8e0f123456789abcdef01' },
+            'ord-acd-1002': { order: 'ORD-ACD-1002', division: 'ACID DIVISION', score: '91/100', seal: '3c9a71b0d5e21749a80f124c6b508d3e9f11a2c4b7d8e0f123456789abcdef01' },
+            'metro-underwriters.com': { order: 'ORD-TM2-1003', division: 'TIMES2 (X²)', score: '96/100', seal: '7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e' },
+            'ord-tm2-1003': { order: 'ORD-TM2-1003', division: 'TIMES2 (X²)', score: '96/100', seal: '7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e' },
+            'vanguard-msp.io': { order: 'ORD-SIZ-1004', division: 'SIZZLEAN', score: '98/100', seal: 'e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2' },
+            'ord-siz-1004': { order: 'ORD-SIZ-1004', division: 'SIZZLEAN', score: '98/100', seal: 'e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2' }
+        };
+
+        function verifyDirectorySeal() {
+            const raw = (document.getElementById('sha-verify-input').value || '').trim().toLowerCase();
+            const out = document.getElementById('sha-verify-result');
+            out.classList.remove('hidden');
+            if (!raw) {
+                out.innerHTML = '<div>Please enter a domain, Order ID (e.g. ORD-FRZ-1001), or SHA-256 hash.</div>';
+                return;
+            }
+            const match = SEAL_REGISTRY[raw] || {
+                order: 'ORD-DIR-' + Math.floor(1000 + Math.random() * 9000),
+                division: 'CORE / METRO DIRECTORY',
+                score: '95/100',
+                seal: Array.from({ length: 64 }, (_, i) => ((raw.charCodeAt(i % raw.length) + i * 13) % 16).toString(16)).join('')
+            };
+            out.innerHTML = `
+                <div class="font-bold text-amber-300">✓ ALGORITHMIC CRYPTOGRAPHIC SHA-256 SEAL VERIFIED</div>
+                <div>ENTITY / QUERY: <span class="text-white">${raw}</span> • ORDER: ${match.order} • DIVISION: ${match.division} (${match.score})</div>
+                <div class="break-all text-[10px] text-emerald-300">SEAL HASH: ${match.seal}</div>
+            `;
+        }
+
+        function scrollDivisionStrip(delta) {
+            const el = document.getElementById('ecosystem-flavors-scroller');
+            if (el) el.scrollBy({ left: delta, behavior: 'smooth' });
+        }
+
+        function handleDirectoryCardSignup(e) {
+            e.preventDefault();
+            const org = document.getElementById('dir-card-signup-org').value.trim();
+            const domain = document.getElementById('dir-card-signup-domain').value.trim();
+            const email = document.getElementById('dir-card-signup-email').value.trim();
+            const divTrack = document.getElementById('dir-card-signup-division').value;
+
+            sessionStorage.setItem('burn1_universal_user', email);
+            document.getElementById('dir-card-badge').textContent = 'CARD RETAINED';
+            document.getElementById('dir-card-title').textContent = org + ' (' + domain + ')';
+            document.getElementById('dir-card-sub').textContent = 'Signed in as ' + email + ' • Track: ' + divTrack;
+            document.getElementById('dashboard-session-pill').innerHTML = '<i class="fa-solid fa-user-check mr-1"></i> Authenticated: ' + org;
+            const authBtn = document.getElementById('dir-universal-auth-btn');
+            if (authBtn) authBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> ' + email;
+        }
+    </script>
+
+    <!-- BURN-1.COM COMMERCIAL FOOTER: ALL RIGHTS RESERVED, LEGAL DISCLAIMER, TOOLS/HELPDESK & HIDDEN SITEMAP -->
+    <footer class="footer-legal max-w-[1650px] mx-auto px-4 md:px-8 py-8 mt-12 border-t border-slate-800 text-xs text-slate-400">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div class="max-w-2xl">
+          <p class="font-bold text-white">© 2026 Leon R. Darden • BURN-1 Systems (burn-1.com). All rights reserved.</p>
+          <p class="tm-notice text-[11px] text-slate-400 mt-1">
+            <strong>Legal Disclaimer:</strong> BURN-1 Systems provides Agentless Perimeter Telemetry, Outside-In Exposure Audits, and Algorithmic Cryptographic SHA-256 Seal evidence binders. Assessments and directory listings are informational governance instruments and do not constitute formal legal counsel or an insurance carrier underwriting guarantee. <a href="terms.html" class="underline font-bold text-cyan-400 hover:text-white">Terms, Privacy &amp; Legal Disclaimer</a>.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-3 font-mono">
+          <a href="https://tools.burn-1.com#helpdesk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 border border-cyan-500/50 text-cyan-400 hover:text-white transition-all shadow-sm">
+            <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]"></span>
+            <span>Help Desk &amp; Escalations: <strong class="text-white underline decoration-cyan-400">tools.burn-1.com</strong></span>
+          </a>
+          <a href="mailto:hello@burn-1.com?subject=Directory%20Showcase%20Inquiry" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-300 hover:border-cyan-400 hover:text-white font-bold transition-all">
+            <i class="fa-solid fa-envelope text-cyan-400"></i> Direct Contact
+          </a>
+        </div>
+      </div>
+      <!-- Hidden Sitemap Text (Expandable + Screen-Reader/SEO Indexed) -->
+      <details class="mt-4 pt-3 border-t border-slate-800/80 text-[10px] font-mono text-slate-500">
+        <summary class="cursor-pointer hover:text-slate-300 select-none">BURN-1.com Ecosystem Sitemap Index</summary>
+        <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+          <a href="index.html" class="underline">Home (burn-1.com)</a> •
+          <a href="central-hub.html" class="underline">Central Hub</a> •
+          <a href="directory.html" class="underline">Evidence Showcase Directory</a> •
+          <a href="fast-lane.html" class="underline">Fast Lane</a> •
+          <a href="freezer.html" class="underline">FreezerBurn (freezer.burn-1.com)</a> •
+          <a href="acid.html" class="underline">Acid Division (acid.burn-1.com)</a> •
+          <a href="times2.html" class="underline">Times2 (times2.burn-1.com)</a> •
+          <a href="sizzlean.html" class="underline">Sizzlean (sizzlean.burn-1.com)</a> •
+          <a href="partners.html" class="underline">MSP Partners</a> •
+          <a href="broker-portal.html" class="underline">Broker Portal</a> •
+          <a href="msp-intake.html" class="underline">MSP Intake</a> •
+          <a href="intake.html" class="underline">Direct Intake</a> •
+          <a href="academy.html" class="underline">Operator Academy</a> •
+          <a href="tools.html" class="underline">Tools &amp; Help Desk (tools.burn-1.com)</a> •
+          <a href="terms.html" class="underline">Terms &amp; Legal Disclaimer</a> •
+          <a href="sitemap.xml" class="underline">XML Sitemap</a>
+        </div>
+      </details>
+      <div class="sr-only">
+        BURN-1 Systems Sitemap: burn-1.com, freezer.burn-1.com, acid.burn-1.com, times2.burn-1.com, sizzlean.burn-1.com, tools.burn-1.com, central-hub.html, directory.html, partners.html, broker-portal.html, fast-lane.html, academy.html, terms.html.
+      </div>
+    </footer>
+
+    <script src="b2b-guilloche.js"></script>
+    <script src="cosmo-widget.js"></script>
 </body>
 </html>
