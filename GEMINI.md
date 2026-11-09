@@ -1,90 +1,22 @@
-# ꟻried Brains™ World — Brand Guidelines & Constraints
+# BURN-1 Systems (`burn-1.com`) — Brand, Governance & Footer Standards
 
-This document defines the strict branding, typography, semantic HTML/CSS, and intellectual property constraints for **ꟻried Brains™ World** across the `burn-1.com` codebase and associated media.
+This document defines the strict commercial branding, governance terminology, and mandatory footer structure for **BURN-1 Systems** (`burn-1.com`) and its 4 autonomous divisions (`freezer.burn-1.com`, `acid.burn-1.com`, `times2.burn-1.com`, `sizzlean.burn-1.com`).
 
----
-
-## 1. Text & Unicode Brand Standards
-
-Always adhere to the exact Unicode styling and character specifications:
-
-* **Primary Glyph:** `ꟻ` (Unicode `U+A7FB` — Latin Epigraphic Letter Reversed F)
-* **Standard Title Case:** `ꟻried Brains™ World`
-* **All-Caps / Display Format:** `ꟻRIED BRAINS™ WORLD`
-* **Campaign Title Format:** `The ꟻried Brains™ Anti-Addiction Campaign`
-* **Short / Brand Reference:** `ꟻried Brains™`
+> **IMPORTANT:** Do NOT use "Fried Brains" branding on `burn-1.com` pages — that belongs to a separate project. Always use **BURN-1 Systems (`burn-1.com`)**.
 
 ---
 
-## 2. Semantic HTML & CSS Implementation
-
-To ensure proper baseline alignment of the trademark symbol (`™`) without altering layout line heights:
-
-### HTML Structures:
-```html
-<!-- Direct Unicode Implementation -->
-<span class="brand-title">
-  ꟻried Brains<span class="brand-tm">™</span> World
-</span>
-
-<!-- CSS-Flipped Standard 'F' Fallback (if font lacks U+A7FB) -->
-<span class="brand-title">
-  <span class="flip-f">F</span>ried Brains<span class="brand-tm">™</span> World
-</span>
-```
-
-### CSS Rules:
-```css
-/* Brand Title Base */
-.brand-title {
-  font-family: var(--font-sans, inherit);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text-main, #ffffff);
-  display: inline-flex;
-  align-items: baseline;
-}
-
-/* Flipped F Utility (fallback for fonts without U+A7FB) */
-.flip-f {
-  display: inline-block;
-  transform: scaleX(-1);
-  margin-right: 1px;
-}
-
-/* Superscript TM Symbol */
-.brand-tm {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.55em;
-  font-weight: 700;
-  color: var(--accent-blue, #38bdf8);
-  vertical-align: super;
-  line-height: 0;
-  margin-left: 2px;
-  margin-right: 4px;
-}
-```
+## 1. Core Governance Terminology
+* **Telemetry:** Agentless Perimeter Telemetry & Outside-In Exposure Audit
+* **Cryptographic Proof:** Algorithmic Cryptographic SHA-256 Seal
+* **Turnaround SLA:** Delivered within standard business turnaround up to 5 business days.
+* **BIND Doctrine:** After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
 
 ---
 
-## 3. Mandatory Legal & Trademark Notice
-
-All footer sections and documentation for ꟻried Brains™ World must include the standard IP declaration:
-
-```html
-<footer class="footer-legal">
-  <p>© 2026 Leon R. Darden. All rights reserved.</p>
-  <p class="tm-notice">
-    ꟻried Brains™ and ꟻried Brains™ World are trademarks of Leon R. Darden.
-  </p>
-</footer>
-```
-
-```css
-.tm-notice {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  color: var(--text-muted, #94a3b8);
-  margin-top: 0.5rem;
-}
-```
+## 2. Mandatory Commercial Footer Standard
+All `burn-1.com` and division pages must include:
+1. **Copyright & All Rights Reserved:** `© 2026 Leon R. Darden • BURN-1 Systems (burn-1.com). All rights reserved.`
+2. **Legal Disclaimer & Terms Link:** Clear commercial disclaimer + link to `terms.html`.
+3. **Help Desk & Escalations Link:** Direct link to `https://tools.burn-1.com#helpdesk`.
+4. **Hidden Sitemap Text:** Collapsible/SEO-accessible sitemap block indexing core, B2B, and division routes.
