@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FREEZERDUMP â€” Pure CSS Pixel Evidence Vault | BURN-1 Systems (burn-1.com)</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="freezerdump.css">
+  <style>
+    :root {
+      --ice-bg: #e8f4fc;
+      --ice-glass: rgba(255, 255, 255, 0.78);
+      --ice-border: rgba(56, 189, 248, 0.45);
+      --accent-blue: #38bdf8;
+      --deep-arctic: #0f172a;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      color: var(--deep-arctic);
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.95) 0%, rgba(224, 242, 254, 0.88) 45%, rgba(186, 230, 253, 0.85) 100%);
+      background-attachment: fixed;
+    }
+    .frosted-glass {
+      background: var(--ice-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid var(--ice-border);
+      box-shadow:
+        0 18px 40px rgba(14, 116, 144, 0.12),
+        inset 0 2px 4px rgba(255, 255, 255, 0.95);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+  <header class="frosted-glass sticky top-0 z-40 border-b-2 border-sky-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <a href="freezer.html" class="flex items-center gap-3">
+          <img src="burn1logopurplesilver.jpg" alt="BURN-1 Logo" class="w-11 h-11 rounded-xl object-cover border-2 border-sky-400 shadow">
+          <div>
+            <div class="text-sm sm:text-base font-black tracking-tight text-slate-900 uppercase" style="font-family:'Orbitron',sans-serif;">
+              FREEZERDUMP <span class="text-sky-600">// PIXEL CSS BINDER</span>
+            </div>
+            <div class="text-[11px] font-mono text-slate-600 font-bold uppercase tracking-widest">
+              freezer.burn-1.com â€¢ Agentless Perimeter Telemetry &amp; Outside-In Exposure Audit
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-white/80 hover:bg-white text-slate-800 border border-sky-300 text-xs font-bold">Core Site</a>
+        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-sky-600 text-white text-xs font-extrabold shadow">1. FreezerBurn</a>
+        <a href="freezerdump.css" download class="px-3 py-1.5 rounded-lg bg-slate-900 text-sky-300 border border-sky-400 text-xs font-mono font-bold">
+          <i class="fa-solid fa-code mr-1"></i> freezerdump.css
+        </a>
+        <a href="freezerdump.png" download class="px-3 py-1.5 rounded-lg bg-white text-slate-800 border border-sky-300 text-xs font-mono font-bold">
+          <i class="fa-solid fa-download mr-1"></i> freezerdump.png
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <section class="frosted-glass rounded-3xl p-6 sm:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border border-sky-300 text-sky-900 font-mono text-xs font-extrabold uppercase">
+            <i class="fa-solid fa-snowflake text-sky-600"></i> Pure CSS Box-Shadow Matrix (128Ã—71 â€¢ 9088 CSS Pixels)
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2" style="font-family:'Orbitron',sans-serif;">
+            FREEZERDUMP // COLD STORAGE EVIDENCE VAULT
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-600 font-mono mt-1">
+            After payment, we bind â€” gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. Sealed with an Algorithmic Cryptographic SHA-256 Seal.
+          </p>
+        </div>
+
+        <!-- Interactive Pixel Scale Controls -->
+        <div class="flex flex-wrap items-center gap-3 bg-white/90 px-4 py-2.5 rounded-2xl border border-sky-300 font-mono text-xs">
+          <label for="px-scale" class="font-bold text-slate-700">CSS Pixel Size:</label>
+          <input id="px-scale" type="range" min="3" max="8" value="6" class="accent-sky-600 cursor-pointer" oninput="updatePixelScale(this.value)">
+          <span id="px-scale-val" class="font-extrabold text-sky-700">6px</span>
+          <button onclick="toggleScanlines()" class="px-2.5 py-1 rounded bg-slate-900 text-sky-300 font-bold hover:bg-slate-800">
+            Scanlines
+          </button>
+        </div>
+      </div>
+
+      <!-- PURE CSS BOX-SHADOW PIXEL ART RENDER -->
+      <div class="flex flex-col items-center justify-center overflow-x-auto py-4 bg-slate-950/90 rounded-2xl border-2 border-sky-400/50 shadow-inner">
+        <div id="css-canvas" class="freezerdump-canvas freezerdump-scanlines">
+          <div class="freezerdump-pixel-css" role="img" aria-label="Freezerdump Cold Storage Evidence Vault Pure CSS Pixel Image"></div>
+        </div>
+        <div class="mt-3 font-mono text-[11px] text-sky-300">
+          Rendered via 100% Pure CSS (<code>.freezerdump-pixel-css</code> in <code>freezerdump.css</code>) â€” zero external image request required.
+        </div>
+      </div>
+
+      <!-- EMBED SNIPPET & CRISP PIXELATED IMG COMPARISON -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <div class="bg-white/90 rounded-2xl p-5 border border-sky-300">
+          <div class="font-mono text-xs font-extrabold uppercase text-sky-700 mb-2">
+            1. Crisp CSS Pixelated Image (Data URI / PNG)
+          </div>
+          <img
+            src="data:image/png;base64,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"
+            alt="Freezerdump Crisp Pixelated"
+            class="freezerdump-img w-full rounded-xl border-2 border-sky-400 shadow"
+          >
+          <p class="font-mono text-[11px] text-slate-600 mt-2">
+            Uses <code>.freezerdump-img { image-rendering: pixelated; }</code> with quantized pixel-art PNG (<code>freezerdump.png</code>).
+          </p>
+        </div>
+
+        <div class="bg-slate-900 text-sky-200 rounded-2xl p-5 border border-sky-400 font-mono text-xs flex flex-col justify-between">
+          <div>
+            <div class="text-sky-400 font-extrabold uppercase mb-2">
+              2. Drop-In HTML + CSS Usage
+            </div>
+            <pre class="bg-slate-950 p-3.5 rounded-xl border border-sky-800 overflow-x-auto text-[11px] leading-relaxed text-sky-100"><code>&lt;link rel="stylesheet" href="freezerdump.css"&gt;
+
+&lt;!-- Option A: Pure CSS Box-Shadow Pixel Art --&gt;
+&lt;div class="freezerdump-canvas freezerdump-scanlines"&gt;
+  &lt;div class="freezerdump-pixel-css"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Option B: Crisp Pixelated Image --&gt;
+&lt;img src="freezerdump.png" class="freezerdump-img" alt="Freezer Evidence"&gt;</code></pre>
+          </div>
+          <div class="mt-4 pt-3 border-t border-sky-800/70 text-[11px] text-slate-300">
+            <div><strong>Saved Workspace Files:</strong></div>
+            <ul class="mt-1 space-y-0.5 text-sky-300">
+              <li>â€¢ <code>freezerdump.css</code> (Pure CSS box-shadow pixel art + rules)</li>
+              <li>â€¢ <code>freezerdump.html</code> (Interactive CSS pixel viewer)</li>
+              <li>â€¢ <code>freezerdump.png</code> (Upscaled crisp pixel art PNG)</li>
+              <li>â€¢ <code>freezerdump-pixel-native.png</code> (128Ã—72 native pixel grid)</li>
+              <li>â€¢ <code>freezerdump.jpg</code> (Source image copy)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BURN-1.COM COMMERCIAL FOOTER: ALL RIGHTS RESERVED, LEGAL DISCLAIMER, TOOLS/HELPDESK & HIDDEN SITEMAP -->
+  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-sky-300/70 text-xs text-slate-600">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div class="max-w-2xl">
+        <p class="font-bold text-slate-900">Â© 2026 Leon R. Darden â€¢ BURN-1 Systems (burn-1.com). All rights reserved.</p>
+        <p class="tm-notice text-[11px] text-slate-600 mt-1">
+          <strong>Legal Disclaimer:</strong> BURN-1 Systems provides Agentless Perimeter Telemetry, Outside-In Exposure Audits, and Algorithmic Cryptographic SHA-256 Seal evidence binders. Delivered within standard business turnaround up to 5 business days. Assessments are informational governance instruments and do not constitute formal legal counsel or an insurance carrier underwriting guarantee. <a href="terms.html" class="underline font-bold text-sky-700 hover:text-sky-900">Terms, Privacy &amp; Legal Disclaimer</a>.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3 font-mono">
+        <a href="https://tools.burn-1.com#helpdesk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 border border-sky-400 text-sky-300 hover:text-white transition-all shadow-sm">
+          <span class="inline-block w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]"></span>
+          <span>Help Desk &amp; Escalations: <strong class="text-white underline decoration-sky-400">tools.burn-1.com</strong></span>
+        </a>
+      </div>
+    </div>
+    <details class="mt-4 pt-3 border-t border-sky-200/60 text-[10px] font-mono text-slate-500">
+      <summary class="cursor-pointer hover:text-slate-800 select-none">BURN-1.com Ecosystem Sitemap Index</summary>
+      <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+        <a href="index.html" class="underline">Home (burn-1.com)</a> â€¢
+        <a href="central-hub.html" class="underline">Central Hub</a> â€¢
+        <a href="directory.html" class="underline">Evidence Showcase Directory</a> â€¢
+        <a href="fast-lane.html" class="underline">Fast Lane</a> â€¢
+        <a href="freezer.html" class="underline">FreezerBurn (freezer.burn-1.com)</a> â€¢
+        <a href="acid.html" class="underline">Acid Division (acid.burn-1.com)</a> â€¢
+        <a href="times2.html" class="underline">Times2 (times2.burn-1.com)</a> â€¢
+        <a href="sizzlean.html" class="underline">Sizzlean (sizzlean.burn-1.com)</a> â€¢
+        <a href="partners.html" class="underline">MSP Partners</a> â€¢
+        <a href="broker-portal.html" class="underline">Broker Portal</a> â€¢
+        <a href="msp-intake.html" class="underline">MSP Intake</a> â€¢
+        <a href="intake.html" class="underline">Direct Intake</a> â€¢
+        <a href="academy.html" class="underline">Operator Academy</a> â€¢
+        <a href="tools.html" class="underline">Tools &amp; Help Desk (tools.burn-1.com)</a> â€¢
+        <a href="terms.html" class="underline">Terms &amp; Legal Disclaimer</a> â€¢
+        <a href="sitemap.xml" class="underline">XML Sitemap</a>
+      </div>
+    </details>
+    <div class="sr-only">
+      BURN-1 Systems Sitemap: burn-1.com, freezer.burn-1.com, acid.burn-1.com, times2.burn-1.com, sizzlean.burn-1.com, tools.burn-1.com, central-hub.html, directory.html, partners.html, broker-portal.html, fast-lane.html, academy.html, terms.html.
+    </div>
+  </footer>
+
+  <script>
+    function updatePixelScale(val) {
+      document.documentElement.style.setProperty('--freezerdump-pixel-size', val + 'px');
+      document.getElementById('px-scale-val').textContent = val + 'px';
+    }
+    function toggleScanlines() {
+      document.getElementById('css-canvas').classList.toggle('freezerdump-scanlines');
+    }
+  </script>
+</body>
+</html>
