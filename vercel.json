@@ -41,6 +41,16 @@
                     "value": "^freezer\\.burn-1\\.com$"
                 }
             ],
+            "destination": "/freezer"
+        },
+        {
+            "source": "/freezer",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^freezer\\.burn-1\\.com$"
+                }
+            ],
             "destination": "/freezer.html"
         },
         {
@@ -61,6 +71,16 @@
                     "value": "^acid\\.burn-1\\.com$"
                 }
             ],
+            "destination": "/acid"
+        },
+        {
+            "source": "/acid",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^acid\\.burn-1\\.com$"
+                }
+            ],
             "destination": "/acid.html"
         },
         {
@@ -81,6 +101,16 @@
                     "value": "^times2\\.burn-1\\.com$"
                 }
             ],
+            "destination": "/times2"
+        },
+        {
+            "source": "/times2",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^times2\\.burn-1\\.com$"
+                }
+            ],
             "destination": "/times2.html"
         },
         {
@@ -101,6 +131,16 @@
                     "value": "^sizzlean\\.burn-1\\.com$"
                 }
             ],
+            "destination": "/sizzlean"
+        },
+        {
+            "source": "/sizzlean",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^sizzlean\\.burn-1\\.com$"
+                }
+            ],
             "destination": "/sizzlean.html"
         },
         {
@@ -118,6 +158,36 @@
             "has": [
                 {
                     "type": "host",
+                    "value": "^directory\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/directory"
+        },
+        {
+            "source": "/directory",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^directory\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/directory.html"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^directory\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/directory.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
                     "value": "^tool\\.burn-1\\.com$"
                 }
             ],
@@ -218,7 +288,7 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "^(?!(www|phase25|tool|tools|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                    "value": "^(?!(www|directory|phase25|tool|tools|inklife|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
                 }
             ],
             "destination": "/cards/:subdomain.html"
@@ -228,7 +298,7 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "^(?!(www|phase25|tool|tools|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                    "value": "^(?!(www|directory|phase25|tool|tools|inklife|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
                 }
             ],
             "destination": "/cards/:subdomain.html"
@@ -414,6 +484,61 @@
             "has": [
                 {
                     "type": "host",
+                    "value": "^freezer\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/freezer",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^acid\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/acid",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^times2\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/times2",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^sizzlean\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/sizzlean",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "^directory\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/directory",
+            "permanent": false
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
                     "value": "^tool\\.burn-1\\.com$"
                 }
             ],
@@ -447,7 +572,7 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "^(?!(www|phase25|tool|tools|inklife|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
+                    "value": "^(?!(www|directory|phase25|tool|tools|inklife|freezer|acid|times2|sizzlean)\\.)(?<subdomain>[a-zA-Z0-9-]+)\\.burn-1\\.com$"
                 }
             ],
             "destination": "/cards/:subdomain",
