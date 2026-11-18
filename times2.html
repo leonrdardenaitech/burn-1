@@ -1,285 +1,2077 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TIMES2 (times2.burn-1.com) — The 2 Clocks Math Problem, Concentric Dials &amp; X² Regulatory Engine</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <title>TIMES2 // The Morning Brief &amp; Verified Timestamp Receipt Cockpit</title>
+  
+  <!-- Modern Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Orbitron, Rajdhani, Cinzel, Inter, JetBrains Mono, Newsreader -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Orbitron:wght@700;800;900&family=Rajdhani:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,800;1,6..72,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Master UI Kit Components -->
+  <link rel="stylesheet" href="css/burn1-components.css">
+
   <style>
     :root {
       --t2-bg: #070b14;
       --t2-amber: #f59e0b;
       --t2-cyan: #38bdf8;
-      --accent-blue: #38bdf8;
-      --text-main: #ffffff;
-      --text-muted: #94a3b8;
-      --font-sans: 'Inter', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --t2-crimson: #ef4444;
+      --neon-emerald: #00FF87;
+      --ease-hydraulic: cubic-bezier(0.16, 1, 0.3, 1);
+      --glass-bg: rgba(10, 16, 28, 0.62);
+      --glass-border: rgba(255, 255, 255, 0.18);
     }
+
     body {
-      font-family: var(--font-sans);
       background-color: var(--t2-bg);
       color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
       background-image:
-        radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.14) 0%, transparent 45%),
-        radial-gradient(circle at 80% 75%, rgba(56, 189, 248, 0.12) 0%, transparent 50%);
+        linear-gradient(180deg, rgba(7, 11, 20, 0.68) 0%, rgba(7, 11, 20, 0.76) 50%, rgba(7, 11, 20, 0.85) 100%),
+        radial-gradient(circle at 15% 15%, rgba(245, 158, 11, 0.28) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(56, 189, 248, 0.24) 0%, transparent 50%),
+        url('assets/hero_clock.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
     }
-    .t2-pane {
-      background: rgba(15, 23, 42, 0.88);
-      border: 1.5px solid rgba(245, 158, 11, 0.42);
-      border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 0 24px rgba(245, 158, 11, 0.06);
-    }
-    .clock-ring-outer {
-      animation: spinSlow 36s linear infinite;
-      transform-origin: 120px 120px;
-    }
-    .clock-ring-inner {
-      animation: spinReverse 24s linear infinite;
-      transform-origin: 120px 120px;
-    }
-    @keyframes spinSlow { to { transform: rotate(360deg); } }
-    @keyframes spinReverse { to { transform: rotate(-360deg); } }
 
-    /* GEMINI.md Mandatory Brand Title & TM CSS */
-    .brand-title {
-      font-family: var(--font-sans, inherit);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main, #ffffff);
-      display: inline-flex;
-      align-items: baseline;
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-serif { font-family: 'Newsreader', Georgia, serif; }
+
+    /* Frosted Glass Chassis */
+    .glass-chassis {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.2);
     }
-    .flip-f {
-      display: inline-block;
-      transform: scaleX(-1);
-      margin-right: 1px;
+
+    .glass-article {
+      background: rgba(8, 13, 24, 0.52);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
-    .brand-tm {
-      font-family: var(--font-mono, monospace);
-      font-size: 0.55em;
-      font-weight: 700;
-      color: var(--accent-blue, #38bdf8);
-      vertical-align: super;
-      line-height: 0;
-      margin-left: 2px;
-      margin-right: 4px;
+
+    .glass-panel {
+      background: rgba(10, 15, 26, 0.94);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
-    .tm-notice {
-      font-family: var(--font-mono, monospace);
-      font-size: 0.75rem;
-      color: var(--text-muted, #94a3b8);
-      margin-top: 0.5rem;
+
+    /* Medical Red Cross Pill */
+    .medical-cross-btn {
+      transition: all 0.35s var(--ease-hydraulic);
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.65);
+    }
+    .medical-cross-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 24px rgba(239, 68, 68, 0.95);
+    }
+
+    /* Completion Ring Progress SVG */
+    .completion-circle-track {
+      stroke: rgba(255, 255, 255, 0.12);
+      stroke-width: 3.5;
+    }
+    .completion-circle-fill {
+      stroke: var(--neon-emerald);
+      stroke-width: 3.5;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      transition: stroke-dashoffset 0.6s var(--ease-hydraulic);
+      filter: drop-shadow(0 0 6px rgba(0, 255, 135, 0.6));
+    }
+
+    /* Vertebrae Spine Vertical Transition */
+    .ultrabar-spine {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      overflow: hidden;
+      transition: max-height 0.55s var(--ease-hydraulic), opacity 0.4s ease, transform 0.5s var(--ease-hydraulic);
+    }
+    .ultrabar-spine.is-deployed {
+      max-height: 640px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .vertebra-node {
+      transition: all 0.3s var(--ease-hydraulic);
+    }
+    .vertebra-node:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .vertebra-node.is-active {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--t2-amber);
+    }
+    .vertebra-node.is-completed {
+      background: rgba(0, 255, 135, 0.09);
+      border-color: rgba(0, 255, 135, 0.4);
+    }
+
+    /* Flyout Panes */
+    .ultrabar-flyout-left {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-30px) scale(0.96);
+      transition: transform 0.45s var(--ease-hydraulic), opacity 0.35s ease;
+    }
+    .ultrabar-flyout-left.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0) scale(1);
+    }
+
+    .ultrabar-flyout-right {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(30px) scale(0.96);
+      transition: transform 0.45s var(--ease-hydraulic), opacity 0.35s ease;
+    }
+    .ultrabar-flyout-right.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0) scale(1);
+    }
+
+    .rotating-needle {
+      transition: transform 0.8s var(--ease-hydraulic);
+      transform-origin: 50% 50%;
+    }
+
+    /* Read More Expandable Article Transition */
+    .article-expanded-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.65s var(--ease-hydraulic), opacity 0.45s ease;
+    }
+    .article-expanded-content.is-expanded {
+      max-height: 4500px;
+      opacity: 1;
+    }
+
+    /* AI E&O Wide Button */
+    .eoi-wide-btn {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(15, 23, 42, 0.85) 50%, rgba(56, 189, 248, 0.18) 100%);
+      border: 2px solid rgba(245, 158, 11, 0.65);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      transition: all 0.35s var(--ease-hydraulic);
+    }
+    .eoi-wide-btn:hover {
+      border-color: #fbbf24;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.45), inset 0 0 15px rgba(56, 189, 248, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Tactical Game Hover Cards */
+    .game-hover-tooltip {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(10px) scale(0.95);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s var(--ease-hydraulic);
+      z-index: 60;
+      width: 290px;
+    }
+    .has-game-tooltip:hover .game-hover-tooltip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    /* Verified Receipt Holographic Paper Card */
+    .verified-receipt-paper {
+      background: #090e18;
+      border: 2px dashed rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.2), inset 0 0 20px rgba(0,0,0,0.85);
+      border-radius: 16px;
+    }
+
+    /* Formula Layer Canvas */
+    #formulaCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.22;
+      z-index: 1;
     }
   </style>
 </head>
-<body data-division="times2" class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col relative select-none">
 
-  <!-- UNIVERSAL SIGN-IN & DIVISION HEADER -->
-  <header class="sticky top-0 z-40 bg-[#070b14]/95 backdrop-blur-md border-b-2 border-amber-500/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="assets/divisions/Times2_modern_logo_design_2610c0e1.jpg" alt="Times2 Logo" class="w-11 h-11 rounded-xl object-cover border-2 border-amber-400">
+  <!-- FORMULA LAYER: Floating Actuarial Chalkboard Equations -->
+  <canvas id="formulaCanvas"></canvas>
+
+  <!-- =========================================================================
+       TOP SOVEREIGN NAV & DIVISION HEADER
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-[#070b14]/85 backdrop-blur-md border-b-2 border-amber-500/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap justify-between items-center gap-4">
+      
+      <!-- Brand & Tagline -->
+      <div class="flex items-center gap-3.5">
+        <img src="assets/divisions/Times2_logo.jpg" alt="Times2 Logo" class="w-11 h-11 rounded-xl object-cover border-2 border-amber-400 shadow-lg">
         <div>
-          <div class="text-sm sm:text-base font-black tracking-tight text-white uppercase" style="font-family:'Orbitron',sans-serif;">
-            TIMES2 <span class="text-amber-400">// DIVISION 4 (X² ENGINE)</span>
+          <div class="flex items-center gap-2">
+            <span class="font-orbitron font-black text-lg text-white tracking-wider">TIMES<span class="text-amber-400">2</span></span>
+            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold border border-amber-400/40">THE MORNING BRIEF</span>
           </div>
-          <div class="text-[11px] font-mono text-slate-400 font-bold uppercase tracking-widest">
-            times2.burn-1.com • The 2 Clocks Math Problem &amp; Regulatory Drift Magazine
-          </div>
+          <p class="font-mono text-[11px] text-slate-400 uppercase tracking-widest">
+            The Morning Brief • TIMES2 (X²) • Verified Receipt Protocol
+          </p>
         </div>
-      </a>
-
-      <div class="flex flex-wrap items-center gap-2">
-        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">Core Site</a>
-        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">1. FreezerBurn</a>
-        <a href="acid.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">2. Acid</a>
-        <a href="times2.html" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 text-xs font-extrabold shadow-[0_0_15px_rgba(245,158,11,0.5)]">3. Times2</a>
-        <a href="sizzlean.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">4. Sizzlean</a>
-        <button
-          type="button"
-          onclick="window.Burn1DivisionEngine && window.Burn1DivisionEngine.openAuth()"
-          data-universal-auth-status
-          class="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-400 font-mono text-xs font-bold border border-amber-400 cursor-pointer"
-        >
-          <i class="fa-solid fa-user-lock mr-1"></i> Universal Sign-In
-        </button>
       </div>
+
+      <!-- Live Telemetry Status & Sound Engine Indicator -->
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 font-mono text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>AUDIO FX: 880 Hz SYNTH ON</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-500/30 bg-sky-950/40 text-sky-300 font-mono text-xs">
+          <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+          <span>TIMESTAMP PROTOCOL: READY</span>
+        </div>
+      </div>
+
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 space-y-10">
-
-    <!-- HERO: THE 2 CLOCKS MATH PROBLEM & CONCENTRIC COMPLETION DIALS -->
-    <section class="t2-pane p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7 space-y-4">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400 font-mono text-xs font-bold text-amber-400 uppercase">
-          <i class="fa-solid fa-clock-rotate-left"></i> X² Engine // The 2 Clocks Math Problem
+  <!-- =========================================================================
+       HERO: THE MORNING BRIEF // TIMES2 (X²) COMMUTE TELEMETRY
+       Clip 1: Riding to Work (Executive Drive)
+       Clip 2: High-Speed Transit Motion Window
+       ========================================================================= -->
+  <section class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2 w-full">
+    
+    <!-- Morning Brief Masthead Header -->
+    <div class="flex items-center justify-between mb-3 px-2">
+      <div class="flex items-center gap-2.5">
+        <span class="px-2.5 py-0.5 rounded bg-amber-500 text-slate-950 font-mono text-xs font-black uppercase tracking-widest">
+          COMMUTE TELEMETRY
         </span>
-        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight" style="font-family:'Orbitron',sans-serif;">
-          When <span class="text-amber-400">Clock 2</span> (Statutory Drift) Outruns <span class="text-sky-400">Clock 1</span> (Internal Telemetry).
+        <h2 class="font-orbitron font-black text-lg sm:text-xl text-white tracking-wide uppercase">
+          The Morning Brief // TIMES2 (X²) Velocity
+        </h2>
+      </div>
+      <span class="hidden sm:inline-block font-mono text-xs text-amber-300 font-bold">
+        07:42 AM EXECUTIVE WINDOW
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 rounded-3xl overflow-hidden p-2 glass-chassis border-2 border-amber-500/40 shadow-2xl">
+      
+      <!-- HERO CLIP 1: Riding to Work (Executive Recon Transit) -->
+      <div class="relative h-60 sm:h-72 rounded-2xl overflow-hidden bg-slate-950 border border-amber-400/30 shadow-inner group">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+          <source src="assets/divisions/Times2_Clip_driving_to _office.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-5">
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-amber-500 text-slate-950 font-mono text-[10px] font-black uppercase tracking-widest w-fit mb-1">
+            <i class="fa-solid fa-car-side"></i> Transit 01 // Riding to Work
+          </div>
+          <h3 class="font-orbitron font-bold text-lg text-white">The Morning Commute &amp; Threat Horizon</h3>
+          <p class="font-mono text-xs text-slate-300">Auditing active perimeter telemetry and third-party SaaS drift before arrival.</p>
+        </div>
+      </div>
+
+      <!-- HERO CLIP 2: Futuristic Train / Plane Ride Window Motion -->
+      <div class="relative h-60 sm:h-72 rounded-2xl overflow-hidden bg-slate-950 border border-sky-400/30 shadow-inner group">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+          <source src="assets/divisions/futuristic_transit_window.mp4" type="video/mp4" />
+          <source src="assets/timesrunning.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-5">
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-sky-400 text-slate-950 font-mono text-[10px] font-black uppercase tracking-widest w-fit mb-1">
+            <i class="fa-solid fa-plane-departure"></i> Transit 02 // Futuristic Motion Window
+          </div>
+          <h3 class="font-orbitron font-bold text-lg text-white">Shattering Forensic Intake Latency</h3>
+          <p class="font-mono text-xs text-slate-300">Fast orbital velocity compressing carrier response times into deterministic proof.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 1: THE TWO ULTRABARS WITH CLEAN TIME ACCELERATOR TITLE IN BETWEEN
+       (Featuring Hover Popup Explanations & Press Start Game Feel)
+       ========================================================================= -->
+  <section class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-6 w-full">
+
+      <!-- =====================================================================
+           LEFT ULTRABAR #1: SHODAN VENDOR DOUBLE-CHECK PIPELINE (5 STEPS)
+           ===================================================================== -->
+      <div class="w-full lg:w-80 flex flex-col items-start shrink-0 relative">
+        
+        <!-- Hover Popup Card: Explaining Shodan Vendor Double-Check Pipeline -->
+        <div class="has-game-tooltip w-full">
+          
+          <div class="game-hover-tooltip glass-panel p-4 rounded-xl border border-amber-400/60 shadow-2xl text-left font-mono text-xs space-y-2">
+            <div class="flex items-center gap-2 text-amber-300 font-bold uppercase">
+              <i class="fa-solid fa-satellite-dish"></i>
+              <span>Shodan Vendor Pipeline (TPRM / EASM)</span>
+            </div>
+            <p class="text-slate-300 leading-relaxed text-[11px]">
+              Replaces static questionnaires with non-intrusive Shodan telemetry. Resolves vendor IPs, audits exposed ports (RDP 3389, SMB 445), checks open databases (MongoDB 27017, Redis 6379), and flags CISA KEV vulnerabilities.
+            </p>
+            <div class="text-[10px] text-emerald-400 font-bold border-t border-white/10 pt-1.5">
+              STANDARDS: CISA KEV • Fair TPRM • NVD
+            </div>
+          </div>
+
+          <!-- Left Medical Pill Button (PRESS START GAME FEEL) -->
+          <div id="leftPill" class="glass-chassis rounded-full px-3.5 py-2.5 flex items-center gap-3 cursor-pointer select-none transition hover:border-amber-400/60 w-full justify-between group">
+            <div class="flex items-center gap-2.5">
+              <button id="leftCrossBtn" type="button" class="medical-cross-btn w-9 h-9 rounded-full bg-red-600 border border-red-400 flex items-center justify-center text-white shrink-0 group-hover:scale-105">
+                <i id="leftCrossIcon" class="fa-solid fa-plus text-base font-black transition-transform duration-300"></i>
+              </button>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-orbitron font-black text-xs text-white tracking-wider">VENDOR CHECK</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-500/30 text-amber-300 uppercase font-bold animate-pulse">PRESS START</span>
+                </div>
+                <span id="leftPillStatus" class="font-mono text-[9px] uppercase tracking-wider text-amber-400">SHODAN PIPELINE</span>
+              </div>
+            </div>
+            <!-- Left Completion Ring -->
+            <div class="relative w-9 h-9 flex items-center justify-center shrink-0">
+              <svg class="w-9 h-9" viewBox="0 0 36 36">
+                <path class="completion-circle-track fill-none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path id="leftCircleFill" class="completion-circle-fill fill-none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div id="leftCircleText" class="absolute inset-0 flex items-center justify-center font-mono text-[9px] font-bold text-slate-400">0%</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Left Vertebrae Spine (5 Shodan Steps) -->
+        <div id="leftSpine" class="ultrabar-spine mt-3 w-full glass-chassis rounded-2xl p-3 space-y-2">
+          <div class="px-2 py-1 flex items-center justify-between border-b border-white/10 pb-2">
+            <span class="font-mono text-[10px] uppercase font-bold text-amber-400 tracking-wider">SHODAN // 5 STEPS</span>
+            <span id="leftStepCounter" class="font-mono text-[10px] text-slate-400">STAGE 1 / 5</span>
+          </div>
+
+          <!-- Left Step 1 -->
+          <div data-left-node="1" class="vertebra-node is-active border border-amber-500/40 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">01</span>
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">1. INGEST VENDOR DOMAIN</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+          </div>
+
+          <!-- Left Step 2 -->
+          <div data-left-node="2" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">02</span>
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">2. ATTACK SURFACE CHECK</span>
+            </div>
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+          </div>
+
+          <!-- Left Step 3 -->
+          <div data-left-node="3" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">03</span>
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">3. VULN &amp; PATCH FRESHNESS</span>
+            </div>
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+          </div>
+
+          <!-- Left Step 4 -->
+          <div data-left-node="4" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">04</span>
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">4. DOUBLE-CHECK ATTESTATION</span>
+            </div>
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+          </div>
+
+          <!-- Left Step 5 -->
+          <div data-left-node="5" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">05</span>
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">5. VENDOR PROOF RECEIPT</span>
+            </div>
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+          </div>
+
+          <!-- Gauge Trigger from UI Kit -->
+          <div class="pt-2 border-t border-white/10 space-y-2">
+            <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 uppercase">
+              <span>Shodan Risk Dial</span>
+              <span class="text-amber-400 font-bold" id="shodanDialScore">0.00 Critical Exposure</span>
+            </div>
+            <div class="flex items-center justify-center py-1">
+              <div class="time-gauge-dial !w-24 !h-24 flex items-center justify-center cursor-pointer" id="vendorGaugeDial" title="Click to rotate calibration">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 z-20"></div>
+                <div id="vendorNeedle" class="rotating-needle absolute w-10 h-0.5 bg-amber-400 left-1/2 top-1/2 -translate-y-1/2 origin-left -rotate-90 shadow-[0_0_8px_#f59e0b]"></div>
+                <div class="absolute bottom-2 font-mono text-[9px] text-amber-300 font-bold">SHODAN TPRM</div>
+              </div>
+            </div>
+            <button type="button" onclick="window.times2LeftUltraBar.handleNextStep()" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-rajdhani font-bold text-xs uppercase tracking-wider transition">
+              <span id="leftBtnAction">INITIALIZE VENDOR SCAN →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Left Flyout Pane (Enlarged & Generous for readability: 620px width) -->
+        <div id="leftFlyout" class="ultrabar-flyout-left absolute top-14 left-0 sm:left-full sm:ml-4 glass-panel rounded-2xl w-[92vw] sm:w-[620px] p-6 space-y-5 shadow-2xl z-50">
+          
+          <div class="flex items-center justify-between border-b border-white/15 pb-3.5">
+            <div class="flex items-center gap-2.5">
+              <span id="leftFlyoutBadge" class="px-2.5 py-0.5 rounded bg-amber-500 text-slate-950 font-mono text-xs font-black">STAGE 01</span>
+              <h3 id="leftFlyoutTitle" class="font-rajdhani font-black text-xl text-white">1. INGEST VENDOR DOMAIN</h3>
+            </div>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+          </div>
+
+          <!-- Dynamic Shodan Viewport Body -->
+          <div id="leftFlyoutViewport" class="space-y-4 font-mono text-xs">
+            
+            <!-- Shodan Step 1: Ingest Vendor Domain -->
+            <div id="leftStepCard1" class="space-y-4">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Non-intrusive Shodan API integration resolves target vendor host IPs, autonomous system numbers (ASN), and public DNS boundaries without noisy probe packets.
+              </p>
+              <div>
+                <label class="block text-slate-300 uppercase font-bold mb-1">Target Vendor Primary Domain</label>
+                <input 
+                  id="leftInputVendor" 
+                  type="text" 
+                  value="checkout.partner.com" 
+                  class="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-sans text-sm focus:border-amber-400 focus:outline-none"
+                />
+              </div>
+              <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 text-amber-300 flex items-center gap-2 text-[11px]">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>PASSIVE RESOLUTION: Resolves DNS &amp; IP blocks via Shodan DNS API</span>
+              </div>
+            </div>
+
+            <!-- Shodan Step 2: Perimeter Attack Surface Check -->
+            <div id="leftStepCard2" class="space-y-3 hidden">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Clean visual status shields indexing public exposure via <code class="text-amber-300">/shodan/host/{ip}</code>:
+              </p>
+              <div class="space-y-2">
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🌐</span>
+                    <div>
+                      <div class="text-white font-bold text-xs">Public Service Exposure</div>
+                      <div class="text-[10px] text-slate-400">Scanned for exposed RDP (3389), SMB (445), SSH (22)</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">✓ CLEAN // 0 ADMIN PORTS</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🗄️</span>
+                    <div>
+                      <div class="text-white font-bold text-xs">Database Isolation</div>
+                      <div class="text-[10px] text-slate-400">Audited MongoDB (27017), Redis (6379), Elasticsearch</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">✓ SECURE // AIR-GAPPED</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Shodan Step 3: Vulnerability & Patch Freshness -->
+            <div id="leftStepCard3" class="space-y-3 hidden">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Cross-referencing banner software versions directly against CISA Known Exploited Vulnerability (KEV) and NVD databases:
+              </p>
+              <div class="space-y-2">
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🛡️</span>
+                    <div>
+                      <div class="text-white font-bold text-xs">Critical CVE &amp; RCE Status</div>
+                      <div class="text-[10px] text-slate-400">Tested against active CISA KEV catalog</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">✓ 0 KNOWN RCE EXPLOITS</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🔒</span>
+                    <div>
+                      <div class="text-white font-bold text-xs">TLS &amp; Cryptographic Cipher</div>
+                      <div class="text-[10px] text-slate-400">Web servers running modern forward-secrecy ciphers</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">✓ TLS 1.3 VERIFIED</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Shodan Step 4: Vendor Double-Check Attestation -->
+            <div id="leftStepCard4" class="space-y-3 hidden">
+              <div class="p-4 rounded-xl bg-slate-950 border border-amber-500/50 space-y-2">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-slate-400">AUDITED VENDOR:</span>
+                  <span id="shodanTargetDomain" class="text-amber-300 font-bold">checkout.partner.com</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-slate-400">PUBLIC RISK SCORE:</span>
+                  <span class="text-emerald-400 font-bold">0.00 Critical Exposure</span>
+                </div>
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-slate-400">PROCUREMENT STATUS:</span>
+                  <span class="text-sky-300 font-bold">APPROVED // CARRIER BASELINE MET</span>
+                </div>
+              </div>
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                4-Pillar Due Diligence evaluation satisfied: Network Exposure, Critical Services, TLS Strength, and Zero Unpatched Vulnerabilities.
+              </p>
+            </div>
+
+            <!-- Shodan Step 5: Official Vendor Due Diligence Proof Receipt -->
+            <div id="leftStepCard5" class="space-y-3 hidden">
+              <div class="verified-receipt-paper p-5 space-y-3 text-xs">
+                <div class="flex items-center justify-between border-b border-amber-500/40 pb-2.5">
+                  <span class="font-orbitron font-bold text-amber-300">SHODAN TPRM PROOF RECEIPT</span>
+                  <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">PRE-PROCUREMENT PROOF</span>
+                </div>
+                <div class="space-y-1.5 text-[11px]">
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">VENDOR DOMAIN:</span>
+                    <span id="shodanReceiptVendor" class="text-white font-bold">checkout.partner.com</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">EASM HARVEST:</span>
+                    <span class="text-emerald-400 font-bold">Passive Shodan DNS &amp; Host API</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">TIMESTAMP RECORD:</span>
+                    <span id="shodanReceiptTimestamp" class="text-amber-300 font-bold">November 16, 2026 // 09:30 EST</span>
+                  </div>
+                </div>
+                <div class="pt-2 border-t border-white/10 font-sans text-[11px] text-slate-300 italic">
+                  "Pre-procurement third-party due diligence recorded without vendor friction. Ready to attach to procurement contracts, vendor review folders, or insurance renewal binders."
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Nav for Left Shodan UltraBar -->
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+            <button 
+              id="btnPrevShodanStep" 
+              type="button" 
+              class="px-4 py-2.5 rounded-xl border border-white/15 text-slate-300 font-mono text-xs font-bold uppercase hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
+              disabled
+            >
+              ← Back
+            </button>
+            <button 
+              id="btnNextShodanStep" 
+              type="button" 
+              class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-rajdhani font-black text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 transition active:scale-95 flex items-center gap-2"
+            >
+              <span id="btnNextShodanLabel">INITIALIZE VENDOR SCAN →</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- CENTER: CLEAN, ELEGANT TIME ACCELERATOR TITLE ONLY -->
+      <div class="flex-1 text-center px-4 py-2 space-y-1">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-300 font-mono text-xs font-black uppercase tracking-widest shadow-md">
+          <i class="fa-solid fa-bolt text-amber-400 animate-pulse"></i>
+          <span>X² Regulatory Engine</span>
+        </div>
+        <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white tracking-wider uppercase drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+          The Time Accelerator
+        </h2>
+        <p class="font-mono text-xs text-sky-300 uppercase tracking-widest drop-shadow">
+          4-Day Clock • Actuarial Chrono Compression • Zero Friction
+        </p>
+      </div>
+
+      <!-- RIGHT ULTRABAR #2: TIMESTAMPED RECEIPT PROTOCOL -->
+      <div class="w-full lg:w-80 flex flex-col items-end shrink-0 relative">
+        
+        <!-- Hover Popup Card: Explaining Timestamped Receipt Protocol -->
+        <div class="has-game-tooltip w-full">
+          
+          <div class="game-hover-tooltip glass-panel p-4 rounded-xl border border-sky-400/60 shadow-2xl text-left font-mono text-xs space-y-2">
+            <div class="flex items-center gap-2 text-sky-300 font-bold uppercase">
+              <i class="fa-solid fa-receipt"></i>
+              <span>What is a Timestamped Receipt?</span>
+            </div>
+            <p class="text-slate-300 leading-relaxed text-[11px]">
+              An immutable cryptographic proof receipt confirming zero third-party script drift and zero unpatched CVEs, sealed under SHA-256 and transmitted directly to cyber underwriters and boards.
+            </p>
+            <div class="text-[10px] text-amber-300 font-bold border-t border-white/10 pt-1.5">
+              LEGAL STATUS: Defensible Carrier Proof
+            </div>
+          </div>
+
+          <!-- Right Medical Pill Button (PRESS START GAME FEEL) -->
+          <div id="rightPill" class="glass-chassis rounded-full px-3.5 py-2.5 flex items-center gap-3 cursor-pointer select-none transition hover:border-sky-400/60 w-full justify-between group">
+            <!-- Right Completion Ring -->
+            <div class="relative w-9 h-9 flex items-center justify-center shrink-0">
+              <svg class="w-9 h-9" viewBox="0 0 36 36">
+                <path class="completion-circle-track fill-none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path id="rightCircleFill" class="completion-circle-fill fill-none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <div id="rightCircleText" class="absolute inset-0 flex items-center justify-center font-mono text-[9px] font-bold text-slate-400">0%</div>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <div class="flex flex-col text-right">
+                <div class="flex items-center justify-end gap-1.5">
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-500/30 text-sky-300 uppercase font-bold animate-pulse">PRESS START</span>
+                  <span class="font-orbitron font-black text-xs text-white tracking-wider">RECEIPT DIAL</span>
+                </div>
+                <span id="rightPillStatus" class="font-mono text-[9px] uppercase tracking-wider text-sky-400">TIMESTAMP PROTOCOL</span>
+              </div>
+              <button id="rightCrossBtn" type="button" class="medical-cross-btn w-9 h-9 rounded-full bg-red-600 border border-red-400 flex items-center justify-center text-white shrink-0 group-hover:scale-105">
+                <i id="rightCrossIcon" class="fa-solid fa-plus text-base font-black transition-transform duration-300"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Vertebrae Spine (6-Step Sequence with Carrier Cross-Exam) -->
+        <div id="rightSpine" class="ultrabar-spine mt-3 w-full glass-chassis rounded-2xl p-3 space-y-2">
+          <div class="px-2 py-1 flex items-center justify-between border-b border-white/10 pb-2">
+            <span class="font-mono text-[10px] uppercase font-bold text-sky-400 tracking-wider">AI E&amp;O // 6 STAGES</span>
+            <span id="rightStepCounter" class="font-mono text-[10px] text-slate-400">STAGE 1 / 6</span>
+          </div>
+
+          <!-- Step 1 -->
+          <div data-right-node="1" class="vertebra-node is-active border border-sky-500/40 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer">
+            <i class="fa-solid fa-chevron-left text-xs text-sky-400"></i>
+            <div class="flex items-center gap-2">
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">1. ENTITY &amp; GATEWAY INTAKE</span>
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300">01</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div data-right-node="2" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+            <div class="flex items-center gap-2">
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">2. UPSTREAM VENDOR DOUBLE-CHECK</span>
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">02</span>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div data-right-node="3" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+            <div class="flex items-center gap-2">
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">3. OPERATIONAL GUARDRAILS</span>
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">03</span>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div data-right-node="4" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+            <div class="flex items-center gap-2">
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-white">4. TELEMETRY &amp; DRIFT RECON</span>
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">04</span>
+            </div>
+          </div>
+
+          <!-- Step 5 (Carrier Cross-Exam) -->
+          <div data-right-node="5" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+            <div class="flex items-center gap-2">
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-amber-300 font-black">5. CARRIER CROSS-EXAM</span>
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">05</span>
+            </div>
+          </div>
+
+          <!-- Step 6 -->
+          <div data-right-node="6" class="vertebra-node border border-white/10 rounded-xl px-3 py-2 flex items-center justify-between cursor-pointer opacity-70">
+            <i class="fa-solid fa-lock text-xs text-slate-500"></i>
+            <div class="flex items-center gap-2">
+              <span class="font-rajdhani font-bold text-xs sm:text-sm text-emerald-400 font-black">6. AI E&amp;O READINESS RECEIPT</span>
+              <span class="font-mono text-[11px] font-black px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">06</span>
+            </div>
+          </div>
+
+          <!-- Time Dial Gauge from Section 4 UI Kit -->
+          <div class="pt-2 border-t border-white/10 space-y-2">
+            <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 uppercase">
+              <span>Time Accel Master Dial</span>
+              <span class="text-sky-400 font-bold" id="chronoRemainingText">96.00h Remaining</span>
+            </div>
+            <div class="flex items-center justify-center py-1">
+              <div class="time-gauge-dial master flex items-center justify-center cursor-pointer" id="rightChronoDial" title="Click to advance chrono dial">
+                <div class="w-2.5 h-2.5 rounded-full bg-sky-400 z-20"></div>
+                <div id="chronoNeedle" class="rotating-needle absolute w-14 h-0.5 bg-sky-400 left-1/2 top-1/2 -translate-y-1/2 origin-left -rotate-90 shadow-[0_0_10px_#38bdf8]"></div>
+                <div class="absolute bottom-3 font-mono text-[9px] text-sky-300 font-bold">X² REGULATORY</div>
+              </div>
+            </div>
+            <button type="button" onclick="window.times2RightUltraBar.handleNextStep()" class="w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-rajdhani font-bold text-xs uppercase tracking-wider transition">
+              <span id="rightSpineBtnLabel">INITIALIZE POSTURE INGESTION →</span>
+            </button>
+          </div>
+        </div>
+        <!-- Right Flyout Pane (Enlarged & Generous for readability: 620px width) -->
+        <div id="rightFlyout" class="ultrabar-flyout-right absolute top-14 right-0 sm:right-full sm:mr-4 glass-panel rounded-2xl w-[92vw] sm:w-[620px] p-6 space-y-5 shadow-2xl z-50">
+          
+          <!-- Step Header Bar -->
+          <div class="flex items-center justify-between border-b border-white/15 pb-3.5">
+            <div class="flex items-center gap-2.5">
+              <span id="rightFlyoutBadge" class="px-2.5 py-0.5 rounded bg-sky-500 text-slate-950 font-mono text-xs font-black">
+                INGESTION
+              </span>
+              <h3 id="rightFlyoutTitle" class="font-rajdhani font-black text-xl text-white tracking-wide">
+                1. ENTITY &amp; GATEWAY INTAKE
+              </h3>
+            </div>
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+          </div>
+
+          <!-- Dynamic Interactive Body Container -->
+          <div id="humanStepViewport" class="space-y-4 font-mono text-xs">
+            
+            <!-- STEP 1: ENTITY & GATEWAY INTAKE -->
+            <div id="stepCard1" class="step-card space-y-4">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Enter clearing entity, primary domain, and AI model gateways to benchmark your carrier renewal window.
+              </p>
+              
+              <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-slate-300 uppercase font-bold mb-1">Company / Brand Entity</label>
+                    <input 
+                      id="inputCompanyName" 
+                      type="text" 
+                      placeholder="e.g. Apex Retail Group" 
+                      value="Apex Retail Group" 
+                      class="w-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-sans text-sm focus:border-sky-400 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-slate-300 uppercase font-bold mb-1">Primary Domain</label>
+                    <input 
+                      id="inputVendorDomain" 
+                      type="text" 
+                      placeholder="e.g. apexretail.com" 
+                      value="apexretail.com" 
+                      class="w-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-sans text-sm focus:border-sky-400 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-amber-300 uppercase font-bold mb-1">Deployed AI Model Gateways</label>
+                  <input 
+                    id="inputAiGateway" 
+                    type="text" 
+                    placeholder="e.g. OpenAI GPT-4o, Anthropic Claude 3.5, Azure AI Gateway" 
+                    value="OpenAI GPT-4o Enterprise, Azure Private AI Gateway" 
+                    class="w-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-sans text-sm focus:border-sky-400 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-slate-300 uppercase font-bold mb-1.5">Industry Sector Benchmark</label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button type="button" class="industry-btn active p-2.5 rounded-xl border border-sky-400 bg-sky-500/20 text-white text-center font-bold text-xs" data-industry="retail">
+                      🛍️ Retail &amp; E-Com
+                    </button>
+                    <button type="button" class="industry-btn p-2.5 rounded-xl border border-white/15 bg-slate-950/70 text-slate-300 text-center font-bold text-xs hover:border-sky-400/50" data-industry="logistics">
+                      📦 Logistics &amp; Freight
+                    </button>
+                    <button type="button" class="industry-btn p-2.5 rounded-xl border border-white/15 bg-slate-950/70 text-slate-300 text-center font-bold text-xs hover:border-sky-400/50" data-industry="saas">
+                      🏢 SaaS / Fintech
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: UPSTREAM VENDOR DOUBLE-CHECK -->
+            <div id="stepCard2" class="step-card space-y-4 hidden">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Inspect third-party LLMs, APIs, and client-side dependencies: data isolation, zero model retraining, and pinned script hashes:
+              </p>
+
+              <div class="space-y-2.5">
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-emerald-400 text-base">🛡️</span>
+                    <div>
+                      <div class="text-white font-bold">Foundation Model Tenant Isolation</div>
+                      <div class="text-[10px] text-slate-400">Zero model retraining on customer payloads verified</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[11px]">✓ ISOLATED // ZERO LEAK</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-sky-400 text-base">🌐</span>
+                    <div>
+                      <div class="text-white font-bold">API Upstream Dependencies</div>
+                      <div class="text-[10px] text-slate-400">Public endpoints run forward secrecy TLS 1.3</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-sky-500/20 text-sky-300 font-bold text-[11px]">✓ ENCRYPTED // TLS 1.3</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-amber-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-amber-400 text-base">⏱️</span>
+                    <div>
+                      <div class="text-white font-bold">Script Hash Integrity</div>
+                      <div class="text-[10px] text-slate-400">SRI Pinning active across checkout tags</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-bold text-[11px]">0.00 ZERO DRIFT</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: OPERATIONAL GUARDRAILS & HUMAN-IN-THE-LOOP -->
+            <div id="stepCard3" class="step-card space-y-4 hidden">
+              <div class="space-y-1">
+                <h4 class="font-orbitron font-bold text-sm text-white uppercase">
+                  Verify Deterministic Safeguards &amp; Decision Clearing
+                </h4>
+                <p class="font-sans text-xs text-slate-300">
+                  Attest active safeguards: human review on high-impact clearing decisions, prompt injection filters, and sub-second token decay.
+                </p>
+              </div>
+
+              <!-- Interactive Visual Switch Toggle -->
+              <div class="p-4 rounded-xl bg-slate-950/90 border-2 border-emerald-500/60 flex items-center justify-between">
+                <div class="space-y-0.5">
+                  <div class="font-bold text-white text-xs">Human-in-the-Loop Override Policy</div>
+                  <div class="text-[10px] text-slate-400">Lloyd's Q4-AI Mandatory Governance Standard</div>
+                </div>
+
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input id="toggleScriptLock" type="checkbox" checked class="sr-only peer">
+                  <div class="w-14 h-7 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500"></div>
+                </label>
+              </div>
+
+              <div class="space-y-2">
+                <div class="p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 text-emerald-300 flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                  <span id="scriptLockSummary">DETERMINISTIC GUARDRAILS: Prompt Injection Filters Active</span>
+                </div>
+                <div class="p-3 rounded-lg bg-sky-950/30 border border-sky-500/30 text-sky-300 flex items-center gap-2">
+                  <i class="fa-solid fa-bolt text-sky-400"></i>
+                  <span>TOKEN DECAY: Ephemeral Session Storage with Rapid Memory Purge</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 4: OUTSIDE TELEMETRY & MODEL DRIFT RECON -->
+            <div id="stepCard4" class="step-card space-y-4 hidden">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Cross-referencing attestation against live external perimeter scans to ensure zero dangling records or model drift:
+              </p>
+
+              <div class="space-y-2.5">
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🧹</span>
+                    <div>
+                      <div class="text-white font-bold">Dangling Staging Records</div>
+                      <div class="text-[10px] text-slate-400">Zero forgotten AI staging subdomains detected</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[11px]">✓ 0 ORPHANS DETECTED</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🔒</span>
+                    <div>
+                      <div class="text-white font-bold">Public Endpoint Telemetry</div>
+                      <div class="text-[10px] text-slate-400">Domain zone files &amp; DNSSEC records match attestation</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[11px]">✓ 100% TELEMETRY MATCH</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 5: CARRIER CROSS-EXAM -->
+            <div id="stepCard5" class="step-card space-y-4 hidden">
+              <div class="p-4 rounded-xl bg-amber-950/40 border-2 border-amber-500/60 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-orbitron font-bold text-amber-300 text-xs">CARRIER CROSS-EXAM ENGINE</span>
+                  <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">CLAUSE BENCHMARK</span>
+                </div>
+                <p class="font-sans text-xs text-slate-200 leading-relaxed">
+                  Pitting observed telemetry and attested controls directly against underwriter exclusion clauses:
+                </p>
+              </div>
+
+              <div class="space-y-2.5">
+                <div class="p-3.5 rounded-xl bg-slate-950/90 border border-emerald-500/40 space-y-1">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-white font-bold">1. Lloyd's Syndicate Bulletin Q4-AI Exclusion:</span>
+                    <span class="text-emerald-400 font-bold">REBUTTED ✓</span>
+                  </div>
+                  <p class="text-[10px] text-slate-400">Proof: Human-in-the-Loop decision gateway eliminates autonomous agent unvetted actions.</p>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/90 border border-emerald-500/40 space-y-1">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-white font-bold">2. SEC Item 1.05 &amp; 4-Day Cyber Disclosure:</span>
+                    <span class="text-emerald-400 font-bold">COMPLIANT ✓</span>
+                  </div>
+                  <p class="text-[10px] text-slate-400">Proof: Passive outside telemetry logs prove continuous incident baseline under 96 hours.</p>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/90 border border-emerald-500/40 space-y-1">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-white font-bold">3. "Silent AI" &amp; Unsanctioned Shadow LLM:</span>
+                    <span class="text-emerald-400 font-bold">DEFENDED ✓</span>
+                  </div>
+                  <p class="text-[10px] text-slate-400">Proof: Subresource integrity hashes and Shodan host lookups prove zero unmapped endpoints.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 6: ISSUE AI E&O READINESS RECEIPT -->
+            <div id="stepCard6" class="step-card space-y-4 hidden">
+              
+              <!-- Embossed Executive Receipt Card -->
+              <div class="verified-receipt-paper p-5 space-y-3.5">
+                
+                <div class="flex items-center justify-between border-b border-sky-500/40 pb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+                    <span class="font-orbitron font-bold text-xs text-white">TIMES2 AI E&amp;O READINESS RECEIPT</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-black text-[10px]">
+                    OFFICIAL UNDERWRITER CLEARANCE
+                  </span>
+                </div>
+
+                <div class="space-y-1.5 text-[11px]">
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">CLEARING ENTITY:</span>
+                    <span id="rcptCompany" class="text-white font-bold font-sans">Apex Retail Group</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">BENCHMARKED DOMAIN:</span>
+                    <span id="rcptDomain" class="text-sky-300 font-bold">apexretail.com</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">AI GATEWAYS BOUND:</span>
+                    <span id="rcptGateways" class="text-white font-mono truncate max-w-[240px]">OpenAI GPT-4o, Azure Private AI</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">CARRIER EXCLUSION REBUTTAL:</span>
+                    <span class="text-emerald-400 font-bold">Lloyd's Q4-AI + SEC 1.05 Cleared</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">CRYPTOGRAPHIC DIGEST:</span>
+                    <span class="text-amber-300 font-mono truncate max-w-[210px]">SHA-256: 7f83b165...e82b04c8</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">TIMESTAMP RECORD:</span>
+                    <span id="rcptTimestamp" class="text-amber-300 font-bold">November 16, 2026 // 09:30 EST</span>
+                  </div>
+                </div>
+
+                <div class="pt-2 border-t border-sky-500/30 font-sans text-[11px] text-slate-300 leading-relaxed italic">
+                  "Your third-party AI models and observed attack surfaces have been cross-referenced against carrier exclusion language and recorded. This timestamped receipt is ready for your audit committee, procurement file, or insurance renewal folder."
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Bottom Action Button for Active Step -->
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+            <button 
+              id="btnPrevReceiptStep" 
+              type="button" 
+              class="px-4 py-2.5 rounded-xl border border-white/15 text-slate-300 font-mono text-xs font-bold uppercase hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
+              disabled
+            >
+              ← Back
+            </button>
+
+            <button 
+              id="btnNextReceiptStep" 
+              type="button" 
+              class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-rajdhani font-black text-sm uppercase tracking-wider shadow-lg shadow-sky-500/25 transition active:scale-95 flex items-center gap-2"
+            >
+              <span id="btnNextReceiptLabel">INITIALIZE POSTURE INGESTION →</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </div>
+        <div id="rightFlyout" class="ultrabar-flyout-right absolute top-14 right-0 sm:right-full sm:mr-4 glass-panel rounded-2xl w-[92vw] sm:w-[540px] p-6 space-y-5 shadow-2xl z-50">
+          
+          <!-- Step Header Bar -->
+          <div class="flex items-center justify-between border-b border-white/15 pb-3.5">
+            <div class="flex items-center gap-2.5">
+              <span id="rightFlyoutBadge" class="px-2.5 py-0.5 rounded bg-sky-500 text-slate-950 font-mono text-xs font-black">
+                STEP 01
+              </span>
+              <h3 id="rightFlyoutTitle" class="font-rajdhani font-black text-xl text-white tracking-wide">
+                WHO ARE WE CHECKING?
+              </h3>
+            </div>
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+          </div>
+
+          <!-- Dynamic Interactive Body Container -->
+          <div id="humanStepViewport" class="space-y-4">
+            
+            <!-- STEP 1: WHO ARE WE CHECKING? -->
+            <div id="stepCard1" class="step-card space-y-4">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Enter your brand name and the vendor or checkout service to verify before underwriters or state audits arrive.
+              </p>
+              
+              <div class="space-y-3 font-mono text-xs">
+                <div>
+                  <label class="block text-slate-300 uppercase font-bold mb-1">Your Company / Brand Name</label>
+                  <input 
+                    id="inputCompanyName" 
+                    type="text" 
+                    placeholder="e.g. Apex Retail Group" 
+                    value="Apex Retail Group" 
+                    class="w-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-sans text-sm focus:border-sky-400 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-slate-300 uppercase font-bold mb-1">Target Vendor or Checkout Domain</label>
+                  <input 
+                    id="inputVendorDomain" 
+                    type="text" 
+                    placeholder="e.g. checkout.shopify.com or stripe.com" 
+                    value="checkout.shopify.com" 
+                    class="w-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-sans text-sm focus:border-sky-400 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-amber-300 uppercase font-bold mb-1.5">Industry Sector</label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button type="button" class="industry-btn active p-2.5 rounded-xl border border-sky-400 bg-sky-500/20 text-white text-center font-bold text-xs" data-industry="retail">
+                      🛍️ Retail
+                    </button>
+                    <button type="button" class="industry-btn p-2.5 rounded-xl border border-white/15 bg-slate-950/70 text-slate-300 text-center font-bold text-xs hover:border-sky-400/50" data-industry="logistics">
+                      📦 Logistics
+                    </button>
+                    <button type="button" class="industry-btn p-2.5 rounded-xl border border-white/15 bg-slate-950/70 text-slate-300 text-center font-bold text-xs hover:border-sky-400/50" data-industry="saas">
+                      🏢 SaaS Vendor
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: THE VENDOR DOUBLE-CHECK -->
+            <div id="stepCard2" class="step-card space-y-4 hidden">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Autonomous outside telemetry pass against Treasury registries and observed public certificates:
+              </p>
+
+              <div class="space-y-2.5 font-mono text-xs">
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-emerald-400 text-base">🛡️</span>
+                    <div>
+                      <div class="text-white font-bold">Sanctions &amp; Legal Standing</div>
+                      <div class="text-[10px] text-slate-400">Scanned against Treasury &amp; public registries</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[11px]">✓ CLEAR // 0 FLAGS</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-sky-400 text-base">🌐</span>
+                    <div>
+                      <div class="text-white font-bold">Public Perimeter Health</div>
+                      <div class="text-[10px] text-slate-400">Vendor ports &amp; cryptographic certificates</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-sky-500/20 text-sky-300 font-bold text-[11px]">✓ SECURE // TLS 1.3</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-amber-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-amber-400 text-base">⏱️</span>
+                    <div>
+                      <div class="text-white font-bold">Vendor Drift Score</div>
+                      <div class="text-[10px] text-slate-400">Continuous anomaly index</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-bold text-[11px]">0.00 ZERO DEFECT</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: PAYMENT & CHECKOUT CODE CHECK -->
+            <div id="stepCard3" class="step-card space-y-4 hidden">
+              <div class="space-y-1">
+                <h4 class="font-orbitron font-bold text-sm text-white uppercase">
+                  Are your checkout buttons and payment scripts locked?
+                </h4>
+                <p class="font-sans text-xs text-slate-300">
+                  Confirms third-party analytics and chat tags haven't mutated into unauthorized form-jackers or credit-card skimmers.
+                </p>
+              </div>
+
+              <!-- Interactive Visual Switch Toggle -->
+              <div class="p-4 rounded-xl bg-slate-950/90 border-2 border-emerald-500/60 flex items-center justify-between">
+                <div class="space-y-0.5">
+                  <div class="font-mono font-bold text-white text-xs">Subresource Integrity (SRI) Pinning</div>
+                  <div class="text-[10px] text-slate-400">PCI-DSS 4.0 E-Commerce Script Requirement</div>
+                </div>
+
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input id="toggleScriptLock" type="checkbox" checked class="sr-only peer">
+                  <div class="w-14 h-7 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500"></div>
+                </label>
+              </div>
+
+              <div class="p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 font-mono text-xs text-emerald-300 flex items-center gap-2">
+                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                <span id="scriptLockSummary">YES — ALL CHECKOUT SCRIPTS PINNED</span>
+              </div>
+            </div>
+
+            <!-- STEP 4: DIGITAL PERIMETER SWEEP -->
+            <div id="stepCard4" class="step-card space-y-4 hidden">
+              <p class="font-sans text-xs text-slate-300 leading-relaxed">
+                Sweeping outer boundaries for forgotten test environments or orphaned DNS records:
+              </p>
+
+              <div class="space-y-2.5 font-mono text-xs">
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🧹</span>
+                    <div>
+                      <div class="text-white font-bold">Abandoned Staging Check</div>
+                      <div class="text-[10px] text-slate-400">Forgotten dev/staging sites mapped</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[11px]">✓ 0 ORPHANS DETECTED</span>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-base">🔒</span>
+                    <div>
+                      <div class="text-white font-bold">Active Security Seals</div>
+                      <div class="text-[10px] text-slate-400">Domain zone files &amp; DNSSEC records</div>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[11px]">✓ VERIFIED UP TO DATE</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 5: THE OFFICIAL TIMES2 VERIFIED RECEIPT -->
+            <div id="stepCard5" class="step-card space-y-4 hidden">
+              
+              <!-- Embossed Executive Receipt Card -->
+              <div class="verified-receipt-paper p-5 font-mono text-xs space-y-3.5">
+                
+                <div class="flex items-center justify-between border-b border-sky-500/40 pb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+                    <span class="font-orbitron font-bold text-xs text-white">TIMES2 VERIFIED RECEIPT</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-black text-[10px]">
+                    OFFICIAL UNDERWRITER &amp; AUDIT RECEIPT
+                  </span>
+                </div>
+
+                <div class="space-y-1.5 text-[11px]">
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">ISSUED TO:</span>
+                    <span id="rcptCompany" class="text-white font-bold font-sans">Apex Retail Group</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">TARGET VENDOR / DOMAIN:</span>
+                    <span id="rcptDomain" class="text-sky-300 font-bold">checkout.shopify.com</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">VERIFICATION LEVEL:</span>
+                    <span class="text-emerald-400 font-bold">Independent Dual-Clock Timestamp</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">TIMESTAMP RECORD:</span>
+                    <span id="rcptTimestamp" class="text-amber-300 font-bold">November 16, 2026 // 09:30 EST</span>
+                  </div>
+                </div>
+
+                <div class="pt-2 border-t border-sky-500/30 font-sans text-[11px] text-slate-300 leading-relaxed italic">
+                  "Your third-party claims have been cross-referenced against observed telemetry and recorded. This timestamped receipt is ready for your audit committee, procurement file, or insurance renewal folder."
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Bottom Action Button for Active Step -->
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+            <button 
+              id="btnPrevReceiptStep" 
+              type="button" 
+              class="px-4 py-2.5 rounded-xl border border-white/15 text-slate-300 font-mono text-xs font-bold uppercase hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
+              disabled
+            >
+              ← Back
+            </button>
+
+            <button 
+              id="btnNextReceiptStep" 
+              type="button" 
+              class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-rajdhani font-black text-sm uppercase tracking-wider shadow-lg shadow-sky-500/25 transition active:scale-95 flex items-center gap-2"
+            >
+              <span id="btnNextReceiptLabel">PROCEED TO VENDOR CHECK →</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 2: DEDICATED FULL-WIDTH ARTICLE SECTION (SEE-THROUGH GLASS)
+       With Wide "AI E&O: CFO vs the Underwriter" Button & Centered Read More
+       ========================================================================= -->
+  <main class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-16 w-full flex-1">
+    
+    <article class="glass-article rounded-3xl p-8 sm:p-12 space-y-8">
+      
+      <!-- Series Header / Vol Badge -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 pb-5">
+        <span class="font-mono text-xs text-amber-400 uppercase tracking-widest font-bold">
+          <i class="fa-solid fa-newspaper mr-1.5"></i> Tech Spec vs. Horror Magazine // The Morning Brief
+        </span>
+        <span class="px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-mono text-xs font-bold">
+          NYDFS 23 NYCRR 500.17 • SEC ITEM 1.05
+        </span>
+      </div>
+
+      <!-- Article Title & Subtitle -->
+      <div class="space-y-4">
+        <h1 class="font-cinzel text-3xl sm:text-5xl font-black text-white leading-tight">
+          The 4-Day Regulatory Clock &amp; The Anatomy of Vendor Contagion
         </h1>
-        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-          Underwriters deny claims when municipal, state, and federal codes update faster than your internal security cadence. Our <strong>X² Engine</strong> cross-references your local telemetry against federal (NIST CSF 2.0, SEC, CISA KEV), state (NYDFS Part 500), and municipal ordinances — locking your <strong>$150 Times2 Shift Report Dossier</strong> with an Algorithmic Cryptographic SHA-256 Seal.
+        <p class="font-rajdhani font-semibold text-xl sm:text-2xl text-amber-300 leading-snug">
+          Why waiting for a third-party SOC-2 audit packet during an active breach guarantees total carrier forfeiture.
         </p>
       </div>
 
-      <!-- Concentric Circular Completion Dials + Downloaded Times2 Logo -->
-      <div class="lg:col-span-5 flex flex-col items-center">
-        <div class="relative w-64 h-64 flex items-center justify-center">
-          <svg viewBox="0 0 240 240" class="w-full h-full">
-            <!-- Outer Dial: Clock 2 Regulatory Sync (96%) -->
-            <circle cx="120" cy="120" r="104" fill="none" stroke="rgba(245,158,11,0.18)" stroke-width="12" />
-            <circle class="clock-ring-outer" cx="120" cy="120" r="104" fill="none" stroke="#f59e0b" stroke-width="12" stroke-dasharray="620 660" stroke-linecap="round" />
-            <!-- Inner Dial: Clock 1 Local Telemetry (92%) -->
-            <circle cx="120" cy="120" r="80" fill="none" stroke="rgba(56,189,248,0.18)" stroke-width="10" />
-            <circle class="clock-ring-inner" cx="120" cy="120" r="80" fill="none" stroke="#38bdf8" stroke-width="10" stroke-dasharray="460 510" stroke-linecap="round" />
-          </svg>
-          <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-            <img src="assets/divisions/Times2_modern_logo_design_2610c0e1.jpg" alt="Times2 Emblem" class="w-20 h-20 rounded-full object-cover border-2 border-amber-400 shadow-lg mb-1">
-            <div class="font-mono text-xs font-black text-amber-400">X² SYNC: 96%</div>
-          </div>
-        </div>
-        <div class="font-mono text-[11px] text-slate-400 text-center mt-2">
-          <span class="text-amber-400 font-bold">● Outer Ring:</span> Statutory &amp; Ordinance Lock (96%) &nbsp;|&nbsp;
-          <span class="text-sky-400 font-bold">● Inner Ring:</span> Local Telemetry (92%)
-        </div>
-      </div>
-    </section>
+      <!-- First Paragraph -->
+      <p class="font-sans text-base sm:text-lg text-slate-100 leading-relaxed">
+        When the New York Department of Financial Services (NYDFS) 23 NYCRR 500.17 and SEC Item 1.05 dropped compliance windows from months to <strong>strictly 96 hours</strong>, the conventional vendor management lifecycle became an existential liability. In the fog of an extortion event, carriers do not underwrite good intentions—they demand cryptographically sealed timestamps and immutable telemetry chains.
+      </p>
 
-    <!-- TIMES2 SHIFT: WEEKLY / MONTHLY REGULATORY MAGAZINE & DRIFT REPORT -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-7 t2-pane p-6 space-y-4">
-        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-          <div>
-            <span class="font-mono text-[10px] font-bold uppercase text-amber-400">CORE FEATURE // REGULATORY MAGAZINE</span>
-            <h2 class="text-xl font-black text-white uppercase" style="font-family:'Orbitron',sans-serif;">Times2 Shift — Drift Dispatch</h2>
-          </div>
-          <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold">ISSUE // NOV 2026</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
-            <img src="assets/divisions/Saved_frame_from_Futuristic_automated_c09ce429.jpg" alt="Automated Telemetry Frame" class="w-full h-36 object-cover rounded-lg mb-3 border border-amber-500/30">
-            <div class="font-mono text-[10px] text-amber-400 font-bold">FEDERAL &amp; STATE OVERLAY</div>
-            <h3 class="text-sm font-extrabold text-white mt-0.5">NYDFS 23 NYCRR 500 &amp; SEC 4-Day Incident Clock</h3>
-            <p class="text-xs text-slate-400 mt-1">Automated cross-reference of MFA enforcement, annual CISO attestation, and 72-hour underwriter notification clocks.</p>
-          </div>
-
-          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-            <div class="space-y-2.5">
-              <div class="font-mono text-[10px] text-sky-400 font-bold">MUNICIPAL &amp; UNDERWRITER MATRIX</div>
-              <h3 class="text-sm font-extrabold text-white">X² Engine Live Citation Feed</h3>
-              <ul class="font-mono text-[11px] text-slate-300 space-y-2">
-                <li class="border-l-2 border-amber-400 pl-2">NIST CSF 2.0 Govern (GV) &amp; Protect (PR) — Mapped</li>
-                <li class="border-l-2 border-sky-400 pl-2">NAIC Insurance Data Security Model Law (MDL-668) — Mapped</li>
-                <li class="border-l-2 border-amber-400 pl-2">Municipal Commercial Continuity Code §14-402 — Verified</li>
-                <li class="border-l-2 border-emerald-400 pl-2">CISA KEV Directive 22-01 — 0 Unpatched Flags</li>
-              </ul>
-            </div>
-            <div class="mt-4 pt-2 border-t border-slate-800 font-mono text-[10px] text-amber-300">
-              Updated every 5 minutes via worker.py X² Engine
-            </div>
+      <!-- IMAGE UNDER TITLE AND FIRST PARAGRAPH -->
+      <div class="rounded-2xl overflow-hidden border-2 border-amber-400/40 shadow-2xl bg-slate-950/80">
+        <div class="relative aspect-[21/9] w-full">
+          <img 
+            src="assets/cyber_soc_monitors.jpg" 
+            alt="Cyber SOC Telemetry & Underwriting War Room" 
+            class="w-full h-full object-cover opacity-90"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex items-end justify-between p-4 font-mono text-xs">
+            <span class="text-amber-300 font-bold bg-slate-950/80 px-3 py-1 rounded border border-amber-400/40">
+              FIG 1.0: Active Incident Telemetry Sweep &amp; Zero-Trust Egress Routing
+            </span>
+            <span class="text-slate-300 hidden sm:inline-block">
+              NIST CSF 2.0 • CISA KEV 22-01
+            </span>
           </div>
         </div>
       </div>
 
-      <!-- $150 TIMES2 SHIFT REPORT DOSSIER + SHA-256 SEAL LOCK -->
-      <div class="lg:col-span-5 t2-pane p-6 space-y-4">
-        <span class="font-mono text-xs font-extrabold uppercase text-amber-400">PRODUCT // SHA-256 SEAL LOCK</span>
-        <h3 class="text-2xl font-black text-white">$150 Times2 Shift Report Dossier</h3>
-        <div class="text-3xl font-black text-amber-400">$150 <span class="text-xs font-mono text-slate-400 uppercase">/ Sealed Dossier</span></div>
-        <p class="text-xs text-slate-300 leading-relaxed">
-          Maps your domain against our municipal ordinance &amp; regulatory update database, reconciles Clock 1 &amp; Clock 2 divergence, and issues a cryptographically sealed Jinja2 PDF/HTML Dossier.
+      <!-- Secondary Paragraph -->
+      <p class="font-sans text-base text-slate-200 leading-relaxed">
+        Traditional security programs lean on annual vendor surveys. But in the modern regulatory theater, an unvetted third-party API token or a vulnerable sub-processor is the direct vector that triggers the 4-day reporting countdown. The X² Regulatory Engine actively calculates the mathematical exponent of delay, proving that delay multiplies carrier exposure while algorithmic evidence compresses it to zero.
+      </p>
+
+      <!-- =====================================================================
+           WIDE BUTTON: "AI E&O: CFO vs the Underwriter"
+           ===================================================================== -->
+      <div class="py-2">
+        <button 
+          type="button" 
+          id="btnEoiExecutive"
+          class="eoi-wide-btn w-full p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-left group cursor-pointer"
+        >
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 text-xl shrink-0 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-slate-950 transition-all">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-black">SPECIAL REPORT</span>
+                <span class="font-mono text-xs text-sky-300 font-bold">SERIES DISPATCH</span>
+              </div>
+              <h3 class="font-orbitron font-black text-lg sm:text-2xl text-white tracking-wide mt-0.5 group-hover:text-amber-300 transition-colors">
+                AI E&amp;O: CFO vs. the Underwriter
+              </h3>
+              <p class="font-mono text-xs text-slate-300 mt-1">
+                Forensic Liability Breakdown • Cyber Errors &amp; Omissions (E&amp;O) vs. Direct Directors &amp; Officers (D&amp;O) Forfeiture
+              </p>
+            </div>
+          </div>
+          <div class="shrink-0 flex items-center gap-2 font-rajdhani font-black text-sm uppercase tracking-wider text-amber-400 group-hover:text-white transition-colors">
+            <span>Access Dossier</span>
+            <i class="fa-solid fa-arrow-right text-base group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </button>
+      </div>
+
+      <!-- EXPANDABLE FULL ARTICLE CONTENT ("Read More Article" Function) -->
+      <div id="articleFullBody" class="article-expanded-content space-y-6 text-base text-slate-200 leading-relaxed border-t border-white/15 pt-6 font-sans">
+        <h3 class="font-orbitron font-bold text-lg sm:text-xl text-white uppercase tracking-wide">
+          I. The Mathematical Flaw of the Annual Questionnaire
+        </h3>
+        <p>
+          Traditional enterprise compliance operates on an asynchronous honor system: questionnaires filled out in February that describe security postures obsolete by March. When an unpatched zero-day propagates through an outsourced billing sub-processor, your organization’s exposure is measured not in the strength of your contracts, but in the physical ingress routes between tenant databases.
         </p>
 
-        <form id="times2-order-form" class="space-y-3">
-          <div>
-            <label class="block font-mono text-[11px] font-bold uppercase text-slate-300 mb-1">Entity Domain *</label>
-            <input id="t2-domain" type="text" required placeholder="e.g. metro-underwriters.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/50 font-mono text-xs text-white">
-          </div>
-          <div>
-            <label class="block font-mono text-[11px] font-bold uppercase text-slate-300 mb-1">Counsel / Executive Email *</label>
-            <input id="t2-email" type="email" required placeholder="counsel@metro-underwriters.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/50 font-mono text-xs text-white">
-          </div>
-          <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono text-xs font-black uppercase tracking-widest shadow-lg cursor-pointer">
-            <i class="fa-solid fa-stamp mr-1.5"></i> Lock $150 Times2 Shift Dossier →
-          </button>
-        </form>
-        <div id="t2-receipt" class="hidden mt-3 p-3 rounded-xl bg-slate-950 border border-amber-400 font-mono text-xs text-amber-300 space-y-1"></div>
+        <h3 class="font-orbitron font-bold text-lg sm:text-xl text-white uppercase tracking-wide">
+          II. Algorithmic Quarantine vs. Contractual Hope
+        </h3>
+        <p>
+          The <strong>TIMES2</strong> doctrine introduces dynamic supply-chain isolation. By routing all cross-border API transmissions through an autonomous, resident probe, anomalous token usage triggers a hardware-grade quarantine before state notification deadlines expire.
+        </p>
+
+        <div class="p-6 rounded-2xl border border-sky-400/40 bg-sky-950/40 font-mono text-xs space-y-3">
+          <div class="font-bold text-sky-300 uppercase text-sm">Actuarial Formula Matrix // Series 2.2:</div>
+          <p class="text-slate-100 text-sm">
+            <code>Loss_Expectancy = (Inherent_Vulnerability × Regulatory_Multiplier^2) ÷ Cryptographic_Proof</code>
+          </p>
+          <p class="text-slate-400 leading-normal">
+            When Proof is verified on an immutable public ledger, Loss Expectancy converges to baseline friction.
+          </p>
+        </div>
       </div>
-    </section>
+
+      <!-- BIGGER, CENTERED "READ MORE ARTICLE" BUTTON -->
+      <div class="pt-6 flex flex-col items-center justify-center border-t border-white/15 space-y-3">
+        <button 
+          id="btnToggleReadMore" 
+          type="button" 
+          class="px-10 py-4 rounded-2xl border-2 border-amber-400 bg-amber-500/20 hover:bg-amber-500 text-white hover:text-slate-950 font-rajdhani font-black text-base uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_30px_rgba(245,158,11,0.7)] flex items-center gap-3 cursor-pointer"
+        >
+          <span id="readMoreLabel">Read More Article</span>
+          <i id="readMoreIcon" class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+        </button>
+
+        <span class="font-mono text-xs text-slate-400">
+          Published: © 2026 BURN-1 Systems • Darden Trust Architecture
+        </span>
+      </div>
+
+    </article>
 
   </main>
 
-  <!-- BURN-1.COM COMMERCIAL FOOTER: ALL RIGHTS RESERVED, LEGAL DISCLAIMER, TOOLS/HELPDESK & HIDDEN SITEMAP -->
-  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-800 text-xs text-slate-400">
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-      <div class="max-w-2xl">
-        <p class="font-bold text-white">© 2026 Leon R. Darden • BURN-1 Systems (burn-1.com). All rights reserved.</p>
-        <p class="tm-notice text-[11px] text-slate-400 mt-1">
-          <strong>Legal Disclaimer:</strong> BURN-1 Systems provides Agentless Perimeter Telemetry, Outside-In Exposure Audits, and Algorithmic Cryptographic SHA-256 Seal evidence binders. Assessments are informational governance instruments and do not constitute formal legal counsel or an insurance carrier underwriting guarantee. <a href="terms.html" class="underline font-bold text-amber-400 hover:text-white">Terms, Privacy &amp; Legal Disclaimer</a>.
-        </p>
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-3 font-mono">
-        <a href="https://tools.burn-1.com#helpdesk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 border border-amber-400/60 text-amber-400 hover:text-white transition-all shadow-sm">
-          <span class="inline-block w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]"></span>
-          <span>Help Desk &amp; Escalations: <strong class="text-white underline decoration-amber-400">tools.burn-1.com</strong></span>
-        </a>
-        <a href="mailto:hello@burn-1.com?subject=Times2%20Division%20Direct%20Inquiry" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-300 hover:border-amber-400 hover:text-white font-bold transition-all">
-          <i class="fa-solid fa-envelope text-amber-400"></i> Direct Contact
-        </a>
-      </div>
-    </div>
-    <!-- Hidden Sitemap Text (Expandable + Screen-Reader/SEO Indexed) -->
-    <details class="mt-4 pt-3 border-t border-slate-800/80 text-[10px] font-mono text-slate-500">
-      <summary class="cursor-pointer hover:text-slate-300 select-none">BURN-1.com Ecosystem Sitemap Index</summary>
-      <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
-        <a href="index.html" class="underline">Home (burn-1.com)</a> •
-        <a href="central-hub.html" class="underline">Central Hub</a> •
-        <a href="directory.html" class="underline">Evidence Showcase Directory</a> •
-        <a href="fast-lane.html" class="underline">Fast Lane</a> •
-        <a href="freezer.html" class="underline">FreezerBurn (freezer.burn-1.com)</a> •
-        <a href="acid.html" class="underline">Acid Division (acid.burn-1.com)</a> •
-        <a href="times2.html" class="underline">Times2 (times2.burn-1.com)</a> •
-        <a href="sizzlean.html" class="underline">Sizzlean (sizzlean.burn-1.com)</a> •
-        <a href="partners.html" class="underline">MSP Partners</a> •
-        <a href="broker-portal.html" class="underline">Broker Portal</a> •
-        <a href="msp-intake.html" class="underline">MSP Intake</a> •
-        <a href="intake.html" class="underline">Direct Intake</a> •
-        <a href="academy.html" class="underline">Operator Academy</a> •
-        <a href="tools.html" class="underline">Tools &amp; Help Desk (tools.burn-1.com)</a> •
-        <a href="terms.html" class="underline">Terms &amp; Legal Disclaimer</a> •
-        <a href="sitemap.xml" class="underline">XML Sitemap</a>
-      </div>
-    </details>
-    <div class="sr-only">
-      BURN-1 Systems Sitemap: burn-1.com, freezer.burn-1.com, acid.burn-1.com, times2.burn-1.com, sizzlean.burn-1.com, tools.burn-1.com, central-hub.html, directory.html, partners.html, broker-portal.html, fast-lane.html, academy.html, terms.html.
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="relative z-10 border-t border-white/10 bg-[#070b14]/90 py-6 text-center font-mono text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
+      <span>© 2026 BURN-1 SYSTEMS • Darden Trust Architecture</span>
+      <span class="text-amber-400 font-bold">Burning Friction... Shattering Time</span>
+      <span>TIMES2 DIVISION • SOVEREIGN BUILD V2</span>
     </div>
   </footer>
 
-  <script src="cosmo-widget.js"></script>
-  <script src="js/division-bots.js"></script>
+  <!-- =========================================================================
+       VANILLA CONTROLLER SCRIPT (Dual UltraBars + Web Audio Synthesizer Engine)
+       ========================================================================= -->
   <script>
-    document.getElementById('times2-order-form').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const res = await window.Burn1DivisionEngine.submitOrder({
-        client_domain: document.getElementById('t2-domain').value.trim(),
-        contact_email: document.getElementById('t2-email').value.trim(),
-        product_type: 'Times2 Shift Report Dossier ($150)',
-        amount_paid: '150.00',
-        risk_index_score: '96'
+    // --- 0. TACTILE WEB AUDIO SYNTHESIZER (880 Hz & Mechanical Clicks) ---
+    class TactileSoundEngine {
+      constructor() {
+        this.ctx = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      // Mechanical Relay Click / Pneumatic Spine Deploy Sound
+      playPneumaticDeploy() {
+        this.init();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(320, t);
+        osc.frequency.exponentialRampToValueAtTime(80, t + 0.18);
+
+        gain.gain.setValueAtTime(0.25, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.18);
+      }
+
+      // Dial Snap / Mechanical Ratchet Click
+      playDialSnap() {
+        this.init();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(740, t);
+        osc.frequency.setValueAtTime(420, t + 0.03);
+
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.08);
+      }
+
+      // 880 Hz Surgical / Executive Harmonic Resonance Tone
+      play880HzTone() {
+        this.init();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, t); // Authentic 880 Hz
+
+        gain.gain.setValueAtTime(0.001, t);
+        gain.gain.linearRampToValueAtTime(0.2, t + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.45);
+      }
+    }
+
+    const sound = new TactileSoundEngine();
+
+    // --- 1. LEFT ULTRABAR CONTROLLER (Vendor Check) ---
+    // --- 1. LEFT ULTRABAR CONTROLLER (Shodan Vendor Double-Check: 5 Steps) ---
+    class LeftUltraBar {
+      constructor() {
+        this.step = 1;
+        this.totalSteps = 5;
+        this.isOpen = false;
+        this.isCompleted = false;
+
+        this.pill = document.getElementById('leftPill');
+        this.btn = document.getElementById('leftCrossBtn');
+        this.icon = document.getElementById('leftCrossIcon');
+        this.spine = document.getElementById('leftSpine');
+        this.flyout = document.getElementById('leftFlyout');
+        this.circle = document.getElementById('leftCircleFill');
+        this.circleText = document.getElementById('leftCircleText');
+        this.needle = document.getElementById('vendorNeedle');
+        this.leftStepCounter = document.getElementById('leftStepCounter');
+        this.leftBtnAction = document.getElementById('leftBtnAction');
+        this.shodanDialScore = document.getElementById('shodanDialScore');
+
+        // Dynamic Flyout Elements
+        this.flyoutBadge = document.getElementById('leftFlyoutBadge');
+        this.flyoutTitle = document.getElementById('leftFlyoutTitle');
+        this.btnNext = document.getElementById('btnNextShodanStep');
+        this.btnPrev = document.getElementById('btnPrevShodanStep');
+        this.btnNextLabel = document.getElementById('btnNextShodanLabel');
+        this.leftInputVendor = document.getElementById('leftInputVendor');
+        this.shodanTargetDomain = document.getElementById('shodanTargetDomain');
+        this.shodanReceiptVendor = document.getElementById('shodanReceiptVendor');
+        this.shodanReceiptTimestamp = document.getElementById('shodanReceiptTimestamp');
+
+        this.stages = [
+          {
+            title: "1. INGEST VENDOR DOMAIN",
+            btnLabel: "INITIALIZE VENDOR SCAN →",
+            score: "0.00 Critical Exposure",
+            angle: -90
+          },
+          {
+            title: "2. ATTACK SURFACE CHECK",
+            btnLabel: "VERIFY SERVICE HYGIENE →",
+            score: "Ports 3389/445 Clean",
+            angle: -45
+          },
+          {
+            title: "3. VULN & PATCH FRESHNESS",
+            btnLabel: "COMPILE DUE DILIGENCE REPORT →",
+            score: "Zero RCE / TLS 1.3",
+            angle: 0
+          },
+          {
+            title: "4. DOUBLE-CHECK ATTESTATION",
+            btnLabel: "STAMP & ISSUE VENDOR RECEIPT ⚡",
+            score: "Procurement Approved",
+            angle: 45
+          },
+          {
+            title: "5. OFFICIAL VENDOR DUE DILIGENCE RECEIPT",
+            btnLabel: "📥 ATTACH VENDOR RECEIPT TO BINDER",
+            score: "Proof Bound SHA-256",
+            angle: 90
+          }
+        ];
+
+        this.attach();
+      }
+
+      attach() {
+        this.pill.addEventListener('click', () => this.toggle());
+        this.btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggle();
+        });
+
+        if (this.btnNext) {
+          this.btnNext.addEventListener('click', () => this.handleNextStep());
+        }
+        if (this.btnPrev) {
+          this.btnPrev.addEventListener('click', () => this.handlePrevStep());
+        }
+
+        document.querySelectorAll('[data-left-node]').forEach(node => {
+          node.addEventListener('click', () => {
+            const s = parseInt(node.getAttribute('data-left-node'), 10);
+            this.goToStep(s);
+          });
+        });
+      }
+
+      toggle() {
+        this.isOpen = !this.isOpen;
+        sound.playPneumaticDeploy();
+        if (this.isOpen) {
+          this.spine.classList.add('is-deployed');
+          this.icon.classList.remove('fa-plus');
+          this.icon.classList.add('fa-xmark');
+          setTimeout(() => this.flyout.classList.add('is-open'), 180);
+        } else {
+          this.spine.classList.remove('is-deployed');
+          this.flyout.classList.remove('is-open');
+          this.icon.classList.remove('fa-xmark');
+          this.icon.classList.add('fa-plus');
+        }
+      }
+
+      goToStep(s) {
+        if (s < 1 || s > this.totalSteps) return;
+        this.step = s;
+        sound.playDialSnap();
+        this.renderStep();
+      }
+
+      handleNextStep() {
+        sound.playDialSnap();
+        if (this.step < this.totalSteps) {
+          this.goToStep(this.step + 1);
+        } else {
+          this.executeVendorReceiptClose();
+        }
+      }
+
+      handlePrevStep() {
+        if (this.step > 1) {
+          this.goToStep(this.step - 1);
+        }
+      }
+
+      renderStep() {
+        const cur = this.stages[this.step - 1];
+
+        const vendorVal = (this.leftInputVendor && this.leftInputVendor.value.trim()) || 'checkout.partner.com';
+        if (this.shodanTargetDomain) this.shodanTargetDomain.textContent = vendorVal;
+        if (this.shodanReceiptVendor) this.shodanReceiptVendor.textContent = vendorVal;
+        if (this.shodanReceiptTimestamp) {
+          const now = new Date();
+          this.shodanReceiptTimestamp.textContent = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + " // " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + " EST";
+        }
+
+        if (this.flyoutBadge) this.flyoutBadge.textContent = `STAGE 0${this.step}`;
+        if (this.flyoutTitle) this.flyoutTitle.textContent = cur.title;
+        if (this.btnNextLabel) this.btnNextLabel.textContent = cur.btnLabel;
+        if (this.leftBtnAction) this.leftBtnAction.textContent = cur.btnLabel;
+        if (this.shodanDialScore) this.shodanDialScore.textContent = cur.score;
+        if (this.leftStepCounter) this.leftStepCounter.textContent = `STAGE ${this.step} / ${this.totalSteps}`;
+
+        for (let i = 1; i <= this.totalSteps; i++) {
+          const card = document.getElementById(`leftStepCard${i}`);
+          if (card) {
+            if (i === this.step) card.classList.remove('hidden');
+            else card.classList.add('hidden');
+          }
+        }
+
+        this.needle.style.transform = `translateY(-50%) rotate(${cur.angle}deg)`;
+        const pct = Math.round(((this.step - 1) / (this.totalSteps - 1)) * 100);
+        this.circle.style.strokeDashoffset = 100 - pct;
+        this.circleText.textContent = `${pct}%`;
+
+        document.querySelectorAll('[data-left-node]').forEach(node => {
+          const s = parseInt(node.getAttribute('data-left-node'), 10);
+          node.classList.remove('is-active', 'border-amber-500/40', 'opacity-70');
+          if (s === this.step) {
+            node.classList.add('is-active', 'border-amber-500/40');
+          } else if (s < this.step) {
+            node.classList.add('is-completed');
+          } else {
+            node.classList.add('opacity-70');
+          }
+        });
+
+        if (this.btnPrev) this.btnPrev.disabled = (this.step === 1);
+      }
+
+      executeVendorReceiptClose() {
+        sound.play880HzTone();
+        this.circle.style.strokeDashoffset = 0;
+        this.circleText.innerHTML = '<i class="fa-solid fa-check text-emerald-400 text-xs"></i>';
+        this.flyout.classList.remove('is-open');
+
+        setTimeout(() => {
+          sound.playPneumaticDeploy();
+          this.spine.classList.remove('is-deployed');
+          this.icon.classList.remove('fa-xmark');
+          this.icon.classList.add('fa-plus');
+          this.isOpen = false;
+          this.isCompleted = true;
+
+          const statusElem = document.getElementById('leftPillStatus');
+          if (statusElem) {
+            statusElem.textContent = "✓ VENDOR RECEIPT BOUND";
+            statusElem.className = "font-mono text-[9px] uppercase tracking-wider text-emerald-400 font-bold";
+          }
+        }, 500);
+      }
+    }
+
+    // --- 2. RIGHT ULTRABAR CONTROLLER (6-Stage AI E&O Sequence with Carrier Cross-Exam) ---
+    class RightUltraBar {
+      constructor() {
+        this.step = 1;
+        this.totalSteps = 6;
+        this.isOpen = false;
+        this.isCompleted = false;
+
+        this.pill = document.getElementById('rightPill');
+        this.btn = document.getElementById('rightCrossBtn');
+        this.icon = document.getElementById('rightCrossIcon');
+        this.spine = document.getElementById('rightSpine');
+        this.flyout = document.getElementById('rightFlyout');
+        this.circle = document.getElementById('rightCircleFill');
+        this.circleText = document.getElementById('rightCircleText');
+        this.needle = document.getElementById('chronoNeedle');
+        this.chronoRemainingText = document.getElementById('chronoRemainingText');
+        this.rightStepCounter = document.getElementById('rightStepCounter');
+        this.rightSpineBtnLabel = document.getElementById('rightSpineBtnLabel');
+
+        this.flyoutBadge = document.getElementById('rightFlyoutBadge');
+        this.flyoutTitle = document.getElementById('rightFlyoutTitle');
+        this.btnNext = document.getElementById('btnNextReceiptStep');
+        this.btnNextLabel = document.getElementById('btnNextReceiptLabel');
+        this.btnPrev = document.getElementById('btnPrevReceiptStep');
+
+        this.inputCompanyName = document.getElementById('inputCompanyName');
+        this.inputVendorDomain = document.getElementById('inputVendorDomain');
+        this.inputAiGateway = document.getElementById('inputAiGateway');
+        this.toggleScriptLock = document.getElementById('toggleScriptLock');
+        this.scriptLockSummary = document.getElementById('scriptLockSummary');
+        this.rcptCompany = document.getElementById('rcptCompany');
+        this.rcptDomain = document.getElementById('rcptDomain');
+        this.rcptGateways = document.getElementById('rcptGateways');
+        this.rcptTimestamp = document.getElementById('rcptTimestamp');
+
+        this.stepsMeta = [
+          {
+            title: "1. ENTITY & GATEWAY INTAKE",
+            badge: "INGESTION",
+            btnLabel: "INITIALIZE POSTURE INGESTION →",
+            angle: -90,
+            hours: "96.00h Remaining"
+          },
+          {
+            title: "2. UPSTREAM VENDOR DOUBLE-CHECK",
+            badge: "SUPPLY CHAIN",
+            btnLabel: "COMMIT VENDOR DOUBLE-CHECK →",
+            angle: -54,
+            hours: "82.00h Remaining"
+          },
+          {
+            title: "3. OPERATIONAL GUARDRAILS",
+            badge: "DETERMINISM",
+            btnLabel: "RECORD DETERMINISTIC SAFEGUARDS →",
+            angle: -18,
+            hours: "68.00h Remaining"
+          },
+          {
+            title: "4. TELEMETRY & DRIFT RECON",
+            badge: "OUTSIDE AUDIT",
+            btnLabel: "CONFIRM TELEMETRY MATCH →",
+            angle: 18,
+            hours: "48.00h Remaining"
+          },
+          {
+            title: "5. CARRIER CROSS-EXAM",
+            badge: "REBUTTAL",
+            btnLabel: "GENERATE CARRIER REBUTTAL →",
+            angle: 54,
+            hours: "24.00h Remaining"
+          },
+          {
+            title: "6. AI E&O READINESS RECEIPT",
+            badge: "CLEARANCE SEAL",
+            btnLabel: "DOWNLOAD VERIFIED RECEIPT PDF ⚡",
+            angle: 90,
+            hours: "00.00h DISPATCHED"
+          }
+        ];
+
+        this.attach();
+      }
+
+      attach() {
+        this.pill.addEventListener('click', () => this.toggle());
+        this.btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggle();
+        });
+
+        this.btnNext.addEventListener('click', () => this.handleNextStep());
+        this.btnPrev.addEventListener('click', () => this.handlePrevStep());
+
+        document.querySelectorAll('[data-right-node]').forEach(node => {
+          node.addEventListener('click', () => {
+            const s = parseInt(node.getAttribute('data-right-node'), 10);
+            this.goToStep(s);
+          });
+        });
+
+        document.querySelectorAll('.industry-btn').forEach(b => {
+          b.addEventListener('click', () => {
+            sound.playDialSnap();
+            document.querySelectorAll('.industry-btn').forEach(btn => {
+              btn.classList.remove('active', 'border-sky-400', 'bg-sky-500/20', 'text-white');
+              btn.classList.add('border-white/15', 'bg-slate-950/70', 'text-slate-300');
+            });
+            b.classList.add('active', 'border-sky-400', 'bg-sky-500/20', 'text-white');
+            b.classList.remove('border-white/15', 'bg-slate-950/70', 'text-slate-300');
+          });
+        });
+
+        if (this.toggleScriptLock) {
+          this.toggleScriptLock.addEventListener('change', (e) => {
+            sound.playDialSnap();
+            if (e.target.checked) {
+              this.scriptLockSummary.textContent = "DETERMINISTIC GUARDRAILS: Prompt Injection Filters Active";
+              this.scriptLockSummary.parentElement.className = "p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 font-mono text-xs text-emerald-300 flex items-center gap-2";
+            } else {
+              this.scriptLockSummary.textContent = "WARNING — AUTONOMOUS DECISION OVERRIDE OFF";
+              this.scriptLockSummary.parentElement.className = "p-3 rounded-lg bg-amber-950/30 border border-amber-500/30 font-mono text-xs text-amber-300 flex items-center gap-2";
+            }
+          });
+        }
+      }
+
+      toggle() {
+        this.isOpen = !this.isOpen;
+        sound.playPneumaticDeploy();
+        if (this.isOpen) {
+          this.spine.classList.add('is-deployed');
+          this.icon.classList.remove('fa-plus');
+          this.icon.classList.add('fa-xmark');
+          setTimeout(() => this.flyout.classList.add('is-open'), 180);
+        } else {
+          this.spine.classList.remove('is-deployed');
+          this.flyout.classList.remove('is-open');
+          this.icon.classList.remove('fa-xmark');
+          this.icon.classList.add('fa-plus');
+        }
+      }
+
+      goToStep(s) {
+        if (s < 1 || s > this.totalSteps) return;
+        this.step = s;
+        sound.playDialSnap();
+        this.renderStep();
+      }
+
+      handleNextStep() {
+        sound.playDialSnap();
+        if (this.step < this.totalSteps) {
+          this.goToStep(this.step + 1);
+        } else {
+          this.executeDownloadAndCollapse();
+        }
+      }
+
+      handlePrevStep() {
+        if (this.step > 1) {
+          this.goToStep(this.step - 1);
+        }
+      }
+
+      renderStep() {
+        const meta = this.stepsMeta[this.step - 1];
+
+        if (this.inputCompanyName && this.rcptCompany) {
+          this.rcptCompany.textContent = this.inputCompanyName.value.trim() || 'Apex Retail Group';
+        }
+        if (this.inputVendorDomain && this.rcptDomain) {
+          this.rcptDomain.textContent = this.inputVendorDomain.value.trim() || 'apexretail.com';
+        }
+        if (this.inputAiGateway && this.rcptGateways) {
+          this.rcptGateways.textContent = this.inputAiGateway.value.trim() || 'OpenAI GPT-4o Enterprise, Azure Private AI Gateway';
+        }
+        if (this.rcptTimestamp) {
+          const now = new Date();
+          this.rcptTimestamp.textContent = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + " // " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + " EST";
+        }
+
+        if (this.flyoutBadge) this.flyoutBadge.textContent = meta.badge;
+        if (this.flyoutTitle) this.flyoutTitle.textContent = meta.title;
+        if (this.btnNextLabel) this.btnNextLabel.textContent = meta.btnLabel;
+        if (this.rightSpineBtnLabel) this.rightSpineBtnLabel.textContent = meta.btnLabel;
+        if (this.chronoRemainingText) this.chronoRemainingText.textContent = meta.hours;
+        if (this.rightStepCounter) this.rightStepCounter.textContent = `STAGE ${this.step} / ${this.totalSteps}`;
+
+        for (let i = 1; i <= this.totalSteps; i++) {
+          const card = document.getElementById(`stepCard${i}`);
+          if (card) {
+            if (i === this.step) card.classList.remove('hidden');
+            else card.classList.add('hidden');
+          }
+        }
+
+        this.needle.style.transform = `translateY(-50%) rotate(${meta.angle}deg)`;
+        const pct = Math.round(((this.step - 1) / (this.totalSteps - 1)) * 100);
+        this.circle.style.strokeDashoffset = 100 - pct;
+        this.circleText.textContent = `${pct}%`;
+
+        document.querySelectorAll('[data-right-node]').forEach(node => {
+          const s = parseInt(node.getAttribute('data-right-node'), 10);
+          node.classList.remove('is-active', 'border-sky-500/40', 'opacity-70');
+          if (s === this.step) {
+            node.classList.add('is-active', 'border-sky-500/40');
+          } else if (s < this.step) {
+            node.classList.add('is-completed');
+          } else {
+            node.classList.add('opacity-70');
+          }
+        });
+
+        this.btnPrev.disabled = (this.step === 1);
+      }
+
+      executeDownloadAndCollapse() {
+        sound.play880HzTone();
+        this.circle.style.strokeDashoffset = 0;
+        this.circleText.innerHTML = '<i class="fa-solid fa-check text-emerald-400 text-xs"></i>';
+        this.flyout.classList.remove('is-open');
+
+        setTimeout(() => {
+          sound.playPneumaticDeploy();
+          this.spine.classList.remove('is-deployed');
+          this.icon.classList.remove('fa-xmark');
+          this.icon.classList.add('fa-plus');
+          this.isOpen = false;
+          this.isCompleted = true;
+
+          const statusElem = document.getElementById('rightPillStatus');
+          if (statusElem) {
+            statusElem.textContent = "✓ AI E&O RECEIPT ISSUED";
+            statusElem.className = "font-mono text-[9px] uppercase tracking-wider text-emerald-400 font-bold";
+          }
+
+          const toast = document.createElement('div');
+          toast.className = 'fixed bottom-8 right-8 glass-panel border border-emerald-500/60 text-emerald-300 font-mono text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 z-50 transition-all';
+          toast.innerHTML = '<i class="fa-solid fa-file-pdf text-emerald-400 text-base"></i> <span>Downloaded: Times2_AI_EO_Readiness_Receipt.pdf</span>';
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 4000);
+        }, 600);
+      }
+    }
+    class ActuarialFormulaCanvas {
+      constructor() {
+        this.canvas = document.getElementById('formulaCanvas');
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+
+        this.formulas = [
+          "R_v = Σ(P_tenant × E_field⁻¹) = 0.00",
+          "Loss_Exp = (V_inh × M_reg²) ÷ Proof_crypto",
+          "Δt_disclosure ≤ 96.00 hrs (NYDFS §500.17)",
+          "SHA-256: 7f83b165...e82b04c8",
+          "E(R_t) = R_f + β_c[E(R_m) - R_f]",
+          "H(m) = 256-bit Digest (Zero Inherent Defect)",
+          "Loss_Multiplier = k × e^(0.14 × t_delay)",
+          "CISA_KEV_22_01 = PASS (Zero Exposed CVSS >= 7.0)",
+          "RFC 8446 (TLS 1.3) • DMARC strict (p=reject)",
+          "Quarantine_Gate = ACTIVE [AES-GCM-256]"
+        ];
+
+        this.items = [];
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        this.animate();
+      }
+
+      resize() {
+        this.w = this.canvas.width = window.innerWidth;
+        this.h = this.canvas.height = window.innerHeight;
+        this.initItems();
+      }
+
+      initItems() {
+        this.items = [];
+        const count = Math.min(18, Math.floor(this.w / 90));
+        for (let i = 0; i < count; i++) {
+          this.items.push({
+            text: this.formulas[i % this.formulas.length],
+            x: Math.random() * this.w,
+            y: Math.random() * this.h,
+            speedY: -0.2 - Math.random() * 0.35,
+            opacity: 0.12 + Math.random() * 0.22,
+            color: (i % 2 === 0) ? '#f59e0b' : '#38bdf8',
+            fontSize: 11 + Math.floor(Math.random() * 3)
+          });
+        }
+      }
+
+      animate() {
+        this.ctx.clearRect(0, 0, this.w, this.h);
+        this.items.forEach(item => {
+          this.ctx.font = `${item.fontSize}px "JetBrains Mono", monospace`;
+          this.ctx.fillStyle = item.color;
+          this.ctx.globalAlpha = item.opacity;
+          this.ctx.fillText(item.text, item.x, item.y);
+
+          item.y += item.speedY;
+          if (item.y < -30) {
+            item.y = this.h + 20;
+            item.x = Math.random() * this.w;
+          }
+        });
+
+        requestAnimationFrame(() => this.animate());
+      }
+    }
+
+    // --- DOM READY INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+      window.times2LeftUltraBar = new LeftUltraBar();
+      window.times2RightUltraBar = new RightUltraBar();
+      window.formulaCanvas = new ActuarialFormulaCanvas();
+
+      // Audio on AI E&O Button Hover
+      const btnEoi = document.getElementById('btnEoiExecutive');
+      if (btnEoi) {
+        btnEoi.addEventListener('mouseenter', () => sound.play880HzTone());
+      }
+
+      // Audio on Gauge Dial Click
+      const leftDial = document.getElementById('vendorGaugeDial');
+      if (leftDial) {
+        leftDial.addEventListener('click', () => sound.playDialSnap());
+      }
+      const rightDial = document.getElementById('rightChronoDial');
+      if (rightDial) {
+        rightDial.addEventListener('click', () => sound.playDialSnap());
+      }
+
+      // Read More Toggle
+      const btnReadMore = document.getElementById('btnToggleReadMore');
+      const articleBody = document.getElementById('articleFullBody');
+      const label = document.getElementById('readMoreLabel');
+      const icon = document.getElementById('readMoreIcon');
+
+      let isExpanded = false;
+      btnReadMore.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        sound.playDialSnap();
+        if (isExpanded) {
+          articleBody.classList.add('is-expanded');
+          label.textContent = "Collapse Article";
+          icon.classList.add('rotate-180');
+        } else {
+          articleBody.classList.remove('is-expanded');
+          label.textContent = "Read More Article";
+          icon.classList.remove('rotate-180');
+        }
       });
-      const box = document.getElementById('t2-receipt');
-      box.classList.remove('hidden');
-      box.innerHTML = `
-        <div class="text-white font-bold">✓ X² DOSSIER LOCKED (${res.queued_order.order_id})</div>
-        <div>DOMAIN: ${res.queued_order.client_domain}</div>
-        <div class="break-all">SHA-256 SEAL: ${res.queued_order.sha256_seal || 'ISSUED_BY_WORKER'}</div>
-      `;
     });
   </script>
+
+  <!-- UNIVERSAL PAYMENT CONTROLLER & TRI-PANE BOT CONTROLLER & AUDIO FX -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
 </body>
 </html>

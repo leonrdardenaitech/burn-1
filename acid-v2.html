@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACID-V2 | Corrosive Compliance & HazMat Telemetry — BURN-1 Systems</title>
+  <meta name="description" content="The Acid Test: Unfiltered, unvarnished telemetry that proves your safety controls didn't degrade under pressure. Agentless Perimeter Telemetry & Outside-In Exposure Audit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/burn1-components.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --acid-bg: #050a06;
+      --acid-panel: #0a120b;
+      --acid-green: #39ff14;
+      --acid-seal: #00FF66;
+      --acid-amber: #f59e0b;
+      --acid-red: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background-color: var(--acid-bg);
+      background-image:
+        radial-gradient(circle at 20% 10%, rgba(57, 255, 20, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 80% 35%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(5, 10, 6, 0.94) 0%, rgba(5, 10, 6, 0.99) 100%),
+        url('assets/divisions/acid_background_Chemical_burn.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #ecfdf5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .orbitron { font-family: 'Orbitron', sans-serif; }
+
+    /* Top Navigation */
+    .acid-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 10, 6, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(57, 255, 20, 0.28);
+      padding: 0.75rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .acid-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .acid-brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(57, 255, 20, 0.12);
+      border: 1px solid #39ff14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #39ff14;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      box-shadow: 0 0 14px rgba(57, 255, 20, 0.35);
+    }
+    .acid-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .acid-nav-links a {
+      color: #a7f3d0;
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.42rem 0.75rem;
+      border-radius: 4px;
+      border: 1px solid rgba(57, 255, 20, 0.18);
+      background: rgba(10, 18, 11, 0.75);
+      transition: all 0.18s ease;
+    }
+    .acid-nav-links a:hover,
+    .acid-nav-links a.active {
+      color: #050a06;
+      background: #39ff14;
+      border-color: #39ff14;
+      box-shadow: 0 0 14px rgba(57, 255, 20, 0.6);
+      font-weight: 700;
+    }
+
+    /* Ultra Bar Custom Scrollbar */
+    .ub-custom-scroll::-webkit-scrollbar { width: 6px; }
+    .ub-custom-scroll::-webkit-scrollbar-track { background: #0c0e12; }
+    .ub-custom-scroll::-webkit-scrollbar-thumb { background: #2A2F38; border-radius: 3px; }
+    .ub-custom-scroll::-webkit-scrollbar-thumb:hover { background: #39ff14; }
+
+    /* Responsive Horizontal Overflow Wrapper for 160px + 680px = 840px Ultra Bar */
+    .ultrabar-stage-scroll {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 1.5rem;
+    }
+
+    /* Mandatory Footer */
+    .burn1-footer {
+      margin-top: 5rem;
+      background: #040805;
+      border-top: 2px solid rgba(57, 255, 20, 0.3);
+      padding: 3rem 1.75rem 2.5rem;
+      color: #9ca3af;
+      font-size: 0.82rem;
+    }
+    .burn1-footer a {
+      color: #39ff14;
+      text-decoration: none;
+    }
+    .burn1-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="acid-topbar">
+    <a href="index.html" class="acid-brand">
+      <div class="acid-brand-badge">B1</div>
+      <div>
+        <div class="orbitron text-sm font-black tracking-wider text-white">BURN-1 SYSTEMS <span class="text-[#39ff14]">// ACID-V2</span></div>
+        <div class="mono text-[10px] text-emerald-400/80 tracking-widest">HAZMAT &amp; ENVIRONMENTAL CONTAINMENT DIVISION</div>
+      </div>
+    </a>
+    <nav class="acid-nav-links" aria-label="Division Switcher">
+      <a href="index.html">Command</a>
+      <a href="freezer.html">FreezerBurn</a>
+      <a href="acid.html">Acid v1</a>
+      <a href="acid-v2.html" class="active">Acid v2 (React UltraBar)</a>
+      <a href="times2.html">Times2</a>
+      <a href="sizzlean.html">Sizzlean</a>
+      <a href="directory.html">Directory</a>
+      <a href="msp-intake.html">MSP Intake</a>
+      <a href="broker-portal.html">Broker Portal</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION WITH .acid-tube-bar DIRECTLY BELOW SLOGAN -->
+  <section class="max-w-7xl mx-auto px-6 pt-10 pb-8">
+    <div class="acid-panel-hazard p-6 md:p-9 rounded-lg border border-[#39ff14]/40 bg-[#09120a]/90 shadow-2xl">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <span class="bio-caution-plate">
+          <i class="fa-solid fa-biohazard"></i> REAGENT-1 // HAZMAT TELEMETRY ENGINE
+        </span>
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="mono text-xs px-3 py-1 rounded bg-black/70 border border-[#39ff14]/40 text-[#39ff14]">
+            SLA: DELIVERED WITHIN STANDARD BUSINESS TURNAROUND UP TO 5 BUSINESS DAYS
+          </span>
+          <span class="mono text-xs px-3 py-1 rounded bg-black/70 border border-amber-500/40 text-amber-400">
+            ALGORITHMIC CRYPTOGRAPHIC SHA-256 SEAL
+          </span>
+        </div>
+      </div>
+
+      <h1 class="orbitron text-2xl md:text-4xl font-black tracking-wide text-white leading-tight mb-3">
+        The Acid Test: <span class="text-[#39ff14]">Unfiltered, unvarnished telemetry</span> that proves your safety controls didn't degrade under pressure.
+      </h1>
+
+      <p class="text-sm md:text-base text-emerald-100/80 max-w-4xl mb-5 leading-relaxed">
+        <strong>Agentless Perimeter Telemetry &amp; Outside-In Exposure Audit</strong> engineered for chemical processing, industrial manufacturing, and EPA/OSHA secondary containment verification. <strong>BIND Doctrine:</strong> After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
+      </p>
+
+      <!-- .acid-tube-bar DIRECTLY BELOW THE SLOGAN -->
+      <div class="mb-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="mono text-xs uppercase tracking-widest text-[#39ff14] font-bold">
+            <i class="fa-solid fa-flask-vial mr-1"></i> REAGENT-1 CORROSIONCONTAINMENT VOLUME TUBE
+          </span>
+          <span id="hero-acid-state-badge" class="mono text-xs uppercase tracking-widest text-amber-400 font-bold">
+            PHASE TELEMETRY: ARMED (85% NOMINAL)
+          </span>
+        </div>
+        <div class="acid-tube-bar" id="hero-acid-tube-bar">
+          <div class="acid-tube-liquid" id="hero-acid-tube-liquid" style="width: 85%;"></div>
+          <span class="acid-tube-label" id="hero-acid-tube-label">85% ACID VOL</span>
+        </div>
+      </div>
+
+      <!-- BIO-HAZARD UI KIT CALLOUT STRIP IN HERO -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div class="bio-panel-radiation">
+          <div class="flex items-center justify-between">
+            <span class="mono text-xs font-bold uppercase tracking-wider text-amber-400">
+              <i class="fa-solid fa-radiation mr-1"></i> EPA / OSHA Municipal Scrape
+            </span>
+            <span class="mono text-[11px] text-[#39ff14]">OPEN-CODE BROWSE</span>
+          </div>
+          <p class="text-xs text-slate-300 m-0">
+            Scrapes local municipal zoning, drainage setbacks, and fire marshal hazardous storage ordinances in real time.
+          </p>
+        </div>
+
+        <div class="bio-panel-lockdown">
+          <div class="flex items-center justify-between">
+            <span class="mono text-xs font-bold uppercase tracking-wider text-[#39ff14]">
+              <i class="fa-solid fa-shield-halved mr-1"></i> Containment Collision Engine
+            </span>
+            <span class="mono text-[11px] text-amber-300">BERM + LOTO + SDS</span>
+          </div>
+          <p class="text-xs text-slate-300 m-0">
+            Pits operator-uploaded secondary berm &amp; eyewash station proof against active federal and municipal codes.
+          </p>
+        </div>
+
+        <div class="bio-panel-alert">
+          <div class="flex items-center justify-between">
+            <span class="mono text-xs font-bold uppercase tracking-wider text-red-400">
+              <i class="fa-solid fa-triangle-exclamation mr-1"></i> Step 7 Multi-System Dispatch
+            </span>
+            <span class="mono text-[11px] text-red-300">SHA-256 BINDER</span>
+          </div>
+          <p class="text-xs text-slate-300 m-0">
+            Stamps the Machine-Verified Timestamp and fires Client Subdomain, PDF Email, Google Sheets, and Obsidian Vault sync.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMBEDDED REACT ULTRA BAR SECTION -->
+  <main class="max-w-7xl mx-auto px-6 pb-12">
+    <div id="acid-v2-ultrabar-root"></div>
+  </main>
+
+  <!-- MANDATORY COMMERCIAL FOOTER STANDARD (GEMINI.md) -->
+  <footer class="burn1-footer">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-emerald-950">
+        <div>
+          <div class="orbitron text-white font-bold tracking-wider text-sm mb-1">
+            © 2026 Leon R. Darden • BURN-1 Systems (burn-1.com). All rights reserved.
+          </div>
+          <p class="text-xs text-slate-400 max-w-3xl m-0">
+            Commercial Disclaimer: BURN-1 Systems provides Agentless Perimeter Telemetry &amp; Outside-In Exposure Audits sealed with an Algorithmic Cryptographic SHA-256 Seal. Delivered within standard business turnaround up to 5 business days. Under the BIND Doctrine, the scan is the evidence-gathering binder cited against federal and international public sources and does not diagnose or summarise the underwriter report.
+          </p>
+        </div>
+        <div class="flex items-center gap-4 flex-wrap mono text-xs">
+          <a href="terms.html"><i class="fa-solid fa-scale-balanced mr-1"></i> Terms &amp; Governance</a>
+          <a href="https://tools.burn-1.com#helpdesk" target="_blank" rel="noopener"><i class="fa-solid fa-headset mr-1"></i> Help Desk &amp; Escalations</a>
+          <a href="directory.html"><i class="fa-solid fa-sitemap mr-1"></i> Division Directory</a>
+        </div>
+      </div>
+
+      <!-- Hidden / Collapsible SEO-Accessible Sitemap Block -->
+      <details class="mt-4 text-xs text-slate-400">
+        <summary class="cursor-pointer mono text-[#39ff14] uppercase tracking-wider font-semibold">
+          + BURN-1 Systems Commercial Sitemap &amp; Autonomous Division Index
+        </summary>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-3 p-4 rounded bg-black/60 border border-emerald-900/50 mono text-[11px]">
+          <div>
+            <div class="text-white font-bold mb-1">CORE COMMAND</div>
+            <ul class="space-y-1 list-none p-0 m-0">
+              <li><a href="index.html">burn-1.com (Main Hub)</a></li>
+              <li><a href="directory.html">Division Directory</a></li>
+              <li><a href="terms.html">Commercial Terms &amp; SLA</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-white font-bold mb-1">AUTONOMOUS DIVISIONS</div>
+            <ul class="space-y-1 list-none p-0 m-0">
+              <li><a href="freezer.html">freezer.burn-1.com (FreezerBurn)</a></li>
+              <li><a href="acid.html">acid.burn-1.com (Acid v1)</a></li>
+              <li><a href="acid-v2.html">acid.burn-1.com/v2 (Acid v2 UltraBar)</a></li>
+              <li><a href="times2.html">times2.burn-1.com (Times2)</a></li>
+              <li><a href="sizzlean.html">sizzlean.burn-1.com (Sizzlean)</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-white font-bold mb-1">B2B &amp; UNDERWRITING</div>
+            <ul class="space-y-1 list-none p-0 m-0">
+              <li><a href="msp-intake.html">MSP Partner Intake</a></li>
+              <li><a href="broker-portal.html">Insurance Broker Portal</a></li>
+              <li><a href="energy.html">Energy &amp; Critical Grid</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-white font-bold mb-1">ESCALATIONS &amp; LEDGER</div>
+            <ul class="space-y-1 list-none p-0 m-0">
+              <li><a href="https://tools.burn-1.com#helpdesk">Help Desk &amp; Escalations</a></li>
+              <li><a href="acid-v2.html#acid-v2-ultrabar-root">Step 7 SHA-256 Binder</a></li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+  </footer>
+
+  <!-- EMBEDDED REACT ULTRA BAR COMPONENT (EXACT MECHANICAL CUBIC-BEZIER, 160PX BACKBONE, 680PX SLIDING TRAY) -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Authentic 7 HazMat Phases for ACID Division
+    const HAZMAT_SHELVES = [
+      {
+        id: 'step-1',
+        stepNum: 'STEP 01',
+        name: 'BATCH INTAKE',
+        progress: '15%',
+        volNum: 85,
+        code: 'HAZ-ENV-01',
+        subtitle: 'Plant Physical Location, Binding Jurisdiction & Hazard Envelope ($49–$150)',
+        actionSummary: 'Enter plant physical location, binding jurisdiction, and select specific hazard envelope ($49–$150).',
+        ordinanceRef: '40 CFR § 262.11 — Hazardous Waste Determination & Facility EPA Registry',
+        checklist: [
+          'Plant GPS / Street Parcel & Municipal Drainage Basin ID Bound',
+          'State / Federal Binding Jurisdiction Selected (EPA Region IV / OSHA 1910)',
+          'Active Hazard Envelope Locked ($49 Drum Storage – $150 Full Bulk Tank Farm)'
+        ],
+        metrics: {
+          pressure: '14.7 PSI (NOMINAL)',
+          reagent: 'REAGENT-1 ARMED',
+          envelope: '$150 BULK HAZMAT TIER'
+        }
+      },
+      {
+        id: 'step-2',
+        stepNum: 'STEP 02',
+        name: 'PLUME RECON',
+        progress: '30%',
+        volNum: 88,
+        code: 'RECON-02',
+        subtitle: 'Reagent-1 OpenCode Browse: Municipal Zoning, Drainage Setbacks & Fire Codes',
+        actionSummary: 'Reagent-1 deploys OpenCode Browse: scraping municipal zoning, drainage setbacks, and local fire codes.',
+        ordinanceRef: 'NFPA 30 / IFC Chapter 50 — Hazardous Materials Setback & Stormwater Plume Vectors',
+        checklist: [
+          'Municipal Zoning & Heavy Industrial Parcel Overlay Scraped',
+          'Stormwater Outfall & 100-Foot Culvert Drainage Setback Mapped',
+          'Local Fire Marshal HazMat Placard & Hydrant Flow Code Extracted'
+        ],
+        metrics: {
+          pressure: '18.2 PSI (SCRAPING)',
+          reagent: 'OPENCODE BROWSE ACTIVE',
+          envelope: '3 MUNICIPAL CODES BOUND'
+        }
+      },
+      {
+        id: 'step-3',
+        stepNum: 'STEP 03',
+        name: 'CONTAINMENT AUDIT',
+        progress: '45%',
+        volNum: 90,
+        code: 'LOTO-SDS-03',
+        subtitle: 'Dynamic Digital Self-Attestation Checklist (LOTO, SDS, Bulk Tank Specs)',
+        actionSummary: 'System dynamically renders the digital self-attestation checklist based on active hazards (LOTO, SDS, tank specs).',
+        ordinanceRef: '29 CFR § 1910.147 (LOTO) & 29 CFR § 1910.1200 (Hazard Communication / SDS)',
+        checklist: [
+          'Lockout/Tagout (LOTO) Valve Isolation & Bleed Schedule Verified',
+          '16-Section SDS Binder Current Within 90 Days for All Corrosive Reagents',
+          'Bulk Double-Walled Polyethylene/Steel Tank Spec & Overfill Sensor Attested'
+        ],
+        metrics: {
+          pressure: '22.4 PSI (ATTESTING)',
+          reagent: 'CHECKLIST RENDERED',
+          envelope: '110% CAPACITY RULE'
+        }
+      },
+      {
+        id: 'step-4',
+        stepNum: 'STEP 04',
+        name: 'SECONDARY BERM LOGS',
+        progress: '65%',
+        volNum: 93,
+        code: 'BERM-IMG-04',
+        subtitle: 'Physical Evidence Photo Submission (Eyewash, Berms, Drum Tags)',
+        actionSummary: 'Plant operators submit physical evidence photos (eyewash, berms, drum tags) via drag-and-drop or direct mobile email reply.',
+        ordinanceRef: '40 CFR § 264.175 — Secondary Containment Sump & ANSI Z358.1 Eyewash Verification',
+        checklist: [
+          'Secondary Containment Berm Epoxy Integrity & Sump Drain Plug EXIF Photo Bound',
+          'ANSI Z358.1 Emergency Eyewash / Drench Shower Weekly Flush Tag Captured',
+          'UN-Rated Corrosive Drum Bung Seals & NFPA 704 Diamond Labels Uploaded'
+        ],
+        metrics: {
+          pressure: '26.9 PSI (INGESTING)',
+          reagent: 'EXIF HASH INGEST',
+          envelope: '4 ARTIFACTS QUEUED'
+        }
+      },
+      {
+        id: 'step-5',
+        stepNum: 'STEP 05',
+        name: 'CORROSION COLLISION',
+        progress: '80%',
+        volNum: 96,
+        code: 'COLLIDE-05',
+        subtitle: 'Physical Proof Pitted Against Scraped Municipal Ordinances & OSHA/EPA Rules',
+        actionSummary: 'Pits uploaded physical proof against scraped municipal ordinances and OSHA/EPA regulations.',
+        ordinanceRef: 'EPA EPCRA Tier II Cross-Examination vs. Physical Berm Volume Telemetry',
+        checklist: [
+          'Uploaded Berm Geometry Cross-Examined Against 110% Largest Vessel Rule',
+          'Eyewash Travel Distance (<10 Seconds / 55 Feet Unobstructed) Confirmed',
+          'Incompatible Acid / Caustic Segregation Wall Verified Against Fire Code'
+        ],
+        metrics: {
+          pressure: '31.5 PSI (COLLISION)',
+          reagent: 'DELTA MATCH 99.4%',
+          envelope: 'ZERO ORDINANCE DRIFT'
+        }
+      },
+      {
+        id: 'step-6',
+        stepNum: 'STEP 06',
+        name: 'CAUSTIC TRIAGE',
+        progress: '90%',
+        volNum: 98,
+        code: 'TRIAGE-06',
+        subtitle: 'Automated Gap-Check & Targeted Email Nudge on Blurry Photos / Setback Violations',
+        actionSummary: 'Automated gap-check; fires targeted email nudge if photos are blurry or setbacks are violated.',
+        ordinanceRef: 'BURN-1 BIND Doctrine — Pre-Seal Optical Clarity & Setback Variance Triage',
+        checklist: [
+          'Optical Blur & Metadata Tamper Scan Passed (300 DPI Tag Legibility)',
+          'Setback Boundary Variance Cleared (Zero Stormwater Grate Encroachment)',
+          'Automated Operator Nudge Channel Verified Standby (No Remediation Blocking)'
+        ],
+        metrics: {
+          pressure: '34.8 PSI (PRE-SEAL)',
+          reagent: 'GAP-CHECK PASSED',
+          envelope: 'READY FOR BURN'
+        }
+      },
+      {
+        id: 'step-7',
+        stepNum: 'STEP 07',
+        name: 'CHEMICAL BURN',
+        progress: '100%',
+        volNum: 100,
+        code: 'BURN-SEAL-07',
+        subtitle: 'Official Machine-Verified Timestamp & 4-System Backend Dispatch Pipeline',
+        actionSummary: 'Stamped with the official Machine-Verified Timestamp; triggers full backend state updates (Subdomain, Email, Google Sheets, Obsidian).',
+        ordinanceRef: 'Algorithmic Cryptographic SHA-256 Seal // Immutable Underwriter Evidence Binder',
+        checklist: [
+          'Client Subdomain Updated: {client}.burn-1.com/evidence HTML Dossier Published',
+          'Automated Email Dispatch: Official PDF Dossier + Machine Verification Certificate',
+          'Internal Google Sheets Queue: division_queue.csv Updated to STATUS: SEALED',
+          'Obsidian Local Vault Sync: Appended to /Vault/Evidence-Runs/ACID-RUN-[ID].md'
+        ],
+        metrics: {
+          pressure: '40.0 PSI (SEALED)',
+          reagent: 'SHA-256 LOCKED',
+          envelope: '4-SYSTEM DISPATCH'
+        }
+      }
+    ];
+
+    function AcidUltraBarApp() {
+      // Exact mechanical state machine from leonsultrabar.html
+      const [isMainExpanded, setIsMainExpanded] = useState(true);
+      const [activeTrayId, setActiveTrayId] = useState('step-1');
+      const [expandedAccordionId, setExpandedAccordionId] = useState('step-1');
+      const [completedTasks, setCompletedTasks] = useState({});
+      const [isFullyComplete, setIsFullyComplete] = useState(false);
+      const [animatingTask, setAnimatingTask] = useState(null);
+
+      // Interactive inputs inside the tray
+      const [plantLocation, setPlantLocation] = useState('SECTOR-7G // HOUSTON SHIP CHANNEL PARCEL #4409');
+      const [jurisdiction, setJurisdiction] = useState('EPA REGION 6 // OSHA 29 CFR 1910 // IFC CH. 50');
+      const [hazardEnvelope, setHazardEnvelope] = useState('$150 — BULK CORROSIVE TANK FARM & SECONDARY BERM');
+      const [clientSlug, setClientSlug] = useState('apex-chemical');
+      const [runId] = useState('ACID-RUN-2026-0941');
+      const [sealTimestamp, setSealTimestamp] = useState('2026-11-13T20:42:19.804Z');
+      const [shaHash, setShaHash] = useState('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+      const [nudgeStatus, setNudgeStatus] = useState(null);
+
+      // Exact layout constants from leonsultrabar.html
+      const HEADER_HEIGHT = 48;
+      const SHELF_HEIGHT = 44;
+      const TRAY_WIDTH = 680;
+      const EASING = 'cubic-bezier(0.16, 1, 0.3, 1)';
+
+      const completedCount = Object.values(completedTasks).filter(Boolean).length;
+
+      // Sync hero .acid-tube-liquid and .acid-tube-label with Ultra Bar progress / Step 7 completion
+      useEffect(() => {
+        const liquidEl = document.getElementById('hero-acid-tube-liquid');
+        const labelEl = document.getElementById('hero-acid-tube-label');
+        const badgeEl = document.getElementById('hero-acid-state-badge');
+
+        if (!liquidEl || !labelEl || !badgeEl) return;
+
+        if (isFullyComplete || completedTasks['step-7']) {
+          liquidEl.style.width = '100%';
+          liquidEl.style.background = 'linear-gradient(90deg, #059669 0%, #00FF66 50%, #a7f3d0 100%)';
+          liquidEl.style.boxShadow = '0 0 28px rgba(0, 255, 102, 0.95)';
+          labelEl.textContent = '100% ACID VOL // CHEMICAL BURN SEALED';
+          badgeEl.textContent = 'PHASE TELEMETRY: 100% SEALED (4-SYSTEM DISPATCH COMPLETE)';
+          badgeEl.style.color = '#00FF66';
+        } else {
+          // Base is 85% ACID VOL per prompt; increases up to 98% across steps 1-6
+          const bonus = Math.min(13, completedCount * 2);
+          const pct = 85 + bonus;
+          liquidEl.style.width = pct + '%';
+          liquidEl.style.background = '';
+          liquidEl.style.boxShadow = '';
+          labelEl.textContent = pct + '% ACID VOL';
+          badgeEl.textContent = `PHASE TELEMETRY: ${completedCount}/7 HAZMAT PHASES VERIFIED (${pct}% ACID VOL)`;
+          badgeEl.style.color = '#f59e0b';
+        }
+      }, [completedTasks, isFullyComplete, completedCount]);
+
+      // Toggle vertical backbone
+      const handleMainToggle = () => {
+        if (isMainExpanded) {
+          setExpandedAccordionId(null);
+          setTimeout(() => {
+            setActiveTrayId(null);
+            setTimeout(() => setIsMainExpanded(false), 200);
+          }, 200);
+        } else {
+          setIsMainExpanded(true);
+        }
+      };
+
+      // Click shelf on 160px backbone -> slide out 680px tray
+      const handleShelfClick = (id) => {
+        if (activeTrayId === id) {
+          setExpandedAccordionId(null);
+          setTimeout(() => setActiveTrayId(null), 250);
+        } else {
+          setExpandedAccordionId(null);
+          setActiveTrayId(id);
+          // Auto-open vertical accordion smoothly after horizontal slide starts
+          setTimeout(() => setExpandedAccordionId(id), 180);
+        }
+      };
+
+      // Toggle vertical accordion inside the 680px tray
+      const handleTrayToggleAccordion = (id, e) => {
+        if (e) e.stopPropagation();
+        if (expandedAccordionId === id) {
+          setExpandedAccordionId(null);
+        } else {
+          setExpandedAccordionId(id);
+        }
+      };
+
+      // Complete an individual HazMat phase
+      const handleCompleteStep = (id, e) => {
+        if (e) e.stopPropagation();
+        setAnimatingTask(id);
+
+        const nowIso = new Date().toISOString();
+        setSealTimestamp(nowIso);
+
+        setTimeout(() => {
+          const updated = { ...completedTasks, [id]: true };
+          setCompletedTasks(updated);
+          setAnimatingTask(null);
+
+          // If Step 7 (CHEMICAL BURN) is completed or all 7 steps are done, trigger full completion
+          const idx = HAZMAT_SHELVES.findIndex(s => s.id === id);
+          if (id === 'step-7' || Object.values(updated).filter(Boolean).length === HAZMAT_SHELVES.length) {
+            const allDone = {};
+            HAZMAT_SHELVES.forEach(s => { allDone[s.id] = true; });
+            setCompletedTasks(allDone);
+            setIsFullyComplete(true);
+            setShaHash('9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
+          } else if (idx >= 0 && idx + 1 < HAZMAT_SHELVES.length) {
+            // Advance smoothly to the next HazMat shelf
+            const nextId = HAZMAT_SHELVES[idx + 1].id;
+            setActiveTrayId(nextId);
+            setExpandedAccordionId(nextId);
+          }
+        }, 420);
+      };
+
+      // Instant Step 7 Chemical Burn Trigger button
+      const handleTriggerChemicalBurn = () => {
+        setAnimatingTask('step-7');
+        const nowIso = new Date().toISOString();
+        setSealTimestamp(nowIso);
+        setIsMainExpanded(true);
+        setActiveTrayId('step-7');
+        setExpandedAccordionId('step-7');
+
+        setTimeout(() => {
+          const allDone = {};
+          HAZMAT_SHELVES.forEach(s => { allDone[s.id] = true; });
+          setCompletedTasks(allDone);
+          setAnimatingTask(null);
+          setIsFullyComplete(true);
+          setShaHash('7c4a8d09ca3762af61e59520943dc26494f8941b8f2c9a63a0e49e6b9c881f42');
+        }, 500);
+      };
+
+      // Reset lifecycle
+      const handleResetAudit = () => {
+        setCompletedTasks({});
+        setIsFullyComplete(false);
+        setNudgeStatus(null);
+        setIsMainExpanded(true);
+        setActiveTrayId('step-1');
+        setExpandedAccordionId('step-1');
+      };
+
+      const activeShelfIndex = HAZMAT_SHELVES.findIndex(s => s.id === activeTrayId);
+      const activeShelf = HAZMAT_SHELVES[activeShelfIndex] || null;
+      const isAccordionOpen = expandedAccordionId === activeTrayId && activeShelf !== null;
+
+      return (
+        <div>
+          {/* TOP CONTROL BAR FOR ULTRA BAR */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6 p-4 rounded-lg bg-[#0b130c]/90 border border-[#39ff14]/30">
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="bio-caution-plate">
+                <i className="fa-solid fa-bars-progress"></i> REACT ULTRA BAR // 7-PHASE HAZMAT LIFECYCLE
+              </span>
+              <span className="mono text-xs text-emerald-300/90">
+                BACKBONE: <strong className="text-[#39ff14]">160px</strong> | TRAY: <strong className="text-[#39ff14]">680px</strong> | EASING: <strong className="text-[#39ff14]">cubic-bezier(0.16, 1, 0.3, 1)</strong>
+              </span>
+            </div>
+            <div className="flex items-center gap-3 flex-wrap">
+              <button
+                type="button"
+                onClick={handleTriggerChemicalBurn}
+                className="acid-btn-activate"
+              >
+                <i className="fa-solid fa-fire-flame-Simple mr-2"></i>
+                EXECUTE STEP 7 CHEMICAL BURN (100%)
+              </button>
+              <button
+                type="button"
+                onClick={handleResetAudit}
+                className="acid-btn-abort"
+              >
+                <i className="fa-solid fa-rotate-left mr-1"></i> RESET STAGES
+              </button>
+            </div>
+          </div>
+
+          {/* MAIN WORKSPACE: LEFT/CENTER ULTRA BAR (160px + 680px) + RIGHT TELEMETRY VIALS */}
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+
+            {/* ULTRA BAR STAGE (8 COLUMNS ON XL) */}
+            <div className="xl:col-span-9 ultrabar-stage-scroll">
+              <div
+                className="relative select-none"
+                style={{
+                  minWidth: '860px',
+                  minHeight: isAccordionOpen ? '790px' : '460px',
+                  transition: `min-height 500ms ${EASING}`
+                }}
+              >
+                {/* 1. TOP HEADER BOX (160px wide x 48px high) */}
+                <button
+                  type="button"
+                  onClick={handleMainToggle}
+                  style={{
+                    width: '160px',
+                    height: `${HEADER_HEIGHT}px`,
+                    transition: `all 300ms ${EASING}`
+                  }}
+                  className={`relative z-30 flex items-center justify-between px-4 rounded-t-lg bg-[#121418] border ${
+                    isFullyComplete
+                      ? 'border-[#00FF66]/60 shadow-[0_0_20px_rgba(0,255,102,0.25)]'
+                      : 'border-[#2A2F38] shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
+                  } hover:border-[#39ff14] focus:outline-none group`}
+                >
+                  <div className="flex items-center space-x-2">
+                    <span className="mono text-[11px] font-bold tracking-[0.2em] text-slate-200 group-hover:text-white">
+                      {isFullyComplete ? 'SEALED' : 'HAZMAT-7'}
+                    </span>
+                    <span className="mono text-[10px] text-[#39ff14]">
+                      [{completedCount}/7]
+                    </span>
+                  </div>
+
+                  {/* Status X / Check Indicator */}
+                  <div className="flex items-center justify-center w-6 h-6 rounded bg-[#08090C] border border-[#1F232B]">
+                    {isFullyComplete ? (
+                      <i className="fa-solid fa-check text-[#00FF66] text-xs drop-shadow-[0_0_8px_rgba(0,255,102,0.9)]"></i>
+                    ) : (
+                      <i className="fa-solid fa-xmark text-[#FF2A4D] text-xs drop-shadow-[0_0_8px_rgba(255,42,77,0.85)]"></i>
+                    )}
+                  </div>
+                </button>
+
+                {/* 2. VERTICAL ACCORDION BACKBONE (160px wide) */}
+                <div
+                  style={{
+                    width: '160px',
+                    maxHeight: isMainExpanded ? `${HAZMAT_SHELVES.length * SHELF_HEIGHT + 36}px` : '0px',
+                    opacity: isMainExpanded ? 1 : 0,
+                    transition: `max-height 500ms ${EASING}, opacity 400ms ${EASING}`
+                  }}
+                  className="relative z-20 overflow-hidden bg-[#0E1014] border-x border-b border-[#2A2F38] rounded-b-lg shadow-[0_20px_50px_rgba(0,0,0,0.95)]"
+                >
+                  {HAZMAT_SHELVES.map((shelf) => {
+                    const isSelected = activeTrayId === shelf.id;
+                    const isCompleted = !!completedTasks[shelf.id];
+                    const isAnimating = animatingTask === shelf.id;
+
+                    return (
+                      <button
+                        key={shelf.id}
+                        type="button"
+                        onClick={() => handleShelfClick(shelf.id)}
+                        style={{
+                          height: `${SHELF_HEIGHT}px`,
+                          transition: `all 220ms ${EASING}`
+                        }}
+                        className={`w-full flex items-center justify-between px-3 border-b border-[#1C2026] text-left group focus:outline-none ${
+                          isSelected
+                            ? 'bg-[#19231b] text-[#39ff14]'
+                            : 'hover:bg-[#141916] text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        {/* Left Status Diode + Phase Name */}
+                        <div className="flex items-center space-x-2 min-w-0 pr-1">
+                          <span
+                            className={`w-2 h-2 rounded-full flex-shrink-0 transition-all duration-300 ${
+                              isCompleted
+                                ? 'bg-[#00FF66] shadow-[0_0_8px_#00FF66]'
+                                : isSelected
+                                ? 'bg-[#39ff14] shadow-[0_0_8px_#39ff14] animate-pulse'
+                                : isAnimating
+                                ? 'bg-amber-400 shadow-[0_0_10px_#f59e0b] animate-ping'
+                                : 'bg-slate-600 group-hover:bg-slate-400'
+                            }`}
+                          />
+                          <span className="mono text-[10px] font-bold tracking-wider truncate">
+                            {shelf.name}
+                          </span>
+                        </div>
+
+                        {/* Right Chevron */}
+                        <i
+                          className={`fa-solid fa-chevron-right text-[10px] transition-transform duration-300 ${
+                            isSelected ? 'translate-x-0.5 text-[#39ff14]' : 'text-slate-600 group-hover:text-slate-400'
+                          }`}
+                        ></i>
+                      </button>
+                    );
+                  })}
+
+                  {/* Base Cap with Diode (#FF2A4D incomplete -> solid #00FF66 on Step 7 completion) */}
+                  <div
+                    className="h-9 bg-[#090A0D] flex items-center justify-between px-3 border-t border-[#1C2026]"
+                    title="Base Cap Status Diode"
+                  >
+                    <span className="mono text-[9px] tracking-widest uppercase text-slate-400">
+                      {isFullyComplete ? 'SEALED // 100%' : 'CAP DIODE'}
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <div
+                        style={{
+                          backgroundColor: isFullyComplete ? '#00FF66' : '#FF2A4D',
+                          boxShadow: isFullyComplete ? '0 0 12px #00FF66' : '0 0 8px #FF2A4D'
+                        }}
+                        className="w-8 h-2 rounded-full transition-all duration-500"
+                      />
+                      {isFullyComplete && (
+                        <i className="fa-solid fa-check text-[10px] text-[#00FF66]"></i>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. HORIZONTAL SLIDING TRAY (680px wide) + 4. VERTICAL ACCORDION WORKSPACE */}
+                <div
+                  style={{
+                    left: '160px',
+                    top: activeShelfIndex >= 0 ? `${HEADER_HEIGHT + activeShelfIndex * SHELF_HEIGHT}px` : `${HEADER_HEIGHT}px`,
+                    width: activeTrayId && isMainExpanded ? `${TRAY_WIDTH}px` : '0px',
+                    opacity: activeTrayId && isMainExpanded ? 1 : 0,
+                    transition: `width 450ms ${EASING}, opacity 350ms ${EASING}, top 400ms ${EASING}`
+                  }}
+                  className="absolute z-10 overflow-hidden rounded-r-lg shadow-[20px_20px_60px_rgba(0,0,0,0.95)]"
+                >
+                  {activeShelf && (
+                    <div className="w-[680px] bg-[#121418] border-y border-r border-[#2A2F38] rounded-r-lg">
+                      {/* Horizontal Bar Header (44px high) */}
+                      <div
+                        onClick={(e) => handleTrayToggleAccordion(activeShelf.id, e)}
+                        style={{ height: `${SHELF_HEIGHT}px` }}
+                        className="flex items-center justify-between px-5 bg-gradient-to-r from-[#161c18] via-[#121615] to-[#121418] border-b border-[#22262E] cursor-pointer hover:bg-[#1A211C] transition-colors"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <span className="mono text-[11px] font-bold px-2 py-0.5 rounded bg-[#39ff14]/15 text-[#39ff14] border border-[#39ff14]/40">
+                            {activeShelf.stepNum} // {activeShelf.progress}
+                          </span>
+                          <span className="orbitron text-xs font-bold tracking-wider text-white">
+                            {activeShelf.name}
+                          </span>
+                          <span className="mono text-[10px] text-slate-400">
+                            [{activeShelf.code}]
+                          </span>
+                        </div>
+
+                        <div className="flex items-center space-x-3">
+                          <span className="mono text-[10px] tracking-widest uppercase text-emerald-400/90">
+                            {completedTasks[activeShelf.id] ? 'PHASE VERIFIED' : 'CLICK TO TOGGLE PANE'}
+                          </span>
+                          <i
+                            className={`fa-solid fa-chevron-down text-xs text-[#39ff14] transition-transform duration-300 ${
+                              isAccordionOpen ? 'rotate-180' : ''
+                            }`}
+                          ></i>
+                        </div>
+                      </div>
+
+                      {/* 4. VERTICAL ACCORDION WORKSPACE (Unfolds downward up to 550px) */}
+                      <div
+                        style={{
+                          maxHeight: isAccordionOpen ? '550px' : '0px',
+                          opacity: isAccordionOpen ? 1 : 0,
+                          transition: `max-height 500ms ${EASING}, opacity 400ms ${EASING}`
+                        }}
+                        className="overflow-y-auto ub-custom-scroll bg-[#0B0D10]/95 backdrop-blur-md"
+                      >
+                        <div className="p-6 space-y-5">
+                          {/* Caution Plate & Subtitle Header */}
+                          <div className="flex flex-wrap items-center justify-between gap-3">
+                            <span className="bio-caution-plate">
+                              <i className="fa-solid fa-flask"></i> {activeShelf.stepNum}: {activeShelf.name}
+                            </span>
+                            <span className="mono text-xs text-[#39ff14] bg-[#39ff14]/10 px-2.5 py-1 rounded border border-[#39ff14]/30">
+                              {activeShelf.ordinanceRef}
+                            </span>
+                          </div>
+
+                          {/* Radiation Callout Panel from burn1-components.css */}
+                          <div className="bio-panel-radiation">
+                            <div className="flex items-center justify-between">
+                              <span className="mono text-xs font-bold uppercase tracking-wider text-amber-400">
+                                <i className="fa-solid fa-radiation mr-1.5"></i>
+                                FACTORY MEANING &amp; EXACT ENGINE ACTION
+                              </span>
+                              <span className="mono text-[11px] text-[#39ff14] font-bold">
+                                TARGET VOL: {activeShelf.volNum}%
+                              </span>
+                            </div>
+                            <p className="text-xs text-slate-200 leading-relaxed m-0">
+                              {activeShelf.actionSummary}
+                            </p>
+                          </div>
+
+                          {/* STEP-SPECIFIC INTERACTIVE CONTROLS */}
+                          {activeShelf.id === 'step-1' && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4 rounded bg-black/60 border border-[#39ff14]/25">
+                              <div>
+                                <label className="block mono text-[10px] uppercase text-[#39ff14] mb-1">
+                                  Plant Physical Location &amp; Parcel
+                                </label>
+                                <input
+                                  type="text"
+                                  value={plantLocation}
+                                  onChange={(e) => setPlantLocation(e.target.value)}
+                                  className="acid-input-chevron w-full text-xs"
+                                />
+                              </div>
+                              <div>
+                                <label className="block mono text-[10px] uppercase text-[#39ff14] mb-1">
+                                  Binding Regulatory Jurisdiction
+                                </label>
+                                <input
+                                  type="text"
+                                  value={jurisdiction}
+                                  onChange={(e) => setJurisdiction(e.target.value)}
+                                  className="acid-input-chevron w-full text-xs"
+                                />
+                              </div>
+                              <div>
+                                <label className="block mono text-[10px] uppercase text-amber-400 mb-1">
+                                  Specific Hazard Envelope ($49–$150)
+                                </label>
+                                <select
+                                  value={hazardEnvelope}
+                                  onChange={(e) => setHazardEnvelope(e.target.value)}
+                                  className="acid-input-chevron w-full text-xs bg-[#09120a]"
+                                >
+                                  <option value="$49 — SINGLE DRUM PALLET & EYEWASH STATION">$49 — SINGLE DRUM PALLET &amp; EYEWASH STATION</option>
+                                  <option value="$99 — SECONDARY BERM + LOTO + SDS BINDER">$99 — SECONDARY BERM + LOTO + SDS BINDER</option>
+                                  <option value="$150 — BULK CORROSIVE TANK FARM & SECONDARY BERM">$150 — BULK CORROSIVE TANK FARM &amp; SECONDARY BERM</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label className="block mono text-[10px] uppercase text-emerald-400 mb-1">
+                                  Authenticated Client Vault Subdomain Slug
+                                </label>
+                                <input
+                                  type="text"
+                                  value={clientSlug}
+                                  onChange={(e) => setClientSlug(e.target.value)}
+                                  className="acid-input-chevron w-full text-xs"
+                                />
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Live Telemetry Metrics Strip */}
+                          <div className="grid grid-cols-3 gap-3">
+                            <div className="p-3 rounded bg-[#111613] border border-[#263129]">
+                              <div className="mono text-[10px] text-slate-400">LINE PRESSURE</div>
+                              <div className="mono text-xs font-bold text-[#39ff14] mt-0.5">{activeShelf.metrics.pressure}</div>
+                            </div>
+                            <div className="p-3 rounded bg-[#111613] border border-[#263129]">
+                              <div className="mono text-[10px] text-slate-400">ENGINE MODULE</div>
+                              <div className="mono text-xs font-bold text-amber-400 mt-0.5">{activeShelf.metrics.reagent}</div>
+                            </div>
+                            <div className="p-3 rounded bg-[#111613] border border-[#263129]">
+                              <div className="mono text-[10px] text-slate-400">ENVELOPE STATUS</div>
+                              <div className="mono text-xs font-bold text-white mt-0.5">{activeShelf.metrics.envelope}</div>
+                            </div>
+                          </div>
+
+                          {/* Checklist Verification Items */}
+                          <div className="space-y-2">
+                            <div className="mono text-[11px] uppercase tracking-wider text-slate-300 font-bold">
+                              UNDERWRITER BINDER CHECKLIST ATTESTATION:
+                            </div>
+                            {activeShelf.checklist.map((item, i) => (
+                              <div
+                                key={i}
+                                className="flex items-center justify-between p-2.5 rounded bg-[#0e1410] border border-[#39ff14]/20"
+                              >
+                                <div className="flex items-center space-x-2.5">
+                                  <i className={`fa-solid ${completedTasks[activeShelf.id] ? 'fa-square-check text-[#00FF66]' : 'fa-flask-vial text-[#39ff14]'} text-xs`}></i>
+                                  <span className="text-xs text-slate-200">{item}</span>
+                                </div>
+                                <span className="mono text-[10px] px-2 py-0.5 rounded bg-black/60 text-[#39ff14] border border-[#39ff14]/30">
+                                  {completedTasks[activeShelf.id] ? 'BOUND' : 'READY'}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Interactive Bio-Hazard Buttons (.bio-btn-panic-amber, .bio-btn-locked-red, .acid-btn-activate) */}
+                          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#222831]">
+                            <div className="flex items-center gap-2.5 flex-wrap">
+                              <button
+                                type="button"
+                                onClick={() => setNudgeStatus(`CAUSTIC TRIAGE NUDGE ARMED FOR ${activeShelf.name} (${new Date().toLocaleTimeString()})`)}
+                                className="bio-btn-panic-amber"
+                              >
+                                <i className="fa-solid fa-triangle-exclamation"></i>
+                                CAUSTIC TRIAGE NUDGE
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => setNudgeStatus(`CONTAINMENT LOCK ENGAGED // ORDINANCE HOLD VERIFIED`)}
+                                className="bio-btn-locked-red"
+                              >
+                                <i className="fa-solid fa-lock"></i>
+                                BERM LOCKDOWN OVERRIDE
+                              </button>
+                            </div>
+
+                            <button
+                              type="button"
+                              onClick={(e) => handleCompleteStep(activeShelf.id, e)}
+                              className="acid-btn-activate"
+                            >
+                              {animatingTask === activeShelf.id ? (
+                                <span><i className="fa-solid fa-spinner fa-spin mr-1.5"></i> BINDING TELEMETRY...</span>
+                              ) : completedTasks[activeShelf.id] ? (
+                                <span><i className="fa-solid fa-check-double mr-1.5"></i> {activeShelf.stepNum} SEALED</span>
+                              ) : activeShelf.id === 'step-7' ? (
+                                <span><i className="fa-solid fa-biohazard mr-1.5"></i> STAMP STEP 7 CHEMICAL BURN</span>
+                              ) : (
+                                <span><i className="fa-solid fa-bolt mr-1.5"></i> BIND &amp; ADVANCE PHASE</span>
+                              )}
+                            </button>
+                          </div>
+
+                          {nudgeStatus && (
+                            <div className="mono text-[11px] text-amber-300 bg-amber-950/40 border border-amber-500/40 px-3 py-2 rounded">
+                              <i className="fa-solid fa-satellite-dish mr-1.5"></i> {nudgeStatus}
+                            </div>
+                          )}
+
+                          {/* STEP 7 4-SYSTEM DISPATCH CONFIRMATION (Renders inside Step 7 or once completed) */}
+                          {(activeShelf.id === 'step-7' || isFullyComplete) && (
+                            <div className="p-4 rounded-lg bg-[#04140a] border-2 border-[#00FF66] shadow-[0_0_30px_rgba(0,255,102,0.2)] space-y-3">
+                              <div className="flex flex-wrap items-center justify-between gap-2">
+                                <div className="orbitron text-xs font-black tracking-wider text-[#00FF66] flex items-center gap-2">
+                                  <i className="fa-solid fa-certificate"></i>
+                                  {isFullyComplete
+                                    ? 'STEP 7 CHEMICAL BURN COMPLETE // 4-SYSTEM DISPATCH CONFIRMED'
+                                    : 'STEP 7 MULTI-SYSTEM DISPATCH PIPELINE (STANDBY)'}
+                                </div>
+                                <span className="mono text-[10px] px-2 py-0.5 rounded bg-[#00FF66]/20 text-[#00FF66] border border-[#00FF66]/50">
+                                  DIODE: #00FF66 SOLID
+                                </span>
+                              </div>
+
+                              <div className="mono text-[11px] text-emerald-200/90 bg-black/70 p-2.5 rounded border border-emerald-500/30 break-all">
+                                <div><strong>MACHINE-VERIFIED TIMESTAMP:</strong> {sealTimestamp}</div>
+                                <div><strong>ALGORITHMIC CRYPTOGRAPHIC SHA-256 SEAL:</strong> {shaHash}</div>
+                              </div>
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs">
+                                <div className="p-2.5 rounded bg-black/65 border border-[#00FF66]/40">
+                                  <div className="mono text-[10px] font-bold text-[#00FF66]">
+                                    1. CLIENT SUBDOMAIN UPDATED
+                                  </div>
+                                  <div className="mono text-[11px] text-white mt-0.5">
+                                    https://{clientSlug}.burn-1.com/evidence
+                                  </div>
+                                  <div className="text-[11px] text-slate-400">
+                                    Date-stamped HTML dossier published with SHA-256 seal.
+                                  </div>
+                                </div>
+
+                                <div className="p-2.5 rounded bg-black/65 border border-[#00FF66]/40">
+                                  <div className="mono text-[10px] font-bold text-[#00FF66]">
+                                    2. AUTOMATED EMAIL DISPATCH
+                                  </div>
+                                  <div className="mono text-[11px] text-white mt-0.5">
+                                    PDF Dossier + Machine Verification Cert
+                                  </div>
+                                  <div className="text-[11px] text-slate-400">
+                                    Dispatched to plant safety director &amp; underwriter desk.
+                                  </div>
+                                </div>
+
+                                <div className="p-2.5 rounded bg-black/65 border border-[#00FF66]/40">
+                                  <div className="mono text-[10px] font-bold text-[#00FF66]">
+                                    3. INTERNAL GOOGLE SHEETS QUEUE
+                                  </div>
+                                  <div className="mono text-[11px] text-white mt-0.5">
+                                    division_queue.csv → STATUS: SEALED
+                                  </div>
+                                  <div className="text-[11px] text-slate-400">
+                                    Logged timestamp, municipal ordinance citations &amp; hash.
+                                  </div>
+                                </div>
+
+                                <div className="p-2.5 rounded bg-black/65 border border-[#00FF66]/40">
+                                  <div className="mono text-[10px] font-bold text-[#00FF66]">
+                                    4. OBSIDIAN LOCAL VAULT SYNC
+                                  </div>
+                                  <div className="mono text-[11px] text-white mt-0.5">
+                                    /Vault/Evidence-Runs/{runId}.md
+                                  </div>
+                                  <div className="text-[11px] text-slate-400">
+                                    Appended immutable offline Markdown evidence record.
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN (3 COLUMNS ON XL): VERTICAL VIALS, PILL SLIDER & STATUS CARDS */}
+            <div className="xl:col-span-3 space-y-6">
+              <div className="acid-panel-hazard p-5 rounded-lg bg-[#0b130c]/95 border border-[#39ff14]/35">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="bio-caution-plate">REAGENT VIALS</span>
+                  <span className="mono text-xs text-[#39ff14] font-bold">
+                    {isFullyComplete ? '100% SEALED' : `${completedCount}/7 BOUND`}
+                  </span>
+                </div>
+
+                <div className="flex items-end justify-around py-4 bg-black/50 rounded border border-emerald-950">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="acid-vial-vertical">
+                      <div
+                        className="acid-vial-fill"
+                        style={{ height: isFullyComplete ? '100%' : `${85 + Math.min(14, completedCount * 2)}%` }}
+                      ></div>
+                    </div>
+                    <span className="mono text-[10px] text-[#39ff14]">H2SO4</span>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="acid-vial-vertical">
+                      <div
+                        className="acid-vial-fill"
+                        style={{ height: isFullyComplete ? '100%' : `${40 + completedCount * 8}%` }}
+                      ></div>
+                    </div>
+                    <span className="mono text-[10px] text-amber-400">NAOH</span>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="acid-vial-vertical">
+                      <div
+                        className="acid-vial-fill"
+                        style={{ height: isFullyComplete ? '100%' : `${Math.max(15, Math.round((completedCount / 7) * 100))}%` }}
+                      ></div>
+                    </div>
+                    <span className="mono text-[10px] text-emerald-300">SEAL</span>
+                  </div>
+                </div>
+
+                {/* Pill Slider */}
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mono text-[10px] text-slate-400 mb-1">
+                    <span>CONTAINMENT VALVE</span>
+                    <span className="text-[#39ff14]">{isFullyComplete ? 'LOCKED GREEN' : 'ARMED'}</span>
+                  </div>
+                  <div
+                    className="bio-pill-slider"
+                    onClick={handleTriggerChemicalBurn}
+                    title="Click to trigger Step 7 Chemical Burn"
+                  >
+                    <div
+                      className="bio-pill-knob"
+                      style={{
+                        left: isFullyComplete ? 'calc(100% - 42px)' : '6px',
+                        transition: 'left 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
+                      }}
+                    ></div>
+                    <div
+                      className="bio-pill-led-red"
+                      style={
+                        isFullyComplete
+                          ? { background: '#00FF66', boxShadow: '0 0 12px #00FF66' }
+                          : {}
+                      }
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Base Cap Diode Status Card */}
+              <div className="bio-panel-radiation">
+                <div className="flex items-center justify-between">
+                  <span className="mono text-xs font-bold text-amber-400">BASE CAP DIODE STATE</span>
+                  <span
+                    className="w-3 h-3 rounded-full"
+                    style={{
+                      backgroundColor: isFullyComplete ? '#00FF66' : '#FF2A4D',
+                      boxShadow: isFullyComplete ? '0 0 12px #00FF66' : '0 0 10px #FF2A4D'
+                    }}
+                  ></span>
+                </div>
+                <p className="mono text-[11px] text-slate-300 m-0">
+                  {isFullyComplete
+                    ? 'SOLID GREEN (#00FF66): Machine-Verified Timestamp sealed and 4-system dispatch pipeline executed.'
+                    : 'RED STANDBY (#FF2A4D): Complete Step 7 CHEMICAL BURN to lock SHA-256 diode to #00FF66.'}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('acid-v2-ultrabar-root'));
+    root.render(<AcidUltraBarApp />);
+  </script>
+
+  <!-- UNIFIED FLOATING BOT WIDGET (COSMO + RESIDENT BINDER) -->
+  <script src="cosmo-widget.js"></script>
+  <script src="js/division-bots.js"></script>
+</body>
+</html>

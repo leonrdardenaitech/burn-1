@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 Systems // Dual-Widget Auth & Guidance Console Prototype</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- React 18, ReactDOM & Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/burn1-components.css">
+
+  <style>
+    :root {
+      --ink: #05080f;
+      --acid-neon: #39ff14;
+      --fire-orange: #ff5500;
+      --steel-border: #52525b;
+    }
+
+    body {
+      background-color: #06090f;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 85, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(57, 255, 20, 0.05) 0%, transparent 40%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 4px);
+    }
+
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* =====================================================================
+       FLOATING TRIGGER: 3D ISOMETRIC STACK OF BOOKS
+       ===================================================================== */
+    .book-stack-trigger {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9990;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .book-stack-trigger:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+
+    .book-stack-icon {
+      width: 68px;
+      height: 68px;
+      background: radial-gradient(circle at 35% 30%, #27272a 0%, #12141a 100%);
+      border: 2px solid #ff5500;
+      border-radius: 18px;
+      box-shadow: 
+        0 10px 25px rgba(0,0,0,0.85),
+        0 0 20px rgba(255, 85, 0, 0.4),
+        inset 0 1px 1px rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Stack of Books Isometric Simulation */
+    .book-layer {
+      position: absolute;
+      width: 40px;
+      height: 10px;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    }
+    .book-layer-1 { bottom: 16px; background: #991b1b; border: 1px solid #ef4444; width: 44px; }
+    .book-layer-2 { bottom: 25px; background: #0f766e; border: 1px solid #14b8a6; width: 40px; }
+    .book-layer-3 { bottom: 34px; background: #ea580c; border: 1px solid #fb923c; width: 36px; }
+
+    /* =====================================================================
+       DUAL-WIDGET MODAL / DOCKED CONSOLE
+       ===================================================================== */
+    .dual-console-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .dual-console-card {
+      background: rgba(14, 18, 28, 0.92);
+      backdrop-filter: blur(20px);
+      border: 2px solid #52525b;
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      width: 100%;
+      max-width: 940px;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 2-Position Heavy Toggle Switch */
+    .toggle-rocker {
+      display: flex;
+      background: #090d14;
+      border: 2px solid #52525b;
+      border-radius: 8px;
+      padding: 3px;
+      gap: 4px;
+    }
+    .toggle-opt {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 0.05em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      color: #94a3b8;
+    }
+    .toggle-opt.active {
+      background: linear-gradient(180deg, #ea580c 0%, #9a3412 100%);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(234, 88, 12, 0.6);
+    }
+
+    /* Flame Monitor Animation */
+    .flame-pulse {
+      animation: flameBounce 1.2s infinite ease-in-out;
+    }
+    @keyframes flameBounce {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px #f97316); }
+      50% { transform: scale(1.15) translateY(-2px); filter: drop-shadow(0 0 18px #ff5500); }
+    }
+
+    /* Accordion Card Active Highlight */
+    .guidance-card {
+      background: rgba(18, 24, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .guidance-card.open {
+      border-color: #39ff14;
+      box-shadow: 0 0 18px rgba(57, 255, 20, 0.15);
+    }
+  </style>
+</head>
+<body class="p-6">
+
+  <!-- BACKGROUND PLACEHOLDER CONTENT TO SHOW DOCKING BEHAVIOR -->
+  <div class="max-w-5xl mx-auto space-y-6 opacity-70">
+    <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+      <h1 class="text-2xl font-black font-orbitron text-white">BURN-1 SYSTEMS // REHEARSAL PLAYGROUND</h1>
+      <p class="text-sm font-mono text-slate-400 mt-2">
+        Click the <strong>Stack of Books</strong> button in the bottom right corner to launch the dual-widget interactive console.
+      </p>
+    </div>
+  </div>
+
+  <!-- REACT ROOT -->
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const GUIDANCE_CHAPTERS = [
+      {
+        id: 'start',
+        tag: 'PHASE 01',
+        title: 'HOW DO I GET STARTED?',
+        subtitle: 'Initial 60-Second Outside-In Diagnostic & Scope Selection',
+        summary: 'Enter your apex corporate domain. Our non-intrusive automated engine probes public DNS TXT hygiene (DMARC, SPF, BIMI), perimeter web transport headers (HSTS, TLS 1.3, CSP), and scans for inadvertent management exposure (Port 3389 / 445) without installing software.',
+        steps: [
+          'Step 1: Enter your public domain (e.g., yourcompany.com)',
+          'Step 2: Non-intrusive 60-second passive radar query executes',
+          'Step 3: Receive your initial Decision Scorecard (0–100 CR index)'
+        ]
+      },
+      {
+        id: 'bot_walkthrough',
+        tag: 'PHASE 02',
+        title: 'BOT TELEMETRY & GATHERING WALKTHROUGH',
+        subtitle: 'Underwriter Evidence Gathering Logic & Defensible Citation',
+        summary: 'Following the strict BIND Doctrine: After payment, we bind. The scan is the binder—the gathering tool that aggregates defensible evidence cited against public, federal, and international sources (NIST SP 800-82, CISA KEV, OSHA, EPA). It does not guess or summarize; it binds authentic proof.',
+        steps: [
+          'Passive Radar Scrape: Municipal zoning, drainage, and domain routing',
+          'Underwriter Checklist Mapping: Direct correlation to insurance criteria',
+          'Cryptographic SHA-256 Hashing: Immutable timestamped receipt issued'
+        ]
+      },
+      {
+        id: 'binder_seal',
+        tag: 'PHASE 03',
+        title: 'HOW TO RECEIVE & VERIFY YOUR BINDER',
+        subtitle: 'Standard Turnaround SLA & Cryptographic Proof Receipt',
+        summary: 'Delivered within standard business turnaround up to 5 business days. Once validated, your evidence dossier is sealed with an Algorithmic Cryptographic SHA-256 Seal and published to your designated subdomain or dispatched via encrypted carrier receipt.',
+        steps: [
+          'SLA Window: Delivered within 5 business days',
+          'Cryptographic Seal: SHA-256 hash published to ledger',
+          'Access Route: Pinned to your dedicated subdomain or finance review portal'
+        ]
+      }
+    ];
+
+    function DualWidgetConsole() {
+      const [isOpen, setIsOpen] = useState(true); // Open by default for preview
+      const [targetRoute, setTargetRoute] = useState('dashboard'); // 'dashboard' or 'payment'
+      const [email, setEmail] = useState('');
+      const [passphrase, setPassphrase] = useState('');
+      const [isLoading, setIsLoading] = useState(false);
+      const [loadingMessage, setLoadingMessage] = useState('');
+      const [activeChapter, setActiveChapter] = useState('start');
+      const [domeAlert, setDomeAlert] = useState(false);
+
+      // Handle Authentication / Routing Dispatch
+      const handleAuthDispatch = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        if (targetRoute === 'payment') {
+          setLoadingMessage('INITIALIZING SECURE CHECKOUT // ROUTING TO CINEMATIC INTAKE...');
+          setTimeout(() => {
+            window.location.href = 'cinematic-onboarding.html';
+          }, 1800);
+        } else {
+          // Dashboard route: Check for client subdomain fallback to finance.html
+          setLoadingMessage('AUTHENTICATING ACCESS KEY // SCANNING SUBDOMAIN RESERVATION...');
+          setTimeout(() => {
+            // Per user rule: If no dedicated subdomain, route to finance.html
+            const hasSubdomain = false; // Mock test condition
+            if (hasSubdomain) {
+              window.location.href = 'https://client.burn-1.com';
+            } else {
+              window.location.href = 'finance.html';
+            }
+          }, 1800);
+        }
+      };
+
+      // Emergency Dome Trigger (Red Palm E-Stop Button)
+      const handleDomePush = () => {
+        setDomeAlert(true);
+        setTimeout(() => {
+          window.open('https://tools.burn-1.com#helpdesk', '_blank');
+          setDomeAlert(false);
+        }, 600);
+      };
+
+      return (
+        <div>
+          {/* =================================================================
+              FLOATING TRIGGER: 3D ISOMETRIC STACK OF BOOKS
+              ================================================================= */}
+          {!isOpen && (
+            <div 
+              className="book-stack-trigger"
+              onClick={() => setIsOpen(true)}
+              title="Open BURN-1 Systems Resident Knowledge & Auth Kiosk"
+            >
+              <div className="book-stack-icon">
+                <div className="book-layer book-layer-1"></div>
+                <div className="book-layer book-layer-2"></div>
+                <div className="book-layer book-layer-3"></div>
+                <i className="fa-solid fa-book-bookmark text-white text-xs relative z-10 -top-3"></i>
+              </div>
+              <span className="font-mono text-[10px] font-extrabold uppercase tracking-wider text-amber-400 bg-black/80 px-2 py-0.5 rounded border border-amber-500/40">
+                BINDER KIOSK
+              </span>
+            </div>
+          )}
+
+          {/* =================================================================
+              DUAL-WIDGET MODAL / DOCKED DUAL PANEL
+              ================================================================= */}
+          {isOpen && (
+            <div className="dual-console-backdrop" onClick={() => setIsOpen(false)}>
+              <div 
+                className="dual-console-card p-5 sm:p-7 space-y-6"
+                onClick={(e) => e.stopPropagation()}
+              >
+                
+                {/* CONSOLE TOP HEADER */}
+                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-white shadow-lg">
+                      <i className="fa-solid fa-layer-group text-lg"></i>
+                    </div>
+                    <div>
+                      <div className="font-orbitron font-black text-lg text-white flex items-center gap-2">
+                        BURN-1 SYSTEMS <span className="text-orange-500">// DUAL-WIDGET CONSOLE</span>
+                      </div>
+                      <div className="text-[11px] font-mono text-slate-400">
+                        Widget A: Fire Security Auth &amp; Dispatch • Widget B: Resident Guidance Kiosk
+                      </div>
+                    </div>
+                  </div>
+
+                  <button 
+                    onClick={() => setIsOpen(false)}
+                    className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white flex items-center justify-center font-mono transition"
+                    title="Close Console"
+                  >
+                    &times;
+                  </button>
+                </div>
+
+                {/* 2-COLUMN SPLIT GRID (SIDE-BY-SIDE ON DESKTOP, STACKED ON MOBILE) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                  
+                  {/* =========================================================
+                      WIDGET A: FIRE SECURITY AUTH & NAVIGATION (5 Cols)
+                      ========================================================= */}
+                  <div className="lg:col-span-5 fire-module-box !p-5 !justify-start !gap-4">
+                    
+                    <div className="w-full flex items-center justify-between border-b border-zinc-700 pb-2">
+                      <span className="font-orbitron text-xs font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <i className="fa-solid fa-shield-halved"></i> WIDGET A: AUTH &amp; DISPATCH
+                      </span>
+                      <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold">
+                        SECURE GATEWAY
+                      </span>
+                    </div>
+
+                    {/* 2-Position Heavy Toggle Switch (Addressing Critique A: Clear Discrete Routing) */}
+                    <div className="w-full space-y-1.5">
+                      <label className="text-[10px] font-mono text-slate-400 uppercase font-bold flex justify-between">
+                        <span>STAGE SELECTOR:</span>
+                        <span className="text-orange-400">{targetRoute === 'dashboard' ? 'DEST: FINANCE / DASHBOARD' : 'DEST: CINEMATIC INTAKE'}</span>
+                      </label>
+                      <div className="toggle-rocker">
+                        <button
+                          type="button"
+                          onClick={() => setTargetRoute('dashboard')}
+                          className={`toggle-opt ${targetRoute === 'dashboard' ? 'active' : ''}`}
+                        >
+                          <i className="fa-solid fa-chart-line mr-1"></i> DASHBOARD / HOME
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setTargetRoute('payment')}
+                          className={`toggle-opt ${targetRoute === 'payment' ? 'active' : ''}`}
+                        >
+                          <i className="fa-solid fa-credit-card mr-1"></i> MAKE PAYMENT
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Auth Form with Fire-Bordered Inputs */}
+                    <form onSubmit={handleAuthDispatch} className="w-full space-y-3">
+                      <div>
+                        <div className="fire-label-plate mb-1 !text-left !px-2">CORPORATE OR CLIENT EMAIL</div>
+                        <input 
+                          type="email" 
+                          required 
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="< exec@organization.com | ⚠ >"
+                          className="w-full p-2.5 rounded bg-black/80 border-2 border-zinc-600 font-mono text-xs text-white focus:border-orange-500 outline-none"
+                        />
+                      </div>
+
+                      <div>
+                        <div className="fire-label-plate mb-1 !text-left !px-2">ACCESS KEY / PASSPHRASE</div>
+                        <input 
+                          type="password" 
+                          required 
+                          value={passphrase}
+                          onChange={(e) => setPassphrase(e.target.value)}
+                          placeholder="< •••••••••••••••• | ⚠ >"
+                          className="w-full p-2.5 rounded bg-black/80 border-2 border-zinc-600 font-mono text-xs text-white focus:border-orange-500 outline-none"
+                        />
+                      </div>
+
+                      {/* Flame Cathode Monitor: Shows Live State & Bouncing Flame During Load */}
+                      <div className="fire-screen-flame !min-h-[76px] p-2">
+                        {isLoading ? (
+                          <div className="flex flex-col items-center justify-center gap-1">
+                            <i className="fa-solid fa-fire text-2xl text-orange-500 flame-pulse"></i>
+                            <span className="font-mono text-[9px] text-amber-300 font-extrabold uppercase tracking-widest text-center px-2">
+                              {loadingMessage}
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-3">
+                            <i className="fa-solid fa-fire text-2xl text-orange-500"></i>
+                            <div className="text-left font-mono">
+                              <div className="text-[11px] text-orange-400 font-bold">FLAME MONITOR: ARMED</div>
+                              <div className="text-[9px] text-slate-400">Target: {targetRoute === 'dashboard' ? 'Client Subdomain / finance.html' : 'cinematic-onboarding.html'}</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Force Override Action Bar */}
+                      <button 
+                        type="submit" 
+                        disabled={isLoading}
+                        className="fire-btn-override w-full !py-3 flex items-center justify-center gap-2"
+                      >
+                        <i className="fa-solid fa-bolt"></i>
+                        <span>{targetRoute === 'dashboard' ? 'AUTHENTICATE & ENTER DASHBOARD' : 'DISPATCH TO PAYMENT INTAKE'}</span>
+                        <i className="fa-solid fa-arrow-right"></i>
+                      </button>
+                    </form>
+
+                  </div>
+
+                  {/* =========================================================
+                      WIDGET B: LIVE ESCALATIONS & RESIDENT KNOWLEDGE KIOSK (7 Cols)
+                      ========================================================= */}
+                  <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
+                    
+                    {/* Top Strip: Giant Red Dome (Addressing Critique B: Guarded Escalations E-Stop) */}
+                    <div className="p-4 rounded-xl bg-zinc-900 border-2 border-zinc-700 flex items-center justify-between gap-4">
+                      <div className="space-y-0.5">
+                        <div className="font-orbitron font-black text-xs text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+                          <i className="fa-solid fa-triangle-exclamation"></i> EMERGENCY TRIAGE &amp; ESCALATIONS
+                        </div>
+                        <p className="text-[11px] font-mono text-slate-400">
+                          Direct link to human operator support desk: <strong className="text-white">tools.burn-1.com#helpdesk</strong>
+                        </p>
+                      </div>
+
+                      {/* Giant Red Dome Button */}
+                      <div className="flex flex-col items-center shrink-0">
+                        <button
+                          type="button"
+                          onClick={handleDomePush}
+                          className="fire-dome-red !w-14 !h-14"
+                          title="Click for Emergency Help Desk Escalations"
+                        ></button>
+                        <span className="text-[8px] font-mono text-rose-400 font-extrabold mt-1 uppercase">
+                          {domeAlert ? 'DISPATCHING...' : 'PUNCH DOME'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Resident Guidance Accordion (Stack of Books Reader) */}
+                    <div className="space-y-2.5 flex-1">
+                      <div className="flex items-center justify-between pb-1">
+                        <span className="font-mono text-xs font-black text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                          <i className="fa-solid fa-book-open"></i> RESIDENT GUIDANCE ACCORDION (EVIDENCE BINDERS)
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-400">Click card to expand</span>
+                      </div>
+
+                      {GUIDANCE_CHAPTERS.map((ch) => {
+                        const isOpenCard = activeChapter === ch.id;
+                        return (
+                          <div 
+                            key={ch.id} 
+                            className={`guidance-card ${isOpenCard ? 'open' : ''}`}
+                          >
+                            {/* Card Accordion Bar */}
+                            <div 
+                              onClick={() => setActiveChapter(isOpenCard ? null : ch.id)}
+                              className="p-3.5 flex items-center justify-between cursor-pointer select-none bg-black/40 hover:bg-black/60 transition"
+                            >
+                              <div className="flex items-center gap-3">
+                                <span className={`text-[10px] font-mono font-black px-2 py-0.5 rounded ${
+                                  isOpenCard ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-400'
+                                }`}>
+                                  {ch.tag}
+                                </span>
+                                <div>
+                                  <div className="font-orbitron font-extrabold text-xs text-white">
+                                    {ch.title}
+                                  </div>
+                                  <div className="text-[10px] font-mono text-slate-400">
+                                    {ch.subtitle}
+                                  </div>
+                                </div>
+                              </div>
+                              <i className={`fa-solid fa-chevron-down text-xs transition-transform ${isOpenCard ? 'rotate-180 text-emerald-400' : 'text-slate-500'}`}></i>
+                            </div>
+
+                            {/* Accordion Expandable Body */}
+                            {isOpenCard && (
+                              <div className="p-4 border-t border-white/10 space-y-3 font-mono text-xs bg-slate-950/60">
+                                <p className="text-slate-300 text-xs leading-relaxed">
+                                  {ch.summary}
+                                </p>
+                                <div className="space-y-1.5 pt-1">
+                                  {ch.steps.map((st, i) => (
+                                    <div key={i} className="flex items-start gap-2 text-slate-400 text-[11px]">
+                                      <i className="fa-solid fa-check text-emerald-400 text-[10px] mt-0.5"></i>
+                                      <span>{st}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Mandatory Governance Notice */}
+                    <div className="p-2.5 rounded bg-black/60 border border-zinc-800 text-[10px] font-mono text-slate-400">
+                      <strong>BIND Doctrine:</strong> After payment, we bind — gathering defensible evidence cited against federal public sources. Delivered within standard turnaround up to 5 business days.
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<DualWidgetConsole />);
+  </script>
+</body>
+</html>

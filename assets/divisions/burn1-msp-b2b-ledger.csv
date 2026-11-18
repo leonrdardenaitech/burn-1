@@ -1,0 +1,3 @@
+UTC Timestamp,Entity Name,Perimeter Domain,Framework,Instrument Tier,SHA-256 Seal Reference,Lifecycle State
+"2026-11-05 21:14:08 UTC","Apex Logistics Group","apex-freight-sys.com","NIST CSF 2.0 (8-Page Proof)","Portfolio 15 ($5,000/yr)","SHA256-8F41C20B-91A4","APPROVED_SEALED"
+"2026-11-05 18:42:51 UTC","Covenant Surgical Partners","covenant-surgical.org","NIST CSF 2.0 + HIPAA Security Rule","Portfolio 5 ($2,500/yr)","SHA256-3E92D71A-44C0","APPROVED_SEALED"

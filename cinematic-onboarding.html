@@ -172,6 +172,8 @@
             </div>
             <p class="text-base font-bold text-slate-600 leading-relaxed">Establish or verify your operator credentials to unlock your full Anergi Mini S.P.A. diagnostic results.</p>
             <div class="space-y-4">
+                <!-- Honeypot Bot Trap -->
+                <input type="text" name="b1_security_trap" id="modal-security-trap" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none; width: 0; height: 0;" aria-hidden="true">
                 <div>
                     <label class="block font-black mb-2 text-sm text-[#2A081C] uppercase tracking-wide">Work Email Address</label>
                     <input type="email" id="modal-form-email" class="clinic-input font-bold text-base" placeholder="admin@yourcompany.com">
@@ -832,6 +834,10 @@
 
         function closeScanModal() { document.getElementById('scan-auth-modal').classList.add('hidden'); }
         function submitScanModalAuth() {
+            if (document.getElementById('modal-security-trap')?.value) {
+                closeScanModal();
+                return;
+            }
             const modalEmail = document.getElementById('modal-form-email').value.trim();
             const modalPass = document.getElementById('modal-form-password').value.trim();
             if (!modalEmail || !modalPass) {

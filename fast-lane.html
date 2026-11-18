@@ -1,447 +1,768 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Burn-1 Fast Lane — Upload Existing Evidence, Algorithmic Cryptographic SHA-256 Seal</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BURN-1 FAST LANE // SECTOR 4 DROP ZONE → HQ • Turning 90 Days Into Minutes</title>
+
+  <!-- Google Fonts: Orbitron, Rajdhani, JetBrains Mono, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800;900&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            b1Purple: '#8B5CF6',
+            b1NeonPurple: '#C084FC',
+            b1DeepViolet: '#17042B',
+            b1Silver: '#E2E8F0',
+            b1DarkSilver: '#64748B',
+            b1Emerald: '#00FF87',
+            b1Gold: '#FBBF24',
+          },
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+            rajdhani: ['Rajdhani', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Burn-1 Master Component Stylesheet -->
+  <link rel="stylesheet" href="css/burn1-components.css" />
 
   <style>
-    :root { --ink:#0f172a; --paper:#d8dee6; --cyan:#06b6d4; --pink:#D92B8A; --violet:#a855f7; }
+    /* =========================================================================
+       BURN-1 PURPLE & HEAVY LIQUID SILVER RACING UI (ACCESSIBILITY & LOW BRAIN FRY)
+       ========================================================================= */
+    :root {
+      --chrome-light: #f8fafc;
+      --chrome-mid: #cbd5e1;
+      --chrome-dark: #334155;
+      --neon-violet: #c084fc;
+      --deep-violet: #0d0218;
+      --silver-glow: rgba(226, 232, 240, 0.45);
+      --violet-glow: rgba(192, 132, 252, 0.55);
+    }
+
     body {
+      background-color: var(--deep-violet);
+      color: #f8fafc;
       font-family: 'Inter', sans-serif;
-      background-color: var(--paper);
-      background-image:
-        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.92) 0%, rgba(226,232,240,0.88) 48%, rgba(186,196,210,0.95) 100%),
-        repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0px, rgba(255,255,255,0.18) 1px, transparent 1px, transparent 12px);
-      background-attachment: fixed;
-      color: var(--ink);
-    }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-    .grey-unibar {
-      background: linear-gradient(180deg,#e2e8f0 0%,#cbd5e1 55%,#b8c4d4 100%);
-      border-bottom: 2px solid #64748b;
-      box-shadow: 0 6px 20px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.9);
-    }
-    .grey-unibar-sub {
-      background: linear-gradient(180deg,#cbd5e1 0%,#94a3b8 100%);
-      border-top: 1px solid rgba(255,255,255,0.65);
-      border-bottom: 2px solid #475569;
-    }
-    .nav-pill-idle {
-      background: linear-gradient(180deg,#f8fafc 0%,#cbd5e1 100%);
-      color: #0f172a; border: 1px solid #64748b;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 #ffffff;
-    }
-    .nav-pill-idle:hover { background: linear-gradient(180deg,#ffffff 0%,#e2e8f0 100%); transform: translateY(-1px); }
-    .nav-pill-active {
-      background: linear-gradient(180deg,#0f172a 0%,#1e293b 100%);
-      color: #38bdf8; border: 1px solid #38bdf8;
-      box-shadow: 0 0 12px rgba(56,189,248,0.45);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Fast Lane Styles */
-    .fl-badge {
-      width: 72px; height: 72px; border-radius: 9999px; object-fit: cover;
-      border: 3px solid #2A081C;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.25);
-      filter: grayscale(1) opacity(0.45);
-      transition: all .35s ease; cursor: pointer;
-    }
-    .fl-badge.earned { filter: none; border-color: #D92B8A; box-shadow: 0 0 0 3px rgba(217,43,138,0.25), 0 10px 26px rgba(217,43,138,0.35); }
-    .fl-badge.earned:hover { transform: translateY(-3px) scale(1.04); }
-    .fl-input {
-      width: 100%; padding: .85rem 1rem;
-      border: 2px solid #C4D4E0; border-radius: 12px;
-      font-size: .95rem; font-weight: 700; color: #2A081C;
-      background: #F8FAFC; outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease;
-    }
-    .fl-input:focus { border-color: #D92B8A; box-shadow: 0 0 0 4px rgba(217,43,138,0.12); }
-    .fl-upload {
-      border: 2px dashed #C4D4E0; border-radius: 14px;
-      padding: 1.25rem; text-align: center;
-      background: #F8FAFC; cursor: pointer;
-      transition: border-color .2s ease, background .2s ease;
-    }
-    .fl-upload:hover, .fl-upload.dragover { border-color: #D92B8A; background: #FFF5FA; }
-    .fl-upload input { display: none; }
-    .fl-step-dot {
-      width: 26px; height: 26px; border-radius: 9999px;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 800;
-      background: #E6E0F8; color: #522d8a;
-    }
-    .fl-step-dot.done { background: #10b981; color: #fff; }
-    .fl-step-dot.active { background: #2A081C; color: #fff; }
+    /* Accessibility high contrast rules */
+    .text-body-bright { color: #ffffff !important; }
+    .text-body-silver { color: #e2e8f0 !important; }
 
-    .fl-modal-backdrop {
-      position: fixed; inset: 0; z-index: 80;
-      background: rgba(0,0,0,0.78); backdrop-filter: blur(6px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 1rem;
+    /* Top Caution Racing Banner */
+    .racing-top-banner {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(192, 132, 252, 0.2) 0px,
+        rgba(192, 132, 252, 0.2) 18px,
+        rgba(13, 2, 24, 0.95) 18px,
+        rgba(13, 2, 24, 0.95) 36px
+      );
+      border-bottom: 2px solid #c084fc;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.85);
     }
-    .fl-modal-backdrop.hidden { display: none; }
-    .fl-modal-card {
-      background: #fff; border-radius: 24px; max-width: 520px; width: 100%;
-      border: 4px solid #2A081C;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-      padding: 1.75rem; position: relative;
+
+    /* Heavy Liquid Silver Beveled Card */
+    .silver-cockpit-box {
+      background: linear-gradient(180deg, #18052e 0%, #0d0218 100%);
+      border: 2px solid #475569;
+      border-radius: 20px;
+      box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.35),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.8),
+        0 15px 35px rgba(0, 0, 0, 0.85);
+      position: relative;
+    }
+    .silver-cockpit-box::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px; right: 6px; bottom: 6px;
+      border: 1px dashed rgba(192, 132, 252, 0.25);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    /* Shell Dropzone Background Skin (from uploaded image fastlane_silver_shell_dropzone.jpg) */
+    .silver-shell-dropzone-frame {
+      position: relative;
+      background: url('assets/fastlane_silver_shell_dropzone.jpg') center/cover no-repeat;
+      border-radius: 24px;
+      border: 3px solid #cbd5e1;
+      box-shadow:
+        0 0 30px rgba(192, 132, 252, 0.4),
+        inset 0 0 20px rgba(0,0,0,0.6);
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem;
+      overflow: hidden;
+    }
+    .silver-shell-dropzone-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(13, 2, 24, 0.35) 0%, rgba(13, 2, 24, 0.75) 100%);
+      pointer-events: none;
+    }
+
+    /* The Purple Capsule Search & Drop Input within Shell */
+    .shell-capsule-input-wrap {
+      position: relative;
+      z-index: 10;
+      background: #0d0218;
+      border: 3px solid #a855f7;
+      border-radius: 9999px;
+      padding: 0.6rem 1.5rem;
+      box-shadow:
+        0 0 25px rgba(168, 85, 247, 0.5),
+        inset 0 3px 8px rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .shell-capsule-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      width: 100%;
+    }
+    .shell-capsule-input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* 3D Silver Metallic Buttons */
+    .btn-silver-chrome {
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 45%, #94a3b8 100%);
+      border: 2px solid #ffffff;
+      color: #0f172a;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 12px;
+      padding: 0.9rem 1.8rem;
+      box-shadow:
+        0 6px 0 #475569,
+        0 12px 25px rgba(0,0,0,0.6),
+        inset 0 2px 4px #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .btn-silver-chrome:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 45%, #cbd5e1 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 #475569, 0 15px 30px rgba(255,255,255,0.4);
+    }
+    .btn-silver-chrome:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #475569, 0 4px 8px rgba(0,0,0,0.5);
+    }
+
+    /* Racing Hazard Button */
+    .btn-racing-hazard {
+      background: repeating-linear-gradient(
+        -45deg,
+        #2e0854,
+        #2e0854 12px,
+        #581c87 12px,
+        #581c87 24px
+      );
+      border: 2px solid #c084fc;
+      color: #ffffff;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      box-shadow: 0 0 25px rgba(192, 132, 252, 0.45);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .btn-racing-hazard:hover {
+      border-color: #ffffff;
+      box-shadow: 0 0 35px rgba(192, 132, 252, 0.85);
+      transform: scale(1.02);
+    }
+
+    /* UltraBar Dynamic State (Greyed out -> Glowing Neon Purple upon input) */
+    .ultrabar-container-fastlane {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ultrabar-container-fastlane.state-greyed {
+      filter: grayscale(1) opacity(0.35);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+    .ultrabar-container-fastlane.state-active {
+      filter: grayscale(0) opacity(1);
+      pointer-events: auto;
+      border-color: #c084fc !important;
+      box-shadow: 0 0 40px rgba(192, 132, 252, 0.4), inset 0 0 20px rgba(192, 132, 252, 0.2);
+    }
+
+    /* Chrome Gauges */
+    .chrome-gauge-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #0d0218 45%, #1f0836 70%, #cbd5e1 95%, #ffffff 100%);
+      border: 3px solid #c084fc;
+      box-shadow: 0 0 20px rgba(192, 132, 252, 0.4), inset 0 0 12px rgba(0,0,0,0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Video Frame Container */
+    .video-media-frame {
+      border: 3px solid #cbd5e1;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(192, 132, 252, 0.3);
+      position: relative;
+    }
+
+    /* Status Bar Strip */
+    .status-strip-pill {
+      background: #08010f;
+      border: 2px solid #a855f7;
+      border-radius: 9999px;
+      padding: 0.4rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col relative">
+<body>
 
-  <!-- REUSED HEADER & NAV FROM INDEX -->
-  <header class="grey-unibar sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
+  <!-- TOP RACING HAZARD BANNER -->
+  <header class="racing-top-banner py-3 px-6 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
-        <div>
-          <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
-          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Accelerating Systems • <span class="text-[#D92B8A] font-bold">Automated Posture Exposure</span></div>
-        </div>
+        <i class="fa-solid fa-flag-checkered text-purple-300 text-xl"></i>
+        <span class="font-orbitron font-black text-white text-base tracking-wider uppercase">
+          BURN-1 FAST LANE // SECTOR 4 DROP ZONE &rarr; CARRIER HQ
+        </span>
+        <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-purple-900 border border-purple-400 text-purple-200 text-xs font-mono font-bold">
+          90 DAYS COMPRESSED TO MINUTES
+        </span>
       </div>
-      <div class="flex flex-wrap items-center gap-2">
-        <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
-        <a href="fast-lane.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Fast Lane →</a>
-        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Guided Intake</a>
-      </div>
-    </div>
-    <div class="grey-unibar-sub">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
-        <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
-        <a href="central-hub.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Central Hub</a>
-        <a href="partners.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Partners</a>
-        <a href="fast-lane.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
-        <a href="healthcare.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
-        <a href="finance.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Finance</a>
-        <a href="defense.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense</a>
-        <a href="manufacturing.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Manufacturing</a>
-        <a href="retail.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
-        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
+      <div class="flex items-center gap-3 font-mono text-xs font-bold text-slate-300">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-emerald-400">INGEST HOPPER: READY</span>
+        <span>|</span>
+        <span class="text-purple-300">ALG SHA-256 SEAL BOUND</span>
       </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 relative z-10">
+  <!-- 1. HERO TITLE & SLOGAN -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6 text-center space-y-4">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/80 border-2 border-purple-400 text-purple-300 font-mono text-xs font-bold uppercase tracking-widest">
+      <i class="fa-solid fa-bolt text-yellow-300"></i> High-Speed Evidentiary Pipeline • Zero Back-and-Forth
+    </div>
+    
+    <h1 class="text-4xl sm:text-6xl font-black font-orbitron tracking-tight text-white uppercase">
+      BURN-1 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-sky-300 to-white">FAST LANE</span>
+    </h1>
 
-    <!-- HERO (70vh with assets/sportscar.mp4) -->
-    <section class="relative rounded-3xl overflow-hidden bg-slate-950 text-white border-2 border-slate-700 shadow-2xl mb-10 h-[70vh] min-h-[480px] flex items-center justify-center">
-      <video src="assets/sportscar.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none mix-blend-screen"></video>
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-900/40 z-10"></div>
-      <div class="relative z-20 text-center px-4 sm:px-6 max-w-4xl mx-auto flex flex-col items-center">
-        <span class="px-4 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 ring-1 ring-[#f26522] text-cyan-300 text-[10px] font-mono uppercase tracking-widest mb-4">Burn-1 Systems • Rapid Evidence Verification</span>
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4">
-          Burn-1 <span class="text-[#f26522]">Fast Lane</span>
-        </h1>
-        <p class="text-slate-300 text-base sm:text-xl font-medium max-w-2xl leading-relaxed">
-          Upload what you have. We verify, seal with Anergi.io, and post the receipt to your subdomain.
+    <p class="text-xl sm:text-2xl font-bold font-sans text-slate-200 max-w-3xl mx-auto leading-relaxed">
+      Turning 90 Days of Underwriter Friction Into Moments of Verified Defense.
+    </p>
+
+    <p class="text-sm font-mono text-purple-300 max-w-2xl mx-auto">
+      Dump your raw policy spreadsheets, perimeter scans, and missing documents into the hopper. The engine extracts, maps to carrier questionnaires, and flags missing gaps on the fly.
+    </p>
+  </section>
+
+  <!-- 2. CENTERED SECTION: SYSTEM PIPELINE IMAGE NEXT TO YOUTUBE EXPLAINER VIDEO -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      
+      <!-- LEFT: Pipeline Architecture Infographic -->
+      <div class="silver-cockpit-box p-6 flex flex-col justify-between space-y-4">
+        <div>
+          <div class="flex items-center justify-between border-b border-purple-900/60 pb-3 mb-4">
+            <span class="font-orbitron font-black text-lg text-white">SYSTEM PIPELINE ARCHITECTURE</span>
+            <span class="font-mono text-xs text-purple-300 font-bold bg-purple-950 px-2 py-0.5 rounded border border-purple-500">MOD-09</span>
+          </div>
+          <div class="video-media-frame">
+            <img 
+              src="assets/system_pipelines_funnel.jpg" 
+              alt="Burn-1 System Pipelines Funnel" 
+              class="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+        <div class="p-3 bg-black/80 rounded-xl border border-purple-500/30 font-mono text-xs text-slate-300 flex items-center justify-between">
+          <span class="text-purple-300 font-bold">STAGE 1: INTAKE</span>
+          <span class="text-sky-300 font-bold">&rarr; STAGE 2: CARRIER MAP</span>
+          <span class="text-emerald-400 font-bold">&rarr; STAGE 3: CRYPTO SEAL</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Layman's YouTube Video Explainer (Embedded from URL) -->
+      <div class="silver-cockpit-box p-6 flex flex-col justify-between space-y-4">
+        <div>
+          <div class="flex items-center justify-between border-b border-purple-900/60 pb-3 mb-4">
+            <span class="font-orbitron font-black text-lg text-white">SYSTEM OPERATIONAL OVERVIEW</span>
+            <span class="font-mono text-xs text-emerald-400 font-bold bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500">VIDEO</span>
+          </div>
+          <div class="video-media-frame aspect-video bg-black">
+            <iframe 
+              class="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/RzsDap3xwYE?rel=0&modestbranding=1" 
+              title="Burn-1 Video Overview" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <p class="text-xs font-mono text-slate-300 leading-relaxed">
+          Watch how unvetted corporate infrastructure is transformed into carrier-defensible evidence so underwriters don't delay renewals or add policy exclusions.
         </p>
       </div>
-    </section>
 
-    <!-- TWO-COLUMN LAYOUT: 5-STEP FLOW + FULL FORM -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+    </div>
+  </section>
 
-      <!-- LEFT: 5-step flow -->
-      <div class="relative rounded-3xl overflow-hidden border-2 border-[#E6E0F8] shadow-lg bg-slate-950 flex flex-col justify-between">
-        <div class="absolute inset-0 bg-gradient-to-br from-[#2A081C]/95 via-[#2A081C]/85 to-[#05070d]/90"></div>
-        <div class="relative z-10 p-6 sm:p-8 text-white">
-          <span class="font-mono text-[10px] uppercase tracking-widest text-amber-400 font-bold block mb-2">VERIFICATION PROTOCOL</span>
-          <h2 class="text-2xl font-black uppercase tracking-tight text-white mb-6">How Fast Lane Works</h2>
-          <ol class="space-y-5">
-            <li class="flex items-start gap-3.5">
-              <span class="fl-step-dot active shrink-0 mt-0.5">1</span>
-              <div>
-                <div class="font-black text-base text-white">Upload what you have</div>
-                <div class="text-sm text-slate-300 mt-0.5">Binder, scan output, questionnaire, MFA/backup exports — whatever exists. If it's a folder, zip it.</div>
-              </div>
-            </li>
-            <li class="flex items-start gap-3.5">
-              <span class="fl-step-dot shrink-0 mt-0.5">2</span>
-              <div>
-                <div class="font-black text-base text-white">AI prefills the template</div>
-                <div class="text-sm text-slate-300 mt-0.5">Your uploads are mapped to the Burn-1 binder template for your framework. No blank page.</div>
-              </div>
-            </li>
-            <li class="flex items-start gap-3.5">
-              <span class="fl-step-dot shrink-0 mt-0.5">3</span>
-              <div>
-                <div class="font-black text-base text-white">System verifies completeness</div>
-                <div class="text-sm text-slate-300 mt-0.5">We check that every required control has evidence. You get an expected release time, not a "we'll be in touch."</div>
-              </div>
-            </li>
-            <li class="flex items-start gap-3.5">
-              <span class="fl-step-dot shrink-0 mt-0.5">4</span>
-              <div>
-                <div class="font-black text-base text-white">Outside-In Exposure Audit → Algorithmic Cryptographic SHA-256 Seal</div>
-                <div class="text-sm text-slate-300 mt-0.5">Agentless Perimeter Telemetry validates the binder. Then Anergi.io signs the Algorithmic Cryptographic SHA-256 Seal.</div>
-              </div>
-            </li>
-            <li class="flex items-start gap-3.5">
-              <span class="fl-step-dot shrink-0 mt-0.5">5</span>
-              <div>
-                <div class="font-black text-base text-white">Receipt on your subdomain</div>
-                <div class="text-sm text-slate-300 mt-0.5">The sealed binder and 8-page report post to <span class="font-mono text-cyan-400">yourcompany.burn-1.com</span>. Your carrier verifies it there.</div>
-              </div>
-            </li>
-          </ol>
-
-          <div class="mt-8 p-4 rounded-xl bg-amber-100/10 border-2 border-amber-400/50">
-            <div class="text-xs font-mono uppercase tracking-widest text-amber-300 font-black mb-1">Expected turnaround</div>
-            <div class="text-sm text-slate-200 font-semibold">Delivered within standard business turnaround up to 5 business days.</div>
-          </div>
+  <!-- 3. UNDER: SHELL DROP ZONE (fastlane_silver_shell_dropzone.jpg) + CUSTOMER INPUT FIELD -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div class="silver-shell-dropzone-frame">
+      
+      <!-- Top Title inside Shell -->
+      <div class="relative z-10 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="font-mono text-xs text-purple-300 font-black tracking-widest uppercase">HARDWARE INTAKE INTERFACE</span>
+          <h2 class="font-orbitron font-black text-2xl sm:text-3xl text-white">THE SECTOR 4 DROP HOPPER</h2>
+        </div>
+        <div class="status-strip-pill text-emerald-400">
+          <i class="fa-solid fa-circle-check"></i> PIPELINE READY FOR PAYLOAD
         </div>
       </div>
 
-      <!-- RIGHT: Full Fast Lane form -->
-      <div id="fastlane-form-card" class="bg-[#2A081C] rounded-3xl border-2 border-[#D92B8A] p-6 sm:p-8 shadow-2xl text-white">
-        <h2 class="text-2xl font-black uppercase tracking-tight mb-1">Start your Fast Lane upload</h2>
-        <p class="text-sm text-slate-300 font-semibold mb-5">5 fields. One upload. No account required to submit.</p>
-
-        <form id="fastlane-form" class="space-y-4" onsubmit="submitFastLane(event)">
-          <div>
-            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Work email</label>
-            <input required type="email" name="email" class="fl-input" placeholder="you@company.com">
-          </div>
-          <div>
-            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Company domain</label>
-            <input required type="text" name="domain" class="fl-input" placeholder="yourcompany.com">
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Carrier</label>
-              <input type="text" name="carrier" class="fl-input" placeholder="e.g. Travelers, Chubb">
-            </div>
-            <div>
-              <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Framework</label>
-              <select name="framework" class="fl-input">
-                <option value="">Select…</option>
-                <option>HIPAA</option>
-                <option>HITRUST</option>
-                <option>PCI DSS</option>
-                <option>NYDFS Part 500</option>
-                <option>CMMC 2.0</option>
-                <option>NIST 800-171</option>
-                <option>SOC 2</option>
-                <option>Other / not sure</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Renewal date</label>
-            <input type="date" name="renewal" class="fl-input">
-          </div>
-
-          <div>
-            <label class="block font-mono text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-1">Existing evidence</label>
-            <label class="fl-upload block" id="fastlane-drop">
-              <input type="file" name="files" multiple accept=".pdf,.doc,.docx,.zip,.json,.csv,.png,.jpg,.jpeg" onchange="onFastLaneFiles(this)">
-              <div class="text-3xl text-[#D92B8A] mb-1"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-              <div class="text-sm font-black text-[#2A081C]">Click or drop files here</div>
-              <div class="text-[11px] font-mono text-slate-500 mt-1">PDF, DOCX, ZIP, JSON, CSV, images. Up to 25 MB.</div>
-            </label>
-            <div id="fastlane-file-list" class="mt-2 text-[11px] font-mono text-slate-300 space-y-1"></div>
-          </div>
-
-          <p class="text-[11px] font-mono text-slate-400 leading-relaxed">
-            Submitting opens a pre-filled email to hello@burn-1.com with your details and a request to attach the files. Until the upload endpoint is live, that's the handoff — no data is sent anywhere else.
-          </p>
-
-          <button type="submit" class="w-full py-3.5 bg-[#f26522] hover:bg-[#d95316] text-white font-black text-sm uppercase tracking-widest rounded-xl shadow-lg transition-all">
-            Request Fast Lane review →
-          </button>
-        </form>
-
-        <div id="fastlane-result" class="hidden mt-4 p-4 rounded-xl bg-emerald-950 border-2 border-emerald-400 text-emerald-100 text-sm font-mono"></div>
+      <!-- Center: Massive File Drop Zone Prompt -->
+      <div 
+        id="shellDropArea" 
+        onclick="document.getElementById('shellFileInput').click()"
+        class="relative z-10 my-8 p-8 border-2 border-dashed border-purple-300/60 bg-black/60 hover:bg-black/80 rounded-2xl text-center cursor-pointer transition-all duration-300"
+      >
+        <input type="file" id="shellFileInput" multiple class="hidden" onchange="handleShellFileDump(this.files)" />
+        <div class="w-16 h-16 rounded-2xl bg-purple-900/60 border-2 border-purple-400 flex items-center justify-center text-3xl text-white mx-auto mb-3 shadow-[0_0_20px_#c084fc]">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <div class="font-orbitron font-black text-xl text-white">
+          DUMP POLICY DOCS, NETWORK CSVs, OR SPREADSHEETS HERE
+        </div>
+        <p class="font-mono text-xs text-slate-300 mt-2">
+          Accepts multi-file batches (.PDF, .CSV, .JSON, .DOCX, .PNG). Raw dumps will be automatically parsed.
+        </p>
+        <div id="fileStagedIndicator" class="hidden mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900 border border-emerald-400 text-emerald-200 font-mono text-xs font-bold">
+          <i class="fa-solid fa-check"></i> <span id="fileStagedCountText">3 Files Staged</span>
+        </div>
       </div>
+
+      <!-- Bottom: The Customer Target Input Field (Search & Input Capsule) -->
+      <div class="relative z-10 space-y-3">
+        <label class="block font-mono text-xs uppercase tracking-wider text-purple-200 font-bold">
+          <i class="fa-solid fa-network-wired mr-1"></i> Customer Primary Domain or Company Identifier (Triggers UltraBar)
+        </label>
+        
+        <div class="shell-capsule-input-wrap">
+          <input 
+            type="text" 
+            id="targetDomainInput" 
+            placeholder="Enter Primary Domain (e.g. corp.clientmfg.com or acme.org)..." 
+            oninput="handleDomainInput(this.value)"
+            class="shell-capsule-input"
+          />
+          <button onclick="activateUltraBarManually()" class="text-purple-300 hover:text-white text-xl cursor-pointer">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <span class="text-[11px] font-mono text-slate-400 block text-center">
+          Typing domain or dumping files immediately activates the greyed-out Remediation UltraBar below.
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. UNDER: GREYED-OUT ULTRABAR THAT ACTIVATES GLOWING NEON PURPLE UPON INPUT -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    
+    <div id="remediationUltraBarContainer" class="silver-cockpit-box p-6 sm:p-8 space-y-8 ultrabar-container-fastlane state-greyed">
+      
+      <!-- UltraBar Header -->
+      <div class="flex flex-wrap items-center justify-between border-b border-purple-500/40 pb-4 gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 font-mono text-xs text-purple-400 font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-sliders"></i> PIT STOP REMEDIATION CONSOLE
+          </div>
+          <h3 class="font-orbitron font-black text-2xl text-white mt-1">
+            THE FAST LANE EVIDENCE BINDER ULTRABAR
+          </h3>
+        </div>
+        <div class="flex items-center gap-3">
+          <span id="ultraStatusLabel" class="font-mono text-xs font-bold px-3 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+            LOCKED // ENTER DOMAIN ABOVE
+          </span>
+          <button onclick="sendMidstageWebhook()" class="btn-silver-chrome text-xs py-2 px-4">
+            <i class="fa-solid fa-cloud-bolt text-purple-700"></i> SAVE PROGRESS WEBHOOK
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Interactive Progress Bar -->
+      <div class="space-y-2">
+        <div class="flex justify-between font-mono text-xs font-bold text-purple-300">
+          <span id="ultraProgressPhaseText">COLLECTION PHASE: AWAITING DISPATCH</span>
+          <span id="ultraProgressPctText">0% READY</span>
+        </div>
+        <div class="h-6 bg-black/90 border border-purple-500/60 rounded-full p-1 shadow-inner">
+          <div id="ultraProgressFill" class="h-full bg-gradient-to-r from-purple-600 via-fuchsia-500 to-sky-300 rounded-full transition-all duration-700" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- 3-Column Cockpit: What's Collected vs. What's Needed vs. Telemetry -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+        
+        <!-- Col 1: What Collected -->
+        <div class="p-5 rounded-2xl bg-black/80 border border-slate-700 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <span class="font-orbitron font-bold text-sm text-white">COLLECTED ASSETS</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          </div>
+          <div class="space-y-2 font-mono text-xs text-slate-300" id="collectedItemsList">
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Primary Domain DNS Resolved</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Public MX & TLS 1.3 Cipher Verified</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> OFAC / SDN Screening Clean</div>
+          </div>
+        </div>
+
+        <!-- Col 2: What's Needed (Remediation Checklist) -->
+        <div class="p-5 rounded-2xl bg-black/80 border border-purple-500/50 space-y-4">
+          <div class="flex items-center justify-between border-b border-purple-900 pb-2">
+            <span class="font-orbitron font-bold text-sm text-purple-300">MISSING REMEDIATIONS</span>
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          </div>
+          <div class="space-y-2 font-mono text-xs" id="remediationChecklist">
+            <label class="flex items-center gap-2 p-2 rounded bg-purple-950/40 border border-purple-800 cursor-pointer">
+              <input type="checkbox" id="chkKillSwitch" onchange="updateUltraBarProgress()" class="w-4 h-4 accent-purple-500" />
+              <span class="text-white">Human Kill-Switch Operator Named</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded bg-purple-950/40 border border-purple-800 cursor-pointer">
+              <input type="checkbox" id="chkDataProvenance" onchange="updateUltraBarProgress()" class="w-4 h-4 accent-purple-500" />
+              <span class="text-white">Data Provenance & Tenant Boundary Bound</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded bg-purple-950/40 border border-purple-800 cursor-pointer">
+              <input type="checkbox" id="chkDeepfakeVoice" onchange="updateUltraBarProgress()" class="w-4 h-4 accent-purple-500" />
+              <span class="text-white">Deepfake-Resistant Wire Sign-off</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Col 3: Telemetry Speedometer & HQ Push -->
+        <div class="p-5 rounded-2xl bg-black/80 border border-slate-700 flex flex-col justify-between space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="chrome-gauge-ring mx-auto">
+              <span id="dialSpeedText" class="font-orbitron font-black text-sm text-purple-300">0 MPH</span>
+              <span class="text-[8px] font-mono text-slate-400">SPEED</span>
+            </div>
+            <div class="chrome-gauge-ring mx-auto">
+              <span id="dialYieldText" class="font-orbitron font-black text-sm text-emerald-400">100%</span>
+              <span class="text-[8px] font-mono text-slate-400">ACCURACY</span>
+            </div>
+          </div>
+          
+          <button 
+            id="btnFinalPushHQ" 
+            onclick="triggerPushToHQ()" 
+            class="btn-racing-hazard w-full text-xs py-3 justify-center"
+          >
+            <i class="fa-solid fa-flag-checkered mr-2"></i> FINAL PUSH TO HQ &rarr;
+          </button>
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- BADGES SHOWCASE -->
-    <div class="mb-12 bg-white rounded-3xl border-2 border-[#E6E0F8] p-6 sm:p-8 shadow-lg max-w-6xl mx-auto">
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
-        <div>
-          <h3 class="text-sm font-mono uppercase tracking-widest text-slate-500">Operator badges</h3>
-          <p class="text-lg font-black text-[#2A081C] uppercase tracking-tight">Operator badges earned in the Academy</p>
+  </section>
+
+
+
+  <!-- 6. MSP VOLUME CALCULATOR WITH SAME HERO VIDEO CAR IN BACKGROUND -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+    <div class="silver-cockpit-box p-8 relative overflow-hidden">
+      
+      <!-- Video Background (sportscar.mp4) inside MSP Section -->
+      <div class="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+          <source src="assets/sportscar.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="relative z-10 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-700 pb-4">
+          <div>
+            <span class="font-mono text-xs text-purple-400 font-bold uppercase tracking-widest">WHOLESALE TREASURY</span>
+            <h3 class="font-orbitron font-black text-2xl text-white">MSP VOLUME DISCOUNT CALCULATOR & TIMERS</h3>
+          </div>
+          <span class="font-mono text-xs px-3 py-1 rounded bg-purple-950 border border-purple-400 text-purple-300 font-bold">
+            PARTNER WHOLESALE MATRIX
+          </span>
         </div>
-        <button type="button" onclick="openBadgeModal()" class="px-4 py-2 bg-[#2A081C] hover:bg-[#522d8a] text-amber-400 font-mono text-xs font-bold uppercase tracking-widest rounded-lg transition-all">
-          View all badges →
+
+        <!-- Slider -->
+        <div class="space-y-3 max-w-2xl">
+          <div class="flex justify-between items-center font-mono">
+            <span class="text-sm font-bold text-slate-200 uppercase">Number of Client Domains:</span>
+            <span id="mspSliderCountText" class="text-2xl font-black font-orbitron text-purple-300">10 Domains</span>
+          </div>
+          <input 
+            type="range" 
+            id="mspRangeSlider" 
+            min="1" 
+            max="100" 
+            value="10" 
+            oninput="updateMspCalculator(this.value)"
+            class="w-full h-3 bg-black rounded-lg appearance-none cursor-pointer accent-purple-400"
+          />
+          <div class="flex justify-between text-xs font-mono text-slate-400">
+            <span>1 Single ($500)</span>
+            <span>10 ($350 ea - 30% Off)</span>
+            <span>25 ($250 ea)</span>
+            <span>50+ Wholesale Tier ($175 ea)</span>
+          </div>
+        </div>
+
+        <!-- Calculated Matrix Table -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
+          <div class="p-4 bg-black/80 rounded-xl border border-slate-800 space-y-1">
+            <div class="text-slate-400">Effective Rate / Domain</div>
+            <div id="mspEffectiveRateText" class="text-xl font-black font-orbitron text-purple-300">$350.00</div>
+          </div>
+          <div class="p-4 bg-black/80 rounded-xl border border-slate-800 space-y-1">
+            <div class="text-slate-400">Total Billed to Partner</div>
+            <div id="mspTotalBilledText" class="text-xl font-black font-orbitron text-emerald-400">$3,500.00</div>
+          </div>
+          <div class="p-4 bg-black/80 rounded-xl border border-slate-800 space-y-1">
+            <div class="text-slate-400">MSP Margin / Value Retained</div>
+            <div id="mspMarginRetainedText" class="text-xl font-black font-orbitron text-yellow-300">$1,500.00</div>
+          </div>
+        </div>
+
+        <button onclick="lockMspOrder()" class="btn-silver-chrome w-full py-4 text-sm">
+          <i class="fa-solid fa-lock text-purple-700 mr-2"></i> LOCK IN MSP VOLUME WHOLESALE ORDER &rarr;
         </button>
       </div>
-      <div class="flex flex-wrap gap-6 items-center">
-        <div class="text-center">
-          <img id="badge-img-completion" src="coursecompletion.jpg" alt="Course Completion badge" class="fl-badge" onclick="openBadgeModal('completion')" onerror="this.style.display='none'">
-          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 mt-2 font-bold">Completion</div>
-        </div>
-        <div class="text-center">
-          <img id="badge-img-mfa2" src="MFAbadge.jpg" alt="MFA-2 badge" class="fl-badge" onclick="openBadgeModal('mfa2')" onerror="this.style.display='none'">
-          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 mt-2 font-bold">MFA-2</div>
-        </div>
-        <div class="text-center">
-          <img id="badge-img-phishing" src="anti-phishingbadge.jpg" alt="Anti-Phishing badge" class="fl-badge" onclick="openBadgeModal('phishing')" onerror="this.style.display='none'">
-          <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 mt-2 font-bold">Anti-Phishing</div>
-        </div>
-      </div>
-      <p class="text-[11px] text-slate-500 font-mono mt-4 leading-relaxed">
-        Badges show in the manager view on your profile. They are <strong>not</strong> the Anergi Cyber Seal — the seal is the underwriting artifact; badges are the training record.
-      </p>
+
     </div>
+  </section>
 
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-400/40 text-center text-xs font-mono text-slate-600">
-    <p>© 2026 Leon R. Darden. All rights reserved.</p>
-  </footer>
-
-  <!-- BADGE MODAL -->
-  <div id="badge-modal" class="fl-modal-backdrop hidden" onclick="if(event.target.id==='badge-modal')closeBadgeModal()">
-    <div class="fl-modal-card" role="dialog" aria-modal="true" aria-labelledby="badge-modal-title">
-      <button type="button" onclick="closeBadgeModal()" aria-label="Close" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-100 hover:bg-[#D92B8A] hover:text-white text-[#2A081C] font-black text-lg flex items-center justify-center transition-colors">✕</button>
-      <div class="text-center mb-5">
-        <img id="badge-modal-img" src="coursecompletion.jpg" alt="" class="w-28 h-28 rounded-full object-cover mx-auto border-4 border-[#D92B8A] shadow-xl">
-        <h3 id="badge-modal-title" class="mt-3 text-xl font-black text-[#2A081C] uppercase tracking-tight">Course Completion</h3>
-        <p id="badge-modal-sub" class="font-mono text-[11px] uppercase tracking-widest text-[#522d8a] font-bold">Operator Academy</p>
+  <!-- PUSH TO HQ CINEMATIC MODAL OVERLAY -->
+  <div id="hqPushModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 hidden">
+    <div class="silver-cockpit-box max-w-4xl w-full p-6 sm:p-8 space-y-6 text-center border-2 border-purple-400">
+      <div class="flex items-center justify-between border-b border-purple-900 pb-3">
+        <span class="font-orbitron font-black text-base text-white">TELEMETRY IN TRANSIT // SECTOR 4 &rarr; CARRIER HQ</span>
+        <span class="font-mono text-xs text-purple-300 font-bold bg-purple-950 px-2 py-0.5 rounded border border-purple-400">SEALING BINDER</span>
       </div>
-      <p id="badge-modal-desc" class="text-sm text-slate-700 font-semibold leading-relaxed mb-4"></p>
-      <div class="p-4 rounded-xl bg-slate-50 border-2 border-slate-200">
-        <div class="font-mono text-[10px] uppercase tracking-widest text-slate-500 font-black mb-1">Earned by</div>
-        <div id="badge-modal-req-text" class="text-sm text-slate-700 font-semibold"></div>
+
+      <div class="video-media-frame aspect-video bg-black">
+        <video id="hqTransitVideo" src="assets/fastlane_dropzone_to_hq.mp4" muted playsinline class="w-full h-full object-cover"></video>
       </div>
-      <div class="mt-5 flex gap-2">
-        <a href="academy.html" class="flex-1 text-center py-3 bg-[#2A081C] hover:bg-[#522d8a] text-white font-black text-xs uppercase tracking-widest rounded-xl">Go to Academy</a>
-        <button type="button" onclick="closeBadgeModal()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase tracking-widest rounded-xl">Close</button>
+
+      <div class="space-y-2">
+        <div class="h-4 bg-black rounded-full overflow-hidden p-0.5 border border-purple-500">
+          <div id="hqProgressFill" class="h-full bg-gradient-to-r from-purple-500 to-emerald-400 rounded-full" style="width: 25%;"></div>
+        </div>
+        <div class="flex justify-between font-mono text-xs text-purple-300 font-bold">
+          <span id="hqTransitStatusText">Transmitting Verified Data Packet to HQ Vault...</span>
+          <span id="hqTransitPctText">25%</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <script>
-    // ---------- Fast Lane Form Handling ----------
-    const FAST_LANE_EMAIL = "hello@burn-1.com";
-    const FAST_LANE_ENDPOINT = "/api/fastlane";
+  <!-- UNIVERSAL PAYMENT CONTROLLER & TRI-PANE BOT ENGINE & AUDIO FX -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
 
-    function onFastLaneFiles(input) {
-      const list = document.getElementById("fastlane-file-list");
-      list.innerHTML = "";
-      Array.from(input.files).forEach(f => {
-        const row = document.createElement("div");
-        row.textContent = `• ${f.name}  (${(f.size/1024/1024).toFixed(2)} MB)`;
-        list.appendChild(row);
-      });
-      const drop = document.getElementById("fastlane-drop");
-      if (input.files.length) drop.style.borderColor = "#10b981";
+  <!-- Fast Lane Interactive Engine Script -->
+  <script>
+    let isUltraBarActive = false;
+    let ultraProgress = 0;
+
+    function handleDomainInput(val) {
+      if (val && val.trim().length > 3) {
+        activateUltraBar();
+      }
     }
 
-    function submitFastLane(ev) {
-      ev.preventDefault();
-      const form = ev.target;
-      const data = new FormData(form);
-      const payload = {
-        email: data.get("email") || "",
-        domain: data.get("domain") || "",
-        carrier: data.get("carrier") || "",
-        framework: data.get("framework") || "",
-        renewal: data.get("renewal") || "",
-        fileNames: Array.from(form.querySelector("input[name=files]").files || []).map(f => f.name),
-        source: "fast-lane-page"
-      };
+    function handleShellFileDump(files) {
+      if (files && files.length > 0) {
+        document.getElementById('fileStagedIndicator').classList.remove('hidden');
+        document.getElementById('fileStagedCountText').innerText = `${files.length} Evidence File(s) Staged`;
+        activateUltraBar();
+      }
+    }
 
-      const result = document.getElementById("fastlane-result");
-      result.classList.remove("hidden");
-      result.textContent = "Packaging your Fast Lane request…";
+    function activateUltraBarManually() {
+      const input = document.getElementById('targetDomainInput');
+      if (!input.value) {
+        input.value = "client-corp.burn-1.com";
+      }
+      activateUltraBar();
+    }
 
-      if (FAST_LANE_ENDPOINT) {
-        fetch(FAST_LANE_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        })
-        .then(r => r.ok ? r.json() : Promise.reject(r.status))
-        .then(res => {
-          result.className = "mt-4 p-4 rounded-xl bg-emerald-950 border-2 border-emerald-400 text-emerald-100 text-sm font-mono";
-          result.textContent = `Received. ${res.eta || "Delivered within standard business turnaround up to 5 business days."} Check ${payload.email} for the completeness report.`;
-        })
-        .catch(err => {
-          result.className = "mt-4 p-4 rounded-xl bg-rose-950 border-2 border-rose-400 text-rose-100 text-sm font-mono";
-          result.textContent = `Upload endpoint error (${err}). Opening email fallback…`;
-          fastLaneMailto(payload);
+    function activateUltraBar() {
+      if (isUltraBarActive) return;
+      isUltraBarActive = true;
+      const container = document.getElementById('remediationUltraBarContainer');
+      container.classList.remove('state-greyed');
+      container.classList.add('state-active');
+      document.getElementById('ultraStatusLabel').className = "font-mono text-xs font-bold px-3 py-1 rounded-full bg-purple-900 text-purple-200 border border-purple-400 animate-pulse";
+      document.getElementById('ultraStatusLabel').innerText = "ONLINE // GATHERING TELEMETRY";
+      
+      updateUltraBarProgress();
+    }
+
+    function updateUltraBarProgress() {
+      const chk1 = document.getElementById('chkKillSwitch').checked;
+      const chk2 = document.getElementById('chkDataProvenance').checked;
+      const chk3 = document.getElementById('chkDeepfakeVoice').checked;
+
+      let count = 0;
+      if (chk1) count++;
+      if (chk2) count++;
+      if (chk3) count++;
+
+      let basePct = 40; // Base from domain input & passive scans
+      let totalPct = basePct + (count * 20);
+
+      document.getElementById('ultraProgressFill').style.width = `${totalPct}%`;
+      document.getElementById('ultraProgressPctText').innerText = `${totalPct}% READY`;
+      document.getElementById('dialSpeedText').innerText = `${totalPct * 1.8 | 0} MPH`;
+
+      if (totalPct >= 100) {
+        document.getElementById('ultraProgressPhaseText').innerText = "STATUS: COMPLETE // READY FOR HQ DISPATCH";
+        document.getElementById('ultraProgressPhaseText').className = "text-emerald-400 font-bold";
+      } else {
+        document.getElementById('ultraProgressPhaseText').innerText = `COLLECTION PHASE: ${count} OF 3 REMEDIATIONS CHECKED`;
+      }
+    }
+
+    function sendMidstageWebhook() {
+      alert("MIDSTAGE WEBHOOK FIRED: Progress, staged domain, and checked controls persisted to Burn-1 Vault.");
+    }
+
+    function triggerPushToHQ() {
+      const modal = document.getElementById('hqPushModal');
+      const video = document.getElementById('hqTransitVideo');
+      modal.classList.remove('hidden');
+      video.currentTime = 0;
+      video.play();
+
+      let pct = 25;
+      const interval = setInterval(() => {
+        pct += 15;
+        if (pct >= 100) {
+          pct = 100;
+          clearInterval(interval);
+          document.getElementById('hqTransitStatusText').innerText = "ARRIVED AT HQ: CRYPTOGRAPHIC SHA-256 SEAL BOUND!";
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            if (window.universalPayEngine) {
+              window.universalPayEngine.openUniversalPayModal({
+                coreSku: 'B1-CORE-02',
+                domain: document.getElementById('targetDomainInput').value || 'client.burn-1.com',
+                companyName: 'Sector 4 Client Enterprise',
+                price: 500
+              });
+            } else {
+              window.location.href = "https://www.paypal.com/ncp/payment/5R9U23V7S2J8S";
+            }
+          }, 1200);
+        }
+        document.getElementById('hqProgressFill').style.width = `${pct}%`;
+        document.getElementById('hqTransitPctText').innerText = `${pct}%`;
+      }, 700);
+    }
+
+    // MSP Volume Slider Math
+    function updateMspCalculator(val) {
+      document.getElementById('mspSliderCountText').innerText = `${val} Domains`;
+      let rate = 500;
+      if (val >= 50) rate = 175;
+      else if (val >= 25) rate = 250;
+      else if (val >= 10) rate = 350;
+
+      const total = val * rate;
+      const margin = (val * 500) - total;
+
+      document.getElementById('mspEffectiveRateText').innerText = `$${rate.toFixed(2)}`;
+      document.getElementById('mspTotalBilledText').innerText = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      document.getElementById('mspMarginRetainedText').innerText = `$${margin.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+    }
+
+    function lockMspOrder() {
+      const domains = document.getElementById('mspRangeSlider').value;
+      if (window.universalPayEngine) {
+        window.universalPayEngine.openUniversalPayModal({
+          coreSku: 'B1-WHL-01',
+          domain: 'msp-portfolio.burn-1.com',
+          companyName: `MSP Partner Fleet (${domains} Domains)`,
+          price: 500
         });
       } else {
-        result.className = "mt-4 p-4 rounded-xl bg-amber-950 border-2 border-amber-400 text-amber-100 text-sm font-mono";
-        result.textContent = "Opening your email client with a pre-filled Fast Lane request. Attach the files there — the upload endpoint isn't live yet.";
-        fastLaneMailto(payload);
+        window.location.href = "https://www.paypal.com/ncp/payment/5R9U23V7S2J8S";
       }
     }
-
-    function fastLaneMailto(p) {
-      const subject = encodeURIComponent(`Fast Lane request — ${p.domain || "new"}`);
-      const body = encodeURIComponent(
-        `Fast Lane request\n\n` +
-        `Email: ${p.email}\nDomain: ${p.domain}\nCarrier: ${p.carrier}\nFramework: ${p.framework}\nRenewal: ${p.renewal}\n\n` +
-        `Files to attach:\n${p.fileNames.length ? p.fileNames.map(n => `- ${n}`).join("\n") : "- (attach your existing binder/files here)"}\n\n` +
-        `— submitted from burn-1.com Fast Lane`
-      );
-      window.location.href = `mailto:${FAST_LANE_EMAIL}?subject=${subject}&body=${body}`;
-    }
-
-    // ---------- Badge modal ----------
-    const BADGE_DATA = {
-      completion: {
-        img: "coursecompletion.jpg",
-        title: "Course Completion",
-        sub: "Operator Academy · All Stages",
-        desc: "Awarded for finishing all three Academy stages: the 8 free hygiene protocols, the 7 advanced Operator Simulators (A–G), and the Road to Remediation scan + reinforcement drills.",
-        req: "Complete Stage 1 (8/8), Stage 2 (7/7), and Part 1–3 of the Road to Remediation."
-      },
-      mfa2: {
-        img: "MFAbadge.jpg",
-        title: "MFA-2",
-        sub: "Identity & authentication",
-        desc: "Awarded for completing the MFA-2 remediation drill — binding FIDO2 or number-matching MFA to the shadow endpoints found in your perimeter scan, and disabling legacy Basic Auth.",
-        req: "Run the perimeter scan in Part 1, then complete the Shadow Subdomain MFA-2 Binding drill in Part 3."
-      },
-      phishing: {
-        img: "anti-phishingbadge.jpg",
-        title: "Anti-Phishing",
-        sub: "Phishing signal decoder",
-        desc: "Awarded for completing Module A (Phishing Signal Decoder) — all four BEC, voice-cloning, and underwriting-warranty scenarios.",
-        req: "Complete Module A in Stage 2: Operator Simulators."
-      }
-    };
-
-    function openBadgeModal(key) {
-      const data = key ? BADGE_DATA[key] : BADGE_DATA.completion;
-      document.getElementById("badge-modal-img").src = data.img;
-      document.getElementById("badge-modal-title").textContent = data.title;
-      document.getElementById("badge-modal-sub").textContent = data.sub;
-      document.getElementById("badge-modal-desc").textContent = data.desc;
-      document.getElementById("badge-modal-req-text").textContent = data.req;
-      document.getElementById("badge-modal").classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-    }
-    function closeBadgeModal() {
-      document.getElementById("badge-modal").classList.add("hidden");
-      document.body.style.overflow = "";
-    }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBadgeModal(); });
-
-    // Reflect earned badges from localStorage
-    document.addEventListener("DOMContentLoaded", () => {
-      try {
-        const raw = localStorage.getItem("burn1_clinic_v1");
-        if (!raw) return;
-        const s = JSON.parse(raw);
-        if (s.stage1Credits >= 40) document.getElementById("badge-img-completion")?.classList.add("earned");
-        if (s.roadParts?.part3Drills?.mfa2 === true) document.getElementById("badge-img-mfa2")?.classList.add("earned");
-        if (s.modulesPassed?.["MOD-A"] === true) document.getElementById("badge-img-phishing")?.classList.add("earned");
-      } catch (e) {}
-    });
   </script>
-  <script src="cosmo-widget.js"></script>
+
 </body>
 </html>
-

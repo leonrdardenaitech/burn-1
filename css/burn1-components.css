@@ -1,0 +1,706 @@
+/* ============================================================================
+   BURN-1 SYSTEMS — MASTER UI KIT COMPONENT STYLESHEET (css/burn1-components.css)
+   Converted 1:1 from Main-UI_Kit_Burn-1.jpg into Pure CSS Components:
+   - SECTION 1: FROST-BURN BUTTONS (3D Ice Cubes, Icicle Drips, Frost-Trig, Freezer Burn)
+   - SECTION 2: ACID PROGRESS BARS (Horizontal Bubbling Tubes, Dissolve Timer, Vertical Vials)
+   - SECTION 3: BIO-HAZARD & SECURITY (Caution Plates, Panic/Locked Sliders, Amber/Red Buttons, Alert Panels)
+   - SECTION 4: TIME ACCEL GAUGES (Time-Lapse Master Dial, Chrono Gain Gauges, Micro-Buttons, Linear Ruler Slider)
+   - SECTION 5: FORMULA CHALKBOARDS (Riveted Slate Panes: Equations, Chem Rings, Decay Graph, Burn Rate Matrix)
+   - SECTION 6: FIRE SECURITY SYSTEM (Firewall Rotary Knob, 3-Gang Breakers, Red Status Dome, Flame Screen, Override Bars)
+   ============================================================================ */
+
+/* --- TOP HEADER BANNER: BURN-1 SYSTEMS UI KIT --- */
+.burn1-uikit-banner {
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(245, 158, 11, 0.18) 0px,
+      rgba(245, 158, 11, 0.18) 18px,
+      rgba(10, 14, 23, 0.96) 18px,
+      rgba(10, 14, 23, 0.96) 36px
+    );
+  border-top: 2px solid #f59e0b;
+  border-bottom: 2px solid #f59e0b;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  color: #fb923c;
+  text-shadow: 0 0 18px rgba(251, 146, 60, 0.75);
+  letter-spacing: 0.08em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+}
+
+/* ============================================================================
+   SECTION 1: FROST-BURN BUTTONS (1. FROST-BURN BUTTONS)
+   - 3D Translucent Ice Cubes with Icicle Drip Edge & Cyan Core Glow
+   - Sub-groups: FROST-TRIG & FREEZER BURN
+   ============================================================================ */
+.frost-cube-btn {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(125, 211, 252, 0.45) 0%, rgba(14, 116, 144, 0.75) 55%, rgba(11, 22, 34, 0.95) 100%);
+  border: 1.5px solid #7dd3fc;
+  color: #e0f2fe;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow:
+    0 5px 0 #0369a1,
+    0 10px 22px rgba(0, 0, 0, 0.65),
+    0 0 18px rgba(56, 189, 248, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.75),
+    inset 0 -4px 10px rgba(56, 189, 248, 0.45);
+  backdrop-filter: blur(10px);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+.frost-cube-btn:hover {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(186, 230, 253, 0.6) 0%, rgba(2, 132, 199, 0.85) 55%, rgba(15, 32, 48, 1) 100%);
+  box-shadow:
+    0 5px 0 #0284c7,
+    0 0 25px rgba(56, 189, 248, 0.75),
+    inset 0 2px 6px #ffffff;
+  transform: translateY(-2px);
+}
+.frost-cube-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #0284c7, 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Square 3D Ice-Cube Icon Button with Icicle Bottom Drip */
+.frost-cube-square {
+  width: 68px;
+  height: 68px;
+  padding: 0;
+  border-radius: 14px;
+  font-size: 1.35rem;
+  position: relative;
+}
+.frost-cube-square::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -9px;
+  height: 9px;
+  background:
+    conic-gradient(from 165deg at 15% 0%, #7dd3fc 0deg 30deg, transparent 30deg),
+    conic-gradient(from 165deg at 42% 0%, #bae6fd 0deg 28deg, transparent 28deg),
+    conic-gradient(from 165deg at 68% 0%, #38bdf8 0deg 30deg, transparent 30deg),
+    conic-gradient(from 165deg at 88% 0%, #7dd3fc 0deg 26deg, transparent 26deg);
+  filter: drop-shadow(0 2px 4px rgba(56, 189, 248, 0.45));
+  pointer-events: none;
+}
+
+/* Melty / State Buttons (FROST-TRIG & FREEZER BURN states) */
+.state-btn-freeze {
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.state-btn-freeze:hover {
+  background: rgba(56, 189, 248, 0.24);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+.state-btn-initiate {
+  border: 1px solid #a855f7;
+  color: #c084fc;
+  background: rgba(168, 85, 247, 0.12);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.state-btn-initiate:hover {
+  background: rgba(168, 85, 247, 0.24);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+.state-btn-shiver {
+  border: 1px dashed #94a3b8;
+  color: #cbd5e1;
+  background: rgba(148, 163, 184, 0.08);
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.state-btn-shiver:hover {
+  border-color: #38bdf8;
+  color: #ffffff;
+  background: rgba(56, 189, 248, 0.12);
+}
+
+/* ============================================================================
+   SECTION 2: ACID PROGRESS BARS (2. ACID PROGRESS BARS)
+   - Horizontal Glass Tubes (85% ACID VOL, 65% ACID VOL, DISSOLVE T-MINUS)
+   - Vertical Bubbling Acid Cylinder Vials
+   ============================================================================ */
+.acid-tube-bar {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  height: 32px;
+  background: linear-gradient(180deg, #06090f 0%, #141c29 50%, #06090f 100%);
+  border: 2px solid #475569;
+  border-left: 10px solid #64748b;
+  border-right: 10px solid #64748b;
+  border-radius: 9999px;
+  padding: 3px;
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.9),
+    0 0 18px rgba(57, 255, 20, 0.2);
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.acid-tube-liquid {
+  height: 100%;
+  background:
+    radial-gradient(circle at 25% 40%, rgba(255, 255, 255, 0.65) 0%, transparent 12%),
+    radial-gradient(circle at 65% 60%, rgba(255, 255, 255, 0.55) 0%, transparent 10%),
+    linear-gradient(90deg, #1f9d0c 0%, #39ff14 70%, #a3e635 100%);
+  border-radius: 9999px;
+  box-shadow: 0 0 16px #39ff14, inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.acid-tube-label {
+  position: absolute;
+  right: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #d9f99d;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 4px #000;
+  pointer-events: none;
+}
+
+/* Vertical Acid Glass Cylinder Vial */
+.acid-vial-vertical {
+  position: relative;
+  width: 44px;
+  height: 210px;
+  background: linear-gradient(90deg, #06090f 0%, #182232 50%, #06090f 100%);
+  border: 2px solid #64748b;
+  border-top: 12px solid #475569;
+  border-bottom: 12px solid #475569;
+  border-radius: 9999px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.95), 0 0 20px rgba(57, 255, 20, 0.22);
+  overflow: hidden;
+}
+.acid-vial-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #a3e635 0%, #39ff14 35%, #15803d 100%);
+  border-radius: 9999px;
+  box-shadow: 0 0 16px #39ff14, inset 0 2px 5px rgba(255, 255, 255, 0.7);
+  transition: height 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================================
+   SECTION 3: BIO-HAZARD & SECURITY (3. BIO-HAZARD & SECURITY)
+   - Caution Plates, Panic/Locked Pill Sliders, Amber Square Panic Button,
+     Red Padlock Button, Radiation/Lockdown/Alert Panels
+   ============================================================================ */
+.acid-btn-activate {
+  background: linear-gradient(180deg, #1b2618 0%, #0c150b 100%);
+  border: 1px solid #39ff14;
+  color: #39ff14;
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.7);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.7rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.acid-btn-activate:hover {
+  background: #39ff14;
+  color: #05080a;
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.8);
+  text-shadow: none;
+}
+
+.acid-btn-abort {
+  background: repeating-linear-gradient(
+    -45deg,
+    #ff2a4d,
+    #ff2a4d 8px,
+    #18080a 8px,
+    #18080a 16px
+  );
+  border: 1px solid #ff2a4d;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.65rem 1.4rem;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(255, 42, 77, 0.4);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.acid-panel-hazard {
+  background: rgba(11, 15, 25, 0.85);
+  border: 1px solid rgba(57, 255, 20, 0.25);
+  border-left: 4px solid #39ff14;
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.acid-input-chevron {
+  background: #090d14;
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  color: #39ff14;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 0.6rem 1rem;
+  border-radius: 3px;
+  outline: none;
+}
+
+/* 3.1 Caution Striped Plate (CAUTION) */
+.bio-caution-plate {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0) 18%, #eab308 18%, #eab308 82%, rgba(0,0,0,0) 82%),
+    repeating-linear-gradient(-45deg, #eab308 0px, #eab308 8px, #111827 8px, #111827 16px);
+  border: 2px solid #713f12;
+  border-radius: 6px;
+  padding: 0.55rem 1.25rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #090d14;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 4px 12px rgba(0,0,0,0.7);
+}
+
+/* 3.2 Horizontal Pill Slider Switch (PANIC / LOCKED) */
+.bio-pill-slider {
+  width: 84px;
+  height: 36px;
+  border-radius: 9999px;
+  background: #111827;
+  border: 2px solid #475569;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.9);
+  cursor: pointer;
+}
+.bio-pill-knob {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #cbd5e1 0%, #64748b 65%, #1e293b 100%);
+  border: 1px solid #94a3b8;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+.bio-pill-led-red {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 12px #ef4444, 0 0 20px #dc2626;
+  margin-right: 6px;
+}
+
+/* 3.3 Amber Square Industrial Push-Button (PANIC) */
+.bio-btn-panic-amber {
+  width: 68px;
+  height: 68px;
+  background: #422006;
+  border: 3px solid #a16207;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.2);
+  display: grid;
+  place-items: center;
+}
+.bio-btn-panic-amber > span {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: radial-gradient(circle, #fde047 0%, #f59e0b 65%, #b45309 100%);
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.85), inset 0 2px 4px #ffffff;
+}
+
+/* 3.4 Recessed Circular Red Padlock Button (LOCKED) */
+.bio-btn-locked-red {
+  width: 68px;
+  height: 68px;
+  background: #1e293b;
+  border: 2px solid #475569;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.8), inset 0 2px 5px rgba(0,0,0,0.9);
+  display: grid;
+  place-items: center;
+}
+.bio-btn-locked-red > span {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f87171 0%, #dc2626 60%, #7f1d1d 100%);
+  border: 2px solid #fca5a5;
+  color: #fee2e2;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.8);
+}
+
+/* 3.5 Illuminated Right-Hand Status & Alert Panels (RADIATION / LOCKDOWN / ALERT PANELS) */
+.bio-panel-radiation {
+  background: linear-gradient(180deg, #facc15 0%, #ca8a04 100%);
+  border: 3px solid #475569;
+  border-radius: 6px;
+  padding: 0.65rem 1.2rem;
+  color: #090d14;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.4), inset 0 1px 3px rgba(255,255,255,0.6);
+}
+.bio-panel-lockdown {
+  background: linear-gradient(180deg, #450a0a 0%, #2a0606 100%);
+  border: 2px solid #7f1d1d;
+  border-radius: 6px;
+  padding: 0.75rem 1.2rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #f87171;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(248, 113, 113, 0.65);
+  box-shadow: inset 0 0 14px rgba(0,0,0,0.85);
+}
+.bio-panel-alert {
+  background: linear-gradient(180deg, #7f1d1d 0%, #450a0a 100%);
+  border: 2px solid #ef4444;
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fecaca;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.45), inset 0 0 10px rgba(239, 68, 68, 0.25);
+}
+
+/* ============================================================================
+   SECTION 4: TIME ACCEL GAUGES (4. TIME ACCEL GAUGES)
+   - Circular Analog/Chrono Dial Gauges (TIME ACCELERATION, TIME-LAPSE, CHRONO GAIN)
+   - Chrono Micro-Buttons & Horizontal Linear Calibration Ruler Slider
+   ============================================================================ */
+.chrono-dial-trigger {
+  background: rgba(14, 18, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00f0ff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.time-gauge-dial {
+  position: relative;
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #0f172a 0%, #06090e 72%, #1e293b 100%);
+  border: 4px solid #475569;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.85),
+    inset 0 0 18px rgba(56, 189, 248, 0.28);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  color: #38bdf8;
+}
+.time-gauge-dial.master {
+  width: 148px;
+  height: 148px;
+  border-width: 5px;
+  border-color: #64748b;
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.9),
+    0 0 24px rgba(56, 189, 248, 0.25),
+    inset 0 0 24px rgba(56, 189, 248, 0.35);
+}
+.time-gauge-needle {
+  width: 38%;
+  height: 3px;
+  background: linear-gradient(90deg, #ffffff 0%, #38bdf8 100%);
+  box-shadow: 0 0 10px #38bdf8;
+  transform-origin: left center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: rotate(-35deg);
+  border-radius: 9999px;
+}
+.time-gauge-hub {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  border: 2px solid #0f172a;
+  z-index: 2;
+}
+
+/* Linear Calibration Ruler Slider (0 - 10 - 20 / 0 - 30 - 50) */
+.time-ruler-slider {
+  width: 100%;
+  max-width: 320px;
+  background: #06090e;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: #94a3b8;
+}
+.time-ruler-track {
+  height: 10px;
+  background:
+    repeating-linear-gradient(90deg, #475569 0px, #475569 1px, transparent 1px, transparent 6px);
+  border-top: 1px solid #475569;
+  border-bottom: 1px solid #475569;
+  position: relative;
+  margin: 4px 0;
+}
+.time-ruler-fill {
+  height: 100%;
+  width: 48%;
+  background: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+/* ============================================================================
+   SECTION 5: FORMULA CHALKBOARDS (5. FORMULA CHALKBOARDS)
+   - Riveted Rust/Bronze-Framed Slate Chalkboard Panes:
+     1. Actuarial Equations  2. Organic Chemical Rings
+     3. Decay Graph Plot     4. BURN RATE MATRIX (4x4 Binary Table)
+   ============================================================================ */
+.formula-chalkboard-panel {
+  background: #06090e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.chalkboard-slate-frame {
+  background:
+    radial-gradient(circle at 50% 50%, #161b22 0%, #0b0e14 100%);
+  border: 4px solid #5c4033;
+  outline: 1px solid #9a6b4c;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #e2e8f0;
+  box-shadow:
+    inset 0 0 24px rgba(0, 0, 0, 0.9),
+    0 8px 20px rgba(0, 0, 0, 0.75);
+  position: relative;
+}
+.burn-rate-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  text-align: center;
+  color: #f8fafc;
+}
+.burn-rate-matrix-table th,
+.burn-rate-matrix-table td {
+  border: 1px solid rgba(226, 232, 240, 0.25);
+  padding: 0.3rem 0.5rem;
+}
+.burn-rate-matrix-table th {
+  color: #cbd5e1;
+  font-weight: 800;
+}
+
+/* ============================================================================
+   SECTION 6: FIRE SECURITY SYSTEM (6. FIRE SECURITY SYSTEM)
+   - Brushed Steel Rotary Knob (FIREWALL)
+   - 3-Gang Vertical Breaker Switches (LOCKDOWN)
+   - Giant Red Dome Push-Button (STATUS)
+   - Illuminated Flame Screen (STATUS)
+   - Right Stack: Flame Trigger, Recessed Lock Plate, Dual Red OVERRIDE Bars
+   ============================================================================ */
+.fire-module-box {
+  background: linear-gradient(180deg, #27272a 0%, #18181b 100%);
+  border: 2px solid #52525b;
+  border-radius: 8px;
+  padding: 0.85rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+.fire-knob-dial {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #71717a, #d4d4d8, #3f3f46, #d4d4d8, #71717a);
+  border: 4px solid #27272a;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.85);
+}
+.fire-dome-red {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f87171 0%, #dc2626 55%, #7f1d1d 100%);
+  border: 4px solid #3f3f46;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.75), inset 0 3px 6px rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+}
+.fire-label-plate {
+  width: 100%;
+  background: #090d14;
+  border: 1px solid #52525b;
+  border-radius: 4px;
+  padding: 0.25rem 0.6rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #fbbf24;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.fire-screen-flame {
+  width: 100%;
+  min-height: 68px;
+  background: radial-gradient(circle, rgba(234, 88, 12, 0.28) 0%, #090d14 85%);
+  border: 2px solid #52525b;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  color: #fb923c;
+  font-size: 1.75rem;
+  text-shadow: 0 0 16px #f97316;
+}
+.fire-btn-override {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+  border: 2px solid #7f1d1d;
+  outline: 2px solid #52525b;
+  border-radius: 6px;
+  padding: 0.55rem 1.25rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(220, 38, 38, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+  transition: all 0.15s ease;
+}
+.fire-btn-override:hover {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.85);
+}
+
+/* --- EDITORIAL STOCK IMAGE CONTAINER --- */
+.stock-image-container {
+  width: 100%;
+  max-width: 520px;
+  height: 240px;
+  margin: 1.5rem auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0e121a;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.stock-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

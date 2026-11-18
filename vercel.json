@@ -579,6 +579,16 @@
             "permanent": false
         },
         {
+            "source": "/store",
+            "destination": "/cinematic-onboarding",
+            "permanent": false
+        },
+        {
+            "source": "/store.html",
+            "destination": "/cinematic-onboarding",
+            "permanent": false
+        },
+        {
             "destination": "/",
             "permanent": false,
             "source": "/downloads"

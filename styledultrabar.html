@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leon's Styled Ultra Bar — Fire Security Console & Frosted Glass Kiosk</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Orbitron, JetBrains Mono, Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- React 18, ReactDOM & Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    /* =====================================================================
+       FROSTED GLASS ARCHITECTURE & INDUSTRIAL CONTROLS
+       ===================================================================== */
+    :root {
+      --frosted-bg: rgba(18, 24, 38, 0.68);
+      --frosted-border: rgba(255, 255, 255, 0.16);
+      --frosted-highlight: rgba(255, 255, 255, 0.35);
+      --neon-flame: #ff5500;
+      --neon-amber: #fbbf24;
+      --neon-red: #ef4444;
+      --neon-cyan: #38bdf8;
+    }
+
+    body {
+      background: #080b11;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 4px);
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* FROSTED GLASS MASTER CONTAINER */
+    .frosted-glass-chassis {
+      background: var(--frosted-bg);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--frosted-border);
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.75),
+        inset 0 1px 1px var(--frosted-highlight),
+        inset 0 -1px 1px rgba(0,0,0,0.4);
+      border-radius: 20px;
+    }
+
+    .frosted-glass-pill {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    /* SECTION 6: FIRE SECURITY COMPONENT SPECIFICATIONS */
+    .fire-module-box {
+      background: linear-gradient(180deg, #27272a 0%, #18181b 100%);
+      border: 2px solid #52525b;
+      border-radius: 10px;
+      padding: 0.9rem 0.75rem;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.85), inset 0 1px 2px rgba(255, 255, 255, 0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      min-height: 170px;
+      position: relative;
+    }
+
+    .fire-label-plate {
+      width: 100%;
+      background: #090d14;
+      border: 1px solid #52525b;
+      border-radius: 4px;
+      padding: 0.25rem 0.4rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #fbbf24;
+      text-align: center;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* 1. FIREWALL Rotary Knob */
+    .fire-knob-dial {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #71717a, #d4d4d8, #3f3f46, #d4d4d8, #71717a);
+      border: 4px solid #27272a;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.85), inset 0 2px 4px rgba(255,255,255,0.4);
+      position: relative;
+      cursor: grab;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fire-knob-dial:active { cursor: grabbing; }
+    .fire-knob-dial::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 16px;
+      background: #ff5500;
+      border-radius: 3px;
+      box-shadow: 0 0 8px #ff5500;
+    }
+
+    /* 2. LOCKDOWN 3-Gang Industrial Breakers */
+    .breaker-gang {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+    }
+    .breaker-switch {
+      width: 22px;
+      height: 64px;
+      background: #18181b;
+      border: 2px solid #52525b;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.9);
+    }
+    .breaker-lever {
+      position: absolute;
+      left: 1px;
+      right: 1px;
+      height: 28px;
+      background: linear-gradient(180deg, #a1a1aa 0%, #52525b 100%);
+      border: 1px solid #d4d4d8;
+      border-radius: 3px;
+      transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.6);
+    }
+    .breaker-lever.down { top: 2px; }
+    .breaker-lever.up { 
+      top: 30px; 
+      background: linear-gradient(180deg, #ef4444 0%, #991b1b 100%); 
+      border-color: #f87171;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+    }
+
+    /* 3. STATUS Red Giant Dome Push-Button */
+    .fire-dome-red {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #f87171 0%, #dc2626 55%, #7f1d1d 100%);
+      border: 4px solid #3f3f46;
+      box-shadow: 0 0 24px rgba(239, 68, 68, 0.8), inset 0 3px 8px rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.12s ease;
+      outline: none;
+    }
+    .fire-dome-red:hover {
+      box-shadow: 0 0 32px rgba(239, 68, 68, 1), inset 0 3px 10px #ffffff;
+      transform: scale(1.03);
+    }
+    .fire-dome-red:active {
+      transform: scale(0.96) translateY(2px);
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6), inset 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* 4. STATUS Illuminated Flame Monitor Screen */
+    .fire-screen-flame {
+      width: 100%;
+      min-height: 72px;
+      background: radial-gradient(circle, rgba(234, 88, 12, 0.35) 0%, #090d14 85%);
+      border: 2px solid #52525b;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #fb923c;
+      font-size: 2rem;
+      text-shadow: 0 0 18px #f97316;
+      position: relative;
+      overflow: hidden;
+    }
+    .fire-screen-flame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, transparent 1px, transparent 2px);
+      pointer-events: none;
+    }
+
+    /* 5. Flame Trigger, Recessed Lock & Dual OVERRIDE Bars */
+    .fire-btn-override {
+      background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+      border: 2px solid #7f1d1d;
+      outline: 2px solid #52525b;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(220, 38, 38, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+      transition: all 0.15s ease;
+      width: 100%;
+      text-align: center;
+    }
+    .fire-btn-override:hover {
+      background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.95);
+      transform: translateY(-1px);
+    }
+    .fire-btn-override:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+    }
+
+    /* Fixed Active Window Starting Position — All active windows align to exact same top/height without scrolling down */
+    .unified-active-stage {
+      position: relative;
+      width: 100%;
+      min-height: 480px;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-8">
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Shelf Definitions with High-Legibility Metadata
+    const SHELVES = [
+      { 
+        id: 'sizzle', 
+        tag: '01', 
+        name: 'SIZZLE', 
+        subtitle: '1-Page Decision Scorecard',
+        desc: 'Rapid perimeter diagnostic and non-intrusive posture evaluation score.',
+        icon: 'fa-gauge-high',
+        accent: 'text-orange-400',
+        border: 'border-orange-500/50'
+      },
+      { 
+        id: 'cook', 
+        tag: '02', 
+        name: 'COOK', 
+        subtitle: 'Level 2 Strategic Brief',
+        desc: 'Defensive resource mapping, underwriter checklists & threat alignment.',
+        icon: 'fa-shield-halved',
+        accent: 'text-amber-400',
+        border: 'border-amber-500/50'
+      },
+      { 
+        id: 'fry', 
+        tag: '03', 
+        name: 'FRY', 
+        subtitle: 'Level 3 Evidence Binder',
+        desc: 'Binding documentation cited against federal & public intelligence.',
+        icon: 'fa-folder-open',
+        accent: 'text-cyan-400',
+        border: 'border-cyan-500/50'
+      },
+      { 
+        id: 'chm-burn', 
+        tag: '04', 
+        name: 'CHEMICAL BURN', 
+        subtitle: 'Forensic Acid Pass',
+        desc: 'Rigorous exposure breakdown and volatile credential vulnerability audit.',
+        icon: 'fa-flask-vial',
+        accent: 'text-lime-400',
+        border: 'border-lime-500/50'
+      },
+      { 
+        id: 'reviews', 
+        tag: '05', 
+        name: 'REVIEWS & SIGN-OFF', 
+        subtitle: 'Final Verification Seal',
+        desc: 'Algorithmic Cryptographic SHA-256 Seal authorization & issuance.',
+        icon: 'fa-certificate',
+        accent: 'text-rose-400',
+        border: 'border-rose-500/50'
+      }
+    ];
+
+    function App() {
+      // Starting State: System in Standby/Armed mode. Controls must be engaged to operate.
+      const [systemEngaged, setSystemEngaged] = useState(false);
+      const [dialDegree, setDialDegree] = useState(45);
+      const [breakers, setBreakers] = useState([false, false, false]); // all 3 gang breakers
+      const [activeShelf, setActiveShelf] = useState(null); // When null, shows the primed starting console
+      const [emergencyAlert, setEmergencyAlert] = useState(false);
+      const [flameIntensity, setFlameIntensity] = useState('NORMAL');
+
+      // Check if all breakers are engaged
+      const allBreakersEngaged = breakers.every(Boolean);
+
+      // Rotate dial handler
+      const rotateKnob = () => {
+        const nextDeg = (dialDegree + 45) % 360;
+        setDialDegree(nextDeg);
+        if (nextDeg >= 180) {
+          setFlameIntensity('OVERCLOCK 100%');
+        } else {
+          setFlameIntensity('NOMINAL 60%');
+        }
+      };
+
+      // Toggle individual breaker lever
+      const toggleBreaker = (idx) => {
+        const copy = [...breakers];
+        copy[idx] = !copy[idx];
+        setBreakers(copy);
+      };
+
+      // Status Red Dome Push
+      const triggerDome = () => {
+        setEmergencyAlert(prev => !prev);
+        if (!systemEngaged) {
+          setSystemEngaged(true);
+        }
+      };
+
+      // Master Engage via Override Button
+      const handleOverride = () => {
+        setSystemEngaged(true);
+        setBreakers([true, true, true]);
+        setDialDegree(180);
+        setFlameIntensity('FIREWALL ARMED');
+        if (!activeShelf) {
+          setActiveShelf('sizzle'); // Opens first shelf into uniform starting position
+        }
+      };
+
+      return (
+        <div className="max-w-6xl mx-auto space-y-6">
+          
+          {/* HEADER FROSTED RIBBON */}
+          <header className="frosted-glass-chassis p-5 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 via-orange-600 to-amber-600 flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+                <i className="fa-solid fa-fire text-lg"></i>
+              </div>
+              <div>
+                <h1 className="font-orbitron font-black text-xl text-white tracking-wider flex items-center gap-2">
+                  BURN-1 <span className="text-orange-500">ULTRA BAR</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/40">
+                    FROSTED GLASS v6.0
+                  </span>
+                </h1>
+                <p className="text-xs text-slate-400 font-mono">
+                  Fire Security Console • Section 6 UI Component Engine
+                </p>
+              </div>
+            </div>
+
+            {/* STATUS BADGE */}
+            <div className="flex items-center gap-3">
+              <div className="px-3.5 py-1.5 rounded-lg border border-white/10 bg-black/40 font-mono text-xs flex items-center gap-2">
+                <span className={`w-2.5 h-2.5 rounded-full ${systemEngaged ? 'bg-emerald-400 animate-pulse' : 'bg-rose-500'}`}></span>
+                <span className="text-slate-300">
+                  SYSTEM STATE: <strong className={systemEngaged ? 'text-emerald-400 font-extrabold' : 'text-rose-400 font-extrabold'}>
+                    {systemEngaged ? 'ACTIVE / OPERATING' : 'PRIMED / STANDBY'}
+                  </strong>
+                </span>
+              </div>
+              <button 
+                onClick={() => { setSystemEngaged(false); setActiveShelf(null); setBreakers([false, false, false]); }}
+                className="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition"
+              >
+                Reset To Start
+              </button>
+            </div>
+          </header>
+
+          {/* SECTION 6: FIRE SECURITY MECHANICAL CONTROLS */}
+          <section className="frosted-glass-chassis p-6 relative">
+            <div className="text-[11px] font-mono uppercase tracking-widest text-orange-400 font-bold mb-4 flex items-center justify-between">
+              <span><i className="fa-solid fa-microchip mr-1.5"></i> Section 6: Fire Security Master Control Board</span>
+              <span className="text-slate-400 text-[10px]">Use Gauges, Switches & Dome to Engage Subsystems</span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              
+              {/* 1. FIREWALL Rotary Knob */}
+              <div className="fire-module-box">
+                <div 
+                  className="fire-knob-dial" 
+                  style={{ transform: `rotate(${dialDegree}deg)` }}
+                  onClick={rotateKnob}
+                  title="Click to turn Firewall dial"
+                ></div>
+                <div className="text-[10px] font-mono text-slate-400">Position: {dialDegree}°</div>
+                <div className="fire-label-plate">FIREWALL</div>
+              </div>
+
+              {/* 2. LOCKDOWN 3-Gang Industrial Breakers */}
+              <div className="fire-module-box">
+                <div className="breaker-gang">
+                  {breakers.map((isOn, idx) => (
+                    <div 
+                      key={idx} 
+                      className="breaker-switch"
+                      onClick={() => toggleBreaker(idx)}
+                      title={`Toggle Breaker ${idx + 1}`}
+                    >
+                      <div className={`breaker-lever ${isOn ? 'up' : 'down'}`}></div>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-[10px] font-mono text-slate-400">
+                  {breakers.filter(Boolean).length}/3 Closed
+                </div>
+                <div className="fire-label-plate">LOCKDOWN</div>
+              </div>
+
+              {/* 3. STATUS Red Giant Dome Push-Button */}
+              <div className="fire-module-box">
+                <button 
+                  className="fire-dome-red"
+                  onClick={triggerDome}
+                  title="Emergency Status Palm Push-Button"
+                ></button>
+                <div className="text-[10px] font-mono text-slate-400">
+                  {emergencyAlert ? 'ALERT TRIPPED' : 'READY'}
+                </div>
+                <div className="fire-label-plate">STATUS DOME</div>
+              </div>
+
+              {/* 4. Illuminated Flame Monitor Screen */}
+              <div className="fire-module-box">
+                <div className="fire-screen-flame">
+                  <i className={`fa-solid fa-fire ${emergencyAlert ? 'text-red-500 animate-bounce' : 'text-orange-500'}`}></i>
+                </div>
+                <div className="text-[10px] font-mono text-orange-400 font-bold truncate max-w-[120px]">
+                  {flameIntensity}
+                </div>
+                <div className="fire-label-plate">STATUS MONITOR</div>
+              </div>
+
+              {/* 5. Flame Trigger & Dual OVERRIDE Bars */}
+              <div className="fire-module-box">
+                <div className="w-full flex flex-col gap-2">
+                  <button onClick={handleOverride} className="fire-btn-override">
+                    OVERRIDE A
+                  </button>
+                  <button onClick={handleOverride} className="fire-btn-override" style={{ background: 'linear-gradient(180deg, #ea580c 0%, #9a3412 100%)', borderColor: '#7c2d12' }}>
+                    IGNITE B
+                  </button>
+                </div>
+                <div className="fire-label-plate">FORCE ENGAGE</div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* 5-SHELF HYDRAULIC SELECTOR TABS */}
+          <nav className="frosted-glass-chassis p-3 flex flex-wrap gap-2 items-center justify-between">
+            {SHELVES.map((shelf) => {
+              const isActive = activeShelf === shelf.id;
+              return (
+                <button
+                  key={shelf.id}
+                  onClick={() => {
+                    setActiveShelf(shelf.id);
+                    setSystemEngaged(true);
+                  }}
+                  className={`flex-1 min-w-[170px] px-3.5 py-3 rounded-xl border transition-all text-left flex items-center gap-3 ${
+                    isActive 
+                      ? 'bg-white/15 border-white/40 shadow-lg shadow-white/5' 
+                      : 'bg-black/30 border-white/5 hover:bg-white/5 hover:border-white/20'
+                  }`}
+                >
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono font-black text-xs ${
+                    isActive ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-400'
+                  }`}>
+                    {shelf.tag}
+                  </div>
+                  <div>
+                    <div className="font-orbitron font-extrabold text-xs text-white tracking-wider flex items-center gap-1.5">
+                      {shelf.name}
+                      <i className={`fa-solid ${shelf.icon} text-[10px] ${shelf.accent}`}></i>
+                    </div>
+                    <div className="text-[10px] font-mono text-slate-400 truncate max-w-[130px]">
+                      {shelf.subtitle}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* UNIFIED ACTIVE WINDOW CONTAINER (Equal starting position, no jumping or scroll mismatch) */}
+          <main className="frosted-glass-chassis p-6 relative">
+            <div className="unified-active-stage">
+
+              {/* STATE 0: INITIAL STARTING POINT (When no window is opened or system in standby) */}
+              {activeShelf === null && (
+                <div className="h-full min-h-[420px] flex flex-col items-center justify-center text-center p-8 space-y-5">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-orange-500/20 via-red-500/20 to-transparent border border-orange-500/30 flex items-center justify-center text-orange-400 text-3xl shadow-xl">
+                    <i className="fa-solid fa-lock"></i>
+                  </div>
+                  <div className="max-w-md space-y-2">
+                    <span className="font-mono text-xs uppercase tracking-widest text-orange-400 font-bold block">
+                      SYSTEM STANDBY // STARTING POINT
+                    </span>
+                    <h2 className="font-orbitron font-black text-2xl text-white">
+                      OPERATING CONSOLE READY
+                    </h2>
+                    <p className="text-slate-300 text-sm leading-relaxed font-mono">
+                      Engage the physical control board above (flip the 3 Lockdown breakers or punch the Status Dome / Override Bars) or select any shelf above to begin.
+                    </p>
+                  </div>
+                  <button 
+                    onClick={handleOverride}
+                    className="fire-btn-override max-w-xs"
+                  >
+                    ENGAGE CONSOLE NOW &rarr;
+                  </button>
+                </div>
+              )}
+
+              {/* SHELF 1: SIZZLE */}
+              {activeShelf === 'sizzle' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="border-b border-white/10 pb-4 flex flex-wrap justify-between items-center gap-2">
+                    <div>
+                      <span className="font-mono text-xs font-bold text-orange-400 uppercase tracking-widest">SHELF 01 // SCORECARD</span>
+                      <h2 className="font-orbitron font-black text-2xl text-white">SIZZLE: 1-PAGE DECISION SCORECARD</h2>
+                    </div>
+                    <span className="px-3 py-1 rounded bg-orange-500/20 border border-orange-500/40 text-orange-300 font-mono text-xs">
+                      SLA: 60-Second Passive Telemetry
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="frosted-glass-pill p-4 rounded-xl space-y-2">
+                      <div className="text-xs font-mono text-slate-400 uppercase">Pillar 1: Email Auth</div>
+                      <div className="text-xl font-black text-emerald-400 font-orbitron">DMARC / SPF: PASS</div>
+                      <p className="text-xs text-slate-300">Non-intrusive DNS TXT record hygiene query completed.</p>
+                    </div>
+                    <div className="frosted-glass-pill p-4 rounded-xl space-y-2">
+                      <div className="text-xs font-mono text-slate-400 uppercase">Pillar 2: Transport</div>
+                      <div className="text-xl font-black text-emerald-400 font-orbitron">TLS 1.3 / HSTS</div>
+                      <p className="text-xs text-slate-300">Strict transport security headers enforced.</p>
+                    </div>
+                    <div className="frosted-glass-pill p-4 rounded-xl space-y-2">
+                      <div className="text-xs font-mono text-slate-400 uppercase">Pillar 3: Perimeter Ports</div>
+                      <div className="text-xl font-black text-amber-400 font-orbitron">RDP/SMB: SECURED</div>
+                      <p className="text-xs text-slate-300">Ports 3389 and 445 confirmed closed from outside-in.</p>
+                    </div>
+                  </div>
+
+                  <div className="frosted-glass-pill p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                      <div className="font-mono text-xs text-slate-400">Calculated Exposure Rating</div>
+                      <div className="font-orbitron text-2xl font-black text-white">92 / 100 <span className="text-emerald-400 text-sm">OPTIMAL POSTURE</span></div>
+                    </div>
+                    <button onClick={() => setActiveShelf('cook')} className="fire-btn-override max-w-[200px]">
+                      Proceed to Cook &rarr;
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* SHELF 2: COOK */}
+              {activeShelf === 'cook' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="border-b border-white/10 pb-4 flex flex-wrap justify-between items-center gap-2">
+                    <div>
+                      <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">SHELF 02 // STRATEGY</span>
+                      <h2 className="font-orbitron font-black text-2xl text-white">COOK: LEVEL 2 STRATEGIC BRIEF</h2>
+                    </div>
+                    <span className="px-3 py-1 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300 font-mono text-xs">
+                      Underwriter Alignment
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="frosted-glass-pill p-5 rounded-xl space-y-3">
+                      <h3 className="font-orbitron font-bold text-sm text-white">Resource Allocation Matrix</h3>
+                      <p className="text-xs text-slate-300 leading-relaxed font-mono">
+                        Defines operational exposure boundaries, third-party vendor risks, and jump-host session isolation parameters.
+                      </p>
+                      <div className="space-y-2 font-mono text-xs">
+                        <div className="flex justify-between border-b border-white/10 py-1">
+                          <span className="text-slate-400">MFA / FIDO2 Enforced</span>
+                          <span className="text-emerald-400 font-bold">YES</span>
+                        </div>
+                        <div className="flex justify-between border-b border-white/10 py-1">
+                          <span className="text-slate-400">Third-Party SaaS Audit</span>
+                          <span className="text-amber-400 font-bold">IN PROGRESS</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="frosted-glass-pill p-5 rounded-xl space-y-3">
+                      <h3 className="font-orbitron font-bold text-sm text-white">Underwriting Binder Checklist</h3>
+                      <p className="text-xs text-slate-300 leading-relaxed font-mono">
+                        BIND Doctrine strictly executed: we gather defensible evidence cited against federal public sources.
+                      </p>
+                      <button onClick={() => setActiveShelf('fry')} className="fire-btn-override mt-4">
+                        Advance to Evidence Fry &rarr;
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SHELF 3: FRY */}
+              {activeShelf === 'fry' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="border-b border-white/10 pb-4 flex flex-wrap justify-between items-center gap-2">
+                    <div>
+                      <span className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-widest">SHELF 03 // FORENSIC BINDER</span>
+                      <h2 className="font-orbitron font-black text-2xl text-white">FRY: LEVEL 3 EVIDENCE BINDER</h2>
+                    </div>
+                    <span className="px-3 py-1 rounded bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-mono text-xs">
+                      Federal public sources
+                    </span>
+                  </div>
+
+                  <div className="frosted-glass-pill p-5 rounded-xl space-y-4">
+                    <div className="font-mono text-xs text-slate-300">
+                      <strong>Defensible Evidence Dossier:</strong> CISA Known Exploited Vulnerabilities (KEV) cross-check, NIST SP 800-82 telemetry, and continuous public surface logging.
+                    </div>
+                    <div className="p-3 rounded-lg bg-black/50 border border-cyan-500/30 font-mono text-xs text-cyan-300 overflow-x-auto">
+                      <code>SHA256(BIND_PAYLOAD) = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>
+                    </div>
+                    <button onClick={() => setActiveShelf('chm-burn')} className="fire-btn-override max-w-[220px]">
+                      Proceed to Chemical Burn &rarr;
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* SHELF 4: CHEMICAL BURN */}
+              {activeShelf === 'chm-burn' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="border-b border-white/10 pb-4 flex flex-wrap justify-between items-center gap-2">
+                    <div>
+                      <span className="font-mono text-xs font-bold text-lime-400 uppercase tracking-widest">SHELF 04 // ACID STRESS TEST</span>
+                      <h2 className="font-orbitron font-black text-2xl text-white">CHEMICAL BURN: FORENSIC ACID PASS</h2>
+                    </div>
+                    <span className="px-3 py-1 rounded bg-lime-500/20 border border-lime-500/40 text-lime-300 font-mono text-xs">
+                      Stress Test Module
+                    </span>
+                  </div>
+
+                  <div className="frosted-glass-pill p-5 rounded-xl space-y-3">
+                    <p className="text-slate-300 text-xs font-mono leading-relaxed">
+                      Final stress test against critical external failure points: ephemeral link expiration, CORS misconfiguration probes, and stale DNS record dissolution.
+                    </p>
+                    <div className="w-full bg-slate-900 rounded-full h-3 overflow-hidden border border-lime-500/40">
+                      <div className="bg-gradient-to-r from-lime-500 to-emerald-400 h-full w-[85%]"></div>
+                    </div>
+                    <div className="flex justify-between text-[11px] font-mono text-slate-400">
+                      <span>Acid Dissolution Pass: 85%</span>
+                      <span className="text-lime-400 font-bold">15% Volatile Residue Quarantined</span>
+                    </div>
+                    <button onClick={() => setActiveShelf('reviews')} className="fire-btn-override mt-2 max-w-[220px]">
+                      Advance to Final Sign-Off &rarr;
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* SHELF 5: REVIEWS & SIGN-OFF */}
+              {activeShelf === 'reviews' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="border-b border-white/10 pb-4 flex flex-wrap justify-between items-center gap-2">
+                    <div>
+                      <span className="font-mono text-xs font-bold text-rose-400 uppercase tracking-widest">SHELF 05 // AUTHORIZATION</span>
+                      <h2 className="font-orbitron font-black text-2xl text-white">REVIEWS & SIGN-OFF // FINAL VALIDATION</h2>
+                    </div>
+                    <span className="px-3 py-1 rounded bg-rose-500/20 border border-rose-500/40 text-rose-300 font-mono text-xs">
+                      Executive Authorization
+                    </span>
+                  </div>
+
+                  <div className="frosted-glass-pill p-6 rounded-xl space-y-4 text-center">
+                    <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 mx-auto flex items-center justify-center text-emerald-400 text-2xl">
+                      <i className="fa-solid fa-check-double"></i>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-orbitron font-bold text-lg text-white">Algorithmic Cryptographic SHA-256 Seal</h3>
+                      <p className="text-xs text-slate-400 font-mono max-w-lg mx-auto">
+                        Delivered within standard business turnaround up to 5 business days. Sealed and verified by Chief Compliance Reviewer.
+                      </p>
+                    </div>
+                    <div className="pt-2">
+                      <button className="fire-btn-override max-w-sm mx-auto" onClick={() => alert("Cryptographic Seal Issued Successfully!")}>
+                        AUTHORIZE & ISSUE SEAL
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </main>
+
+          {/* MANDATORY COMMERCIAL FOOTER */}
+          <footer className="frosted-glass-chassis p-4 text-center text-xs text-slate-400 font-mono space-y-2">
+            <div>
+              &copy; 2026 Leon R. Darden &bull; <strong>BURN-1 Systems (burn-1.com)</strong>. All rights reserved.
+            </div>
+            <div className="flex justify-center gap-4 text-[11px] text-slate-400">
+              <a href="terms.html" className="hover:text-white underline">Legal Terms &amp; Disclaimer</a>
+              <span>&bull;</span>
+              <a href="https://tools.burn-1.com#helpdesk" className="hover:text-white underline text-orange-400 font-bold">Help Desk &amp; Escalations</a>
+            </div>
+          </footer>
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

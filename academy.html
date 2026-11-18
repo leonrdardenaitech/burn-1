@@ -692,6 +692,8 @@
                     </div>
 
                     <div id="login-form-area" class="space-y-3">
+                        <!-- Honeypot Bot Trap -->
+                        <input type="text" name="b1_security_trap" id="academy-security-trap" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none; width: 0; height: 0;" aria-hidden="true">
                         <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-100 rounded-xl font-mono text-[11px] font-bold">
                             <button type="button" id="tab-mode-create" onclick="setIntakeMode('create')" class="py-1.5 rounded-lg bg-[#2A081C] text-white transition-all">Create Account</button>
                             <button type="button" id="tab-mode-signin" onclick="setIntakeMode('signin')" class="py-1.5 rounded-lg text-slate-600 hover:text-[#2A081C] transition-all">Operator Sign In</button>
@@ -1385,6 +1387,9 @@
         }
 
         function processLogin() {
+            if (document.getElementById('academy-security-trap')?.value) {
+                return;
+            }
             const email = document.getElementById('login-email').value.trim();
             const domain = document.getElementById('login-domain').value.trim();
             if (!email) { showToast("Enter your Operator Email to create an account or sign in.", "warn"); document.getElementById('login-email').focus(); return; }

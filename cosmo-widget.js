@@ -1256,22 +1256,13 @@
 
   function syncFloatingAuthButtonState() {
     const wrap = document.getElementById('b1-floating-auth-wrap');
-    const labelEl = document.getElementById('b1-floating-auth-text');
-    const subEl = document.getElementById('b1-floating-auth-sub');
-    if (!wrap) return;
-
-    if (isB2BPortalPage()) {
+    if (wrap) {
+      // Consolidated into the Unified Floating Hub ("Binder Bot & Payment Hub")
       wrap.classList.add('is-hidden');
-      return;
     }
-    wrap.classList.remove('is-hidden');
-
-    if (session.authUser && session.authUser.emailMasked) {
-      if (labelEl) labelEl.textContent = session.authUser.emailMasked;
-      if (subEl) subEl.textContent = 'ROLE: ' + String(session.authUser.role || 'direct').toUpperCase();
-    } else {
-      if (labelEl) labelEl.textContent = 'Sign In / Sign Up';
-      if (subEl) subEl.textContent = 'Customer Account';
+    const bar = document.getElementById('cosmo-floating-bar');
+    if (bar && document.getElementById('burn1-unified-hub')) {
+      bar.style.display = 'none';
     }
   }
 
@@ -1705,7 +1696,20 @@
       renderWidget();
       focusCliInput();
     },
-    openAuthModal: openCustomerAuthModal,
+    openAuthModal: function () {
+      if (window.Burn1UnifiedHub && typeof window.Burn1UnifiedHub.openTab === 'function') {
+        window.Burn1UnifiedHub.openTab('auth');
+        return;
+      }
+      openCustomerAuthModal();
+    },
+    openModal: function () {
+      if (window.Burn1UnifiedHub && typeof window.Burn1UnifiedHub.openTab === 'function') {
+        window.Burn1UnifiedHub.openTab('auth');
+        return;
+      }
+      openCustomerAuthModal();
+    },
     minimise: function () {
       session.viewState = 'collapsed';
       saveSession();

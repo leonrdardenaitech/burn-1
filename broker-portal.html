@@ -65,6 +65,33 @@
           </a>
         </nav>
 
+        <!-- Division Switcher (Ultra Bar Links) -->
+        <div class="text-[9px] font-mono font-extrabold uppercase tracking-widest text-[#4A554E] px-1 mt-4 mb-1.5">
+          Autonomous Divisions
+        </div>
+        <nav aria-label="Divisional Routing">
+          <a href="freezer.html" class="vault-nav-link">
+            <i class="fa-solid fa-snowflake w-4 text-center text-sky-600"></i>
+            <span>FreezerBurn</span>
+          </a>
+          <a href="acid.html" class="vault-nav-link">
+            <i class="fa-solid fa-flask-vial w-4 text-center text-lime-700"></i>
+            <span>Acid Division</span>
+          </a>
+          <a href="times2.html" class="vault-nav-link">
+            <i class="fa-solid fa-clock-rotate-left w-4 text-center text-indigo-700"></i>
+            <span>Times2</span>
+          </a>
+          <a href="sizzlean.html" class="vault-nav-link">
+            <i class="fa-solid fa-fire-flame-curved w-4 text-center text-orange-700"></i>
+            <span>Sizzlean</span>
+          </a>
+          <a href="directory.html" class="vault-nav-link">
+            <i class="fa-solid fa-stamp w-4 text-center text-[#14452F]"></i>
+            <span>Directory</span>
+          </a>
+        </nav>
+
         <!-- Mandatory Governance Notice Box -->
         <div class="mt-5 p-2.5 rounded bg-[#FAF7F0]/90 border border-[#1B365D] text-[10px] font-mono leading-relaxed text-[#111814]">
           <div class="font-extrabold text-[#1B365D] uppercase mb-1 flex items-center gap-1">
@@ -336,43 +363,44 @@
         </div>
       </div>
 
-      <!-- Footer -->
-      <footer class="footer-legal">
-        <p>© 2026 Leon R. Darden. All rights reserved.</p>
+      <!-- Mandatory Commercial Footer Standard -->
+      <footer class="footer-legal space-y-2 text-[11px] font-mono text-[#4A554E]">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="font-bold text-[#111814]">© 2026 Leon R. Darden • BURN-1 Systems (burn-1.com). All rights reserved.</p>
+          <a href="https://tools.burn-1.com#helpdesk" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-[#14452F] text-[#FAF7F0] font-bold hover:opacity-90">
+            Help Desk &amp; Escalations: tools.burn-1.com
+          </a>
+        </div>
+        <p class="text-[10px] leading-relaxed">
+          <strong>Legal Disclaimer:</strong> BURN-1 Systems provides Agentless Perimeter Telemetry &amp; Outside-In Exposure Audits bound with an Algorithmic Cryptographic SHA-256 Seal. Delivered within standard business turnaround up to 5 business days. After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report. <a href="terms.html" class="underline font-bold text-[#14452F]">Terms &amp; Legal Disclaimer</a>.
+        </p>
+        <details class="pt-1 border-t border-[#C4B693] text-[10px]">
+          <summary class="cursor-pointer font-bold text-[#1B365D]">BURN-1 Systems Ecosystem Sitemap</summary>
+          <div class="mt-1 flex flex-wrap gap-x-2 gap-y-1">
+            <a href="index.html" class="underline">Home</a> •
+            <a href="freezer.html" class="underline">FreezerBurn</a> •
+            <a href="acid.html" class="underline">Acid</a> •
+            <a href="times2.html" class="underline">Times2</a> •
+            <a href="sizzlean.html" class="underline">Sizzlean</a> •
+            <a href="directory.html" class="underline">Directory</a> •
+            <a href="partners.html" class="underline">Partners</a> •
+            <a href="broker-portal.html" class="underline">Broker Portal</a> •
+            <a href="msp-intake.html" class="underline">MSP Intake</a> •
+            <a href="intake.html" class="underline">Direct Intake</a> •
+            <a href="energy.html" class="underline">Energy Sector</a> •
+            <a href="terms.html" class="underline">Terms</a>
+          </div>
+        </details>
       </footer>
     </main>
 
     <!-- ======================================================================
-         COLUMN 3: RIGHT AUTH & LIVE STATUS SIDEBAR (250px)
+         COLUMN 3: RIGHT LIVE TELEMETRY & STATUS SIDEBAR (250px)
+         (Sign-In unified into Binder Bot & Payment Hub)
          ====================================================================== -->
     <aside class="col-right-status p-3.5">
-      <!-- TOP: Authentication / Sign-In Widget -->
-      <div class="p-3 rounded bg-[#FAF7F0] border-2 border-[#1B365D] shadow-sm">
-        <div class="flex items-center justify-between border-b border-[#C4B693] pb-2 mb-2.5">
-          <span class="font-serif font-extrabold text-[11px] text-[#1B365D] uppercase tracking-wider">
-            <i class="fa-solid fa-key text-[#14452F] mr-1"></i> Broker Sign-In
-          </span>
-          <span class="px-1.5 py-0.5 bg-[#14452F]/15 text-[#14452F] font-mono text-[9px] font-bold rounded">
-            TLS 1.3
-          </span>
-        </div>
-        <form onsubmit="event.preventDefault(); window.Burn1Treasury.triggerLifecycleProgression('BROKER-DESK-AUTH-VERIFIED');" class="space-y-2">
-          <div>
-            <label class="block font-mono text-[9px] font-bold uppercase text-[#4A554E] mb-0.5">Broker Syndicate ID</label>
-            <input type="text" placeholder="BRK-2048-LLOYDS" class="treasury-input text-[11px] py-1 px-2" required>
-          </div>
-          <div>
-            <label class="block font-mono text-[9px] font-bold uppercase text-[#4A554E] mb-0.5">Cryptographic Key</label>
-            <input type="password" placeholder="••••••••••••" class="treasury-input text-[11px] py-1 px-2" required>
-          </div>
-          <button type="submit" class="med-coin med-silver w-full text-[10px] py-1.5">
-            <i class="fa-solid fa-lock"></i> Authenticate Broker
-          </button>
-        </form>
-      </div>
-
-      <!-- MIDDLE: 5-State Lifecycle Telemetry Monitor -->
-      <div class="my-3 p-3 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-sm flex-1 flex flex-col justify-between">
+      <!-- TOP/MIDDLE: 5-State Lifecycle Telemetry Monitor -->
+      <div class="mb-3 p-3 rounded bg-[#FAF7F0] border-2 border-[#14452F] shadow-sm flex-1 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between border-b border-[#C4B693] pb-1.5 mb-2">
             <span class="font-serif font-extrabold text-[10px] text-[#14452F] uppercase">
@@ -436,6 +464,7 @@
 
   <script src="b2b-guilloche.js"></script>
   <script src="cosmo-widget.js"></script>
+  <script src="js/division-bots.js"></script>
   <script>
     function updateCoBrandPreview() {
       const firm = (document.getElementById('broker-firm-input').value || 'BROKERAGE PARTNER').toUpperCase();
@@ -453,6 +482,12 @@
       window.Burn1Treasury.openProofCertificateModal(firm, client);
     }
   </script>
+
+  <!-- UNIVERSAL PAYMENT CONTROLLER & TRI-PANE BOT CONTROLLER & AUDIO FX -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
+
 </body>
 </html>
 

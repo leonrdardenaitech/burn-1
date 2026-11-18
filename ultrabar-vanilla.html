@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BURN-1 // Vanilla UltraBar Hydraulic Vertebrae Console</title>
+  
+  <!-- Modern Tailwind CSS CDN for utility resets -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter, JetBrains Mono, Rajdhani, Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Rajdhani:wght@600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* =========================================================================
+       CUSTOM FROSTED GLASS & HYDRAULIC MECHANICAL EASING
+       Zero React • Zero Babel • Zero Heavy Runtime Dependencies
+       ========================================================================= */
+    :root {
+      --ease-hydraulic: cubic-bezier(0.16, 1, 0.3, 1);
+      --glass-bg: rgba(14, 20, 32, 0.72);
+      --glass-panel-bg: rgba(11, 16, 26, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --glass-border-active: rgba(56, 189, 248, 0.5);
+      --glass-highlight: rgba(255, 255, 255, 0.28);
+      
+      --med-red: #ef4444;
+      --med-red-glow: rgba(239, 68, 68, 0.65);
+      --neon-emerald: #00FF87;
+      --neon-emerald-glow: rgba(0, 255, 135, 0.6);
+      --neon-cyan: #38bdf8;
+      --neon-amber: #fbbf24;
+      --paper-cream: #F4EFE0;
+    }
+
+    body {
+      background-color: #06090e;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(239, 68, 68, 0.06) 0%, transparent 45%),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 4px);
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+    /* Frosted Glass Mastery */
+    .glass-chassis {
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 1px var(--glass-highlight);
+    }
+
+    .glass-panel {
+      background: var(--glass-panel-bg);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    /* Medical Red Cross Pill Pulse */
+    .medical-cross-btn {
+      transition: all 0.35s var(--ease-hydraulic);
+      box-shadow: 0 0 16px var(--med-red-glow);
+    }
+    .medical-cross-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 26px var(--med-red);
+    }
+    .medical-cross-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Completion Ring Circular Progress SVG */
+    .completion-circle-track {
+      stroke: rgba(255, 255, 255, 0.12);
+      stroke-width: 3.5;
+    }
+    .completion-circle-fill {
+      stroke: var(--neon-emerald);
+      stroke-width: 3.5;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      transition: stroke-dashoffset 0.6s var(--ease-hydraulic), stroke 0.4s ease;
+      filter: drop-shadow(0 0 6px var(--neon-emerald-glow));
+    }
+
+    /* Vertebrae Spine Transitions */
+    #ultraBarSpine {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      transform-origin: top left;
+      overflow: hidden;
+      transition: max-height 0.55s var(--ease-hydraulic), opacity 0.4s ease, transform 0.5s var(--ease-hydraulic);
+    }
+    #ultraBarSpine.is-deployed {
+      max-height: 600px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Vertebrae Spine Item */
+    .vertebra-node {
+      transition: all 0.3s var(--ease-hydraulic);
+    }
+    .vertebra-node:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .vertebra-node.is-active {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: var(--neon-cyan);
+    }
+    .vertebra-node.is-completed {
+      background: rgba(0, 255, 135, 0.08);
+      border-color: rgba(0, 255, 135, 0.35);
+    }
+
+    /* Generous Sliding Side Pane (Slide to Right & Teleport Down) */
+    #ultraBarFlyoutPane {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-30px) scale(0.96);
+      transform-origin: top left;
+      transition: transform 0.45s var(--ease-hydraulic), opacity 0.35s ease, top 0.4s var(--ease-hydraulic);
+    }
+    #ultraBarFlyoutPane.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0) scale(1);
+    }
+
+    /* High-Contrast Inputs for Accessibility / Visually Impaired */
+    .accessible-input {
+      background: #0b111a;
+      border: 2px solid #334155;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: all 0.25s ease;
+    }
+    .accessible-input:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+      background: #0f172a;
+    }
+
+    /* Retraction LCD Lamp */
+    .lcd-indicator-bar {
+      transition: all 0.45s ease;
+    }
+    .lcd-indicator-bar.lcd-green {
+      background: var(--neon-emerald);
+      box-shadow: 0 0 18px var(--neon-emerald), 0 0 30px var(--neon-emerald);
+    }
+
+    /* Subtle Animated Guilloche Canvas in background for sovereign look */
+    #guillocheCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.18;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body class="p-6 md:p-10 select-none">
+
+  <!-- Background Sovereign Wireframe Canvas -->
+  <canvas id="guillocheCanvas"></canvas>
+
+  <!-- Ambient Hero Backdrop Showcase (Demonstrating Fast Lane & Medical Context) -->
+  <div class="relative z-10 max-w-4xl mx-auto pt-24 pb-12 text-center space-y-4">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-sky-500/30 bg-sky-950/40 text-sky-400 font-mono text-xs uppercase tracking-widest">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+      <span>Autonomous Vanilla UltraBar Engine • Active</span>
+    </div>
+    <h1 class="font-rajdhani font-black text-4xl sm:text-6xl text-white tracking-wide uppercase">
+      Tactile UltraBar <span class="text-sky-400">Vertebrae Console</span>
+    </h1>
+    <p class="font-mono text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
+      Engineered without React or framework overhead. Click the <span class="text-red-400 font-bold">Medical Cross Pill</span> docked on the left to deploy the vertical spine, auto-slide into the generous title pane, and transmit your deliverable.
+    </p>
+  </div>
+
+  <!-- =========================================================================
+       LEON'S VANILLA ULTRABAR COMPONENT DOCK
+       ========================================================================= -->
+  <div id="ultraBarRoot" class="fixed top-8 left-8 z-50 flex items-start gap-4">
+    
+    <!-- LEFT BACKBONE COLUMN: Pill + Vertebrae Spine -->
+    <div class="flex flex-col items-start">
+      
+      <!-- 1. THE STARTING MEDICAL PILL -->
+      <div 
+        id="ultraBarPill" 
+        class="glass-chassis rounded-full px-3 py-2 flex items-center gap-3 cursor-pointer select-none transition-all duration-300 hover:border-slate-400/40"
+        title="Click to toggle UltraBar Spine"
+      >
+        <!-- The Medical Sign: Red circle button with white cross -->
+        <button 
+          id="medicalCrossBtn" 
+          type="button" 
+          aria-label="Deploy UltraBar Spine"
+          class="medical-cross-btn w-9 h-9 rounded-full bg-red-600 border border-red-400 flex items-center justify-center text-white shrink-0"
+        >
+          <i id="medicalCrossIcon" class="fa-solid fa-plus text-base font-black transition-transform duration-300"></i>
+        </button>
+
+        <!-- Brand / Mode Identifier Label -->
+        <div class="flex flex-col pr-1">
+          <span class="font-rajdhani font-bold text-sm tracking-widest text-white leading-none">BURN-1</span>
+          <span id="pillSubStatus" class="font-mono text-[9px] uppercase tracking-wider text-slate-400">DISPATCH COCKPIT</span>
+        </div>
+
+        <!-- Completion Circle Indicator (Grayed out initially, turns Emerald 100% on complete) -->
+        <div class="relative w-9 h-9 flex items-center justify-center shrink-0">
+          <svg class="w-9 h-9" viewBox="0 0 36 36">
+            <path 
+              class="completion-circle-track fill-none" 
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+            />
+            <path 
+              id="completionCircleProgress"
+              class="completion-circle-fill fill-none" 
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+            />
+          </svg>
+          <div id="completionRingCenter" class="absolute inset-0 flex items-center justify-center font-mono text-[9px] font-bold text-slate-400">
+            0%
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. THE VERTICALLY EXPANDING VERTEBRAE SPINE -->
+      <div id="ultraBarSpine" class="mt-2.5 w-64 glass-chassis rounded-2xl p-2.5 space-y-2">
+        
+        <div class="px-2 py-1 flex items-center justify-between border-b border-white/10 pb-2">
+          <span class="font-mono text-[10px] uppercase font-bold text-sky-400 tracking-widest">VERTEBRAE // STAGES</span>
+          <span id="spineStepCounter" class="font-mono text-[10px] text-slate-400">STAGE 1 / 4</span>
+        </div>
+
+        <!-- Spine Node 1 -->
+        <div 
+          data-step-node="1" 
+          class="vertebra-node is-active border border-sky-500/40 rounded-xl px-3 py-2.5 flex items-center justify-between cursor-pointer"
+        >
+          <div class="flex items-center gap-2.5">
+            <span class="font-mono text-xs font-black px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300">01</span>
+            <span class="font-rajdhani font-bold text-sm tracking-wide text-white">INTAKE &amp; TARGET</span>
+          </div>
+          <span class="node-indicator font-mono text-xs text-sky-400"><i class="fa-solid fa-chevron-right"></i></span>
+        </div>
+
+        <!-- Spine Node 2 -->
+        <div 
+          data-step-node="2" 
+          class="vertebra-node border border-white/10 rounded-xl px-3 py-2.5 flex items-center justify-between cursor-pointer opacity-70"
+        >
+          <div class="flex items-center gap-2.5">
+            <span class="font-mono text-xs font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">02</span>
+            <span class="font-rajdhani font-bold text-sm tracking-wide text-white">OPERATIONAL ATTESTATION</span>
+          </div>
+          <span class="node-indicator font-mono text-xs text-slate-500"><i class="fa-solid fa-lock"></i></span>
+        </div>
+
+        <!-- Spine Node 3 -->
+        <div 
+          data-step-node="3" 
+          class="vertebra-node border border-white/10 rounded-xl px-3 py-2.5 flex items-center justify-between cursor-pointer opacity-70"
+        >
+          <div class="flex items-center gap-2.5">
+            <span class="font-mono text-xs font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">03</span>
+            <span class="font-rajdhani font-bold text-sm tracking-wide text-white">FORENSIC BIND EVIDENCE</span>
+          </div>
+          <span class="node-indicator font-mono text-xs text-slate-500"><i class="fa-solid fa-lock"></i></span>
+        </div>
+
+        <!-- Spine Node 4 -->
+        <div 
+          data-step-node="4" 
+          class="vertebra-node border border-white/10 rounded-xl px-3 py-2.5 flex items-center justify-between cursor-pointer opacity-70"
+        >
+          <div class="flex items-center gap-2.5">
+            <span class="font-mono text-xs font-black px-1.5 py-0.5 rounded bg-white/10 text-slate-300">04</span>
+            <span class="font-rajdhani font-bold text-sm tracking-wide text-white">DELIVERABLE DISPATCH</span>
+          </div>
+          <span class="node-indicator font-mono text-xs text-slate-500"><i class="fa-solid fa-lock"></i></span>
+        </div>
+
+        <!-- Bottom LCD Indicator Lamp on Spine -->
+        <div class="pt-1.5 px-1 flex items-center justify-between">
+          <span class="font-mono text-[9px] uppercase tracking-wider text-slate-400">HARDWARE BUS</span>
+          <div id="spineLcdBar" class="lcd-indicator-bar w-16 h-2 rounded-full bg-slate-700"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. GENEROUS SLIDING SIDE PANE (Auto-slides to right, teleports down to active stage) -->
+    <div 
+      id="ultraBarFlyoutPane" 
+      class="glass-panel rounded-2xl w-[92vw] sm:w-[580px] md:w-[680px] p-6 space-y-6"
+    >
+      <!-- Generous Title Pane Header with Completion Save-Point Indicator at far right -->
+      <div class="flex items-center justify-between border-b border-white/15 pb-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span id="paneStepBadge" class="font-mono text-xs font-black uppercase px-2 py-0.5 rounded bg-sky-500 text-slate-950">
+              STEP 01
+            </span>
+            <h2 id="paneTitle" class="font-rajdhani font-black text-xl sm:text-2xl text-white tracking-wide">
+              INTAKE TARGET &amp; CORE IDENTITY
+            </h2>
+          </div>
+          <p id="paneSubtext" class="font-mono text-xs text-slate-300 mt-1">
+            Specify the corporate entity, industry sector, and external root domain.
+          </p>
+        </div>
+
+        <!-- Save Point / Completion Indicator Button at far right of title -->
+        <button 
+          id="paneSavePointIndicator" 
+          type="button" 
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-sky-400/40 bg-sky-950/60 text-sky-300 font-mono text-xs font-bold transition hover:bg-sky-900/60"
+          title="Step Save Point Status"
+        >
+          <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+          <span id="savePointText">READY</span>
+        </button>
+      </div>
+
+      <!-- DYNAMIC PANE VIEWPORT: Teleporting Content based on current active step -->
+      <div id="paneBodyContainer" class="space-y-5">
+        
+        <!-- === STEP 1 CONTENT: Industry Selector & Input Fields === -->
+        <div id="stepView1" class="step-view space-y-4">
+          <!-- Industry / Product Selector Menu -->
+          <div>
+            <label class="block font-mono text-xs uppercase font-bold text-amber-300 mb-1.5 tracking-wider">
+              1. Select Industry / Product Tier
+            </label>
+            <select id="inputIndustry" class="accessible-input w-full p-3.5 rounded-xl font-mono text-sm cursor-pointer">
+              <option value="healthcare">HEALTHCARE PLUS // SURGICAL VAULT (880 Hz Audio &amp; HIPAA Safe Harbor)</option>
+              <option value="acid">ACID DIVISION // INDUSTRIAL CHEMICAL &amp; OSHA 1910.119 CONSOLE</option>
+              <option value="fastlane">FAST LANE V2 // 4-PAGE EVIDENTIARY DOSSIER (SPORTS CAR VELOCITY)</option>
+              <option value="freezer">FREEZER DUMP // COLD STORAGE EVIDENCE RECOVERY</option>
+              <option value="finance">CAPITAL SHIELD // NYDFS 23 NYCRR 500 TREASURY BIND</option>
+            </select>
+          </div>
+
+          <!-- Business Name & Root Domain Input Fields -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-mono text-xs uppercase font-bold text-slate-300 mb-1 tracking-wider">
+                2. Business Legal Entity
+              </label>
+              <input 
+                id="inputBusinessName" 
+                type="text" 
+                placeholder="e.g. Apex Health Systems, LLC" 
+                class="accessible-input w-full p-3.5 rounded-xl"
+                value="Apex Health Systems, LLC"
+              />
+            </div>
+            <div>
+              <label class="block font-mono text-xs uppercase font-bold text-slate-300 mb-1 tracking-wider">
+                3. Primary Root Domain
+              </label>
+              <input 
+                id="inputDomain" 
+                type="text" 
+                placeholder="e.g. apexhealth.org" 
+                class="accessible-input w-full p-3.5 rounded-xl"
+                value="apexhealth.org"
+              />
+            </div>
+          </div>
+
+          <!-- Signatory Verification Contact -->
+          <div>
+            <label class="block font-mono text-xs uppercase font-bold text-slate-300 mb-1 tracking-wider">
+              4. Executive Signatory Contact
+            </label>
+            <input 
+              id="inputSignatory" 
+              type="text" 
+              placeholder="e.g. Dr. Eleanor Vance, Chief Risk Officer" 
+              class="accessible-input w-full p-3.5 rounded-xl"
+              value="Dr. Eleanor Vance (Chief Risk Officer)"
+            />
+          </div>
+        </div>
+
+        <!-- === STEP 2 CONTENT: Operational Attestation Checklist === -->
+        <div id="stepView2" class="step-view space-y-4 hidden">
+          <p class="font-mono text-xs text-sky-200">
+            Attest key operational assertions to prevent <code class="bg-black/50 px-1 py-0.5 rounded text-amber-300">NON_CONV_INCOMPLETE</code> posture:
+          </p>
+          <div class="space-y-3 font-mono text-xs">
+            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-white/10 bg-black/30 cursor-pointer hover:bg-black/50 transition">
+              <input id="chkMfa" type="checkbox" checked class="mt-1 w-4 h-4 accent-emerald-500 rounded" />
+              <div>
+                <span class="font-bold text-white uppercase">MFA Enforced Across All Remote &amp; Administrative Boundaries</span>
+                <p class="text-slate-400 mt-0.5">Complies with NIST CSF 2.0 PR.AA and zero-trust identity verification.</p>
+              </div>
+            </label>
+            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-white/10 bg-black/30 cursor-pointer hover:bg-black/50 transition">
+              <input id="chkBck" type="checkbox" checked class="mt-1 w-4 h-4 accent-emerald-500 rounded" />
+              <div>
+                <span class="font-bold text-white uppercase">Air-Gapped Immutable Backups Verified Weekly</span>
+                <p class="text-slate-400 mt-0.5">Satisfies Ransomware Underwriting Schedule B and NYDFS §500.12.</p>
+              </div>
+            </label>
+            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-white/10 bg-black/30 cursor-pointer hover:bg-black/50 transition">
+              <input id="chkPatch" type="checkbox" checked class="mt-1 w-4 h-4 accent-emerald-500 rounded" />
+              <div>
+                <span class="font-bold text-white uppercase">CISA Known Exploited Vulnerability (KEV) 14-Day Remediation SLA</span>
+                <p class="text-slate-400 mt-0.5">Zero unpatched high-severity CVEs on exposed public attack surfaces.</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- === STEP 3 CONTENT: Forensic Bind Evidence === -->
+        <div id="stepView3" class="step-view space-y-4 hidden">
+          <div class="border border-sky-500/30 bg-sky-950/20 p-4 rounded-xl font-mono text-xs space-y-2">
+            <div class="flex items-center justify-between text-slate-300">
+              <span>TARGET ORCHESTRATION:</span>
+              <span id="evidenceTargetDomain" class="font-bold text-emerald-400">apexhealth.org</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-300">
+              <span>SLM INFERENCE ENGINE:</span>
+              <span class="font-bold text-sky-300">BEE:LATEST (LOCAL RESIDENT HARVESTER)</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-300">
+              <span>CRYPTOGRAPHIC SEAL:</span>
+              <span class="font-mono text-[10px] text-amber-300">SHA-256: e8d4f02a...c8901b52</span>
+            </div>
+          </div>
+          <p class="font-mono text-xs text-slate-300 leading-relaxed">
+            All gathered public telemetry, DNS records, TLS cipher suites, and SPF/DMARC postures are verified and ready for algorithmic underwriting binder assembly.
+          </p>
+        </div>
+
+        <!-- === STEP 4 CONTENT: Deliverable Dispatch & Transmission === -->
+        <div id="stepView4" class="step-view space-y-4 hidden">
+          <div class="p-4 rounded-xl border border-emerald-500/30 bg-emerald-950/20 space-y-2">
+            <span class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-2">
+              <i class="fa-solid fa-shield-halved"></i>
+              Professional Executive Underwriting Dispatch
+            </span>
+            <p class="font-mono text-xs text-slate-300 leading-relaxed">
+              Upon clicking "EXECUTE DELIVERABLE DISPATCH", the four-part dossier will be cryptographically sealed, uploaded to the client private subdomain (<code class="text-sky-300">apexhealth.burn-1.com</code>), and sent to carrier underwriting with formal executive cover documentation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PANE FOOTER NAVIGATION & ACTION BUTTONS -->
+      <div class="flex items-center justify-between pt-4 border-t border-white/10">
+        <button 
+          id="btnPrevStep" 
+          type="button" 
+          class="px-4 py-2.5 rounded-xl border border-white/15 text-slate-300 font-mono text-xs font-bold uppercase tracking-wider hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
+          disabled
+        >
+          <i class="fa-solid fa-arrow-left mr-1.5"></i> Back
+        </button>
+
+        <button 
+          id="btnNextStep" 
+          type="button" 
+          class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-rajdhani font-black text-sm uppercase tracking-widest shadow-lg shadow-sky-500/25 transition active:scale-95 flex items-center gap-2"
+        >
+          <span id="btnNextStepLabel">Proceed to Attestation</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+     VANILLA JAVASCRIPT ULTRABAR CONTROLLER ENGINE
+     Zero Frameworks • Full Hydraulic Physics & Mechanical Sequencing
+     ========================================================================= -->
+  <script>
+    class VanillaUltraBarEngine {
+      constructor() {
+        this.currentStep = 1;
+        this.totalSteps = 4;
+        this.isSpineOpen = false;
+        this.isFlyoutOpen = false;
+        this.isFullyCompleted = false;
+
+        this.stepsMeta = [
+          {
+            id: 1,
+            title: "INTAKE TARGET & CORE IDENTITY",
+            subtext: "Specify corporate entity, industry sector, and external root domain.",
+            buttonLabel: "Save & Proceed to Attestation"
+          },
+          {
+            id: 2,
+            title: "OPERATIONAL ATTESTATIONS",
+            subtext: "Attest administrative boundaries, MFA enforcement, and backup resilience.",
+            buttonLabel: "Lock Attestations & Verify Evidence"
+          },
+          {
+            id: 3,
+            title: "FORENSIC BIND EVIDENCE",
+            subtext: "Review passive telemetry sweep, DNS ciphers, and resident SLM harvest.",
+            buttonLabel: "Approve Dossier & Prepare Dispatch"
+          },
+          {
+            id: 4,
+            title: "DELIVERABLE DISPATCH",
+            subtext: "Seal under SHA-256 and deliver to carrier underwriters with formal cover.",
+            buttonLabel: "Execute Deliverable Dispatch"
+          }
+        ];
+
+        this.cacheDOMElements();
+        this.attachEventListeners();
+        this.initGuillocheCanvas();
+        this.updateCompletionProgress(0);
+      }
+
+      cacheDOMElements() {
+        // Pill Elements
+        this.pill = document.getElementById('ultraBarPill');
+        this.medicalCrossBtn = document.getElementById('medicalCrossBtn');
+        this.medicalCrossIcon = document.getElementById('medicalCrossIcon');
+        this.pillSubStatus = document.getElementById('pillSubStatus');
+        this.completionCircleProgress = document.getElementById('completionCircleProgress');
+        this.completionRingCenter = document.getElementById('completionRingCenter');
+
+        // Spine Elements
+        this.spine = document.getElementById('ultraBarSpine');
+        this.spineStepCounter = document.getElementById('spineStepCounter');
+        this.spineLcdBar = document.getElementById('spineLcdBar');
+        this.stepNodes = document.querySelectorAll('[data-step-node]');
+
+        // Flyout Pane Elements
+        this.flyout = document.getElementById('ultraBarFlyoutPane');
+        this.paneStepBadge = document.getElementById('paneStepBadge');
+        this.paneTitle = document.getElementById('paneTitle');
+        this.paneSubtext = document.getElementById('paneSubtext');
+        this.savePointText = document.getElementById('savePointText');
+        this.btnPrev = document.getElementById('btnPrevStep');
+        this.btnNext = document.getElementById('btnNextStep');
+        this.btnNextLabel = document.getElementById('btnNextStepLabel');
+
+        // Step Views
+        this.stepViews = {
+          1: document.getElementById('stepView1'),
+          2: document.getElementById('stepView2'),
+          3: document.getElementById('stepView3'),
+          4: document.getElementById('stepView4'),
+        };
+
+        // Form Inputs
+        this.inputDomain = document.getElementById('inputDomain');
+        this.evidenceTargetDomain = document.getElementById('evidenceTargetDomain');
+      }
+
+      attachEventListeners() {
+        // Toggle Spine on Medical Cross Click or Pill click
+        this.medicalCrossBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleSpine();
+        });
+
+        this.pill.addEventListener('click', () => {
+          this.toggleSpine();
+        });
+
+        // Click Spine Nodes
+        this.stepNodes.forEach(node => {
+          node.addEventListener('click', () => {
+            const stepNum = parseInt(node.getAttribute('data-step-node'), 10);
+            this.goToStep(stepNum);
+          });
+        });
+
+        // Navigation Buttons
+        this.btnNext.addEventListener('click', () => this.handleNextStep());
+        this.btnPrev.addEventListener('click', () => this.handlePrevStep());
+
+        // Dynamic domain update in evidence preview
+        if (this.inputDomain) {
+          this.inputDomain.addEventListener('input', (e) => {
+            const val = e.target.value.trim() || 'domain.com';
+            if (this.evidenceTargetDomain) this.evidenceTargetDomain.textContent = val;
+          });
+        }
+      }
+
+      toggleSpine() {
+        if (this.isFullyCompleted) {
+          // If already complete, allow quick inspection or notification
+          this.isFullyCompleted = false;
+          this.updateCompletionProgress(0);
+          this.spineLcdBar.classList.remove('lcd-green');
+          this.pillSubStatus.textContent = "DISPATCH COCKPIT";
+        }
+
+        if (this.isSpineOpen) {
+          this.closeUltraBar();
+        } else {
+          this.openUltraBar();
+        }
+      }
+
+      openUltraBar() {
+        this.isSpineOpen = true;
+        this.spine.classList.add('is-deployed');
+        this.medicalCrossIcon.classList.remove('fa-plus');
+        this.medicalCrossIcon.classList.add('fa-xmark');
+        this.medicalCrossBtn.classList.add('rotate-90');
+
+        // Auto-Slide Step 1 open to the right with generous title pane
+        setTimeout(() => {
+          this.openFlyoutPane();
+          this.teleportFlyoutToStep(this.currentStep);
+        }, 180);
+      }
+
+      closeUltraBar() {
+        this.isSpineOpen = false;
+        this.isFlyoutOpen = false;
+        this.spine.classList.remove('is-deployed');
+        this.flyout.classList.remove('is-open');
+        this.medicalCrossIcon.classList.remove('fa-xmark');
+        this.medicalCrossIcon.classList.add('fa-plus');
+        this.medicalCrossBtn.classList.remove('rotate-90');
+      }
+
+      openFlyoutPane() {
+        this.isFlyoutOpen = true;
+        this.flyout.classList.add('is-open');
+      }
+
+      teleportFlyoutToStep(stepIndex) {
+        // Compute active node position on the spine to align the flyout smoothly
+        const activeNode = document.querySelector(`[data-step-node="${stepIndex}"]`);
+        if (activeNode) {
+          const offsetTop = activeNode.offsetTop;
+          // Smooth hydraulic teleport offset
+          this.flyout.style.marginTop = `${Math.max(0, offsetTop - 12)}px`;
+        }
+      }
+
+      goToStep(stepNum) {
+        if (stepNum < 1 || stepNum > this.totalSteps) return;
+        this.currentStep = stepNum;
+        this.renderCurrentStep();
+      }
+
+      handleNextStep() {
+        if (this.currentStep < this.totalSteps) {
+          // Progress to next step
+          this.goToStep(this.currentStep + 1);
+        } else {
+          // Execute Final Step Deliverable Completion Sequence!
+          this.executeCompletionSequence();
+        }
+      }
+
+      handlePrevStep() {
+        if (this.currentStep > 1) {
+          this.goToStep(this.currentStep - 1);
+        }
+      }
+
+      renderCurrentStep() {
+        const meta = this.stepsMeta[this.currentStep - 1];
+
+        // 1. Update Spine State
+        this.spineStepCounter.textContent = `STAGE ${this.currentStep} / ${this.totalSteps}`;
+        this.stepNodes.forEach((node, idx) => {
+          const nodeNum = idx + 1;
+          const indicator = node.querySelector('.node-indicator');
+          node.classList.remove('is-active', 'border-sky-500/40', 'opacity-70');
+
+          if (nodeNum === this.currentStep) {
+            node.classList.add('is-active', 'border-sky-500/40');
+            indicator.innerHTML = '<i class="fa-solid fa-chevron-right text-sky-400"></i>';
+          } else if (nodeNum < this.currentStep) {
+            node.classList.add('is-completed');
+            indicator.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i>';
+          } else {
+            node.classList.add('opacity-70');
+            indicator.innerHTML = '<i class="fa-solid fa-lock text-slate-500"></i>';
+          }
+        });
+
+        // 2. Update Flyout Pane Titles & Badges
+        this.paneStepBadge.textContent = `STEP 0${this.currentStep}`;
+        this.paneTitle.textContent = meta.title;
+        this.paneSubtext.textContent = meta.subtext;
+        this.btnNextLabel.textContent = meta.buttonLabel;
+        this.savePointText.textContent = `STAGE 0${this.currentStep} READY`;
+
+        // 3. Switch Step Views
+        Object.keys(this.stepViews).forEach(key => {
+          if (parseInt(key, 10) === this.currentStep) {
+            this.stepViews[key].classList.remove('hidden');
+          } else {
+            this.stepViews[key].classList.add('hidden');
+          }
+        });
+
+        // 4. Update Prev Button State
+        this.btnPrev.disabled = (this.currentStep === 1);
+
+        // 5. Update Teleport Position
+        this.teleportFlyoutToStep(this.currentStep);
+
+        // 6. Update Circular Completion Ring
+        const progressPct = Math.round(((this.currentStep - 1) / this.totalSteps) * 100);
+        this.updateCompletionProgress(progressPct);
+      }
+
+      updateCompletionProgress(percentage) {
+        // stroke-dashoffset: 100 is 0%, 0 is 100%
+        const offset = 100 - percentage;
+        this.completionCircleProgress.style.strokeDashoffset = offset;
+        this.completionRingCenter.textContent = `${percentage}%`;
+
+        if (percentage >= 100) {
+          this.completionCircleProgress.style.stroke = '#00FF87';
+          this.completionRingCenter.innerHTML = '<i class="fa-solid fa-check text-emerald-400 text-xs"></i>';
+        } else {
+          this.completionCircleProgress.style.stroke = '#00FF87';
+          this.completionRingCenter.textContent = `${percentage}%`;
+        }
+      }
+
+      executeCompletionSequence() {
+        // Set to 100%
+        this.updateCompletionProgress(100);
+        this.savePointText.textContent = "SEALED & TRANSMITTED";
+
+        // Step 1: Mark all nodes as completed
+        this.stepNodes.forEach(node => {
+          node.classList.add('is-completed');
+          const indicator = node.querySelector('.node-indicator');
+          indicator.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i>';
+        });
+
+        // Step 2: Turn Spine bottom LCD green!
+        this.spineLcdBar.classList.add('lcd-green');
+
+        // Step 3: Animate Closing of the Flyout Pane after brief celebration
+        setTimeout(() => {
+          this.flyout.classList.remove('is-open');
+          
+          // Step 4: Vertebrae retracts back into starting pill
+          setTimeout(() => {
+            this.spine.classList.remove('is-deployed');
+            this.medicalCrossIcon.classList.remove('fa-xmark');
+            this.medicalCrossIcon.classList.add('fa-plus');
+            this.medicalCrossBtn.classList.remove('rotate-90');
+            this.isSpineOpen = false;
+            this.isFullyCompleted = true;
+
+            // Step 5: Sub-status updates to deliverable active
+            this.pillSubStatus.textContent = "DELIVERABLE SEALED";
+            this.pillSubStatus.classList.remove('text-slate-400');
+            this.pillSubStatus.classList.add('text-emerald-400', 'font-bold');
+
+            // Show clean tactile confirmation notification
+            this.showTactileToast("Executive Deliverable Dispatched & Bound — Subdomain Active");
+          }, 450);
+        }, 900);
+      }
+
+      showTactileToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 glass-panel border border-emerald-500/50 text-emerald-300 font-mono text-xs px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 z-50 transition-all duration-500 opacity-0 transform translate-y-4';
+        toast.innerHTML = `<i class="fa-solid fa-shield-halved text-emerald-400 text-sm"></i> <span>${msg}</span>`;
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.remove('opacity-0', 'translate-y-4');
+        });
+
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-4');
+          setTimeout(() => toast.remove(), 500);
+        }, 4500);
+      }
+
+      initGuillocheCanvas() {
+        const canvas = document.getElementById('guillocheCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        const resize = () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          draw();
+        };
+
+        const draw = () => {
+          const w = canvas.width;
+          const h = canvas.height;
+          ctx.clearRect(0, 0, w, h);
+          ctx.strokeStyle = '#38bdf8';
+          ctx.lineWidth = 0.6;
+
+          // Mathematical Spirograph Guilloche Rosettes
+          const drawRosette = (cx, cy, R, r, d) => {
+            ctx.beginPath();
+            const steps = 720;
+            for (let i = 0; i <= steps; i++) {
+              const theta = (i / steps) * Math.PI * 16;
+              const k = (R - r) / r;
+              const x = cx + (R - r) * Math.cos(theta) + d * Math.cos(k * theta);
+              const y = cy + (R - r) * Math.sin(theta) - d * Math.sin(k * theta);
+              if (i === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+          };
+
+          drawRosette(w * 0.15, h * 0.45, 140, 52, 85);
+          drawRosette(w * 0.85, h * 0.65, 180, 64, 110);
+        };
+
+        window.addEventListener('resize', resize);
+        resize();
+      }
+    }
+
+    // Initialize Vanilla UltraBar on DOM Ready
+    document.addEventListener('DOMContentLoaded', () => {
+      window.ultraBar = new VanillaUltraBarEngine();
+    });
+  </script>
+
+  <!-- UNIVERSAL PAYMENT CONTROLLER & TRI-PANE BOT CONTROLLER & AUDIO FX -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
+
+</body>
+</html>

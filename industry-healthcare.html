@@ -1,0 +1,716 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BURN-1 Healthcare Matrix | Surgery Room Posture &amp; PLUS Vault — Burning Friction... Shattering Time</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            moneyGreen: '#14452F',
+            scrollTan: '#F4EFE0',
+            printedBlue: '#1B365D',
+            neonEmerald: '#00FF87',
+          },
+          fontFamily: {
+            serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+            mono: ['"Courier New"', 'Consolas', 'Monaco', 'monospace'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --money-green: #14452F;
+      --scroll-tan: #F4EFE0;
+      --printed-blue: #1B365D;
+      --neon-emerald: #00FF87;
+    }
+
+    body {
+      background-color: var(--scroll-tan);
+      color: var(--money-green);
+      overflow-x: hidden;
+    }
+
+    /* Sterile Surgery-Room Calibration Grid + Day-Theme Financial Backdrop */
+    .surgical-grid-bg {
+      background-color: #F4EFE0;
+      background-image:
+        linear-gradient(to right, rgba(27, 54, 93, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(27, 54, 93, 0.06) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, rgba(20, 69, 47, 0.06), transparent 65%);
+      background-size: 28px 28px, 28px 28px, 100% 100%;
+    }
+
+    /* Precision Surgical Instrument Bezel */
+    .surgical-bezel {
+      border: 2px solid #14452F;
+      box-shadow:
+        inset 0 0 0 3px #F4EFE0,
+        inset 0 0 0 4px rgba(27, 54, 93, 0.4),
+        0 14px 32px -10px rgba(20, 69, 47, 0.22);
+      transition: box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.45s ease;
+    }
+
+    /* Dynamic Neon Emerald Unlock Glow */
+    .vault-unlocked-glow {
+      border-color: #00FF87 !important;
+      box-shadow:
+        0 0 0 2px #14452F,
+        0 0 34px rgba(0, 255, 135, 0.65),
+        inset 0 0 28px rgba(0, 255, 135, 0.16) !important;
+    }
+
+    .emerald-header-glow {
+      box-shadow: 0 4px 28px rgba(0, 255, 135, 0.38);
+      border-bottom-color: #00FF87 !important;
+    }
+
+    /* Heavy Brushed Metallic Vault Door Texture */
+    .metallic-vault-surface {
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04) 0px,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px,
+          transparent 4px
+        ),
+        linear-gradient(145deg, #1B365D 0%, #10233d 48%, #14452F 100%);
+    }
+
+    /* Split Heavy Vault Doors & Ratchet Mechanics */
+    .vault-overlay {
+      perspective: 1400px;
+      transition: visibility 0.85s ease;
+    }
+
+    .vault-door-left,
+    .vault-door-right {
+      transition: transform 0.82s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+      will-change: transform;
+    }
+
+    .vault-wheel-hub {
+      transition: transform 0.65s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.4s ease;
+      will-change: transform;
+    }
+
+    .vault-bolt {
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+    }
+
+    /* State: Ratcheting Wheel & Retracting Bolts */
+    .vault-console.is-ratcheting .vault-wheel-hub {
+      transform: translate(-50%, -50%) rotate(240deg) scale(1.04);
+      box-shadow: 0 0 28px rgba(0, 255, 135, 0.8);
+    }
+
+    .vault-console.is-ratcheting .bolt-left {
+      transform: translateX(34px);
+      background-color: #00FF87;
+    }
+
+    .vault-console.is-ratcheting .bolt-right {
+      transform: translateX(-34px);
+      background-color: #00FF87;
+    }
+
+    /* State: Vault Fully Breached / Open */
+    .vault-console.is-unlocked .vault-door-left {
+      transform: translateX(-104%);
+    }
+
+    .vault-console.is-unlocked .vault-door-right {
+      transform: translateX(104%);
+    }
+
+    .vault-console.is-unlocked .vault-wheel-hub {
+      transform: translate(-50%, -50%) rotate(360deg) scale(0.72);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .vault-console.is-unlocked .vault-overlay {
+      pointer-events: none;
+    }
+
+    /* 3D Flip-Card & Mechanical Shuffle Sequence */
+    .compliance-card-slot {
+      perspective: 1100px;
+    }
+
+    .compliance-flip-inner {
+      position: relative;
+      width: 100%;
+      min-height: 186px;
+      transform-style: preserve-3d;
+      transform: rotateY(180deg) translateY(18px) scale(0.94);
+      opacity: 0.25;
+      transition:
+        transform 0.68s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.45s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .compliance-flip-inner.is-revealed {
+      transform: rotateY(0deg) translateY(0px) scale(1);
+      opacity: 1;
+    }
+
+    .compliance-flip-inner.is-flipped-detail {
+      transform: rotateY(180deg) translateY(0px) scale(1);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .card-face-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Surgical ECG Telemetry Sweep */
+    @keyframes ecgDash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .ecg-line {
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: ecgDash 3.2s linear infinite;
+    }
+  </style>
+</head>
+<body class="surgical-grid-bg min-h-screen antialiased selection:bg-moneyGreen selection:text-neonEmerald">
+
+  <!-- TOP SURGERY-ROOM TELEMETRY HEADER -->
+  <header id="surgicalTopHeader" class="sticky top-0 z-40 bg-scrollTan/95 backdrop-blur-md border-b-2 border-moneyGreen transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a href="./fast-lane.html" class="w-11 h-11 bg-moneyGreen text-scrollTan border-2 border-printedBlue flex items-center justify-center font-serif font-bold text-lg tracking-tighter">
+          B-1
+        </a>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="font-serif font-bold text-lg text-moneyGreen">BURN-1 CLINICAL MATRIX</span>
+            <span class="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 bg-printedBlue text-scrollTan">
+              SURGERY ROOM INFRASTRUCTURE BAY
+            </span>
+          </div>
+          <p class="text-xs font-mono uppercase tracking-widest text-printedBlue">
+            Burning Friction... Shattering Time
+          </p>
+        </div>
+      </div>
+
+      <!-- Live Vital Telemetry Readout + Fast Lane Nav -->
+      <div class="flex items-center gap-4">
+        <div id="telemetryMonitorPill" class="hidden lg:flex items-center gap-3 px-3.5 py-1.5 border border-moneyGreen bg-scrollTan font-mono text-xs transition-all">
+          <span id="telemetryPulseDot" class="w-2.5 h-2.5 rounded-full bg-printedBlue"></span>
+          <span id="telemetryStatusText" class="text-moneyGreen">OR-BAY STATUS: STANDARD SEALED</span>
+          <svg class="w-20 h-5" viewBox="0 0 120 28" fill="none">
+            <path
+              id="ecgTracePath"
+              class="ecg-line"
+              d="M0 15 H28 L35 6 L42 24 L50 3 L58 25 L64 15 H120"
+              stroke="#1B365D"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+
+        <a
+          href="./fast-lane.html"
+          class="bg-moneyGreen hover:bg-printedBlue text-scrollTan font-mono text-xs uppercase tracking-widest px-4 py-2.5 border border-moneyGreen transition"
+        >
+          ← Fast Lane On-Ramp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-10">
+
+    <!-- SURGERY ROOM COMMAND WIDGET HERO -->
+    <section class="surgical-bezel bg-scrollTan p-6 md:p-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+        <!-- Left Clinical Briefing & Master Security Console Switch -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-printedBlue text-scrollTan font-mono text-[11px] uppercase tracking-widest">
+            <span>SECTOR 02 // MEDICAL IT &amp; CLINICAL FACILITY UNDERWRITING</span>
+          </div>
+
+          <h1 class="font-serif text-3xl md:text-4xl font-bold text-moneyGreen leading-tight">
+            Sterile Evidentiary Binding for Hospital Networks, Clinics &amp; Bio-Health Systems.
+          </h1>
+
+          <p class="text-sm md:text-base text-printedBlue leading-relaxed">
+            Healthcare underwriters and federal auditors require simultaneous proof across patient telemetry, EHR access boundaries, and physical clinical hazard ordinances. Compare our static <strong>Standard Clinical Sweep</strong> against the heavy-duty <strong>Healthcare PLUS Vault</strong>.
+          </p>
+
+          <!-- Physical Security Console Master Toggle Bar -->
+          <div
+            id="masterSwitchConsole"
+            class="border-2 border-moneyGreen bg-moneyGreen text-scrollTan p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all"
+          >
+            <div>
+              <div class="text-[11px] font-mono uppercase tracking-widest text-neonEmerald" id="consoleClearanceLabel">
+                SECURITY CONSOLE // LEVEL-1 STANDARD ACTIVE
+              </div>
+              <div class="font-serif font-bold text-base">
+                Toggle Healthcare PLUS Vault (HITRUST + HIPAA + OSHA)
+              </div>
+            </div>
+
+            <button
+              id="plusMasterToggleBtn"
+              type="button"
+              role="switch"
+              aria-checked="false"
+              class="group relative inline-flex items-center gap-3 bg-printedBlue hover:brightness-110 border-2 border-scrollTan px-4 py-2.5 font-mono text-xs uppercase tracking-widest transition cursor-pointer"
+            >
+              <span id="toggleKnobIndicator" class="w-3.5 h-3.5 rounded-full bg-scrollTan transition-colors"></span>
+              <span id="toggleBtnText" class="font-bold text-scrollTan">UNLOCK PLUS VAULT</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Dual Surgery-Room Optical Monitors -->
+        <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+          <div class="border-2 border-moneyGreen bg-printedBlue p-1.5">
+            <div class="relative aspect-[4/3] bg-moneyGreen overflow-hidden">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="../assets/seals/onlineseal.jpg"
+                class="w-full h-full object-cover opacity-90"
+              >
+                <source src="../assets/Medical_worker_walking_in_clinic_20261023154149.mp4" type="video/mp4" />
+              </video>
+              <div class="absolute top-2 left-2 px-1.5 py-0.5 bg-moneyGreen/90 text-scrollTan font-mono text-[9px] uppercase">
+                CAM-01 // CLINICAL CORRIDOR
+              </div>
+            </div>
+            <div class="pt-1.5 px-1 font-mono text-[10px] text-scrollTan flex justify-between">
+              <span>EHR PERIMETER</span>
+              <span class="text-neonEmerald">PASSIVE</span>
+            </div>
+          </div>
+
+          <div class="border-2 border-moneyGreen bg-printedBlue p-1.5">
+            <div class="relative aspect-[4/3] bg-moneyGreen overflow-hidden">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="../assets/seals/documentSeal.jpg"
+                class="w-full h-full object-cover opacity-90"
+              >
+                <source src="../assets/Biometric_sensor_scanning_eyes_20261023210603.mp4" type="video/mp4" />
+              </video>
+              <div class="absolute top-2 left-2 px-1.5 py-0.5 bg-moneyGreen/90 text-scrollTan font-mono text-[9px] uppercase">
+                CAM-02 // BIOMETRIC IAM
+              </div>
+            </div>
+            <div class="pt-1.5 px-1 font-mono text-[10px] text-scrollTan flex justify-between">
+              <span>45 CFR §164.312</span>
+              <span class="text-neonEmerald">READY</span>
+            </div>
+          </div>
+
+          <div class="col-span-2 border border-moneyGreen bg-scrollTan px-3 py-2 flex items-center justify-between font-mono text-[11px] text-printedBlue">
+            <span>AUDIO TELEMETRY: 880 Hz HARMONIC SYNTH</span>
+            <span id="audioReadoutBadge" class="font-bold text-moneyGreen">ARMED</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PHYSICAL SECURITY CONSOLE: DUAL-BAY TIER MATRIX -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+      <!-- BAY 01: STANDARD CLINICAL TIER (STATIC DISPLAY) -->
+      <div class="lg:col-span-5 surgical-bezel bg-scrollTan flex flex-col justify-between p-6 md:p-8">
+        <div class="space-y-6">
+          <div class="flex items-center justify-between border-b-2 border-moneyGreen pb-4">
+            <div>
+              <span class="font-mono text-[11px] uppercase tracking-widest text-printedBlue">BAY 01 // STATIC CONSOLE</span>
+              <h2 class="font-serif text-2xl font-bold text-moneyGreen mt-0.5">Standard Clinical Tier</h2>
+            </div>
+            <span class="font-mono text-xs px-2.5 py-1 border border-moneyGreen text-moneyGreen bg-moneyGreen/5">
+              OPEN ACCESS
+            </span>
+          </div>
+
+          <div class="flex items-baseline gap-2">
+            <span class="font-serif text-4xl font-bold text-moneyGreen">$99</span>
+            <span class="font-mono text-xs uppercase text-printedBlue">/ Single Domain Evidentiary Sweep</span>
+          </div>
+
+          <p class="text-xs font-mono text-printedBlue leading-relaxed">
+            External passive surface binder tailored for single-site outpatient practices requiring rapid cyber insurance renewal evidence.
+          </p>
+
+          <!-- Static Diagnostic Specification List -->
+          <ul class="space-y-3 text-xs font-mono text-moneyGreen border-t border-moneyGreen/20 pt-4">
+            <li class="flex items-start gap-2.5">
+              <span class="font-bold text-printedBlue">[✓]</span>
+              <span><strong>External Perimeter Sweep:</strong> Ports 3389 (RDP) &amp; 445 (SMB) exposure check + CISA KEV 22-01 cross-citation.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="font-bold text-printedBlue">[✓]</span>
+              <span><strong>Clinical Mail Transport:</strong> RFC 7489 DMARC enforcement &amp; TLS 1.3 (RFC 8446) cipher verification.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="font-bold text-printedBlue">[✓]</span>
+              <span><strong>Baseline Seal:</strong> Standard NIST CSF 2.0 SHA-256 evidentiary PDF delivered via client vault.</span>
+            </li>
+            <li class="flex items-start gap-2.5 opacity-55">
+              <span class="font-bold text-printedBlue">[—]</span>
+              <span>HITRUST CSF (e1/i1/r2) Cross-Mapping Matrix (Locked — Requires PLUS)</span>
+            </li>
+            <li class="flex items-start gap-2.5 opacity-55">
+              <span class="font-bold text-printedBlue">[—]</span>
+              <span>HIPAA Omnibus + OSHA 29 CFR Clinical Facility Citations (Locked — Requires PLUS)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-8 mt-6 border-t-2 border-moneyGreen space-y-3">
+          <div class="flex items-center justify-between text-[11px] font-mono text-printedBlue">
+            <span>SETTLEMENT: PAYPAL HOSTED</span>
+            <span>TURNAROUND: ≤ 5 BUS. DAYS</span>
+          </div>
+          <a
+            href="https://www.paypal.com/ncp/payment/5R9U23V7S2J8S"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full text-center bg-printedBlue hover:bg-moneyGreen text-scrollTan font-mono font-bold text-xs uppercase tracking-widest py-3.5 border-2 border-moneyGreen transition"
+          >
+            Bind Standard Clinical Sweep ($99) →
+          </a>
+        </div>
+      </div>
+
+      <!-- BAY 02: HEALTHCARE PLUS TIER (LOCKED HEAVY METALLIC VAULT -> NEON EMERALD UNLOCK) -->
+      <div
+        id="healthcarePlusVaultConsole"
+        class="vault-console lg:col-span-7 surgical-bezel bg-scrollTan relative overflow-hidden flex flex-col justify-between p-6 md:p-8"
+      >
+
+        <!-- UNDERLYING UNLOCKED SURGICAL CHAMBER -->
+        <div class="relative z-10 space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-moneyGreen pb-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-neonEmerald"></span>
+                <span class="font-mono text-[11px] uppercase tracking-widest text-printedBlue" id="plusChamberSubheader">
+                  BAY 02 // HIGH-CLEARANCE SURGICAL VAULT
+                </span>
+              </div>
+              <h2 class="font-serif text-2xl md:text-3xl font-bold text-moneyGreen mt-0.5">
+                Healthcare PLUS Evidentiary Matrix
+              </h2>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span
+                id="plusVaultStatusBadge"
+                class="font-mono text-xs font-bold px-3 py-1 bg-moneyGreen text-neonEmerald border border-printedBlue"
+              >
+                VAULT SEALED
+              </span>
+              <button
+                id="relockVaultBtn"
+                type="button"
+                class="hidden font-mono text-[11px] uppercase px-2.5 py-1 border border-moneyGreen text-moneyGreen hover:bg-moneyGreen hover:text-scrollTan transition"
+              >
+                Re-Seal
+              </button>
+            </div>
+          </div>
+
+          <!-- Pricing & Multi-Regulatory Value Strip -->
+          <div class="flex flex-wrap items-baseline justify-between gap-4 bg-moneyGreen text-scrollTan p-4 border-2 border-printedBlue">
+            <div class="flex items-baseline gap-2.5">
+              <span class="font-serif text-4xl font-bold text-neonEmerald">$249</span>
+              <span class="font-mono text-xs uppercase text-scrollTan/90">/ Comprehensive Multi-Ordinance Clinical Bind</span>
+            </div>
+            <span class="font-mono text-[11px] uppercase px-2.5 py-1 bg-printedBlue text-neonEmerald border border-neonEmerald/40">
+              SHA-256 + HITRUST + HIPAA + OSHA
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between text-xs font-mono text-printedBlue">
+            <span>4-CARD EVIDENTIARY MATRIX (CLICK ANY UNLOCKED CARD TO FLIP CITATIONS)</span>
+            <span class="text-moneyGreen font-bold">3D DECK ACTIVE</span>
+          </div>
+
+          <!-- 4 GAMIFIED 3D FLIP-CARDS (HITRUST, HIPAA, OSHA, BIOMED SHA-256 SEAL) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="plusComplianceDeck">
+
+            <!-- CARD 01: HITRUST CSF -->
+            <div class="compliance-card-slot">
+              <div class="compliance-flip-inner cursor-pointer" data-flip-card="0" tabindex="0">
+                <!-- Front (Revealed State) -->
+                <div class="card-face bg-scrollTan border-2 border-moneyGreen p-4 flex flex-col justify-between shadow-sm hover:border-printedBlue">
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[10px] uppercase px-2 py-0.5 bg-moneyGreen text-neonEmerald font-bold">CARD 01 // HITRUST</span>
+                      <span class="font-mono text-[10px] text-printedBlue">FLIP ↻</span>
+                    </div>
+                    <h3 class="font-serif font-bold text-base text-moneyGreen mt-2">HITRUST CSF v11 (e1 / i1 / r2)</h3>
+                    <p class="text-xs text-printedBlue mt-1 leading-relaxed">
+                      Automated external telemetry alignment mapped directly to HITRUST inheritance &amp; cyber-resilience domains.
+                    </p>
+                  </div>
+                  <div class="pt-2 border-t border-moneyGreen/20 font-mono text-[10px] text-moneyGreen font-bold">
+                    DOMAINS: 01.0 ACCESS • 09.m NETWORK • 10.m TLS
+                  </div>
+                </div>
+                <!-- Back (Citation Inspection Detail) -->
+                <div class="card-face card-face-back bg-moneyGreen text-scrollTan border-2 border-neonEmerald p-4 flex flex-col justify-between">
+                  <div>
+                    <div class="font-mono text-[10px] text-neonEmerald uppercase">HITRUST UNDERWRITING CITATION</div>
+                    <p class="font-mono text-xs mt-2 leading-relaxed">
+                      Cites external attack surface, certificate lifecycle, and email authentication directly into HITRUST e1 Essential hygiene checklists for rapid payer/hospital vendor clearance.
+                    </p>
+                  </div>
+                  <div class="font-mono text-[10px] text-neonEmerald">CLICK TO RETURN ↺</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 02: HIPAA SECURITY RULE -->
+            <div class="compliance-card-slot">
+              <div class="compliance-flip-inner cursor-pointer" data-flip-card="1" tabindex="0">
+                <div class="card-face bg-scrollTan border-2 border-moneyGreen p-4 flex flex-col justify-between shadow-sm hover:border-printedBlue">
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[10px] uppercase px-2 py-0.5 bg-moneyGreen text-neonEmerald font-bold">CARD 02 // HIPAA</span>
+                      <span class="font-mono text-[10px] text-printedBlue">FLIP ↻</span>
+                    </div>
+                    <h3 class="font-serif font-bold text-base text-moneyGreen mt-2">HIPAA Security Rule (45 CFR §164)</h3>
+                    <p class="text-xs text-printedBlue mt-1 leading-relaxed">
+                      Technical safeguard verification across ePHI transmission security, portal encryption, and remote access exposure.
+                    </p>
+                  </div>
+                  <div class="pt-2 border-t border-moneyGreen/20 font-mono text-[10px] text-moneyGreen font-bold">
+                    CITED: §164.312(a)(1) • §164.312(e)(1) • §164.308
+                  </div>
+                </div>
+                <div class="card-face card-face-back bg-moneyGreen text-scrollTan border-2 border-neonEmerald p-4 flex flex-col justify-between">
+                  <div>
+                    <div class="font-mono text-[10px] text-neonEmerald uppercase">OCR AUDIT EVIDENCE PACKET</div>
+                    <p class="font-mono text-xs mt-2 leading-relaxed">
+                      Binds passive TLS 1.3 cipher proof, zero-exposed RDP/SMB confirmation, and MFA operational attestations into an OCR-defensible Dossier section.
+                    </p>
+                  </div>
+                  <div class="font-mono text-[10px] text-neonEmerald">CLICK TO RETURN ↺</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 03: HIPAA + OSHA CLINICAL HAZARD -->
+            <div class="compliance-card-slot">
+              <div class="compliance-flip-inner cursor-pointer" data-flip-card="2" tabindex="0">
+                <div class="card-face bg-scrollTan border-2 border-moneyGreen p-4 flex flex-col justify-between shadow-sm hover:border-printedBlue">
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[10px] uppercase px-2 py-0.5 bg-moneyGreen text-neonEmerald font-bold">CARD 03 // HIPAA + OSHA</span>
+                      <span class="font-mono text-[10px] text-printedBlue">FLIP ↻</span>
+                    </div>
+                    <h3 class="font-serif font-bold text-base text-moneyGreen mt-2">OSHA Clinical &amp; Facility Safety</h3>
+                    <p class="text-xs text-printedBlue mt-1 leading-relaxed">
+                      Fuses Acid Division physical-facility citations with clinical IT continuity for surgery centers &amp; labs.
+                    </p>
+                  </div>
+                  <div class="pt-2 border-t border-moneyGreen/20 font-mono text-[10px] text-moneyGreen font-bold">
+                    CITED: 29 CFR 1910.1030 • 1910.1200 • NFPA 99
+                  </div>
+                </div>
+                <div class="card-face card-face-back bg-moneyGreen text-scrollTan border-2 border-neonEmerald p-4 flex flex-col justify-between">
+                  <div>
+                    <div class="font-mono text-[10px] text-neonEmerald uppercase">DUAL CYBER-PHYSICAL BIND</div>
+                    <p class="font-mono text-xs mt-2 leading-relaxed">
+                      Cross-cites OSHA Bloodborne/Hazard Communication (1910.1030 / 1910.1200) and NFPA 99 Health Care Facilities electrical/telemetry resilience.
+                    </p>
+                  </div>
+                  <div class="font-mono text-[10px] text-neonEmerald">CLICK TO RETURN ↺</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 04: MEDICAL IoT / CISA KEV + SHA-256 SEAL -->
+            <div class="compliance-card-slot">
+              <div class="compliance-flip-inner cursor-pointer" data-flip-card="3" tabindex="0">
+                <div class="card-face bg-scrollTan border-2 border-moneyGreen p-4 flex flex-col justify-between shadow-sm hover:border-printedBlue">
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="font-mono text-[10px] uppercase px-2 py-0.5 bg-moneyGreen text-neonEmerald font-bold">CARD 04 // SEAL + IoMT</span>
+                      <span class="font-mono text-[10px] text-printedBlue">FLIP ↻</span>
+                    </div>
+                    <h3 class="font-serif font-bold text-base text-moneyGreen mt-2">FDA / CISA KEV &amp; SHA-256 Seal</h3>
+                    <p class="text-xs text-printedBlue mt-1 leading-relaxed">
+                      Lumbo SLM checks public medical-device gateway exposures against active CISA KEV directives before sealing.
+                    </p>
+                  </div>
+                  <div class="pt-2 border-t border-moneyGreen/20 font-mono text-[10px] text-moneyGreen font-bold">
+                    SEAL: BURN1_SEAL:NIST_CSF_2.0:CISA_KEV
+                  </div>
+                </div>
+                <div class="card-face card-face-back bg-moneyGreen text-scrollTan border-2 border-neonEmerald p-4 flex flex-col justify-between">
+                  <div>
+                    <div class="font-mono text-[10px] text-neonEmerald uppercase">ALGORITHMIC TRUST SEAL</div>
+                    <p class="font-mono text-xs mt-2 leading-relaxed">
+                      Issues cryptographic SHA-256 Dossier Seal + Priority MSP/Broker Underwriting Packet upon APPROVED_SEALED verification.
+                    </p>
+                  </div>
+                  <div class="font-mono text-[10px] text-neonEmerald">CLICK TO RETURN ↺</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PLUS Checkout Footer -->
+        <div class="relative z-10 pt-8 mt-6 border-t-2 border-moneyGreen space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-printedBlue">
+            <span>GATEWAY: PAYPAL OFFICIAL HOSTED CHECKOUT</span>
+            <span id="plusTokenPreview" class="font-bold text-moneyGreen">SESSION TOKEN: ARMED ON UNLOCK</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+            <a
+              id="plusPaypalCheckoutBtn"
+              href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="sm:col-span-8 text-center bg-neonEmerald text-moneyGreen font-mono font-bold text-xs uppercase tracking-widest py-4 px-5 border-2 border-moneyGreen shadow-md hover:brightness-105 transition"
+            >
+              Settle via PayPal &amp; Bind Healthcare PLUS ($249) →
+            </a>
+            <a
+              href="./fast-lane.html?division=times2&tier=healthcare_plus"
+              class="sm:col-span-4 text-center bg-moneyGreen hover:bg-printedBlue text-scrollTan font-mono text-xs uppercase tracking-widest py-4 px-3 border-2 border-moneyGreen transition"
+            >
+              Drop Artifacts
+            </a>
+          </div>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- LOCKED HEAVY METALLIC VAULT OVERLAY (INITIAL DEFAULT LOCKED STATE)    -->
+        <!-- ===================================================================== -->
+        <div
+          id="heavyVaultOverlay"
+          class="vault-overlay absolute inset-0 z-20 flex overflow-hidden select-none"
+          aria-hidden="false"
+        >
+          <!-- Left Heavy Vault Blast Door -->
+          <div class="vault-door-left metallic-vault-surface w-1/2 h-full border-r-4 border-scrollTan/30 relative flex flex-col justify-between p-6">
+            <div class="space-y-1">
+              <span class="font-mono text-[10px] uppercase tracking-widest text-neonEmerald">VAULT BAY 02 // CLASS-IV CLINICAL</span>
+              <div class="font-serif text-lg font-bold text-scrollTan">HITRUST + HIPAA + OSHA</div>
+            </div>
+
+            <!-- Horizontal Steel Locking Bolts (Left) -->
+            <div class="space-y-6 my-auto">
+              <div class="bolt-left vault-bolt ml-auto w-14 h-3.5 bg-scrollTan/80 border border-moneyGreen"></div>
+              <div class="bolt-left vault-bolt ml-auto w-20 h-4 bg-scrollTan/90 border border-moneyGreen"></div>
+              <div class="bolt-left vault-bolt ml-auto w-14 h-3.5 bg-scrollTan/80 border border-moneyGreen"></div>
+            </div>
+
+            <div class="font-mono text-[10px] text-scrollTan/70 uppercase">
+              DARDEN TRUST ARMOR // 256-BIT SEALED
+            </div>
+          </div>
+
+          <!-- Right Heavy Vault Blast Door -->
+          <div class="vault-door-right metallic-vault-surface w-1/2 h-full border-l-4 border-scrollTan/30 relative flex flex-col justify-between p-6 text-right">
+            <div class="space-y-1">
+              <span class="font-mono text-[10px] uppercase tracking-widest text-scrollTan/80">CLEARANCE REQUIRED</span>
+              <div class="font-mono text-xs text-neonEmerald font-bold">880 Hz ACOUSTIC LOCK</div>
+            </div>
+
+            <!-- Horizontal Steel Locking Bolts (Right) -->
+            <div class="space-y-6 my-auto">
+              <div class="bolt-right vault-bolt mr-auto w-14 h-3.5 bg-scrollTan/80 border border-moneyGreen"></div>
+              <div class="bolt-right vault-bolt mr-auto w-20 h-4 bg-scrollTan/90 border border-moneyGreen"></div>
+              <div class="bolt-right vault-bolt mr-auto w-14 h-3.5 bg-scrollTan/80 border border-moneyGreen"></div>
+            </div>
+
+            <div class="font-mono text-[10px] text-scrollTan/70 uppercase">
+              BURNING FRICTION... SHATTERING TIME
+            </div>
+          </div>
+
+          <!-- Center Rotary Vault Wheel Trigger -->
+          <button
+            id="vaultWheelUnlockBtn"
+            type="button"
+            class="vault-wheel-hub group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-56 h-56 rounded-full bg-moneyGreen border-4 border-scrollTan shadow-2xl flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:border-neonEmerald focus:outline-none"
+            aria-label="Unlock Healthcare PLUS Vault"
+          >
+            <!-- Mechanical Spokes SVG -->
+            <svg class="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] text-scrollTan/25 group-hover:text-neonEmerald/50 transition-colors" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" />
+              <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <line x1="50" y1="4" x2="50" y2="96" stroke="currentColor" stroke-width="2" />
+              <line x1="4" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="2" />
+              <line x1="17" y1="17" x2="83" y2="83" stroke="currentColor" stroke-width="2" />
+              <line x1="83" y1="17" x2="17" y2="83" stroke="currentColor" stroke-width="2" />
+            </svg>
+
+            <div class="relative z-10 bg-printedBlue/95 border-2 border-neonEmerald px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-neonEmerald">
+              LOCKED VAULT
+            </div>
+            <div class="relative z-10 font-serif font-bold text-lg text-scrollTan mt-2 leading-tight">
+              Healthcare PLUS
+            </div>
+            <div class="relative z-10 font-mono text-[11px] text-neonEmerald mt-1 group-hover:underline">
+              [ CLICK TO RATCHET OPEN ]
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="max-w-7xl mx-auto px-6 py-8 border-t border-moneyGreen/30 mt-8 flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-printedBlue">
+    <span>© 2026 Leon R. Darden • BURN-1 Systems (burn-1.com) // Darden Trust Architecture</span>
+    <span class="font-bold text-moneyGreen">BURNING FRICTION... SHATTERING TIME</span>
+  </footer>
+
+  <script src="./js/healthcare-vault-controller.js"></script>
+
+  <!-- UNIVERSAL PAYMENT CONTROLLER & TRI-PANE BOT CONTROLLER & AUDIO FX -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
+
+</body>
+</html>

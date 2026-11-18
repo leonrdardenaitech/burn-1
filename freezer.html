@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="freezerdump.css">
+  <link rel="stylesheet" href="css/burn1-components.css">
   <style>
     :root {
       --ice-bg: #e8f4fc;
@@ -93,6 +94,36 @@
       background: #0284c7;
       color: #ffffff;
       border-color: #38bdf8;
+    }
+    /* 3D Flip Card System for Pricing Tiers */
+    .flip-card-container {
+      perspective: 1000px;
+      min-height: 420px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card-container.is-flipped .flip-card-inner,
+    .flip-card-container:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1.25rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
       box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
     }
     /* Stamp preview */
@@ -121,23 +152,32 @@
         </a>
       </div>
 
-      <!-- Division Switcher Bar -->
+      <!-- New Ultra Bar (Division Switcher & B2B Router) -->
       <nav class="flex flex-wrap items-center gap-1.5 font-mono text-xs">
-        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm">
-          <i class="fa-solid fa-cube mr-1"></i> 1. FreezerBurn
+        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm border border-sky-400">
+          <i class="fa-solid fa-snowflake mr-1"></i> FreezerBurn
         </a>
-        <a href="acid.html" class="px-3 py-1.5 rounded-lg bg-white/70 hover:bg-white text-slate-700 font-semibold border border-sky-200">
-          2. Acid
+        <a href="acid.html" class="px-3 py-1.5 rounded-lg bg-white/80 hover:bg-white text-slate-800 font-bold border border-sky-200 transition-all">
+          <i class="fa-solid fa-flask-vial text-lime-600 mr-1"></i> Acid
         </a>
-        <a href="times2.html" class="px-3 py-1.5 rounded-lg bg-white/70 hover:bg-white text-slate-700 font-semibold border border-sky-200">
-          3. Times2
+        <a href="times2.html" class="px-3 py-1.5 rounded-lg bg-white/80 hover:bg-white text-slate-800 font-bold border border-sky-200 transition-all">
+          <i class="fa-solid fa-clock-rotate-left text-indigo-600 mr-1"></i> Times2
         </a>
-        <a href="sizzlean.html" class="px-3 py-1.5 rounded-lg bg-white/70 hover:bg-white text-slate-700 font-semibold border border-sky-200">
-          4. Sizzlean
+        <a href="sizzlean.html" class="px-3 py-1.5 rounded-lg bg-white/80 hover:bg-white text-slate-800 font-bold border border-sky-200 transition-all">
+          <i class="fa-solid fa-fire-flame-curved text-orange-600 mr-1"></i> Sizzlean
         </a>
-        <a href="directory.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-sky-300 hover:text-white font-bold border border-sky-400">
-          <i class="fa-solid fa-stamp mr-1"></i> Center Stage Directory
+        <a href="directory.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-sky-300 hover:text-white font-bold border border-sky-400 transition-all">
+          <i class="fa-solid fa-compass mr-1"></i> Directory
         </a>
+        <a href="msp-intake.html" class="px-3 py-1.5 rounded-lg bg-emerald-950 text-emerald-300 hover:text-white font-bold border border-emerald-500/70 transition-all">
+          <i class="fa-solid fa-network-wired mr-1"></i> MSP Intake
+        </a>
+        <a href="broker-portal.html" class="px-3 py-1.5 rounded-lg bg-indigo-950 text-indigo-200 hover:text-white font-bold border border-indigo-400/70 transition-all">
+          <i class="fa-solid fa-building-columns mr-1"></i> Broker Portal
+        </a>
+        <button type="button" onclick="window.Burn1UnifiedHub && window.Burn1UnifiedHub.openTab('payment')" class="frost-cube-btn !py-1.5 !px-3.5 !text-xs">
+          <i class="fa-solid fa-layer-group"></i> Binder Bot &amp; Payment Hub
+        </button>
       </nav>
     </div>
   </header>
@@ -148,11 +188,32 @@
     <!-- HERO SECTION WITH CYBER TITLE BANNER & HEALTHCARE VALUE HOOK -->
     <section class="frosted-glass rounded-3xl overflow-hidden p-6 sm:p-8 space-y-6">
       
-      <!-- Uploaded High-Res Cyber Banner -->
-      <div class="rounded-2xl overflow-hidden border-2 border-sky-400/80 shadow-lg relative bg-slate-950">
-        <img src="assets/freezer-title-banner.jpg" alt="Freezer.Burn-1.com High Tech Cyber Title Banner" class="w-full h-auto max-h-[340px] object-cover">
-        <div class="absolute bottom-3 right-4 px-3 py-1 rounded-full bg-slate-950/85 border border-sky-400 text-sky-300 font-mono text-[11px] font-bold">
-          <i class="fa-solid fa-snowflake mr-1"></i> Darden Trust Architecture // NIST CSF 2.0
+      <!-- Uploaded High-Res Cyber Banner + Directory Motion Video Preview -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-stretch">
+        <div class="lg:col-span-2 rounded-2xl overflow-hidden border-2 border-sky-400/80 shadow-lg relative bg-slate-950">
+          <img src="assets/freezer-title-banner.jpg" alt="Freezer.Burn-1.com High Tech Cyber Title Banner" class="w-full h-full max-h-[340px] object-cover">
+          <div class="absolute bottom-3 right-4 px-4 py-1.5 rounded-full bg-slate-950/90 border-2 border-sky-400 text-sky-300 font-mono text-xs font-black shadow-lg flex items-center gap-2 backdrop-blur-md">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
+            <i class="fa-solid fa-prescription-bottle-medical text-sky-400"></i>
+            <span>Rx DARDEN TRUST ARCHITECTURE // HIPAA § 164.312 FROZEN</span>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border-2 border-sky-400/80 shadow-lg relative bg-slate-950 flex flex-col justify-between">
+          <video src="assets/divisions/freezer_Directory_banner.mp4" autoplay loop muted playsinline class="w-full h-48 lg:h-56 object-cover"></video>
+          <div class="p-3 bg-slate-950/95 border-t border-sky-500/40 flex flex-col gap-2 font-mono text-[10px]">
+            <div class="text-sky-300 font-black uppercase tracking-wider">3D Ice-Cube &amp; Melty State Controls</div>
+            <div class="grid grid-cols-3 gap-1.5">
+              <button type="button" onclick="document.getElementById('scan-intake-section').scrollIntoView({behavior:'smooth'})" class="state-btn-freeze justify-center !py-1.5 !px-2 !text-[10px]">
+                <i class="fa-solid fa-snowflake"></i> FREEZE
+              </button>
+              <button type="button" onclick="window.Burn1UnifiedHub && window.Burn1UnifiedHub.openTab('payment')" class="state-btn-initiate justify-center !py-1.5 !px-2 !text-[10px]">
+                <i class="fa-solid fa-bolt"></i> INITIATE
+              </button>
+              <button type="button" onclick="window.Burn1UnifiedHub && window.Burn1UnifiedHub.openTab('advisor')" class="state-btn-shiver justify-center !py-1.5 !px-2 !text-[10px]">
+                <i class="fa-solid fa-icicles"></i> SHIVER
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -377,7 +438,7 @@
           <label for="px-scale" class="font-bold text-slate-700">Pixel Size:</label>
           <input id="px-scale" type="range" min="3" max="8" value="6" class="accent-sky-600 cursor-pointer" oninput="updatePixelScale(this.value)">
           <span id="px-scale-val" class="font-extrabold text-sky-700">6px</span>
-          <button onclick="toggleScanlines()" class="px-2.5 py-1 rounded bg-slate-900 text-sky-300 font-bold hover:bg-slate-800">
+          <button onclick="toggleScanlines()" class="frost-cube-btn !py-1 !px-3 !text-xs">
             Scanlines
           </button>
         </div>
@@ -425,13 +486,13 @@
 
         <!-- 3-Stage Progress Indicators -->
         <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
-          <button id="pill-step-0" onclick="playClip(0)" class="step-pill active px-3 py-1.5 rounded-lg border border-sky-300 bg-white text-slate-800 font-bold transition-all">
+          <button id="pill-step-0" onclick="playClip(0)" class="step-pill active state-btn-freeze">
             1. Scan Initiated
           </button>
-          <button id="pill-step-1" onclick="playClip(1)" class="step-pill px-3 py-1.5 rounded-lg border border-sky-300 bg-white text-slate-800 font-bold transition-all">
+          <button id="pill-step-1" onclick="playClip(1)" class="step-pill state-btn-initiate">
             2. Perimeter Inspection
           </button>
-          <button id="pill-step-2" onclick="playClip(2)" class="step-pill px-3 py-1.5 rounded-lg border border-sky-300 bg-white text-slate-800 font-bold transition-all">
+          <button id="pill-step-2" onclick="playClip(2)" class="step-pill state-btn-shiver">
             3. Airtight Seal Sent
           </button>
         </div>
@@ -455,146 +516,272 @@
       </div>
     </section>
 
-    <!-- SCAN INTAKE, TWO-TIER FREEZE SEAL & COSMO POST-SEAL WORKFLOW -->
+    <!-- HEALTHCARE PRESCRIPTION & EVIDENCE VAULT (FLIP CARD DOSING INTERFACE) -->
     <section id="scan-intake-section" class="frosted-glass rounded-3xl p-6 sm:p-8 space-y-8">
       <div>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-sky-300 font-mono text-xs font-bold uppercase">
-          <i class="fa-solid fa-stamp text-sky-400"></i> Two-Tier Verification Mechanics
-        </span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 text-sky-300 font-mono text-xs font-bold uppercase shadow-sm">
+          <i class="fa-solid fa-prescription-bottle-medical text-sky-400"></i> Clinical Security Dosing // Underwriter Evidence
+        </div>
         <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2" style="font-family:'Orbitron',sans-serif;">
-          EXECUTE COLD PERIMETER SCAN &amp; ISSUE FREEZE SEAL
+          PRESCRIBED COLD-STORAGE COMPLIANCE TIERS
         </h2>
         <p class="text-xs sm:text-sm text-slate-600 font-mono mt-1">
-          Select a commercial tier below. Kiosk scans issue an instant <strong>Machine-Verified Timestamped Freeze Seal</strong>; continuous drift ledgers issue full <strong>Algorithmic Cryptographic SHA-256 Seals</strong>.
+          Hover or tap any prescription capsule below to flip between clinical assessment scope and instant seal dispatch.
         </p>
       </div>
 
-      <!-- Commercial Tiers Grid -->
+      <!-- 3D FLIP CARD PRESCRIPTION CAPSULES -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <!-- Tier 1: $50 Scorecard -->
-        <div class="p-6 rounded-2xl bg-white/95 border border-sky-300 shadow flex flex-col justify-between space-y-4">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono font-extrabold text-sky-700 uppercase">Express Baseline</span>
-              <span class="text-2xl font-black text-slate-900">$50</span>
+        <!-- FLIP CARD 1: $50 Scorecard -->
+        <div class="flip-card-container cursor-pointer" onclick="this.classList.toggle('is-flipped')">
+          <div class="flip-card-inner">
+            <!-- Front Face -->
+            <div class="flip-card-front p-6 bg-white/95 border-2 border-sky-300 shadow-lg flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 font-mono text-xs font-black uppercase">
+                    <i class="fa-solid fa-capsules text-sky-600"></i> Dose 01
+                  </span>
+                  <span class="text-2xl font-black text-slate-900 font-mono">$50</span>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-slate-900">Zero-Point Scorecard</h3>
+                  <div class="text-xs font-mono font-bold text-sky-600 mt-0.5">Express Hygiene Dosing</div>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Rapid perimeter diagnostic. Discovers exposed clinic endpoints, email authentication (DMARC/SPF/DKIM), and management port leaks.
+                </p>
+                <div class="p-3 rounded-xl bg-sky-50 border border-sky-200 text-[11px] font-mono text-slate-700 space-y-1">
+                  <div><strong>• Target:</strong> Single Clinic WAN IP / Root Domain</div>
+                  <div><strong>• Diagnostic SLA:</strong> Express Automated Sweep</div>
+                  <div><strong>• Output:</strong> Machine-Stamped Freeze Seal</div>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-sky-100 flex items-center justify-between text-xs font-mono font-bold text-sky-700">
+                <span><i class="fa-solid fa-arrows-rotate mr-1"></i> Tap / Hover to Inspect</span>
+                <span class="text-sky-600 font-black">Flip →</span>
+              </div>
             </div>
-            <h3 class="text-lg font-black text-slate-900 mt-2">Zero-Point Scorecard</h3>
-            <p class="text-xs text-slate-600 mt-1">
-              Rapid perimeter hygiene check. Inspects DNS recursion, DMARC alignment, and management port cloaking.
-            </p>
-            <div class="mt-3 py-1.5 px-2.5 rounded bg-sky-50 text-[11px] font-mono text-sky-900 font-semibold border border-sky-200">
-              Seal: Timestamped Freeze Stamp (FRZ-2026)
+
+            <!-- Back Face -->
+            <div class="flip-card-back p-6 bg-slate-950 text-white border-2 border-sky-400 shadow-2xl flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between border-b border-sky-800 pb-3">
+                  <span class="font-mono text-xs text-sky-400 font-bold uppercase"><i class="fa-solid fa-file-prescription mr-1"></i> Rx Specification</span>
+                  <span class="px-2 py-0.5 rounded bg-sky-900/60 text-sky-200 font-mono text-[10px]">FRZ-DOSE-50</span>
+                </div>
+                <ul class="text-xs font-mono space-y-2 text-slate-300">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>DNS Recursion &amp; Anti-Spoofing Audit</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>RDP (3389) &amp; SMB (445) WAN Port Cloaking</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>Timestamped Freeze Stamp (FRZ-2026)</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-2 pt-4">
+                <button 
+                  type="button" 
+                  onclick="event.stopPropagation(); triggerDosingOrder('Zero-Point Scorecard', '50')" 
+                  class="frost-cube-btn w-full justify-center uppercase tracking-wider"
+                >
+                  <i class="fa-solid fa-clipboard-check"></i> Request $50 Scorecard
+                </button>
+                <div class="text-[10px] font-mono text-center text-slate-400">Tap to flip back</div>
+              </div>
             </div>
           </div>
-          <button onclick="selectFreezerProduct('Zero-Point Scorecard', '50')" class="w-full py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs font-mono transition-all shadow">
-            Select $50 Scorecard →
-          </button>
         </div>
 
-        <!-- Tier 2: $99 Snapshot -->
-        <div class="p-6 rounded-2xl bg-white/95 border-2 border-sky-500 shadow-md flex flex-col justify-between space-y-4 relative">
-          <span class="absolute -top-3 right-4 px-3 py-0.5 rounded-full bg-sky-600 text-white font-mono text-[10px] font-black uppercase">
-            Most Popular
-          </span>
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono font-extrabold text-sky-700 uppercase">Audit Assessment</span>
-              <span class="text-2xl font-black text-slate-900">$99</span>
+        <!-- FLIP CARD 2: $99 Snapshot (Featured) -->
+        <div class="flip-card-container cursor-pointer" onclick="this.classList.toggle('is-flipped')">
+          <div class="flip-card-inner">
+            <!-- Front Face -->
+            <div class="flip-card-front p-6 bg-white/95 border-2 border-sky-500 shadow-xl flex flex-col justify-between relative">
+              <span class="absolute -top-3.5 right-5 px-3 py-1 rounded-full bg-gradient-to-r from-sky-600 to-indigo-600 text-white font-mono text-[10px] font-black uppercase tracking-wider shadow">
+                Recommended For Clinics
+              </span>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-600 text-white font-mono text-xs font-black uppercase">
+                    <i class="fa-solid fa-capsules text-white"></i> Dose 02
+                  </span>
+                  <span class="text-2xl font-black text-slate-900 font-mono">$99</span>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-slate-900">Posture Snapshot</h3>
+                  <div class="text-xs font-mono font-bold text-sky-600 mt-0.5">HIPAA Audit Evaluation</div>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Complete outside-in perimeter evaluation. Cross-referenced directly against HIPAA Security Rule § 164.312 and HITRUST CSF standards.
+                </p>
+                <div class="p-3 rounded-xl bg-sky-50 border border-sky-200 text-[11px] font-mono text-slate-700 space-y-1">
+                  <div><strong>• Compliance:</strong> HIPAA § 164.312(e) Cipher Audit</div>
+                  <div><strong>• Underwriter Ready:</strong> Defensible Carrier Evidence</div>
+                  <div><strong>• Output:</strong> Machine-Verified Audit Stamp</div>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-sky-100 flex items-center justify-between text-xs font-mono font-bold text-sky-700">
+                <span><i class="fa-solid fa-arrows-rotate mr-1"></i> Tap / Hover to Inspect</span>
+                <span class="text-sky-600 font-black">Flip →</span>
+              </div>
             </div>
-            <h3 class="text-lg font-black text-slate-900 mt-2">Posture Snapshot</h3>
-            <p class="text-xs text-slate-600 mt-1">
-              Complete outside-in exposure evaluation. Cross-referenced against HIPAA § 164.312 and HITRUST CSF standards.
-            </p>
-            <div class="mt-3 py-1.5 px-2.5 rounded bg-sky-50 text-[11px] font-mono text-sky-900 font-semibold border border-sky-200">
-              Seal: Machine-Verified Timestamped Stamp
+
+            <!-- Back Face -->
+            <div class="flip-card-back p-6 bg-slate-950 text-white border-2 border-sky-400 shadow-2xl flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between border-b border-sky-800 pb-3">
+                  <span class="font-mono text-xs text-sky-400 font-bold uppercase"><i class="fa-solid fa-file-prescription mr-1"></i> Rx Specification</span>
+                  <span class="px-2 py-0.5 rounded bg-sky-900/60 text-sky-200 font-mono text-[10px]">FRZ-DOSE-99</span>
+                </div>
+                <ul class="text-xs font-mono space-y-2 text-slate-300">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>EHR Portal SSL/TLS Cipher Invalidation Check</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>CISA Known Exploited Vulnerabilities (KEV) Correlation</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>Full 4-Page Underwriter Defensible Report PDF</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-2 pt-4">
+                <button 
+                  type="button" 
+                  onclick="event.stopPropagation(); triggerDosingOrder('Posture Snapshot', '99')" 
+                  class="frost-cube-btn w-full justify-center uppercase tracking-wider"
+                >
+                  <i class="fa-solid fa-clipboard-check"></i> Request $99 Snapshot
+                </button>
+                <div class="text-[10px] font-mono text-center text-slate-400">Tap to flip back</div>
+              </div>
             </div>
           </div>
-          <button onclick="selectFreezerProduct('Posture Snapshot', '99')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-sky-300 font-bold text-xs font-mono transition-all shadow">
-            Select $99 Snapshot →
-          </button>
         </div>
 
-        <!-- Tier 3: $249/mo Drift Ledger -->
-        <div class="p-6 rounded-2xl bg-white/95 border border-sky-300 shadow flex flex-col justify-between space-y-4">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono font-extrabold text-sky-700 uppercase">Continuous Defense</span>
-              <span class="text-2xl font-black text-slate-900">$249<span class="text-xs text-slate-500 font-normal">/mo</span></span>
+        <!-- FLIP CARD 3: $249/mo Continuous -->
+        <div class="flip-card-container cursor-pointer" onclick="this.classList.toggle('is-flipped')">
+          <div class="flip-card-inner">
+            <!-- Front Face -->
+            <div class="flip-card-front p-6 bg-white/95 border-2 border-sky-300 shadow-lg flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-sky-300 font-mono text-xs font-black uppercase">
+                    <i class="fa-solid fa-shield-virus text-sky-400"></i> Dose 03
+                  </span>
+                  <span class="text-2xl font-black text-slate-900 font-mono">$249<span class="text-xs text-slate-500 font-normal">/mo</span></span>
+                </div>
+                <div>
+                  <h3 class="text-xl font-black text-slate-900">Continuous Drift Ledger</h3>
+                  <div class="text-xs font-mono font-bold text-sky-600 mt-0.5">Permanent Compliance Seal</div>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  30-day automated diff engine sweeps. Eliminates insurance claim denials by proving continuous, unbroken security posture.
+                </p>
+                <div class="p-3 rounded-xl bg-sky-50 border border-sky-200 text-[11px] font-mono text-slate-700 space-y-1">
+                  <div><strong>• Cadence:</strong> Continuous 30-Day Automated Diff</div>
+                  <div><strong>• Audit Vault:</strong> Algorithmic SHA-256 Ledger</div>
+                  <div><strong>• Carrier Proof:</strong> Zero-Posture-Drift Guarantee</div>
+                </div>
+              </div>
+              <div class="pt-4 border-t border-sky-100 flex items-center justify-between text-xs font-mono font-bold text-sky-700">
+                <span><i class="fa-solid fa-arrows-rotate mr-1"></i> Tap / Hover to Inspect</span>
+                <span class="text-sky-600 font-black">Flip →</span>
+              </div>
             </div>
-            <h3 class="text-lg font-black text-slate-900 mt-2">Continuous Drift Ledger</h3>
-            <p class="text-xs text-slate-600 mt-1">
-              30-day recurring automated diff engine sweeps. Eliminates carrier claim denials by proving continuous unbroken compliance.
-            </p>
-            <div class="mt-3 py-1.5 px-2.5 rounded bg-sky-50 text-[11px] font-mono text-sky-900 font-semibold border border-sky-200">
-              Seal: Full Algorithmic SHA-256 Digest
+
+            <!-- Back Face -->
+            <div class="flip-card-back p-6 bg-slate-950 text-white border-2 border-sky-400 shadow-2xl flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between border-b border-sky-800 pb-3">
+                  <span class="font-mono text-xs text-sky-400 font-bold uppercase"><i class="fa-solid fa-file-prescription mr-1"></i> Rx Specification</span>
+                  <span class="px-2 py-0.5 rounded bg-sky-900/60 text-sky-200 font-mono text-[10px]">FRZ-DOSE-249</span>
+                </div>
+                <ul class="text-xs font-mono space-y-2 text-slate-300">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>Automated Continuous Attack Surface Drift Detection</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>Monthly Immutable Algorithmic Cryptographic Seal</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+                    <span>Full Claims-Defense Underwriting Evidence Packet</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-2 pt-4">
+                <button 
+                  type="button" 
+                  onclick="event.stopPropagation(); triggerDosingOrder('Continuous Drift Ledger', '249')" 
+                  class="frost-cube-btn w-full justify-center uppercase tracking-wider"
+                >
+                  <i class="fa-solid fa-clipboard-check"></i> Request $249/mo Ledger
+                </button>
+                <div class="text-[10px] font-mono text-center text-slate-400">Tap to flip back</div>
+              </div>
             </div>
           </div>
-          <button onclick="selectFreezerProduct('Continuous Drift Ledger', '249')" class="w-full py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs font-mono transition-all shadow">
-            Select $249/mo Ledger →
-          </button>
         </div>
 
       </div>
 
-      <!-- Intake Form (Enqueues directly to worker.py) -->
-      <form id="freezer-order-form" class="p-6 sm:p-8 rounded-2xl bg-white/95 border border-sky-300 shadow-md space-y-4 max-w-3xl mx-auto">
-        <h3 class="text-base font-black text-slate-900 uppercase font-mono tracking-tight">
-          Intake Form // Dispatch to worker.py
-        </h3>
+      <!-- Prescribed Diagnostic Intake (Pure Form - No Exposed Developer Scripts) -->
+      <form id="freezer-order-form" class="p-6 sm:p-8 rounded-2xl bg-white/95 border-2 border-sky-300 shadow-md space-y-4 max-w-3xl mx-auto">
+        <div class="flex items-center justify-between border-b border-sky-100 pb-3">
+          <h3 class="text-sm font-black text-slate-900 uppercase font-mono tracking-tight flex items-center gap-2">
+            <i class="fa-solid fa-stethoscope text-sky-600"></i> Clinic Perimeter Telemetry Intake
+          </h3>
+          <span id="selected-dose-pill" class="px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 font-mono text-[11px] font-bold">
+            Selected Dose: Posture Snapshot ($99)
+          </span>
+        </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
           <div>
-            <label class="block font-bold text-slate-700 mb-1">Target Healthcare / Practice Domain:</label>
+            <label class="block font-bold text-slate-700 mb-1">Target Healthcare Domain or Clinic IP:</label>
             <input 
               id="frz-domain" 
               type="text" 
               required 
-              placeholder="e.g. apex-clinic.com" 
+              placeholder="e.g. clinic.yourhealth.com" 
               class="w-full px-3 py-2.5 rounded-xl border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-sky-50/40 text-slate-900 font-bold"
             >
           </div>
           <div>
-            <label class="block font-bold text-slate-700 mb-1">Contact Email for Deliverable PDF:</label>
+            <label class="block font-bold text-slate-700 mb-1">Compliance Officer or Dispatch Email:</label>
             <input 
               id="frz-email" 
               type="email" 
               required 
-              placeholder="billing@apex-clinic.com" 
+              placeholder="compliance@yourhealth.com" 
               class="w-full px-3 py-2.5 rounded-xl border border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-sky-50/40 text-slate-900 font-bold"
             >
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Selected Product:</label>
-            <input 
-              id="frz-product" 
-              type="text" 
-              readonly 
-              value="Posture Snapshot" 
-              class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-slate-100 text-slate-800 font-bold"
-            >
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">Amount ($ USD):</label>
-            <input 
-              id="frz-amount" 
-              type="text" 
-              readonly 
-              value="99" 
-              class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-slate-100 text-slate-800 font-bold"
-            >
-          </div>
-        </div>
+        <input id="frz-product" type="hidden" value="Posture Snapshot">
+        <input id="frz-amount" type="hidden" value="99">
 
         <button 
           type="submit" 
           id="btn-submit-order"
-          class="w-full py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-black text-sm uppercase tracking-wider font-mono transition-all shadow-lg flex items-center justify-center gap-2"
+          class="frost-cube-btn w-full justify-center uppercase tracking-wider"
         >
-          <i class="fa-solid fa-stamp"></i> Complete &amp; Issue Airtight Freeze Seal →
+          <i class="fa-solid fa-snowflake"></i> Freeze Telemetry &amp; Issue Evidence Seal →
         </button>
       </form>
 
@@ -629,7 +816,7 @@
           <button 
             type="button"
             onclick="openCosmoAuth()" 
-            class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-black text-xs font-mono uppercase tracking-wider transition-all shadow"
+            class="frost-cube-btn uppercase tracking-wider"
           >
             <i class="fa-solid fa-user-shield mr-1"></i> Sign In With Cosmo
           </button>
@@ -766,12 +953,23 @@
       playClip(activeClipIdx + 1);
     });
 
-    // 4. Product Selector
-    function selectFreezerProduct(name, amount) {
+    // 4. Clinical Dosing Selection Trigger (Syncs with both inline form & Unified Accordion Payment Hub)
+    function triggerDosingOrder(name, amount) {
       document.getElementById('frz-product').value = name;
       document.getElementById('frz-amount').value = amount;
-      document.getElementById('scan-intake-section').scrollIntoView({ behavior: 'smooth' });
-      document.getElementById('frz-domain').focus();
+      const pill = document.getElementById('selected-dose-pill');
+      if (pill) {
+        pill.textContent = `Selected Dose: ${name} ($${amount})`;
+      }
+      if (window.Burn1UnifiedHub && typeof window.Burn1UnifiedHub.openPaymentForTier === 'function') {
+        window.Burn1UnifiedHub.openPaymentForTier(name, amount);
+      } else {
+        const intakeSec = document.getElementById('freezer-order-form');
+        if (intakeSec) {
+          intakeSec.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('frz-domain').focus();
+        }
+      }
     }
 
     // 5. Order Intake & Two-Tier Seal Logic (cosmo after seal complete)
@@ -832,14 +1030,21 @@
       btn.innerHTML = '<i class="fa-solid fa-stamp"></i> Complete &amp; Issue Airtight Freeze Seal →';
     });
 
-    // 6. Cosmo Post-Seal Auth Trigger
+    // 6. Cosmo Post-Seal Auth Trigger (Opens Universal Login / Account Binder in Unified Hub)
     function openCosmoAuth() {
-      if (window.Burn1Cosmo && typeof window.Burn1Cosmo.openModal === 'function') {
-        window.Burn1Cosmo.openModal();
+      if (window.triBotEngine && typeof window.triBotEngine.openModal === 'function') {
+        window.triBotEngine.openModal();
+      } else if (window.Burn1UnifiedHub && typeof window.Burn1UnifiedHub.openTab === 'function') {
+        window.Burn1UnifiedHub.openTab('auth');
       } else {
         window.location.href = 'directory.html#signin';
       }
     }
   </script>
+
+  <!-- UNIVERSAL PAYMENT CONTROLLER & TRI-PANE BOT CONTROLLER & AUDIO FX -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
 </body>
 </html>

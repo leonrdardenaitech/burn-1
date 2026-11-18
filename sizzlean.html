@@ -95,77 +95,196 @@
         </div>
       </a>
 
-      <div class="flex flex-wrap items-center gap-2">
-        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">Core Site</a>
-        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">1. FreezerBurn</a>
-        <a href="acid.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">2. Acid</a>
-        <a href="times2.html" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 border border-slate-700 text-xs font-bold">3. Times2</a>
-        <a href="sizzlean.html" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 text-xs font-extrabold shadow-[0_0_15px_rgba(16,185,129,0.5)]">4. Sizzlean</a>
+      <nav class="flex flex-wrap items-center gap-1.5 font-mono text-xs">
+        <a href="freezer.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-bold">
+          <i class="fa-solid fa-snowflake text-sky-400 mr-1"></i> FreezerBurn
+        </a>
+        <a href="acid.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-bold">
+          <i class="fa-solid fa-flask-vial text-lime-400 mr-1"></i> Acid
+        </a>
+        <a href="times2.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-bold">
+          <i class="fa-solid fa-clock-rotate-left text-indigo-400 mr-1"></i> Times2
+        </a>
+        <a href="sizzlean.html" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-extrabold shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+          <i class="fa-solid fa-fire-flame-curved mr-1"></i> Sizzlean
+        </a>
+        <a href="directory.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-500/50 font-bold">
+          <i class="fa-solid fa-compass mr-1"></i> Directory
+        </a>
+        <a href="msp-intake.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-500/50 font-bold">
+          <i class="fa-solid fa-network-wired mr-1"></i> MSP Intake
+        </a>
+        <a href="broker-portal.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-indigo-300 border border-indigo-500/50 font-bold">
+          <i class="fa-solid fa-building-columns mr-1"></i> Broker Portal
+        </a>
         <button
           type="button"
-          onclick="window.Burn1DivisionEngine && window.Burn1DivisionEngine.openAuth()"
-          data-universal-auth-status
-          class="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-emerald-400 font-mono text-xs font-bold border border-emerald-400 cursor-pointer"
+          onclick="window.Burn1UnifiedHub && window.Burn1UnifiedHub.openTab('payment')"
+          class="px-3.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-900 text-emerald-400 font-mono text-xs font-black border-2 border-emerald-400 cursor-pointer"
         >
-          <i class="fa-solid fa-user-lock mr-1"></i> Universal Sign-In
+          <i class="fa-solid fa-layer-group mr-1"></i> Binder Bot &amp; Payment Hub
         </button>
-      </div>
+      </nav>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 space-y-10">
 
-    <!-- HERO + FORMAT & STYLE SELECTOR (PAPER PRINT PDF vs DIGITAL WEB DASHBOARD) -->
-    <section class="guilloche-card p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7 space-y-4">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400 font-mono text-xs font-bold text-emerald-400 uppercase">
-          <i class="fa-solid fa-layer-group"></i> Minimalist Guilloche Line-Art + Netflix-Style Catalog
-        </span>
-        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight" style="font-family:'Cinzel',serif;">
-          Treasury-Grade Contracts &amp; White-Label MSP Compliance Kits.
-        </h1>
-        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-          Switch seamlessly between physical <strong>Paper Print Guilloche PDFs</strong> and interactive <strong>Digital Web Dashboards</strong>. Access free commercial templates or subscribe to $250–$500/mo White-Label MSP Scorecard Bundles.
-        </p>
-
-        <!-- Format & Style Selector -->
-        <div class="pt-2">
-          <div class="font-mono text-[11px] font-bold uppercase text-emerald-400 mb-2">FORMAT &amp; STYLE SELECTOR:</div>
-          <div class="inline-flex rounded-xl bg-black/60 p-1.5 border border-emerald-500/40 gap-2">
-            <button
-              id="btn-mode-digital"
-              type="button"
-              onclick="setSizzleanFormat('digital')"
-              class="px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 font-mono text-xs font-extrabold cursor-pointer transition-all"
-            >
-              <i class="fa-solid fa-display mr-1"></i> Digital Web Dashboard
-            </button>
-            <button
-              id="btn-mode-paper"
-              type="button"
-              onclick="setSizzleanFormat('paper')"
-              class="px-4 py-2 rounded-lg bg-transparent text-slate-300 hover:text-white font-mono text-xs font-bold cursor-pointer transition-all"
-            >
-              <i class="fa-solid fa-file-pdf mr-1"></i> Paper Print Guilloche PDF
-            </button>
-          </div>
-          <div id="format-readout" class="font-mono text-[11px] text-slate-400 mt-2">
-            Active Output Mode: <strong class="text-emerald-400">Digital Web Dashboard (Interactive Telemetry View)</strong>
-          </div>
+    <!-- SIZZLEAN HERO BANNER (sizzlean_Hero.jpg — CATALOG: Sizzling Themes + Lean Prices, NO RAW UI KIT IMAGE) -->
+    <section class="guilloche-card p-6 sm:p-10 space-y-6">
+      <div class="rounded-2xl overflow-hidden border-2 border-emerald-400/80 shadow-2xl relative bg-black">
+        <img
+          src="assets/divisions/sizzlean_Hero.jpg"
+          alt="Sizzlean Catalog: Sizzling Themes + Lean Prices ($12 Case Brief, Chronology, Forensic Log, Evidence File, Summary Report)"
+          class="w-full h-auto max-h-[420px] object-cover"
+        >
+        <div class="absolute bottom-3 right-4 px-4 py-1.5 rounded-full bg-slate-950/90 border-2 border-emerald-400 text-emerald-300 font-mono text-xs font-black shadow-lg flex items-center gap-2 backdrop-blur-md">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981] animate-pulse"></span>
+          <span>SIZZLING THEMES + LEAN PRICES // $12 MICRO-WINDOWS &amp; ACADEMY CREDITS</span>
         </div>
       </div>
 
-      <div class="lg:col-span-5">
-        <div class="p-3 rounded-2xl bg-black/60 border border-emerald-500/40">
-          <img
-            src="assets/divisions/show_this_logo_on_clothes_24c03a3b.jpg"
-            alt="Sizzlean Brand &amp; White-Label Showcase"
-            class="w-full h-64 object-cover rounded-xl"
-          >
-          <div class="mt-2 flex justify-between items-center font-mono text-[11px] text-emerald-400 px-1">
-            <span>SIZZLEAN // BRAND &amp; WHITE-LABEL</span>
-            <span>● GUILLOCHE VERIFIED</span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-4">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400 font-mono text-xs font-bold text-emerald-400 uppercase">
+            <i class="fa-solid fa-layer-group"></i> Minimalist Guilloche Line-Art + Compression Layer &amp; Executive Reporting
+          </span>
+          <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight" style="font-family:'Cinzel',serif;">
+            $12 Micro-Windows, $49 Executive Briefs™ &amp; Academy Credit Funnel.
+          </h1>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Switch seamlessly between physical <strong>Paper Print Guilloche PDFs</strong> and interactive <strong>Digital Web Dashboards</strong>. Trigger zero-backend <strong>$12 Micro-Windows</strong> (Case Brief, Chronology, Forensic Log), unlock the flagship <strong>$49 Sizzlean Executive Brief™</strong> or <strong>$149 Board Pack™</strong>, or redeem <strong>Earned Academy Credits</strong> directly inside the Centered Ultra Bar below.
+          </p>
+          <p class="text-xs font-mono text-emerald-300 bg-black/70 border border-emerald-500/40 p-3 rounded-xl">
+            <strong>BIND Doctrine:</strong> After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report. Delivered within standard business turnaround up to 5 business days.
+          </p>
+
+          <!-- Format & Style Selector -->
+          <div class="pt-2">
+            <div class="font-mono text-[11px] font-bold uppercase text-emerald-400 mb-2">FORMAT &amp; STYLE SELECTOR:</div>
+            <div class="inline-flex rounded-xl bg-black/60 p-1.5 border border-emerald-500/40 gap-2">
+              <button
+                id="btn-mode-digital"
+                type="button"
+                onclick="setSizzleanFormat('digital')"
+                class="px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 font-mono text-xs font-extrabold cursor-pointer transition-all"
+              >
+                <i class="fa-solid fa-display mr-1"></i> Digital Web Dashboard
+              </button>
+              <button
+                id="btn-mode-paper"
+                type="button"
+                onclick="setSizzleanFormat('paper')"
+                class="px-4 py-2 rounded-lg bg-transparent text-slate-300 hover:text-white font-mono text-xs font-bold cursor-pointer transition-all"
+              >
+                <i class="fa-solid fa-file-pdf mr-1"></i> Paper Print Guilloche PDF
+              </button>
+            </div>
+            <div id="format-readout" class="font-mono text-[11px] text-slate-400 mt-2">
+              Active Output Mode: <strong class="text-emerald-400">Digital Web Dashboard (Interactive Telemetry View)</strong>
+            </div>
           </div>
+        </div>
+
+        <!-- PURE CSS REAL ESTATE / ACADEMY CREDIT FUNNEL DECK (REPLACING RAW UI KIT PICTURE) -->
+        <div class="lg:col-span-5">
+          <div class="p-5 rounded-2xl bg-black/75 border-2 border-emerald-500/50 space-y-4 shadow-xl">
+            <div class="flex items-center justify-between border-b border-emerald-500/30 pb-2.5">
+              <span class="font-mono text-xs font-black text-emerald-400 uppercase">
+                <i class="fa-solid fa-graduation-cap mr-1"></i> ACADEMY CREDIT FUNNEL
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400 text-amber-300 font-mono text-[10px] font-black">
+                2 CREDITS ($50 VALUE)
+              </span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Real estate and facility risk managers complete free modules in the <a href="academy.html" class="text-emerald-400 underline font-bold">BURN-1 Academy</a> to earn <strong>Academy Credits</strong>, then redeem them inside the Centered Ultra Bar below to unlock <strong>$12 Micro-Windows</strong> or discount flagship dossiers.
+            </p>
+            <div class="grid grid-cols-2 gap-2.5 font-mono text-[11px]">
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/40">
+                <div class="text-slate-400 text-[10px]">IMPULSE MICRO-TOOLS</div>
+                <div class="text-amber-300 font-black mt-0.5">$12 INSTANT PDF</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/40">
+                <div class="text-slate-400 text-[10px]">EXECUTIVE / BOARD</div>
+                <div class="text-emerald-400 font-black mt-0.5">$49 BRIEF / $149 PACK</div>
+              </div>
+            </div>
+            <button type="button" onclick="document.getElementById('sizzlean-ultra-bar-mount').scrollIntoView({behavior:'smooth'})" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono text-xs font-black uppercase tracking-wider cursor-pointer transition-all">
+              Open Centered Ultra Bar (&lt; &gt; Chevrons) →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNDER HERO: LEON'S CENTERED ACCORDION ULTRA BAR FOR SIZZLEAN (< and > CHEVRON BROWSER) -->
+    <div id="sizzlean-ultra-bar-mount" data-ultrabar-division="sizzlean" data-ultrabar-layout="centered"></div>
+
+    <!-- NETFLIX-STYLE CATALOG ROW 0: $12 LEAN PRICE FORENSIC & CASE DOSSIERS (FROM sizzlean_Hero.jpg) -->
+    <section class="space-y-4">
+      <div class="flex justify-between items-end">
+        <div>
+          <span class="font-mono text-xs font-extrabold uppercase text-amber-300">ROW 00 // SIZZLING THEMES + LEAN PRICES ($12 EACH)</span>
+          <h2 class="text-2xl font-black text-white uppercase" style="font-family:'Cinzel',serif;">$12 Forensic &amp; Underwriting Evidence Dossiers</h2>
+        </div>
+        <span class="font-mono text-xs text-slate-400">From the Sizzlean Hero Catalog</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="guilloche-card catalog-item-preview p-4 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 font-mono text-[10px] font-bold">LEAN PRICE // $12</span>
+            <h3 class="text-base font-black mt-2" style="font-family:'Cinzel',serif;">Case Brief Dossier</h3>
+            <p class="text-xs opacity-80 mt-1">Executive perimeter incident &amp; posture summary formatted for legal &amp; carrier review.</p>
+          </div>
+          <button type="button" onclick="selectSizzleanOffer('Sizzlean Case Brief Dossier ($12)', '12.00')" class="mt-4 w-full py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono text-xs font-black uppercase cursor-pointer">
+            Select $12 Brief →
+          </button>
+        </div>
+
+        <div class="guilloche-card catalog-item-preview p-4 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 font-mono text-[10px] font-bold">LEAN PRICE // $12</span>
+            <h3 class="text-base font-black mt-2" style="font-family:'Cinzel',serif;">Chronology Ledger</h3>
+            <p class="text-xs opacity-80 mt-1">Timestamped remediation &amp; patch verification timeline with SHA-256 chain of custody.</p>
+          </div>
+          <button type="button" onclick="selectSizzleanOffer('Sizzlean Chronology Ledger ($12)', '12.00')" class="mt-4 w-full py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono text-xs font-black uppercase cursor-pointer">
+            Select $12 Chronology →
+          </button>
+        </div>
+
+        <div class="guilloche-card catalog-item-preview p-4 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 font-mono text-[10px] font-bold">LEAN PRICE // $12</span>
+            <h3 class="text-base font-black mt-2" style="font-family:'Cinzel',serif;">Forensic Log Binder</h3>
+            <p class="text-xs opacity-80 mt-1">Outside-In DNS, TLS, and WAN port telemetry log formatted in high-contrast Guilloche.</p>
+          </div>
+          <button type="button" onclick="selectSizzleanOffer('Sizzlean Forensic Log Binder ($12)', '12.00')" class="mt-4 w-full py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono text-xs font-black uppercase cursor-pointer">
+            Select $12 Forensic Log →
+          </button>
+        </div>
+
+        <div class="guilloche-card catalog-item-preview p-4 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 font-mono text-[10px] font-bold">LEAN PRICE // $12</span>
+            <h3 class="text-base font-black mt-2" style="font-family:'Cinzel',serif;">Evidence File Packet</h3>
+            <p class="text-xs opacity-80 mt-1">Statutory citation packet mapped to NIST CSF 2.0, CISA KEV, and carrier checklists.</p>
+          </div>
+          <button type="button" onclick="selectSizzleanOffer('Sizzlean Evidence File Packet ($12)', '12.00')" class="mt-4 w-full py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono text-xs font-black uppercase cursor-pointer">
+            Select $12 Evidence File →
+          </button>
+        </div>
+
+        <div class="guilloche-card catalog-item-preview p-4 flex flex-col justify-between">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 font-mono text-[10px] font-bold">LEAN PRICE // $12</span>
+            <h3 class="text-base font-black mt-2" style="font-family:'Cinzel',serif;">Summary Report</h3>
+            <p class="text-xs opacity-80 mt-1">Board-ready 2-page posture attestation summary with Algorithmic Cryptographic SHA-256 Seal.</p>
+          </div>
+          <button type="button" onclick="selectSizzleanOffer('Sizzlean Summary Report ($12)', '12.00')" class="mt-4 w-full py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono text-xs font-black uppercase cursor-pointer">
+            Select $12 Summary →
+          </button>
         </div>
       </div>
     </section>

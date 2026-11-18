@@ -477,7 +477,8 @@
       client_type: clientType,
       form_origin: formPayload.endpoint || (clientType === 'msp' ? 'msp_intake' : 'direct_intake'),
       framework: formPayload.framework || 'NIST CSF 2.0',
-      packageTier: formPayload.packageTier || 'Standard Dossier'
+      packageTier: formPayload.packageTier || 'Standard Dossier',
+      b1_security_trap: formPayload.b1_security_trap || document.getElementById('b1_security_trap')?.value || ''
     };
 
     fetch(apiBase + '/api/intake', {

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon's Ultra Bar</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#121418',
+                        metal: '#2A2F38',
+                        silver: '#D0D5DD',
+                        'neon-red': '#FF2A4D',
+                        'neon-amber': '#FF8400',
+                        'neon-green': '#00FF66',
+                        'base-dark': '#0a0b0d'
+                    },
+                    fontFamily: {
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace'],
+                    },
+                    transitionTimingFunction: {
+                        'hydraulic': 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base reset and dark theme background for the playground */
+        body {
+            background-color: #0a0b0d; /* Dark background to showcase the widget */
+            color: #D0D5DD;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+        }
+        
+        /* Hide scrollbars for ultra-clean look */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121418;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2F38;
+            border-radius: 2px;
+        }
+        
+        .glow-red { filter: drop-shadow(0 0 4px rgba(255, 42, 77, 0.6)); }
+        .glow-green { filter: drop-shadow(0 0 6px rgba(0, 255, 102, 0.6)); }
+        .glow-amber { filter: drop-shadow(0 0 4px rgba(255, 132, 0, 0.6)); }
+        
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <!-- App Container -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // --- Data Structure ---
+        const SHELVES = [
+            { id: 'sizzle', title: 'SIZZLE', fullTitle: 'SIZZLE // 1-PAGE DECISION SCORECARD', desc: 'Evaluate core metrics and immediate impact vectors.' },
+            { id: 'cook', title: 'COOK', fullTitle: 'COOK // LEVEL 2 STRATEGIC BRIEF', desc: 'Define operational parameters and resource allocation.' },
+            { id: 'fry', title: 'FRY', fullTitle: 'FRY // LEVEL 3 EVIDENCE BINDER', desc: 'Attach supporting documents and forensic data.' },
+            { id: 'chm-burn', title: 'CHEMICAL BURN', fullTitle: 'CHEMICAL BURN // FORENSIC ACID PASS', desc: 'Final stress test against critical failure points.' },
+            { id: 'reviews', title: 'REVIEWS & SIGN-OFF', fullTitle: 'REVIEWS & SIGN-OFF // FINAL VALIDATION', desc: 'Executive authorization protocol.' },
+        ];
+
+        // --- SVG Icons ---
+        const IconX = ({ className }) => (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className={`w-4 h-4 ${className}`}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        );
+
+        const IconCheck = ({ className }) => (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className={`w-4 h-4 ${className}`}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+        );
+
+        const IconChevron = ({ direction, className }) => {
+            const rotations = { right: 'rotate-0', down: 'rotate-90', up: '-rotate-90' };
+            return (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" 
+                     className={`w-4 h-4 transition-transform duration-300 ease-hydraulic ${rotations[direction]} ${className}`}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            );
+        };
+
+        // --- Main Component ---
+        const LeonsUltraBar = () => {
+            // Phase States
+            const [isMainExpanded, setIsMainExpanded] = useState(false); // Phase 1
+            const [activeTrayId, setActiveTrayId] = useState(null);      // Phase 2 (Horizontal)
+            const [expandedAccordionId, setExpandedAccordionId] = useState(null); // Phase 3 (Vertical)
+            
+            // Completion States
+            const [completedTasks, setCompletedTasks] = useState([]);
+            const [isFullyComplete, setIsFullyComplete] = useState(false); // Phase 5
+            
+            // Animation handling
+            const [animatingTask, setAnimatingTask] = useState(null);
+
+            // Phase 5 Logic Check
+            useEffect(() => {
+                if (completedTasks.length === SHELVES.length && !isFullyComplete) {
+                    // Trigger final collapse sequence
+                    setTimeout(() => {
+                        setIsMainExpanded(false);
+                        setActiveTrayId(null);
+                        setExpandedAccordionId(null);
+                        setTimeout(() => setIsFullyComplete(true), 500); // Wait for retraction
+                    }, 1000);
+                }
+            }, [completedTasks]);
+
+            // Handlers
+            const handleToggleMain = () => {
+                if (isFullyComplete) return; // Locked when complete
+                setIsMainExpanded(!isMainExpanded);
+                if (isMainExpanded) {
+                    setActiveTrayId(null);
+                    setExpandedAccordionId(null);
+                }
+            };
+
+            const handleShelfClick = (id) => {
+                if (completedTasks.includes(id)) return; // Don't reopen completed tasks
+                
+                if (activeTrayId === id) {
+                    // Close if currently open
+                    setActiveTrayId(null);
+                    setExpandedAccordionId(null);
+                } else {
+                    // Open new tray, ensure accordion is closed initially
+                    setActiveTrayId(id);
+                    setExpandedAccordionId(null);
+                }
+            };
+
+            const handleTrayHeaderClick = (id) => {
+                if (completedTasks.includes(id)) return;
+                setExpandedAccordionId(expandedAccordionId === id ? null : id);
+            };
+
+            const handleCommitTask = (id) => {
+                setAnimatingTask(id);
+                
+                // Sequence Phase 4: Chevron -> Check, then collapse
+                setTimeout(() => {
+                    setExpandedAccordionId(null); // Collapse accordion
+                    setTimeout(() => {
+                        setActiveTrayId(null); // Retract horizontal tray
+                        setCompletedTasks(prev => [...prev, id]); // Mark completed
+                        setAnimatingTask(null);
+                    }, 400); // wait for accordion
+                }, 600); // hold checkmark state briefly
+            };
+
+            // Layout Constants
+            const HEADER_HEIGHT = 48;
+            const SHELF_HEIGHT = 44;
+            const TRAY_WIDTH = 680;
+
+            return (
+                <div className="fixed top-6 left-6 font-mono text-[11px] uppercase tracking-[1.5px] select-none z-50 flex">
+                    
+                    {/* --- LEFT COLUMN: BACKBONE --- */}
+                    <div className="relative flex flex-col items-start z-20">
+                        
+                        {/* PHASE 0: Top Header Box */}
+                        <div 
+                            onClick={handleToggleMain}
+                            className={`
+                                relative flex items-center justify-between px-4 cursor-pointer
+                                bg-obsidian border border-metal rounded-[3px] shadow-2xl
+                                transition-all duration-500 ease-hydraulic overflow-hidden
+                                ${isFullyComplete ? 'w-[140px] h-[48px] border-neon-green/30 shadow-[0_0_15px_rgba(0,255,102,0.15)]' : 'w-[140px] h-[48px] hover:bg-[#181a20]'}
+                            `}
+                        >
+                            <div className="flex items-center gap-2">
+                                <span className={`font-bold ${isFullyComplete ? 'text-neon-green' : 'text-silver'}`}>
+                                    BURN-1
+                                </span>
+                            </div>
+                            
+                            <div className="flex items-center justify-center">
+                                {isFullyComplete ? (
+                                    <IconCheck className="text-neon-green glow-green" />
+                                ) : (
+                                    <IconX className="text-neon-red glow-red" />
+                                )}
+                            </div>
+                        </div>
+
+                        {/* PHASE 1: Vertical Backbone */}
+                        <div 
+                            className={`
+                                overflow-hidden transition-all duration-500 ease-hydraulic flex flex-col
+                                bg-obsidian border-x border-b border-metal rounded-b-[3px] shadow-2xl
+                                ${isMainExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+                            `}
+                            style={{ 
+                                width: '160px', 
+                                maxHeight: isMainExpanded ? '500px' : '0px',
+                                // Smooth transition from 140px to 160px width visually integrated via layout
+                                marginLeft: isMainExpanded ? '0px' : '0px'
+                            }}
+                        >
+                            {SHELVES.map((shelf, idx) => {
+                                const isCompleted = completedTasks.includes(shelf.id);
+                                const isActive = activeTrayId === shelf.id;
+                                
+                                return (
+                                    <div 
+                                        key={`shelf-${shelf.id}`}
+                                        onClick={() => handleShelfClick(shelf.id)}
+                                        className={`
+                                            h-[44px] flex items-center justify-between px-4 border-b border-metal/50
+                                            transition-colors duration-200
+                                            ${isCompleted ? 'cursor-default opacity-60' : 'cursor-pointer hover:bg-metal/20'}
+                                            ${isActive ? 'bg-metal/30' : ''}
+                                        `}
+                                    >
+                                        <span className={isCompleted ? 'text-neon-green' : 'text-silver'}>
+                                            {shelf.title}
+                                        </span>
+                                        <div className="flex-shrink-0 w-4 flex justify-end">
+                                            {isCompleted ? (
+                                                <IconCheck className="text-neon-green glow-green w-3.5 h-3.5" />
+                                            ) : (
+                                                <IconChevron 
+                                                    direction="right" 
+                                                    className={`text-neon-amber w-3.5 h-3.5 ${isActive ? 'glow-amber opacity-0' : 'opacity-100'} transition-opacity`} 
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            
+                            {/* Base Cap Status Indicator */}
+                            <div className="h-8 bg-[#0d0e12] flex items-center justify-center border-t border-metal">
+                                <div className={`
+                                    w-2 h-2 rounded-full transition-colors duration-500
+                                    ${isFullyComplete ? 'bg-neon-green shadow-[0_0_8px_#00FF66]' : 'bg-neon-red shadow-[0_0_8px_#FF2A4D]'}
+                                `} />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* --- RIGHT COLUMN: ABSOLUTE POSITIONED TRAYS --- */}
+                    {/* We render these outside the backbone container flow to avoid overflow clipping issues */}
+                    {SHELVES.map((shelf, idx) => {
+                        const isTrayActive = activeTrayId === shelf.id;
+                        const isAccordionExpanded = expandedAccordionId === shelf.id;
+                        const isCompleting = animatingTask === shelf.id;
+                        const isCompleted = completedTasks.includes(shelf.id);
+                        
+                        // Calculate vertical offset relative to the main container
+                        const topOffset = HEADER_HEIGHT + (idx * SHELF_HEIGHT);
+
+                        return (
+                            <div
+                                key={`tray-${shelf.id}`}
+                                className={`
+                                    absolute z-10 flex flex-col
+                                    bg-obsidian border-metal rounded-r-[3px] shadow-[15px_0_30px_rgba(0,0,0,0.5)]
+                                    transition-all duration-500 ease-hydraulic overflow-hidden
+                                `}
+                                style={{
+                                    top: `${topOffset}px`,
+                                    left: '160px', // Exact width of expanded backbone
+                                    width: isTrayActive ? `${TRAY_WIDTH}px` : '0px',
+                                    borderWidth: isTrayActive ? '1px 1px 1px 0' : '0px',
+                                    opacity: isTrayActive ? 1 : 0,
+                                    pointerEvents: isTrayActive ? 'auto' : 'none'
+                                }}
+                            >
+                                {/* PHASE 2: Horizontal Header */}
+                                <div 
+                                    onClick={() => handleTrayHeaderClick(shelf.id)}
+                                    className={`
+                                        h-[44px] flex items-center justify-between px-6 cursor-pointer
+                                        bg-obsidian hover:bg-[#181a20] transition-colors
+                                    `}
+                                >
+                                    <span className="text-silver">{shelf.fullTitle}</span>
+                                    
+                                    <div className="w-5 flex items-center justify-center">
+                                        {isCompleting || isCompleted ? (
+                                            <IconCheck className="text-neon-green glow-green w-4 h-4 animate-[pulse_1s_ease-in-out_1]" />
+                                        ) : (
+                                            <IconChevron 
+                                                direction={isAccordionExpanded ? 'up' : 'down'} 
+                                                className="text-neon-amber glow-amber w-4 h-4" 
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* PHASE 3: Vertical Accordion Workspace */}
+                                <div 
+                                    className="overflow-hidden transition-all duration-500 ease-hydraulic bg-[#0d0e12]"
+                                    style={{
+                                        maxHeight: isAccordionExpanded ? '550px' : '0px',
+                                        borderTop: isAccordionExpanded ? '1px solid #2A2F38' : '0px solid transparent'
+                                    }}
+                                >
+                                    {/* Mock Tufte-inspired High-Density Content Area */}
+                                    <div className="p-8 flex flex-col gap-6 text-[13px] normal-case tracking-normal">
+                                        
+                                        <div className="text-silver/80 text-[15px] font-sans leading-relaxed border-l-2 border-neon-amber/50 pl-4 mb-2">
+                                            {shelf.desc}
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-8">
+                                            <div className="flex flex-col gap-4">
+                                                <label className="flex flex-col gap-1 text-silver">
+                                                    <span className="text-[10px] text-silver/60 uppercase tracking-widest">Input Parameter Alpha</span>
+                                                    <input type="text" className="bg-transparent border-b border-metal py-2 focus:outline-none focus:border-neon-amber transition-colors font-mono" placeholder="Enter metric data..." />
+                                                </label>
+                                                <label className="flex flex-col gap-1 text-silver">
+                                                    <span className="text-[10px] text-silver/60 uppercase tracking-widest">Risk Assessment Vector</span>
+                                                    <select className="bg-obsidian border-b border-metal py-2 focus:outline-none focus:border-neon-amber text-silver font-mono appearance-none">
+                                                        <option>NOMINAL (STANDARD)</option>
+                                                        <option>ELEVATED (MONITOR)</option>
+                                                        <option>CRITICAL (ACTION REQ)</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            
+                                            <div className="bg-metal/10 p-4 rounded-sm border border-metal/30 flex flex-col gap-3 font-mono text-[11px]">
+                                                <div className="flex items-center gap-2 text-silver/70">
+                                                    <div className="w-2 h-2 border border-neon-amber/50 rounded-sm"></div>
+                                                    <span>VERIFY DATA INTEGRITY</span>
+                                                </div>
+                                                <div className="flex items-center gap-2 text-silver/70">
+                                                    <div className="w-2 h-2 border border-neon-amber/50 rounded-sm"></div>
+                                                    <span>RUN HEURISTIC ANALYSIS</span>
+                                                </div>
+                                                <div className="flex items-center gap-2 text-silver/70">
+                                                    <div className="w-2 h-2 border border-neon-amber/50 rounded-sm"></div>
+                                                    <span>ATTACH FORENSIC LOGS</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Action Bar */}
+                                        <div className="mt-8 flex justify-end">
+                                            <button 
+                                                onClick={(e) => { e.stopPropagation(); handleCommitTask(shelf.id); }}
+                                                className={`
+                                                    px-6 py-3 bg-neon-amber/10 border border-neon-amber/50 text-neon-amber
+                                                    hover:bg-neon-amber hover:text-obsidian transition-all duration-300
+                                                    font-bold uppercase tracking-widest shadow-[0_0_10px_rgba(255,132,0,0.2)]
+                                                    focus:outline-none active:scale-95
+                                                    ${isCompleting ? 'pointer-events-none opacity-50' : ''}
+                                                `}
+                                            >
+                                                {isCompleting ? 'PROCESSING...' : 'COMMIT & VALIDATE SECTION'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<LeonsUltraBar />);
+    </script>
+</body>
+</html>

@@ -40,6 +40,21 @@ LOGS_DIR = VAULT_DIR.parent / "Logs"
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 ESCALATIONS_FILE = LOGS_DIR / "escalations.jsonl"
 
+# --- RATE LIMITER & BOT DEFENSE STORE ---
+RATE_LIMIT_STORE = {}
+
+def is_rate_limited(client_ip: str, max_requests: int = 5, window_seconds: int = 300) -> bool:
+    """In-memory rate limiter: max requests within window per IP."""
+    now = datetime.datetime.now().timestamp()
+    timestamps = RATE_LIMIT_STORE.get(client_ip, [])
+    # Filter expired timestamps
+    timestamps = [t for t in timestamps if now - t < window_seconds]
+    if len(timestamps) >= max_requests:
+        return True
+    timestamps.append(now)
+    RATE_LIMIT_STORE[client_ip] = timestamps
+    return False
+
 
 def generate_sha256_seal(domain: str, timestamp: str) -> str:
     """Generates the official Algorithmic Cryptographic SHA-256 Seal hash."""
@@ -120,9 +135,19 @@ def get_spreadsheet_csv():
 @app.route("/api/intake", methods=["POST"])
 def process_intake():
     try:
+        # Rate Limiting Check (5 per 5 minutes per IP)
+        client_ip = request.headers.get("X-Forwarded-For", request.remote_addr).split(",")[0].strip()
+        if is_rate_limited(client_ip, max_requests=5, window_seconds=300):
+            return jsonify({"status": "ERROR", "message": "Rate limit exceeded. Please wait 5 minutes."}), 429
+
         data = request.get_json(force=True)
         if not data:
             return jsonify({"status": "ERROR", "message": "Invalid or empty JSON payload"}), 400
+
+        # Honeypot Bot Trap Check
+        if data.get("b1_security_trap"):
+            # Return fake 200 so automated scrapers don't retry, but discard data
+            return jsonify({"status": "SUCCESS", "message": "Submission acknowledged.", "trap": True}), 200
 
         # Extract domain
         raw_domain = data.get("client_domain") or data.get("primaryDomain") or ""
@@ -440,8 +465,18 @@ def cosmo_escalate():
 def divisions_intake():
     """Enqueues an order from Freezer, Acid, Times2, or Sizzlean into division_queue.csv."""
     try:
+        # Rate Limiting Check
+        client_ip = request.headers.get("X-Forwarded-For", request.remote_addr).split(",")[0].strip()
+        if is_rate_limited(client_ip, max_requests=8, window_seconds=300):
+            return jsonify({"status": "ERROR", "message": "Rate limit exceeded. Please wait a few minutes."}), 429
+
         import worker
         data = request.get_json(force=True) or {}
+
+        # Honeypot Bot Trap Check
+        if data.get("b1_security_trap"):
+            return jsonify({"status": "SUCCESS", "message": "Order queued.", "trap": True}), 200
+
         row = worker.enqueue_division_order(data)
         auto_sync = data.get("auto_sync", True)
         sync_result = worker.process_pending_queue(target_division=row["division_origin"]) if auto_sync else None

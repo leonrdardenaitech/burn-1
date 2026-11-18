@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tools.burn-1.com | The Nerd's Corner CLI — Burning Friction... Shattering Time</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            termBg: '#06110C',
+            termPanel: '#0A1A12',
+            moneyGreen: '#14452F',
+            scrollTan: '#F4EFE0',
+            printedBlue: '#1B365D',
+            neonEmerald: '#00FF87',
+          },
+          fontFamily: {
+            mono: ['"Courier New"', 'Consolas', 'Monaco', 'Lucida Console', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --term-bg: #06110C;
+      --money-green: #14452F;
+      --scroll-tan: #F4EFE0;
+      --printed-blue: #1B365D;
+      --neon-emerald: #00FF87;
+    }
+
+    body {
+      background-color: var(--term-bg);
+      color: var(--scroll-tan);
+      font-family: 'Courier New', Consolas, Monaco, monospace;
+      overflow-x: hidden;
+    }
+
+    /* Authentic CRT Scanline & Phosphor Vignette Overlay */
+    .crt-scanlines::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      background:
+        linear-gradient(
+          rgba(20, 69, 47, 0) 50%,
+          rgba(0, 0, 0, 0.28) 50%
+        ),
+        radial-gradient(
+          circle at center,
+          transparent 62%,
+          rgba(4, 10, 7, 0.68) 100%
+        );
+      background-size: 100% 4px, 100% 100%;
+    }
+
+    .terminal-border {
+      border: 2px solid #14452F;
+      box-shadow: 0 0 0 1px rgba(27, 54, 93, 0.65), inset 0 0 24px rgba(20, 69, 47, 0.28);
+    }
+
+    .emerald-text-glow {
+      text-shadow: 0 0 10px rgba(0, 255, 135, 0.6);
+    }
+
+    .decryption-chip-glow {
+      border: 2px solid #00FF87;
+      box-shadow: 0 0 22px rgba(0, 255, 135, 0.45), inset 0 0 14px rgba(0, 255, 135, 0.18);
+    }
+
+    .locked-gate-stripes {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(27, 54, 93, 0.28),
+        rgba(27, 54, 93, 0.28) 10px,
+        rgba(6, 17, 12, 0.85) 10px,
+        rgba(6, 17, 12, 0.85) 20px
+      );
+    }
+
+    @keyframes cursorBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .cli-cursor {
+      animation: cursorBlink 1s infinite;
+    }
+
+    /* Custom Terminal Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #06110C;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #14452F;
+      border: 1px solid #00FF87;
+    }
+  </style>
+</head>
+<body class="crt-scanlines min-h-screen selection:bg-neonEmerald selection:text-termBg relative">
+
+  <!-- Subtle Ambient Binary Telemetry Backdrop -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="fixed inset-0 w-full h-full object-cover opacity-[0.07] pointer-events-none z-0"
+  >
+    <source src="../assets/Binary_code_rising_slow_75.mp4" type="video/mp4" />
+  </video>
+
+  <!-- TOP TERMINAL TTY STATUS BAR -->
+  <header class="relative z-20 border-b-2 border-moneyGreen bg-termPanel/95 px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-3">
+        <span class="px-2 py-0.5 bg-neonEmerald text-termBg font-bold">TTY-01</span>
+        <span class="text-neonEmerald font-bold tracking-wider emerald-text-glow">tools.burn-1.com // THE NERD'S CORNER</span>
+        <span class="hidden md:inline text-scrollTan/60">| DARDEN TRUST CLI v2.6</span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <span class="text-scrollTan/80 hidden sm:inline">MANTRA: <strong class="text-neonEmerald">BURNING FRICTION... SHATTERING TIME</strong></span>
+        <a
+          href="./fast-lane.html"
+          class="px-3 py-1 bg-moneyGreen hover:bg-printedBlue text-scrollTan border border-neonEmerald/50 transition uppercase"
+        >
+          [ cd /fast-lane ]
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CLI WORKSPACE -->
+  <main class="relative z-20 max-w-7xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+    <!-- ===================================================================== -->
+    <!-- LEFT COLUMN (7 COLS): LIVE INTERACTIVE CLI STREAM & FREE DIAGNOSTICS  -->
+    <!-- ===================================================================== -->
+    <section class="lg:col-span-7 flex flex-col gap-5">
+
+      <!-- PRIMARY INTERACTIVE WEB-CLI SHELL -->
+      <div class="terminal-border bg-termPanel/95 flex flex-col h-[520px]">
+        <!-- Window Title Bar -->
+        <div class="bg-moneyGreen px-4 py-2 border-b border-neonEmerald/30 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 inline-block bg-neonEmerald"></span>
+            <span class="font-bold text-scrollTan">guest@tools.burn-1.com: ~/diagnostics</span>
+          </div>
+          <span class="text-scrollTan/80 text-[11px]">SHELL: BURN1-ASH // ZERO-AGENT</span>
+        </div>
+
+        <!-- Quick Command Macro Bar -->
+        <div class="bg-termBg px-3 py-2 border-b border-moneyGreen flex flex-wrap items-center gap-2 text-[11px]">
+          <span class="text-scrollTan/60 uppercase mr-1">Macros:</span>
+          <button data-cli-cmd="help" class="px-2 py-0.5 border border-moneyGreen hover:border-neonEmerald text-neonEmerald transition">
+            help
+          </button>
+          <button data-cli-cmd="diag latency" class="px-2 py-0.5 border border-moneyGreen hover:border-neonEmerald text-scrollTan transition">
+            diag latency
+          </button>
+          <button data-cli-cmd="diag socket" class="px-2 py-0.5 border border-moneyGreen hover:border-neonEmerald text-scrollTan transition">
+            diag socket
+          </button>
+          <button data-cli-cmd="apea --scan" class="px-2 py-0.5 border border-printedBlue hover:border-neonEmerald text-scrollTan/90 bg-printedBlue/30 transition">
+            apea --scan [LOCKED]
+          </button>
+          <button data-cli-cmd="clear" class="px-2 py-0.5 border border-moneyGreen hover:border-scrollTan text-scrollTan/60 ml-auto transition">
+            clear
+          </button>
+        </div>
+
+        <!-- Scrollable Terminal STDOUT Buffer -->
+        <div
+          id="terminalOutputBuffer"
+          class="flex-1 p-4 overflow-y-auto space-y-2.5 text-xs leading-relaxed"
+          aria-live="polite"
+        ></div>
+
+        <!-- Interactive STDIN Prompt Line -->
+        <form id="terminalInputForm" class="border-t-2 border-moneyGreen bg-termBg px-4 py-3 flex items-center gap-2 text-xs">
+          <label for="terminalCommandInput" class="text-neonEmerald font-bold shrink-0">
+            guest@burn-1:~$
+          </label>
+          <input
+            id="terminalCommandInput"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Type 'help', 'diag latency', 'diag socket', or 'apea --auth <KEY>'..."
+            class="w-full bg-transparent text-scrollTan focus:outline-none placeholder:text-scrollTan/35"
+          />
+          <span class="cli-cursor w-2 h-4 bg-neonEmerald shrink-0"></span>
+        </form>
+      </div>
+
+      <!-- FREE CLIENT-SIDE COMPUTER DIAGNOSTICS MODULE (UTILITY PLACEHOLDERS) -->
+      <div class="terminal-border bg-termPanel/95 p-4 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-moneyGreen pb-2.5">
+          <div>
+            <span class="text-[11px] uppercase px-2 py-0.5 bg-moneyGreen text-neonEmerald font-bold">FREE CLIENT-SIDE PROBES</span>
+            <h2 class="text-sm font-bold text-scrollTan mt-1">LOCAL NODE &amp; TRANSPORT DIAGNOSTICS (ZERO AUTH REQUIRED)</h2>
+          </div>
+          <span class="text-[11px] text-neonEmerald">STATUS: UNRESTRICTED</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <!-- Probe 01: Edge Latency & Jitter -->
+          <div class="border border-moneyGreen bg-termBg p-3.5 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="text-neonEmerald font-bold">[01] RTT LATENCY &amp; JITTER</span>
+                <span id="latencyProbeReadout" class="text-scrollTan/70">IDLE</span>
+              </div>
+              <p class="text-scrollTan/75 mt-1.5 text-[11px] leading-relaxed">
+                Executes 5-packet HTTP/TLS timing burst from client browser to edge node and computes jitter variance.
+              </p>
+            </div>
+            <button
+              id="runLatencyDiagBtn"
+              type="button"
+              class="w-full py-2 bg-moneyGreen hover:bg-printedBlue text-neonEmerald border border-neonEmerald/40 font-bold uppercase text-[11px] transition"
+            >
+              &gt; Run Latency Probe
+            </button>
+          </div>
+
+          <!-- Probe 02: Socket & TLS Stability -->
+          <div class="border border-moneyGreen bg-termBg p-3.5 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="text-neonEmerald font-bold">[02] SOCKET STABILITY MATRIX</span>
+                <span id="socketProbeReadout" class="text-scrollTan/70">IDLE</span>
+              </div>
+              <p class="text-scrollTan/75 mt-1.5 text-[11px] leading-relaxed">
+                Inspects local transport downlink, effective RTT profile, keep-alive frame readiness, and WebCrypto engine integrity.
+              </p>
+            </div>
+            <button
+              id="runSocketDiagBtn"
+              type="button"
+              class="w-full py-2 bg-moneyGreen hover:bg-printedBlue text-neonEmerald border border-neonEmerald/40 font-bold uppercase text-[11px] transition"
+            >
+              &gt; Run Socket Stability Check
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- RIGHT COLUMN (5 COLS): CYBER-PONG DOPAMINE ENGINE + GATED APEA SCAN   -->
+    <!-- ===================================================================== -->
+    <section class="lg:col-span-5 flex flex-col gap-5">
+
+      <!-- RETRO TERMINAL CYBER-PONG (<canvas>) -->
+      <div class="terminal-border bg-termPanel/95 p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-moneyGreen pb-2.5 text-xs">
+          <div>
+            <span class="text-[10px] px-2 py-0.5 bg-printedBlue text-neonEmerald font-bold uppercase">ARCADE DAEMON // PID 1972</span>
+            <h2 class="text-sm font-bold text-scrollTan mt-1">CYBER-PONG v2.0 (SCORE 5 TO DECRYPT TRIAL CHIP)</h2>
+          </div>
+          <div class="text-right text-[11px]">
+            <div class="text-scrollTan/70">HIGH SCORE</div>
+            <div id="pongHighScoreDisplay" class="text-neonEmerald font-bold text-sm">00</div>
+          </div>
+        </div>
+
+        <!-- Scoreboard & Controls Strip -->
+        <div class="flex items-center justify-between bg-termBg border border-moneyGreen px-3 py-1.5 text-xs">
+          <div>PLAYER: <strong id="pongPlayerScore" class="text-neonEmerald">0</strong></div>
+          <div id="pongMilestoneStatus" class="text-[11px] text-scrollTan/80">TARGET: 5 PTS → DECRYPT KEY</div>
+          <div>LUMBO-BOT: <strong id="pongAiScore" class="text-scrollTan">0</strong></div>
+        </div>
+
+        <!-- Playable HTML5 Canvas -->
+        <div class="relative border-2 border-moneyGreen bg-termBg overflow-hidden">
+          <canvas
+            id="cyberPongCanvas"
+            width="460"
+            height="270"
+            class="w-full h-auto block cursor-crosshair touch-none"
+          ></canvas>
+
+          <!-- Canvas Start / Milestone Pause Overlay -->
+          <div
+            id="pongOverlayPanel"
+            class="absolute inset-0 bg-termBg/90 flex flex-col items-center justify-center p-5 text-center space-y-3"
+          >
+            <div id="pongOverlayBadge" class="px-2.5 py-0.5 bg-moneyGreen text-neonEmerald text-[11px] font-bold uppercase border border-neonEmerald/50">
+              TERMINAL VECTOR ENGINE READY
+            </div>
+            <h3 id="pongOverlayTitle" class="text-base font-bold text-scrollTan">
+              REACH 5 POINTS TO UNLOCK DECRYPTION KEY CHIP
+            </h3>
+            <p id="pongOverlayDesc" class="text-[11px] text-scrollTan/75 max-w-xs">
+              Controls: Move Mouse / Touch Drag inside arena, or use [W / S] &amp; [↑ / ↓] keys.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+              <button
+                id="pongStartResumeBtn"
+                type="button"
+                class="px-5 py-2 bg-neonEmerald text-termBg font-bold text-xs uppercase tracking-wider hover:brightness-110 transition"
+              >
+                [ INITIALIZE CYBER-PONG ]
+              </button>
+              <button
+                id="pongResetBtn"
+                type="button"
+                class="hidden px-3 py-2 bg-printedBlue text-scrollTan text-xs uppercase border border-scrollTan/40 hover:bg-moneyGreen transition"
+              >
+                Reset Match
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-scrollTan/65">
+          <span>AUDIO: 8-BIT SYNTHESIZER</span>
+          <button id="pongMuteBtn" type="button" class="text-neonEmerald hover:underline">[ SFX: ON ]</button>
+        </div>
+      </div>
+
+      <!-- STRICTLY GATED / LOCKED ELITE APEA ENTERPRISE SCAN -->
+      <div id="apeaGateContainer" class="terminal-border locked-gate-stripes p-4 space-y-4 relative">
+        <div class="flex items-start justify-between gap-2 border-b border-printedBlue pb-3">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-printedBlue text-scrollTan text-[10px] font-bold uppercase border border-scrollTan/30">
+              <span id="apeaLockIcon">🔒</span>
+              <span id="apeaGateStatusBadge">STRICTLY GATED // AUTH TOKEN REQUIRED</span>
+            </div>
+            <h2 class="text-sm font-bold text-scrollTan mt-1.5">
+              APEA ENTERPRISE SCAN (Autonomous Passive Enterprise Attestation)
+            </h2>
+          </div>
+          <span class="text-xs font-bold text-neonEmerald bg-termBg px-2 py-1 border border-moneyGreen">$150+</span>
+        </div>
+
+        <p class="text-[11px] text-scrollTan/85 leading-relaxed bg-termBg/85 p-3 border border-printedBlue">
+          Executes deep multi-subdomain CISA KEV 22-01 sweeps, Shadow IAM boundary discovery, TLS 1.3 cipher grading, and issues an official <strong>SHA-256 Cryptographic Seal</strong> via Resident Dual-SLM (<em>Bee + Lumbo</em>). Unauthenticated execution is strictly blocked.
+        </p>
+
+        <!-- Auth Token Input Gate -->
+        <div class="space-y-2">
+          <label for="apeaAuthTokenInput" class="block text-[11px] uppercase text-scrollTan/80 font-bold">
+            Enter Secure APEA Auth Token or Trial Decryption Chip:
+          </label>
+          <div class="flex gap-2">
+            <input
+              id="apeaAuthTokenInput"
+              type="text"
+              placeholder="B1_APEA_AUTH_XXXXXXXXXXXXXXXX"
+              spellcheck="false"
+              class="flex-1 bg-termBg border-2 border-printedBlue focus:border-neonEmerald px-3 py-2 text-xs text-neonEmerald placeholder:text-scrollTan/30 focus:outline-none"
+            />
+            <button
+              id="verifyApeaTokenBtn"
+              type="button"
+              class="px-4 py-2 bg-printedBlue hover:bg-moneyGreen text-scrollTan border border-scrollTan/40 text-xs font-bold uppercase transition shrink-0"
+            >
+              Verify Key
+            </button>
+          </div>
+          <div id="apeaAuthFeedback" class="text-[11px] text-scrollTan/70">
+            STATUS: <span class="text-neonEmerald">[403_LOCKED]</span> Valid cryptographic session key required.
+          </div>
+        </div>
+
+        <!-- Official PayPal Treasury Settlement & Fast Lane On-Ramp -->
+        <div class="pt-2 border-t border-printedBlue/60 flex flex-col sm:flex-row gap-2.5 text-xs">
+          <a
+            id="apeaPaypalBtn"
+            href="https://www.paypal.com/ncp/payment/J36CK6MGB5U8N"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 text-center py-2.5 px-3 bg-moneyGreen hover:bg-printedBlue text-neonEmerald border border-neonEmerald/60 font-bold uppercase transition"
+          >
+            Acquire Full Auth Token (PayPal) →
+          </a>
+          <a
+            href="./fast-lane.html"
+            class="text-center py-2.5 px-3 bg-scrollTan text-moneyGreen font-bold uppercase hover:brightness-95 transition"
+          >
+            Fast Lane
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- TERMINAL FOOTER -->
+  <footer class="relative z-20 max-w-7xl mx-auto px-6 py-5 text-[11px] text-scrollTan/60 flex flex-wrap items-center justify-between gap-2 border-t border-moneyGreen/40 mt-4">
+    <span>© 2026 Leon R. Darden • BURN-1 Systems (tools.burn-1.com)</span>
+    <span class="text-neonEmerald">DARDEN TRUST ARCHITECTURE // SHA-256 VERIFIED</span>
+  </footer>
+
+  <script src="./js/nerd-corner-controller.js"></script>
+
+  <!-- UNIVERSAL PAYMENT CONTROLLER & TRI-PANE BOT CONTROLLER & AUDIO FX -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
+
+</body>
+</html>
