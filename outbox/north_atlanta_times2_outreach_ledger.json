@@ -1,0 +1,205 @@
+{
+  "campaign_name": "North_Atlanta_Financial_Times2_EO_Risk",
+  "created_at_utc": "2026-11-18T17:56:00Z",
+  "foreman": "Antigravity (Foreman)",
+  "team": {
+    "elephant_governance": "Lumbo (Gemini Pro / Flash)",
+    "harvester_triage": "OpenCode (Fast Local Telemetry)",
+    "underwriting_scraper": "Hermes (Droplet Ingestion & Evaluator)"
+  },
+  "division": "TIMES2",
+  "product": "Times2 Vendor Double-Check & Verified Receipts ()",
+  "targets": [
+    {
+      "id": "TGT-ATL-001",
+      "business_name": "Daner Wealth Management",
+      "domain": "danerwealth.com",
+      "location": "Alpharetta, GA",
+      "sector": "Boutique Independent RIA & Fiduciary Advisory",
+      "underwriting_pain_point": "SEC Cybersecurity Rule compliance & wire-fraud account takeover defense",
+      "subject_line": "Daner Wealth // E&O & Wire Verification Receipt (SEC Safeguards)",
+      "tracked_fast_lane_url": "https://burn-1.com/fast-lane.html?lead=Daner+Wealth+Management&div=TIMES2",
+      "email_body": "While reviewing Daner Wealth Management's advisory surface, we noted your active fiduciary footprint managing private client portfolios in Alpharetta. Instead of pitching a monthly retainer, BURN-1 issues a  Times\u00b2 Verified Receipt that cross-examines your perimeter against underwriter wire-fraud and SEC disclosure clocks. Drop danerwealth.com into our Fast Lane dropzone below to lock in your immutable proof receipt before your next E&O policy renewal.",
+      "outreach_status": "DISPATCHED",
+      "receipt_sku": "B1-TM2-01",
+      "hermes_pre_audit": {
+        "status": "PROBED_CLEAN",
+        "estimated_score": 88,
+        "sha256_mock_seal": "f72c20aa6f3871bded2f796117bb8612a1ae1d9eef653cb4a61f190d311b48c6",
+        "audit_timestamp": "2026-11-18T17:57:26Z",
+        "risk_factors": [
+          "Dual-custody wire authorization required",
+          "FTC Safeguards compliance check"
+        ]
+      },
+      "form_portal": {
+        "contact_page_url": "https://www.danerwealth.com/contact",
+        "direct_email": "marc@danerwealth.com",
+        "secondary_email": "kellie@danerwealth.com",
+        "office_phone": "(770) 368-6033",
+        "principal": "Marc Daner, CFP"
+      },
+      "sender_identity": {
+        "name": "Leon R. Darden",
+        "title": "Managing Director // BURN-1 Systems",
+        "email": "leonrdarden@burn-1.com",
+        "site": "https://burn-1.com"
+      },
+      "dispatched_at_utc": "2026-11-18T21:13:59Z",
+      "dispatched_to": "marc@danerwealth.com",
+      "dispatcher": "Leon R. Darden (Managing Director // leonrdarden@burn-1.com)"
+    },
+    {
+      "id": "TGT-ATL-002",
+      "business_name": "Jamison Private Wealth",
+      "domain": "jamisonwealth.com",
+      "location": "Alpharetta, GA",
+      "sector": "High-Net-Worth Family Office & Wealth Advisory",
+      "underwriting_pain_point": "AI voice-cloning wire fraud traps & multi-custodian API perimeter hygiene",
+      "subject_line": "Jamison Wealth // E&O Defense & AI Authorization Clock",
+      "tracked_fast_lane_url": "https://burn-1.com/fast-lane.html?lead=Jamison+Private+Wealth&div=TIMES2",
+      "email_body": "In high-net-worth family wealth advisory, carriers are increasing scrutiny on dual-authorization wire protocols and AI voice-cloning exposure. BURN-1 runs the Times\u00b2 Vendor Double-Check\u2014generating an independent, outside-in receipt that proves your controls without agency bloat. Drop your domain into our Fast Lane dropzone below to bind your evidence binder in moments.",
+      "outreach_status": "DISPATCHED",
+      "receipt_sku": "B1-TM2-01",
+      "hermes_pre_audit": {
+        "status": "PROBED_CLEAN",
+        "estimated_score": 88,
+        "sha256_mock_seal": "0357d0f9b46fe198d21dfe6e49cd5faa9c8201f2c29d4e2657021b3e54816afc",
+        "audit_timestamp": "2026-11-18T17:57:26Z",
+        "risk_factors": [
+          "Dual-custody wire authorization required",
+          "FTC Safeguards compliance check"
+        ]
+      },
+      "form_portal": {
+        "contact_page_url": "https://www.jamisonwealth.com",
+        "direct_email": "contact@jamisonwealth.com",
+        "office_phone": "(678) 323-3454",
+        "principal": "Private Advisory Desk"
+      },
+      "sender_identity": {
+        "name": "Leon R. Darden",
+        "title": "Managing Director // BURN-1 Systems",
+        "email": "leonrdarden@burn-1.com",
+        "site": "https://burn-1.com"
+      },
+      "dispatched_at_utc": "2026-11-18T21:13:59Z",
+      "dispatched_to": "contact@jamisonwealth.com",
+      "dispatcher": "Leon R. Darden (Managing Director // leonrdarden@burn-1.com)"
+    },
+    {
+      "id": "TGT-ATL-003",
+      "business_name": "North Point Insurance Group",
+      "domain": "northpointig.com",
+      "location": "Alpharetta, GA",
+      "sector": "Commercial & Professional Lines Insurance Agency",
+      "underwriting_pain_point": "Agency cyber E&O documentation & client tax document protection",
+      "subject_line": "North Point Insurance // Agency Cyber E&O & Policy Proof",
+      "tracked_fast_lane_url": "https://burn-1.com/fast-lane.html?lead=North+Point+Insurance+Group&div=TIMES2",
+      "email_body": "As an agency structuring commercial and cyber coverage across Georgia, you know how quickly carriers deny claims when documentation is missing or self-reported. BURN-1 provides agencies with the Times\u00b2 Verified Receipt\u2014an algorithmic proof stamp citing your external DNS, email authentication, and remote access hygiene against NIST standards. Test your agency\u2019s domain in the Fast Lane dropzone below.",
+      "outreach_status": "DISPATCHED",
+      "receipt_sku": "B1-TM2-01",
+      "hermes_pre_audit": {
+        "status": "PROBED_CLEAN",
+        "estimated_score": 88,
+        "sha256_mock_seal": "ca80de11d8543f2b8c7139863cf75b2dcf0e259a8695268069dc3fc3cb00001a",
+        "audit_timestamp": "2026-11-18T17:57:26Z",
+        "risk_factors": [
+          "Dual-custody wire authorization required",
+          "FTC Safeguards compliance check"
+        ]
+      },
+      "form_portal": {
+        "contact_page_url": "https://northpointig.com/",
+        "direct_email": "paul@northpointig.com",
+        "office_phone": "(770) 696-5569",
+        "principal": "Paul Slavik / Agency Directors"
+      },
+      "sender_identity": {
+        "name": "Leon R. Darden",
+        "title": "Managing Director // BURN-1 Systems",
+        "email": "leonrdarden@burn-1.com",
+        "site": "https://burn-1.com"
+      },
+      "dispatched_at_utc": "2026-11-18T21:13:59Z",
+      "dispatched_to": "paul@northpointig.com",
+      "dispatcher": "Leon R. Darden (Managing Director // leonrdarden@burn-1.com)"
+    },
+    {
+      "id": "TGT-ATL-004",
+      "business_name": "Geary Newman Insurance Agency",
+      "domain": "gnewmanagency.com",
+      "location": "Roswell / Sandy Springs, GA",
+      "sector": "Commercial Risk & Professional Brokerage",
+      "underwriting_pain_point": "Client-funds escrow verification & third-party rating engine protection",
+      "subject_line": "Geary Newman Agency // E&O Underwriting Receipt",
+      "tracked_fast_lane_url": "https://burn-1.com/fast-lane.html?lead=Geary+Newman+Agency&div=TIMES2",
+      "email_body": "While reviewing Geary Newman\u2019s commercial presence across Roswell and Sandy Springs, we noted your active commercial lines practice. We don't sell IT services\u2014BURN-1 provides the  Times\u00b2 double-check that delivers an immutable SHA-256 seal for carrier audits. Run your domain through the Fast Lane dropzone below to inspect your verified evidence binder.",
+      "outreach_status": "DISPATCHED",
+      "receipt_sku": "B1-TM2-01",
+      "hermes_pre_audit": {
+        "status": "PROBED_CLEAN",
+        "estimated_score": 88,
+        "sha256_mock_seal": "5ead505c8f6d4e14173a87f654691cbdfc97fa664912b8b428c93b67bf1a8ae1",
+        "audit_timestamp": "2026-11-18T17:57:26Z",
+        "risk_factors": [
+          "Dual-custody wire authorization required",
+          "FTC Safeguards compliance check"
+        ]
+      },
+      "form_portal": {
+        "contact_page_url": "https://gnewmanagency.com/contact-us/",
+        "direct_email": "geary@gnewmanagency.com",
+        "office_phone": "(770) 993-5775",
+        "principal": "Geary Newman"
+      },
+      "sender_identity": {
+        "name": "Leon R. Darden",
+        "title": "Managing Director // BURN-1 Systems",
+        "email": "leonrdarden@burn-1.com",
+        "site": "https://burn-1.com"
+      },
+      "dispatched_at_utc": "2026-11-18T21:13:59Z",
+      "dispatched_to": "geary@gnewmanagency.com",
+      "dispatcher": "Leon R. Darden (Managing Director // leonrdarden@burn-1.com)"
+    },
+    {
+      "id": "TGT-ATL-005",
+      "business_name": "HB Wealth Management",
+      "domain": "hbwealth.com",
+      "location": "Sandy Springs / Alpharetta, GA",
+      "sector": "Multi-Office Wealth & Tax Planning Powerhouse",
+      "underwriting_pain_point": "Dual-custody financial planning & CPA tax portal document vaults",
+      "subject_line": "HB Wealth // Fiduciary E&O & Perimeter Double-Check",
+      "tracked_fast_lane_url": "https://burn-1.com/fast-lane.html?lead=HB+Wealth&div=TIMES2",
+      "email_body": "With integrated tax and wealth management operations across Sandy Springs and Alpharetta, maintaining verifiable perimeter hygiene is essential to prevent E&O underwriter friction. BURN-1's Times\u00b2 division delivers a rapid Zero-Point baseline scan with verified receipts for cyber insurance and regulatory compliance. Access your evidence binder directly via the Fast Lane dropzone below.",
+      "outreach_status": "DISPATCHED",
+      "receipt_sku": "B1-TM2-01",
+      "hermes_pre_audit": {
+        "status": "PROBED_CLEAN",
+        "estimated_score": 88,
+        "sha256_mock_seal": "bb1eb1b838f0786013b1a0e46db2207370bd2e7b463aa7ddcf9e9b0093f59a26",
+        "audit_timestamp": "2026-11-18T17:57:26Z",
+        "risk_factors": [
+          "Dual-custody wire authorization required",
+          "FTC Safeguards compliance check"
+        ]
+      },
+      "form_portal": {
+        "contact_page_url": "https://hbwealth.com/contact-us/",
+        "direct_email": "info@hbwealth.com",
+        "office_phone": "(404) 459-0027",
+        "principal": "Sandy Springs & Alpharetta Advisory Team"
+      },
+      "sender_identity": {
+        "name": "Leon R. Darden",
+        "title": "Managing Director // BURN-1 Systems",
+        "email": "leonrdarden@burn-1.com",
+        "site": "https://burn-1.com"
+      },
+      "dispatched_at_utc": "2026-11-18T21:13:59Z",
+      "dispatched_to": "info@hbwealth.com",
+      "dispatcher": "Leon R. Darden (Managing Director // leonrdarden@burn-1.com)"
+    }
+  ]
+}
