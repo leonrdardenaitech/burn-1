@@ -40,12 +40,20 @@ def render_codeband_seal(
     
     if seal_type == "online":
         src_path = SEALS_DIR / "onlineseal.jpg"
-        ink_color = (255, 215, 100) # Metallic Gold / Amber
-        r = 492
+        ink_color = (255, 215, 120) # Metallic Gold / Amber
+        r = 726                     # Calibrated for 2000x1493 master artwork perimeter
+        char_spacing_px = 13.0
+        font_size = 14
+        default_cx = 1000.0
+        default_cy = 730.0
     else:
         src_path = SEALS_DIR / "documentSeal.jpg"
-        ink_color = (35, 35, 35)    # Intaglio Banknote Black
-        r = 490
+        ink_color = (20, 20, 20)    # Intaglio Banknote Black
+        r = 437                     # Calibrated for 1200x896 master artwork perimeter
+        char_spacing_px = 10.5
+        font_size = 11
+        default_cx = 600.0
+        default_cy = 448.0
 
     if not src_path.exists():
         raise FileNotFoundError(f"Source master seal not found at: {src_path}")
@@ -53,14 +61,14 @@ def render_codeband_seal(
     im = Image.open(src_path).convert("RGB")
     draw = ImageDraw.Draw(im)
     w, h = im.size
-    cx, cy = w / 2, h / 2
+    cx = default_cx if (w, h) in [(2000, 1493), (1200, 896)] else w / 2
+    cy = default_cy if (w, h) in [(2000, 1493), (1200, 896)] else h / 2
 
     # Construct the micro-print security string
     clean_hash = sha256_hash.upper()
     text_segment = f"• SHA256:{clean_hash} • CERT:{cert_id} • DOMAIN:{domain.upper()} • NIST_CSF_2.0_VERIFIED "
     
     circumference = 2 * math.pi * r
-    char_spacing_px = 11.5
     total_chars = int(circumference / char_spacing_px)
     repeat_count = int(total_chars / len(text_segment)) + 1
     full_band_text = (text_segment * repeat_count)[:total_chars]
@@ -68,10 +76,10 @@ def render_codeband_seal(
     angle_step = 360.0 / total_chars
 
     try:
-        font = ImageFont.truetype("cour.ttf", 10)
+        font = ImageFont.truetype("cour.ttf", font_size)
     except Exception:
         try:
-            font = ImageFont.truetype("DejaVuSansMono.ttf", 10)
+            font = ImageFont.truetype("DejaVuSansMono.ttf", font_size)
         except Exception:
             font = ImageFont.load_default()
 
