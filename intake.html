@@ -156,7 +156,7 @@
                 Applicant Organization &amp; Framework Parameter Ledger
               </h2>
               <p class="text-xs font-mono text-[#4A554E]">
-                Submitting this form dispatches a simulated POST request to <code>/webhook/direct-intake-collector</code>, saves to the Customer-Facing Spreadsheet, and initiates the 5-State Lifecycle in the Right Column.
+                Submitting this form initiates non-invasive Agentless Perimeter Telemetry, registers your domain for outside-in audit verification, and generates your Cryptographic SHA-256 Underwriting Seal.
               </p>
             </div>
             <span class="px-3 py-1 bg-[#1B365D] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase rounded">
@@ -228,7 +228,7 @@
 
             <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
               <div class="text-[11px] font-mono text-[#4A554E]">
-                <i class="fa-solid fa-table text-[#14452F] mr-1"></i> Appends to Customer-Facing Spreadsheet &amp; runs 5-State Lifecycle (1.5s/step).
+                <i class="fa-solid fa-shield-halved text-[#14452F] mr-1"></i> Dispatches authenticated intake to /api/intake &amp; issues verifiable SHA-256 seal.
               </div>
               <div class="flex flex-wrap gap-2.5">
                 <button type="submit" class="med-coin med-gold">
@@ -246,57 +246,44 @@
         </div>
       </div>
 
-      <!-- Customer-Facing Spreadsheet Collector Ledger -->
-      <div class="guilloche-pane guilloche-pane-blue">
+      <!-- Private Submission Confirmation Card (Revealed dynamically only upon applicant submission) -->
+      <div id="private-submission-receipt" class="hidden guilloche-pane guilloche-pane-blue mb-6">
         <div class="guilloche-pane-content">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-3 border-b border-[#C4B693] pb-2.5">
-            <div>
-              <h2 class="text-base sm:text-lg font-black text-[#1B365D] uppercase" style="font-family: var(--font-serif);">
-                <i class="fa-solid fa-table-list text-[#14452F] mr-1.5"></i> Customer-Facing Spreadsheet Ledger (Direct Applicant Sink)
-              </h2>
-              <p class="text-[11px] font-mono text-[#4A554E]">
-                Live webhook records progressing through `PENDING` → `COMPLETE_PASS` → `NON_CONV_INCOMPLETE` → `REJECTED_NEEDS_REMEDIATION` → `APPROVED_SEALED`.
-              </p>
-            </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#C4B693] pb-3 mb-4">
             <div class="flex items-center gap-2">
-              <button type="button" onclick="window.Burn1Treasury.exportSpreadsheetCSV('burn1-direct-intake-ledger.csv')" class="med-coin med-silver text-[10px] py-1 px-3">
-                <i class="fa-solid fa-file-csv"></i> Export CSV Ledger
-              </button>
-              <span class="px-2.5 py-1 bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold rounded">
-                COLLECTOR WEBHOOK: CONNECTED
-              </span>
+              <span class="w-3 h-3 rounded-full bg-emerald-600 animate-pulse"></span>
+              <h2 class="text-base sm:text-lg font-black text-[#14452F] uppercase" style="font-family: var(--font-serif);">
+                Intake Attestation Receipt &amp; Verifiable SHA-256 Seal
+              </h2>
+            </div>
+            <span id="receipt-state-badge" class="px-3 py-1 bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase rounded">
+              APPROVED_SEALED
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+            <div class="p-3 bg-[#FAF7F0] rounded border border-[#C4B693]">
+              <div class="text-[10px] text-[#4A554E] uppercase font-bold">Applicant Organization</div>
+              <div id="receipt-entity-name" class="font-bold text-[#14452F] text-sm mt-0.5">—</div>
+              <div class="text-[10px] text-[#4A554E] uppercase font-bold mt-2">Telemetry Scope (Domain)</div>
+              <div id="receipt-primary-domain" class="font-bold text-[#1B365D] mt-0.5">—</div>
+            </div>
+
+            <div class="p-3 bg-[#FAF7F0] rounded border border-[#C4B693]">
+              <div class="text-[10px] text-[#4A554E] uppercase font-bold">Framework &amp; Package Tier</div>
+              <div id="receipt-package-info" class="font-bold text-[#111814] mt-0.5">—</div>
+              <div class="text-[10px] text-[#4A554E] uppercase font-bold mt-2">Algorithmic Cryptographic SHA-256 Seal</div>
+              <div id="receipt-seal-code" class="font-bold text-[#14452F] text-[11px] break-all mt-0.5">—</div>
             </div>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse bg-[#FAF7F0]/95 border-2 border-[#1B365D]">
-              <thead>
-                <tr class="bg-[#1B365D] text-[#FAF7F0] font-mono text-[10px] uppercase">
-                  <th class="p-2 border border-[#C4B693]">UTC Timestamp</th>
-                  <th class="p-2 border border-[#C4B693]">Applicant Entity</th>
-                  <th class="p-2 border border-[#C4B693]">Perimeter Domain</th>
-                  <th class="p-2 border border-[#C4B693]">Framework</th>
-                  <th class="p-2 border border-[#C4B693]">Dossier Instrument</th>
-                  <th class="p-2 border border-[#C4B693]">SHA-256 Seal Reference</th>
-                  <th class="p-2 border border-[#C4B693]">Lifecycle State</th>
-                </tr>
-              </thead>
-              <tbody id="customer-spreadsheet-tbody" class="text-xs">
-                <tr class="border-b border-[#C4B693]">
-                  <td class="p-2 font-mono text-[10px] text-[#4A554E]">2026-11-05 22:05:19 UTC</td>
-                  <td class="p-2 font-mono text-[11px] font-bold text-[#14452F]">beacon-ridge-energy.com</td>
-                  <td class="p-2 font-mono text-[11px] text-[#1B365D] font-semibold">beacon-ridge-energy.com</td>
-                  <td class="p-2 font-mono text-[10px]">NIST CSF 2.0 Core Underwriting Dossier</td>
-                  <td class="p-2 font-mono text-[10px] font-bold">8-Page NIST CSF 2.0 Sealed Proof</td>
-                  <td class="p-2 font-mono text-[10px] text-[#14452F]">SHA256-7C19A04E-88B2</td>
-                  <td class="p-2">
-                    <span class="px-2 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold">
-                      APPROVED_SEALED
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="mt-4 p-3 rounded bg-[#EDE5CE] border border-[#14452F]/40 flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-[#0B291B]">
+            <div>
+              <strong>Turnaround Guarantee:</strong> Dossier bound within standard turnaround up to 5 business days.
+            </div>
+            <button type="button" onclick="if(window.triBotEngine) window.triBotEngine.openModal();" class="px-3 py-1.5 rounded bg-[#14452F] hover:bg-[#0B291B] text-white font-bold text-[11px] uppercase transition cursor-pointer">
+              <i class="fa-solid fa-clock mr-1"></i> Check Status in Universal Console &rarr;
+            </button>
           </div>
         </div>
       </div>

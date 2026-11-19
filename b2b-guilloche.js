@@ -451,14 +451,29 @@
       sheetBody.prepend(tr);
     }
 
+    // Populate and reveal Private Submission Receipt Card
+    const privateReceipt = document.getElementById('private-submission-receipt');
+    if (privateReceipt) {
+      privateReceipt.classList.remove('hidden');
+      const rEntity = document.getElementById('receipt-entity-name');
+      const rDomain = document.getElementById('receipt-primary-domain');
+      const rPkg = document.getElementById('receipt-package-info');
+      const rSeal = document.getElementById('receipt-seal-code');
+      if (rEntity) rEntity.textContent = formPayload.entityName || 'Applicant Organization';
+      if (rDomain) rDomain.textContent = formPayload.primaryDomain || 'domain.tld';
+      if (rPkg) rPkg.textContent = `${formPayload.packageTier || 'Standard'} • ${formPayload.framework || 'NIST CSF 2.0'}`;
+      if (rSeal) rSeal.textContent = initialTempSeal;
+      privateReceipt.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
     // Update webhook banner if present
     const webhookBanner = document.getElementById('webhook-post-receipt');
     if (webhookBanner) {
       webhookBanner.classList.remove('hidden');
       webhookBanner.innerHTML = `
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <span><strong>WEBHOOK POST 202 ACCEPTED:</strong> Row appended to Customer-Facing Spreadsheet (${formPayload.primaryDomain}) • Seal ID: <code id="banner-seal-code">${initialTempSeal}</code></span>
-          <span class="px-2 py-0.5 bg-[#14452F] text-[#FAF7F0] rounded text-[9.5px]">5-STATE LIFECYCLE ACTIVE (1.5s/STEP)</span>
+          <span><strong>TELEMETRY DISPATCH ACCEPTED:</strong> Intake queued for (${formPayload.primaryDomain}) • Verifiable Attestation Seal: <code id="banner-seal-code">${initialTempSeal}</code></span>
+          <span class="px-2 py-0.5 bg-[#14452F] text-[#FAF7F0] rounded text-[9.5px]">AUTHENTICATED • SLA UP TO 5 DAYS</span>
         </div>
       `;
     }
@@ -499,6 +514,8 @@
         }
         const bannerSeal = document.getElementById('banner-seal-code');
         if (bannerSeal) bannerSeal.textContent = finalSeal;
+        const rSeal = document.getElementById('receipt-seal-code');
+        if (rSeal) rSeal.textContent = finalSeal;
 
         if (logContainer) {
           const serverEntry = document.createElement('div');
