@@ -1,0 +1,373 @@
+[
+  {
+    "company_name": "TechCastles Media Services",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "techcastles.com",
+    "scouted_timestamp": "2026-11-19T05:05:29.129050+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "160.153.0.173"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Tier3MD",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "tier3md.com",
+    "scouted_timestamp": "2026-11-19T05:05:32.383970+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "107.180.41.52"
+    ],
+    "tls_version": "TLSv1.2",
+    "open_ports": [
+      22
+    ],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "CTEKS",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "cteks.com",
+    "scouted_timestamp": "2026-11-19T05:05:34.875055+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "162.159.135.42"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Relevant (Relevant IT Services)",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "relevantitservices.com",
+    "scouted_timestamp": "2026-11-19T05:05:38.046837+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "104.21.90.161",
+      "172.67.202.114"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Leapfrog Services",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "leapfrogservices.com",
+    "scouted_timestamp": "2026-11-19T05:05:41.217173+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "162.159.134.42"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "AlphaCIS",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "alphacis.com",
+    "scouted_timestamp": "2026-11-19T05:05:45.065784+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "104.21.70.26",
+      "172.67.218.173"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "UniVirtual Solutions",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "uvs-it.com",
+    "scouted_timestamp": "2026-11-19T05:05:48.240276+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "34.174.235.45"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Network 1 Consulting",
+    "category": "Commercial & Healthcare MSPs",
+    "scouted_domain": "network1consulting.com",
+    "scouted_timestamp": "2026-11-19T05:05:51.556726+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "82.25.89.112"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Cameron &amp; Roberts Insurance Agency",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "cameronandroberts.com",
+    "scouted_timestamp": "2026-11-19T05:05:54.792603+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "162.159.134.42"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Foundations Insurance Group, LLC",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "foundationsinsurancegroup.com",
+    "scouted_timestamp": "2026-11-19T05:05:57.997729+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "141.193.213.10",
+      "141.193.213.11"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Booth Insurance Group",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "boothinsurancegroup.com",
+    "scouted_timestamp": "2026-11-19T05:06:01.471523+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "192.124.249.155"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Manry Heston",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "manryheston.com",
+    "scouted_timestamp": "2026-11-19T05:06:04.760591+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "151.101.2.159"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Griffin &amp; Company Insurance",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "griffin-company.com",
+    "scouted_timestamp": "2026-11-19T05:06:07.956091+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "151.101.66.159"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Townley Kenton",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "townleykenton.com",
+    "scouted_timestamp": "2026-11-19T05:06:11.147873+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "108.59.85.231"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "The Tabb Insurance Agency Inc",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "tabbinsurance.com",
+    "scouted_timestamp": "2026-11-19T05:06:14.473745+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "209.133.202.235"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Usher Risk Management Group LLC",
+    "category": "Commercial & Cyber Insurance Brokers",
+    "scouted_domain": "usherinsurancegroup.com",
+    "scouted_timestamp": "2026-11-19T05:06:17.779519+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "160.153.0.170"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Lake Park Logistics",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "lakeparklogistics.com",
+    "scouted_timestamp": "2026-11-19T05:06:20.990719+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "198.202.211.1"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "CHEMSMART WHOLESALE INC.",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "chemsmartwholesale.com",
+    "scouted_timestamp": "2026-11-19T05:06:24.346891+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "143.244.144.216"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [
+      22
+    ],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Clean Harbors (Tucker Technical Services)",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "cleanharbors.com",
+    "scouted_timestamp": "2026-11-19T05:06:26.626213+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "52.73.145.1"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "Rinchem Company (Atlanta)",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "rinchem.com",
+    "scouted_timestamp": "2026-11-19T05:06:29.938936+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "96.45.82.219",
+      "96.45.83.151",
+      "96.45.83.39",
+      "96.45.82.75"
+    ],
+    "tls_version": "DEGRADED_OR_TIMEOUT",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "B",
+    "underwriting_talking_point": "TLS handshake latency or legacy cipher configuration observed. Carrier readiness tune-up recommended."
+  },
+  {
+    "company_name": "Etowah Chemical Sales &amp; Services",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "etowahchemicals.com",
+    "scouted_timestamp": "2026-11-19T05:06:33.125096+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "192.254.187.15"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [
+      22
+    ],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  },
+  {
+    "company_name": "GTY Logistics",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "gtytms.com",
+    "scouted_timestamp": "2026-11-19T05:06:35.689436+00:00",
+    "dns_resolved": false,
+    "ip_addresses": [],
+    "tls_version": "N/A",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "UNKNOWN",
+    "underwriting_talking_point": "DNS resolution failed on gtytms.com; possible expired or misconfigured nameservers."
+  },
+  {
+    "company_name": "LeSaint Logistics",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "lesaint.com",
+    "scouted_timestamp": "2026-11-19T05:06:35.740559+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "213.165.233.16"
+    ],
+    "tls_version": "DEGRADED_OR_TIMEOUT",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "B",
+    "underwriting_talking_point": "TLS handshake latency or legacy cipher configuration observed. Carrier readiness tune-up recommended."
+  },
+  {
+    "company_name": "Georgia Chemical &amp; Equipment Co.",
+    "category": "Chemical, HazMat & 3PL Warehouses",
+    "scouted_domain": "georgiachemical.com",
+    "scouted_timestamp": "2026-11-19T05:06:38.904097+00:00",
+    "dns_resolved": true,
+    "ip_addresses": [
+      "172.67.143.137",
+      "104.21.47.3"
+    ],
+    "tls_version": "TLSv1.3",
+    "open_ports": [],
+    "high_risk_exposure": false,
+    "baseline_grade": "A+",
+    "underwriting_talking_point": "Perimeter is clean and hardened. Ready for immediate fast-track underwriting binder sign-off."
+  }
+]
