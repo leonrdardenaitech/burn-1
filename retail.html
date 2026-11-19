@@ -133,6 +133,69 @@
     @keyframes b1pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
     @media (max-width: 640px) { .b1-letter { font-size: 4.5rem; } .b1-face { min-height: 320px; } }
 
+  
+    /* Protocol PLUS Purple & Silver Chrome UI Kit Components */
+    .btn-silver-chrome {
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 45%, #94a3b8 100%);
+      border: 2px solid #ffffff;
+      color: #0f172a;
+      font-family: 'Orbitron', 'JetBrains Mono', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 12px;
+      padding: 0.85rem 1.6rem;
+      box-shadow: 0 5px 0 #475569, 0 10px 20px rgba(0,0,0,0.5), inset 0 2px 4px #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .btn-silver-chrome:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 45%, #cbd5e1 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #475569, 0 14px 25px rgba(255,255,255,0.35);
+    }
+    .btn-silver-chrome:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #475569, 0 3px 6px rgba(0,0,0,0.4);
+    }
+
+    .btn-racing-hazard {
+      background: repeating-linear-gradient(-45deg, #2e0854, #2e0854 12px, #581c87 12px, #581c87 24px);
+      border: 2px solid #c084fc;
+      color: #ffffff;
+      font-family: 'Orbitron', 'JetBrains Mono', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 12px;
+      padding: 0.85rem 1.6rem;
+      box-shadow: 0 0 20px rgba(192, 132, 252, 0.45);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .btn-racing-hazard:hover {
+      border-color: #ffffff;
+      box-shadow: 0 0 30px rgba(192, 132, 252, 0.85);
+      transform: scale(1.02);
+    }
+
+    .plus-badge-pill {
+      background: linear-gradient(135deg, #7e22ce 0%, #3b0764 100%);
+      border: 1.5px solid #d8b4fe;
+      color: #f3e8ff;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+    }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col relative">
@@ -412,6 +475,125 @@
 
       </div>
     </div>
+
+    <!-- ========================================================================
+         PROTOCOL PLUS: RETAIL & E-COMMERCE PLUS (SKU: 03b | +$500 ONE-TIME)
+         Specialized Statutory Translation Layer Stacked Directly onto Core Binder
+         ======================================================================== -->
+    <section id="retail-plus" class="mb-12 rounded-3xl bg-slate-950 border-2 border-purple-500/80 shadow-[0_0_50px_rgba(168,85,247,0.25)] overflow-hidden text-white">
+      <div class="relative p-6 sm:p-10 border-b-2 border-purple-900/60 overflow-hidden">
+        <img src="assets/corporate/corp_retail_store_interior_displays.jpg" alt="Retail Store Interior" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none filter saturate-150 mix-blend-luminosity">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-purple-950/70"></div>
+        
+        <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div class="space-y-2 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full plus-badge-pill font-mono text-xs font-black tracking-widest uppercase">
+              <i class="fa-solid fa-plus text-amber-400"></i> PROTOCOL PLUS · SKU: 03b
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight font-orbitron">
+              RETAIL &amp; E-COMMERCE PLUS <span class="text-purple-400">| +$500 ONE-TIME</span>
+            </h2>
+            <p class="text-sm sm:text-base font-mono text-purple-200/90 leading-relaxed">
+              Stacked directly onto the <strong>Core Evidence Binder ($1,000)</strong> for Merchants, Payment Aggregators, and High-Volume Checkout Platforms.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-stretch gap-3 shrink-0">
+            <a href="fast-lane.html" class="btn-racing-hazard text-xs py-3 px-5">
+              <i class="fa-solid fa-bolt text-amber-300"></i> FAST LANE INTAKE
+            </a>
+            <a href="intake.html" class="btn-silver-chrome text-xs py-3 px-5">
+              <i class="fa-solid fa-shield-halved text-purple-700"></i> DIRECT APPLICANT
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-10 space-y-8 bg-slate-900/70">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-5 rounded-2xl bg-black/60 border border-slate-800 space-y-3">
+            <div class="font-mono text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">FOUNDATION STACK</div>
+            <div class="text-xl font-bold font-orbitron text-white">CORE BINDER</div>
+            <div class="text-2xl font-black text-slate-200 font-mono">$1,000 <span class="text-xs font-normal text-slate-400">/ base</span></div>
+            <p class="text-xs font-mono text-slate-400 leading-relaxed">
+              Outside-in telemetry, quarterly scans, checkout hostname security, and SHA-256 seal.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-purple-950/40 border-2 border-purple-500 space-y-3 relative shadow-lg shadow-purple-950/50">
+            <div class="absolute -top-3 right-4 px-2 py-0.5 rounded bg-purple-600 text-[9px] font-mono font-black text-white uppercase">UPSELL STACK</div>
+            <div class="font-mono text-[10px] font-extrabold text-purple-300 uppercase tracking-wider">PAYMENT SECURITY</div>
+            <div class="text-xl font-bold font-orbitron text-purple-200">RETAIL PLUS</div>
+            <div class="text-2xl font-black text-amber-400 font-mono">+$500 <span class="text-xs font-normal text-purple-300">at purchase ($1,500 total)</span></div>
+            <p class="text-xs font-mono text-purple-200/80 leading-relaxed">
+              Provides complete PCI DSS v4.0 verification defending against Magecart, iframe tampering, and checkout skimmers.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-black/60 border border-emerald-800/60 space-y-3">
+            <div class="font-mono text-[10px] font-extrabold text-emerald-400 uppercase tracking-wider">TRANSACTION DEFENSE</div>
+            <div class="text-xl font-bold font-orbitron text-emerald-200">SCRIPT INTEGRITY WATCH</div>
+            <div class="text-2xl font-black text-emerald-300 font-mono">$249 <span class="text-xs font-normal text-slate-400">/mo</span></div>
+            <p class="text-xs font-mono text-slate-400 leading-relaxed">
+              Automated monthly drift ledger auditing payment page HTTP headers and third-party script hash changes.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="font-mono text-xs font-extrabold text-purple-300 uppercase tracking-widest border-b border-purple-900/60 pb-2">
+            The Retail &amp; E-Commerce PLUS Regulatory Stack
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="p-4 rounded-xl bg-slate-950 border border-purple-900/40 space-y-2">
+              <div class="flex items-center gap-2 text-purple-400 text-sm font-bold">
+                <i class="fa-solid fa-credit-card"></i> PCI DSS v4.0 (Req. 6.4.3 &amp; 11.6.1)
+              </div>
+              <p class="text-[11px] font-mono text-slate-300 leading-relaxed">
+                JavaScript execution integrity and checkout header change-detection monitoring to eliminate Magecart and e-skimming fraud.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-purple-900/40 space-y-2">
+              <div class="flex items-center gap-2 text-purple-400 text-sm font-bold">
+                <i class="fa-solid fa-thumbtack"></i> Script Pinning &amp; SRI
+              </div>
+              <p class="text-[11px] font-mono text-slate-300 leading-relaxed">
+                Attestation that all checkout iframes, tag managers, and payment CDN scripts enforce Subresource Integrity (SRI) hashes.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-purple-900/40 space-y-2">
+              <div class="flex items-center gap-2 text-purple-400 text-sm font-bold">
+                <i class="fa-solid fa-user-shield"></i> Consumer Privacy Signals
+              </div>
+              <p class="text-[11px] font-mono text-slate-300 leading-relaxed">
+                Verification that CCPA / CPRA Global Privacy Control (GPC) opt-out signals are respected across customer checkout flows.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-purple-900/40 space-y-2">
+              <div class="flex items-center gap-2 text-purple-400 text-sm font-bold">
+                <i class="fa-solid fa-truck-fast"></i> Cold Chain Telemetry
+              </div>
+              <p class="text-[11px] font-mono text-slate-300 leading-relaxed">
+                Logistics integration proof ensuring warehouse and supply chain dispatch portals maintain zero unencrypted telemetry ports.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-gradient-to-r from-purple-950/60 to-slate-950 border-2 border-purple-500/50 flex flex-col md:flex-row items-center gap-6">
+          <img src="assets/corporate/corp_cargo_trucks_warehouse.jpg" alt="Logistics Warehouse" class="w-full md:w-56 h-36 rounded-xl object-cover border-2 border-purple-400/50 shadow-md shrink-0">
+          <div class="space-y-2">
+            <span class="px-2 py-0.5 rounded bg-amber-400 text-black font-mono text-[9px] font-black uppercase">SPECIALTY ARTIFACT INCLUDED</span>
+            <h3 class="text-lg font-black text-white font-orbitron uppercase">2-Column Split-Screen PCI DSS v4.0 Evidence Binder</h3>
+            <p class="text-xs font-mono text-slate-300 leading-relaxed">
+              Side-by-side technical mapping that proves your checkout environment conforms to PCI DSS v4.0 mandatory script integrity controls, packaged for instant merchant acquirer approval.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
 

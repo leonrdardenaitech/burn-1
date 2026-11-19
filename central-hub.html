@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Burn-1 Systems — Central Hub (/central-hub) | What We Offer, Portals &amp; Briefings</title>
+  <title>Burn-1 Systems — Central Hub (/central-hub) | Enterprise Underwriting & MSP Partner Showcase</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="b2b-treasury.css">
+
   <style>
     :root {
       --money-green: #14452F;
@@ -21,22 +23,14 @@
       --font-serif: 'Cinzel', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --font-orbitron: 'Orbitron', monospace;
     }
 
     body {
       font-family: var(--font-sans);
       color: var(--ink-charcoal);
       background-color: var(--scroll-tan);
-      background-image:
-        radial-gradient(circle at 18% 15%, rgba(20, 69, 47, 0.06) 0%, transparent 45%),
-        radial-gradient(circle at 82% 80%, rgba(27, 54, 93, 0.06) 0%, transparent 45%),
-        repeating-linear-gradient(
-          45deg,
-          rgba(20, 69, 47, 0.02) 0px,
-          rgba(20, 69, 47, 0.02) 1px,
-          transparent 1px,
-          transparent 8px
-        );
+      overflow-x: hidden;
     }
 
     /* Uniform Grey Unibar Header */
@@ -46,7 +40,7 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     .grey-unibar-sub {
-      background: rgba(51, 65, 85, 0.92);
+      background: rgba(51, 65, 85, 0.95);
       border-top: 1px solid #94a3b8;
     }
     .nav-pill-idle {
@@ -65,153 +59,113 @@
       box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
     }
 
-    /* Day-Theme Financial Guilloche Pane */
+    /* Promelli Long-Scroll Big Component Styles */
+    .hero-banner-square {
+      position: relative;
+      border-radius: 1.5rem;
+      border: 2px solid var(--money-green);
+      box-shadow: 0 15px 35px rgba(20, 69, 47, 0.15);
+      overflow: hidden;
+    }
+
     .guilloche-pane {
       position: relative;
       background-color: var(--scroll-tan);
       background-image:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.72), transparent 70%),
-        repeating-linear-gradient(
-          0deg,
-          rgba(20, 69, 47, 0.025) 0px,
-          rgba(20, 69, 47, 0.025) 1px,
-          transparent 1px,
-          transparent 4px
-        );
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.8), transparent 75%),
+        repeating-linear-gradient(0deg, rgba(20, 69, 47, 0.02) 0px, rgba(20, 69, 47, 0.02) 1px, transparent 1px, transparent 4px);
       border: 2px solid var(--money-green);
       outline: 1px solid var(--money-blue);
       outline-offset: -6px;
-      border-radius: 4px;
-      padding: 1.75rem;
-      box-shadow:
-        0 10px 28px rgba(11, 41, 27, 0.1),
-        inset 0 0 28px rgba(196, 182, 147, 0.35);
-      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(11, 41, 27, 0.08), inset 0 0 25px rgba(196, 182, 147, 0.3);
     }
 
-    .guilloche-pane-blue {
-      border-color: var(--money-blue);
-      outline-color: var(--money-green);
-    }
-
-    .guilloche-corner {
-      position: absolute;
-      width: 48px;
-      height: 48px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.85;
-    }
-    .guilloche-corner.tl { top: 4px; left: 4px; }
-    .guilloche-corner.tr { top: 4px; right: 4px; transform: scaleX(-1); }
-    .guilloche-corner.bl { bottom: 4px; left: 4px; transform: scaleY(-1); }
-    .guilloche-corner.br { bottom: 4px; right: 4px; transform: scale(-1, -1); }
-
-    .guilloche-border-strip {
-      position: absolute;
-      left: 48px;
-      right: 48px;
-      height: 12px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.65;
-    }
-    .guilloche-border-strip.top-strip { top: 5px; }
-    .guilloche-border-strip.bottom-strip { bottom: 5px; transform: scaleY(-1); }
-
-    .guilloche-pane-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* 3D Metallic Medallion Buttons */
-    .med-coin {
-      position: relative;
+    /* Purple & Silver Metallic Button Kit */
+    .btn-silver-chrome {
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 45%, #94a3b8 100%);
+      border: 2px solid #ffffff;
+      color: #0f172a;
+      font-family: 'Orbitron', 'JetBrains Mono', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      box-shadow: 0 6px 0 #475569, 0 12px 25px rgba(0,0,0,0.5), inset 0 2px 4px #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 0.7rem 1.25rem;
-      border-radius: 9999px;
-      font-family: var(--font-serif);
-      font-weight: 800;
-      font-size: 0.76rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      gap: 0.75rem;
       text-decoration: none;
-      user-select: none;
     }
-    .med-coin:hover {
-      filter: brightness(1.06);
-      transform: translateY(-1px);
+    .btn-silver-chrome:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 45%, #cbd5e1 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 #475569, 0 16px 30px rgba(255,255,255,0.4);
     }
-    .med-gold {
-      background: radial-gradient(ellipse at 30% 25%, #FFF8C9 0%, #F5D061 28%, #C9971C 68%, #7E5908 100%);
-      color: #2A1B00;
-      border: 2px solid #7E5908;
-      text-shadow: 0 1px 0 rgba(255, 250, 215, 0.75);
-      box-shadow:
-        0 5px 14px rgba(126, 89, 8, 0.35),
-        inset 0 2px 3px rgba(255, 252, 224, 0.9),
-        inset 0 -3px 6px rgba(92, 62, 2, 0.8);
-    }
-    .med-silver {
-      background: radial-gradient(ellipse at 30% 25%, #FFFFFF 0%, #E2E8F0 30%, #94A3B8 70%, #475569 100%);
-      color: #0F172A;
-      border: 2px solid #475569;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
-      box-shadow:
-        0 5px 14px rgba(71, 85, 105, 0.35),
-        inset 0 2px 3px rgba(255, 255, 255, 0.95),
-        inset 0 -3px 6px rgba(51, 65, 85, 0.75);
-    }
-    .med-bronze {
-      background: radial-gradient(ellipse at 30% 25%, #FCD9B6 0%, #D98A4E 30%, #9C5221 70%, #592B0B 100%);
-      color: #260E00;
-      border: 2px solid #592B0B;
-      text-shadow: 0 1px 0 rgba(255, 225, 196, 0.65);
-      box-shadow:
-        0 5px 14px rgba(89, 43, 11, 0.4),
-        inset 0 2px 3px rgba(255, 232, 209, 0.85),
-        inset 0 -3px 6px rgba(69, 31, 5, 0.85);
+    .btn-silver-chrome:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #475569, 0 4px 8px rgba(0,0,0,0.4);
     }
 
-    .treasury-input {
-      width: 100%;
-      padding: 0.75rem 0.9rem;
-      background: var(--scroll-tan-light);
-      border: 1.5px solid var(--money-green);
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.84rem;
-      color: var(--ink-charcoal);
-      box-shadow: inset 0 1px 3px rgba(17, 24, 20, 0.08);
+    .btn-racing-hazard {
+      background: repeating-linear-gradient(-45deg, #2e0854, #2e0854 12px, #581c87 12px, #581c87 24px);
+      border: 2px solid #c084fc;
+      color: #ffffff;
+      font-family: 'Orbitron', 'JetBrains Mono', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      box-shadow: 0 0 25px rgba(192, 132, 252, 0.45);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      text-decoration: none;
     }
-    .treasury-input:focus {
-      outline: none;
-      border-color: var(--money-blue);
-      box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.15);
+    .btn-racing-hazard:hover {
+      border-color: #ffffff;
+      box-shadow: 0 0 35px rgba(192, 132, 252, 0.85);
+      transform: scale(1.02);
+    }
+
+    .hyper-photo-frame {
+      position: relative;
+      border-radius: 1.25rem;
+      border: 2px solid #C4B693;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col relative">
+<body class="min-h-screen flex flex-col relative text-slate-900">
 
-  <!-- UNIFORM HEADER & SINGLE PARTNERS NAV LINK -->
+  <!-- UNIFORM HEADER & ULTRA NAVIGATION BAR -->
   <header class="grey-unibar sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
       <div class="flex items-center gap-3">
         <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
         <div>
           <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
-          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Central Hub • <span class="text-[#14452F] font-bold">Catalog, Portals &amp; Briefings</span></div>
+          <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">
+            Central Hub • <span class="text-[#14452F] font-bold">MSP Wholesale, Brokers &amp; Protocol PLUS</span>
+          </div>
         </div>
       </div>
       <div class="flex flex-wrap items-center gap-2">
-        <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
-        <a href="fast-lane.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Fast Lane →</a>
-        <a href="cinematic-onboarding.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Guided Intake</a>
+        <a href="fast-lane.html" class="btn-racing-hazard text-xs py-2 px-4">
+          <i class="fa-solid fa-bolt text-amber-300"></i> Fast Lane &rarr;
+        </a>
+        <a href="intake.html" class="btn-silver-chrome text-xs py-2 px-4">
+          <i class="fa-solid fa-clipboard-check text-purple-700"></i> Direct Intake
+        </a>
       </div>
     </div>
     <div class="grey-unibar-sub">
@@ -219,363 +173,558 @@
         <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
         <a href="central-hub.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Central Hub</a>
         <a href="partners.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Partners</a>
-        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
+        <a href="broker-portal.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Broker Portal</a>
+        <a href="msp-intake.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">MSP Intake</a>
+        <a href="directory.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Directory</a>
+        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
         <a href="healthcare.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
         <a href="finance.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Finance</a>
+        <a href="retail.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
         <a href="defense.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Defense</a>
         <a href="manufacturing.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Manufacturing</a>
-        <a href="retail.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Retail</a>
-        <a href="energy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Energy</a>
-        <a href="it-infra.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">IT Infrastructure</a>
-        <a href="legal.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Legal</a>
-        <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
       </div>
     </div>
   </header>
 
-  <!-- ========================================================================
-       CENTRAL HUB — 2-COLUMN DAY-THEME FINANCIAL GUILLOCHE LAYOUT
-       LEFT COLUMN (MAIN, WIDE): Portals + What We Offer + Articles
-       RIGHT COLUMN (SLIM): Prominent, Bigger Sign-Up Pane
-       ======================================================================== -->
-  <main class="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 relative z-10">
+  <!-- MAIN LONG-SCROLLING B2B CONTAINER (Big Typography, Square Panes, High-Contrast) -->
+  <main class="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 flex-1 relative z-10 space-y-16">
 
-    <div class="w-full space-y-8">
+    <!-- 1. HERO SQUARE PANE: SPEAKING THE MSP & BROKER LANGUAGE -->
+    <section class="hero-banner-square bg-slate-950 text-white p-8 sm:p-14 relative">
+      <img src="assets/corporate/corp_skyscraper_headquarters.jpg" alt="Skyscraper Headquarters" class="absolute inset-0 w-full h-full object-cover opacity-25 filter saturate-150 mix-blend-luminosity">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-purple-950/80"></div>
 
-        <!-- 1. PORTAL DIRECTORY & BIND DOCTRINE BANNER -->
-        <section class="guilloche-pane">
-          <div class="guilloche-pane-content">
-            <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#14452F] pb-4 mb-5">
-              <div>
-                <span class="px-2.5 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-bold uppercase tracking-widest">
-                  CENTRAL HUB • /CENTRAL-HUB
-                </span>
-                <h1 class="text-2xl sm:text-3xl font-black text-[#14452F] uppercase mt-1.5" style="font-family: var(--font-serif);">
-                  BURN-1 Systems — Central Hub &amp; Portal Directory
-                </h1>
-              </div>
-              <div class="px-3 py-2 rounded bg-[#FAF7F0] border border-[#1B365D] font-mono text-[10px] text-[#1B365D] font-bold">
-                <i class="fa-solid fa-certificate text-[#14452F] mr-1"></i> Algorithmic Cryptographic SHA-256 Seal
-              </div>
+      <div class="relative z-10 space-y-6 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950 border-2 border-purple-400 font-mono text-xs font-black tracking-widest text-purple-200 uppercase">
+          <i class="fa-solid fa-building-shield text-amber-400"></i> Central Hub &amp; Underwriting Exchange
+        </div>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white font-orbitron leading-tight">
+          BUILT FOR <span class="text-purple-400">MSPs</span>, BROKERS &amp; THE ENTERPRISE.
+        </h1>
+        <p class="text-base sm:text-xl font-mono text-slate-200 leading-relaxed font-medium">
+          Carriers don't pay out on self-attestations. We deliver outside-in <strong>Agentless Perimeter Telemetry</strong> bound with an <strong>Algorithmic Cryptographic SHA-256 Seal</strong>. Standard turnaround up to 5 business days.
+        </p>
+
+        <!-- Master BIND Doctrine Banner -->
+        <div class="p-5 rounded-2xl bg-black/75 border-2 border-[#14452F] text-slate-200 font-mono text-xs sm:text-sm leading-relaxed space-y-2">
+          <div class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-stamp text-[#14452F]"></i> THE MASTER BIND DOCTRINE
+          </div>
+          <p>
+            After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a href="#product-architecture" class="btn-silver-chrome text-xs sm:text-sm">
+            <i class="fa-solid fa-sitemap text-purple-700"></i> Explore Product Math
+          </a>
+          <a href="#plus-layers" class="btn-racing-hazard text-xs sm:text-sm">
+            <i class="fa-solid fa-plus text-amber-300"></i> The 5 PLUS Layers
+          </a>
+          <a href="partners.html" class="btn-silver-chrome text-xs sm:text-sm">
+            <i class="fa-solid fa-handshake text-[#14452F]"></i> MSP Partner Hub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HIGH-CONTRAST PORTAL LAUNCHPAD (Square Panes) -->
+    <section class="space-y-6">
+      <div class="border-b-4 border-[#14452F] pb-3">
+        <span class="font-mono text-xs font-black text-purple-800 uppercase tracking-widest">RAPID VAULT ACCESS</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-[#14452F] uppercase font-serif">DIRECT OPERATING PORTALS</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- MSP Portal -->
+        <a href="partners.html" class="p-6 rounded-2xl bg-[#FAF7F0] border-2 border-[#14452F] hover:bg-white transition-all shadow-md flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-[#14452F] text-white flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-sitemap"></i>
             </div>
+            <div class="font-mono text-xs font-bold text-[#14452F] uppercase">/partners</div>
+            <h3 class="text-xl font-black text-[#14452F] font-serif uppercase">MSP Partner Hub</h3>
+            <p class="text-xs text-slate-600 font-mono leading-relaxed">
+              Wholesale multi-tenant allocations, Monthly Delta Digest ($249/mo), Portfolio 5 &amp; 15 packs.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#C4B693] font-mono text-xs font-black text-[#1B365D] flex items-center justify-between">
+            <span>ENTER /PARTNERS</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
 
-            <!-- Mandatory §1A BIND Doctrine Box -->
-            <div class="p-4 rounded bg-[#FAF7F0] border-l-4 border-[#14452F] border border-[#C4B693] mb-6">
-              <div class="font-mono text-[11px] font-extrabold text-[#14452F] uppercase tracking-wider mb-1">
-                Core Package Doctrine — Bind, Not a Scan
+        <!-- Broker Portal -->
+        <a href="broker-portal.html" class="p-6 rounded-2xl bg-[#FAF7F0] border-2 border-[#1B365D] hover:bg-white transition-all shadow-md flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-[#1B365D] text-white flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-file-shield"></i>
+            </div>
+            <div class="font-mono text-xs font-bold text-[#1B365D] uppercase">/broker-portal</div>
+            <h3 class="text-xl font-black text-[#1B365D] font-serif uppercase">Broker Pre-Underwriting</h3>
+            <p class="text-xs text-slate-600 font-mono leading-relaxed">
+              Co-branded 8-page NIST CSF 2.0 proof packages sealed with our Algorithmic SHA-256 Seal.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#C4B693] font-mono text-xs font-black text-[#14452F] flex items-center justify-between">
+            <span>ENTER /BROKER-PORTAL</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- MSP Intake -->
+        <a href="msp-intake.html" class="p-6 rounded-2xl bg-[#FAF7F0] border-2 border-[#14452F] hover:bg-white transition-all shadow-md flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-[#14452F] text-white flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-building-lock"></i>
+            </div>
+            <div class="font-mono text-xs font-bold text-[#14452F] uppercase">/msp-intake</div>
+            <h3 class="text-xl font-black text-[#14452F] font-serif uppercase">B2B Wholesale Intake</h3>
+            <p class="text-xs text-slate-600 font-mono leading-relaxed">
+              Client seat provisioning, perimeter scope locking, and backend underwriting intake.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#C4B693] font-mono text-xs font-black text-[#1B365D] flex items-center justify-between">
+            <span>ENTER /MSP-INTAKE</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- Direct Customer Intake -->
+        <a href="intake.html" class="p-6 rounded-2xl bg-[#FAF7F0] border-2 border-[#1B365D] hover:bg-white transition-all shadow-md flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-[#1B365D] text-white flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+            <div class="font-mono text-xs font-bold text-[#1B365D] uppercase">/intake</div>
+            <h3 class="text-xl font-black text-[#1B365D] font-serif uppercase">Direct Intake</h3>
+            <p class="text-xs text-slate-600 font-mono leading-relaxed">
+              Enterprise self-service domain audit, framework selection, and private attestation receipt.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#C4B693] font-mono text-xs font-black text-[#14452F] flex items-center justify-between">
+            <span>ENTER /INTAKE</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. THE PRODUCT & PRICING ARCHITECTURE (Clean Math for MSPs & Brokers) -->
+    <section id="product-architecture" class="space-y-8">
+      <div class="border-b-4 border-[#14452F] pb-3">
+        <span class="font-mono text-xs font-black text-purple-800 uppercase tracking-widest">COMMERCIAL MODEL</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-[#14452F] uppercase font-serif">HOW THE PRODUCT STACKS</h2>
+        <p class="text-sm font-mono text-slate-600 mt-1">
+          Simple, transparent, defensible pricing. No monthly retainer trap for single buyers; wholesale volume predictability for MSPs.
+        </p>
+      </div>
+
+      <!-- Promelli 3-Tier Comparison Panes -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- PANE 1: CORE EVIDENCE BINDER ($1,000) -->
+        <div class="p-8 rounded-3xl bg-[#FAF7F0] border-2 border-slate-400 flex flex-col justify-between shadow-lg relative overflow-hidden">
+          <div class="space-y-4">
+            <span class="px-3 py-1 rounded bg-slate-800 text-white font-mono text-[10px] font-black uppercase tracking-wider">TIER 1 · BASELINE</span>
+            <h3 class="text-2xl font-black text-slate-900 font-serif uppercase">CORE EVIDENCE BINDER</h3>
+            <div class="text-4xl font-black text-slate-950 font-mono">
+              $1,000 <span class="text-sm font-bold text-slate-600">/ base year</span>
+            </div>
+            <p class="text-xs font-mono text-slate-600 leading-relaxed">
+              Outside-in perimeter telemetry, quarterly automated verification scans, and the official Algorithmic Cryptographic SHA-256 Seal.
+            </p>
+            <ul class="space-y-2.5 text-xs font-mono text-slate-700 pt-3 border-t border-slate-300">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-700"></i> Full External Attack Surface Enumeration</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-700"></i> Zero-Port / WAN Leak Verification</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-700"></i> CISA KEV Known Vulnerability Cross-Walk</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-700"></i> SHA-256 Cryptographic Seal Attestation</li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="intake.html" class="btn-silver-chrome w-full text-xs">BUY CORE BINDER ($1,000)</a>
+          </div>
+        </div>
+
+        <!-- PANE 2: PROTOCOL PLUS ADD-ON (+ $500 to + $750) -->
+        <div class="p-8 rounded-3xl bg-purple-950 text-white border-2 border-purple-400 flex flex-col justify-between shadow-2xl relative overflow-hidden transform lg:-translate-y-2">
+          <div class="absolute -top-3 right-6 px-3 py-1 rounded bg-amber-400 text-slate-950 font-mono text-[10px] font-black uppercase">
+            FLAGSHIP UPSELL
+          </div>
+          <div class="space-y-4">
+            <span class="px-3 py-1 rounded plus-badge-pill font-mono text-[10px] font-black uppercase tracking-wider">TIER 2 · TRANSLATION LAYER</span>
+            <h3 class="text-2xl font-black text-white font-serif uppercase">PROTOCOL PLUS ADD-ON</h3>
+            <div class="text-4xl font-black text-amber-400 font-mono">
+              +$500 / +$750 <span class="text-xs font-bold text-purple-200">one-time ($1,500 total)</span>
+            </div>
+            <p class="text-xs font-mono text-purple-200 leading-relaxed">
+              Direct statutory translation layer mapping technical controls to carrier questionnaire clauses, HIPAA, NYDFS, CMMC, or OSHA.
+            </p>
+            <ul class="space-y-2.5 text-xs font-mono text-purple-100 pt-3 border-t border-purple-800">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-plus text-amber-400"></i> Single Protocol (+$250) or Specialized (+$500-+$750)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-plus text-amber-400"></i> Carrier Statutory Mapping (Policy Clause Match)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-plus text-amber-400"></i> Specialized Industry Evidence Artifact Included</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-plus text-amber-400"></i> Audit-Ready Pre-Renewal Defense Dossier</li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="fast-lane.html" class="btn-racing-hazard w-full text-xs">STACK PROTOCOL PLUS &rarr;</a>
+          </div>
+        </div>
+
+        <!-- PANE 3: MSP WHOLESALE & DRIFT ($249/mo or $2,500-$5,000/yr) -->
+        <div class="p-8 rounded-3xl bg-[#FAF7F0] border-2 border-[#1B365D] flex flex-col justify-between shadow-lg relative overflow-hidden">
+          <div class="space-y-4">
+            <span class="px-3 py-1 rounded bg-[#1B365D] text-white font-mono text-[10px] font-black uppercase tracking-wider">TIER 3 · MSP MULTI-TENANT</span>
+            <h3 class="text-2xl font-black text-[#1B365D] font-serif uppercase">WHOLESALE DRIFT LEDGER</h3>
+            <div class="text-4xl font-black text-[#1B365D] font-mono">
+              $249 <span class="text-sm font-bold text-slate-600">/mo per tenant</span>
+            </div>
+            <p class="text-xs font-mono text-slate-600 leading-relaxed">
+              Continuous monthly perimeter drift surveillance tracking configuration degradation across your managed portfolio.
+            </p>
+            <ul class="space-y-2.5 text-xs font-mono text-slate-700 pt-3 border-t border-slate-300">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-700"></i> Portfolio 5 Pack ($2,500/yr) for 5 Client Domains</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-700"></i> Portfolio 15 Pack ($5,000/yr) for 15 Client Domains</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-700"></i> Monthly Drift Attestation Ledger &amp; Reseller Margin</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-700"></i> White-Label Co-Branding for MSP Portals</li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <a href="partners.html" class="btn-silver-chrome w-full text-xs">JOIN MSP PARTNER HUB</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. PHOTO GALLERY & HIGH-ENFORCEMENT SECTORS (Visual Imagery Showcase) -->
+    <section class="space-y-6">
+      <div class="border-b-4 border-[#14452F] pb-3 flex flex-wrap justify-between items-baseline gap-2">
+        <div>
+          <span class="font-mono text-xs font-black text-purple-800 uppercase tracking-widest">REAL-WORLD ASSETS</span>
+          <h2 class="text-2xl sm:text-4xl font-black text-[#14452F] uppercase font-serif">CRITICAL SECTOR PHOTO RECONNAISSANCE</h2>
+        </div>
+        <span class="font-mono text-xs text-slate-600">20 Corporate Production Visuals Deployed</span>
+      </div>
+
+      <!-- 4-Column Image Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1: Hospital -->
+        <div class="hyper-photo-frame group h-64">
+          <img src="assets/corporate/corp_hospital_emergency_center.jpg" alt="Hospital Emergency Center" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-4 flex flex-col justify-end">
+            <span class="font-mono text-[9px] font-black text-purple-300 uppercase">HEALTHCARE SECTOR</span>
+            <div class="font-bold text-white text-sm">Emergency Medical Infrastructure</div>
+          </div>
+        </div>
+
+        <!-- 2: Factory Complex -->
+        <div class="hyper-photo-frame group h-64">
+          <img src="assets/corporate/corp_drone_manufacturing_complex.jpg" alt="Manufacturing Complex" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-4 flex flex-col justify-end">
+            <span class="font-mono text-[9px] font-black text-amber-300 uppercase">MANUFACTURING &amp; OT</span>
+            <div class="font-bold text-white text-sm">Drone Reconnaissance View</div>
+          </div>
+        </div>
+
+        <!-- 3: Data Center -->
+        <div class="hyper-photo-frame group h-64">
+          <img src="assets/corporate/corp_server_room_data_racks.jpg" alt="Server Room Data Racks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-4 flex flex-col justify-end">
+            <span class="font-mono text-[9px] font-black text-cyan-300 uppercase">DEFENSE &amp; IT INFRA</span>
+            <div class="font-bold text-white text-sm">Tier IV Server Vault Architecture</div>
+          </div>
+        </div>
+
+        <!-- 4: Cleanroom Hazmat -->
+        <div class="hyper-photo-frame group h-64">
+          <img src="assets/corporate/corp_cleanroom_hazmat_facility.jpg" alt="Cleanroom Hazmat Facility" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-4 flex flex-col justify-end">
+            <span class="font-mono text-[9px] font-black text-emerald-300 uppercase">CHEMICAL / HAZMAT</span>
+            <div class="font-bold text-white text-sm">Cleanroom Biocontainment Sweep</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. THE 5 FLAGSHIP PROTOCOL PLUS LAYERS (Detailed Breakdown) -->
+    <section id="plus-layers" class="space-y-8">
+      <div class="border-b-4 border-[#14452F] pb-3">
+        <span class="font-mono text-xs font-black text-purple-800 uppercase tracking-widest">STATUTORY SPECIFICATIONS</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-[#14452F] uppercase font-serif">THE 5 FLAGSHIP PROTOCOL PLUS LAYERS</h2>
+        <p class="text-sm font-mono text-slate-600 mt-1">
+          Each PLUS layer stacks directly onto the Core Binder, translating outside-in technical controls into verifiable regulatory proof.
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        <!-- 1. HEALTHCARE PLUS -->
+        <div class="guilloche-pane p-6 sm:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-4 hyper-photo-frame h-56 lg:h-64">
+              <img src="assets/corporate/corp_healthcare_professionals_clinic.jpg" alt="Healthcare Professionals" class="w-full h-full object-cover">
+            </div>
+            <div class="lg:col-span-8 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-purple-900 text-purple-200 font-mono text-[10px] font-bold uppercase">SKU: 01b · +$500</span>
+                <span class="font-mono text-xs text-slate-500 font-bold">Covered Entities, Hospital Networks &amp; SaaS</span>
               </div>
-              <p class="text-sm text-[#111814] leading-relaxed font-medium">
-                After payment, we bind — gathering defensible evidence, cited against federal and international public sources, following the underwriter checklist. The scan is the binder, the gathering tool. It does not diagnose or summarise the report.
+              <h3 class="text-2xl font-black text-[#14452F] font-serif uppercase">HEALTHCARE PLUS (+$500)</h3>
+              <p class="text-xs sm:text-sm font-mono text-slate-700 leading-relaxed">
+                <strong>The Stack:</strong> HITRUST CSF v11.9 baseline controls · FDA Section 524B SBOM tracking for connected clinical devices · State Privacy Shield (Washington MHMD, Texas HB 300, California CMIA) · Patient intake form pixel leak audit (Meta/Google).
               </p>
-              <div class="mt-2 font-mono text-[11px] text-[#1B365D] font-bold">
-                Agentless Perimeter Telemetry • Outside-In Exposure Audit • Delivered within standard business turnaround up to 5 business days.
+              <div class="p-3 bg-purple-50 border border-purple-200 rounded-xl font-mono text-xs text-purple-900">
+                <strong>Specialty Artifact:</strong> The 6-Zone Operating Room Hotspot Map (DICOM / PACS network isolation).
               </div>
-            </div>
-
-            <!-- Direct Links to the 4 Newly Added Portals -->
-            <div class="font-mono text-xs font-extrabold uppercase tracking-wider text-[#1B365D] mb-3">
-              Direct Portal Access
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a href="partners.html" class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] hover:bg-white transition-all flex flex-col justify-between shadow-sm">
-                <div>
-                  <div class="font-mono text-[10px] font-bold text-[#14452F] uppercase">/partners</div>
-                  <h2 class="text-lg font-black text-[#14452F] mt-0.5" style="font-family: var(--font-serif);">MSP Partner Hub</h2>
-                  <p class="text-xs text-[#4A554E] mt-1">Wholesale multi-tenant allocations, Monthly Delta Digest ($249/mo), Portfolio 5, Portfolio 15, and Leader Pack.</p>
-                </div>
-                <div class="mt-3 font-mono text-xs font-extrabold text-[#1B365D]">Enter /partners →</div>
-              </a>
-
-              <a href="broker-portal.html" class="p-4 rounded bg-[#FAF7F0] border-2 border-[#1B365D] hover:bg-white transition-all flex flex-col justify-between shadow-sm">
-                <div>
-                  <div class="font-mono text-[10px] font-bold text-[#1B365D] uppercase">/broker-portal</div>
-                  <h2 class="text-lg font-black text-[#1B365D] mt-0.5" style="font-family: var(--font-serif);">Broker Pre-Underwriting Portal</h2>
-                  <p class="text-xs text-[#4A554E] mt-1">Co-branded 8-page NIST CSF 2.0 proof packages sealed with our Algorithmic Cryptographic SHA-256 Seal.</p>
-                </div>
-                <div class="mt-3 font-mono text-xs font-extrabold text-[#14452F]">Enter /broker-portal →</div>
-              </a>
-
-              <a href="msp-intake.html" class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F] hover:bg-white transition-all flex flex-col justify-between shadow-sm">
-                <div>
-                  <div class="font-mono text-[10px] font-bold text-[#14452F] uppercase">/msp-intake</div>
-                  <h2 class="text-lg font-black text-[#14452F] mt-0.5" style="font-family: var(--font-serif);">B2B MSP Intake</h2>
-                  <p class="text-xs text-[#4A554E] mt-1">Wholesale partner domain onboarding and multi-client Agentless Perimeter Telemetry dispatch.</p>
-                </div>
-                <div class="mt-3 font-mono text-xs font-extrabold text-[#1B365D]">Enter /msp-intake →</div>
-              </a>
-
-              <a href="intake.html" class="p-4 rounded bg-[#FAF7F0] border-2 border-[#1B365D] hover:bg-white transition-all flex flex-col justify-between shadow-sm">
-                <div>
-                  <div class="font-mono text-[10px] font-bold text-[#1B365D] uppercase">/intake</div>
-                  <h2 class="text-lg font-black text-[#1B365D] mt-0.5" style="font-family: var(--font-serif);">Direct Customer Intake</h2>
-                  <p class="text-xs text-[#4A554E] mt-1">Single-entity direct underwriting binder intake and Outside-In Exposure Audit submission.</p>
-                </div>
-                <div class="mt-3 font-mono text-xs font-extrabold text-[#14452F]">Enter /intake →</div>
-              </a>
+              <div class="pt-2">
+                <a href="healthcare.html#healthcare-plus" class="btn-silver-chrome text-xs py-2 px-4">VIEW HEALTHCARE PAGE &rarr;</a>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <!-- 2. WHAT WE OFFER — CATALOG SECTION -->
-        <section class="guilloche-pane guilloche-pane-blue">
-          <div class="guilloche-pane-content">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#1B365D] pb-3 mb-5">
-              <div>
-                <span class="font-mono text-[10px] font-extrabold uppercase tracking-widest text-[#14452F]">
-                  LOCKED SCHEDULE OF OFFERINGS
-                </span>
-                <h2 class="text-xl sm:text-2xl font-black text-[#1B365D] uppercase" style="font-family: var(--font-serif);">
-                  What We Offer
-                </h2>
-              </div>
-              <span class="font-mono text-[11px] font-bold text-[#14452F]">
-                Delivered within standard business turnaround up to 5 business days.
-              </span>
+        <!-- 2. FINANCE PLUS -->
+        <div class="guilloche-pane p-6 sm:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-4 hyper-photo-frame h-56 lg:h-64">
+              <img src="assets/corporate/corp_employees_office_collaboration.jpg" alt="Financial Office Collaboration" class="w-full h-full object-cover">
             </div>
-
-            <!-- Direct / Retail Offerings -->
-            <div class="mb-6">
-              <h3 class="font-mono text-xs font-extrabold uppercase tracking-wider text-[#14452F] mb-3">
-                Direct Customer Evidence Binders
-              </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-4 rounded bg-[#FAF7F0] border border-[#C4B693]">
-                  <div class="flex justify-between items-baseline">
-                    <span class="font-serif font-black text-base text-[#14452F]">Free Preview</span>
-                    <span class="font-mono font-black text-xl text-[#111814]">$0</span>
-                  </div>
-                  <p class="text-xs text-[#4A554E] mt-1.5">
-                    Initial perimeter snapshot via Agentless Perimeter Telemetry to preview external posture before binding.
-                  </p>
-                </div>
-
-                <div class="p-4 rounded bg-[#FAF7F0] border border-[#C4B693]">
-                  <div class="flex justify-between items-baseline">
-                    <span class="font-serif font-black text-base text-[#14452F]">One-Time Evidence Report</span>
-                    <span class="font-mono font-black text-xl text-[#111814]">$500</span>
-                  </div>
-                  <p class="text-xs text-[#4A554E] mt-1.5">
-                    Single-domain Outside-In Exposure Audit and defensible evidence report mapped to your sector framework.
-                  </p>
-                </div>
-
-                <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#14452F]">
-                  <div class="flex justify-between items-baseline">
-                    <span class="font-serif font-black text-base text-[#14452F]">Core Binder</span>
-                    <span class="font-mono font-black text-xl text-[#111814]">$1,000<span class="text-xs font-normal">/yr</span></span>
-                  </div>
-                  <p class="text-xs text-[#4A554E] mt-1.5">
-                    Full annual Verified Evidence Binder with Algorithmic Cryptographic SHA-256 Seal and underwriter checklist citations.
-                  </p>
-                </div>
-
-                <div class="p-4 rounded bg-[#FAF7F0] border border-[#1B365D]">
-                  <div class="flex justify-between items-baseline">
-                    <span class="font-serif font-black text-base text-[#1B365D]">Guidance PLUS &amp; Enforcement PLUS</span>
-                    <span class="font-mono font-black text-sm text-[#1B365D]">+$500/yr / +$750/yr</span>
-                  </div>
-                  <p class="text-xs text-[#4A554E] mt-1.5">
-                    <strong>Guidance PLUS:</strong> +$500/yr ($1,500/yr total). <strong>Enforcement PLUS:</strong> +$750/yr ($1,750/yr total).
-                  </p>
-                </div>
+            <div class="lg:col-span-8 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-purple-900 text-purple-200 font-mono text-[10px] font-bold uppercase">SKU: 02b · +$500</span>
+                <span class="font-mono text-xs text-slate-500 font-bold">RIAs, Clearing Entities, Credit Unions &amp; Fintechs</span>
+              </div>
+              <h3 class="text-2xl font-black text-[#14452F] font-serif uppercase">FINANCE PLUS (+$500)</h3>
+              <p class="text-xs sm:text-sm font-mono text-slate-700 leading-relaxed">
+                <strong>The Stack:</strong> NYDFS 23 NYCRR Part 500 (Class A compliance, MFA enforcement, independent risk assessments) · CRI Profile v2.2 sector cross-walk · SEC Item 1.05 Form 8-K 4-day material incident readiness · FIDO2 / Passkey passwordless validation.
+              </p>
+              <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-xl font-mono text-xs text-indigo-900">
+                <strong>Specialty Artifact:</strong> RIA Fiduciary Underwriting Dossier with SEC 4-day disclosure architecture.
+              </div>
+              <div class="pt-2">
+                <a href="finance.html#finance-plus" class="btn-silver-chrome text-xs py-2 px-4">VIEW FINANCE PAGE &rarr;</a>
               </div>
             </div>
+          </div>
+        </div>
 
-            <!-- MSP Wholesale Offerings -->
+        <!-- 3. RETAIL & E-COMMERCE PLUS -->
+        <div class="guilloche-pane p-6 sm:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-4 hyper-photo-frame h-56 lg:h-64">
+              <img src="assets/corporate/corp_retail_store_interior_displays.jpg" alt="Retail Store Interior" class="w-full h-full object-cover">
+            </div>
+            <div class="lg:col-span-8 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-purple-900 text-purple-200 font-mono text-[10px] font-bold uppercase">SKU: 03b · +$500</span>
+                <span class="font-mono text-xs text-slate-500 font-bold">Merchants, High-Volume E-Commerce &amp; Aggregators</span>
+              </div>
+              <h3 class="text-2xl font-black text-[#14452F] font-serif uppercase">RETAIL &amp; E-COMMERCE PLUS (+$500)</h3>
+              <p class="text-xs sm:text-sm font-mono text-slate-700 leading-relaxed">
+                <strong>The Stack:</strong> PCI DSS v4.0 (Req. 6.4.3 &amp; 11.6.1) JavaScript integrity &amp; payment header tampering defense · Script Pinning &amp; Subresource Integrity (SRI) hashes · CCPA / CPRA data opt-out signal proof · Warehouse supply chain telemetry.
+              </p>
+              <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl font-mono text-xs text-amber-900">
+                <strong>Specialty Artifact:</strong> The 2-Column Split-Screen PCI DSS v4.0 Evidence Binder.
+              </div>
+              <div class="pt-2">
+                <a href="retail.html#retail-plus" class="btn-silver-chrome text-xs py-2 px-4">VIEW RETAIL PAGE &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. DEFENSE PLUS -->
+        <div class="guilloche-pane p-6 sm:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-4 hyper-photo-frame h-56 lg:h-64">
+              <img src="assets/corporate/corp_it_server_room_specialists.jpg" alt="IT Specialists Server Room" class="w-full h-full object-cover">
+            </div>
+            <div class="lg:col-span-8 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-purple-900 text-purple-200 font-mono text-[10px] font-bold uppercase">SKU: 04b · +$750</span>
+                <span class="font-mono text-xs text-slate-500 font-bold">DoD Contractors, Aerospace Suppliers &amp; DIB</span>
+              </div>
+              <h3 class="text-2xl font-black text-[#14452F] font-serif uppercase">DEFENSE PLUS (+$750)</h3>
+              <p class="text-xs sm:text-sm font-mono text-slate-700 leading-relaxed">
+                <strong>The Stack:</strong> CMMC 2.0 Level 2 (110 requirements across 14 control families) · NIST SP 800-171 / 172 CUI enclave boundary verification · DFARS 252.204-7012 72-hour cyber incident reporting threshold · CIRCIA critical infrastructure compliance.
+              </p>
+              <div class="p-3 bg-red-50 border border-red-200 rounded-xl font-mono text-xs text-red-900">
+                <strong>Specialty Artifact:</strong> CUI Enclave Boundary Verification Dossier for Prime Defense Contractors.
+              </div>
+              <div class="pt-2">
+                <a href="defense.html#defense-plus" class="btn-silver-chrome text-xs py-2 px-4">VIEW DEFENSE PAGE &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. MANUFACTURING & INDUSTRIAL OT PLUS -->
+        <div class="guilloche-pane p-6 sm:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-4 hyper-photo-frame h-56 lg:h-64">
+              <img src="assets/corporate/corp_industrial_machinery_operating.jpg" alt="Industrial Machinery" class="w-full h-full object-cover">
+            </div>
+            <div class="lg:col-span-8 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-purple-900 text-purple-200 font-mono text-[10px] font-bold uppercase">SKU: 06 · +$750</span>
+                <span class="font-mono text-xs text-slate-500 font-bold">Process Manufacturing, Chemical Facilities &amp; Utilities</span>
+              </div>
+              <h3 class="text-2xl font-black text-[#14452F] font-serif uppercase">MANUFACTURING &amp; INDUSTRIAL OT PLUS (+$750)</h3>
+              <p class="text-xs sm:text-sm font-mono text-slate-700 leading-relaxed">
+                <strong>The Stack:</strong> ISA / IEC 62443 industrial automation zones and conduits · NIST SP 800-82 Rev 3 OT/SCADA network segmentation · OSHA 1910.119 (PSM) Process Safety Management cyber hazard integration · Perimeter cloaking of Modbus, DNP3, and SMB.
+              </p>
+              <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl font-mono text-xs text-amber-900">
+                <strong>Specialty Artifact:</strong> Purdue Model OT/SCADA Zone Isolation Attestation Dossier.
+              </div>
+              <div class="pt-2">
+                <a href="manufacturing.html#manufacturing-plus" class="btn-silver-chrome text-xs py-2 px-4">VIEW MANUFACTURING PAGE &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. THE 4 PILLARS: WHITE LABEL, ACADEMY, DIRECTORY & CARRIER CLAIMS -->
+    <section class="space-y-6">
+      <div class="border-b-4 border-[#14452F] pb-3">
+        <span class="font-mono text-xs font-black text-purple-800 uppercase tracking-widest">ECOSYSTEM PILLARS</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-[#14452F] uppercase font-serif">ENTERPRISE CHANNELS &amp; OPERATOR INFRASTRUCTURE</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Pillar 1: White Label & MSP Resellers -->
+        <div class="p-6 rounded-2xl bg-[#FAF7F0] border-2 border-[#14452F] space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-[#14452F] text-white flex items-center justify-center text-xl">
+            <i class="fa-solid fa-stamp"></i>
+          </div>
+          <h3 class="text-xl font-black text-[#14452F] font-serif uppercase">WHITE LABEL FOR MSPS</h3>
+          <p class="text-xs font-mono text-slate-600 leading-relaxed">
+            Co-brand the evidence binder with your firm's logo and contact info. Deliver sealed audit packages directly to your executive clients under your MSP banner.
+          </p>
+          <div class="pt-2">
+            <a href="partners.html" class="font-mono text-xs font-black text-[#1B365D] underline">MSP Partner Onboarding &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Operator Academy -->
+        <div class="p-6 rounded-2xl bg-[#FAF7F0] border-2 border-[#1B365D] space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-[#1B365D] text-white flex items-center justify-center text-xl">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h3 class="text-xl font-black text-[#1B365D] font-serif uppercase">OPERATOR ACADEMY</h3>
+          <p class="text-xs font-mono text-slate-600 leading-relaxed">
+            Hands-on technical training for internal IT directors and MSP engineers on outside-in telemetry, underwriter checklists, and zero-point baseline sweeps.
+          </p>
+          <div class="pt-2">
+            <a href="academy.html" class="font-mono text-xs font-black text-[#14452F] underline">Enter Operator Academy &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Verified Directory -->
+        <div class="p-6 rounded-2xl bg-[#FAF7F0] border-2 border-[#14452F] space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-[#14452F] text-white flex items-center justify-center text-xl">
+            <i class="fa-solid fa-address-book"></i>
+          </div>
+          <h3 class="text-xl font-black text-[#14452F] font-serif uppercase">VERIFIED DIRECTORY</h3>
+          <p class="text-xs font-mono text-slate-600 leading-relaxed">
+            Explore the public proof registry of regional commercial businesses and interact with the Live Agriculture &amp; Commercial Supply Sample Evidence Binder.
+          </p>
+          <div class="pt-2">
+            <a href="directory.html" class="font-mono text-xs font-black text-[#1B365D] underline">Browse Directory Plaza &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ACCOUNT REGISTRATION & ENROLLMENT (Square Card) -->
+    <section class="guilloche-pane p-8 sm:p-12 shadow-2xl">
+      <div class="max-w-2xl mx-auto space-y-6">
+        <div class="text-center border-b-2 border-[#14452F] pb-4">
+          <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-14 h-14 rounded-xl object-cover border-2 border-slate-500 shadow-md mx-auto mb-2">
+          <span class="px-3 py-1 rounded bg-[#14452F] text-white font-mono text-xs font-black uppercase tracking-widest">
+            AUTHENTICATED ENROLLMENT
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-[#14452F] uppercase mt-2 font-serif">
+            OPEN AN ACCOUNT / REGISTER DOMAIN
+          </h2>
+          <p class="text-xs font-mono text-slate-600 mt-1">
+            Create your Direct Customer, MSP Wholesale, or Broker Pre-Underwriting account.
+          </p>
+        </div>
+
+        <form id="central-hub-signup-form" class="space-y-4" autocomplete="off">
+          <div>
+            <label for="hub-signup-org" class="block font-mono text-xs font-bold uppercase text-[#14452F] mb-1">
+              Organization / Firm Legal Name *
+            </label>
+            <input id="hub-signup-org" type="text" required placeholder="e.g. Meridian Fiduciary Holdings" class="treasury-input">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <h3 class="font-mono text-xs font-extrabold uppercase tracking-wider text-[#1B365D] mb-3">
-                Wholesale MSP &amp; Channel Allocations
-              </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-4 rounded bg-[#FAF7F0] border-2 border-[#1B365D]">
-                  <div class="flex justify-between items-baseline">
-                    <span class="font-serif font-black text-base text-[#1B365D]">Monthly Delta Digest</span>
-                    <span class="font-mono font-black text-xl text-[#111814]">$249<span class="text-xs font-normal">/mo</span></span>
-                  </div>
-                  <p class="text-xs text-[#4A554E] mt-1.5">
-                    Multi-tenant wholesale perimeter drift ledger with Algorithmic Cryptographic SHA-256 Seal attestation.
-                  </p>
-                </div>
+              <label for="hub-signup-domain" class="block font-mono text-xs font-bold uppercase text-[#14452F] mb-1">
+                Primary Corporate Domain *
+              </label>
+              <input id="hub-signup-domain" type="text" required placeholder="e.g. meridian-fiduciary.com" class="treasury-input">
+            </div>
 
-                <div class="p-4 rounded bg-[#FAF7F0] border border-[#C4B693]">
-                  <div class="flex justify-between items-baseline">
-                    <span class="font-serif font-black text-base text-[#14452F]">Portfolio 5 &amp; Portfolio 15</span>
-                    <span class="font-mono font-black text-sm text-[#111814]">$2,500/yr • $5,000/yr</span>
-                  </div>
-                  <p class="text-xs text-[#4A554E] mt-1.5">
-                    Wholesale annual binder tranches for 5 client domains ($2,500/yr) or 15 client domains ($5,000/yr), plus Leader Pack ($500/mo).
-                  </p>
-                </div>
-              </div>
+            <div>
+              <label for="hub-signup-email" class="block font-mono text-xs font-bold uppercase text-[#14452F] mb-1">
+                Corporate Work Email *
+              </label>
+              <input id="hub-signup-email" type="email" required placeholder="exec@meridian-fiduciary.com" class="treasury-input">
             </div>
           </div>
-        </section>
 
-        <!-- 3. ARTICLES SECTION (CLEAN TEMPLATE FOR ELLEON TO ADD ARTICLES) -->
-        <section class="guilloche-pane" id="central-hub-articles">
-          <div class="guilloche-pane-content">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#14452F] pb-3 mb-5">
-              <div>
-                <span class="font-mono text-[10px] font-extrabold uppercase tracking-widest text-[#1B365D]">
-                  DISPATCHES &amp; BRIEFINGS
-                </span>
-                <h2 class="text-xl sm:text-2xl font-black text-[#14452F] uppercase" style="font-family: var(--font-serif);">
-                  Articles &amp; Underwriting Briefs
-                </h2>
-              </div>
-              <span class="font-mono text-[10px] font-bold text-[#4A554E] uppercase">
-                Editorial Slot Ready
-              </span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="hub-signup-role" class="block font-mono text-xs font-bold uppercase text-[#14452F] mb-1">
+                Account Track *
+              </label>
+              <select id="hub-signup-role" class="treasury-input font-bold">
+                <option value="direct">Direct Customer — Core Binder ($1,000/yr)</option>
+                <option value="direct-plus">Direct Customer — Core + PLUS ($1,500 total)</option>
+                <option value="msp">MSP Wholesale — Monthly Delta Digest ($249/mo)</option>
+                <option value="broker">Cyber Insurance Broker — 8-Page NIST CSF 2.0 Proof</option>
+              </select>
             </div>
 
-            <!-- Repeatable Article Slot Template (Ready for Elleon's Articles — No Invented Copy) -->
-            <div class="space-y-4" id="articles-container">
-              <article class="p-5 rounded bg-[#FAF7F0] border border-[#C4B693]">
-                <div class="flex items-center justify-between font-mono text-[11px] text-[#4A554E] mb-1.5">
-                  <span class="font-bold text-[#14452F] uppercase">[ARTICLE SLOT 01]</span>
-                  <span>DATE: YYYY-MM-DD</span>
-                </div>
-                <h3 class="text-lg font-black text-[#111814]" style="font-family: var(--font-serif);">
-                  Article Headline Placeholder
-                </h3>
-                <p class="text-xs text-[#4A554E] mt-2 leading-relaxed">
-                  Paste article body copy here. Duplicate this <code>&lt;article&gt;</code> block inside <code>#articles-container</code> to publish additional articles on the Central Hub.
-                </p>
-              </article>
-
-              <article class="p-5 rounded bg-[#FAF7F0] border border-[#C4B693]">
-                <div class="flex items-center justify-between font-mono text-[11px] text-[#4A554E] mb-1.5">
-                  <span class="font-bold text-[#1B365D] uppercase">[ARTICLE SLOT 02]</span>
-                  <span>DATE: YYYY-MM-DD</span>
-                </div>
-                <h3 class="text-lg font-black text-[#111814]" style="font-family: var(--font-serif);">
-                  Article Headline Placeholder
-                </h3>
-                <p class="text-xs text-[#4A554E] mt-2 leading-relaxed">
-                  Paste article body copy here.
-                </p>
-              </article>
+            <div>
+              <label for="hub-signup-pass" class="block font-mono text-xs font-bold uppercase text-[#14452F] mb-1">
+                Security Passphrase *
+              </label>
+              <input id="hub-signup-pass" type="password" required placeholder="••••••••••••" class="treasury-input">
             </div>
           </div>
-        </section>
 
-        <!-- 4. ACCOUNT ENROLLMENT & REGISTRATION PANE (FULL WIDTH SINGLE COLUMN) -->
-        <section class="guilloche-pane border-2 border-[#14452F] shadow-xl">
-          <div class="guilloche-pane-content max-w-2xl mx-auto py-2">
-            <div class="text-center border-b-2 border-[#14452F] pb-4 mb-5">
-              <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-14 h-14 rounded-xl object-cover border-2 border-slate-500 shadow-md mx-auto mb-2.5">
-              <span class="px-2.5 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-extrabold uppercase tracking-widest">
-                ACCOUNT ENROLLMENT
-              </span>
-              <h2 class="text-xl sm:text-2xl font-black text-[#14452F] uppercase mt-2" style="font-family: var(--font-serif);">
-                Sign Up / Open Account
-              </h2>
-              <p class="text-xs text-[#4A554E] mt-1 font-medium">
-                Create your Direct Customer, MSP Wholesale, or Broker Pre-Underwriting account.
-              </p>
-            </div>
+          <div id="hub-signup-feedback" class="hidden p-3 rounded bg-emerald-100 border border-emerald-500 font-mono text-xs text-emerald-900 font-bold"></div>
 
-            <form id="central-hub-signup-form" class="space-y-4" autocomplete="off">
-              <div>
-                <label for="hub-signup-org" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                  Organization / Firm Name *
-                </label>
-                <input
-                  id="hub-signup-org"
-                  type="text"
-                  required
-                  placeholder="e.g. Meridian Fiduciary Holdings"
-                  class="treasury-input"
-                />
-              </div>
+          <button type="submit" class="btn-racing-hazard w-full text-xs sm:text-sm py-4">
+            <i class="fa-solid fa-user-check text-amber-300"></i> CREATE ACCOUNT &amp; REGISTER DOMAIN
+          </button>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label for="hub-signup-domain" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                    Primary Domain *
-                  </label>
-                  <input
-                    id="hub-signup-domain"
-                    type="text"
-                    required
-                    placeholder="e.g. meridian-fiduciary.com"
-                    class="treasury-input"
-                  />
-                </div>
-
-                <div>
-                  <label for="hub-signup-email" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                    Work Email *
-                  </label>
-                  <input
-                    id="hub-signup-email"
-                    type="email"
-                    required
-                    placeholder="exec@meridian-fiduciary.com"
-                    class="treasury-input"
-                  />
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label for="hub-signup-role" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                    Account Track *
-                  </label>
-                  <select id="hub-signup-role" class="treasury-input">
-                    <option value="direct">Direct Customer — Core Binder ($1,000/yr)</option>
-                    <option value="direct-preview">Direct Customer — Free Preview ($0)</option>
-                    <option value="direct-report">Direct Customer — Evidence Report ($500)</option>
-                    <option value="msp">MSP Wholesale — Monthly Delta Digest ($249/mo)</option>
-                    <option value="broker">Cyber Insurance Broker — 8-Page NIST CSF 2.0 Proof</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label for="hub-signup-pass" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                    Create Passphrase *
-                  </label>
-                  <input
-                    id="hub-signup-pass"
-                    type="password"
-                    required
-                    placeholder="••••••••••••"
-                    class="treasury-input"
-                  />
-                </div>
-              </div>
-
-              <div id="hub-signup-feedback" class="hidden p-3 rounded bg-[#14452F]/15 border border-[#14452F] font-mono text-xs text-[#0B291B] font-bold"></div>
-
-              <button type="submit" class="med-coin med-gold w-full py-3.5 text-sm cursor-pointer">
-                <i class="fa-solid fa-user-check mr-1.5"></i> Create Account &amp; Continue
-              </button>
-
-              <div class="pt-3 border-t border-[#C4B693] text-center">
-                <button
-                  type="button"
-                  onclick="if(window.triBotEngine) window.triBotEngine.openModal();"
-                  class="font-mono text-xs font-extrabold text-[#1B365D] underline hover:text-[#14452F] cursor-pointer"
-                >
-                  Already have an account? Sign In &rarr;
-                </button>
-              </div>
-            </form>
-
-            <div class="mt-5 pt-3 border-t border-[#C4B693] font-mono text-[10px] text-[#4A554E] leading-relaxed flex flex-wrap justify-between">
-              <div><strong>Telemetry Standard:</strong> Agentless Perimeter Telemetry &amp; Outside-In Exposure Audit.</div>
-              <div><strong>Turnaround:</strong> Standard up to 5 business days.</div>
-            </div>
+          <div class="pt-3 border-t border-[#C4B693] text-center">
+            <button type="button" onclick="if(window.triBotEngine) window.triBotEngine.openModal();" class="font-mono text-xs font-black text-[#1B365D] underline hover:text-[#14452F] cursor-pointer">
+              Already have an account? Sign In &rarr;
+            </button>
           </div>
-        </section>
+        </form>
 
-    </div>
+        <div class="mt-4 pt-3 border-t border-[#C4B693] font-mono text-[10px] text-slate-500 flex flex-wrap justify-between">
+          <div><strong>Standard:</strong> Agentless Perimeter Telemetry · NIST CSF 2.0.</div>
+          <div><strong>Turnaround:</strong> Up to 5 business days.</div>
+        </div>
+      </div>
+    </section>
 
   </main>
 
   <!-- UNIFORM FOOTER -->
   <footer class="footer-legal max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-400/40 text-center text-xs font-mono text-slate-600">
-    <p>© 2026 Leon R. Darden. All rights reserved.</p>
+    <p>© 2026 Leon R. Darden • BURN-1 Systems (burn-1.com). All rights reserved.</p>
   </footer>
 
   <script src="b2b-guilloche.js"></script>
@@ -583,6 +732,7 @@
   <script src="js/universal-payment-controller.js"></script>
   <script src="js/universal-bot-controller.js"></script>
   <script src="js/burn1-audio-fx.js"></script>
+
   <script>
     document.getElementById('central-hub-signup-form').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -595,11 +745,7 @@
       const fb = document.getElementById('hub-signup-feedback');
       fb.classList.remove('hidden');
       fb.textContent =
-        'Account initialized for ' +
-        org +
-        ' (' +
-        domain +
-        '). Redirecting to your selected portal...';
+        'Account registered for ' + org + ' (' + domain + '). Redirecting to your assigned vault...';
 
       setTimeout(function () {
         if (roleVal === 'msp') {
@@ -609,9 +755,8 @@
         } else {
           window.location.href = 'intake.html';
         }
-      }, 900);
+      }, 800);
     });
   </script>
 </body>
 </html>
-
