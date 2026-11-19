@@ -39,9 +39,10 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--scroll-tan);
   color: var(--ink-charcoal);
   font-family: var(--font-sans);
@@ -68,69 +69,55 @@ body::before {
 }
 
 /* ============================================================================
- * 1. FIXED 3-COLUMN FINANCIAL GUI GRID SHELL
- * grid-cols-[200px_1fr_250px]
+ * 1. UNIFIED SINGLE-COLUMN CLEAN B2B TREASURY LAYOUT (No Side Columns)
+ * Clean, centered, full-width responsive architecture (max-w-5xl mx-auto)
  * ============================================================================ */
 .b2b-shell {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 200px 1fr 250px;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  display: block !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
 }
 
-/* LEFT COLUMN: Persistent Navigation Vault Sidebar (200px) */
+/* SIDE COLUMNS: Retired / Hidden per Single-Column Architecture */
 .col-left-nav {
-  background: linear-gradient(180deg, #EDE5CE 0%, #E2D6B8 100%);
-  border-right: 2px solid var(--money-green);
-  box-shadow: inset -4px 0 12px rgba(20, 69, 47, 0.08), 4px 0 16px rgba(17, 24, 20, 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-  overflow-y: auto;
-  position: relative;
+  display: none !important;
 }
 
-/* CENTER COLUMN: Main Scrollable Treasury Content Area (1fr) */
+.col-right-status {
+  display: none !important;
+}
+
+/* CENTER COLUMN: Main Clean Centered Content Area (max-w-5xl mx-auto) */
 .col-center-main {
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 1.5rem 2rem 3rem 2rem;
+  width: 100% !important;
+  max-width: 64rem !important; /* max-w-5xl: 1024px */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  padding: 2rem 1.5rem 4rem 1.5rem !important;
   position: relative;
   scroll-behavior: smooth;
 }
 
 /* Custom Scrollbar for Daylight Treasury Look */
-.col-center-main::-webkit-scrollbar,
-.col-right-status::-webkit-scrollbar {
+.col-center-main::-webkit-scrollbar {
   width: 8px;
 }
-.col-center-main::-webkit-scrollbar-track,
-.col-right-status::-webkit-scrollbar-track {
+.col-center-main::-webkit-scrollbar-track {
   background: var(--scroll-tan-dark);
   border-left: 1px solid var(--scroll-tan-border);
 }
-.col-center-main::-webkit-scrollbar-thumb,
-.col-right-status::-webkit-scrollbar-thumb {
+.col-center-main::-webkit-scrollbar-thumb {
   background: var(--money-green);
   border-radius: 2px;
-}
-
-/* RIGHT COLUMN: Persistent Auth & Live Telemetry Feed (250px) */
-.col-right-status {
-  background: linear-gradient(180deg, #EDE5CE 0%, #E2D6B8 100%);
-  border-left: 2px solid var(--money-blue);
-  box-shadow: inset 4px 0 12px rgba(27, 54, 93, 0.08), -4px 0 16px rgba(17, 24, 20, 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-  overflow-y: auto;
-  position: relative;
 }
 
 /* ============================================================================

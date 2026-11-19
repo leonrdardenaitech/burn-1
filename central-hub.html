@@ -238,14 +238,9 @@
        LEFT COLUMN (MAIN, WIDE): Portals + What We Offer + Articles
        RIGHT COLUMN (SLIM): Prominent, Bigger Sign-Up Pane
        ======================================================================== -->
-  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 relative z-10">
+  <main class="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 relative z-10">
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-      <!-- ====================================================================
-           LEFT COLUMN (MAIN, WIDE — 8 COLS ON DESKTOP)
-           ==================================================================== -->
-      <div class="lg:col-span-8 space-y-8">
+    <div class="w-full space-y-8">
 
         <!-- 1. PORTAL DIRECTORY & BIND DOCTRINE BANNER -->
         <section class="guilloche-pane">
@@ -464,15 +459,9 @@
           </div>
         </section>
 
-      </div>
-
-      <!-- ====================================================================
-           RIGHT COLUMN (SLIM — 4 COLS ON DESKTOP):
-           BIGGER, PROMINENT SIGN-UP PANE
-           ==================================================================== -->
-      <aside class="lg:col-span-4 lg:sticky lg:top-28">
-        <div class="guilloche-pane border-2 border-[#14452F] shadow-xl">
-          <div class="guilloche-pane-content">
+        <!-- 4. ACCOUNT ENROLLMENT & REGISTRATION PANE (FULL WIDTH SINGLE COLUMN) -->
+        <section class="guilloche-pane border-2 border-[#14452F] shadow-xl">
+          <div class="guilloche-pane-content max-w-2xl mx-auto py-2">
             <div class="text-center border-b-2 border-[#14452F] pb-4 mb-5">
               <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-14 h-14 rounded-xl object-cover border-2 border-slate-500 shadow-md mx-auto mb-2.5">
               <span class="px-2.5 py-0.5 rounded bg-[#14452F] text-[#FAF7F0] font-mono text-[10px] font-extrabold uppercase tracking-widest">
@@ -500,82 +489,85 @@
                 />
               </div>
 
-              <div>
-                <label for="hub-signup-domain" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                  Primary Domain *
-                </label>
-                <input
-                  id="hub-signup-domain"
-                  type="text"
-                  required
-                  placeholder="e.g. meridian-fiduciary.com"
-                  class="treasury-input"
-                />
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="hub-signup-domain" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
+                    Primary Domain *
+                  </label>
+                  <input
+                    id="hub-signup-domain"
+                    type="text"
+                    required
+                    placeholder="e.g. meridian-fiduciary.com"
+                    class="treasury-input"
+                  />
+                </div>
+
+                <div>
+                  <label for="hub-signup-email" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
+                    Work Email *
+                  </label>
+                  <input
+                    id="hub-signup-email"
+                    type="email"
+                    required
+                    placeholder="exec@meridian-fiduciary.com"
+                    class="treasury-input"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label for="hub-signup-email" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                  Work Email *
-                </label>
-                <input
-                  id="hub-signup-email"
-                  type="email"
-                  required
-                  placeholder="exec@meridian-fiduciary.com"
-                  class="treasury-input"
-                />
-              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="hub-signup-role" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
+                    Account Track *
+                  </label>
+                  <select id="hub-signup-role" class="treasury-input">
+                    <option value="direct">Direct Customer — Core Binder ($1,000/yr)</option>
+                    <option value="direct-preview">Direct Customer — Free Preview ($0)</option>
+                    <option value="direct-report">Direct Customer — Evidence Report ($500)</option>
+                    <option value="msp">MSP Wholesale — Monthly Delta Digest ($249/mo)</option>
+                    <option value="broker">Cyber Insurance Broker — 8-Page NIST CSF 2.0 Proof</option>
+                  </select>
+                </div>
 
-              <div>
-                <label for="hub-signup-role" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                  Account Track *
-                </label>
-                <select id="hub-signup-role" class="treasury-input">
-                  <option value="direct">Direct Customer — Core Binder ($1,000/yr)</option>
-                  <option value="direct-preview">Direct Customer — Free Preview ($0)</option>
-                  <option value="direct-report">Direct Customer — Evidence Report ($500)</option>
-                  <option value="msp">MSP Wholesale — Monthly Delta Digest ($249/mo)</option>
-                  <option value="broker">Cyber Insurance Broker — 8-Page NIST CSF 2.0 Proof</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="hub-signup-pass" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
-                  Create Passphrase *
-                </label>
-                <input
-                  id="hub-signup-pass"
-                  type="password"
-                  required
-                  placeholder="••••••••••••"
-                  class="treasury-input"
-                />
+                <div>
+                  <label for="hub-signup-pass" class="block font-mono text-[11px] font-extrabold uppercase text-[#14452F] mb-1">
+                    Create Passphrase *
+                  </label>
+                  <input
+                    id="hub-signup-pass"
+                    type="password"
+                    required
+                    placeholder="••••••••••••"
+                    class="treasury-input"
+                  />
+                </div>
               </div>
 
               <div id="hub-signup-feedback" class="hidden p-3 rounded bg-[#14452F]/15 border border-[#14452F] font-mono text-xs text-[#0B291B] font-bold"></div>
 
-              <button type="submit" class="med-coin med-gold w-full py-3.5 text-sm">
-                <i class="fa-solid fa-user-check"></i> Create Account &amp; Continue
+              <button type="submit" class="med-coin med-gold w-full py-3.5 text-sm cursor-pointer">
+                <i class="fa-solid fa-user-check mr-1.5"></i> Create Account &amp; Continue
               </button>
 
               <div class="pt-3 border-t border-[#C4B693] text-center">
                 <button
                   type="button"
-                  onclick="if(window.Burn1Cosmo && window.Burn1Cosmo.openAuthModal) window.Burn1Cosmo.openAuthModal();"
-                  class="font-mono text-xs font-extrabold text-[#1B365D] underline hover:text-[#14452F]"
+                  onclick="if(window.triBotEngine) window.triBotEngine.openModal();"
+                  class="font-mono text-xs font-extrabold text-[#1B365D] underline hover:text-[#14452F] cursor-pointer"
                 >
-                  Already have an account? Sign In →
+                  Already have an account? Sign In &rarr;
                 </button>
               </div>
             </form>
 
-            <div class="mt-5 pt-3 border-t border-[#C4B693] font-mono text-[10px] text-[#4A554E] leading-relaxed">
+            <div class="mt-5 pt-3 border-t border-[#C4B693] font-mono text-[10px] text-[#4A554E] leading-relaxed flex flex-wrap justify-between">
               <div><strong>Telemetry Standard:</strong> Agentless Perimeter Telemetry &amp; Outside-In Exposure Audit.</div>
-              <div class="mt-1"><strong>Turnaround:</strong> Delivered within standard business turnaround up to 5 business days.</div>
+              <div><strong>Turnaround:</strong> Standard up to 5 business days.</div>
             </div>
           </div>
-        </div>
-      </aside>
+        </section>
 
     </div>
 
@@ -587,7 +579,10 @@
   </footer>
 
   <script src="b2b-guilloche.js"></script>
-  <script src="cosmo-widget.js"></script>
+  <!-- Single Bot Rule: Universal Clock Dial Trigger with Hardware Login, Dynamic Payment & Systems Guru -->
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
   <script>
     document.getElementById('central-hub-signup-form').addEventListener('submit', function (e) {
       e.preventDefault();
