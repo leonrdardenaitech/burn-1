@@ -390,13 +390,13 @@
 
   <header class="grey-unibar sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
-      <div class="flex items-center gap-3">
+      <a href="index.html" class="flex items-center gap-3 hover:opacity-95 transition-opacity">
         <img src="burn1logopurplesilver.jpg" alt="Burn-1 Logo" class="w-12 h-12 rounded-xl object-cover border-2 border-slate-500 shadow-md">
         <div>
           <div class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none uppercase">Cyber Readiness Clinic</div>
           <div class="text-[11px] font-mono text-slate-700 font-semibold mt-0.5 uppercase tracking-widest">Healthcare Module • <span class="text-emerald-700 font-bold">HIPAA Shield</span></div>
         </div>
-      </div>
+      </a>
       <div class="flex flex-wrap items-center gap-2">
         <a href="academy.html" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-slate-700 shadow transition-colors">Operator Academy</a>
         <a href="fast-lane.html" class="px-4 py-2 rounded-lg bg-[#D92B8A] hover:bg-[#bf2277] text-white font-black text-xs uppercase tracking-widest shadow transition-colors">Fast Lane →</a>
@@ -407,11 +407,12 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center gap-1.5 overflow-x-auto">
         <a href="index.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Home</a>
         <a href="central-hub.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Central Hub</a>
+        <a href="directory.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Directory</a>
         <a href="partners.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Partners</a>
         <a href="healthcare.html" class="nav-pill-active px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Healthcare</a>
         <a href="academy.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Academy</a>
         <a href="cinematic-onboarding.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Guided Intake</a>
-        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0">Fast Lane</a>
+        <a href="fast-lane.html" class="nav-pill-idle px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 opacity-80" title="Convenience Intake Dropzone">Fast Lane</a>
       </div>
     </div>
   </header>
@@ -1027,6 +1028,8 @@
       }
     })();
   </script>
-  <script src="cosmo-widget.js"></script>
+  <script src="js/universal-payment-controller.js"></script>
+  <script src="js/universal-bot-controller.js"></script>
+  <script src="js/burn1-audio-fx.js"></script>
 </body>
 </html>
