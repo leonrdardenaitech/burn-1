@@ -32,18 +32,22 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .menu-card {
-      background: radial-gradient(120% 120% at 50% 0%, #162016 0%, #0d120d 100%);
-      border: 1px solid #1f2e1f;
+
+    /* Glass Card Acrylic Styling with Uniform Typography */
+    .glass-card-uniform {
+      background: rgba(18, 25, 18, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(118, 186, 27, 0.28);
+      border-radius: 20px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
       transition: all 0.25s ease;
     }
-    .menu-card:hover {
-      border-color: #76BA1B;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(118, 186, 27, 0.15);
-    }
-    .modal-backdrop {
-      backdrop-filter: blur(8px);
+    .glass-card-uniform:hover {
+      border-color: rgba(118, 186, 27, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(118, 186, 27, 0.18);
     }
 
     /* Interactive Image Hotspot Overlay */
@@ -65,10 +69,9 @@
     }
     .hotspot:hover {
       background: rgba(255, 255, 255, 0.15);
-      outline: 2px solid rgba(118, 186, 27, 0.8);
+      outline: 2px solid rgba(118, 186, 27, 0.85);
     }
 
-    /* Hotspot coordinates mapped from user 1920x1080 banner */
     .hs-home { top: 11%; left: 32.5%; width: 5.5%; height: 5%; }
     .hs-menu { top: 11%; left: 38.5%; width: 8.5%; height: 5%; }
     .hs-story { top: 11%; left: 47.5%; width: 8.5%; height: 5%; }
@@ -78,11 +81,17 @@
     
     .hs-order-mid { top: 73%; left: 13%; width: 14%; height: 6.5%; }
     .hs-view-menu { top: 73%; left: 28%; width: 13%; height: 6.5%; }
+
+    /* Ultra-Vibrant High Contrast Hardware Filter for Menu Poster */
+    .menu-vibrant-display {
+      filter: saturate(1.28) contrast(1.14) brightness(1.05) drop-shadow(0 0 50px rgba(118, 186, 27, 0.35));
+      transition: filter 0.3s ease;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
 
-  <!-- TOP ACTIVE UNIBAR (Matches the Nav Bar in the user's graphic with live clickable links) -->
+  <!-- TOP ACTIVE UNIBAR (With Instagram, TikTok & DoorDash) -->
   <header class="bg-black/95 border-b border-zinc-800 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
       
@@ -109,8 +118,14 @@
         </nav>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="flex items-center gap-3">
+      <!-- Action & Social CTAs -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://www.instagram.com/wowhealthspot/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 hover:opacity-90 flex items-center justify-center text-white text-sm transition-all shadow" title="Instagram @wowhealthspot">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@wowhealthspot" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 flex items-center justify-center text-white text-sm transition-all shadow" title="TikTok @wowhealthspot">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
         <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5E00] to-[#E05200] hover:from-[#e05200] hover:to-[#c84500] text-white text-xs font-black uppercase tracking-wider shadow-lg transition-all">
           <i class="fa-solid fa-bag-shopping mr-1.5"></i> Order Now
         </a>
@@ -120,13 +135,12 @@
   </header>
 
   <!-- INTERACTIVE CINEMATIC HERO (User Design with Active Clickable Hotspots) -->
-  <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-10">
+  <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-6">
     
     <div class="hero-graphic-wrap bg-black">
-      <!-- Full graphic uploaded by user -->
       <img src="assets/wowhealthspot/wow_home_hero.jpg" alt="All Roads Lead to Wellness on Wellborn - Hero" class="w-full h-auto block select-none">
 
-      <!-- Invisible interactive hitboxes mapped to the buttons in the image -->
+      <!-- Active Hitboxes -->
       <a href="wowhealthspot.html" class="hotspot hs-home" title="Home"></a>
       <a href="#menu" class="hotspot hs-menu" title="Our Menu"></a>
       <a href="wow-story.html" class="hotspot hs-story" title="Our Story"></a>
@@ -138,192 +152,161 @@
       <a href="#menu" class="hotspot hs-view-menu" title="View Menu"></a>
     </div>
 
-    <!-- Sub-bar quick bar under the graphic -->
-    <div class="mt-4 flex flex-wrap justify-between items-center gap-3 text-xs font-mono text-zinc-400 px-2">
-      <span class="flex items-center gap-1.5 text-lime-400 font-bold">
-        <i class="fa-solid fa-leaf"></i> 100% Cold-Pressed • Made Fresh to Order • Zero Artificial Syrups
-      </span>
-      <div class="flex items-center gap-4">
-        <a href="wow-community.html" class="text-orange-400 hover:underline font-bold">
-          <i class="fa-solid fa-guitar mr-1"></i> Live Music &amp; Open Mic Schedule →
+    <!-- Quick Icon Anchor Bar right under Hero -->
+    <div class="mt-4 flex flex-wrap justify-between items-center gap-4 px-2 text-xs font-mono">
+      <div class="flex items-center gap-3 text-zinc-300">
+        <a href="https://www.instagram.com/wowhealthspot/" target="_blank" class="flex items-center gap-1.5 text-rose-400 hover:text-rose-300 font-bold transition-colors">
+          <i class="fa-brands fa-instagram text-sm"></i> @wowhealthspot
         </a>
-        <a href="wow-story.html" class="text-zinc-300 hover:text-white underline">
-          Our Lighthouse Story →
+        <span class="text-zinc-600">•</span>
+        <a href="https://www.tiktok.com/@wowhealthspot" target="_blank" class="flex items-center gap-1.5 text-zinc-300 hover:text-white font-bold transition-colors">
+          <i class="fa-brands fa-tiktok text-sm"></i> @wowhealthspot
         </a>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- STORE DETAILS & HIGHLIGHTS -->
-  <section class="bg-zinc-950 py-8 border-y border-zinc-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        
-        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
-          <span class="text-[10px] font-mono text-zinc-400 uppercase font-bold block">📍 Physical Location</span>
-          <h4 class="text-sm font-black text-white mt-1">1544 Wellborn Rd, Ste 10</h4>
-          <p class="text-xs text-zinc-400">Lithonia, GA 30058</p>
-        </div>
-
-        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
-          <span class="text-[10px] font-mono text-zinc-400 uppercase font-bold block">⏰ Store Hours</span>
-          <h4 class="text-sm font-black text-emerald-400 mt-1">Mon–Tue 12–5pm | Wed–Sat 12–6pm</h4>
-          <p class="text-xs text-zinc-500">Sunday Closed</p>
-        </div>
-
-        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
-          <span class="text-[10px] font-mono text-zinc-400 uppercase font-bold block">📞 Call &amp; Pick Up</span>
-          <h4 class="text-sm font-black text-orange-400 mt-1"><a href="tel:4709070740">(470) 907-0740</a></h4>
-          <p class="text-xs text-zinc-400">Walk-ins &amp; Call Ahead</p>
-        </div>
-
-        <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
-          <span class="text-[10px] font-mono text-zinc-400 uppercase font-bold block">🛵 Delivery Partner</span>
-          <h4 class="text-sm font-black text-rose-400 mt-1">DoorDash Verified</h4>
-          <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" class="text-xs text-rose-300 underline font-mono">Order Online Delivery →</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SIGNATURE LONG SCROLLING MENU (Dual Presentation: HD Visual Poster + Interactive Cards) -->
-  <main id="menu" class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-14 flex-1">
-    
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-zinc-800">
-      <div>
-        <span class="text-xs font-mono font-bold text-lime-400 uppercase tracking-widest">// Farm to Cup Nutrition</span>
-        <h2 class="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight mt-1">
-          Signature Store Menu
-        </h2>
-        <p class="text-sm text-zinc-400 mt-1">
-          Prepared fresh daily. Toggle between the high-definition vertical board and interactive category cards.
-        </p>
+        <span class="text-zinc-600">•</span>
+        <a href="wow-community.html" class="text-orange-400 hover:underline font-bold flex items-center gap-1">
+          <i class="fa-solid fa-guitar text-xs"></i> Live Patio &amp; Open Mic
+        </a>
       </div>
 
       <div class="flex items-center gap-2">
-        <button onclick="showMenuMode('board')" id="btn-mode-board" class="px-4 py-2 rounded-xl text-xs font-bold bg-lime-500 text-black border border-lime-400 transition-all">
-          <i class="fa-solid fa-image mr-1"></i> Full Visual Menu Poster
-        </button>
-        <button onclick="showMenuMode('cards')" id="btn-mode-cards" class="px-4 py-2 rounded-xl text-xs font-bold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-zinc-700 transition-all">
-          <i class="fa-solid fa-list mr-1"></i> Interactive Item Cards
-        </button>
-        <a href="wow-menu-board.html" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white transition-all">
-          <i class="fa-solid fa-tv mr-1"></i> Pure CSS TV Canvas ↗
+        <a href="https://posh.vip/e/the-wow-open-mic" target="_blank" class="px-3 py-1 rounded-full bg-orange-950/80 border border-orange-500/40 text-[11px] text-orange-300 font-bold hover:bg-orange-900 transition-all">
+          🎟 Open Mic Tickets on Posh VIP →
         </a>
       </div>
     </div>
 
-    <!-- PRESENTATION MODE A: LONG SCROLLING CLEAN MENU BOARD (User uploaded HD vertical board) -->
-    <div id="view-menu-board" class="flex flex-col items-center">
-      <div class="relative max-w-4xl w-full rounded-3xl overflow-hidden border-2 border-lime-500/40 shadow-[0_0_60px_rgba(118,186,27,0.2)] bg-black">
-        <img src="assets/wowhealthspot/wow_menu_board_vertical_clean.jpg" alt="WOW Health Spot Full Menu Board" class="w-full h-auto object-contain">
+  </section>
+
+  <!-- UNIFORM GLASSY STORE CARDS UNDER THE HERO -->
+  <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      
+      <!-- Card 1: Address & Location -->
+      <div class="glass-card-uniform flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-bold">Physical Location</span>
+            <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
+          </div>
+          <h4 class="text-base font-black text-white leading-tight">1544 Wellborn Rd</h4>
+          <p class="text-xs text-zinc-300 font-medium mt-0.5">Suite 10 • Lithonia, GA 30058</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-zinc-800/80">
+          <a href="https://maps.google.com/?q=1544+Wellborn+Rd+Lithonia+GA+30058" target="_blank" class="text-xs font-mono font-bold text-lime-400 hover:underline flex items-center gap-1.5">
+            Get Directions <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
       </div>
-      <div class="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-zinc-400">
-        <span>Click the image or open full screen for presentation mode</span>
+
+      <!-- Card 2: Operating Hours -->
+      <div class="glass-card-uniform flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-bold">Store Hours</span>
+            <i class="fa-solid fa-clock text-emerald-400 text-sm"></i>
+          </div>
+          <h4 class="text-base font-black text-emerald-400 leading-tight">Mon–Tue 12–5pm</h4>
+          <p class="text-xs text-emerald-300 font-medium mt-0.5">Wed–Sat 12–6pm (Sun Closed)</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-zinc-800/80">
+          <span class="text-xs font-mono text-zinc-400">Fresh Pressed Daily</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Direct Phone Call -->
+      <div class="glass-card-uniform flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-bold">Call Ahead &amp; Orders</span>
+            <i class="fa-solid fa-phone text-orange-400 text-sm"></i>
+          </div>
+          <h4 class="text-base font-black text-orange-400 leading-tight"><a href="tel:4709070740">(470) 907-0740</a></h4>
+          <p class="text-xs text-zinc-300 font-medium mt-0.5">Pickup &amp; Walk-ins Welcome</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-zinc-800/80">
+          <a href="tel:4709070740" class="text-xs font-mono font-bold text-orange-400 hover:underline flex items-center gap-1.5">
+            One-Touch Call <i class="fa-solid fa-phone text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4: DoorDash Delivery -->
+      <div class="glass-card-uniform flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 font-bold">Online Delivery</span>
+            <i class="fa-solid fa-bag-shopping text-rose-500 text-sm"></i>
+          </div>
+          <h4 class="text-base font-black text-white leading-tight">DoorDash Delivery</h4>
+          <p class="text-xs text-zinc-300 font-medium mt-0.5">Direct to Office, Home, or Gym</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-zinc-800/80">
+          <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" class="text-xs font-mono font-bold text-rose-400 hover:underline flex items-center gap-1.5">
+            Order DoorDash <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NUTRITIONAL PLATTER FEATURE BANNER (Dish Graphic Overlay) -->
+  <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    <div class="relative rounded-3xl overflow-hidden border-2 border-lime-500/30 bg-black shadow-2xl">
+      <img src="assets/wowhealthspot/wow_platter_dish_bg.jpg" alt="WOW Pure Fresh Ingredients and Acai Platter" class="w-full h-auto min-h-[360px] object-cover opacity-85">
+      
+      <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent flex flex-col justify-center p-6 sm:p-12 max-w-xl">
+        <span class="text-xs font-mono font-bold text-lime-400 uppercase tracking-widest mb-2">// 100% Raw Ingredients</span>
+        <h3 class="text-2xl sm:text-4xl font-black uppercase text-white leading-tight">
+          CRAFTED FROM REAL FRUIT. <br><span class="wow-gradient-text">ZERO COMPROMISES.</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-zinc-200 mt-2 leading-relaxed">
+          From wild organic açai purée and antioxidant blueberries to raw Peruvian ginger roots and green Caribbean coconuts. Taste the difference of real living nutrients.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#menu" class="px-5 py-2.5 rounded-xl bg-lime-500 hover:bg-lime-400 text-black font-black text-xs uppercase tracking-wider shadow transition-all">
+            See Full Menu Board ↓
+          </a>
+          <a href="wow-story.html" class="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-xs uppercase tracking-wider border border-zinc-700 transition-all">
+            Read Our Story →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE FULL-WIDTH VIBRANT MENU SECTION -->
+  <main id="menu" class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 flex-1">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-zinc-800">
+      <div>
+        <span class="text-xs font-mono font-bold text-lime-400 uppercase tracking-widest">// In-Store Display</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight mt-1">
+          Signature Store Menu Board
+        </h2>
+        <p class="text-sm text-zinc-400 mt-1">
+          100% Cold-Pressed Juices, Fresh Fruit Smoothies, Loaded Açai Bowls, and Raw Ginger Shots.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="wow-menu-board.html" target="_blank" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white transition-all shadow">
+          <i class="fa-solid fa-tv mr-1.5"></i> Open Full Screen Pure CSS TV Canvas ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- HIGH-CONTRAST VIBRANT FULL-FIT MENU POSTER -->
+    <div class="flex flex-col items-center">
+      <div class="relative w-full rounded-3xl overflow-hidden border-2 border-lime-500/50 shadow-[0_0_60px_rgba(118,186,27,0.3)] bg-black">
+        <img src="assets/wowhealthspot/wow_menu_board_vertical_clean.jpg" alt="WOW Health Spot Full Menu Board" class="w-full h-auto object-contain menu-vibrant-display">
+      </div>
+      <div class="mt-4 flex flex-wrap items-center justify-between w-full px-2 text-xs font-mono text-zinc-400">
+        <span>✨ Enhanced with saturated high-contrast digital vibrancy</span>
         <a href="assets/wowhealthspot/wow_menu_board_vertical_clean.jpg" target="_blank" class="text-lime-400 font-bold underline">
           Open Raw Full-Resolution Image ↗
         </a>
       </div>
-    </div>
-
-    <!-- PRESENTATION MODE B: INTERACTIVE ITEM CARDS (Hidden by default, toggleable) -->
-    <div id="view-menu-cards" class="hidden space-y-12">
-      
-      <!-- Category 1: Juices -->
-      <div>
-        <div class="flex items-center justify-between mb-6 pb-2 border-b border-lime-500/20">
-          <div class="flex items-center gap-3">
-            <span class="w-3 h-8 bg-lime-400 rounded-sm"></span>
-            <div>
-              <h3 class="text-xl font-black text-white uppercase tracking-tight">Fresh Cold-Pressed Juices</h3>
-              <span class="text-xs font-mono text-zinc-400">100% Raw Juice • Never Heated</span>
-            </div>
-          </div>
-          <span class="text-xs font-mono font-bold text-lime-400 bg-lime-950/80 px-2.5 py-1 rounded border border-lime-500/30">
-            16 oz: $9.99 | 24 oz: $12.99
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Watermelon Breeze</h4>
-            <p class="text-xs text-zinc-300 mt-1">Orange, Yellow &amp; Red Fresh Watermelon Juice.</p>
-            <span class="text-xs font-mono font-bold text-rose-400 mt-3 block">$9.99 / $12.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Tropical Energy</h4>
-            <p class="text-xs text-zinc-300 mt-1">Mango, Orange, Pineapple, Apple, Lemon.</p>
-            <span class="text-xs font-mono font-bold text-amber-400 mt-3 block">$9.99 / $12.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Root Radiance</h4>
-            <p class="text-xs text-zinc-300 mt-1">Fresh Beet, Orange, Pineapple, Apple, Lemon.</p>
-            <span class="text-xs font-mono font-bold text-purple-400 mt-3 block">$9.99 / $12.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Green Glow</h4>
-            <p class="text-xs text-zinc-300 mt-1">Kale, Celery, Cucumber, Pineapple, Apple, Lemon.</p>
-            <span class="text-xs font-mono font-bold text-emerald-400 mt-3 block">$9.99 / $12.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Liquid Gold</h4>
-            <p class="text-xs text-zinc-300 mt-1">Carrot, Turmeric, Pineapple, Apple, Lemon.</p>
-            <span class="text-xs font-mono font-bold text-yellow-400 mt-3 block">$9.99 / $12.99</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category 2: Smoothies -->
-      <div>
-        <div class="flex items-center justify-between mb-6 pb-2 border-b border-orange-500/20">
-          <div class="flex items-center gap-3">
-            <span class="w-3 h-8 bg-orange-500 rounded-sm"></span>
-            <div>
-              <h3 class="text-xl font-black text-white uppercase tracking-tight">Fresh Fruit Smoothies</h3>
-              <span class="text-xs font-mono text-zinc-400">Blended to Order • Plant Milks &amp; Real Fruit</span>
-            </div>
-          </div>
-          <span class="text-xs font-mono font-bold text-orange-400 bg-orange-950/80 px-2.5 py-1 rounded border border-orange-500/30">
-            16 oz: $8.99 | 24 oz: $11.99
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Berry Blast</h4>
-            <p class="text-xs text-zinc-300 mt-1">Blueberry, Raspberry, Strawberry, Banana.</p>
-            <span class="text-xs font-mono font-bold text-purple-400 mt-3 block">$8.99 / $11.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Strawberry Banana Bliss</h4>
-            <p class="text-xs text-zinc-300 mt-1">Fresh Strawberries, Banana, Almond Milk.</p>
-            <span class="text-xs font-mono font-bold text-pink-400 mt-3 block">$8.99 / $11.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Green Goddess</h4>
-            <p class="text-xs text-zinc-300 mt-1">Spinach, Pineapple, Avocado, Banana.</p>
-            <span class="text-xs font-mono font-bold text-lime-400 mt-3 block">$8.99 / $11.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Paradise Vibes</h4>
-            <p class="text-xs text-zinc-300 mt-1">Mango, Pineapple, Banana, Lemon, Coconut Milk.</p>
-            <span class="text-xs font-mono font-bold text-yellow-300 mt-3 block">$8.99 / $11.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5">
-            <h4 class="text-base font-black text-white">Sunrise Splash</h4>
-            <p class="text-xs text-zinc-300 mt-1">Strawberry, Peach, Mango, Banana, Lemon, Coconut Milk.</p>
-            <span class="text-xs font-mono font-bold text-orange-400 mt-3 block">$8.99 / $11.99</span>
-          </div>
-          <div class="menu-card rounded-2xl p-5 border-lime-500/50">
-            <h4 class="text-base font-black text-lime-400">W.O.W. Soursop Booster</h4>
-            <p class="text-xs text-zinc-300 mt-1">Authentic Soursop Graviola, Mango, Pineapple, Banana.</p>
-            <span class="text-xs font-mono font-bold text-lime-400 mt-3 block">$8.99 / $11.99</span>
-          </div>
-        </div>
-      </div>
-
     </div>
 
   </main>
@@ -340,7 +323,7 @@
             Located right on Wellborn Road in Lithonia. Come for the fresh raw juices, stay for the good vibes and live music patio!
           </p>
 
-          <div class="space-y-2 pt-2 text-xs font-mono">
+          <div class="space-y-2.5 pt-2 text-xs font-mono">
             <div class="flex items-center gap-2 text-zinc-200">
               <i class="fa-solid fa-location-dot text-rose-500 w-4"></i>
               <span><strong>Address:</strong> 1544 Wellborn Rd, Suite 10, Lithonia, GA 30058</span>
@@ -352,6 +335,15 @@
             <div class="flex items-center gap-2 text-zinc-200">
               <i class="fa-solid fa-clock text-emerald-400 w-4"></i>
               <span><strong>Hours:</strong> Mon–Tue 12–5pm | Wed–Sat 12–6pm | Sun Closed</span>
+            </div>
+            <div class="flex items-center gap-3 pt-2">
+              <a href="https://www.instagram.com/wowhealthspot/" target="_blank" class="text-rose-400 hover:text-rose-300 text-sm font-bold flex items-center gap-1">
+                <i class="fa-brands fa-instagram"></i> Instagram
+              </a>
+              <span class="text-zinc-600">•</span>
+              <a href="https://www.tiktok.com/@wowhealthspot" target="_blank" class="text-zinc-300 hover:text-white text-sm font-bold flex items-center gap-1">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+              </a>
             </div>
           </div>
 
@@ -389,28 +381,6 @@
       </p>
     </div>
   </footer>
-
-  <!-- Menu Mode Switcher Script -->
-  <script>
-    function showMenuMode(mode) {
-      const boardView = document.getElementById('view-menu-board');
-      const cardsView = document.getElementById('view-menu-cards');
-      const btnBoard = document.getElementById('btn-mode-board');
-      const btnCards = document.getElementById('btn-mode-cards');
-
-      if (mode === 'board') {
-        boardView.classList.remove('hidden');
-        cardsView.classList.add('hidden');
-        btnBoard.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-lime-500 text-black border border-lime-400 transition-all';
-        btnCards.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-zinc-700 transition-all';
-      } else {
-        boardView.classList.add('hidden');
-        cardsView.classList.remove('hidden');
-        btnCards.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-lime-500 text-black border border-lime-400 transition-all';
-        btnBoard.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-zinc-700 transition-all';
-      }
-    }
-  </script>
 
 </body>
 </html>

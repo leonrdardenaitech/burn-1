@@ -6,35 +6,12 @@
   <title>Community, Live Events & Open Mic | WOW Health Spot & Juice Bar</title>
   <meta name="description" content="Experience live music, open mic nights, pop-up concerts, and wellness gatherings at WOW Health Spot & Juice Bar on Wellborn Rd in Lithonia, GA. Where good vibes meet good eats!">
   
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            wow: {
-              lime: '#76BA1B',
-              orange: '#FF5E00',
-              gold: '#FBBF24',
-              dark: '#080c08',
-              card: '#121912'
-            }
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-            header: ['"Oswald"', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
 
   <style>
     body {
@@ -42,29 +19,71 @@
       color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .neon-glow-orange {
-      text-shadow: 0 0 25px rgba(255, 94, 0, 0.5);
+    .glass-card {
+      background: rgba(18, 25, 18, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(118, 186, 27, 0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
-    .neon-glow-lime {
-      text-shadow: 0 0 25px rgba(118, 186, 27, 0.5);
+    .glass-card-orange {
+      background: rgba(25, 18, 14, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 94, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
-    .wow-gradient-text {
-      background: linear-gradient(135deg, #76BA1B 0%, #FF5E00 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    /* Hyperframe Graphic Container */
+    .hyperframe-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid rgba(118, 186, 27, 0.4);
+      box-shadow: 0 0 50px rgba(118, 186, 27, 0.25);
+      background-color: #000;
     }
-    .patio-frame {
-      box-shadow: 0 0 50px rgba(255, 94, 0, 0.25), inset 0 0 30px rgba(0,0,0,0.8);
+
+    /* Hotspots matching user 1920x1080 stage graphic */
+    .hotspot {
+      position: absolute;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
+    .hotspot:hover {
+      background: rgba(255, 255, 255, 0.12);
+      outline: 2px solid rgba(118, 186, 27, 0.85);
+    }
+
+    /* Top Nav Hitboxes */
+    .hs-home { top: 11%; left: 32.5%; width: 5.5%; height: 5%; }
+    .hs-menu { top: 11%; left: 38.5%; width: 8.5%; height: 5%; }
+    .hs-story { top: 11%; left: 47.5%; width: 8.5%; height: 5%; }
+    .hs-community { top: 11%; left: 56.5%; width: 9%; height: 5%; }
+    .hs-locations { top: 11%; left: 66%; width: 8.5%; height: 5%; }
+    .hs-order-top { top: 10.5%; left: 78%; width: 11.5%; height: 6%; }
+    
+    /* Hero Action Buttons in artwork */
+    .hs-view-calendar { top: 76%; left: 13%; width: 16.5%; height: 6.5%; }
+    .hs-perform-with-us { top: 76%; left: 31%; width: 14%; height: 6.5%; }
+
+    /* Feature Pills in artwork */
+    .hs-feat-live { top: 88%; left: 13%; width: 9%; height: 7%; }
+    .hs-feat-popup { top: 88%; left: 23%; width: 11%; height: 7%; }
+    .hs-feat-openmic { top: 88%; left: 35.5%; width: 10%; height: 7%; }
+
+    /* Live stage interactive hotspot (top right patio) */
+    .hs-patio-stage { top: 31%; left: 55%; width: 37%; height: 35%; border-radius: 16px; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
 
-  <!-- TOP NETWORK BAR -->
-  <header class="bg-black/90 border-b border-zinc-800 sticky top-0 z-50 backdrop-blur-md">
+  <!-- TOP ACTIVE UNIBAR (With Instagram, TikTok & DoorDash) -->
+  <header class="bg-black/95 border-b border-zinc-800 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
       
-      <!-- Logo + Nav Links matching user image -->
       <div class="flex items-center gap-6">
         <a href="wowhealthspot.html" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
           <img src="assets/wowhealthspot/wow_logo_badge.jpg" alt="WOW Logo" class="w-10 h-10 rounded-xl object-cover border border-lime-500/40 bg-black">
@@ -74,8 +93,7 @@
           </div>
         </a>
 
-        <!-- Global Nav from user images -->
-        <nav class="hidden md:flex items-center gap-5 text-xs font-bold uppercase tracking-wider text-zinc-300">
+        <nav class="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-zinc-300">
           <a href="wowhealthspot.html" class="hover:text-lime-400 transition-colors">Home</a>
           <a href="wowhealthspot.html#menu" class="hover:text-lime-400 transition-colors">Our Menu</a>
           <a href="wow-story.html" class="hover:text-lime-400 transition-colors">Our Story</a>
@@ -84,73 +102,78 @@
         </nav>
       </div>
 
-      <!-- Right Action CTAs -->
-      <div class="flex items-center gap-3">
-        <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF5E00] to-[#E05200] hover:from-[#e05200] hover:to-[#c84500] text-white text-xs font-black uppercase tracking-wider shadow-md transition-all">
-          <i class="fa-solid fa-bag-shopping mr-1.5"></i> Order on DoorDash
+      <!-- Social & Order CTAs -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://www.instagram.com/wowhealthspot/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 hover:opacity-90 flex items-center justify-center text-white text-sm transition-all shadow" title="Instagram @wowhealthspot">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@wowhealthspot" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 flex items-center justify-center text-white text-sm transition-all shadow" title="TikTok @wowhealthspot">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF5E00] to-[#E05200] hover:from-[#e05200] text-white text-xs font-black uppercase tracking-wider shadow-md transition-all">
+          <i class="fa-solid fa-bag-shopping mr-1.5"></i> Order Online
         </a>
       </div>
 
     </div>
   </header>
 
-  <!-- HERO BANNER: COMMUNITY & LIVE EVENTS -->
-  <section class="relative bg-gradient-to-b from-zinc-950 via-[#0d160d] to-[#070a07] py-12 sm:py-16 border-b border-zinc-800 overflow-hidden">
-    <!-- Ambient backlights -->
-    <div class="absolute top-0 right-1/4 w-96 h-96 bg-orange-500/15 blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-lime-500/10 blur-3xl pointer-events-none"></div>
+  <!-- HYPERFRAME COMMUNITY HERO: STOCK ARTWORK WITH ACTIVE OVERLAYS -->
+  <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-10">
+    
+    <div class="hyperframe-wrap">
+      <!-- Clean High-Res Graphic provided by user -->
+      <img src="assets/wowhealthspot/wow_community_stage_clean.jpg" alt="Community & Live Events - Where Good Vibes Meet Good Eats" class="w-full h-auto block select-none">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Active Hitboxes Mapped to Nav & CTAs in Image -->
+      <a href="wowhealthspot.html" class="hotspot hs-home" title="Home"></a>
+      <a href="wowhealthspot.html#menu" class="hotspot hs-menu" title="Our Menu"></a>
+      <a href="wow-story.html" class="hotspot hs-story" title="Our Story"></a>
+      <a href="wow-community.html" class="hotspot hs-community" title="Community"></a>
+      <a href="wowhealthspot.html#locations" class="hotspot hs-locations" title="Locations"></a>
+      <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" class="hotspot hs-order-top" title="Order Now"></a>
+
+      <!-- Button 1 in Image: View Event Calendar (Posh VIP Open Mic) -->
+      <a href="https://posh.vip/e/the-wow-open-mic?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeBnImvq2KgThXqqc62cIqnOOLWjHt80ZYgMewX1m_63e705n7xLsY4GgGn1Q_aem_-Euzy3rSQDW5P6kXcwQrVg" target="_blank" class="hotspot hs-view-calendar" title="View Event Calendar & Open Mic Passes"></a>
+
+      <!-- Button 2 in Image: Perform With Us (Direct Call / Sign-up) -->
+      <a href="tel:4709070740" class="hotspot hs-perform-with-us" title="Call (470) 907-0740 to Perform With Us"></a>
+
+      <!-- Bottom Feature Badges in Artwork -->
+      <a href="#schedule" class="hotspot hs-feat-live" title="Live Music"></a>
+      <a href="#schedule" class="hotspot hs-feat-popup" title="Pop-Up Concerts"></a>
+      <a href="https://posh.vip/e/the-wow-open-mic" target="_blank" class="hotspot hs-feat-openmic" title="Open-Mic Nights on Posh"></a>
+
+      <!-- Acoustic Patio Stage Clickable Region -->
+      <a href="#patio-video" class="hotspot hs-patio-stage" title="Click to Watch Motion Patio Clip"></a>
+    </div>
+
+    <!-- Sub-bar quick bar under hyperframe -->
+    <div class="mt-4 flex flex-wrap justify-between items-center gap-3 text-xs font-mono text-zinc-400 px-2">
+      <span class="flex items-center gap-1.5 text-lime-400 font-bold">
+        <i class="fa-solid fa-microphone-lines"></i> Fenced Acoustic Patio • Live Musicians &amp; Poets • Lithonia, GA
+      </span>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/wowhealthspot/" target="_blank" class="text-rose-400 hover:underline font-bold flex items-center gap-1">
+          <i class="fa-brands fa-instagram"></i> Follow on IG @wowhealthspot →
+        </a>
+        <a href="https://www.tiktok.com/@wowhealthspot" target="_blank" class="text-zinc-300 hover:text-white underline flex items-center gap-1">
+          <i class="fa-brands fa-tiktok"></i> TikTok Daily Clips →
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- LIVE MOTION PATIO VIDEO WINDOW (Right Center Feature) -->
+  <section id="patio-video" class="py-12 bg-zinc-950 border-y border-zinc-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
-        <!-- Left: Text Header exactly styled like the user mockup -->
-        <div class="lg:col-span-6 space-y-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-950/60 border border-lime-500/40 text-xs font-mono font-bold text-lime-400">
-            <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
-            LIVE MUSIC • OPEN MIC • PATIO VIBES
-          </div>
-
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-none">
-            COMMUNITY & <span class="wow-gradient-text">LIVE EVENTS</span>
-          </h1>
-          <p class="text-lg sm:text-xl font-header font-bold text-orange-400 uppercase tracking-wider">
-            WHERE GOOD VIBES MEET GOOD EATS!
-          </p>
-
-          <p class="text-sm text-zinc-300 leading-relaxed font-sans max-w-xl">
-            WOW Health Spot & Juice Bar regularly hosts live music, pop-up concerts, and open-mic nights! Bring your friends, enjoy local talent on our fenced outdoor patio, sip fresh cold-pressed juices, and feel the energy of our community.
-          </p>
-
-          <div class="flex flex-wrap gap-3 pt-2">
-            <a href="https://posh.vip/e/the-wow-open-mic?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeBnImvq2KgThXqqc62cIqnOOLWjHt80ZYgMewX1m_63e705n7xLsY4GgGn1Q_aem_-Euzy3rSQDW5P6kXcwQrVg" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-white font-black text-xs uppercase tracking-wider shadow-lg transition-all">
-              <i class="fa-solid fa-ticket mr-2"></i> Register for The WOW Open Mic
-            </a>
-            <a href="tel:4709070740" class="px-5 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-white font-bold text-xs uppercase tracking-wider transition-all">
-              <i class="fa-solid fa-microphone mr-2 text-lime-400"></i> Perform With Us
-            </a>
-          </div>
-
-          <!-- Feature Icons Row -->
-          <div class="grid grid-cols-3 gap-3 pt-4 border-t border-zinc-800/80 text-center">
-            <div class="p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-              <i class="fa-solid fa-guitar text-lime-400 text-lg mb-1 block"></i>
-              <span class="text-[11px] font-mono font-bold text-zinc-200 block uppercase">Live Music</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-              <i class="fa-solid fa-users text-orange-400 text-lg mb-1 block"></i>
-              <span class="text-[11px] font-mono font-bold text-zinc-200 block uppercase">Pop-Up Concerts</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-              <i class="fa-solid fa-microphone-lines text-purple-400 text-lg mb-1 block"></i>
-              <span class="text-[11px] font-mono font-bold text-zinc-200 block uppercase">Open-Mic Nights</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Right: Living Video Patio Experience (Motion Clip Uploaded by User) -->
-        <div class="lg:col-span-6 flex flex-col items-center">
-          <div class="relative w-full rounded-2xl overflow-hidden border-2 border-orange-500/50 patio-frame bg-black aspect-video">
+        <!-- Video Player Frame -->
+        <div class="lg:col-span-7">
+          <div class="relative w-full rounded-2xl overflow-hidden border-2 border-orange-500/50 shadow-2xl bg-black aspect-video">
             <video src="assets/wowhealthspot/wow_community_live_patio.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
             
             <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-lime-400/50 flex items-center gap-2">
@@ -160,53 +183,106 @@
 
             <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 flex justify-between items-center">
               <div>
-                <span class="text-xs font-black text-white uppercase tracking-wide block">Fenced Acoustic Stage</span>
+                <span class="text-xs font-black text-white uppercase tracking-wide block">Fenced Outdoor Acoustic Stage</span>
                 <span class="text-[10px] text-lime-400 font-mono">1544 Wellborn Rd • Lithonia, GA</span>
               </div>
-              <a href="https://posh.vip/e/the-wow-open-mic" target="_blank" class="px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-400 text-white font-black text-[10px] uppercase font-mono shadow">
+              <a href="https://posh.vip/e/the-wow-open-mic" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-400 text-white font-black text-[10px] uppercase font-mono shadow">
                 RSVP Pass →
               </a>
             </div>
           </div>
-          <span class="text-[11px] font-mono text-zinc-400 mt-2 text-center">
-            Watch our guests enjoying live music and fresh juices on the patio
-          </span>
+        </div>
+
+        <!-- Description & RSVP Box -->
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-xs font-mono text-lime-400 font-bold uppercase tracking-widest">// Outdoor Stage Experience</span>
+          <h2 class="text-3xl font-black text-white uppercase tracking-tight">
+            The Living Patio Stage
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
+            Our fenced-in outdoor patio transforms into Lithonia’s warmest acoustic stage. Bring your crew, sip on an icy Watermelon Breeze or loaded açai bowl, and catch local artists performing live under the string lights.
+          </p>
+
+          <div class="space-y-2.5 pt-2 text-xs font-mono">
+            <div class="flex items-center gap-2 text-zinc-200">
+              <i class="fa-solid fa-guitar text-lime-400 w-4"></i>
+              <span><strong>Next Open Mic:</strong> RSVP via Posh VIP</span>
+            </div>
+            <div class="flex items-center gap-2 text-zinc-200">
+              <i class="fa-solid fa-microphone text-orange-400 w-4"></i>
+              <span><strong>Artist Sign-Up:</strong> Call (470) 907-0740</span>
+            </div>
+            <div class="flex items-center gap-2 text-zinc-200">
+              <i class="fa-solid fa-shield-halved text-emerald-400 w-4"></i>
+              <span><strong>Vibe:</strong> Family-friendly, fenced patio, positive energy</span>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <a href="https://posh.vip/e/the-wow-open-mic?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeBnImvq2KgThXqqc62cIqnOOLWjHt80ZYgMewX1m_63e705n7xLsY4GgGn1Q_aem_-Euzy3rSQDW5P6kXcwQrVg" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 text-white font-black text-xs uppercase tracking-wider shadow-lg transition-all">
+              <i class="fa-solid fa-ticket"></i> Grab Event Passes on Posh VIP →
+            </a>
+          </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
-  <!-- SOCIAL MEDIA HUB & TIKTOK GREEN COCONUT FEATURE -->
-  <section class="py-14 bg-zinc-950 border-b border-zinc-800">
+  <!-- SOCIAL FEED & DISH SHOWCASE -->
+  <section class="py-14 bg-[#070a07]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="text-xs font-mono font-bold text-lime-400 uppercase tracking-widest">// Stay Connected & Order Online</span>
+        <span class="text-xs font-mono font-bold text-lime-400 uppercase tracking-widest">// Connect & Follow</span>
         <h2 class="text-3xl font-black text-white uppercase tracking-tight mt-1">
-          Find Us Across Social & Delivery
+          Follow the Vibe on Social Media
         </h2>
         <p class="text-sm text-zinc-400 mt-2">
-          Watch our daily juicing sessions, RSVP to the next outdoor open mic, or order straight to your doorstep.
+          Daily juice specials, behind-the-scenes green coconut juicing, and weekly open-mic performer highlights.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <!-- TikTok Card (Green Coconut Juicing Feature) -->
-        <div class="p-6 rounded-2xl bg-zinc-900/80 border border-zinc-800 hover:border-lime-500/50 transition-all flex flex-col justify-between">
+        <!-- Instagram Card -->
+        <div class="glass-card-orange rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-xl text-white shadow">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-rose-950 border border-rose-600 text-[10px] font-mono font-bold text-rose-300 uppercase">
+                MAIN SOCIAL
+              </span>
+            </div>
+            <h3 class="text-lg font-black text-white uppercase">Instagram: @wowhealthspot</h3>
+            <p class="text-xs text-zinc-300 mt-2 leading-relaxed">
+              Our official IG home. Follow for live patio concert announcements, open mic performers, and secret weekly juice drops.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-zinc-800">
+            <a href="https://www.instagram.com/wowhealthspot/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 hover:opacity-90 text-white font-bold text-xs uppercase tracking-wider transition-all">
+              <i class="fa-brands fa-instagram"></i> Follow @wowhealthspot on IG ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- TikTok Card -->
+        <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <div class="w-12 h-12 rounded-xl bg-black border border-zinc-700 flex items-center justify-center text-xl text-white">
                 <i class="fa-brands fa-tiktok"></i>
               </div>
               <span class="px-2.5 py-1 rounded-full bg-lime-950 border border-lime-600 text-[10px] font-mono font-bold text-lime-400 uppercase">
-                VIRAL JUICING
+                VIRAL TIKTOK
               </span>
             </div>
             <h3 class="text-lg font-black text-white uppercase">TikTok: @wowhealthspot</h3>
             <p class="text-xs text-zinc-300 mt-2 leading-relaxed">
-              Watch the owner slicing and cold-pressing fresh green Caribbean coconuts straight from the shell! Real fruit, zero syrups.
+              Watch the owner slicing and cold-pressing fresh green Caribbean coconuts straight from the shell! Zero syrups, pure nature.
             </p>
           </div>
           <div class="mt-6 pt-4 border-t border-zinc-800">
@@ -216,43 +292,20 @@
           </div>
         </div>
 
-        <!-- Posh VIP Open Mic Ticket Portal -->
-        <div class="p-6 rounded-2xl bg-zinc-900/80 border border-zinc-800 hover:border-orange-500/50 transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-xl bg-orange-950/60 border border-orange-500/40 flex items-center justify-center text-xl text-orange-400">
-                <i class="fa-solid fa-microphone-lines"></i>
-              </div>
-              <span class="px-2.5 py-1 rounded-full bg-orange-950 border border-orange-600 text-[10px] font-mono font-bold text-orange-400 uppercase">
-                COMMUNITY STAGE
-              </span>
-            </div>
-            <h3 class="text-lg font-black text-white uppercase">The WOW Open Mic</h3>
-            <p class="text-xs text-zinc-300 mt-2 leading-relaxed">
-              Lithonia’s hottest community stage. Musicians, spoken-word poets, and local vocalists perform live on our patio stage.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-zinc-800">
-            <a href="https://posh.vip/e/the-wow-open-mic?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeBnImvq2KgThXqqc62cIqnOOLWjHt80ZYgMewX1m_63e705n7xLsY4GgGn1Q_aem_-Euzy3rSQDW5P6kXcwQrVg" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs uppercase tracking-wider transition-all">
-              <i class="fa-solid fa-ticket"></i> Grab Event Tickets on Posh ↗
-            </a>
-          </div>
-        </div>
-
-        <!-- DoorDash Instant Delivery Portal -->
-        <div class="p-6 rounded-2xl bg-zinc-900/80 border border-zinc-800 hover:border-rose-500/50 transition-all flex flex-col justify-between">
+        <!-- DoorDash Instant Order -->
+        <div class="glass-card-orange rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <div class="w-12 h-12 rounded-xl bg-rose-950/60 border border-rose-500/40 flex items-center justify-center text-xl text-rose-500">
-                <i class="fa-solid fa-utensils"></i>
+                <i class="fa-solid fa-bag-shopping"></i>
               </div>
-              <span class="px-2.5 py-1 rounded-full bg-rose-950 border border-rose-600 text-[10px] font-mono font-bold text-rose-400 uppercase">
+              <span class="px-2.5 py-1 rounded-full bg-rose-950 border border-rose-600 text-[10px] font-mono font-bold text-rose-300 uppercase">
                 DOORDASH VERIFIED
               </span>
             </div>
             <h3 class="text-lg font-black text-white uppercase">DoorDash Delivery</h3>
             <p class="text-xs text-zinc-300 mt-2 leading-relaxed">
-              Get fresh cold-pressed bottles, fruit smoothies, and chilled açai bowls delivered to your house, gym, or office in minutes.
+              Craving fresh juice during work or after a gym workout? Order our full menu straight to your doorstep in minutes.
             </p>
           </div>
           <div class="mt-6 pt-4 border-t border-zinc-800">

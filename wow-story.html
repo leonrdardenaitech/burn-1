@@ -8,7 +8,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=JetBrains+Mono:wght@500;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,6 +25,15 @@
       -webkit-text-fill-color: transparent;
     }
 
+    /* Glass Card Styling */
+    .glass-card {
+      background: rgba(18, 25, 18, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(118, 186, 27, 0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
     /* Cinematic Big White Scrolling Text Overlay */
     .fade-scroller {
       mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
@@ -35,11 +44,11 @@
       position: relative;
       height: 480px;
       overflow-y: scroll;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .scroll-text-container::-webkit-scrollbar {
-      display: none; /* Safari and Chrome */
+      display: none;
     }
 
     .scrolling-content {
@@ -51,7 +60,7 @@
 
     @keyframes autoScrollText {
       0% {
-        transform: translateY(10%);
+        transform: translateY(8%);
       }
       100% {
         transform: translateY(-80%);
@@ -65,8 +74,8 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
 
-  <!-- TOP NETWORK BAR -->
-  <header class="bg-black/90 border-b border-zinc-800 sticky top-0 z-50 backdrop-blur-md">
+  <!-- TOP NETWORK BAR (With IG and TikTok icons) -->
+  <header class="bg-black/95 border-b border-zinc-800 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-3">
       
       <div class="flex items-center gap-6">
@@ -78,7 +87,7 @@
           </div>
         </a>
 
-        <nav class="hidden md:flex items-center gap-5 text-xs font-bold uppercase tracking-wider text-zinc-300">
+        <nav class="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-zinc-300">
           <a href="wowhealthspot.html" class="hover:text-lime-400 transition-colors">Home</a>
           <a href="wowhealthspot.html#menu" class="hover:text-lime-400 transition-colors">Our Menu</a>
           <a href="wow-story.html" class="text-lime-400 border-b-2 border-lime-400 pb-0.5">Our Story</a>
@@ -87,8 +96,14 @@
         </nav>
       </div>
 
-      <div class="flex items-center gap-3">
-        <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF5E00] to-[#E05200] text-white text-xs font-black uppercase tracking-wider shadow-md transition-all">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://www.instagram.com/wowhealthspot/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 hover:opacity-90 flex items-center justify-center text-white text-sm transition-all shadow" title="Instagram @wowhealthspot">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@wowhealthspot" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 flex items-center justify-center text-white text-sm transition-all shadow" title="TikTok @wowhealthspot">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="https://www.doordash.com/store/wow-health-spot-&-juice-bar-lithonia-46257041/111438548/?srsltid=AYCX9vLvXlf5tkRYC3Nh6OlSF_sOCvpXnbxaOZ5HT3pc8yHBYlMK7jzo" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF5E00] to-[#E05200] hover:from-[#e05200] text-white text-xs font-black uppercase tracking-wider shadow-md transition-all">
           Order Online
         </a>
       </div>
@@ -96,20 +111,30 @@
     </div>
   </header>
 
-  <!-- MAIN STORY VIEW WITH FIRE-RED LIGHTHOUSE MURAL & CURVY ROAD -->
+  <!-- MAIN STORY VIEW WITH FIRE-RED LIGHTHOUSE MURAL & OVERLAY LOGO -->
   <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10">
     
     <div class="rounded-3xl bg-zinc-950 border-2 border-orange-500/40 overflow-hidden beacon-glow">
       <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
         
-        <!-- Left: The In-Store Fire Red Lighthouse Mural with Curvy Road Floor Painting -->
+        <!-- Left: The In-Store Fire Red Lighthouse Mural with OVERLAY BRAND LOGO -->
         <div class="lg:col-span-6 relative bg-black flex justify-center items-center overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-800">
-          <img src="assets/wowhealthspot/wow_story_lighthouse_road.jpg" alt="WOW Wellness on Wellborn Lighthouse and Curvy Road Mural" class="w-full h-auto max-h-[700px] object-cover">
+          <img src="assets/wowhealthspot/wow_story_lighthouse_road.jpg" alt="WOW Wellness on Wellborn Lighthouse and Curvy Road Mural" class="w-full h-auto max-h-[720px] object-cover">
           
+          <!-- BRAND LOGO BADGE OVERLAY (Lighthouse Beacon Radiant Crest) -->
+          <div class="absolute top-4 left-4 z-20 flex items-center gap-3 p-2.5 rounded-2xl bg-black/80 backdrop-blur-md border border-lime-400/50 shadow-[0_0_25px_rgba(118,186,27,0.4)]">
+            <img src="assets/wowhealthspot/wow_logo_badge.jpg" alt="WOW Logo" class="w-12 h-12 rounded-xl object-cover bg-black border border-lime-400">
+            <div>
+              <span class="text-xs font-black text-white block uppercase tracking-tight">WOW Health Spot</span>
+              <span class="text-[9px] font-mono text-lime-400 uppercase tracking-widest block font-bold">Wellness On Wellborn</span>
+            </div>
+          </div>
+
+          <!-- Bottom Roadway Tag -->
           <div class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-md p-3.5 rounded-xl border border-orange-500/40 flex justify-between items-center text-xs">
             <div>
               <span class="font-black text-white uppercase block">The Beacon of Wellness</span>
-              <span class="text-[10px] font-mono text-lime-400">In-Store Lighthouse Mural • Lithonia, GA</span>
+              <span class="text-[10px] font-mono text-lime-400">1544 Wellborn Rd • Lithonia, GA</span>
             </div>
             <span class="px-2 py-1 rounded bg-orange-600 text-white font-mono text-[9px] font-black uppercase">
               ALL ROADS LEAD HERE
@@ -162,13 +187,40 @@
 
           <div class="mt-6 pt-4 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3">
             <span class="text-xs font-mono text-zinc-500">Hover over text to pause scrolling</span>
-            <a href="wowhealthspot.html#menu" class="px-5 py-2.5 rounded-xl bg-lime-500 hover:bg-lime-400 text-black font-black text-xs uppercase tracking-wider shadow-md transition-all">
-              Explore The Menu →
-            </a>
+            <div class="flex items-center gap-3">
+              <a href="https://www.instagram.com/wowhealthspot/" target="_blank" class="text-xs font-mono font-bold text-rose-400 hover:underline flex items-center gap-1">
+                <i class="fa-brands fa-instagram"></i> @wowhealthspot
+              </a>
+              <a href="wowhealthspot.html#menu" class="px-5 py-2.5 rounded-xl bg-lime-500 hover:bg-lime-400 text-black font-black text-xs uppercase tracking-wider shadow-md transition-all">
+                Explore The Menu →
+              </a>
+            </div>
           </div>
 
         </div>
 
+      </div>
+    </div>
+
+    <!-- SPOTLIGHT: BRICK WALL SMOOTHIE & SHOT SHOWCASE -->
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-zinc-950 p-6 sm:p-8 rounded-3xl border border-zinc-800">
+      <div class="md:col-span-5 rounded-2xl overflow-hidden border border-zinc-700 bg-black shadow-xl">
+        <img src="assets/wowhealthspot/wow_smoothie_brick_shot.jpg" alt="WOW Signature Smoothie and Ginger Shot at the Wellborn Store" class="w-full h-auto object-cover">
+      </div>
+      <div class="md:col-span-7 space-y-3">
+        <span class="text-xs font-mono text-orange-400 font-bold uppercase tracking-wider">// Handcrafted Fresh Daily</span>
+        <h3 class="text-2xl font-black text-white uppercase">Loaded Superfood Smoothies &amp; Fire Ginger Shots</h3>
+        <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
+          Every cup served at our counter carries the official WOW stamp. Made with thick pure fruits, nutrient-dense sea moss gel, almond butter, and raw turmeric roots—crafted to give you clean, sustained energy all day.
+        </p>
+        <div class="pt-2 flex flex-wrap gap-3">
+          <a href="wowhealthspot.html#menu" class="px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-black text-xs uppercase tracking-wider shadow transition-all">
+            See All Smoothie Blends →
+          </a>
+          <a href="wow-community.html" class="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 font-bold text-xs uppercase tracking-wider transition-all">
+            Join The Community →
+          </a>
+        </div>
       </div>
     </div>
 
