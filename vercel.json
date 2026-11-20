@@ -38,6 +38,28 @@
             "has": [
                 {
                     "type": "host",
+                    "value": "^wowhealthspot\\.burn-1\\.com$"
+                }
+            ],
+            "destination": "/wowhealthspot.html"
+        },
+        {
+            "source": "/cards/wowhealthspot",
+            "destination": "/cards/wowhealthspot.html"
+        },
+        {
+            "source": "/cards/wow-health-spot",
+            "destination": "/cards/wow-health-spot.html"
+        },
+        {
+            "source": "/wowhealthspot",
+            "destination": "/wowhealthspot.html"
+        },
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
                     "value": "^freezer\\.burn-1\\.com$"
                 }
             ],
