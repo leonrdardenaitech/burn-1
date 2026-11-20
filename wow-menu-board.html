@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WOW Health Spot - Menu Board Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,800;1,900&family=Oswald:wght@600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --chalk-green: #68cc3b;
+      --chalk-lime: #84e843;
+      --chalk-orange: #ff6a13;
+      --chalk-dark-orange: #f2550c;
+      --chalk-yellow: #ffc425;
+      --chalk-purple: #ab47bc;
+      --chalk-blue: #29b6f6;
+      --chalk-pink: #ec407a;
+      --chalk-rose: #ff4081;
+    }
+
+    body {
+      background-color: #0b0f0b;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Chalkboard Canvas */
+    .menu-canvas {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 10.5;
+      background: radial-gradient(circle at 50% 30%, #151a14 0%, #0d110d 65%, #070907 100%);
+      border: 12px solid #1c241c;
+      border-radius: 28px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.9), inset 0 0 100px rgba(0,0,0,0.85);
+      position: relative;
+      overflow: hidden;
+      padding: 28px 36px;
+      box-sizing: border-box;
+    }
+
+    /* Tropical Leaf Accents via SVG Shapes */
+    .palm-leaf-tl {
+      position: absolute;
+      top: -15px;
+      left: -20px;
+      width: 140px;
+      height: 140px;
+      opacity: 0.45;
+      pointer-events: none;
+      filter: drop-shadow(0 0 15px rgba(104, 204, 59, 0.4));
+    }
+    .palm-leaf-tr {
+      position: absolute;
+      top: -15px;
+      right: -20px;
+      width: 140px;
+      height: 140px;
+      opacity: 0.45;
+      pointer-events: none;
+      filter: drop-shadow(0 0 15px rgba(104, 204, 59, 0.4));
+      transform: scaleX(-1);
+    }
+    .pineapple-accent {
+      position: absolute;
+      bottom: -15px;
+      right: -10px;
+      width: 110px;
+      height: 140px;
+      opacity: 0.55;
+      pointer-events: none;
+      filter: drop-shadow(0 0 20px rgba(255, 106, 19, 0.35));
+    }
+
+    /* Script Fonts */
+    .font-script {
+      font-family: 'Caveat', cursive;
+    }
+    .font-header {
+      font-family: 'Oswald', sans-serif;
+    }
+
+    /* Header Title Glows */
+    .chalk-title-green {
+      color: #6ee742;
+      text-shadow: 0 0 16px rgba(110, 231, 66, 0.6), 0 2px 4px rgba(0,0,0,0.9);
+      letter-spacing: 0.04em;
+    }
+    .chalk-title-orange {
+      color: #ff7824;
+      text-shadow: 0 0 16px rgba(255, 120, 36, 0.6), 0 2px 4px rgba(0,0,0,0.9);
+      letter-spacing: 0.04em;
+    }
+    .chalk-title-purple {
+      color: #c058d8;
+      text-shadow: 0 0 16px rgba(192, 88, 216, 0.6), 0 2px 4px rgba(0,0,0,0.9);
+    }
+    .chalk-title-blue {
+      color: #38bdf8;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.6), 0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    /* Pill Badges */
+    .pill-green {
+      background: linear-gradient(90deg, #49a81e 0%, #68cc3b 50%, #49a81e 100%);
+      color: #0b1507;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      border-radius: 9999px;
+      box-shadow: 0 4px 15px rgba(104, 204, 59, 0.45), inset 0 1px 2px rgba(255,255,255,0.6);
+    }
+    .pill-smoothie {
+      background: linear-gradient(90deg, #49a81e 0%, #68cc3b 50%, #49a81e 100%);
+      color: #0b1507;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      border-radius: 9999px;
+      box-shadow: 0 4px 15px rgba(104, 204, 59, 0.45), inset 0 1px 2px rgba(255,255,255,0.6);
+    }
+    .pill-purple {
+      background: linear-gradient(135deg, #8e24aa, #ab47bc);
+      color: #ffffff;
+      font-weight: 900;
+      border-radius: 9999px;
+      box-shadow: 0 4px 12px rgba(171, 71, 188, 0.5);
+    }
+    .pill-blue {
+      background: linear-gradient(135deg, #0288d1, #29b6f6);
+      color: #ffffff;
+      font-weight: 900;
+      border-radius: 9999px;
+      box-shadow: 0 4px 12px rgba(41, 182, 246, 0.5);
+    }
+    .pill-yellow-shot {
+      background: linear-gradient(135deg, #ffb300, #ffca28);
+      color: #211500;
+      font-weight: 900;
+      border-radius: 9999px;
+      box-shadow: 0 3px 10px rgba(255, 179, 0, 0.4);
+    }
+
+    /* Realistic Cup Graphic via Pure CSS */
+    .cup-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 60px;
+      flex-shrink: 0;
+    }
+    .cup-body {
+      width: 36px;
+      height: 48px;
+      margin: 4px auto 0;
+      border-radius: 2px 2px 7px 7px;
+      position: relative;
+      overflow: hidden;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.5), inset 0 0 6px rgba(255,255,255,0.3);
+    }
+    .cup-lid {
+      width: 42px;
+      height: 6px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 4px 4px 1px 1px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+    .cup-straw {
+      position: absolute;
+      top: -8px;
+      left: 20px;
+      width: 4px;
+      height: 12px;
+      background: #76ba1b;
+      transform: rotate(14deg);
+      border-radius: 1px;
+    }
+    .cup-logo-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7px;
+      font-weight: 900;
+      color: #ff5e00;
+    }
+
+    /* Juice Liquids */
+    .liquid-watermelon { background: linear-gradient(180deg, #ff4d6d 0%, #e61f48 100%); }
+    .liquid-tropical { background: linear-gradient(180deg, #ffb703 0%, #fb8500 100%); }
+    .liquid-root { background: linear-gradient(180deg, #880e4f 0%, #58002b 100%); }
+    .liquid-green { background: linear-gradient(180deg, #80ed99 0%, #38b000 100%); }
+    .liquid-gold { background: linear-gradient(180deg, #ffea00 0%, #ff9100 100%); }
+
+    /* Smoothie Liquids */
+    .liquid-berry { background: linear-gradient(180deg, #7b2cbf 0%, #3c096c 100%); }
+    .liquid-strawberry { background: linear-gradient(180deg, #ff758f 0%, #e01e37 100%); }
+    .liquid-goddess { background: linear-gradient(180deg, #99e2b4 0%, #52b788 100%); }
+    .liquid-paradise { background: linear-gradient(180deg, #ffd166 0%, #f77f00 100%); }
+    .liquid-sunrise { background: linear-gradient(180deg, #ff70a6 0%, #ff9770 100%); }
+    .liquid-soursop { background: linear-gradient(180deg, #e9ecef 0%, #ced4da 100%); }
+
+    /* Shot Liquids */
+    .liquid-shot-bad { background: linear-gradient(180deg, #f77f00 0%, #d62828 100%); }
+    .liquid-shot-straight { background: linear-gradient(180deg, #ffea00 0%, #d4a373 100%); }
+
+    /* Acai / Smoothie Bowl CSS Graphics */
+    .bowl-graphic {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.7);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .bowl-acai {
+      background: radial-gradient(circle, #5b146f 0%, #350842 100%);
+    }
+    .bowl-smoothie-base {
+      background: radial-gradient(circle, #ff4081 0%, #c2185b 100%);
+    }
+    .bowl-topping-slice {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      right: 10px;
+      height: 16px;
+      background: repeating-linear-gradient(90deg, #fff3b0, #fff3b0 8px, #ffe49e 8px, #ffe49e 14px);
+      border-radius: 12px;
+      opacity: 0.9;
+    }
+    .bowl-berries {
+      position: absolute;
+      bottom: 12px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+    .berry-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #c1121f;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    .berry-dot.blue { background: #1d3557; }
+    .berry-dot.gold { background: #fca311; }
+
+    /* Menu Row Separator */
+    .menu-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .menu-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Box Borders */
+    .ginger-box {
+      border: 1.5px solid #ffb703;
+      border-radius: 16px;
+      padding: 10px 14px;
+      background: rgba(255, 183, 3, 0.04);
+      position: relative;
+    }
+    .ginger-header-tag {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111611;
+      padding: 0 12px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #ffb703;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .addon-box {
+      border: 1.5px solid #68cc3b;
+      border-radius: 16px;
+      padding: 10px 14px;
+      background: rgba(104, 204, 59, 0.04);
+    }
+
+    .leaf-bullet {
+      color: #68cc3b;
+      margin-left: 4px;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Controller / Actions -->
+  <div class="w-full max-w-7xl flex flex-wrap justify-between items-center mb-4 px-2">
+    <div class="flex items-center gap-3">
+      <a href="wowhealthspot.html" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-mono font-bold rounded-lg border border-zinc-600 transition-colors">
+        ← Back to Storefront
+      </a>
+      <span class="text-xs font-mono text-lime-400 font-bold uppercase tracking-wider">
+        ✨ 100% Pure CSS Chalkboard Menu Replica
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="assets/wowhealthspot/wow_menu_board_hd.jpg" target="_blank" class="px-4 py-2 bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold uppercase rounded-lg transition-colors">
+        View Original HD Photo
+      </a>
+    </div>
+  </div>
+
+  <!-- THE BOARD -->
+  <div class="menu-canvas shadow-2xl">
+    
+    <!-- Top Corner Tropical Leaves -->
+    <svg class="palm-leaf-tl" viewBox="0 0 100 100" fill="#68cc3b">
+      <path d="M10,90 Q40,40 90,10 Q60,50 30,95 Z M20,80 Q50,30 100,5 Q70,45 40,90 Z M5,95 Q30,50 80,20 Q50,60 15,100 Z"/>
+    </svg>
+    <svg class="palm-leaf-tr" viewBox="0 0 100 100" fill="#68cc3b">
+      <path d="M10,90 Q40,40 90,10 Q60,50 30,95 Z M20,80 Q50,30 100,5 Q70,45 40,90 Z M5,95 Q30,50 80,20 Q50,60 15,100 Z"/>
+    </svg>
+    <svg class="pineapple-accent" viewBox="0 0 100 130" fill="#fca311">
+      <ellipse cx="50" cy="80" rx="32" ry="42" fill="#e85d04" opacity="0.8"/>
+      <path d="M30,45 L50,10 L70,45 M20,50 L50,15 L80,50 M35,45 L50,5 L65,45" stroke="#76ba1b" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </svg>
+
+    <!-- BOARD HEADER ROW -->
+    <div class="grid grid-cols-12 items-center mb-4 relative z-10">
+      
+      <!-- Left Callout: Fresh No Artificial Syrups -->
+      <div class="col-span-4 text-center">
+        <div class="font-script text-3xl text-white tracking-wide leading-none transform -rotate-3">
+          • Fresh! •
+        </div>
+        <div class="font-header font-bold text-sm tracking-widest uppercase text-white mt-1">
+          NO ARTIFICIAL SYRUPS
+        </div>
+        <div class="w-28 h-1 bg-lime-400 mx-auto rounded-full mt-1"></div>
+      </div>
+
+      <!-- Center Logo & Name Badge -->
+      <div class="col-span-4 flex flex-col items-center justify-center text-center">
+        <!-- Logo Icon Group -->
+        <div class="flex items-center gap-1.5 mb-1">
+          <svg class="w-8 h-8" viewBox="0 0 40 40">
+            <!-- Juice Cup + Heart Leaf Logo -->
+            <rect x="8" y="10" width="12" height="20" rx="3" fill="#ff7824" stroke="#ffffff" stroke-width="1.5"/>
+            <path d="M12,4 L16,10" stroke="#76ba1b" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M22,14 C22,8 28,8 30,12 C32,8 38,8 38,14 C38,22 30,28 30,28 C30,28 22,22 22,14 Z" fill="#76ba1b" stroke="#ffffff" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="font-header font-black text-4xl sm:text-5xl tracking-tight leading-none">
+          <span class="text-lime-400">W</span><span class="text-white">.</span><span class="text-orange-500">O</span><span class="text-white">.</span><span class="text-orange-500">W</span>
+        </div>
+        <div class="font-header font-bold text-[11px] tracking-widest text-lime-400 uppercase mt-0.5">
+          WELLNESS ON WELLBORN
+        </div>
+        <div class="text-[8px] font-mono tracking-widest text-zinc-300 uppercase mt-0.5">
+          HEALTH SPOT AND JUICE BAR
+        </div>
+      </div>
+
+      <!-- Right Callout: Made Fresh Made To Order -->
+      <div class="col-span-4 text-center">
+        <div class="font-script text-3xl text-orange-400 tracking-wide leading-none transform rotate-2">
+          • Made Fresh •
+        </div>
+        <div class="font-header font-bold text-sm tracking-widest uppercase text-white mt-1">
+          MADE TO ORDER.
+        </div>
+        <div class="w-28 h-1 bg-orange-500 mx-auto rounded-full mt-1"></div>
+      </div>
+
+    </div>
+
+    <!-- MAIN 3-COLUMN CONTENT GRID -->
+    <div class="grid grid-cols-12 gap-5 relative z-10">
+      
+      <!-- ============================================== -->
+      <!-- COLUMN 1: FRESH COLD-PRESSED JUICES + SHOTS -->
+      <!-- ============================================== -->
+      <div class="col-span-12 md:col-span-4 flex flex-col justify-between">
+        
+        <div>
+          <!-- Title & Price Banner -->
+          <div class="text-center mb-2">
+            <h2 class="font-header font-black text-2xl chalk-title-green uppercase tracking-tight">
+              FRESH COLD-PRESSED JUICES
+            </h2>
+            <div class="pill-green py-1 px-4 text-xs tracking-wider uppercase inline-block mt-1">
+              16 oz $9.99 <span class="mx-1 text-black font-black">|</span> 24 oz $12.99
+            </div>
+          </div>
+
+          <!-- Item List -->
+          <div class="space-y-1.5 mt-3">
+            
+            <!-- 1. Watermelon Breeze -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-watermelon">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-rose-400 uppercase tracking-wide">
+                  WATERMELON BREEZE <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Orange • Yellow • Red Fresh Watermelon Juice
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Tropical Energy -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-tropical">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-amber-400 uppercase tracking-wide">
+                  TROPICAL ENERGY <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Mango • Orange • Pineapple • Apple • Lemon
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Root Radiance -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-root">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-pink-500 uppercase tracking-wide">
+                  ROOT RADIANCE <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Beet • Orange • Pineapple • Apple • Lemon
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Green Glow -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-green">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-lime-400 uppercase tracking-wide">
+                  GREEN GLOW <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Kale • Celery • Cucumber • Pineapple • Apple • Lemon
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Liquid Gold -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-gold">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-yellow-400 uppercase tracking-wide">
+                  LIQUID GOLD <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Carrot • Turmeric • Pineapple • Apple • Lemon
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Ginger Shots Box (Bottom Column 1) -->
+        <div class="ginger-box mt-3">
+          <div class="ginger-header-tag">— GINGER SHOTS —</div>
+          <div class="text-center mt-1 mb-2">
+            <span class="pill-yellow-shot py-0.5 px-3 text-[10px] tracking-wider uppercase inline-block">
+              2 oz | $3.99
+            </span>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3 text-left">
+            <!-- Bad Style / Bar Style -->
+            <div class="flex items-center gap-2">
+              <div class="cup-wrapper" style="width:28px;height:40px;">
+                <div class="cup-body liquid-shot-bad" style="width:24px;height:32px;"></div>
+              </div>
+              <div class="leading-tight">
+                <div class="font-header font-black text-[11px] text-orange-400 uppercase">BAR STYLE</div>
+                <div class="text-[9px] text-zinc-300 font-medium">Ginger • Turmeric • Lemon • Lime • Jalapeno • Black Pepper</div>
+              </div>
+            </div>
+
+            <!-- Straight Ginger Shot -->
+            <div class="flex items-center gap-2">
+              <div class="cup-wrapper" style="width:28px;height:40px;">
+                <div class="cup-body liquid-shot-straight" style="width:24px;height:32px;"></div>
+              </div>
+              <div class="leading-tight">
+                <div class="font-header font-black text-[11px] text-yellow-300 uppercase">STRAIGHT SHOT</div>
+                <div class="text-[9px] text-zinc-300 font-medium">100% Pure Ginger • Fresh Pressed Lemon</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============================================== -->
+      <!-- COLUMN 2: AÇAI & SMOOTHIE BOWLS -->
+      <!-- ============================================== -->
+      <div class="col-span-12 md:col-span-4 flex flex-col justify-between border-x border-zinc-800/60 px-3">
+        
+        <!-- AÇAI BOWLS BLOCK -->
+        <div>
+          <div class="text-center">
+            <h2 class="font-header font-black text-2xl chalk-title-purple uppercase tracking-tight">
+              AÇAI BOWLS <span class="leaf-bullet">🍃</span>
+            </h2>
+            <div class="pill-purple py-0.5 px-4 text-xs tracking-wider uppercase inline-block mt-0.5">
+              $12.99
+            </div>
+            <div class="text-[10px] font-mono text-zinc-400 mt-1">Includes 2 Toppings + 1 Fruit</div>
+          </div>
+
+          <div class="flex items-center gap-3 my-2 bg-purple-950/20 p-2 rounded-xl border border-purple-800/30">
+            <div class="bowl-graphic bowl-acai">
+              <div class="bowl-topping-slice"></div>
+              <div class="bowl-berries">
+                <span class="berry-dot"></span>
+                <span class="berry-dot blue"></span>
+                <span class="berry-dot gold"></span>
+              </div>
+            </div>
+            <div>
+              <div class="font-header font-bold text-xs text-purple-300 uppercase">POPULAR TOPPINGS:</div>
+              <div class="text-[10px] text-zinc-300 leading-snug">
+                Granola • Coconut Flakes • Chia Seeds • Almonds • Hemp Seeds • Cacao Nibs • Flax Seeds • Goji Berries • Honey
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SMOOTHIE BOWLS BLOCK -->
+        <div class="mt-3">
+          <div class="text-center">
+            <h2 class="font-header font-black text-2xl chalk-title-blue uppercase tracking-tight">
+              SMOOTHIE BOWLS <span class="leaf-bullet">🍃</span>
+            </h2>
+            <div class="pill-blue py-0.5 px-4 text-xs tracking-wider uppercase inline-block mt-0.5">
+              $12.99
+            </div>
+            <div class="text-[10px] font-mono text-zinc-400 mt-1">Includes 2 Toppings + 1 Fruit</div>
+          </div>
+
+          <div class="flex items-center gap-3 my-2 bg-sky-950/20 p-2 rounded-xl border border-sky-800/30">
+            <div class="bowl-graphic bowl-smoothie-base">
+              <div class="bowl-topping-slice"></div>
+              <div class="bowl-berries">
+                <span class="berry-dot"></span>
+                <span class="berry-dot blue"></span>
+                <span class="berry-dot gold"></span>
+              </div>
+            </div>
+            <div>
+              <div class="font-header font-bold text-xs text-sky-300 uppercase">POPULAR TOPPINGS:</div>
+              <div class="text-[10px] text-zinc-300 leading-snug">
+                Granola • Coconut Flakes • Chia Seeds • Almonds • Hemp Seeds • Cacao Nibs • Honey • Dragonfruit / Pitaya
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADD-ONS FOOTER BOX (MIDDLE) -->
+        <div class="addon-box mt-3 text-left">
+          <div class="flex items-center gap-1 font-header font-black text-xs text-lime-400 uppercase mb-1">
+            <span>★ ADD-ONS</span>
+          </div>
+          <div class="text-[9.5px] text-zinc-200 leading-snug font-medium">
+            Sea Moss • Almond Butter • Peanut Butter • Plant Protein • Cayenne Pepper • Hemp Seed • Chia Seeds • Flax Seeds • Moringa • B-12
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============================================== -->
+      <!-- COLUMN 3: FRESH FRUIT SMOOTHIES -->
+      <!-- ============================================== -->
+      <div class="col-span-12 md:col-span-4 flex flex-col justify-between">
+        
+        <div>
+          <!-- Title & Price Banner -->
+          <div class="text-center mb-2">
+            <h2 class="font-header font-black text-2xl chalk-title-green uppercase tracking-tight">
+              FRESH FRUIT SMOOTHIES
+            </h2>
+            <div class="pill-smoothie py-1 px-4 text-xs tracking-wider uppercase inline-block mt-1">
+              16 oz $8.99 <span class="mx-1 text-black font-black">|</span> 24 oz $11.99
+            </div>
+          </div>
+
+          <!-- Smoothie Items -->
+          <div class="space-y-1.5 mt-3">
+            
+            <!-- 1. Berry Blast -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw" style="background:#ec407a;"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-berry">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-purple-400 uppercase tracking-wide">
+                  BERRY BLAST <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Blueberry • Raspberry • Strawberry • Banana
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Strawberry Banana Bliss -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw" style="background:#ec407a;"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-strawberry">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-pink-400 uppercase tracking-wide">
+                  STRAWBERRY BANANA BLISS
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Strawberry • Banana • Almond Milk
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Green Goddess -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-goddess">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-lime-400 uppercase tracking-wide">
+                  GREEN GODDESS <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Spinach • Pineapple • Avocado • Banana
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Paradise Vibes -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-paradise">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-yellow-300 uppercase tracking-wide">
+                  PARADISE VIBES <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Mango • Pineapple • Banana • Lemon • Coconut Milk
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Sunrise Splash -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-sunrise">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-orange-400 uppercase tracking-wide">
+                  SUNRISE SPLASH <span class="leaf-bullet">🍃</span>
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Strawberry • Peach • Mango • Banana • Lemon • Coconut Milk
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. W.O.W. Soursop Booster -->
+            <div class="menu-row">
+              <div class="cup-wrapper">
+                <div class="cup-straw"></div>
+                <div class="cup-lid"></div>
+                <div class="cup-body liquid-soursop">
+                  <div class="cup-logo-dot">W</div>
+                </div>
+              </div>
+              <div class="flex-1 leading-tight">
+                <div class="font-header font-black text-sm text-lime-300 uppercase tracking-wide">
+                  W.O.W. SOURSOP BOOSTER
+                </div>
+                <div class="text-[11px] text-zinc-300 font-medium">
+                  Pure Soursop • Mango • Pineapple • Banana
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Smoothie Bases Box (Bottom Column 3) -->
+        <div class="addon-box mt-3 text-left border-orange-500/50 bg-orange-950/10">
+          <div class="flex items-center gap-1 font-header font-black text-xs text-orange-400 uppercase mb-1">
+            <span>★ SMOOTHIE BASES</span>
+          </div>
+          <div class="text-[9.5px] text-zinc-200 leading-snug font-medium">
+            Orange Juice • Almond Milk • Coconut Milk • Oat Milk • Strawberry Lemonade • Pineapple / Apple Juice
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Footer Signoff on Canvas -->
+    <div class="mt-4 pt-3 border-t border-zinc-800/80 flex flex-wrap justify-between items-center text-[10px] font-mono text-zinc-500">
+      <span>1544 Wellborn Rd, Suite 10 • Lithonia, GA 30058</span>
+      <span class="text-lime-400 font-bold">CALL AHEAD: (470) 907-0740</span>
+      <span>MON–TUE: 12–5PM | WED–SAT: 12–6PM</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
