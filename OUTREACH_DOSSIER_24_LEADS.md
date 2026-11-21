@@ -2,7 +2,7 @@
 **Module:** `burn-1.com/outreach`  
 **Founder:** Leon R. Darden  
 **Ecosystem URL:** [burn-1.com](https://www.burn-1.com/)  
-**Executive Briefing Video:** [Watch on YouTube](https://youtu.be/PyVjoKVfWQY)  
+**Executive Briefing Video:** [Watch on YouTube](https://www.youtube.com/watch?v=RzsDap3xwYE)  
 
 ---
 
@@ -25,7 +25,7 @@ Instead of pulling your senior engineers away from billable tickets to complete 
 We offer Atlanta MSPs a wholesale partner tranche ($500 wholesale vs $1,000 retail) where you deliver underwriter-grade compliance directly to your clients while keeping 50% margin.
 
 Take a look at our executive briefing and partner portal:
-• 🎬 Executive Briefing: https://youtu.be/PyVjoKVfWQY
+• 🎬 Executive Briefing: https://www.youtube.com/watch?v=RzsDap3xwYE
 • 🔗 Wholesale Partner Desk: https://www.burn-1.com/partners.html
 • 🔗 Central Platform: https://www.burn-1.com/central-hub.html
 
@@ -36,7 +36,7 @@ Best regards,
 Leon R. Darden
 Founder, BURN-1 Systems
 East Metro Atlanta, GA
-Direct: 404-585-8495
+Direct: 678-763-0580
 Web: https://www.burn-1.com/
 #DoneInADash • #EnjoyTheRestOfYourEvening
 ```
@@ -58,7 +58,7 @@ At BURN-1 Systems (https://www.burn-1.com/), we help independent commercial brok
 When your commercial account is facing a 40% premium increase or imminent declination due to perimeter exposure flags, our 24-hour baseline evidence pack arms your desk with binding technical proof to push the carrier underwriters across the finish line.
 
 Key resources for your producers:
-• 🎬 3-Minute Underwriting Briefing: https://youtu.be/PyVjoKVfWQY
+• 🎬 3-Minute Underwriting Briefing: https://www.youtube.com/watch?v=RzsDap3xwYE
 • 🔗 Broker Portal: https://www.burn-1.com/broker-portal.html
 • 🔗 Financial & Underwriting Protocol: https://www.burn-1.com/finance.html
 
@@ -69,7 +69,7 @@ Warm regards,
 Leon R. Darden
 Founder, BURN-1 Systems
 East Metro Atlanta, GA
-Direct: 404-585-8495
+Direct: 678-763-0580
 Web: https://www.burn-1.com/
 ```
 
@@ -90,7 +90,7 @@ At BURN-1 Systems (https://www.burn-1.com/), our Manufacturing & Industrial OT P
 We generate a sealed tamper-evident attestation packet that gives your insurer proof of physical and network isolation before your next policy renewal or safety audit.
 
 Review our facility protocol:
-• 🎬 Industrial Briefing: https://youtu.be/PyVjoKVfWQY
+• 🎬 Industrial Briefing: https://www.youtube.com/watch?v=RzsDap3xwYE
 • 🔗 Manufacturing & OT Shield: https://www.burn-1.com/manufacturing.html
 • 🔗 Central Platform: https://www.burn-1.com/central-hub.html
 
@@ -101,7 +101,7 @@ Sincerely,
 Leon R. Darden
 Founder, BURN-1 Systems
 East Metro Atlanta, GA
-Direct: 404-585-8495
+Direct: 678-763-0580
 Web: https://www.burn-1.com/
 ```
 
@@ -113,7 +113,7 @@ Web: https://www.burn-1.com/
 ```text
 Hi [First Name] — Noticed your work leading [Company Name] in the Atlanta area. We run BURN-1 Systems (burn-1.com) in East Metro. We build automated outside-in cyber posture evidence binders that help local businesses satisfy carrier underwriters and stop 90-day policy renewal stalls. 
 
-Here is our 3-minute executive briefing: https://youtu.be/PyVjoKVfWQY
+Here is our 3-minute executive briefing: https://www.youtube.com/watch?v=RzsDap3xwYE
 
 Would love to share how we can back up your commercial accounts or facility compliance. Have a great week! — Leon
 ```
@@ -161,7 +161,7 @@ Would love to share how we can back up your commercial accounts or facility comp
 | 19 | **Clean Harbors (Tucker Technical)** | Stone Mountain, GA 30083 (~5 mi) | `tuckerops@cleanharbors.com`<br>770-908-8251 • [Website](https://www.cleanharbors.com/) | National leader in environmental and hazmat disposal; enterprise attestation target. |
 | 20 | **Rinchem Company (Atlanta)** | 3195 N Lanier Pkwy, Decatur, GA 30034 (~6 mi) | `sales@rinchem.com`<br>470-343-7614 • [Website](https://www.rinchem.com/) | 80,000 sq ft chemical warehouse storing flammables/combustibles; textbook candidate for OT cloaking. |
 | 21 | **Etowah Chemical Sales & Services** | 878 Davis Dr SE, Conyers, GA 30094 (~12 mi) | `info@etowahchemicals.com`<br>770-760-7031 • [Website](https://www.etowahchemicals.com/) | Conyers distributor facing heightened Rockdale County post-BioLab chemical inspection scrutiny. |
-| 22 | **GTY Logistics** | 1449 V F W Dr SW, Conyers, GA 30012 (~12 mi) | `dispatch@gtytms.com`<br>[Website](http://gtytms.com/) | 3PL serving DoD and FEMA supply chains; federal standards require sealed digital posture proof. |
+| 22 | **GTY Logistics** | 1449 V F W Dr SW, Conyers, GA 30012 (~12 mi) | `dispatch@gty.ai`<br>470-687-1216 • [Website](http://gty.ai/) | 3PL serving DoD and FEMA supply chains; federal standards require sealed digital posture proof. |
 | 23 | **LeSaint Logistics** | 1940 Twin Creek Pkwy, Conyers, GA 30013 (~13 mi) | `info@lesaint.com`<br>314-991-1900 • [Website](https://www.lesaint.com/) | Large I-20 distribution center; enterprise multi-domain tier prospect ($2,500 - $5,000/yr). |
 | 24 | **Georgia Chemical & Equipment Co.** | 1580 Beaver Ruin Rd, Norcross, GA 30093 (~14 mi) | `sales@georgiachemical.com`<br>770-921-0397 • [Website](https://georgiachemical.com/) | Owner-operated chemical & detergent supplier; direct access to ownership for quick deal closing. |
 
@@ -170,7 +170,7 @@ Would love to share how we can back up your commercial accounts or facility comp
 ## Part 3: Video & Link Assets for Messaging
 
 When messaging or emailing leads, keep these exact URLs ready:
-- **Executive Underwriting Briefing (YouTube):** `https://youtu.be/PyVjoKVfWQY`
+- **Executive Underwriting Briefing (YouTube):** `https://www.youtube.com/watch?v=RzsDap3xwYE`
 - **Main Home Platform:** `https://www.burn-1.com/`
 - **Wholesale MSP Desk:** `https://www.burn-1.com/partners.html`
 - **Commercial Broker Desk:** `https://www.burn-1.com/broker-portal.html`
