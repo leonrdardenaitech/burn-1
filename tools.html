@@ -1,611 +1,1155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="burner">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Omni Diagnostic Workbench | Burn-1 Systems</title>
-  
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omni Diagnostic Suite & Mender Accelerator | Leon R. Darden Advisory</title>
   <style>
     :root {
-      /* Holographic Neon Palette */
-      --neon-blue: #00f0ff;
-      --neon-cyan: #22d3ee;
-      --neon-emerald: #10b981;
-      --neon-amber: #f59e0b;
-      --neon-purple: #a855f7;
-      --panel-glass: rgba(8, 12, 20, 0.85);
+      --bg-dark: #080a0f;
+      --panel-bg: #11141d;
+      --panel-border: rgba(255, 0, 85, 0.25);
+      --accent-fuchsia: #ff0055;
+      --accent-glow: rgba(255, 0, 85, 0.4);
+      --accent-cyan: #00f0ff;
+      --accent-green: #00ff88;
+      --accent-orange: #ff6600;
+      --text-main: #f0f4f8;
+      --text-muted: #8a99ad;
+      --font-mono: 'Consolas', 'Courier New', monospace;
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
     body {
-      background-color: #020617;
-      color: var(--neon-blue);
-      font-family: 'Share Tech Mono', monospace;
-      margin: 0;
-      /* Holographic Motherboard / Workbench Background */
-      background-image: 
-        linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)),
-        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px 20px 80px;
       overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(255, 0, 85, 0.08) 0%, transparent 60%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 40px 40px, 40px 40px;
     }
 
-    .font-hud { font-family: 'Orbitron', sans-serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-    /* Coolant Tube Assembly (From your live code) */
-    .coolant-tube-assembly {
-      position: relative;
-      height: 24px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(2,6,23,0.85) 50%, rgba(34,211,238,0.2) 100%);
-      border: 1px solid rgba(34, 211, 238, 0.5);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0,0,0,0.8);
-      overflow: hidden;
+    /* Header & Branding */
+    header {
       width: 100%;
+      max-width: 960px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: var(--text-main);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo span { color: var(--accent-fuchsia); text-shadow: 0 0 10px var(--accent-glow); }
+    .brand-badge {
+      background: rgba(255, 0, 85, 0.12);
+      border: 1px solid var(--accent-fuchsia);
+      color: var(--accent-fuchsia);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    /* True SVG Turbine Rotors (From your live code) */
-    .turbine-housing {
-      position: relative; 
-      width: 64px; 
-      height: 64px; 
-      border-radius: 50%; 
-      padding: 4px;
-      background: conic-gradient(from 45deg, #0f172a, #22d3ee, #0f172a, #22d3ee, #0f172a);
-      border: 1px solid var(--neon-cyan);
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-    }
-    .turbine-cavity {
-      width: 100%; height: 100%; border-radius: 50%;
-      background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 85%);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: inset 0 0 15px #000;
+    /* Center Tool Container */
+    .app-container {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
     }
 
-    /* Accordion & Glass Panels */
-    .holo-pane {
-      background: var(--panel-glass);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.05), inset 0 0 20px rgba(0, 240, 255, 0.05);
+    /* Sleek Omni-Bar Wrapper */
+    .omni-wrapper {
+      width: 100%;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      box-shadow: 0 0 35px rgba(0,0,0,0.6), 0 0 15px rgba(255,0,85,0.15);
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
+    .omni-bar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 25px;
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .omni-bar-header:hover {
+      background: rgba(255, 0, 85, 0.05);
+    }
+    .omni-bar-header.open {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+    .omni-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .omni-icon {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-fuchsia);
+      box-shadow: 0 0 10px var(--accent-fuchsia);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+    .omni-label {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-main);
+    }
+    .omni-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+    .accordion-indicator {
+      font-size: 13px;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chevron {
+      transition: transform 0.3s ease;
+    }
+    .chevron.open {
+      transform: rotate(180deg);
+    }
+
+    /* Accordion Body / Selection Matrix */
     .accordion-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.6s ease, opacity 0.5s ease;
-      opacity: 0;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(0, 0, 0, 0.2);
     }
-    .accordion-item.active .accordion-content {
-      max-height: 3500px;
-      opacity: 1;
-      padding-top: 1.5rem;
-      padding-bottom: 1.5rem;
+    .accordion-content.open {
+      max-height: 800px;
+      padding: 25px;
     }
 
-    /* Diagnostics Result Box */
-    .result-box {
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.75rem;
-      border-radius: 0.5rem;
-      min-height: 60px;
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .test-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .test-card:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.04);
+    }
+    .test-card.selected {
+      border-color: var(--accent-fuchsia);
+      background: rgba(255, 0, 85, 0.06);
+      box-shadow: inset 0 0 15px rgba(255, 0, 85, 0.08);
+    }
+    .test-checkbox {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--text-muted);
+      border-radius: 4px;
+      margin-top: 2px;
+      cursor: pointer;
+      display: grid;
+      place-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .test-checkbox::before {
+      content: "✓";
+      font-size: 13px;
+      font-weight: 900;
+      color: #fff;
+      transform: scale(0);
+      transition: transform 0.2s ease;
+    }
+    .test-checkbox:checked {
+      background: var(--accent-fuchsia);
+      border-color: var(--accent-fuchsia);
+      box-shadow: 0 0 8px var(--accent-fuchsia);
+    }
+    .test-checkbox:checked::before {
+      transform: scale(1);
+    }
+    .test-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .test-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
       display: flex;
       align-items: center;
-      color: #cbd5e1;
+      justify-content: space-between;
+    }
+    .time-badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 240, 255, 0.2);
+    }
+    .test-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
 
-    /* Footer Ad Marquee */
-    .marquee { overflow: hidden; white-space: nowrap; border-top: 1px solid var(--neon-cyan); border-bottom: 1px solid var(--neon-cyan); background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
-    .marquee-content { display: inline-block; animation: scroll 25s linear infinite; }
-    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    /* Accordion Control Bar */
+    .selection-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .btn-text {
+      background: transparent;
+      border: none;
+      color: var(--accent-cyan);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      margin-right: 15px;
+    }
+    .btn-text:hover { color: #fff; text-decoration: underline; }
+
+    /* Action Trigger Button */
+    .omni-launch-bar {
+      padding: 20px 25px;
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .btn-launch {
+      width: 100%;
+      max-width: 450px;
+      background: linear-gradient(135deg, var(--accent-fuchsia) 0%, #d00045 100%);
+      color: #fff;
+      border: none;
+      padding: 16px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 25px var(--accent-glow);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .btn-launch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    /* Email Modal Popup */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(5, 7, 12, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .email-modal {
+      width: 90%;
+      max-width: 480px;
+      background: var(--panel-bg);
+      border: 1px solid var(--accent-fuchsia);
+      border-radius: 16px;
+      padding: 35px;
+      box-shadow: 0 0 50px rgba(255, 0, 85, 0.3);
+      text-align: center;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .email-modal {
+      transform: scale(1);
+    }
+    .modal-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    .modal-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .modal-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .input-field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 14px 18px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .input-field:focus {
+      border-color: var(--accent-fuchsia);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+    .checkbox-newsletter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .btn-modal-submit {
+      width: 100%;
+      background: var(--accent-fuchsia);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 0 20px var(--accent-glow);
+      transition: all 0.3s ease;
+    }
+    .btn-modal-submit:hover {
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px; right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Stacked Cinematic Scan Console */
+    .scan-console {
+      width: 100%;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 30px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 0 35px rgba(0,0,0,0.6);
+    }
+    .scan-console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 15px;
+    }
+    .console-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .console-timer-global {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent-orange);
+      background: rgba(255, 102, 0, 0.12);
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 102, 0, 0.3);
+    }
+
+    /* Stacked Items & Individual Bars */
+    .stacked-scan-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .scan-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 16px 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .scan-item.active {
+      border-color: var(--accent-fuchsia);
+      background: rgba(255, 0, 85, 0.04);
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.12);
+    }
+    .scan-item.completed {
+      border-color: var(--accent-green);
+      background: rgba(0, 255, 136, 0.03);
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .item-status {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+    .scan-item.active .item-status { color: var(--accent-fuchsia); font-weight: 700; }
+    .scan-item.completed .item-status { color: var(--accent-green); font-weight: 700; }
+
+    /* Individual Progress Bar */
+    .item-bar-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .item-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-fuchsia), var(--accent-orange));
+      border-radius: 4px;
+      transition: width 0.1s linear;
+    }
+    .scan-item.completed .item-bar-fill {
+      background: var(--accent-green);
+    }
+    .item-log {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      min-height: 16px;
+    }
+
+    /* Final Pop-Up Findings Report */
+    .report-popup {
+      width: 100%;
+      background: var(--panel-bg);
+      border: 1px solid var(--accent-green);
+      border-radius: 16px;
+      padding: 35px;
+      display: none;
+      flex-direction: column;
+      gap: 25px;
+      box-shadow: 0 0 45px rgba(0, 255, 136, 0.18);
+      animation: fadeIn 0.5s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .report-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+      padding-bottom: 20px;
+    }
+    .report-title-group h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .report-title-group p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .overall-grade-card {
+      text-align: center;
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px solid var(--accent-green);
+      border-radius: 12px;
+      padding: 12px 24px;
+    }
+    .grade-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .grade-value { font-size: 32px; font-weight: 900; color: var(--accent-green); }
+
+    /* Findings Grid & Cards */
+    .findings-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .finding-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .finding-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .finding-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .section-grade {
+      font-size: 14px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+    }
+    .grade-A { background: rgba(0, 255, 136, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .grade-B { background: rgba(0, 240, 255, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+    .grade-C { background: rgba(255, 102, 0, 0.15); color: var(--accent-orange); border: 1px solid var(--accent-orange); }
+    .grade-F { background: rgba(255, 0, 85, 0.15); color: var(--accent-fuchsia); border: 1px solid var(--accent-fuchsia); }
+
+    .diagnosis-box {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 12px 15px;
+      border-radius: 6px;
+      border-left: 3px solid var(--accent-cyan);
+      font-size: 13px;
+      color: #d1dce8;
+    }
+    .remediation-box {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 15px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .remediation-box strong { color: var(--accent-green); }
+
+    .report-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .btn-download-pdf {
+      background: var(--accent-green);
+      color: #080a0f;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-download-pdf:hover {
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Modern 3D Parallax & Depth Architecture */
+    html {
+      scroll-behavior: smooth;
+    }
+    .parallax-glow-1 {
+      position: fixed;
+      top: -150px;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(40px);
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .parallax-glow-2 {
+      position: fixed;
+      bottom: -100px;
+      right: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 0, 85, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(50px);
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .app-container {
+      position: relative;
+      z-index: 2;
+    }
+    .omni-wrapper {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(255, 0, 85, 0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .omni-wrapper:hover {
+      box-shadow: 0 25px 70px rgba(0,0,0,0.9), 0 0 45px rgba(0, 240, 255, 0.3);
+    }
+    .consult-banner {
+      width: 100%;
+      max-width: 860px;
+      margin-top: 35px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, rgba(17, 20, 29, 0.95), rgba(8, 10, 15, 0.98));
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+    }
+    .consult-btn {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #00f0ff, #00a8ff);
+      color: #080a0f !important;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .consult-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
+    }
+
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body>
 
-  <!-- SVG Gradients for Turbines -->
-  <svg width="0" height="0" class="absolute pointer-events-none">
-    <defs>
-      <linearGradient id="steelBladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#22d3ee"/>
-        <stop offset="45%" stop-color="#0f172a"/>
-        <stop offset="100%" stop-color="#00f0ff"/>
-      </linearGradient>
-    </defs>
-  </svg>
+  <!-- Dynamic Parallax Depth Glows -->
+  <div class="parallax-glow-1"></div>
+  <div class="parallax-glow-2"></div>
 
-  <!-- ================= HERO WORKBENCH ================= -->
-  <header class="w-full pt-8 pb-6 px-4">
-    <!-- Top Coolant Canvas -->
-    <div class="max-w-7xl mx-auto mb-6">
-      <div class="coolant-tube-assembly">
-        <canvas id="topCoolantCanvas" class="w-full h-full block"></canvas>
-      </div>
-    </div>
-
-    <!-- Title & Quad SVG Fans -->
-    <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
-      <!-- Left Dual Fans -->
-      <div class="hidden md:flex gap-3">
-        <div class="turbine-housing"><div class="turbine-cavity">
-          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
-        </div></div>
-        <div class="turbine-housing"><div class="turbine-cavity">
-          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
-        </div></div>
-      </div>
-
-      <!-- Center Holographic Title -->
-      <div class="text-center flex-1">
-        <h1 class="font-hud text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-300 to-blue-600 drop-shadow-[0_0_20px_rgba(34,211,238,0.8)] tracking-widest leading-none">
-          BURN-1 SYSTEMS
-        </h1>
-        <div class="text-xl sm:text-2xl font-bold tracking-widest text-cyan-500 mt-2">TOOLS WORKBENCH</div>
-        <p class="mt-2 text-slate-400 text-xs tracking-widest">/// OMNI_DIAGNOSTICS_ONLINE // HARDWARE_SYNC_OK ///</p>
-      </div>
-
-      <!-- Right Dual Fans -->
-      <div class="hidden md:flex gap-3">
-        <div class="turbine-housing"><div class="turbine-cavity">
-          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
-        </div></div>
-        <div class="turbine-housing"><div class="turbine-cavity">
-          <svg class="w-full h-full fan-rotor" viewBox="0 0 100 100"><g fill="url(#steelBladeGrad)" stroke="#0f172a" stroke-width="1"><path d="M50,50 L42,10 L58,8 Z"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(45 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(90 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(135 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(180 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(225 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(270 50 50)"/><path d="M50,50 L42,10 L58,8 Z" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="14" fill="#0f172a" stroke="#22d3ee"/></svg>
-        </div></div>
-      </div>
-    </div>
-
-    <!-- HUGE LAYERED OMNI-BAR IMAGE -->
-    <!-- Scaled up significantly, absolute inputs mapped to the pixels of the image -->
-    <div class="mt-8 mb-6 w-full max-w-5xl mx-auto relative px-2 drop-shadow-[0_0_30px_rgba(0,240,255,0.3)]">
-      <img src="image.png_20261027024343.jpg" alt="Omni Bar HUD" class="w-full h-auto block rounded-2xl">
-      
-      <!-- Invisible Input layered over "type domain |" -->
-      <input type="text" id="target-domain" 
-        class="absolute bg-transparent text-white font-mono font-bold outline-none z-10" 
-        style="top: 40%; left: 35.5%; width: 42%; height: 20%; font-size: clamp(1rem, 2.5vw, 2rem);" 
-        placeholder="burn-1.com" onkeypress="handleEnter(event)">
-      
-      <!-- Invisible Button layered over Arrow/Search Icons -->
-      <button class="absolute bg-cyan-500/10 hover:bg-cyan-400/30 cursor-pointer z-10 rounded-xl transition-colors" 
-        style="top: 36%; right: 9%; width: 10%; height: 28%;" 
-        onclick="runAllMicroScans()" title="Execute Omni Scan"></button>
-    </div>
-
+  <!-- Header Branding with Parallax Depth -->
+  <header class="parallax-layer">
+    <div class="brand-logo">LEON R. DARDEN <span>// WORKBENCH</span></div>
+    <div class="brand-badge" style="border-color: #00f0ff; color: #00f0ff; background: rgba(0,240,255,0.1);">Omni-Scan &amp; Mender Suite</div>
   </header>
 
-  <!-- ================= ACCORDION WORKBENCH UI ================= -->
-  <main class="max-w-6xl mx-auto w-full px-4 py-4 flex-1 space-y-6">
+  <div class="app-container">
 
-    <!-- 1. LIVE FREE DIAGNOSTICS (Cyan - Active by Default) -->
-    <div class="accordion-item holo-pane rounded-2xl active" id="acc-1">
-      <button onclick="toggleSection('acc-1')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
-        <div class="flex items-center gap-4">
-          <div class="w-2 h-10 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
-          <span class="text-cyan-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">01_Omni Perimeter Probe</span>
-        </div>
-        <i class="fa-solid fa-chevron-up text-cyan-400 toggle-icon text-xl"></i>
-      </button>
+    <!-- SLEEK OMNI-BAR WITH ACCORDION SELECTOR -->
+    <div class="omni-wrapper" id="omni-wrapper">
       
-      <div class="accordion-content px-5 sm:px-10 border-t border-cyan-900/50">
-        <p class="text-slate-400 text-sm mb-6 font-mono">
-          <i class="fa-solid fa-circle-info text-cyan-400 mr-1"></i> Non-invasive public DNS-over-HTTPS (RFC 8484) and cryptographic TLS handshakes. Zero credentials, zero disruption. Enter domain in the HUD above and click search.
-        </p>
-
-        <!-- The 4 Original Vector Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 font-mono text-xs">
-          
-          <!-- VECTOR 1: DMARC -->
-          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-bold text-white text-sm"><i class="fa-solid fa-envelope-shield text-cyan-400 mr-2"></i>Email Spoofing & DMARC</span>
-              <span id="badge-dmarc" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
-            </div>
-            <p class="text-slate-400 text-[11px] font-sans mb-3">Queries live Cloudflare DNS-over-HTTPS for published TXT records. Verifies if actors can forge emails.</p>
-            <div id="result-dmarc" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
-          </div>
-
-          <!-- VECTOR 2: TLS -->
-          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-bold text-white text-sm"><i class="fa-solid fa-lock text-cyan-400 mr-2"></i>TLS 1.3 Cipher Strength</span>
-              <span id="badge-tls" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
-            </div>
-            <p class="text-slate-400 text-[11px] font-sans mb-3">Audits transport encryption protocols. Confirms forward-secrecy cipher suites and flags deprecated TLS 1.0.</p>
-            <div id="result-tls" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
-          </div>
-
-          <!-- VECTOR 3: HEADERS -->
-          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-bold text-white text-sm"><i class="fa-solid fa-shield-virus text-cyan-400 mr-2"></i>Web Headers & Cookies</span>
-              <span id="badge-headers" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
-            </div>
-            <p class="text-slate-400 text-[11px] font-sans mb-3">Inspects client protection headers including HSTS, Content-Security-Policy, and HttpOnly cookie flags.</p>
-            <div id="result-headers" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
-          </div>
-
-          <!-- VECTOR 4: CLOUD -->
-          <div class="bg-black/40 rounded-xl p-5 border border-cyan-900/50">
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-bold text-white text-sm"><i class="fa-solid fa-cloud-arrow-down text-cyan-400 mr-2"></i>Cloud Storage Pointers</span>
-              <span id="badge-cloud" class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-600 font-bold uppercase">READY</span>
-            </div>
-            <p class="text-slate-400 text-[11px] font-sans mb-3">Checks authoritative CNAME mapping to detect dangling buckets or forgotten staging takeover risks.</p>
-            <div id="result-cloud" class="result-box font-mono text-[10px]">Awaiting telemetry execution...</div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. SELF HELP & DOWNLOADS (Emerald Coolant) -->
-    <div class="accordion-item holo-pane rounded-2xl" id="acc-2">
-      <button onclick="toggleSection('acc-2')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
-        <div class="flex items-center gap-4">
-          <div class="w-2 h-10 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></div>
-          <span class="text-emerald-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">02_Self-Help Blueprints</span>
-        </div>
-        <i class="fa-solid fa-chevron-down text-emerald-400 toggle-icon text-xl"></i>
-      </button>
-      <div class="accordion-content px-5 sm:px-10 border-t border-emerald-900/50">
-        <div class="flex flex-col md:flex-row gap-8 items-start">
-          <div class="md:w-1/3">
-            <h3 class="text-emerald-300 font-bold mb-2">ZERO-COST BLUEPRINTS</h3>
-            <p class="text-slate-400 text-sm mb-4">Download step-by-step implementation guides utilizing 100% free, native security tools for Microsoft 365, Entra ID, and Windows environments.</p>
-            <a href="Free_Self_Help_Security_Pack.zip" download class="inline-block px-4 py-3 bg-emerald-500/20 border border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-black transition-all font-bold rounded">
-              <i class="fa-solid fa-download mr-2"></i>Download Full ZIP (26 KB)
-            </a>
-          </div>
-          <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
-            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
-              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-MFA</div>
-              <div class="font-bold text-slate-200">MFA Setup Guide</div>
-            </div>
-            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
-              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-SECDEF</div>
-              <div class="font-bold text-slate-200">Security Defaults</div>
-            </div>
-            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
-              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-SCORE</div>
-              <div class="font-bold text-slate-200">Secure Score Benchmark</div>
-            </div>
-            <div class="p-4 border border-emerald-900/50 bg-black/40 rounded">
-              <div class="text-xs text-emerald-500 mb-1">DOC-ID: B1-COMPLY</div>
-              <div class="font-bold text-slate-200">Zero Trust Framework</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. FREE RESOURCES (Purple Coolant) -->
-    <div class="accordion-item holo-pane rounded-2xl" id="acc-3">
-      <button onclick="toggleSection('acc-3')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
-        <div class="flex items-center gap-4">
-          <div class="w-2 h-10 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></div>
-          <span class="text-purple-400 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">03_External Resources</span>
-        </div>
-        <i class="fa-solid fa-chevron-down text-purple-400 toggle-icon text-xl"></i>
-      </button>
-      <div class="accordion-content px-5 sm:px-10 border-t border-purple-900/50">
-        
-        <!-- Filter Tabs -->
-        <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
-          <button onclick="filterTools('all')" class="px-3 py-1.5 bg-purple-600 text-white font-bold rounded">All Utilities</button>
-          <button onclick="filterTools('dns')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">DNS/Email</button>
-          <button onclick="filterTools('ssl')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">Crypto/SSL</button>
-          <button onclick="filterTools('intel')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-300 font-bold rounded border border-white/10">Threat Intel</button>
-        </div>
-
-        <!-- 14 Tool Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs" id="tools-grid">
-          
-          <a href="https://dnsviz.net/" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-sitemap text-purple-400 mr-2"></i>DNSViz</h3>
-            <p class="text-slate-400">Visual analysis of the DNSSEC authentication chain and DNS resolution path.</p>
-          </a>
-          <a href="https://mxtoolbox.com/SuperTool.aspx" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-toolbox text-purple-400 mr-2"></i>MXToolbox</h3>
-            <p class="text-slate-400">Diagnostic platform for MX records, DNS propagation, and SMTP response tests.</p>
-          </a>
-          <a href="https://www.whatsmydns.net/" target="_blank" class="tool-card dns block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-earth-americas text-purple-400 mr-2"></i>What's My DNS</h3>
-            <p class="text-slate-400">Global DNS propagation checker across 30+ edge nodes worldwide.</p>
-          </a>
-          
-          <a href="https://www.ssllabs.com/ssltest/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-certificate text-purple-400 mr-2"></i>Qualys SSL Labs</h3>
-            <p class="text-slate-400">The gold standard for evaluating web server SSL/TLS configurations and ciphers.</p>
-          </a>
-          <a href="https://badssl.com/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-triangle-exclamation text-purple-400 mr-2"></i>BadSSL</h3>
-            <p class="text-slate-400">Curated suite of test subdomains for inspecting how clients handle broken certs.</p>
-          </a>
-          <a href="https://crt.sh/" target="_blank" class="tool-card ssl block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-fingerprint text-purple-400 mr-2"></i>crt.sh</h3>
-            <p class="text-slate-400">Public Certificate Transparency log search for Outside-In Exposure Audit shadow IT discovery.</p>
-          </a>
-
-          <a href="https://www.abuseipdb.com/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-bug text-purple-400 mr-2"></i>AbuseIPDB</h3>
-            <p class="text-slate-400">Crowdsourced IP reputation database for checking incoming malicious activity.</p>
-          </a>
-          <a href="https://www.shodan.io/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-crosshairs text-purple-400 mr-2"></i>Shodan</h3>
-            <p class="text-slate-400">Search engine for Internet-connected devices, open ports, and exposed services.</p>
-          </a>
-          <a href="https://securityheaders.com/" target="_blank" class="tool-card intel block p-4 border border-purple-500/30 bg-black/40 hover:border-purple-400 transition-colors rounded">
-            <h3 class="text-sm font-bold text-white mb-1"><i class="fa-solid fa-shield text-purple-400 mr-2"></i>SecurityHeaders</h3>
-            <p class="text-slate-400">Analyzes HTTP response headers, grading your site from A+ down to F.</p>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. SYSTEM HELPDESK (Amber Coolant) -->
-    <div class="accordion-item holo-pane rounded-2xl" id="acc-4">
-      <button onclick="toggleSection('acc-4')" class="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
-        <div class="flex items-center gap-4">
-          <div class="w-2 h-10 rounded-full bg-amber-500 shadow-[0_0_10px_#f59e0b]"></div>
-          <span class="text-amber-500 font-hud text-xl sm:text-2xl font-bold tracking-widest uppercase">04_System Helpdesk</span>
-        </div>
-        <i class="fa-solid fa-chevron-down text-amber-500 toggle-icon text-xl"></i>
-      </button>
-      <div class="accordion-content px-5 sm:px-10 border-t border-amber-900/50">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div class="omni-bar-header open" id="accordion-toggle" onclick="toggleAccordion()">
+        <div class="omni-title-group">
+          <div class="omni-icon"></div>
           <div>
-            <div class="mb-4">
-              <h3 class="text-2xl font-black text-white font-hud">BURN-1 SYSTEMS CORP.</h3>
-              <p class="text-amber-500 text-sm tracking-widest mt-1 font-mono">ENGINEERING & ARCHITECTURE DIVISION</p>
-            </div>
-            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
-              Burn-1 Systems develops generative AI workflows, agentic systems, and non-intrusive security platforms for enterprise environments. Our helpdesk is active 24/7.
-            </p>
-            <div class="space-y-3 font-mono text-sm">
-              <a href="#" class="block p-3 border border-amber-500/30 bg-black/40 hover:bg-amber-500/20 text-amber-300 transition-colors">
-                <i class="fa-solid fa-user-astronaut mr-2"></i>Contact Chief Architect (Leon R. Darden)
-              </a>
-              <a href="https://leonrdarden.com" target="_blank" class="block p-3 border border-blue-500/30 bg-black/40 hover:bg-blue-500/20 text-blue-300 transition-colors">
-                <i class="fa-solid fa-briefcase mr-2"></i>View Portfolio (leonrdarden.com)
-              </a>
-              <a href="https://eachoneteach.one" target="_blank" class="block p-3 border border-emerald-500/30 bg-black/40 hover:bg-emerald-500/20 text-emerald-300 transition-colors">
-                <i class="fa-solid fa-graduation-cap mr-2"></i>Access Academy (eachoneteach.one)
-              </a>
-            </div>
+            <span class="omni-label">SYSTEM HEALTH & EXPOSURE SCANNER</span>
+            <span class="omni-subtitle">(Select tests to customize report)</span>
           </div>
+        </div>
+        <div class="accordion-indicator">
+          <span id="selected-count-label">6 Tests Selected</span>
+          <span class="chevron open" id="chevron-icon">▼</span>
+        </div>
+      </div>
 
-          <div class="bg-black/60 border border-amber-500/30 p-6 rounded-lg font-mono">
-            <h4 class="text-amber-400 font-bold mb-4 tracking-widest"><i class="fa-solid fa-terminal mr-2"></i>SUBMIT TICKET_</h4>
-            <form class="space-y-4" onsubmit="event.preventDefault(); alert('TICKET LOGGED TO SECURE PIPELINE.');">
-              <input type="text" placeholder="Entity Name" class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500" required>
-              <input type="email" placeholder="Comms Channel (Email)" class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500" required>
-              <textarea rows="3" placeholder="Diagnostic Log / Issue Details..." class="w-full bg-black/50 border border-amber-500/30 text-amber-100 p-3 focus:outline-none focus:border-amber-500 resize-none" required></textarea>
-              <button type="submit" class="w-full py-3 bg-amber-500 text-black font-bold hover:bg-amber-400 transition-colors tracking-widest">
-                TRANSMIT_
-              </button>
-            </form>
+      <!-- Accordion Selection Matrix -->
+      <div class="accordion-content open" id="accordion-content">
+        <div class="test-grid">
+          
+          <!-- Test 1 -->
+          <label class="test-card selected" onclick="updateSelection()">
+            <input type="checkbox" class="test-checkbox" value="cookies" data-time="7" data-name="Storage & Cookie Detox" checked />
+            <div class="test-info">
+              <div class="test-name">
+                Storage & Cookie Detox
+                <span class="time-badge">7 SECONDS</span>
+              </div>
+              <div class="test-desc">Clears tracking residue, stale session tokens, and local storage clutter.</div>
+            </div>
+          </label>
+
+          <!-- Test 2 -->
+          <label class="test-card selected" onclick="updateSelection()">
+            <input type="checkbox" class="test-checkbox" value="hardware" data-time="12" data-name="Hardware & CPU Stress" checked />
+            <div class="test-info">
+              <div class="test-name">
+                Hardware & CPU Stress
+                <span class="time-badge">12 SECONDS</span>
+              </div>
+              <div class="test-desc">Benchmarks logical cores, RAM capacity, and thermal compute throttling.</div>
+            </div>
+          </label>
+
+          <!-- Test 3 -->
+          <label class="test-card selected" onclick="updateSelection()">
+            <input type="checkbox" class="test-checkbox" value="network" data-time="9" data-name="Network & Transport Security" checked />
+            <div class="test-info">
+              <div class="test-name">
+                Network & Transport
+                <span class="time-badge">9 SECONDS</span>
+              </div>
+              <div class="test-desc">Evaluates RTT latency, HTTPS transport ciphers, and protocol encryption.</div>
+            </div>
+          </label>
+
+          <!-- Test 4 -->
+          <label class="test-card selected" onclick="updateSelection()">
+            <input type="checkbox" class="test-checkbox" value="privacy" data-time="15" data-name="Privacy & Fingerprint Shield" checked />
+            <div class="test-info">
+              <div class="test-name">
+                Privacy Fingerprint
+                <span class="time-badge">15 SECONDS</span>
+              </div>
+              <div class="test-desc">Audits canvas tracking vectors, cross-site leaks, and telemetry footprints.</div>
+            </div>
+          </label>
+
+          <!-- Test 5 (Email Trigger) -->
+          <label class="test-card selected" onclick="updateSelection()">
+            <input type="checkbox" class="test-checkbox" id="email-check-box" value="email" data-time="10" data-name="Domain & Email Spoofing Audit" checked />
+            <div class="test-info">
+              <div class="test-name">
+                Domain Email Spoofing
+                <span class="time-badge">10 SECONDS</span>
+              </div>
+              <div class="test-desc">Audits SPF, DKIM, and DMARC alignment. (Requires email entry).</div>
+            </div>
+          </label>
+
+          <!-- Test 6 -->
+          <label class="test-card selected" onclick="updateSelection()">
+            <input type="checkbox" class="test-checkbox" value="mender" data-time="20" data-name="Mender WASM Acceleration" checked />
+            <div class="test-info">
+              <div class="test-name">
+                Mender Accelerator
+                <span class="time-badge">20 SECONDS</span>
+              </div>
+              <div class="test-desc">Tests WebAssembly & WebGL 2.0 throughput on legacy hardware.</div>
+            </div>
+          </label>
+
+        </div>
+
+        <div class="selection-controls">
+          <div>
+            <button type="button" class="btn-text" onclick="selectAll(true)">Select All</button>
+            <button type="button" class="btn-text" onclick="selectAll(false)">Clear All</button>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted);">
+            Est. Total Duration: <strong id="total-time-estimate" style="color: var(--accent-cyan);">73s</strong>
           </div>
         </div>
       </div>
+
+      <!-- Action Trigger Bar -->
+      <div class="omni-launch-bar">
+        <button type="button" class="btn-launch" onclick="handleLaunchClick()">
+          <span>⚡ Launch Selected Diagnostics</span>
+        </button>
+      </div>
+
     </div>
 
-  </main>
+    <!-- STACKED CINEMATIC SCAN CONSOLE -->
+    <div class="scan-console" id="scan-console">
+      <div class="scan-console-header">
+        <div class="console-title">
+          <span>RUNNING SEQUENTIAL DIAGNOSTICS</span>
+        </div>
+        <div class="console-timer-global" id="global-timer">
+          Time Remaining: 00s
+        </div>
+      </div>
 
-  <!-- ================= FOOTER / ADS ================= -->
-  <footer class="w-full mt-10 font-mono">
-    <div class="marquee py-3">
-      <div class="marquee-content font-bold tracking-widest uppercase text-sm">
-        <span class="mx-8 text-cyan-400">⚡ Accelerating Cyber Solutions @ burn-1.com ⚡</span>
-        <span class="mx-8 text-emerald-400">🛡️ Automated Evidence Binders Now Available 🛡️</span>
-        <span class="mx-8 text-amber-400">🔒 Deploy the Burn-1 Tor Privacy Vault 🔒</span>
-        <span class="mx-8 text-purple-400">🧠 12-Week Anti-Addiction Protocol @ eachoneteach.one 🧠</span>
-        <!-- Duplicated for seamless loop -->
-        <span class="mx-8 text-cyan-400">⚡ Accelerating Cyber Solutions @ burn-1.com ⚡</span>
-        <span class="mx-8 text-emerald-400">🛡️ Automated Evidence Binders Now Available 🛡️</span>
-        <span class="mx-8 text-amber-400">🔒 Deploy the Burn-1 Tor Privacy Vault 🔒</span>
-        <span class="mx-8 text-purple-400">🧠 12-Week Anti-Addiction Protocol @ eachoneteach.one 🧠</span>
+      <div class="stacked-scan-list" id="stacked-scan-list">
+        <!-- Dynamically populated stacked items with individual bars -->
       </div>
     </div>
-    <div class="bg-black py-6 text-center text-xs text-slate-600 tracking-widest border-t border-cyan-900">
-      &copy; 2026 BURN-1 SYSTEMS CORP. ALL RIGHTS RESERVED. <br>
-      UNAUTHORIZED ACCESS TO TELEMETRY PIPELINES IS STRICTLY PROHIBITED.
-    </div>
-  </footer>
 
-  <!-- ================= SCRIPTS ================= -->
+    <!-- POP-UP DIAGNOSTIC FINDINGS REPORT -->
+    <div class="report-popup" id="report-popup">
+      <div class="report-header">
+        <div class="report-title-group">
+          <h2>SYSTEM HEALTH & DIAGNOSTIC REPORT</h2>
+          <p id="report-meta-line">Generated by BURN-1 Systems | Patient Chart #B1-9821</p>
+        </div>
+        <div class="overall-grade-card">
+          <div class="grade-label">Overall Grade</div>
+          <div class="grade-value" id="overall-grade-display">A-</div>
+        </div>
+      </div>
+
+      <div class="findings-stack" id="findings-stack">
+        <!-- Dynamically populated findings cards -->
+      </div>
+
+      <div class="report-actions">
+        <button type="button" class="btn-download-pdf" onclick="alert('Downloading Executive Evidence Binder & Free Resource Pack (ZIP)...')">
+          📥 Download Full PDF Chart & Patch Definitions
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EMAIL MODAL POPUP -->
+  <div class="modal-overlay" id="email-modal-overlay">
+    <div class="email-modal">
+      <button class="modal-close" onclick="closeEmailModal()">×</button>
+      <div class="modal-icon">✉️</div>
+      <div class="modal-title">TYPE EMAIL TO DISPATCH REPORT</div>
+      <div class="modal-desc">
+        Enter your email address to receive your detailed diagnostic findings report, patch definitions, and free self-help security guides.
+      </div>
+      <div class="input-group">
+        <input type="email" id="user-email-input" class="input-field" placeholder="name@company.com" required />
+      </div>
+      <label class="checkbox-newsletter">
+        <input type="checkbox" id="newsletter-optin" checked />
+        <span>Subscribe to the BURN-1 Digital Health Newsletter & future tools.</span>
+      </label>
+      <button type="button" class="btn-modal-submit" onclick="submitEmailAndStart()">
+        Submit & Begin Sequential Scan
+      </button>
+    </div>
+  </div>
+
   <script>
-    // --- Accordion Logic ---
-    function toggleSection(id) {
-      const item = document.getElementById(id);
-      const icon = item.querySelector('.toggle-icon');
+    let userEmail = "";
+
+    function toggleAccordion() {
+      const content = document.getElementById('accordion-content');
+      const chevron = document.getElementById('chevron-icon');
+      const header = document.getElementById('accordion-toggle');
       
-      document.querySelectorAll('.accordion-item').forEach(el => {
-        if (el.id !== id) {
-          el.classList.remove('active');
-          const otherIcon = el.querySelector('.toggle-icon');
-          if (otherIcon) {
-            otherIcon.classList.remove('fa-chevron-up');
-            otherIcon.classList.add('fa-chevron-down');
-          }
+      content.classList.toggle('open');
+      chevron.classList.toggle('open');
+      header.classList.toggle('open');
+    }
+
+    function updateSelection() {
+      const checkboxes = document.querySelectorAll('.test-checkbox');
+      let count = 0;
+      let totalTime = 0;
+
+      checkboxes.forEach(cb => {
+        const card = cb.closest('.test-card');
+        if (cb.checked) {
+          count++;
+          totalTime += parseInt(cb.getAttribute('data-time'));
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
         }
       });
 
-      if (item.classList.contains('active')) {
-        item.classList.remove('active');
-        icon.classList.remove('fa-chevron-up');
-        icon.classList.add('fa-chevron-down');
+      document.getElementById('selected-count-label').innerText = `${count} Tests Selected`;
+      document.getElementById('total-time-estimate').innerText = `${totalTime}s`;
+    }
+
+    function selectAll(state) {
+      const checkboxes = document.querySelectorAll('.test-checkbox');
+      checkboxes.forEach(cb => { cb.checked = state; });
+      updateSelection();
+    }
+
+    function handleLaunchClick() {
+      const emailChecked = document.getElementById('email-check-box').checked;
+      
+      if (emailChecked && !userEmail) {
+        document.getElementById('email-modal-overlay').classList.add('active');
       } else {
-        item.classList.add('active');
-        icon.classList.remove('fa-chevron-down');
-        icon.classList.add('fa-chevron-up');
+        startSequentialScans();
       }
     }
 
-    // --- External Tools Filter ---
-    function filterTools(category) {
-      const cards = document.querySelectorAll('.tool-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.classList.contains(category)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+    function closeEmailModal() {
+      document.getElementById('email-modal-overlay').classList.remove('active');
     }
 
-    // --- Enter Key for Omni Bar ---
-    function handleEnter(e) {
-      if(e.key === 'Enter') runAllMicroScans();
+    function submitEmailAndStart() {
+      const input = document.getElementById('user-email-input');
+      if (!input.value || !input.value.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      userEmail = input.value;
+      closeEmailModal();
+      startSequentialScans();
     }
 
-    // --- Live Omni-Scan Engine (Cloudflare DoH & Simulation) ---
-    async function runAllMicroScans() {
-      const domainInput = document.getElementById('target-domain');
-      let domain = (domainInput.value || '').trim().toLowerCase();
-      domain = domain.replace(/^(https?:\/\/)/, '').replace(/\/.*$/, '');
-
-      if (!domain || domain.length < 3) {
-        alert('Please enter a valid domain name (e.g., burn-1.com)');
+    async function startSequentialScans() {
+      const checkboxes = document.querySelectorAll('.test-checkbox:checked');
+      if (checkboxes.length === 0) {
+        alert('Please select at least one diagnostic test.');
         return;
       }
 
-      // Open the diagnostic accordion if closed
-      const acc = document.getElementById('acc-1');
-      if (!acc.classList.contains('active')) toggleSection('acc-1');
+      // Hide Omni-Bar UI and Report
+      document.getElementById('omni-wrapper').style.display = 'none';
+      document.getElementById('report-popup').style.display = 'none';
 
-      // Set Badges to Scanning state
-      ['dmarc', 'tls', 'headers', 'cloud'].forEach(id => {
-        const b = document.getElementById(`badge-${id}`);
-        if (b) {
-          b.className = 'px-2 py-0.5 rounded text-[10px] bg-orange-900/80 text-orange-300 border border-orange-500/40 font-bold uppercase animate-pulse';
-          b.textContent = 'PROBING...';
-        }
+      // Setup Console
+      const consoleEl = document.getElementById('scan-console');
+      const listEl = document.getElementById('stacked-scan-list');
+      consoleEl.style.display = 'flex';
+      listEl.innerHTML = '';
+
+      const selectedTests = [];
+      let totalGlobalTime = 0;
+
+      checkboxes.forEach(cb => {
+        const time = parseInt(cb.getAttribute('data-time'));
+        selectedTests.push({
+          id: cb.value,
+          name: cb.getAttribute('data-name'),
+          time: time
+        });
+        totalGlobalTime += time;
       });
 
-      // 1. Vector 1: Live Cloudflare DNS-over-HTTPS DMARC Query
-      try {
-        const res = await fetch(`https://cloudflare-dns.com/dns-query?name=_dmarc.${domain}&type=TXT`, {
-          headers: { 'Accept': 'application/dns-json' }
-        });
-        const data = await res.json();
-        const dmarcEl = document.getElementById('result-dmarc');
-        const badgeDmarc = document.getElementById('badge-dmarc');
-
-        if (data.Answer && data.Answer.length > 0) {
-          const txt = data.Answer[0].data.replace(/"/g, '');
-          const isReject = txt.includes('p=reject');
-          const isQuarantine = txt.includes('p=quarantine');
-
-          badgeDmarc.className = isReject || isQuarantine
-            ? 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase'
-            : 'px-2 py-0.5 rounded text-[10px] bg-amber-900/80 text-amber-400 border border-amber-500/40 font-bold uppercase';
-          badgeDmarc.textContent = isReject ? 'HARDENED (REJECT)' : (isQuarantine ? 'QUARANTINE' : 'MONITORING (P=NONE)');
-          
-          dmarcEl.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; VALID RECORD DETECTED:</span><br><code class="text-slate-300">${txt}</code>`;
-        } else {
-          badgeDmarc.className = 'px-2 py-0.5 rounded text-[10px] bg-red-900/80 text-red-400 border border-red-500/40 font-bold uppercase';
-          badgeDmarc.textContent = 'NO DMARC RECORD';
-          dmarcEl.innerHTML = `<span class="text-red-400 font-bold">&#10007; EXPOSURE DETECTED:</span> No _dmarc.${domain} TXT record found. Domain is vulnerable to email spoofing.`;
-        }
-      } catch (err) {
-        document.getElementById('result-dmarc').innerHTML = `<span class="text-slate-400">Notice: DNS check bypassed or filtered.</span>`;
-      }
-
-      // 2. Vector 2: TLS 1.3 Simulation
-      setTimeout(() => {
-        const badgeTls = document.getElementById('badge-tls');
-        const resTls = document.getElementById('result-tls');
-        badgeTls.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase';
-        badgeTls.textContent = 'TLS 1.3 VERIFIED';
-        resTls.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; MODERN CIPHER NEGOTIATION:</span><br>HTTPS Handshake active with ECDHE key exchange. Legacy ciphers rejected.`;
-      }, 800);
-
-      // 3. Vector 3: Web Headers Simulation
-      setTimeout(() => {
-        const badgeHeaders = document.getElementById('badge-headers');
-        const resHeaders = document.getElementById('result-headers');
-        badgeHeaders.className = 'px-2 py-0.5 rounded text-[10px] bg-amber-900/80 text-amber-400 border border-amber-500/40 font-bold uppercase';
-        badgeHeaders.textContent = 'ADVISORY READY';
-        resHeaders.innerHTML = `<span class="text-amber-400 font-bold">&#9888; BROWSER HEADER TIP:</span> HSTS protocol active. Add Content-Security-Policy (CSP) to restrict scripts.`;
-      }, 1500);
-
-      // 4. Vector 4: Cloud Storage Simulation
-      setTimeout(() => {
-        const badgeCloud = document.getElementById('badge-cloud');
-        const resCloud = document.getElementById('result-cloud');
-        badgeCloud.className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-900/80 text-emerald-400 border border-emerald-500/40 font-bold uppercase';
-        badgeCloud.textContent = 'SURFACE STABLE';
-        resCloud.innerHTML = `<span class="text-emerald-400 font-bold">&#10003; 0 DANGLING ASSETS:</span> No unmapped CNAME takeovers, dangling S3 buckets, or exposed endpoints found.`;
-      }, 2200);
-    }
-
-    // --- HTML5 Canvas Coolant Loop Animation ---
-    const canvas = document.getElementById('topCoolantCanvas');
-    const ctx = canvas ? canvas.getContext('2d') : null;
-    let bubbles = [];
-    let fanAngle = 0;
-
-    function initCoolant() {
-      if (!canvas) return;
-      canvas.width = canvas.parentElement.clientWidth || 800;
-      canvas.height = 24;
-      bubbles = [];
-      for (let i = 0; i < 40; i++) {
-        bubbles.push({
-          x: Math.random() * canvas.width,
-          y: 4 + Math.random() * (canvas.height - 8),
-          r: 1 + Math.random() * 2,
-          speed: 0.5 + Math.random() * 1.5
-        });
-      }
-    }
-
-    function renderCoolant() {
-      if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Draw Bubbles
-      for (let i = 0; i < bubbles.length; i++) {
-        const b = bubbles[i];
-        b.x += b.speed;
-        if (b.x > canvas.width) b.x = -5;
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.8)';
-        ctx.fill();
-      }
-
-      // Rotate SVG Fans
-      fanAngle += 2;
-      document.querySelectorAll('.fan-rotor').forEach(svg => {
-        svg.style.transform = `rotate(${fanAngle}deg)`;
+      // Build Stacked UI List
+      selectedTests.forEach((test, idx) => {
+        const itemHtml = `
+          <div class="scan-item" id="scan-item-${idx}">
+            <div class="item-header">
+              <span class="item-title">${test.name}</span>
+              <span class="item-status" id="item-status-${idx}">WAITING IN QUEUE...</span>
+            </div>
+            <div class="item-bar-track">
+              <div class="item-bar-fill" id="item-bar-${idx}"></div>
+            </div>
+            <div class="item-log" id="item-log-${idx}">Standing by for preceding check completion...</div>
+          </div>
+        `;
+        listEl.innerHTML += itemHtml;
       });
 
-      requestAnimationFrame(renderCoolant);
+      // Execute Stacked Sequential Logic (Wait for previous to finish)
+      for (let i = 0; i < selectedTests.length; i++) {
+        await runIndividualScan(i, selectedTests[i]);
+      }
+
+      // Hide Console and Show Final Report Popup
+      consoleEl.style.display = 'none';
+      renderReportPopup(selectedTests);
     }
 
-    window.addEventListener('load', () => {
-      initCoolant();
-      requestAnimationFrame(renderCoolant);
-      
-      const hash = (window.location.hash || '').toLowerCase();
-      if (hash === '#helpdesk' || hash === '#acc-4' || hash === '#ticket' || hash === '#support') {
-        setTimeout(() => {
-          toggleSection('acc-4');
-          const el = document.getElementById('acc-4');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
-      }
-    });
-    window.addEventListener('resize', initCoolant);
+    function runIndividualScan(index, test) {
+      return new Promise((resolve) => {
+        const itemEl = document.getElementById(`scan-item-${index}`);
+        const statusEl = document.getElementById(`item-status-${index}`);
+        const barEl = document.getElementById(`item-bar-${index}`);
+        const logEl = document.getElementById(`item-log-${index}`);
 
+        itemEl.classList.add('active');
+        statusEl.innerText = 'RUNNING SCAN...';
+
+        const logs = [
+          `Initializing ${test.name} sub-routines...`,
+          `Querying system telemetry and browser APIs...`,
+          `Analyzing performance metrics and security state...`,
+          `Finalizing diagnostic evaluation...`
+        ];
+
+        let elapsed = 0;
+        const totalDuration = test.time * 1000;
+        const intervalMs = 100;
+
+        const timer = setInterval(() => {
+          elapsed += intervalMs;
+          const pct = Math.min(100, (elapsed / totalDuration) * 100);
+          barEl.style.width = `${pct}%`;
+
+          // Update log text periodically
+          const logIdx = Math.floor((pct / 100) * logs.length);
+          logEl.innerText = logs[Math.min(logs.length - 1, logIdx)];
+
+          if (elapsed >= totalDuration) {
+            clearInterval(timer);
+            itemEl.classList.remove('active');
+            itemEl.classList.add('completed');
+            statusEl.innerText = 'COMPLETED ✔';
+            logEl.innerText = `Scan finished in ${test.time}.0s. Finding logged.`;
+            resolve();
+          }
+        }, intervalMs);
+      });
+    }
+
+    function renderReportPopup(testsRun) {
+      const reportPopup = document.getElementById('report-popup');
+      const findingsStack = document.getElementById('findings-stack');
+      findingsStack.innerHTML = '';
+
+      if (userEmail) {
+        document.getElementById('report-meta-line').innerText = `Dispatched to ${userEmail} | Patient Chart #B1-9821`;
+      }
+
+      const MockFindings = {
+        cookies: {
+          grade: 'B+', gradeClass: 'grade-B',
+          diagnosis: 'Detected 28 active tracking cookies and 18.4 MB of stale LocalStorage residue causing slight session lag.',
+          remediation: 'Execute 1-Click Cookie Detox script or navigate to <code>chrome://settings/clearBrowserData</code>.'
+        },
+        hardware: {
+          grade: 'A', gradeClass: 'grade-A',
+          diagnosis: `Hardware Concurrency: ${navigator.hardwareConcurrency || 8} CPU Cores. Memory Tier: ${navigator.deviceMemory || 8} GB RAM. No thermal compute throttling observed.`,
+          remediation: 'System hardware vitals are healthy. Launch <strong>Mender WASM Accelerator</strong> to maintain optimal FPS during peak multitasking.'
+        },
+        network: {
+          grade: 'A', gradeClass: 'grade-A',
+          diagnosis: 'Round-Trip Time (RTT): 22ms. Active Transport: TLS 1.3 encrypted over HTTPS.',
+          remediation: 'Network transport is secure. Ensure secure DNS-over-HTTPS is enforced in local browser settings.'
+        },
+        privacy: {
+          grade: 'C', gradeClass: 'grade-C',
+          diagnosis: 'Canvas fingerprinting susceptibility detected. Behavioral trackers active on 3 third-party domains.',
+          remediation: 'Enable Strict Tracking Protection and install telemetry blocking headers.'
+        },
+        email: {
+          grade: 'F', gradeClass: 'grade-F',
+          diagnosis: 'Domain DMARC policy missing or configured to "p=none". Vulnerable to email spoofing and domain impersonation.',
+          remediation: 'Add TXT record to public DNS: <code>v=DMARC1; p=reject; rua=mailto:dmarc-reports@domain.com</code>.'
+        },
+        mender: {
+          grade: 'A+', gradeClass: 'grade-A',
+          diagnosis: 'WebAssembly (WASM) compute engine passed at 60 FPS. WebGL 2.0 acceleration operational.',
+          remediation: 'Deploy Mender container to run legacy business apps without upgrading local physical hardware.'
+        }
+      };
+
+      testsRun.forEach(t => {
+        const data = MockFindings[t.id] || {
+          grade: 'A', gradeClass: 'grade-A',
+          diagnosis: 'Scan passed cleanly without critical deficiencies.',
+          remediation: 'Maintain current preventative maintenance schedule.'
+        };
+
+        const cardHtml = `
+          <div class="finding-card">
+            <div class="finding-top">
+              <div class="finding-name">${t.name}</div>
+              <div class="section-grade ${data.gradeClass}">GRADE: ${data.grade}</div>
+            </div>
+            <div class="diagnosis-box">
+              <strong>Clinical Diagnosis:</strong> ${data.diagnosis}
+            </div>
+            <div class="remediation-box">
+              <strong>Specialized Remediation Plan:</strong> ${data.remediation}
+            </div>
+          </div>
+        `;
+        findingsStack.innerHTML += cardHtml;
+      });
+
+      reportPopup.style.display = 'flex';
+    }
   </script>
+
+
+  <script>
+    // Modern 60fps Depth Parallax
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 35;
+      const y = (e.clientY / window.innerHeight - 0.5) * 35;
+      const glow1 = document.querySelector('.parallax-glow-1');
+      const glow2 = document.querySelector('.parallax-glow-2');
+      const header = document.querySelector('.parallax-layer');
+      if (glow1) glow1.style.transform = `translate(${x * 1.8}px, ${y * 1.8}px)`;
+      if (glow2) glow2.style.transform = `translate(${-x * 1.4}px, ${-y * 1.4}px)`;
+      if (header) header.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px)`;
+    });
+  </script>
+
 </body>
 </html>
