@@ -1,6 +1,11 @@
 ﻿User-agent: *
 Allow: /
 Disallow: /downloads/
+Disallow: /cards/
+Disallow: /directory*
+Disallow: /moon-spa*
+Disallow: /emissions*
+Disallow: /wow*
 
 # Canonical Sitemap for Burn-1 Platform
 Sitemap: https://www.burn-1.com/sitemap.xml
