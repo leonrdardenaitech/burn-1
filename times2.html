@@ -1290,8 +1290,250 @@
        With Wide "AI E&O: CFO vs the Underwriter" Button & Centered Read More
        ========================================================================= -->
   <main class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-16 w-full flex-1">
-    
-    <article class="glass-article rounded-3xl p-8 sm:p-12 space-y-8">
+
+    <!-- ARTICLE SELECTOR SWITCHER (TAB NAV) -->
+    <div class="flex items-center justify-center gap-3 mb-6 font-mono text-xs">
+      <button 
+        type="button" 
+        id="tab-article-crunch" 
+        onclick="switchTimesArticle('crunch')"
+        class="px-5 py-3 rounded-xl border border-amber-400 bg-amber-500/30 text-amber-300 font-bold tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:scale-105"
+      >
+        <i class="fa-solid fa-bolt mr-1.5 text-amber-400"></i> Dispatches: Mid-November Crunch (Latest)
+      </button>
+      <button 
+        type="button" 
+        id="tab-article-regulatory" 
+        onclick="switchTimesArticle('regulatory')"
+        class="px-5 py-3 rounded-xl border border-white/20 bg-slate-900/60 text-slate-400 font-bold tracking-wider uppercase transition-all hover:text-white hover:border-cyan-400/50"
+      >
+        <i class="fa-solid fa-clock mr-1.5 text-cyan-400"></i> The 4-Day Regulatory Clock
+      </button>
+    </div>
+
+    <!-- =====================================================================
+         ARTICLE 1: MID-NOVEMBER CRUNCH: WHAT A WEEK IT WAS! (NEWEST LEAD)
+         ===================================================================== -->
+    <article id="article-crunch-container" class="glass-article rounded-3xl p-8 sm:p-12 space-y-8">
+      
+      <!-- Series Header / Vol Badge -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 pb-5">
+        <span class="font-mono text-xs text-amber-400 uppercase tracking-widest font-bold">
+          <i class="fa-solid fa-newspaper mr-1.5"></i> Anergi Incident Management // Times2 Special Report
+        </span>
+        <span class="px-3.5 py-1 rounded-full bg-red-500/20 text-red-300 border border-red-400/40 font-mono text-xs font-bold animate-pulse">
+          NOVEMBER 18, 2026 • HIGH ALERT
+        </span>
+      </div>
+
+      <!-- Title & Hook -->
+      <div class="space-y-4">
+        <h1 class="font-cinzel text-3xl sm:text-5xl font-black text-white leading-tight">
+          Mid-November Crunch: What a Week It Was!
+        </h1>
+        <p class="font-rajdhani font-semibold text-xl sm:text-2xl text-amber-300 leading-snug">
+          Between November 12 and November 18, 2026: Active high-severity zero-day exploitation collided with unprecedented nationwide infrastructure self-destruction.
+        </p>
+      </div>
+
+      <!-- Lead Narrative -->
+      <p class="font-sans text-base sm:text-lg text-slate-100 leading-relaxed">
+        If you work in IT, cybersecurity, or executive leadership and felt like the floor kept shifting beneath your feet over the past seven days, you weren’t imagining it. Between November 12 and November 18, 2026, the technology world took a relentless one-two punch: active, high-severity exploitation across core developer and enterprise ecosystems on one side, and an unprecedented wave of self-inflicted infrastructure outages on the other.
+      </p>
+
+      <p class="font-sans text-base text-slate-200 leading-relaxed">
+        Airplanes stopped taking off. Corporate email went dark across more than 70 countries. Bank payments stalled. Trusted websites served malware straight through a major marketing CDN. Even classified government networks and consumer payment rails buckled.
+      </p>
+
+      <!-- PULL-QUOTE CALLOUT -->
+      <div class="p-6 rounded-2xl border-l-4 border-amber-400 bg-amber-950/30 font-serif text-lg sm:text-xl text-amber-200 italic leading-relaxed shadow-lg">
+        "Put all of it side by side, and one uncomfortable truth jumps off the page: our systems aren't just under attack from the outside—they are cracking under the weight of their own complexity."
+      </div>
+
+      <!-- IMAGE 1: CYBER SOC TELEMETRY -->
+      <div class="rounded-2xl overflow-hidden border-2 border-amber-400/40 shadow-2xl bg-slate-950/80">
+        <div class="relative aspect-[21/9] w-full">
+          <img 
+            src="assets/corp_server_room_data_racks.jpg" 
+            alt="Enterprise Datacenter Telemetry Grid" 
+            class="w-full h-full object-cover opacity-90"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex items-end justify-between p-4 font-mono text-xs">
+            <span class="text-amber-300 font-bold bg-slate-950/80 px-3 py-1 rounded border border-amber-400/40">
+              FIG 1.0: Cloud Infrastructure Fracture &amp; Core Upstream Routing Degrade
+            </span>
+            <span class="text-slate-300 hidden sm:inline-block">
+              ANERGI CYBER TELEMETRY • CRITICAL INCIDENT LOG
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: JAVA4SHELL & CISA -->
+      <div class="space-y-4 pt-4 border-t border-white/10">
+        <h2 class="font-orbitron text-2xl font-black text-white uppercase tracking-wide">
+          Java4Shell, CISA’s Red Alert, and the Supply-Chain Squeeze
+        </h2>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          Before we even get to the outages, security teams spent the week scrambling to contain a brutal run of software vulnerabilities and supply-chain compromises.
+        </p>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          First came <strong>Java4Shell (CVE-2026-114938)</strong>, a critical memory-corruption flaw buried inside the Base64 decoder of Oracle’s x86-64 HotSpot Java Virtual Machine (JVM). Affecting OpenJDK builds 17.0.6 and newer running on modern Intel Xeon and AMD EPYC processors with AVX-512 VBMI support, the bug lets an unauthenticated attacker send crafted Base64 data to corrupt heap memory, leak secrets like keys and tokens (dubbed "JavaBleed"), or execute remote code outright. Researchers demonstrated pre-authentication remote code execution on default installations of widely used enterprise staples including Keycloak, Jira, Confluence, Jenkins, Artifactory, and PingFederate. Oracle pushed emergency fixes on November 17, and CISA immediately urged organizations to hunt down every bundled JDK hiding inside containers, appliances, and third-party apps—warning that many don't even show up in standard software inventories.
+        </p>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          Then, on November 18, CISA added four actively exploited vulnerabilities to its Known Exploited Vulnerabilities (KEV) catalog in a single drop: Synology DiskStation Manager (CVE-2024-10441), BerriAI LiteLLM (CVE-2026-40217), end-of-life Apache Axis (CVE-2026-90436), and Vanderbilt University’s REDCap (CVE-2026-90817). Federal agencies were slapped with an aggressive three-day deadline—November 21—to remediate three of them. Notably, the LiteLLM flaw lets attackers bypass sandbox controls to execute code directly on enterprise AI proxy servers, putting cloud AI keys and model pipelines directly in the blast radius.
+        </p>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          And right in the middle of that patch storm, Optimizely suffered a sobering supply-chain attack—tracked by Palo Alto Networks Unit 42 as <strong>OPTIMJACK</strong>. On November 16, attackers compromised trusted scripts served through Optimizely’s platform and injected malicious JavaScript across the websites of 178 organizations—without ever breaching those 178 companies directly. For roughly 17 hours, visitors to major brands faced payment-card skimming, cryptocurrency wallet swapping, and mobile exploit kits targeting unpatched iPhones and iPads. It was a textbook reminder that your security perimeter ends wherever your third-party scripts begin.
+        </p>
+      </div>
+
+      <!-- SECTION: 60,000 GITHUB REPOS -->
+      <div class="space-y-4 pt-4 border-t border-white/10">
+        <h2 class="font-orbitron text-2xl font-black text-white uppercase tracking-wide text-cyan-400">
+          60,000 GitHub Repositories in the Crosshairs
+        </h2>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          While operations teams watched the web front end, attackers went straight for the software factory floor.
+        </p>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          Beginning November 10 and coming to light in force on November 12, researchers uncovered <strong>wfx-loot</strong>, a sprawling credential-theft campaign that leveraged 4,837 hijacked GitHub accounts to test access against more than 60,000 GitHub repositories. In over 1,800 of those repositories, the attacker injected malicious code into GitHub Actions workflows, CI shell scripts, and npm installation hooks.
+        </p>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          What made this campaign so dangerous wasn't just its scale—it was its speed and persistence. The payload executed inside CI runners, scraped GitHub tokens, repository secrets, AI service keys, and OIDC tokens, and used them to mint long-lived sessions across AWS, Azure, and GCP. Worse, it rewrote IAM trust policies and added federated identity credentials to leave behind persistent cloud backdoors designed to survive routine secret rotation—then cleaned up its tracks inside GitHub within a single minute. Over 10,000 malicious probe pull requests spilled into repositories the compromised accounts didn't even own, riding collaborator and organization permissions sideways across the ecosystem.
+        </p>
+      </div>
+
+      <!-- IMAGE 2: OUTAGE GRID -->
+      <div class="rounded-2xl overflow-hidden border-2 border-red-500/40 shadow-2xl bg-slate-950/80">
+        <div class="relative aspect-[21/9] w-full">
+          <img 
+            src="assets/corp_it_server_room_specialists.jpg" 
+            alt="National Infrastructure Outage Matrix" 
+            class="w-full h-full object-cover opacity-90"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex items-end justify-between p-4 font-mono text-xs">
+            <span class="text-red-400 font-bold bg-slate-950/80 px-3 py-1 rounded border border-red-500/40">
+              FIG 2.0: National Infrastructure Ground Stop &amp; Telecom Gateway Choke
+            </span>
+            <span class="text-slate-300 hidden sm:inline-block">
+              FAA • MICROSOFT 365 • APPLE • JPMORGAN
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: THE MAIN EVENT GLITCHES -->
+      <div class="space-y-4 pt-4 border-t border-white/10">
+        <h2 class="font-orbitron text-2xl font-black text-white uppercase tracking-wide text-red-400">
+          The Main Event: Glitches and the Great November Outage Wave
+        </h2>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          Here is the plot twist that should keep every COO and CIO awake tonight: despite all of those real, active cyber threats, none of the week’s biggest nationwide disruptions were caused by hackers.
+        </p>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          From Thursday, November 12 through Tuesday, November 17, a rolling wave of technical glitches knocked out critical pillars of American commerce, travel, finance, and government—one after another. Every organization that disclosed a root cause pointed inward: latent patches, routine updates, and modernization cutovers.
+        </p>
+
+        <!-- BREAKDOWN CARDS -->
+        <div class="space-y-4 pt-2">
+          
+          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-2">
+            <h4 class="font-orbitron text-base font-bold text-amber-300">
+              Microsoft 365’s $7 Billion Blackout (Nov. 12–14)
+            </h4>
+            <p class="font-sans text-sm text-slate-300 leading-relaxed">
+              The dominoes started falling on Thursday morning when Exchange Online, Outlook, Teams, and dependent Microsoft 365 services ground to a halt for roughly 24 hours, with residual disruptions stretching into November 14 across more than 70 countries. Microsoft traced the failure to a latent software defect introduced in a July fix for its networking gateway servers, which caused servers to lock up sequentially under heavy load. The real-world fallout was staggering: U.S. House staff lost a full day of legislative work, courts in multiple countries suspended legal deadlines, UK hospitals reverted to paper records, companies delayed earnings releases, and a hotel in Germany even saw guests injured when an Outlook-dependent chlorine-monitoring alert failed to send. The Anderson Economic Group pegged global lost productivity at roughly $7 billion, while insurance analysts estimate insured losses could span anywhere from minimal to $700 million, depending on waiting periods and non-malicious outage exclusions.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-2">
+            <h4 class="font-orbitron text-base font-bold text-amber-300">
+              The FAA Nationwide Ground Stop (Nov. 13)
+            </h4>
+            <p class="font-sans text-sm text-slate-300 leading-relaxed">
+              Before businesses had even cleared their Microsoft email backlogs, Friday afternoon delivered the longest nationwide U.S. ground stop since 9/11. For 4 hours and 21 minutes, the FAA halted all U.S. departures as communications degraded across 17 of its 22 regional air-traffic control centers. More than 18,500 flights were canceled through Monday. The suspected culprit? A copper-to-fiber modernization upgrade involving a newly installed HPE Juniper router replacing legacy Cisco gear manufactured in 2001—a device that flooded legacy FAA telecom equipment with excessive data traffic. The FAA has since disabled the broadcast feature on 69 similar routers and paused further installations while investigating alongside contractor L3Harris and the FBI. Brokerage firm Bernstein estimated the disruption will cost the four largest U.S. airlines roughly $345 million in combined pre-tax earnings, while Delta CEO Ed Bastian warned the broader economic tab will run into the billions of dollars—fueling Transportation Secretary Sean Duffy’s push for $50 billion in air-traffic modernization funding.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-700/80 space-y-2">
+            <h4 class="font-orbitron text-base font-bold text-amber-300">
+              The Cascading Aftershocks (Nov. 13–17)
+            </h4>
+            <ul class="font-sans text-sm text-slate-300 space-y-2 list-disc list-inside">
+              <li><strong>Workday (Nov. 13–14):</strong> A service disruption across two data centers knocked out HR and payroll tools for thousands of companies.</li>
+              <li><strong>911 Reports (Nov. 13):</strong> Over 300 users reported failing to connect to emergency 911 services or hitting busy signals.</li>
+              <li><strong>JPMorgan Chase &amp; Major U.S. Banks (Nov. 16):</strong> A software bug on an on-premises hardware system at JPMorgan Chase delayed transaction processing and Zelle payments—cascading into customer disruptions across Bank of America, Wells Fargo, U.S. Bank, Truist, and Capital One.</li>
+              <li><strong>United Airlines (Nov. 16):</strong> Barely recovering from the weekend FAA halt, United hit an unrelated internal software glitch impacting crew-facing apps, flight planning, and weather tools.</li>
+              <li><strong>NSA &amp; Apple Services (Nov. 17):</strong> On Tuesday, a classified internal NSA communications network degraded during suspected routine patching or upgrades, while an internal Apple update knocked out Apple Pay, iCloud, the App Store, Apple Music, and AppleCare during midday peak hours.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <p class="font-sans text-base text-slate-200 leading-relaxed pt-2">
+          Federal officials confirmed zero evidence tying these outages together or linking them to foreign adversaries. Honestly, that isn’t comforting—it’s a wake-up call. If routine maintenance, a single router configuration, and a four-month-old patch bug can rattle aviation, banking, and global productivity in the same six-day stretch, imagine what happens when an adversary actually coordinates against those exact choke points.
+        </p>
+      </div>
+
+      <!-- SECTION: HARDEN YOUR POSTURE NOW -->
+      <div class="space-y-4 pt-6 border-t-2 border-amber-400/30">
+        <h2 class="font-orbitron text-2xl font-black text-amber-300 uppercase tracking-wide">
+          Harden Your Posture Now: It’s Going to Be a Cold Winter
+        </h2>
+        <p class="font-sans text-base text-slate-200 leading-relaxed">
+          We are heading straight into peak holiday commerce, year-end financial closes, and winter storm season with thinner engineering benches, denser AI integrations, and deeply tangled vendor dependencies. Hoping your stack stays upright isn't a strategy.
+        </p>
+        <p class="font-sans text-base text-slate-100 font-semibold leading-relaxed">
+          If you lead a business, run engineering, or own risk, use this week as your catalyst to act before December hits:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          
+          <div class="p-4 rounded-xl bg-slate-900 border border-amber-400/30 space-y-1">
+            <h5 class="font-mono text-xs font-bold text-amber-400 uppercase">1. Hunt Hidden Runtime Debt Immediately</h5>
+            <p class="text-xs text-slate-300">Don't trust top-level asset sheets. Scan containers, appliances, and third-party apps for vulnerable Java builds (Java4Shell) and check every item on CISA’s KEV list—especially newly deployed AI proxies and legacy utilities.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900 border border-amber-400/30 space-y-1">
+            <h5 class="font-mono text-xs font-bold text-amber-400 uppercase">2. Lock Down Your Supply Chain</h5>
+            <p class="text-xs text-slate-300">Audit every third-party JavaScript tag running on customer-facing pages and lock down script integrity. On the developer side, audit GitHub Actions workflows, strip unnecessary org-wide collaborator permissions, and inspect AWS, Azure, and GCP IAM trust policies.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900 border border-amber-400/30 space-y-1">
+            <h5 class="font-mono text-xs font-bold text-amber-400 uppercase">3. Build Out-of-Band Resilience</h5>
+            <p class="text-xs text-slate-300">If Microsoft 365 goes dark tomorrow, how does your executive team coordinate? How do critical operational alerts fire? Establish independent fallback communication channels and test them before you need them.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900 border border-amber-400/30 space-y-1">
+            <h5 class="font-mono text-xs font-bold text-amber-400 uppercase">4. Treat Routine Upgrades Like Threats</h5>
+            <p class="text-xs text-slate-300">The FAA, Microsoft, and Apple outages proved change management is now top-tier availability risk. Enforce staged rollouts, strict traffic-flood guardrails, and verified rollback playbooks—especially where modern hardware meets legacy gear.</p>
+          </div>
+
+        </div>
+
+        <div class="p-5 rounded-2xl bg-gradient-to-r from-amber-500/20 to-sky-500/20 border border-amber-400/40 space-y-2 mt-4">
+          <h5 class="font-mono text-xs font-bold text-white uppercase">5. Read Your Cyber Insurance Fine Print Today</h5>
+          <p class="text-xs text-slate-200 leading-relaxed">
+            Find out right now whether your policy covers non-malicious vendor outages and how long your waiting-period deductible actually is. You don't want to discover an exclusion after a 24-hour blackout.
+          </p>
+        </div>
+
+        <p class="font-sans text-base text-slate-200 leading-relaxed pt-2">
+          Mid-November just gave every business on the map a free stress test—even if it felt anything but free. Patch the holes, decouple your single points of failure, and tighten your operational discipline right now.
+        </p>
+
+        <p class="font-mono text-sm text-amber-400 font-bold">
+          Because judging by the week we just lived through, it’s going to be a long, cold winter for anyone caught unprepared.
+        </p>
+      </div>
+
+    </article>
+
+    <!-- =====================================================================
+         ARTICLE 2: THE 4-DAY REGULATORY CLOCK (EXISTING DISPATCH)
+         ===================================================================== -->
+    <article id="article-regulatory-container" class="glass-article rounded-3xl p-8 sm:p-12 space-y-8 hidden">
       
       <!-- Series Header / Vol Badge -->
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 pb-5">
@@ -1342,72 +1584,70 @@
         Traditional security programs lean on annual vendor surveys. But in the modern regulatory theater, an unvetted third-party API token or a vulnerable sub-processor is the direct vector that triggers the 4-day reporting countdown. The X² Regulatory Engine actively calculates the mathematical exponent of delay, proving that delay multiplies carrier exposure while algorithmic evidence compresses it to zero.
       </p>
 
-      <!-- =====================================================================
-           WIDE BUTTON: "AI E&O: CFO vs the Underwriter"
-           ===================================================================== -->
+      <!-- WIDE BUTTON: "AI E&O: CFO vs the Underwriter" -->
       <div class="py-2">
         <button 
           type="button" 
           id="btnEoiExecutive"
-          class="eoi-wide-btn w-full p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-left group cursor-pointer"
+          class="eoi-wide-btn w-full p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-left group"
         >
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 text-xl shrink-0 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-slate-950 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 text-xl shrink-0 group-hover:scale-110 transition-transform">
               <i class="fa-solid fa-scale-balanced"></i>
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <span class="font-mono text-xs px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-black">SPECIAL REPORT</span>
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-bold uppercase tracking-wider">CRITICAL BRIEF</span>
                 <span class="font-mono text-xs text-sky-300 font-bold">SERIES DISPATCH</span>
               </div>
-              <h3 class="font-orbitron font-black text-lg sm:text-2xl text-white tracking-wide mt-0.5 group-hover:text-amber-300 transition-colors">
+              <h3 class="font-orbitron font-black text-lg sm:text-2xl text-white tracking-wide mt-0.5">
                 AI E&amp;O: CFO vs. the Underwriter
               </h3>
               <p class="font-mono text-xs text-slate-300 mt-1">
-                Forensic Liability Breakdown • Cyber Errors &amp; Omissions (E&amp;O) vs. Direct Directors &amp; Officers (D&amp;O) Forfeiture
+                Forensic Liability Breakdown • Cyber Errors &amp; Omissions (E&amp;O) vs. Direct Directors &amp; Officers Exposure
               </p>
             </div>
           </div>
-          <div class="shrink-0 flex items-center gap-2 font-rajdhani font-black text-sm uppercase tracking-wider text-amber-400 group-hover:text-white transition-colors">
+          <div class="shrink-0 flex items-center gap-2 font-rajdhani font-black text-sm uppercase tracking-wider text-amber-300 group-hover:text-amber-200">
             <span>Access Dossier</span>
             <i class="fa-solid fa-arrow-right text-base group-hover:translate-x-1 transition-transform"></i>
           </div>
         </button>
       </div>
 
-      <!-- EXPANDABLE FULL ARTICLE CONTENT ("Read More Article" Function) -->
-      <div id="articleFullBody" class="article-expanded-content space-y-6 text-base text-slate-200 leading-relaxed border-t border-white/15 pt-6 font-sans">
+      <!-- EXPANDABLE FULL ARTICLE CONTENT -->
+      <div id="articleFullBody" class="article-expanded-content space-y-6 text-base text-slate-200 leading-relaxed">
         <h3 class="font-orbitron font-bold text-lg sm:text-xl text-white uppercase tracking-wide">
           I. The Mathematical Flaw of the Annual Questionnaire
         </h3>
         <p>
-          Traditional enterprise compliance operates on an asynchronous honor system: questionnaires filled out in February that describe security postures obsolete by March. When an unpatched zero-day propagates through an outsourced billing sub-processor, your organization’s exposure is measured not in the strength of your contracts, but in the physical ingress routes between tenant databases.
+          Traditional enterprise compliance operates on an asynchronous honor system: questionnaires filled by middle management, approved by legal, and locked in a cabinet for 365 days. In an era where CISA KEV directives add zero-day exploits in rolling 72-hour bursts, an attestation older than four days is actuarially void.
         </p>
 
         <h3 class="font-orbitron font-bold text-lg sm:text-xl text-white uppercase tracking-wide">
           II. Algorithmic Quarantine vs. Contractual Hope
         </h3>
         <p>
-          The <strong>TIMES2</strong> doctrine introduces dynamic supply-chain isolation. By routing all cross-border API transmissions through an autonomous, resident probe, anomalous token usage triggers a hardware-grade quarantine before state notification deadlines expire.
+          The <strong>TIMES2</strong> doctrine introduces dynamic supply-chain isolation. By routing all external API webhooks through deterministic egress monitors and SHA-256 state anchors, the system creates a cryptographic ledger that proves non-contagion to the underwriter in real-time.
         </p>
 
-        <div class="p-6 rounded-2xl border border-sky-400/40 bg-sky-950/40 font-mono text-xs space-y-3">
-          <div class="font-bold text-sky-300 uppercase text-sm">Actuarial Formula Matrix // Series 2.2:</div>
+        <div class="p-6 rounded-2xl border border-sky-400/40 bg-sky-950/40 font-mono text-xs space-y-2">
+          <div class="font-bold text-sky-300 uppercase text-sm">Actuarial Formula Matrix // Series 24</div>
           <p class="text-slate-100 text-sm">
-            <code>Loss_Expectancy = (Inherent_Vulnerability × Regulatory_Multiplier^2) ÷ Cryptographic_Proof</code>
+            <code>Loss_Expectancy = (Inherent_Vulnerability × Regulatory_Multiplier^2) ÷ Cryptographic_Proof_Rate</code>
           </p>
           <p class="text-slate-400 leading-normal">
-            When Proof is verified on an immutable public ledger, Loss Expectancy converges to baseline friction.
+            When Proof is verified on an immutable public ledger, Loss Expectancy converges to baseline, protecting director and officer indemnification.
           </p>
         </div>
       </div>
 
-      <!-- BIGGER, CENTERED "READ MORE ARTICLE" BUTTON -->
+      <!-- CENTERED "READ MORE ARTICLE" BUTTON -->
       <div class="pt-6 flex flex-col items-center justify-center border-t border-white/15 space-y-3">
         <button 
           id="btnToggleReadMore" 
           type="button" 
-          class="px-10 py-4 rounded-2xl border-2 border-amber-400 bg-amber-500/20 hover:bg-amber-500 text-white hover:text-slate-950 font-rajdhani font-black text-base uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_30px_rgba(245,158,11,0.7)] flex items-center gap-3 cursor-pointer"
+          class="px-10 py-4 rounded-2xl border-2 border-amber-400 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-rajdhani font-black text-lg uppercase tracking-wider flex items-center gap-3 transition-all shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
         >
           <span id="readMoreLabel">Read More Article</span>
           <i id="readMoreIcon" class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
@@ -2073,5 +2313,29 @@
   <script src="js/universal-payment-controller.js"></script>
   <script src="js/universal-bot-controller.js"></script>
   <script src="js/burn1-audio-fx.js"></script>
+
+  <script>
+    function switchTimesArticle(mode) {
+      const crunchCont = document.getElementById('article-crunch-container');
+      const regCont = document.getElementById('article-regulatory-container');
+      const tabCrunch = document.getElementById('tab-article-crunch');
+      const tabReg = document.getElementById('tab-article-regulatory');
+
+      if (mode === 'crunch') {
+        crunchCont.classList.remove('hidden');
+        regCont.classList.add('hidden');
+
+        tabCrunch.className = "px-5 py-3 rounded-xl border border-amber-400 bg-amber-500/30 text-amber-300 font-bold tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:scale-105";
+        tabReg.className = "px-5 py-3 rounded-xl border border-white/20 bg-slate-900/60 text-slate-400 font-bold tracking-wider uppercase transition-all hover:text-white hover:border-cyan-400/50";
+      } else {
+        crunchCont.classList.add('hidden');
+        regCont.classList.remove('hidden');
+
+        tabReg.className = "px-5 py-3 rounded-xl border border-cyan-400 bg-cyan-500/30 text-cyan-300 font-bold tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:scale-105";
+        tabCrunch.className = "px-5 py-3 rounded-xl border border-white/20 bg-slate-900/60 text-slate-400 font-bold tracking-wider uppercase transition-all hover:text-white hover:border-amber-400/50";
+      }
+    }
+  </script>
+
 </body>
 </html>
